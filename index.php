@@ -222,13 +222,13 @@
                 var maxValue = d3.max(info, function(d) {return d.valor; });
 
             //distribuicao de frequencias    
-                var quant = 18;
+                var quant = 17;
                 var amp = maxValue - minValue; 
                 var larg = Math.round(amp / quant);
 
             //domino de valores para as cores do mapa
                 var dom = [
-                            (minValue+100), 
+                            (minValue+300), 
                             (minValue+larg), 
                             (minValue+(2*larg)), 
                             (minValue+(3*larg)), 
@@ -241,7 +241,7 @@
 
             //ajuste do dominio
                 var i = 0; 
-                while(i<=(quant -1)){
+                while(i<=9){
                     dom[i] = dom[i] - (dom[i] % 5);
                     i++;
                 }
