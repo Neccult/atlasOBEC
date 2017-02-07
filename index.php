@@ -290,7 +290,7 @@
                     .attr("font-size", "14px")
                     .attr("font-weight", "bold")
                     .attr("fill", "black")
-                    .text(d.properties.name+" = "+dict[d.id].valor+" "+dom[8]);
+                    .text(d.properties.name+" = "+dict[d.id].valor);
 
 
                   d3.select(this)
