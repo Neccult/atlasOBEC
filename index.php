@@ -45,7 +45,7 @@
         <style type="text/css">
             .states{
               fill: gray;
-              stroke: white;
+              stroke: rgb(225, 225, 227);
               stroke-linejoin: round;
             }
             .legend {
