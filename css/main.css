@@ -1,0 +1,60 @@
+/*=== Fontes ======================*/
+@font-face {
+    font-family: Lato Bold;
+    src: url('../fonts/Lato-Bold_0.ttf');
+}
+@font-face {
+    font-family: Lato;
+    src: url('../fonts/Lato-Regular.ttf');
+}
+/*=== geral ======================*/
+body{
+	font-family: Lato;
+	padding: 0px;
+}
+.label{
+	font-weight: normal;
+}
+.custom-label{
+	font-family: Lato;
+	padding-top: 15px;
+}
+.white{
+	background-color: white !important;
+}
+
+/*=== links! ======================*/
+a,a:hover, a:visited{
+	color: black;
+}
+.icon-download{
+	width: 50px;
+	height: auto;
+	margin: -5px 5px 0px 0px;
+}
+
+
+/*===== nav! ======*/
+.logo{
+	width: 130px;
+}
+.navbar-nav{
+	display: inline-block;
+	float: none;
+	font-family: Lato Bold;
+	font-size: 18px;
+	padding-top: 35px;
+}
+.dropdown-menu>.active>a, 
+.dropdown-menu>.active>a:focus, 
+.dropdown-menu>.active>a:hover{
+	background-color: black;
+}
+ li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}

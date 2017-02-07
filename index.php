@@ -1,0 +1,340 @@
+<?php 
+    if (!empty($_GET["ano"]))
+        $ano = $_GET["ano"];
+    else
+        $ano = "2014";
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- BOOTSTRAP -->
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/navbar.css" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="js/ie-emulation-modes-warning.js"></script>
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- D3 JS -->
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+        <!-- D3 Legend -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+
+        <!--===== css ====-->
+        <link href="css/main.css" rel="stylesheet">
+
+        <style type="text/css">
+            .states{
+              fill: gray;
+              stroke: white;
+              stroke-linejoin: round;
+            }
+            .legend {
+                padding: 24px 0 0 24px;
+            }
+        </style>
+
+        <title>Atlas Econômico da Cultura Brasileira</title>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <!-- Static navbar -->
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        
+                        <a class="navbar-brand" href="#"><img src="images/logo.png" class="logo"></a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse text-center">
+
+                        <ul class="nav navbar-nav">
+                  
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eixo <span class="caret"></span></a>
+                                
+                                <ul class="dropdown-menu">
+                                  
+                                    <li class="active"><a href="#">Empreendimentos Culturais</a></li>
+                                    <li><a href="#">Mercado de Trabalho</a></li>
+                                    <li><a href="#">Investimento Público</a></li>
+                                    <li><a href="#">Comércio Internacional</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav">
+                  
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Váriaveis <span class="caret"></span></a>
+                                
+                                <ul class="dropdown-menu">
+
+                                    <li class="dropdown-header">Descritivo</li>
+                                    <li class="active"><a href="#">Total de Empresas</a></li>
+                                    <li><a href="#">Participação das Empresas Culturais no Total de Empresas</a></li>     
+                                    <li><a href="#">Total de Empregadores</a></li>
+                                    <li><a href="#">Taxas de Natalidade de Empresas</a></li>
+                                    <li><a href="#">Taxa de Mortalidade das Empresas</a></li>
+                                    <li><a href="#">Produtivdade do Trabalho das Empresas Culturais</a></li>
+
+                                    <li role="separator" class="divider"></li>
+
+                                    <li class="dropdown-header">Relacional</li>
+                                    <li><a href="#">Receita Total das Empresas Culturais</a></li>
+                                    <li><a href="#">Custo Total das Empresas Culturais</a></li>
+                                    <li><a href="#">Razão entre Receita Total e Custo Total das Empresas Culturais</a></li>
+                                    <li><a href="#">Quociente de Valor Adicionado e Receita por Empresa Cultura</a></li>
+                                    <li><a href="#">Razão entre PIB Setorial e Receita Operacional Líquida das Empresas Culturais</a></li>
+
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Índice</li>
+                                    <li><a href="#">Concentrações: Locacionais, Despesas, Receitas e Salariais.</a></li>
+
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav">
+                      
+                            <li class="dropdown">
+                            
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Periodicidade <span class="caret"></span></a>
+
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Ano</li>
+                                    <li class = "<?php echo ($ano == "2006" ? "active" : "")?>"><a href="index.php?ano=2006">2006</a></li>
+                                    <li class = "<?php echo ($ano == "2007" ? "active" : "")?>"><a href="index.php?ano=2007">2007</a></li>
+                                    <li class = "<?php echo ($ano == "2008" ? "active" : "")?>"><a href="index.php?ano=2008">2008</a></li>
+                                    <li class = "<?php echo ($ano == "2009" ? "active" : "")?>"><a href="index.php?ano=2009">2009</a></li>
+                                    <li class = "<?php echo ($ano == "2010" ? "active" : "")?>"><a href="index.php?ano=2010">2010</a></li>
+                                    <li class = "<?php echo ($ano == "2011" ? "active" : "")?>"><a href="index.php?ano=2011">2011</a></li>
+                                    <li class = "<?php echo ($ano == "2012" ? "active" : "")?>"><a href="index.php?ano=2012">2012</a></li>
+                                    <li class = "<?php echo ($ano == "2013" ? "active" : "")?>"><a href="index.php?ano=2013">2013</a></li>
+                                    <li class = "<?php echo ($ano == "2014" ? "active" : "")?>"><a href="index.php?ano=2014">2014</a></li>
+
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>      
+
+            <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron white">
+                <div id="corpo" align="center"></div>
+
+
+                <!-- download -->
+                <a href=""><img src="images/icons/pdf.png" class="icon-download"></a>
+                <a href=""><img src="images/icons/xls.png" class="icon-download"></a>
+                <a href=""><img src="images/icons/csv.png" class="icon-download"></a>
+            </div> 
+        </div><!-- /container -->
+
+        <!-- <script src="js/mapa.js"></script> -->
+
+        
+
+        <script type="text/javascript">
+            // Mapa JS
+            //tamanho do mapa
+              var width = 800,
+                  height = 600;
+
+            //cria svg
+              var svg = d3.select("#corpo").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            //configura projeção
+              var projection = d3.geoMercator()
+                .center([-40, -30])             
+                .rotate([4.4, 0])               
+                .scale(750)                     
+                .translate([width / 2, height / 1.2]);  
+
+              var path = d3.geoPath()
+                .projection(projection);
+
+
+            //pre-load arquivos
+              d3.queue()
+                .defer(d3.json, "br-min.json")
+                .defer(d3.csv, "total.csv")
+                .await(ready);
+
+            //leitura
+              function ready(error, br_states, data) {
+
+                if (error) return console.error(error);
+
+            //carrega estados JSON
+                var states = topojson.feature(br_states, br_states.objects.states);
+
+
+                  
+            //carrega dados CSV
+                var ano = <?php echo $ano; ?>
+
+                var total = d3.csvFormat(data, ["ID", "UF", ano]);
+
+            //parse CSV para array
+                var dict = {};
+
+                var info = d3.csvParseRows(total, function(d, i) {
+                  return dict[d[0]] = {id:d[0], uf:d[1], valor:+d[2]}
+                });
+
+            //valores maximos e minimos
+                var minValue = d3.min(info, function(d) {return d.valor; });
+                var maxValue = d3.max(info, function(d) {return d.valor; });
+
+            //distribuicao de frequencias    
+                var quant = 9;
+                var amp = maxValue - minValue; 
+                var larg = Math.round(amp / quant);
+
+            //domino de valores para as cores do mapa
+                var dom = [
+                            (minValue+100), 
+                            (minValue+larg), 
+                            (minValue+(2*larg)), 
+                            (minValue+(3*larg)), 
+                            (minValue+(4*larg)), 
+                            (minValue+(5*larg)), 
+                            (minValue+(6*larg)), 
+                            (minValue+(7*larg)), 
+                            (minValue+(8*larg))
+                          ];
+
+            //ajuste do dominio
+                var i = 0; 
+                while(i<=(quant -1)){
+                    dom[i] = dom[i] - (dom[i] % 5);
+                    i++;
+                }
+
+            //legenda da faixa de valores do dominio
+                var legend = [
+                                "Menor que "+dom[0],
+                                "Entre "+dom[0]+" e "+dom[1], 
+                                "Entre "+dom[1]+" e "+dom[2],  
+                                "Entre "+dom[2]+" e "+dom[3], 
+                                "Entre "+dom[3]+" e "+dom[4], 
+                                "Entre "+dom[5]+" e "+dom[6], 
+                                "Entre "+dom[6]+" e "+dom[7], 
+                                "Entre "+dom[7]+" e "+dom[8], 
+                                "Maior que "+dom[8]
+                             ];
+
+            //coloração do mapa
+                var color = d3.scaleThreshold()
+                  .domain(dom)
+                  .range(d3.schemeYlGn[9]);
+                          
+            //concatena propriedades
+                svg.append("g")
+                  .attr("class", "states")
+                  .selectAll("path")
+                  .data(states.features)
+                  .enter()
+                  .append("path")
+                  // .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
+
+                  .style('fill', function(d){return color(dict[d.id].valor);})
+
+                  .attr("d", path)
+                  
+            //mouseover
+                .on("mouseover", function(d) {
+                  var xPosition = d3.mouse(this)[0];
+                  var yPosition = d3.mouse(this)[1] - 30;
+                  svg.append("text")
+                    .attr("id", "tooltip")
+                    .attr("x", xPosition)
+                    .attr("y", yPosition)
+                    .attr("text-anchor", "middle")
+                    .attr("font-family", "Lato")
+                    .attr("font-size", "14px")
+                    .attr("font-weight", "bold")
+                    .attr("fill", "black")
+                    .text(d.properties.name+" = "+dict[d.id].valor+" "+dom[8]);
+
+
+                  d3.select(this)
+                    .style("fill", "yellow")
+                    .style("stroke-width", "2px");
+                })
+
+            //mouseout
+                .on("mouseout", function(d) {
+                  d3.select("#tooltip").remove();
+                  d3.select(this)
+                    .transition()
+                    .duration(250)
+                    .style('fill', function(d){return color(dict[d.id].valor);})
+                    .style("stroke-width", "1px")
+                });
+
+            //legenda
+                var legend_svg = d3.select("svg");
+
+                legend_svg.append("g")
+                  .attr("class", "legendLinear")
+                  .attr("transform", "translate(600,300)");
+
+                var legendLinear = d3.legendColor()
+                  .title("Total de Empresas "+ano)
+                  .labels(legend)
+                  .shapeWidth(80)
+                  .shapePadding(5)
+                  .orient('vertical')
+                  .scale(color);
+
+                legend_svg.select(".legendLinear")
+                  .call(legendLinear);
+
+              };
+        </script>
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+
+    </body>
+</html>
