@@ -222,7 +222,7 @@
                 var maxValue = d3.max(info, function(d) {return d.valor; });
 
             //distribuicao de frequencias    
-                var quant = 9;
+                var quant = 18;
                 var amp = maxValue - minValue; 
                 var larg = Math.round(amp / quant);
 
