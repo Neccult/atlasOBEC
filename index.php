@@ -223,20 +223,20 @@
 
             //distribuicao de frequencias    
                 var quant = 17;
-                var amp = maxValue - minValue; 
-                var larg = Math.round(amp / quant);
+                var range = maxValue - minValue; 
+                var amp = Math.round(range / quant);
 
             //domino de valores para as cores do mapa
                 var dom = [
                             (minValue+300), 
-                            (minValue+larg), 
-                            (minValue+(2*larg)), 
-                            (minValue+(3*larg)), 
-                            (minValue+(4*larg)), 
-                            (minValue+(5*larg)), 
-                            (minValue+(6*larg)), 
-                            (minValue+(7*larg)), 
-                            (minValue+(8*larg))
+                            (minValue+amp), 
+                            (minValue+(2*amp)), 
+                            (minValue+(3*amp)), 
+                            (minValue+(4*amp)), 
+                            (minValue+(5*amp)), 
+                            (minValue+(6*amp)), 
+                            (minValue+(7*amp)), 
+                            (minValue+(8*amp))
                           ];
 
             //ajuste do dominio
@@ -247,6 +247,7 @@
                 }
 
             //legenda da faixa de valores do dominio
+            /*
                 var legend = [
                                 "Menor que "+dom[0],
                                 "Entre "+dom[0]+" e "+dom[1], 
@@ -258,7 +259,7 @@
                                 "Entre "+dom[7]+" e "+dom[8], 
                                 "Maior que "+dom[8]
                              ];
-
+            */
             //coloração do mapa
                 var color = d3.scaleThreshold()
                   .domain(dom)
@@ -317,7 +318,23 @@
 
                 var legendLinear = d3.legendColor()
                   .title("Total de Empresas "+ano)
-                  .labels(legend)
+                  .labelFormat(d3.format(".0f"))
+                  .labels( //substitui legenda em ingles
+                    function({ i, genLength, generatedLabels }){
+                      if (i === 0 ){
+                        return generatedLabels[i]
+                          .replace('NaN to', 'Menor que')
+                      } 
+                      else if (i === genLength - 1) {
+                        return "Maior que "+dom[7]
+                      } 
+                      else  {
+                        return "Entre "+generatedLabels[i]
+                          .replace('to', 'e')
+                      }
+                      return generatedLabels[i]
+                    }
+                    )
                   .shapeWidth(80)
                   .shapePadding(5)
                   .orient('vertical')
