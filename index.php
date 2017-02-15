@@ -95,7 +95,7 @@
                         <ul class="nav navbar-nav">
                   
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Váriaveis <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Variáveis <span class="caret"></span></a>
                                 
                                 <ul class="dropdown-menu">
 
@@ -217,18 +217,23 @@
                   return dict[d[0]] = {id:d[0], uf:d[1], valor:+d[2]}
                 });
 
+            //exclui linha de cabeçario do OBJ
+                info.splice(0,1);
+                delete dict["ID"];
+                // console.log(dict);
+
             //valores maximos e minimos
                 var minValue = d3.min(info, function(d) {return d.valor; });
                 var maxValue = d3.max(info, function(d) {return d.valor; });
 
             //distribuicao de frequencias    
-                var quant = 17;
+                var quant = 9;
                 var range = maxValue - minValue; 
                 var amp = Math.round(range / quant);
 
             //domino de valores para as cores do mapa
                 var dom = [
-                            (minValue+300), 
+                            (minValue+(amp/4)), 
                             (minValue+amp), 
                             (minValue+(2*amp)), 
                             (minValue+(3*amp)), 
@@ -247,8 +252,8 @@
                 }
 
             //legenda da faixa de valores do dominio
-            /*
-                var legend = [
+            
+/*                var legend = [
                                 "Menor que "+dom[0],
                                 "Entre "+dom[0]+" e "+dom[1], 
                                 "Entre "+dom[1]+" e "+dom[2],  
@@ -258,8 +263,8 @@
                                 "Entre "+dom[6]+" e "+dom[7], 
                                 "Entre "+dom[7]+" e "+dom[8], 
                                 "Maior que "+dom[8]
-                             ];
-            */
+                             ];*/
+            
             //coloração do mapa
                 var color = d3.scaleThreshold()
                   .domain(dom)
@@ -319,6 +324,7 @@
                 var legendLinear = d3.legendColor()
                   .title("Total de Empresas "+ano)
                   .labelFormat(d3.format(".0f"))
+                  // .labels(legend)
                   .labels( //substitui legenda em ingles
                     function({ i, genLength, generatedLabels }){
                       if (i === 0 ){
