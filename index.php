@@ -155,7 +155,6 @@
             <div class="jumbotron white">
                 <div id="corpo" align="center"></div>
 
-
                 <!-- download -->
                 <a href=""><img src="images/icons/pdf.png" class="icon-download"></a>
                 <a href=""><img src="images/icons/xls.png" class="icon-download"></a>
@@ -168,7 +167,7 @@
         
 
         <script type="text/javascript">
-            // Mapa JS
+            // Mapa JS //
             //tamanho do mapa
               var width = 800,
                   height = 600;
@@ -188,7 +187,6 @@
               var path = d3.geoPath()
                 .projection(projection);
 
-
             //pre-load arquivos
               d3.queue()
                 .defer(d3.json, "br-min.json")
@@ -203,11 +201,8 @@
             //carrega estados JSON
                 var states = topojson.feature(br_states, br_states.objects.states);
 
-
-                  
             //carrega dados CSV
-                var ano = <?php echo $ano; ?>
-
+                var ano = <?php echo $ano; ?>;
                 var total = d3.csvFormat(data, ["ID", "UF", ano]);
 
             //parse CSV para array
@@ -251,9 +246,9 @@
                     i++;
                 }
 
-            //legenda da faixa de valores do dominio
-            
-/*                var legend = [
+            //legenda da faixa de valores do dominio       
+        /*      
+            var legend = [
                                 "Menor que "+dom[0],
                                 "Entre "+dom[0]+" e "+dom[1], 
                                 "Entre "+dom[1]+" e "+dom[2],  
@@ -263,8 +258,8 @@
                                 "Entre "+dom[6]+" e "+dom[7], 
                                 "Entre "+dom[7]+" e "+dom[8], 
                                 "Maior que "+dom[8]
-                             ];*/
-            
+                         ];
+        */
             //coloração do mapa
                 var color = d3.scaleThreshold()
                   .domain(dom)
@@ -278,9 +273,7 @@
                   .enter()
                   .append("path")
                   // .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
-
                   .style('fill', function(d){return color(dict[d.id].valor);})
-
                   .attr("d", path)
                   
             //mouseover
@@ -297,7 +290,6 @@
                     .attr("font-weight", "bold")
                     .attr("fill", "black")
                     .text(d.properties.name+" = "+dict[d.id].valor);
-
 
                   d3.select(this)
                     .style("fill", "yellow")
@@ -325,7 +317,8 @@
                   .title("Total de Empresas "+ano)
                   .labelFormat(d3.format(".0f"))
                   // .labels(legend)
-                  .labels( //substitui legenda em ingles
+                  .labels( 
+                  //substitui legenda em ingles
                     function({ i, genLength, generatedLabels }){
                       if (i === 0 ){
                         return generatedLabels[i]
