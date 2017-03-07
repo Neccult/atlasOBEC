@@ -14,7 +14,7 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
  - CSV padronizado (Informações / Banco de Dados)
 
 
-## Documentação para instalar Atlas
+## Documentação para instalar o Atlas
 
 ### Dependências para instalação
 
@@ -41,7 +41,7 @@ vamos começar atualizando o sistema para garantir que tudo corra bem
  ```
   sudo apt-get install git
  ```
-### Configurar Atlas
+### Configurar o Atlas
 
 Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
 
