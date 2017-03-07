@@ -22,20 +22,25 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 - NPM
 - Git
 
+Em ambiente linux,
+vamos começar atualizando o sistema para garantir que tudo corra bem
 ```
-Vamos começar atualizando o sistema para garantir que tudo corra bem
-` sudo apt-get update `
-
+  sudo apt-get update
+```
  Agora, baixar a Apache:
- ` sudo apt-get install apache2`
+ ```
+  sudo apt-get install apache2
+ ```
 
- O NodeJS para poder utilizar o NPM:
- `sudo apt-get install nodejs`
- `npm install express`
-
- O Git:
- ` sudo apt-get install git`
+ Instalar o NodeJS para poder utilizar o NPM:
+ ```
+  sudo apt-get install nodejs
+  npm install express
 ```
+ e o Git:
+ ```
+  sudo apt-get install git
+ ```
 ### Configurar Atlas
 
 Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
