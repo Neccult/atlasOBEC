@@ -27,7 +27,7 @@ vamos começar atualizando o sistema para garantir que tudo corra bem
 ```
   sudo apt-get update
 ```
- Agora, baixar a Apache:
+ Agora, instalar o Apache:
  ```
   sudo apt-get install apache2
  ```
