@@ -18,7 +18,8 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 
 ### Dependências para instalação
 
-- Apache2
+- Apache
+- PHP
 - NPM
 - Git
 
@@ -27,11 +28,21 @@ vamos começar atualizando o sistema para garantir que tudo corra bem
 ```
   sudo apt-get update
 ```
- Agora, instalar o Apache:
+ Agora, instalar o Apache e o PHP:
  ```
   sudo apt-get install apache2
+  sudo apt-get install php
  ```
-
+ Ou instalar pacote LAMP(Linux, Apache, MySQL, PHP):
+ ```
+  apt-get -y install wget screen unzip
+  wget --no-check-certificate -O lamp.zip https://github.com/teddysun/lamp/archive/master.zip
+  unzip lamp.zip
+  cd lamp-master
+  chmod +x *.sh
+  screen -S lamp
+  ./lamp.sh
+ ```
  Instalar o NodeJS para poder utilizar o NPM:
  ```
   sudo apt-get install nodejs
