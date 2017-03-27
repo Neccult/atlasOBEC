@@ -23,7 +23,7 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 - NPM
 - Git
 
-Em ambiente linux,
+Em ambiente linux(Ubuntu),
 vamos começar atualizando o sistema para garantir que tudo corra bem
 ```
   sudo apt-get update
