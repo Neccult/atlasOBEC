@@ -30,26 +30,58 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <!-- D3 JS -->
-        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <!-- TopoJSON -->
         <script src="https://d3js.org/topojson.v2.min.js"></script>
-        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+        <!-- D3 JS v4 --> 
+        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script> 
 
-        <!-- D3 Legend -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+        
+        <!-- C3 JS -->
+<!-- 
+        <script src="https://d3js.org/d3.v3.min.js"></script> 
+        <script src="js/c3.min.js"></script>
+        <link href="css/c3.css" rel="stylesheet" type="text/css">
+ -->    
 
-        <!--===== css ====-->
+        <!-- D3 QUEUE -->
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
+        <!-- === CSS === -->
         <link href="css/main.css" rel="stylesheet">
 
         <style type="text/css">
-            .states{
-              fill: gray;
-              stroke: rgb(225, 225, 227);
-              stroke-linejoin: round;
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: black;
+                shape-rendering: crispEdges;
             }
-            .legend {
-                padding: 24px 0 0 24px;
+            .axis text {
+                font-family: sans-serif;
+                font-size: 11px;
+            }
+
+            rect {
+                -moz-transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+            rect:hover{
+                fill: orange;
+            }
+
+            path {
+                fill: none;
+                stroke: black
+            }
+
+            line {
+                stroke: black;
+            }
             }
         </style>
 
@@ -162,190 +194,140 @@
             </div> 
         </div><!-- /container -->
 
-        <!-- <script src="js/mapa.js"></script> -->
+        <script>
+
+        var dict = {};
+        var info = [];
+        var dados = {key: [], value: []};
+        var uf = 0;
+
+        // get the data
+            d3.csv("total.csv", function(error, data) {
+              if (error) throw error;
+
+              // format the data
+              data.forEach(function(d) {
+                d.id = +d.ID;
+              });
+            
+                var total = d3.csvFormat(data, ["ID", "UF", "a2006", "a2007", "a2008", "a2009", "a2010", "a2011", "a2012", "a2013", "a2014"]);
+
+                //parse CSV para array
+                var parse = d3.csvParseRows(total, function(d, i) {
+                  return dict[d[0]] = {id:d[0], uf:d[1], a2006:+d[2], a2007:+d[3], a2008:+d[4], a2009:+d[5], a2010:+d[6], a2011:+d[7], a2012:+d[8], a2013:+d[9], a2014:+d[10]}
+                });
+            
+                info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
+
+
+                dados = {key: [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014], value: info};
+
+
+                console.log(dados);
+                console.log(dados.value.length);
+
+                console.log(d3.max(dados.value));
+
+                // console.log(info);
+
+                // set the dimensions and margins of the graph
+                var margin = {top: 20, right: 20, bottom: 30, left: 40},
+                    width = 1200 - margin.left - margin.right,
+                    height = 600 - margin.top - margin.bottom;
+
+                // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
+
+                //valores maximos e minimos
+                    var minValue = d3.min(info);
+                    var maxValue = d3.max(info);
+
+                //distribuicao de frequencias    
+                    var quant = 9;
+                    var range = maxValue - minValue; 
+                    var amp = Math.round(range / quant);
+
+                //domino de valores para as cores do mapa
+                    var dom = [
+                                (minValue+(amp/4)), 
+                                (minValue+amp), 
+                                (minValue+(2*amp)), 
+                                (minValue+(3*amp)), 
+                                (minValue+(4*amp)), 
+                                (minValue+(5*amp)), 
+                                (minValue+(6*amp)), 
+                                (minValue+(7*amp)), 
+                                (minValue+(8*amp))
+                              ];
+
+                //ajuste do dominio
+                    var i = 0; 
+                    while(i<=9){
+                        dom[i] = dom[i] - (dom[i] % 5);
+                        i++;
+                    }
+
+                // set the ranges
+                var x = d3.scaleBand()
+                    .domain(d3.range(dados.value.length))
+                    .range([0, width])
+                    .padding(0.2);
+
+                var y = d3.scaleLinear()
+                    .domain([0, d3.max(dados.value)])
+                    .range([height, 0]);
+
+                
+                var color = d3.scaleThreshold()
+                    .domain(dom)
+                    .range(d3.schemeYlGn[9]);
+                
+                          
+                var svg = d3.select("#corpo").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                    .attr("transform", 
+                          "translate(" + margin.left + "," + margin.top + ")");
+
+                //Create bars
+                svg.selectAll("rect")
+                   .data(dados.value, function(d) { return d; })
+                   .enter().append("rect")
+                   .attr("class", "bar")
+                   .attr("x", function(d, i) {
+                    return x(i);
+                   })
+                   .attr("y", function(d) {
+                    return y(d);
+                   })
+                   .attr("width", x.bandwidth())
+                   .attr("height", function(d) {
+                    return height - y(d);
+                   })
+
+                   .attr("fill", function(d) {
+                    // return "rgb(0, 0, " + (d * 10) + ")";
+                    return color(d);
+                   })
+
+                   // add the x Axis
+                   svg.append("g")
+                       .attr("transform", "translate(0," + height + ")")
+                       .call(d3.axisBottom(x));
+
+                   // add the y Axis
+                   svg.append("g")
+                       .call(d3.axisLeft(y));
+
+            });
 
         
 
-        <script type="text/javascript">
-            // Mapa JS //
-            //tamanho do mapa
-              var width = 800,
-                  height = 600;
-
-            //cria svg
-              var svg = d3.select("#corpo").append("svg")
-                .attr("width", width)
-                .attr("height", height);
-
-            //configura projeção
-              var projection = d3.geoMercator()
-                .center([-40, -30])             
-                .rotate([4.4, 0])               
-                .scale(750)                     
-                .translate([width / 2, height / 1.2]);  
-
-              var path = d3.geoPath()
-                .projection(projection);
-
-            //pre-load arquivos
-              d3.queue()
-                .defer(d3.json, "br-min.json")
-                .defer(d3.csv, "total.csv")
-                .await(ready);
-
-            //leitura
-              function ready(error, br_states, data) {
-
-                if (error) return console.error(error);
-
-            //carrega estados JSON
-                var states = topojson.feature(br_states, br_states.objects.states);
-
-            //carrega dados CSV
-                var ano = <?php echo $ano; ?>;
-                var total = d3.csvFormat(data, ["ID", "UF", "a"+ano]);
-
-            //parse CSV para array
-                var dict = {};
-
-                var info = d3.csvParseRows(total, function(d, i) {
-                  return dict[d[0]] = {id:d[0], uf:d[1], valor:+d[2]}
-                });
-
-            //exclui linha de cabeçario do OBJ
-                info.splice(0,1);
-                info.splice(27,28);
-                delete dict["ID"];
-                delete dict[0];
-                // console.log(dict);
-
-            //valores maximos e minimos
-                var minValue = d3.min(info, function(d) {return d.valor; });
-                var maxValue = d3.max(info, function(d) {return d.valor; });
-
-            //distribuicao de frequencias    
-                var quant = 9;
-                var range = maxValue - minValue; 
-                var amp = Math.round(range / quant);
-
-            //domino de valores para as cores do mapa
-                var dom = [
-                            (minValue+(amp/4)), 
-                            (minValue+amp), 
-                            (minValue+(2*amp)), 
-                            (minValue+(3*amp)), 
-                            (minValue+(4*amp)), 
-                            (minValue+(5*amp)), 
-                            (minValue+(6*amp)), 
-                            (minValue+(7*amp)), 
-                            (minValue+(8*amp))
-                          ];
-
-            //ajuste do dominio
-                var i = 0; 
-                while(i<=9){
-                    dom[i] = dom[i] - (dom[i] % 5);
-                    i++;
-                }
-
-            //legenda da faixa de valores do dominio       
-        /*      
-            var legend = [
-                                "Menor que "+dom[0],
-                                "Entre "+dom[0]+" e "+dom[1], 
-                                "Entre "+dom[1]+" e "+dom[2],  
-                                "Entre "+dom[2]+" e "+dom[3], 
-                                "Entre "+dom[3]+" e "+dom[4], 
-                                "Entre "+dom[5]+" e "+dom[6], 
-                                "Entre "+dom[6]+" e "+dom[7], 
-                                "Entre "+dom[7]+" e "+dom[8], 
-                                "Maior que "+dom[8]
-                         ];
-        */
-            //coloração do mapa
-                var color = d3.scaleThreshold()
-                  .domain(dom)
-                  .range(d3.schemeYlGn[9]);
-                          
-            //concatena propriedades
-                svg.append("g")
-                  .attr("class", "states")
-                  .selectAll("path")
-                  .data(states.features)
-                  .enter()
-                  .append("path")
-                  // .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
-                  .style('fill', function(d){return color(dict[d.id].valor);})
-                  .attr("d", path)
-                  
-            //mouseover
-                .on("mouseover", function(d) {
-                  var xPosition = d3.mouse(this)[0];
-                  var yPosition = d3.mouse(this)[1] - 30;
-                  svg.append("text")
-                    .attr("id", "tooltip")
-                    .attr("x", xPosition)
-                    .attr("y", yPosition)
-                    .attr("text-anchor", "middle")
-                    .attr("font-family", "Lato")
-                    .attr("font-size", "14px")
-                    .attr("font-weight", "bold")
-                    .attr("fill", "black")
-                    .text(d.properties.name+" = "+dict[d.id].valor);
-
-                  d3.select(this)
-                    .style("fill", "yellow")
-                    .style("stroke-width", "2px");
-                })
-
-            //mouseout
-                .on("mouseout", function(d) {
-                  d3.select("#tooltip").remove();
-                  d3.select(this)
-                    .transition()
-                    .duration(250)
-                    .style('fill', function(d){return color(dict[d.id].valor);})
-                    .style("stroke-width", "1px")
-                });
-
-            //legenda
-                var legend_svg = d3.select("svg");
-
-                legend_svg.append("g")
-                  .attr("class", "legendLinear")
-                  .attr("transform", "translate(600,300)");
-
-                var legendLinear = d3.legendColor()
-                  .title("Total de Empresas "+ano)
-                  .labelFormat(d3.format(".0f"))
-                  // .labels(legend)
-                  .labels( 
-                  //substitui legenda em ingles
-                    function({ i, genLength, generatedLabels }){
-                      if (i === 0 ){
-                        return generatedLabels[i]
-                          .replace('NaN to', 'Menor que')
-                      } 
-                      else if (i === genLength - 1) {
-                        return "Maior que "+dom[7]
-                      } 
-                      else  {
-                        return "Entre "+generatedLabels[i]
-                          .replace('to', 'e')
-                      }
-                      return generatedLabels[i]
-                    }
-                    )
-                  .shapeWidth(80)
-                  .shapePadding(5)
-                  .orient('vertical')
-                  .scale(color);
-
-                legend_svg.select(".legendLinear")
-                  .call(legendLinear);
-
-              };
         </script>
+
+        
+
+
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
