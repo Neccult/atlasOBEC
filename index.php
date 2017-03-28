@@ -247,21 +247,7 @@
                     dom[i] = dom[i] - (dom[i] % 5);
                     i++;
                 }
-
-            //legenda da faixa de valores do dominio       
-        /*      
-            var legend = [
-                                "Menor que "+dom[0],
-                                "Entre "+dom[0]+" e "+dom[1], 
-                                "Entre "+dom[1]+" e "+dom[2],  
-                                "Entre "+dom[2]+" e "+dom[3], 
-                                "Entre "+dom[3]+" e "+dom[4], 
-                                "Entre "+dom[5]+" e "+dom[6], 
-                                "Entre "+dom[6]+" e "+dom[7], 
-                                "Entre "+dom[7]+" e "+dom[8], 
-                                "Maior que "+dom[8]
-                         ];
-        */
+                
             //coloração do mapa
                 var color = d3.scaleThreshold()
                   .domain(dom)

@@ -1,8 +1,8 @@
 <?php 
-    if (!empty($_GET["ano"]))
-        $ano = $_GET["ano"];
+    if (!empty($_GET["uf"]))
+        $uf = $_GET["uf"];
     else
-        $ano = "2014";
+        $uf = 0;
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,14 +69,15 @@
                 -webkit-transition: all 0.3s;
                 -o-transition: all 0.3s;
                 transition: all 0.3s;
+                stroke: #CCC;
             }
             rect:hover{
-                fill: orange;
+                fill: yellow;
             }
 
             path {
                 fill: none;
-                stroke: black
+                stroke: black;
             }
 
             line {
@@ -161,19 +162,48 @@
                       
                             <li class="dropdown">
                             
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Periodicidade <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Desagregação <span class="caret"></span></a>
 
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-header">Ano</li>
-                                    <li class = "<?php echo ($ano == "2006" ? "active" : "")?>"><a href="index.php?ano=2006">2006</a></li>
-                                    <li class = "<?php echo ($ano == "2007" ? "active" : "")?>"><a href="index.php?ano=2007">2007</a></li>
-                                    <li class = "<?php echo ($ano == "2008" ? "active" : "")?>"><a href="index.php?ano=2008">2008</a></li>
-                                    <li class = "<?php echo ($ano == "2009" ? "active" : "")?>"><a href="index.php?ano=2009">2009</a></li>
-                                    <li class = "<?php echo ($ano == "2010" ? "active" : "")?>"><a href="index.php?ano=2010">2010</a></li>
-                                    <li class = "<?php echo ($ano == "2011" ? "active" : "")?>"><a href="index.php?ano=2011">2011</a></li>
-                                    <li class = "<?php echo ($ano == "2012" ? "active" : "")?>"><a href="index.php?ano=2012">2012</a></li>
-                                    <li class = "<?php echo ($ano == "2013" ? "active" : "")?>"><a href="index.php?ano=2013">2013</a></li>
-                                    <li class = "<?php echo ($ano == "2014" ? "active" : "")?>"><a href="index.php?ano=2014">2014</a></li>
+                                    <li class="dropdown-header">Estados</li>
+                                    <li class = "<?php echo ($uf == 0 ? "active" : "")?>"><a href="barras.php?uf=0">Todos</a></li>
+
+                                    <li class = "<?php echo ($uf == 12 ? "active" : "")?>"><a href="barras.php?uf=12">Acre</a></li>
+                                    <li class = "<?php echo ($uf == 27 ? "active" : "")?>"><a href="barras.php?uf=27">Alagoas</a></li>
+                                    <li class = "<?php echo ($uf == 16 ? "active" : "")?>"><a href="barras.php?uf=16">Amapá</a></li>
+                                    <li class = "<?php echo ($uf == 13 ? "active" : "")?>"><a href="barras.php?uf=13">Amazonas</a></li>
+                                    <li class = "<?php echo ($uf == 29 ? "active" : "")?>"><a href="barras.php?uf=29">Bahia</a></li>
+                                    <li class = "<?php echo ($uf == 23 ? "active" : "")?>"><a href="barras.php?uf=23">Ceará</a></li>
+                                    <li class = "<?php echo ($uf == 53 ? "active" : "")?>"><a href="barras.php?uf=53">Distrito Federal</a></li>
+                                    <li class = "<?php echo ($uf == 32 ? "active" : "")?>"><a href="barras.php?uf=32">Espírito Santo</a></li>
+                                    <li class = "<?php echo ($uf == 52 ? "active" : "")?>"><a href="barras.php?uf=52">Goías</a></li>
+
+                                    <li class = "<?php echo ($uf == 21 ? "active" : "")?>"><a href="barras.php?uf=21">Maranhão</a></li>
+                                    <li class = "<?php echo ($uf == 51 ? "active" : "")?>"><a href="barras.php?uf=51">Mato Grosso</a></li>
+                                    <li class = "<?php echo ($uf == 50 ? "active" : "")?>"><a href="barras.php?uf=50">Mato Grosso do Sul</a></li>
+                                    <li class = "<?php echo ($uf == 31 ? "active" : "")?>"><a href="barras.php?uf=31">Minas Gerais</a></li>
+                                    <li class = "<?php echo ($uf == 15 ? "active" : "")?>"><a href="barras.php?uf=15">Pará</a></li>
+                                    <li class = "<?php echo ($uf == 25 ? "active" : "")?>"><a href="barras.php?uf=25">Paraíba</a></li>
+                                    <li class = "<?php echo ($uf == 41 ? "active" : "")?>"><a href="barras.php?uf=41">Paraná</a></li>
+                                    <li class = "<?php echo ($uf == 26 ? "active" : "")?>"><a href="barras.php?uf=26">Pernambuco</a></li>
+                                    <li class = "<?php echo ($uf == 22 ? "active" : "")?>"><a href="barras.php?uf=22">Piauí</a></li>
+
+                                    <li class = "<?php echo ($uf == 33 ? "active" : "")?>"><a href="barras.php?uf=33">Rio de Janeiro</a></li>
+                                    <li class = "<?php echo ($uf == 24 ? "active" : "")?>"><a href="barras.php?uf=24">Rio Grande do Norte</a></li>
+                                    <li class = "<?php echo ($uf == 43 ? "active" : "")?>"><a href="barras.php?uf=43">Rio Grande do Sul</a></li>
+                                    <li class = "<?php echo ($uf == 11 ? "active" : "")?>"><a href="barras.php?uf=11">Rondônia</a></li>
+                                    <li class = "<?php echo ($uf == 14 ? "active" : "")?>"><a href="barras.php?uf=14">Roraima</a></li>
+                                    <li class = "<?php echo ($uf == 42 ? "active" : "")?>"><a href="barras.php?uf=42">Santa Catarina</a></li>
+                                    <li class = "<?php echo ($uf == 35 ? "active" : "")?>"><a href="barras.php?uf=35">São Paulo</a></li>
+                                    <li class = "<?php echo ($uf == 28 ? "active" : "")?>"><a href="barras.php?uf=22">Sergipe</a></li>
+                                    <li class = "<?php echo ($uf == 17 ? "active" : "")?>"><a href="barras.php?uf=17">Tocantins</a></li>
+
+
+
+
+
+
+
 
                                     <li role="separator" class="divider"></li>
                                 </ul>
@@ -195,93 +225,93 @@
         </div><!-- /container -->
 
         <script>
+        // Barras JS //
 
+        //Variaveis/Objetos
         var dict = {};
         var info = [];
         var dados = {key: [], value: []};
-        var uf = 0;
+        var uf = <?php echo $uf; ?>;
 
-        // get the data
+        //Leitura de arquivo CSV
             d3.csv("total.csv", function(error, data) {
               if (error) throw error;
 
-              // format the data
+            //formatar dados
               data.forEach(function(d) {
                 d.id = +d.ID;
               });
             
+            //carrega dados 
                 var total = d3.csvFormat(data, ["ID", "UF", "a2006", "a2007", "a2008", "a2009", "a2010", "a2011", "a2012", "a2013", "a2014"]);
 
-                //parse CSV para array
+            //parse CSV para array
                 var parse = d3.csvParseRows(total, function(d, i) {
                   return dict[d[0]] = {id:d[0], uf:d[1], a2006:+d[2], a2007:+d[3], a2008:+d[4], a2009:+d[5], a2010:+d[6], a2011:+d[7], a2012:+d[8], a2013:+d[9], a2014:+d[10]}
                 });
             
+            //preenche objetos
                 info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
-
-
                 dados = {key: [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014], value: info};
 
+            // console.log(dados);
 
-                console.log(dados);
-                console.log(dados.value.length);
 
-                console.log(d3.max(dados.value));
-
-                // console.log(info);
-
-                // set the dimensions and margins of the graph
-                var margin = {top: 20, right: 20, bottom: 30, left: 40},
+            //tamanho do grafico
+                var margin = {top: 20, right: 20, bottom: 30, left: 50},
                     width = 1200 - margin.left - margin.right,
                     height = 600 - margin.top - margin.bottom;
 
-                // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
+            // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
 
-                //valores maximos e minimos
-                    var minValue = d3.min(info);
-                    var maxValue = d3.max(info);
+            //valores maximos e minimos
+                var minValue = d3.min(info);
+                var maxValue = d3.max(info);
 
-                //distribuicao de frequencias    
-                    var quant = 9;
-                    var range = maxValue - minValue; 
-                    var amp = Math.round(range / quant);
+            //distribuicao de frequencias    
+                var quant = 9;
+                var range = maxValue - minValue; 
+                var amp = Math.round(range / quant);
 
-                //domino de valores para as cores do mapa
-                    var dom = [
-                                (minValue+(amp/4)), 
-                                (minValue+amp), 
-                                (minValue+(2*amp)), 
-                                (minValue+(3*amp)), 
-                                (minValue+(4*amp)), 
-                                (minValue+(5*amp)), 
-                                (minValue+(6*amp)), 
-                                (minValue+(7*amp)), 
-                                (minValue+(8*amp))
-                              ];
+            //domino de valores para as cores do mapa
+                var dom = [
+                            (minValue+(amp/4)), 
+                            (minValue+amp), 
+                            (minValue+(2*amp)), 
+                            (minValue+(3*amp)), 
+                            (minValue+(4*amp)), 
+                            (minValue+(5*amp)), 
+                            (minValue+(6*amp)), 
+                            (minValue+(7*amp)), 
+                            (minValue+(8*amp))
+                          ];
 
-                //ajuste do dominio
-                    var i = 0; 
-                    while(i<=9){
-                        dom[i] = dom[i] - (dom[i] % 5);
-                        i++;
-                    }
+            //ajuste do dominio
+                var i = 0; 
+                while(i<=9){
+                    dom[i] = dom[i] - (dom[i] % 5);
+                    i++;
+                }
 
-                // set the ranges
-                var x = d3.scaleBand()
-                    .domain(d3.range(dados.value.length))
-                    .range([0, width])
-                    .padding(0.2);
-
-                var y = d3.scaleLinear()
-                    .domain([0, d3.max(dados.value)])
-                    .range([height, 0]);
-
-                
+            //cor das barras
                 var color = d3.scaleThreshold()
                     .domain(dom)
                     .range(d3.schemeYlGn[9]);
+
+            // configura ranges
+                var x = d3.scaleBand()
+                    .domain(d3.range(dados.value.length))
+                    .range([0, width])
+                    .padding(0.3);
+
+                var maxy = Math.ceil(maxValue + (maxValue % 10));
+                // console.log(maxy)
+
+                var y = d3.scaleLinear()
+                    .domain([0, maxy])
+                    .range([height, 0]);
                 
-                          
+            //cria SVG
                 var svg = d3.select("#corpo").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
@@ -289,7 +319,7 @@
                     .attr("transform", 
                           "translate(" + margin.left + "," + margin.top + ")");
 
-                //Create bars
+            //Cria barras
                 svg.selectAll("rect")
                    .data(dados.value, function(d) { return d; })
                    .enter().append("rect")
@@ -306,18 +336,24 @@
                    })
 
                    .attr("fill", function(d) {
-                    // return "rgb(0, 0, " + (d * 10) + ")";
                     return color(d);
                    })
 
-                   // add the x Axis
-                   svg.append("g")
-                       .attr("transform", "translate(0," + height + ")")
-                       .call(d3.axisBottom(x));
+            //formata labels eixo X
+                var xAxis = d3.axisBottom(x)
+                    .tickFormat(function(d){ return dados.key[d];})
+                    .tickSize(5)
+                    .tickPadding(5); 
 
-                   // add the y Axis
-                   svg.append("g")
-                       .call(d3.axisLeft(y));
+            //adiciona eixo X
+                svg.append("g")
+                   .attr("transform", "translate(0," + height + ")")
+                   // .call(d3.axisBottom(x));
+                   .call(xAxis);
+
+            //adiciona eixo Y
+                svg.append("g")
+                   .call(d3.axisLeft(y));
 
             });
 
