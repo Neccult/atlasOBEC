@@ -333,11 +333,21 @@
                     .attr("transform", 
                           "translate(" + margin.left + "," + margin.top + ")");
 
-            //div
+            //titulo
+            svg.append("text")
+                    .attr("x", (width / 2))             
+                    .attr("y", 5 - (margin.top / 2))
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "16px") 
+                    // .style("font-weight", "bold")  
+                    .text(dict[uf].uf);
+
+            //div tooltip
+/*
                 var div = d3.select("#corpo").append("div")   
                     .attr("class", "tooltip")               
                     .style("opacity", 0);
-
+*/
             //Cria barras
                 svg.selectAll("rect")
                    .data(dados.value, function(d) { return d; })
@@ -355,7 +365,8 @@
                    })
                    .attr("fill", function(d) {
                     return color(d);
-                   })
+                   });
+                   /*
                    .on("mouseover", function(d) {       
                                div.transition()     
                                    .duration(200)       
@@ -369,6 +380,7 @@
                            .duration(500)       
                            .style("opacity", 0);    
                    });
+                   */
 
             //Create labels bar
                 svg.selectAll("text")
