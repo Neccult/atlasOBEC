@@ -83,7 +83,20 @@
             line {
                 stroke: black;
             }
+
+            div.tooltip {   
+                position: absolute;         
+                text-align: center;         
+                width: 60px;                    
+                height: 28px;                   
+                padding: 2px;               
+                font: 12px sans-serif;      
+                background: lightsteelblue; 
+                border: 0px;        
+                border-radius: 8px;         
+                pointer-events: none;           
             }
+            
         </style>
 
         <title>Atlas Econômico da Cultura Brasileira</title>
@@ -229,7 +242,7 @@
 
         //Variaveis/Objetos
         var dict = {};
-        var info = [];
+        // var info = [];
         var dados = {key: [], value: []};
         var uf = <?php echo $uf; ?>;
 
@@ -251,11 +264,12 @@
                 });
             
             //preenche objetos
-                info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
-                dados = {key: [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014], value: info};
+            dados.key = [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014];
+            dados.value.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
+                
+            //info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
 
             // console.log(dados);
-
 
             //tamanho do grafico
                 var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -265,8 +279,8 @@
             // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
 
             //valores maximos e minimos
-                var minValue = d3.min(info);
-                var maxValue = d3.max(info);
+                var minValue = d3.min(dados.value);
+                var maxValue = d3.max(dados.value);
 
             //distribuicao de frequencias    
                 var quant = 9;
@@ -319,6 +333,11 @@
                     .attr("transform", 
                           "translate(" + margin.left + "," + margin.top + ")");
 
+            //div
+                var div = d3.select("#corpo").append("div")   
+                    .attr("class", "tooltip")               
+                    .style("opacity", 0);
+
             //Cria barras
                 svg.selectAll("rect")
                    .data(dados.value, function(d) { return d; })
@@ -334,10 +353,38 @@
                    .attr("height", function(d) {
                     return height - y(d);
                    })
-
                    .attr("fill", function(d) {
                     return color(d);
                    })
+                   .on("mouseover", function(d) {       
+                               div.transition()     
+                                   .duration(200)       
+                                   .style("opacity", .9);       
+                               div  .html("Teste")  
+                                   .style("left", (d3.event.pageX) + "px")      
+                                   .style("top", (d3.event.pageY - 28) + "px"); 
+                               })                   
+                   .on("mouseout", function(d) {        
+                       div.transition()     
+                           .duration(500)       
+                           .style("opacity", 0);    
+                   });
+
+            //Create labels bar
+                svg.selectAll("text")
+                   .data(dados.value, function(d) { return d; })
+                   .enter()
+                   .append("text")
+                   .text(function(d) {
+                    return d;
+                   })
+                   .attr("text-anchor", "middle")
+                   .attr("x", function(d, i) {
+                    return x(i) + x.bandwidth() / 2 ;
+                   })
+                   .attr("y", function(d) {
+                    return  y(d)-5;
+                   });
 
             //formata labels eixo X
                 var xAxis = d3.axisBottom(x)
