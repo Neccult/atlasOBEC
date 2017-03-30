@@ -208,7 +208,7 @@
                                     <li class = "<?php echo ($uf == 14 ? "active" : "")?>"><a href="barras.php?uf=14">Roraima</a></li>
                                     <li class = "<?php echo ($uf == 42 ? "active" : "")?>"><a href="barras.php?uf=42">Santa Catarina</a></li>
                                     <li class = "<?php echo ($uf == 35 ? "active" : "")?>"><a href="barras.php?uf=35">São Paulo</a></li>
-                                    <li class = "<?php echo ($uf == 28 ? "active" : "")?>"><a href="barras.php?uf=22">Sergipe</a></li>
+                                    <li class = "<?php echo ($uf == 28 ? "active" : "")?>"><a href="barras.php?uf=28">Sergipe</a></li>
                                     <li class = "<?php echo ($uf == 17 ? "active" : "")?>"><a href="barras.php?uf=17">Tocantins</a></li>
 
 
@@ -247,8 +247,8 @@
         var uf = <?php echo $uf; ?>;
 
         //Leitura de arquivo CSV
-            d3.csv("total.csv", function(error, data) {
-              if (error) throw error;
+        d3.csv("total.csv", function(error, data) {
+            if (error) throw error;
 
             //formatar dados
               data.forEach(function(d) {
@@ -318,7 +318,7 @@
                     .range([0, width])
                     .padding(0.3);
 
-                var maxy = Math.ceil(maxValue + (maxValue % 10));
+                var maxy = Math.round(maxValue + (range/2));
                 // console.log(maxy)
 
                 var y = d3.scaleLinear()
@@ -334,13 +334,30 @@
                           "translate(" + margin.left + "," + margin.top + ")");
 
             //titulo
-            svg.append("text")
-                    .attr("x", (width / 2))             
-                    .attr("y", 5 - (margin.top / 2))
-                    .attr("text-anchor", "middle")  
-                    .style("font-size", "16px") 
-                    // .style("font-weight", "bold")  
-                    .text(dict[uf].uf);
+                svg.append("text")
+                        .attr("x", (width / 2))             
+                        .attr("y", 5 - (margin.top / 2))
+                        .attr("text-anchor", "middle")  
+                        .attr("font-family", "Lato")
+                        .style("font-size", "16px")
+                        .text(dict[uf].uf);
+
+            //gridlines in y axis function
+                function make_y_gridlines() {       
+                    return d3.axisLeft(y)
+                        .ticks()
+                }
+
+            //add the Y gridlines
+                svg.append("g")    
+                    .attr("class", "grid")
+                    .style("opacity", 0.1)
+                    .call(make_y_gridlines()
+                        .tickSize(-width +10)
+                        .tickSizeOuter(0)
+                        .tickFormat("")
+
+                    )
 
             //div tooltip
 /*
@@ -366,6 +383,7 @@
                    .attr("fill", function(d) {
                     return color(d);
                    });
+           
                    /*
                    .on("mouseover", function(d) {       
                                div.transition()     
@@ -382,11 +400,12 @@
                    });
                    */
 
-            //Create labels bar
+            //cria labels barras 
                 svg.selectAll("text")
                    .data(dados.value, function(d) { return d; })
                    .enter()
                    .append("text")
+                   .attr("id", "teste")    
                    .text(function(d) {
                     return d;
                    })
@@ -407,14 +426,15 @@
             //adiciona eixo X
                 svg.append("g")
                    .attr("transform", "translate(0," + height + ")")
-                   // .call(d3.axisBottom(x));
                    .call(xAxis);
 
             //adiciona eixo Y
                 svg.append("g")
                    .call(d3.axisLeft(y));
 
-            });
+        });
+
+    
 
         
 
