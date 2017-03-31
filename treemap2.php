@@ -228,7 +228,13 @@
 
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron white">
-                <div id="corpo" align="center"></div>
+                <div id="corpo" align="center">
+                    <svg width="1000" height="600"></svg>
+                    <!-- <form>
+                      <label><input type="radio" name="mode" value="sumBySize" checked> Size</label>
+                      <label><input type="radio" name="mode" value="sumByCount"> Count</label>
+                    </form> -->
+                </div>
 
                 <!-- download -->
                 <a href=""><img src="images/icons/pdf.png" class="icon-download"></a>
@@ -238,206 +244,90 @@
         </div><!-- /container -->
 
         <script>
-        // Barras JS //
+        var svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
 
-        //Variaveis/Objetos
-        var dict = {};
-        // var info = [];
-        var dados = {key: [], value: []};
-        var uf = <?php echo $uf; ?>;
+        var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
+            color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
+            format = d3.format(",d");
 
-        //Leitura de arquivo CSV
-        d3.csv("total.csv", function(error, data) {
-            if (error) throw error;
+        var treemap = d3.treemap()
+            .tile(d3.treemapResquarify)
+            .size([width, height])
+            .round(true)
+            .paddingInner(1);
 
-            //formatar dados
-              data.forEach(function(d) {
-                d.id = +d.ID;
-              });
-            
-            //carrega dados 
-                var total = d3.csvFormat(data, ["ID", "UF", "a2006", "a2007", "a2008", "a2009", "a2010", "a2011", "a2012", "a2013", "a2014"]);
+        d3.json("region.json", function(error, data) {
+          if (error) throw error;
 
-            //parse CSV para array
-                var parse = d3.csvParseRows(total, function(d, i) {
-                  return dict[d[0]] = {id:d[0], uf:d[1], a2006:+d[2], a2007:+d[3], a2008:+d[4], a2009:+d[5], a2010:+d[6], a2011:+d[7], a2012:+d[8], a2013:+d[9], a2014:+d[10]}
-                });
-            
-            //preenche objetos
-            dados.key = [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014];
-            dados.value.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
-                
-            //info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
+          var root = d3.hierarchy(data)
+              .eachBefore(function(d) { d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name; })
+              .sum(sumBySize)
+              .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
 
-            // console.log(dados);
+          treemap(root);
 
-            //tamanho do grafico
-                var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                    width = 1200 - margin.left - margin.right,
-                    height = 600 - margin.top - margin.bottom;
+          var cell = svg.selectAll("g")
+            .data(root.leaves())
+            .enter().append("g")
+              .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; });
 
-            // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
+          cell.append("rect")
+              .attr("id", function(d) { return d.data.id; })
+              .attr("width", function(d) { return d.x1 - d.x0; })
+              .attr("height", function(d) { return d.y1 - d.y0; })
+              .attr("fill", function(d) { return color(d.parent.data.id); });
 
-            //valores maximos e minimos
-                var minValue = d3.min(dados.value);
-                var maxValue = d3.max(dados.value);
+          cell.append("clipPath")
+              .attr("id", function(d) { return "clip-" + d.data.id; })
+            .append("use")
+              .attr("xlink:href", function(d) { return "#" + d.data.id; });
 
-            //distribuicao de frequencias    
-                var quant = 9;
-                var range = maxValue - minValue; 
-                var amp = Math.round(range / quant);
+          cell.append("text")
+              .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+            .selectAll("tspan")
+              .data(function(d) { return d.data.name.split(/(?=[A-Z][^A-Z])/g); })
+            .enter().append("tspan")
+              .attr("x", 4)
+              .attr("y", function(d, i) { return 13 + i * 10; })
+              .text(function(d) { return d; });
 
-            //domino de valores para as cores do mapa
-                var dom = [
-                            (minValue+(amp/4)), 
-                            (minValue+amp), 
-                            (minValue+(2*amp)), 
-                            (minValue+(3*amp)), 
-                            (minValue+(4*amp)), 
-                            (minValue+(5*amp)), 
-                            (minValue+(6*amp)), 
-                            (minValue+(7*amp)), 
-                            (minValue+(8*amp))
-                          ];
+          cell.append("title")
+              .text(function(d) { return d.data.id + "\n" + format(d.value); });
 
-            //ajuste do dominio
-                var i = 0; 
-                while(i<=9){
-                    dom[i] = dom[i] - (dom[i] % 5);
-                    i++;
-                }
-
-            //cor das barras
-                var color = d3.scaleThreshold()
-                    .domain(dom)
-                    .range(d3.schemeYlGn[9]);
-
-            // configura ranges
-                var x = d3.scaleBand()
-                    .domain(d3.range(dados.value.length))
-                    .range([0, width])
-                    .padding(0.3);
-
-                var maxy = Math.round(maxValue + (range/2));
-                // console.log(maxy)
-
-                var y = d3.scaleLinear()
-                    .domain([0, maxy])
-                    .range([height, 0]);
-                
-            //cria SVG
-                var svg = d3.select("#corpo").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                  .append("g")
-                    .attr("transform", 
-                          "translate(" + margin.left + "," + margin.top + ")");
-
-            //titulo
-                svg.append("text")
-                        .attr("x", (width / 2))             
-                        .attr("y", 5 - (margin.top / 2))
-                        .attr("text-anchor", "middle")  
-                        .attr("font-family", "Lato")
-                        .style("font-size", "16px")
-                        .text(dict[uf].uf);
-
-            //gridlines in y axis function
-                function make_y_gridlines() {       
-                    return d3.axisLeft(y)
-                        .ticks(4)
-                }
-            
-            //add the Y gridlines
-            
-                svg.append("g")    
-                    .attr("class", "grid")
-                    .style("opacity", 0.1)
-                    .call(make_y_gridlines()
-                        .tickSize(-width +10)
-                        .tickSizeOuter(0)
-                        .tickFormat("")
-
-                    )
-            
-            //div tooltip
 /*
-                var div = d3.select("#corpo").append("div")   
-                    .attr("class", "tooltip")               
-                    .style("opacity", 0);
+          d3.selectAll("input")
+              .data([sumBySize, sumByCount], function(d) { return d ? d.name : this.value; })
+              .on("change", changed);
+
+          var timeout = d3.timeout(function() {
+            d3.select("input[value=\"sumByCount\"]")
+                .property("checked", true)
+                .dispatch("change");
+          }, 2000);
+          function changed(sum) {
+            timeout.stop();
+
+            treemap(root.sum(sum));
+
+            cell.transition()
+                .duration(750)
+                .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
+              .select("rect")
+                .attr("width", function(d) { return d.x1 - d.x0; })
+                .attr("height", function(d) { return d.y1 - d.y0; });
+          }
 */
-            //Cria barras
-                svg.selectAll("rect")
-                   .data(dados.value, function(d) { return d; })
-                   .enter().append("rect")
-                   .attr("class", "bar")
-                   .attr("x", function(d, i) {
-                    return x(i);
-                   })
-                   .attr("y", function(d) {
-                    return y(d);
-                   })
-                   .attr("width", x.bandwidth())
-                   .attr("height", function(d) {
-                    return height - y(d);
-                   })
-                   .attr("fill", function(d) {
-                    return color(d);
-                   });
-           
-                   /*
-                   .on("mouseover", function(d) {       
-                               div.transition()     
-                                   .duration(200)       
-                                   .style("opacity", .9);       
-                               div  .html("Teste")  
-                                   .style("left", (d3.event.pageX) + "px")      
-                                   .style("top", (d3.event.pageY - 28) + "px"); 
-                               })                   
-                   .on("mouseout", function(d) {        
-                       div.transition()     
-                           .duration(500)       
-                           .style("opacity", 0);    
-                   });
-                   */
-
-            //cria labels barras 
-                svg.selectAll("text")
-                   .data(dados.value, function(d) { return d; })
-                   .enter()
-                   .append("text")
-                   .attr("id", "teste")    
-                   .text(function(d) {
-                    return d;
-                   })
-                   .attr("text-anchor", "middle")
-                   .attr("x", function(d, i) {
-                    return x(i) + x.bandwidth() / 2 ;
-                   })
-                   .attr("y", function(d) {
-                    return  y(d)-5;
-                   });
-
-            //formata labels eixo X
-                var xAxis = d3.axisBottom(x)
-                    .tickFormat(function(d){ return dados.key[d];})
-                    .tickSize(5)
-                    .tickPadding(5); 
-
-            //adiciona eixo X
-                svg.append("g")
-                   .attr("transform", "translate(0," + height + ")")
-                   .call(xAxis);
-
-            //adiciona eixo Y
-                svg.append("g")
-                   .call(d3.axisLeft(y));
-
         });
 
-    
+        function sumByCount(d) {
+          return d.children ? 0 : 1;
+        }
 
-        
+        function sumBySize(d) {
+          return d.size;
+        }
 
         </script>
 

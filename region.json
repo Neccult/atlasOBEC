@@ -1,0 +1,82 @@
+{
+ "name": "region",
+    "children": [
+      {
+        "name": "Sul",
+        "children": [
+          {
+            "name": "Sul",
+            "children": [
+              {"name": "RS", "size": 6966},
+              {"name": "SC", "size": 4610},
+              {"name": "PR", "size": 6063}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Sudeste",
+        "children": [
+          {
+            "name": "Sudeste",
+            "children": [
+              {"name": "RJ", "size": 8071},
+              {"name": "SP", "size": 23906},
+              {"name": "MG", "size": 9316},
+              {"name": "ES", "size": 1652}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Centro-Oeste",
+        "children": [
+          {
+            "name": "Centro-Oeste",
+            "children": [
+              {"name": "MT", "size": 1110},
+              {"name": "MS", "size": 936},
+              {"name": "GO", "size": 2225},
+              {"name": "DF", "size": 1802}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Nordeste",
+        "children": [
+          {
+            "name": "Nordeste",
+            "children": [
+              {"name": "BH", "size": 3148},
+              {"name": "PI", "size": 470},
+              {"name": "MA", "size": 782},
+              {"name": "CE", "size": 1692},
+              {"name": "RN", "size": 861},
+              {"name": "PB", "size": 637},
+              {"name": "PE", "size": 1920},
+              {"name": "AL", "size": 560},
+              {"name": "SE", "size": 543}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Norte",
+        "children": [
+          {
+            "name": "Norte",
+            "children": [
+              {"name": "AC", "size": 135},
+              {"name": "RO", "size": 607},
+              {"name": "AM", "size": 532},
+              {"name": "PA", "size": 981},
+              {"name": "TO", "size": 303},
+              {"name": "RR", "size": 127},
+              {"name": "AP", "size": 148}
+            ]
+          } 
+        ]
+      }
+    ]
+}

@@ -1,0 +1,115 @@
+{
+ "name": "scc",
+    "children": [
+      {
+        "name": "Arquitetura",
+        "children": [
+          {
+            "name": "Arquitetura",
+            "children": [
+              {"name": "Arquitetura", "size": 2089}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Artes",
+        "children": [
+          {
+            "name": "Artes",
+            "children": [
+              {"name": "Artes", "size": 5391}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Audiovisual",
+        "children": [
+          {
+            "name": "Audiovisual",
+            "children": [
+              {"name": "Audiovisual", "size": 11422}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Design",
+        "children": [
+          {
+            "name": "Design",
+            "children": [
+              {"name": "Design", "size": 9603}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Editoração",
+        "children": [
+          {
+            "name": "Editoração",
+            "children": [
+              {"name": "Editoração", "size": 35255}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Entretenimento",
+        "children": [
+          {
+            "name": "Entretenimento",
+            "children": [
+              {"name": "Entretenimento", "size": 6502}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Formação",
+        "children": [
+          {
+            "name": "Formação",
+            "children": [
+              {"name": "Formação", "size": 4765}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Gestão",
+        "children": [
+          {
+            "name": "Gestão",
+            "children": [
+              {"name": "Gestão", "size": 1363}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Música",
+        "children": [
+          {
+            "name": "Música",
+            "children": [
+              {"name": "Música", "size": 5156}
+            ]
+          } 
+        ]
+      },
+      {
+        "name": "Patrimônio",
+        "children": [
+          {
+            "name": "Patrimônio",
+            "children": [
+              {"name": "Patrimônio", "size": 432}
+            ]
+          } 
+        ]
+      }
+    ]
+}
