@@ -9,8 +9,8 @@ class EixoUm {
 	protected static $table = 'Eixo_1';
 	private static $conn;
 
- 	//campos da tabelas
-	protected $pk = 'id';
+ 	//informações Eixo_1
+	protected $id;
 	public $Numero;
 	public $idUF;
 	public $idAtuacao;
@@ -19,6 +19,21 @@ class EixoUm {
 	public $Ano;
 	public $Valor;
 	public $Percentual;
+
+	//informações UF
+	public $UFNome;
+	public $UFRegiao;
+	public $UFSigla;
+
+	//informações Atuação
+	public $AtuacaoNome;
+
+	//informações Cadeia
+	public $CadeiaNome;
+	
+	//informações Porte
+	public $PorteNome;
+
 
 ## Metodos
 
@@ -31,13 +46,13 @@ class EixoUm {
 
 		$conexao = mysqli_connect(DB_HOST, DB_USUARIO, DB_SENHA, DB_NOME);
 
-		if (mysqli_connect_errno())
-		{
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
-		}
+			if (mysqli_connect_errno())
+			{
+				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			}
 
 		self::$conn = $conexao;
-
+		mysqli_query($conexao, 'SET NAMES utf8');
 	}
 
 	//função para desconectar
@@ -50,12 +65,12 @@ class EixoUm {
 
 		self::connect();
 
-			$query = "SELECT * FROM ".self::$table
+			$query = "SELECT * FROM ".self::$table." AS ex"
+					." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
+					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
 					." WHERE Numero = ".$var
-					." AND idUF = ".$ufs
-					." AND idAtuacao = ".$atc
-					." AND idCadeia = ".$cad
-					." AND idPorte = ".$prt
 					." AND Ano = ".$anos;
 
 			$result = mysqli_query(self::$conn, $query);
@@ -69,33 +84,100 @@ class EixoUm {
 	//função para buscar todas tuplas
 	public static function all(){
 		self::connect();
-		$query = "SELECT * FROM ".self::$table." ORDER BY id";
-		$result = mysqli_query(self::$conn, $query);
-		$allObjects = array();
-		while($obj = mysqli_fetch_object($result, 'EixoUm')){
-			$allObjects[] = $obj;
-		}
+			// $query = "SELECT * FROM ".self::$table." ORDER BY id";
+			$query = "SELECT * FROM ".self::$table." AS ex"
+						." JOIN UF AS uf ON uf.idUF =  ex.idUF" 
+						." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao"
+						." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia"
+						." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte"
+						." ORDER BY id";
+
+			$result = mysqli_query(self::$conn, $query);
+			$allObjects = array();
+
+			while($obj = mysqli_fetch_object($result, 'EixoUm')){
+				$allObjects[] = $obj;
+			}
+
 		self::disconnect();
+		
 		return $allObjects;
 	}
 
+	//função para pegar conjunto de tuplas
+	public static function getter($var, $atc, $cad, $prt, $anos){
+
+		self::connect();		
+			$query = "SELECT * FROM ".self::$table." AS ex"
+					." JOIN UF AS uf ON uf.idUF =  ex.idUF"
+					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
+					." WHERE Numero = ".$var;
+
+				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
+
+			$result = mysqli_query(self::$conn, $query);
+			$allObjects = array();
+
+			while($obj = mysqli_fetch_object($result, 'EixoUm')){
+				$allObjects[] = $obj;
+			}
+
+		self::disconnect();
+		
+		return $allObjects;
+	}
+
+	//função para pegar conjunto de tuplas de um UF por ano
+	public static function getter_uf_anos($var, $ufs, $atc, $cad, $prt){
+
+		self::connect();		
+			$query = "SELECT * FROM ".self::$table." AS ex"
+					." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
+					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
+					." WHERE Numero = ".$var;
+
+			$result = mysqli_query(self::$conn, $query);
+			$allObjects = array();
+
+			while($obj = mysqli_fetch_object($result, 'EixoUm')){
+				$allObjects[] = $obj;
+			}
+
+		self::disconnect();
+		
+		return $allObjects;
+	}
+	
+
 	//função teste
-	//função para buscar uma tupla com join
-	public static function teste($id){
+	public static function teste($var, $atc, $cad, $prt, $anos){
 
 		self::connect();
 
-			$query = "SELECT * FROM ".self::$table. "AS ex"
-					."JOIN Porte as por ON por.id = ex.idPorte"
-					." WHERE ex.id = ".$id;
+			$query = "SELECT * FROM ".self::$table." AS ex"
+					." JOIN UF AS uf ON uf.idUF =  ex.idUF"
+					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
+					." WHERE Numero = ".$var
+					." AND Ano = ".$anos;
 
 			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoUm');
+			$allObjects = array();
+
+			while($obj = mysqli_fetch_object($result, 'EixoUm')){
+				$allObjects[] = $obj;
+			}
 
 		self::disconnect();
-
-		return ($obj == false) ? NULL : $obj;
+		
+		return $allObjects;
 	}
+
 }
 
 // echo "teste!";
