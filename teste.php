@@ -15,15 +15,18 @@ require_once("EixoUm.php");
 	echo '<hr />';
 }*/
 
+/*
 if (!empty($_GET["uf"]))
         $uf = $_GET["uf"];
     else
         $uf = 0;
+*/
 
 $teste = array();
-foreach (EixoUm::getter_uf_anos(1, $uf, 0, 0, 0) as $tupla) {
+foreach (EixoUm::getter_uf_anos(1, 0, 0, 0, 0) as $tupla) {
 	$teste[$tupla->Ano] = $tupla->Valor;
 }
+
 
 // var_dump($teste);
 echo json_encode($teste);
