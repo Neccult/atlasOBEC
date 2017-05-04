@@ -1,8 +1,31 @@
 <?php 
-    if (!empty($_GET["uf"]))
-        $uf = $_GET["uf"];
+
+    if (!empty($_GET["var"]))
+        $var = $_GET["var"];
     else
-        $uf = 0;
+        $var = 1;
+
+        if (!empty($_GET["uf"]))
+            $uf = $_GET["uf"];
+        else
+            $uf = 0;
+
+
+            if (!empty($_GET["atc"]))
+                $atc = $_GET["atc"];
+            else
+                $atc = 0;
+
+                if (!empty($_GET["cad"]))
+                    $cad = $_GET["cad"];
+                else
+                    $cad = 0;
+
+                    if (!empty($_GET["prt"]))
+                        $prt = $_GET["prt"];
+                    else
+                        $prt = 0;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -237,220 +260,188 @@
             </div> 
         </div><!-- /container -->
 
-        <script>
-        // Barras JS //
-
-        //Variaveis/Objetos
-        var dict = {};
-        // var info = [];
-        var dados = {key: [], value: []};
-        var uf = <?php echo $uf; ?>;
-
-        //Leitura de arquivo CSV
-        d3.csv("total.csv", function(error, data) {
-            if (error) throw error;
-
-            //formatar dados
-              data.forEach(function(d) {
-                d.id = +d.ID;
-              });
-            
-            //carrega dados 
-                var total = d3.csvFormat(data, ["ID", "UF", "a2006", "a2007", "a2008", "a2009", "a2010", "a2011", "a2012", "a2013", "a2014"]);
-
-            //parse CSV para array
-                var parse = d3.csvParseRows(total, function(d, i) {
-                  return dict[d[0]] = {id:d[0], uf:d[1], a2006:+d[2], a2007:+d[3], a2008:+d[4], a2009:+d[5], a2010:+d[6], a2011:+d[7], a2012:+d[8], a2013:+d[9], a2014:+d[10]}
-                });
-            
-            //preenche objetos
-            dados.key = [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014];
-            dados.value.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
-                
-            //info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
-
-            // console.log(dados);
-
-            //tamanho do grafico
-                var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                    width = 1200 - margin.left - margin.right,
-                    height = 600 - margin.top - margin.bottom;
-
-            // var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
-
-            //valores maximos e minimos
-                var minValue = d3.min(dados.value);
-                var maxValue = d3.max(dados.value);
-
-            //distribuicao de frequencias    
-                var quant = 9;
-                var range = maxValue - minValue; 
-                var amp = Math.round(range / quant);
-
-            //domino de valores para as cores do mapa
-                var dom = [
-                            (minValue+(amp/4)), 
-                            (minValue+amp), 
-                            (minValue+(2*amp)), 
-                            (minValue+(3*amp)), 
-                            (minValue+(4*amp)), 
-                            (minValue+(5*amp)), 
-                            (minValue+(6*amp)), 
-                            (minValue+(7*amp)), 
-                            (minValue+(8*amp))
-                          ];
-
-            //ajuste do dominio
-                var i = 0; 
-                while(i<=9){
-                    dom[i] = dom[i] - (dom[i] % 5);
-                    i++;
-                }
-
-            //cor das barras
-                var color = d3.scaleThreshold()
-                    .domain(dom)
-                    .range(d3.schemeYlGn[9]);
-
-            // configura ranges
-                var x = d3.scaleBand()
-                    .domain(d3.range(dados.value.length))
-                    .range([0, width])
-                    .padding(0.3);
-
-                var maxy = Math.round(maxValue + (range/2));
-                // console.log(maxy)
-
-                var y = d3.scaleLinear()
-                    .domain([0, maxy])
-                    .range([height, 0]);
-                
-            //cria SVG
-                var svg = d3.select("#corpo").append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                  .append("g")
-                    .attr("transform", 
-                          "translate(" + margin.left + "," + margin.top + ")");
-
-            //titulo
-                svg.append("text")
-                        .attr("x", (width / 2))             
-                        .attr("y", 5 - (margin.top / 2))
-                        .attr("text-anchor", "middle")  
-                        .attr("font-family", "Lato")
-                        .style("font-size", "16px")
-                        .text(dict[uf].uf);
-
-            //gridlines in y axis function
-                function make_y_gridlines() {       
-                    return d3.axisLeft(y)
-                        .ticks(4)
-                }
-            
-            //add the Y gridlines
-            
-                svg.append("g")    
-                    .attr("class", "grid")
-                    .style("opacity", 0.1)
-                    .call(make_y_gridlines()
-                        .tickSize(-width +10)
-                        .tickSizeOuter(0)
-                        .tickFormat("")
-
-                    )
-            
-            //div tooltip
-/*
-                var div = d3.select("#corpo").append("div")   
-                    .attr("class", "tooltip")               
-                    .style("opacity", 0);
-*/
-            //Cria barras
-                svg.selectAll("rect")
-                   .data(dados.value, function(d) { return d; })
-                   .enter().append("rect")
-                   .attr("class", "bar")
-                   .attr("x", function(d, i) {
-                    return x(i);
-                   })
-                   .attr("y", function(d) {
-                    return y(d);
-                   })
-                   .attr("width", x.bandwidth())
-                   .attr("height", function(d) {
-                    return height - y(d);
-                   })
-                   .attr("fill", function(d) {
-                    return color(d);
-                   });
-           
-                   /*
-                   .on("mouseover", function(d) {       
-                               div.transition()     
-                                   .duration(200)       
-                                   .style("opacity", .9);       
-                               div  .html("Teste")  
-                                   .style("left", (d3.event.pageX) + "px")      
-                                   .style("top", (d3.event.pageY - 28) + "px"); 
-                               })                   
-                   .on("mouseout", function(d) {        
-                       div.transition()     
-                           .duration(500)       
-                           .style("opacity", 0);    
-                   });
-                   */
-
-            //cria labels barras 
-                svg.selectAll("text")
-                   .data(dados.value, function(d) { return d; })
-                   .enter()
-                   .append("text")
-                   .attr("id", "teste")    
-                   .text(function(d) {
-                    return d;
-                   })
-                   .attr("text-anchor", "middle")
-                   .attr("x", function(d, i) {
-                    return x(i) + x.bandwidth() / 2 ;
-                   })
-                   .attr("y", function(d) {
-                    return  y(d)-5;
-                   });
-
-            //formata labels eixo X
-                var xAxis = d3.axisBottom(x)
-                    .tickFormat(function(d){ return dados.key[d];})
-                    .tickSize(5)
-                    .tickPadding(5); 
-
-            //adiciona eixo X
-                svg.append("g")
-                   .attr("transform", "translate(0," + height + ")")
-                   .call(xAxis);
-
-            //adiciona eixo Y
-                svg.append("g")
-                   .call(d3.axisLeft(y));
-
-        });
-
-    
-
-        
-
-        </script>
-
-        
-
-
-
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
         <script src="js/bootstrap.min.js"></script>
+
+         <script>
+        // Barras JS //
+
+        var vrv = <?php echo $var; ?>;
+        var uf = <?php echo $uf; ?>;
+        var atc = <?php echo $atc; ?>;
+        var cad = <?php echo $cad; ?>;
+        var prt = <?php echo $prt; ?>;
+
+        var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"";
+        // console.log(config);
+
+        d3.queue()
+          .defer(d3.json, "ajax_barras.php"+config)
+          .await(analyze);
+
+        function analyze(error, data) {
+          if(error) { console.log(error); }
+
+            var dados = {key: [], value: []};
+
+
+            dados.key = d3.keys(data);
+            dados.value = d3.values(data);
+
+            dados.key = dados.key.map(Number);
+            dados.value = dados.value.map(Number);;
+
+            // console.log(dados);
+
+
+                    //tamanho do grafico
+                        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                            width = 1200 - margin.left - margin.right,
+                            height = 600 - margin.top - margin.bottom;
+
+                    //valores maximos e minimos
+                        var minValue = d3.min(dados.value);
+                        var maxValue = d3.max(dados.value);
+
+                        // console.log(minValue);
+                        // console.log(maxValue);
+
+                    //distribuicao de frequencias    
+                        var quant = 9;
+                        var range = maxValue - minValue; 
+                        var amp = Math.round(range / quant);
+
+                    //domino de valores para as cores do mapa
+                        var dom = [
+                                    (minValue+(amp/4)), 
+                                    (minValue+amp), 
+                                    (minValue+(2*amp)), 
+                                    (minValue+(3*amp)), 
+                                    (minValue+(4*amp)), 
+                                    (minValue+(5*amp)), 
+                                    (minValue+(6*amp)), 
+                                    (minValue+(7*amp)), 
+                                    (minValue+(8*amp))
+                                  ];
+                        // console.log(dom);
+
+                    //ajuste do dominio
+                        var i = 0; 
+                        while(i<=9){
+                            dom[i] = dom[i] - (dom[i] % 5);
+                            i++;
+                        }
+
+
+                    //cor das barras
+                        var color = d3.scaleThreshold()
+                            .domain(dom)
+                            .range(d3.schemeYlGn[9]);
+
+                    // configura ranges
+                        var x = d3.scaleBand()
+                            .domain(d3.range(dados.value.length))
+                            .range([0, width])
+                            .padding(0.3);
+
+                        var maxy = Math.round(maxValue + (range/2));
+                        // console.log(maxy)
+
+                        var y = d3.scaleLinear()
+                            .domain([0, maxy])
+                            .range([height, 0]);
+                        
+                    //cria SVG
+                        var svg = d3.select("#corpo").append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                          .append("g")
+                            .attr("transform", 
+                                  "translate(" + margin.left + "," + margin.top + ")");
+
+                    //titulo
+                    /*
+                        svg.append("text")
+                                .attr("x", (width / 2))             
+                                .attr("y", 5 - (margin.top / 2))
+                                .attr("text-anchor", "middle")  
+                                .attr("font-family", "Lato")
+                                .style("font-size", "16px")
+                                .text(dict[uf].uf);
+                    */
+
+                    //gridlines in y axis function
+                        function make_y_gridlines() {       
+                            return d3.axisLeft(y)
+                                .ticks(4)
+                        }
+                    
+                    //add the Y gridlines
+                    
+                        svg.append("g")    
+                            .attr("class", "grid")
+                            .style("opacity", 0.1)
+                            .call(make_y_gridlines()
+                                .tickSize(-width +10)
+                                .tickSizeOuter(0)
+                                .tickFormat("")
+                            )
+                    
+                    //Cria barras
+                        svg.selectAll("rect")
+                           .data(dados.value, function(d) { return d; })
+                           .enter().append("rect")
+                           .attr("class", "bar")
+                           .attr("x", function(d, i) {
+                            return x(i);
+                           })
+                           .attr("y", function(d) {
+                            return y(d);
+                           })
+                           .attr("width", x.bandwidth())
+                           .attr("height", function(d) {
+                            return height - y(d);
+                           })
+                           .attr("fill", function(d) {
+                            return color(d);
+                           });
+
+                    //cria labels barras 
+                        svg.selectAll("text")
+                           .data(dados.value, function(d) { return d; })
+                           .enter()
+                           .append("text")  
+                           .text(function(d) {
+                            return d;
+                           })
+                           .attr("text-anchor", "middle")
+                           .attr("x", function(d, i) {
+                            return x(i) + x.bandwidth() / 2 ;
+                           })
+                           .attr("y", function(d) {
+                            return  y(d)-5;
+                           });
+
+                    //formata labels eixo X
+                        var xAxis = d3.axisBottom(x)
+                            .tickFormat(function(d){ return dados.key[d];})
+                            .tickSize(5)
+                            .tickPadding(5); 
+
+                    //adiciona eixo X
+                        svg.append("g")
+                           .attr("transform", "translate(0," + height + ")")
+                           .call(xAxis);
+
+                    //adiciona eixo Y
+                        svg.append("g")
+                           .call(d3.axisLeft(y));        
+        }
+        </script>
 
     </body>
 </html>
