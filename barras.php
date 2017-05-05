@@ -270,6 +270,7 @@
          <script>
         // Barras JS //
 
+        //variaveis configuracao query
         var vrv = <?php echo $var; ?>;
         var uf = <?php echo $uf; ?>;
         var atc = <?php echo $atc; ?>;
@@ -349,6 +350,7 @@
                             .padding(0.3);
 
                         var maxy = Math.round(maxValue + (range/2));
+                        maxy = maxy - (maxy % 5);
                         // console.log(maxy)
 
                         var y = d3.scaleLinear()
@@ -375,9 +377,10 @@
                     */
 
                     //gridlines in y axis function
+                    
                         function make_y_gridlines() {       
                             return d3.axisLeft(y)
-                                .ticks(4)
+                                .ticks(1);
                         }
                     
                     //add the Y gridlines
@@ -386,7 +389,7 @@
                             .attr("class", "grid")
                             .style("opacity", 0.1)
                             .call(make_y_gridlines()
-                                .tickSize(-width +10)
+                                .tickSize(-width+10)
                                 .tickSizeOuter(0)
                                 .tickFormat("")
                             )

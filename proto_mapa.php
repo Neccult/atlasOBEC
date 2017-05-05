@@ -1,29 +1,8 @@
 <?php 
-    
-    if (!empty($_GET["var"]))
-        $var = $_GET["var"];
+    if (!empty($_GET["ano"]))
+        $ano = $_GET["ano"];
     else
-        $var = 1;
-
-        if (!empty($_GET["atc"]))
-            $atc = $_GET["atc"];
-        else
-            $atc = 0;
-
-            if (!empty($_GET["cad"]))
-                $cad = $_GET["cad"];
-            else
-                $cad = 0;
-
-                if (!empty($_GET["prt"]))
-                    $prt = $_GET["prt"];
-                else
-                    $prt = 0;
-
-                    if (!empty($_GET["ano"]))
-                        $ano = $_GET["ano"];
-                    else
-                        $ano = 2014;
+        $ano = "2014";
 ?>
 <!DOCTYPE html>
 <html>
@@ -208,49 +187,37 @@
               var path = d3.geoPath()
                 .projection(projection);
 
-            //variaveis configuracao query
-            var vrv = <?php echo $var; ?>;
-            var atc = <?php echo $atc; ?>;
-            var cad = <?php echo $cad; ?>;
-            var prt = <?php echo $prt; ?>;
-            var ano = <?php echo $ano; ?>;
-
-            var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
-            // console.log(config);
-
             //pre-load arquivos
               d3.queue()
                 .defer(d3.json, "br-min.json")
-                .defer(d3.json, "ajax_mapa.php"+config)
+                .defer(d3.csv, "total.csv")
                 .await(ready);
 
             //leitura
-              function ready(error, br_states, mapa) {
+              function ready(error, br_states, data) {
 
                 if (error) return console.error(error);
-
-                //variaveis informacao
-                var dict = {};
-                var info = [];
-
-                Object.keys(mapa).forEach(function(key) {
-
-                    // console.log(key, mapa[key]);
-                    info.push(mapa[key]);
-                    return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor};
-
-                });
 
             //carrega estados JSON
                 var states = topojson.feature(br_states, br_states.objects.states);
 
+            //carrega dados CSV
+                var ano = <?php echo $ano; ?>;
+                var total = d3.csvFormat(data, ["ID", "UF", "a"+ano]);
+
+            //parse CSV para array
+                var dict = {};
+
+                var info = d3.csvParseRows(total, function(d, i) {
+                  return dict[d[0]] = {id:d[0], uf:d[1], valor:+d[2]}
+                });
 
             //exclui linha de cabeçario do OBJ
                 info.splice(0,1);
                 info.splice(27,28);
+                delete dict["ID"];
                 delete dict[0];
                 // console.log(dict);
-                // console.log(info);
 
             //valores maximos e minimos
                 var minValue = d3.min(info, function(d) {return d.valor; });
