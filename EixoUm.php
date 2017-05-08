@@ -104,8 +104,8 @@ class EixoUm {
 		return $allObjects;
 	}
 
-	//função para pegar conjunto de tuplas
-	public static function getter($var, $atc, $cad, $prt, $anos){
+	//função para pegar conjunto de tuplas para o mapa
+	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -129,8 +129,8 @@ class EixoUm {
 		return $allObjects;
 	}
 
-	//função para pegar conjunto de tuplas de um UF por ano
-	public static function getter_uf_anos($var, $ufs, $atc, $cad, $prt){
+	//função para pegar conjunto de tuplas para as barras
+	public static function getter_barras($var, $ufs, $atc, $cad, $prt){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -153,18 +153,18 @@ class EixoUm {
 	}
 	
 
-	//função teste
-	public static function teste($var, $atc, $cad, $prt, $anos){
+	//função para pegar conjunto de tuplas para o mapa
+	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
-		self::connect();
-
+		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF =  ex.idUF"
+					." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE '".$regiao."'"
 					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE Numero = ".$var
-					." AND Ano = ".$anos;
+					." WHERE Numero = ".$var;
+
+				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();

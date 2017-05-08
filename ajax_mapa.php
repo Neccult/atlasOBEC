@@ -6,6 +6,7 @@ require_once("EixoUm.php");
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
+
 	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
@@ -13,6 +14,7 @@ if (!empty($_GET["var"])) {
 }
 else{
 	$var = 1;
+	
 	$atc = 0;
 	$cad = 0;
 	$prt = 0;
@@ -21,7 +23,7 @@ else{
 
 
 $mapa = array();
-foreach (EixoUm::getter($var, $atc, $cad, $prt, $ano) as $tupla) {
+foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 	
 	$mapa[$tupla->idUF] = [
 
