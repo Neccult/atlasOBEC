@@ -1,0 +1,74 @@
+{
+	"cadeias": {
+		"0": {
+			"name": "Principal",
+			"color": "071342"
+		},
+		"1": {
+			"name": "Arquitetura",
+			"color": "87A8CA"
+		},
+		"2": {
+			"name": "Artes",
+			"color": "077DDD"
+		},
+		"3": {
+			"name": "Audiovisual",
+			"color": "0F4B67"
+		},
+		"4": {
+			"name": "Design",
+			"color": "8178AF"
+		},
+		"5": {
+			"name": "Editoração",
+			"color": "F6D5AB"
+		},
+		"6": {
+			"name": "Entretenimento",
+			"color": "EC8A91"
+		},
+		"7": {
+			"name": "Formação",
+			"color": "AD5468"
+		},
+		"8": {
+			"name": "Gestão",
+			"color": "6A474D"
+		},
+		"9": {
+			"name": "Música",
+			"color": "E96B00"
+		},
+		"10": {
+			"name": "Patrimônio",
+			"color": "B2510F"
+		}
+	},
+	"regioes": {
+		"0": {
+			"name": "Principal",
+			"color": "2F484F"
+		},
+		"1": {
+			"name": "Centro-Oeste",
+			"color": "657F7B"
+		},
+		"2": {
+			"name": "Nordeste",
+			"color": "8D8E69"
+		},
+		"3": {
+			"name": "Norte",
+			"color": "656F70"
+		},
+		"4": {
+			"name": "Sudeste",
+			"color": "FAEECF"
+		},
+		"5": {
+			"name": "Sul",
+			"color": "D8D1AE"
+		}
+	}
+}

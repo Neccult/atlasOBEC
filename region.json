@@ -2,6 +2,7 @@
  "name": "region",
     "children": [
       {
+        "colorId": 5,
         "name": "Sul",
         "children": [
           {
@@ -15,6 +16,7 @@
         ]
       },
       {
+        "colorId": 4,
         "name": "Sudeste",
         "children": [
           {
@@ -29,6 +31,7 @@
         ]
       },
       {
+        "colorId": 1,
         "name": "Centro-Oeste",
         "children": [
           {
@@ -43,6 +46,7 @@
         ]
       },
       {
+        "colorId": 2,
         "name": "Nordeste",
         "children": [
           {
@@ -62,6 +66,7 @@
         ]
       },
       {
+        "colorId": 3,
         "name": "Norte",
         "children": [
           {
