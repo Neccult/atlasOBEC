@@ -345,10 +345,10 @@
 				});
 			}
 
-			var pNode = placeholder.node().parentNode
+			var pNode = placeholder.node().parentNode;
 			var bbox = placeholder.node().getBBox();
 
-			pNode.removeChild(pNode.lastChild);
+			d3.select(pNode.parentNode).remove();
 
 		    return bbox;
 		}
