@@ -33,6 +33,7 @@ for ($cad=1; $cad <= 10; $cad++) {
 
 	$treemap .= '
 					{
+					  "colorId": "'.$cad.'", 
 					  "name": "'.$tupla->CadeiaNome.'",
 					  "children": [
 					    {
