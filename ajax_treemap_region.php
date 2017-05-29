@@ -31,6 +31,7 @@ $treemap = '{
 $regiao = "Sul";
 $treemap .= '
 					{
+					  "colorId": 5,
 					  "name": "'.$regiao.'",
 					  "children": [
 					    {
@@ -55,6 +56,7 @@ $treemap .= '
 $regiao = "Sudeste";
 $treemap .= '
 					{
+					  "colorId": 4,
 					  "name": "'.$regiao.'",
 					  "children": [
 					    {
@@ -78,6 +80,7 @@ $treemap .= '
 $regiao = "Centro-Oeste";
 $treemap .= '
 					{
+					  "colorId": 1,
 					  "name": "'.$regiao.'",
 					  "children": [
 					    {
@@ -101,6 +104,7 @@ $treemap .= '
 $regiao = "Nordeste";
 $treemap .= '
 					{
+					  "colorId": 2,
 					  "name": "'.$regiao.'",
 					  "children": [
 					    {
@@ -124,6 +128,7 @@ $treemap .= '
 $regiao = "Norte";
 $treemap .= '
 					{
+					  "colorId": 3,
 					  "name": "'.$regiao.'",
 					  "children": [
 					    {
