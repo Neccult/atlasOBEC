@@ -270,12 +270,22 @@
 		var uf = <?php echo $uf; ?>;
 
 		 // import colors.json file
-			var colorJSON;
-			d3.json('colors.json', function(error, data) {
-			  if (error) throw error;
+		var colorJSON;
+		d3.json('colors.json', function(error, data) {
+		  if (error) throw error;
 
-			  colorJSON = data;
-			});
+		  colorJSON = data;
+		});
+
+			// return matching color value
+		var color = function(colorId){
+			if(colorJSON.cadeias[colorId]){
+				return "#" + colorJSON.cadeias[colorId].color;
+			} else {
+				console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+				return "#" + colorJSON.cadeias[0].color;
+			}
+		}
 
 		//Leitura de arquivo CSV
 		d3.csv("total.csv", function(error, data) {
@@ -306,6 +316,10 @@
 				var margin = {top: 20, right: 20, bottom: 30, left: 50},
 					width = 1200 - margin.left - margin.right,
 					height = 600 - margin.top - margin.bottom;
+
+				var zeroPos = height/2;
+				var minBarHeight = 5;
+				var topLabelHeight = 17;
 
 			// var dataset = {key: [1, 2, 3, 4, 5], value: [10,20,30,40,50]};
 
@@ -360,7 +374,7 @@
 					.text(dict[uf].uf);
 
 				d3.select(".tooltip .size")
-					.text(dict[uf].valor);
+					.text(d);
 
 				d3.select(".tooltip").classed("hidden", false);
 			};
@@ -371,23 +385,41 @@
 
 			//cor das barras
 				//coloração do mapa
-				var color = d3.scaleThreshold()
+				/*var color = d3.scaleThreshold()
 				  .domain(dom)
-				  .range(colorsRange);
+				  .range(colorsRange);*/
 
+				  
 			// configura ranges
-				var x = d3.scaleBand()
+				/*var x = d3.scaleBand()
 					.domain(d3.range(dados.value.length))
 					.range([0, width])
-					.padding(0.3);
+					.padding(0.3);*/
 
-				var maxy = Math.round(maxValue + (range / 6));
+
+				//var maxy = Math.round(maxValue + (range / 6));
 				
-
 				var minDisplayValue = minValue > 0? minValue - (minValue / 10) : 0;
-				var y = d3.scaleLinear()
+				
+				/*var y = d3.scaleLinear()
 					.domain([minDisplayValue, maxy])
+					.range([height, 0]);*/
+
+
+			var x = d3.scaleBand()
+						.domain(d3.range(dados.value.length))
+						.rangeRound([0, width])
+						.padding(0.1);
+			
+
+				//d3.range(dados.value.length)
+			var y = d3.scaleLinear()
+					.domain(d3.extent(dados.value))
 					.range([height, 0]);
+
+			y.domain(d3.extent(dados.value, function(d) {
+		        return d;
+		    })).nice();
 				
 			//cria SVG
 				var svg = d3.select("#corpo").append("svg")
@@ -407,13 +439,13 @@
 						.text(dict[uf].uf);
 
 			//gridlines in y axis function
-				function make_y_gridlines() {       
+				function make_y_gridlines() {     
 					return d3.axisLeft(y)
+						.scale(y)
 						.ticks(4)
 				}
 			
 			//add the Y gridlines
-			
 				svg.append("g")    
 					.attr("class", "grid")
 					.style("opacity", 0.1)
@@ -422,14 +454,8 @@
 						.tickSizeOuter(0)
 						.tickFormat("")
 
-					)
+					)		
 			
-			//div tooltip
-/*
-				var div = d3.select("#corpo").append("div")   
-					.attr("class", "tooltip")               
-					.style("opacity", 0);
-*/
 			//Cria barras
 				svg.selectAll("rect")
 				   .data(dados.value, function(d) { return d; })
@@ -439,24 +465,27 @@
 					return x(i);
 				   })
 				   .attr("y", function(d) {
-					return y(d);
+				   		if(d > 0)
+				   			return y(d);
+
+						return y(0);
 				   })
 				   .attr("width", x.bandwidth())
 				   .attr("height", function(d) {
-					return height - y(d);
+					return Math.abs(y(d)) >= y(0)? minBarHeight : Math.abs(y(d) - y(0));
 				   })
 				   .attr("fill", function(d) {
-					return "#" + color(d);
+					return color(cadeia);
 				   })
 				   .on("mouseover", mouseOn)
 			  		.on("mouseout", mouseOut);
 
 			//cria labels barras 
-				svg.selectAll("text")
+				svg.selectAll("text g")
 				   .data(dados.value, function(d) { return d; })
 				   .enter()
 				   .append("text")
-				   .attr("id", "teste")    
+				   .attr("class", "barTopValue")    
 				   .text(function(d) {
 					return d;
 				   })
@@ -465,7 +494,11 @@
 					return x(i) + x.bandwidth() / 2 ;
 				   })
 				   .attr("y", function(d) {
-					return  y(d)-5;
+						if (y(d) >= y(0)){
+							return y(d) + topLabelHeight + 5;
+						} else {
+							return y(d)-5;
+						}
 				   });
 
 			//formata labels eixo X

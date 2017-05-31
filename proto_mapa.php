@@ -275,6 +275,7 @@
 				var quant = 9;
 				var range = maxValue - minValue;
 
+				// ERRO MAPA AQUI
 				var amp = minValue <= 1 ? range / quant : Math.round(range / quant);
 
 			//domino de valores para as cores do mapa
@@ -317,6 +318,7 @@
 				d3.select(".tooltip .heading")
 					.text(d['properties']['name']);
 
+				// ERRO MAPA AQUI
 				d3.select(".tooltip .size")
 					.text(dict[d.id].valor);
 
@@ -340,7 +342,7 @@
 				  .data(states.features)
 				  .enter()
 				  .append("path")
-				  // .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
+				  // ERRO MAPA AQUI
 				  .style('fill', function(d){return "#" + color(dict[d.id].valor);})
 				  .attr("d", path)
 				  
