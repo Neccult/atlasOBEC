@@ -465,14 +465,16 @@
 					return x(i);
 				   })
 				   .attr("y", function(d) {
-				   		if(d > 0)
+				   		if(d >= minBarHeight)
 				   			return y(d);
-
-						return y(0);
+				   		else if(minBarHeight - Math.abs(d) >= 0 && d > 0)
+				   			return y(d) - (minBarHeight);
+				   		else
+							return y(0);
 				   })
 				   .attr("width", x.bandwidth())
 				   .attr("height", function(d) {
-					return Math.abs(y(d)) >= y(0)? minBarHeight : Math.abs(y(d) - y(0));
+						return (Math.abs(y(d)) + minBarHeight >= y(0) && Math.abs(d) <= minBarHeight)? minBarHeight : Math.abs(y(d) - y(0));
 				   })
 				   .attr("fill", function(d) {
 					return color(cadeia);
@@ -496,9 +498,12 @@
 				   .attr("y", function(d) {
 						if (y(d) >= y(0)){
 							return y(d) + topLabelHeight + 5;
+						} else if (minBarHeight - Math.abs(d) >= 0 && d > 0){
+							return y(d) - minBarHeight - 5;
 						} else {
 							return y(d)-5;
 						}
+						
 				   });
 
 			//formata labels eixo X
