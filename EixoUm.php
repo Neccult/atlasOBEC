@@ -114,9 +114,9 @@ class EixoUm {
 					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE Numero = ".$var;
+					." WHERE ex.Numero = ".$var;
 
-				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
+				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
