@@ -71,8 +71,8 @@ class EixoUm {
 					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE Numero = ".$var
-					." AND Ano = ".$anos;
+					." WHERE ex.Numero = ".$var
+					." AND ex.Ano = ".$anos;
 
 			$result = mysqli_query(self::$conn, $query);
 			$obj = mysqli_fetch_object($result, 'EixoUm');
@@ -139,7 +139,7 @@ class EixoUm {
 					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE Numero = ".$var;
+					." WHERE ex.Numero = ".$var;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
@@ -163,7 +163,7 @@ class EixoUm {
 					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE Numero = ".$var;
+					." WHERE ex.Numero = ".$var;
 
 				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 
