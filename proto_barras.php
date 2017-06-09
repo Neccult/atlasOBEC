@@ -1,13 +1,31 @@
 <?php 
-	if (!empty($_GET["uf"]))
-		$uf = $_GET["uf"];
-	else
-		$uf = 0;
 
-	if (!empty($_GET["cad"]))
-		$cadeia = $_GET["cad"];
-	else
-		$cadeia = 0;
+    if (!empty($_GET["var"]))
+        $var = $_GET["var"];
+    else
+        $var = 1;
+
+        if (!empty($_GET["uf"]))
+            $uf = $_GET["uf"];
+        else
+            $uf = 0;
+
+
+            if (!empty($_GET["atc"]))
+                $atc = $_GET["atc"];
+            else
+                $atc = 0;
+
+                if (!empty($_GET["cad"]))
+                    $cad = $_GET["cad"];
+                else
+                    $cad = 0;
+
+                    if (!empty($_GET["prt"]))
+                        $prt = $_GET["prt"];
+                    else
+                        $prt = 0;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -260,14 +278,16 @@
 		</div><!-- /container -->
 
 		<script>
-		var cadeia = <?php echo $cadeia; ?>;
 		// Barras JS //
 
-		//Variaveis/Objetos
-		var dict = {};
-		// var info = [];
-		var dados = {key: [], value: []};
-		var uf = <?php echo $uf; ?>;
+		//variaveis configuracao query
+        var vrv = <?php echo $var; ?>;
+        var uf = <?php echo $uf; ?>;
+        var atc = <?php echo $atc; ?>;
+        var cad = <?php echo $cad; ?>;
+        var prt = <?php echo $prt; ?>;
+
+        var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"";
 
 		 // import colors.json file
 		var colorJSON;
@@ -287,26 +307,24 @@
 			}
 		}
 
-		//Leitura de arquivo CSV
-		d3.csv("total.csv", function(error, data) {
-			if (error) throw error;
+        
+        // console.log(config);
 
-			//formatar dados
-			  data.forEach(function(d) {
-				d.id = +d.ID;
-			  });
-			
-			//carrega dados 
-				var total = d3.csvFormat(data, ["ID", "UF", "a2006", "a2007", "a2008", "a2009", "a2010", "a2011", "a2012", "a2013", "a2014"]);
+        d3.queue()
+          .defer(d3.json, "ajax_barras.php"+config)
+          .await(analyze);
 
-			//parse CSV para array
-				var parse = d3.csvParseRows(total, function(d, i) {
-				  return dict[d[0]] = {id:d[0], uf:d[1], a2006:+d[2], a2007:+d[3], a2008:+d[4], a2009:+d[5], a2010:+d[6], a2011:+d[7], a2012:+d[8], a2013:+d[9], a2014:+d[10]}
-				});
-			
-			//preenche objetos
-			dados.key = [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014];
-			dados.value.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
+        function analyze(error, data) {
+          if(error) { console.log(error); }
+
+            var dados = {key: [], value: []};
+
+
+            dados.key = d3.keys(data);
+            dados.value = d3.values(data);
+
+            dados.key = dados.key.map(Number);
+            dados.value = dados.value.map(Number);;
 				
 			//info.push(dict[uf].a2006, dict[uf].a2007, dict[uf].a2008, dict[uf].a2009, dict[uf].a2010, dict[uf].a2011, dict[uf].a2012, dict[uf].a2013, dict[uf].a2014);
 
@@ -317,7 +335,6 @@
 					width = 1200 - margin.left - margin.right,
 					height = 600 - margin.top - margin.bottom;
 
-				var zeroPos = height/2;
 				var minBarHeight = 5;
 				var topLabelHeight = 17;
 
@@ -356,7 +373,7 @@
 
 			// creates cadeia's color range array from color.json file
 			var colorsRange = [];             
-			$.each(colorJSON.cadeias[cadeia].gradient, function(i, rgb){
+			$.each(colorJSON.cadeias[cad].gradient, function(i, rgb){
 				if (i > 1)
 					colorsRange.push(rgb);
 			});
@@ -371,7 +388,7 @@
 					.style("top", yPosition + "px");
 
 				d3.select(".tooltip .heading")
-					.text(dict[uf].uf);
+					.text(dados.key.uf);
 
 				d3.select(".tooltip .size")
 					.text(d);
@@ -413,12 +430,17 @@
 			
 
 				//d3.range(dados.value.length)
+			/*var y = d3.scaleLinear()
+					.domain(d3.extent(dados.value))
+					.range([height, 0]);*/
+
 			var y = d3.scaleLinear()
 					.domain(d3.extent(dados.value))
-					.range([height, 0]);
+					.rangeRound([height, 0], .2);
 
 			y.domain(d3.extent(dados.value, function(d) {
-		        return d;
+		        return d < 0? d - .4: d + .2;
+		        //return d;
 		    })).nice();
 				
 			//cria SVG
@@ -430,13 +452,15 @@
 						  "translate(" + margin.left + "," + margin.top + ")");
 
 			//titulo
-				svg.append("text")
+				/*svg.append("text")
 						.attr("x", (width / 2))             
 						.attr("y", 5 - (margin.top / 2))
 						.attr("text-anchor", "middle")  
 						.attr("font-family", "Lato")
 						.style("font-size", "16px")
-						.text(dict[uf].uf);
+						.text(function(d){
+							return dados.key;
+						});*/
 
 			//gridlines in y axis function
 				function make_y_gridlines() {     
@@ -446,15 +470,14 @@
 				}
 			
 			//add the Y gridlines
-				svg.append("g")    
+				svg.append("g")
 					.attr("class", "grid")
 					.style("opacity", 0.1)
 					.call(make_y_gridlines()
 						.tickSize(-width +10)
 						.tickSizeOuter(0)
 						.tickFormat("")
-
-					)		
+					)
 			
 			//Cria barras
 				svg.selectAll("rect")
@@ -462,22 +485,55 @@
 				   .enter().append("rect")
 				   .attr("class", "bar")
 				   .attr("x", function(d, i) {
-					return x(i);
+						return x(i);
 				   })
 				   .attr("y", function(d) {
-				   		if(d >= minBarHeight)
-				   			return y(d);
-				   		else if(minBarHeight - Math.abs(d) >= 0 && d > 0)
-				   			return y(d) - (minBarHeight);
-				   		else
-							return y(0);
+				   		var barPosition = Math.abs(y(d));
+				   		var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+				   		var zeroPosition = y(0);
+				   		var isValorNegative = d < 0;
+				   		var isBarTooSmall = barHeight < minBarHeight;
+				   		var zeroPositionExists = zeroPosition < height;
+
+				   		//console.log(barHeight);
+
+				   		if(isValorNegative){
+
+				   			return zeroPosition;
+
+				   		} else{
+
+
+			   				if (isBarTooSmall){
+
+			   					if (zeroPositionExists)
+				   					return zeroPosition - minBarHeight;
+
+				   				return barPosition - 5;
+				   			}
+
+							return barPosition;
+				   			
+				   		}
+
 				   })
 				   .attr("width", x.bandwidth())
 				   .attr("height", function(d) {
-						return (Math.abs(y(d)) + minBarHeight >= y(0) && Math.abs(d) <= minBarHeight)? minBarHeight : Math.abs(y(d) - y(0));
+				   		var minValue = d3.min(dados.value);
+				   		var maxValue = d3.max(dados.value);
+				   		var minValorIsNegative = minValue < 0;
+				   		var isValorSmallerThanMax = d < maxValue + .1;
+				   		var isRangeTooHigh = maxValue - minValue > maxValue / 2; 
+				   		// var barHeight = isRangeTooHigh? Math.abs(y(d) - y(0)) : height - y(d);
+				   		var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+
+				   		if (barHeight < minBarHeight)
+				   			return minBarHeight;
+
+				   		return barHeight;
 				   })
 				   .attr("fill", function(d) {
-					return color(cadeia);
+					return color(cad);
 				   })
 				   .on("mouseover", mouseOn)
 			  		.on("mouseout", mouseOut);
@@ -496,14 +552,25 @@
 					return x(i) + x.bandwidth() / 2 ;
 				   })
 				   .attr("y", function(d) {
-						if (y(d) >= y(0)){
-							return y(d) + topLabelHeight + 5;
-						} else if (minBarHeight - Math.abs(d) >= 0 && d > 0){
-							return y(d) - minBarHeight - 5;
-						} else {
-							return y(d)-5;
-						}
+				   		var isValorNegative = d < 0;
+				   		var isValorPositiveOrZero = d >= 0;
+				   		var areValuesHigh = Math.abs(y(d) - y(0)) > height;
+				   		var zeroPosition = y(0);
+				   		var zeroPositionExists = zeroPosition < height;
+				   		var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
+
+				   		if(areValuesHigh)
+				   			isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
+				   		
+
+						if (isBarSmallerThanMinimum && isValorPositiveOrZero)
+							return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
+
 						
+						if(isValorNegative)
+							return y(d) + topLabelHeight;
+
+						return y(d) - 5;		
 				   });
 
 			//formata labels eixo X
@@ -521,7 +588,7 @@
 				svg.append("g")
 				   .call(d3.axisLeft(y));
 
-		});
+		};
 
 	
 
