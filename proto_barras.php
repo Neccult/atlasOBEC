@@ -391,7 +391,7 @@
 					.text(dados.key.uf);
 
 				d3.select(".tooltip .size")
-					.text(d);
+					.text(numberFormat(d));
 
 				d3.select(".tooltip").classed("hidden", false);
 			};
@@ -436,11 +436,24 @@
 
 			var y = d3.scaleLinear()
 					.domain(d3.extent(dados.value))
-					.rangeRound([height, 0], .2);
+					.rangeRound([height, 0], .002);
 
 			y.domain(d3.extent(dados.value, function(d) {
-		        return d < 1? d - .002: d + .02;
-		        //return d;
+		        //return d < 1 && d > - 1? d - .02 : d + .02;
+		        var isMinValueNegative = y(0) !== false;
+		        var isNegativeBarTooHigh = y(d) + 5 >= height;
+		        var isPositiveBarTooHigh = y(d) <= minBarHeight;
+
+				if (isMinValueNegative){
+
+					if (isNegativeBarTooHigh)
+						return d - 0.05;
+
+					/*if (isPositiveBarTooHigh)
+						return d;*/
+				}
+
+		        return d;
 		    })).nice();
 
 
@@ -453,6 +466,9 @@
 
 		    	return num;
 		    };
+
+
+		    var formatLabel = d3.format(".4s");
 				
 			//cria SVG
 				var svg = d3.select("#corpo").append("svg")
@@ -508,20 +524,37 @@
 				   		var isValueNegative = d < 0;
 				   		var isBarTooSmall = barHeight < minBarHeight;
 				   		var zeroPositionExists = zeroPosition < height;
+				   		var isValueZero = d === 0;
+				   		var isYAxisZero = y(d) <= 5;
 
+
+				   		// TEM VALOR NEGATIVO
 				   		if (isMinValueNegative) {
 
+				   			// NÚMERO NEGATIVO
 					   		if(isValueNegative)
 					   			return zeroPosition;
+
+					   		// NÚMERO 0
+					   		if(isValueZero)
+					   			return zeroPosition - 5;
 					   		
-					   		if (isBarTooSmall)
-				   				return barPosition - 5;
+					   		// BARRA MUITO PEQUENA
+					   		/*if (isBarTooSmall)
+				   				return barPosition - 5;*/
+
+				   			// SE RESULTADO DE y(d) FOR ZERO (0)
+				   			if (isYAxisZero)
+					   			return 0;
 
 					   		return zeroPosition - y(d);
 					   	}
+					   	console.log(d, isBarTooSmall);
 
-					   	if (isBarTooSmall)
-				   			return barPosition - 5;
+					   	// BARRA MUITO PEQUENA
+					   	if (isBarTooSmall){
+				   			return barPosition;
+					   	}
 
 						return barPosition;
 				   })
@@ -535,20 +568,30 @@
 				   		var isRangeTooHigh = maxValue - minValue > maxValue / 2; 
 				   		var isMinValueNegative = zeroPosition !== false;
 				   		var isValueNegative = d < 0;
+				   		var isValueZero = d === 0;
+				   		var isYAxisZero = y(d) <= 5;
 				   		var barHeight = height - y(d);
 				   		//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
 
+
+				   		// TEM VALOR NEGATIVO
 				   		if (isMinValueNegative){
 
-				   			// DISCREPÂNCIA QUANDO RANGE DE DADOS MUITO ALTA
-				   			console.log(isRangeTooHigh);
-
+				   			// NÚMERO NEGATIVO
 					   		if (isValueNegative){
-					   			if (barHeight < minBarHeight)
+					   			if (barHeight < minBarHeight || isValueZero)
 					   				return minBarHeight;
 
 					   			return Math.abs(y(d)) - zeroPosition; 
 					   		}
+
+					   		// NÚMERO POSITIVO
+					   		if (barHeight < minBarHeight || isValueZero){
+				   				return minBarHeight;
+					   		}
+
+					   		if (isYAxisZero)
+					   			return Math.abs(y(0));
 
 					   		return Math.abs(height - (height - y(d)));
 					   	}
@@ -590,23 +633,37 @@
 				   		var zeroPositionExists = zeroPosition < height;
 				   		var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
 				   		var barHeight = height - y(d);
+				   		var isValueZero = d === 0;
+				   		var isYAxisZero = y(d) <= 5;
 
+				   		// TEM VALOR NEGATIVO
 				   		if (isMinValueNegative){
 
+				   			// VALOR NEGATIVO
 				   			if (isValueNegative)
 				   				return y(d) + topLabelHeight;
 
-				   			return zeroPosition - y(d) - 5;
+				   			// BARRA MUITO PEQUENA
+				   			if (barHeight <= minBarHeight || isValueZero){
+					   			return y(d) - minBarHeight - 4;
+					   		}
 
+					   		console.log(d, y(d));
+					   		// SE RESULTADO DE y(d) FOR ZERO (0)
+					   		if (isYAxisZero)
+					   			return -5;
+
+				   			return zeroPosition - y(d) - 5;
 				   		}
 
-				   		if (barHeight <= minBarHeight){
+				   		// BARRA MUITO PEQUENA
+				   		if (barHeight <= minBarHeight/* || isValueZero*/){
 				   			return y(d) - minBarHeight - 4;
 				   		}
 
+				   		
 				   		if(areValuesHigh)
 				   			isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
-				   		
 
 						if (isBarSmallerThanMinimum && isValuePositiveOrZero)
 							return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
@@ -621,7 +678,8 @@
 					.tickPadding(5);
 
 				var yAxis = d3.axisLeft()
-							.scale(y);
+							.scale(y)
+							.tickFormat(formatLabel);
 
 			//adiciona eixo X
 				svg.append("g")
@@ -634,15 +692,9 @@
 				   .call(yAxis);
 
 		};
-
-	
-
 		
 
 		</script>
-
-		
-
 
 
 		<!-- Bootstrap core JavaScript
