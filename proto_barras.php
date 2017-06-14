@@ -194,7 +194,7 @@
 									<li><a href="#">Receita Total das Empresas Culturais</a></li>
 									<li><a href="#">Custo Total das Empresas Culturais</a></li>
 									<li><a href="#">Razão entre Receita Total e Custo Total das Empresas Culturais</a></li>
-									<li><a href="#">Quociente de Valor Adicionado e Receita por Empresa Cultura</a></li>
+									<li><a href="#">Quociente de Value Adicionado e Receita por Empresa Cultura</a></li>
 									<li><a href="#">Razão entre PIB Setorial e Receita Operacional Líquida das Empresas Culturais</a></li>
 
 									<li role="separator" class="divider"></li>
@@ -442,6 +442,17 @@
 		        return d < 1? d - .002: d + .02;
 		        //return d;
 		    })).nice();
+
+
+		    var numberFormat = d3.format(".2f");
+		    var removeZeroFormat = function(num){
+		    	var numSplit = num.split(".");
+
+		    	if (parseInt(numSplit[1]) === 0)
+		    		num = Math.round(num);;
+
+		    	return num;
+		    };
 				
 			//cria SVG
 				var svg = d3.select("#corpo").append("svg")
@@ -488,44 +499,59 @@
 						return x(i);
 				   })
 				   .attr("y", function(d) {
+				   		var graphBottom = height;
 				   		var barPosition = Math.abs(y(d));
-				   		var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
-				   		var zeroPosition = y(0);
-				   		var isValorNegative = d < 0;
+				   		//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+				   		var barHeight = height - y(d);
+				   		var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				   		var isMinValueNegative = zeroPosition !== false;
+				   		var isValueNegative = d < 0;
 				   		var isBarTooSmall = barHeight < minBarHeight;
 				   		var zeroPositionExists = zeroPosition < height;
 
-				   		//console.log(barHeight);
+				   		if (isMinValueNegative) {
 
-				   		if(isValorNegative){
-
-				   			return zeroPosition;
-
-				   		} else{
-
-
-			   				if (isBarTooSmall){
-
-			   					if (zeroPositionExists)
-				   					return zeroPosition - minBarHeight;
-
+					   		if(isValueNegative)
+					   			return zeroPosition;
+					   		
+					   		if (isBarTooSmall)
 				   				return barPosition - 5;
-				   			}
 
-							return barPosition;
-				   			
-				   		}
+					   		return zeroPosition - y(d);
+					   	}
 
+					   	if (isBarTooSmall)
+				   			return barPosition - 5;
+
+						return barPosition;
 				   })
 				   .attr("width", x.bandwidth())
 				   .attr("height", function(d) {
 				   		var minValue = d3.min(dados.value);
 				   		var maxValue = d3.max(dados.value);
-				   		var minValorIsNegative = minValue < 0;
-				   		var isValorSmallerThanMax = d < maxValue + .1;
+				   		var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				   		var minValueIsNegative = minValue < 0;
+				   		var isValueSmallerThanMax = d < maxValue + .1;
 				   		var isRangeTooHigh = maxValue - minValue > maxValue / 2; 
-				   		// var barHeight = isRangeTooHigh? Math.abs(y(d) - y(0)) : height - y(d);
-				   		var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+				   		var isMinValueNegative = zeroPosition !== false;
+				   		var isValueNegative = d < 0;
+				   		var barHeight = height - y(d);
+				   		//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+
+				   		if (isMinValueNegative){
+
+				   			// DISCREPÂNCIA QUANDO RANGE DE DADOS MUITO ALTA
+				   			console.log(isRangeTooHigh);
+
+					   		if (isValueNegative){
+					   			if (barHeight < minBarHeight)
+					   				return minBarHeight;
+
+					   			return Math.abs(y(d)) - zeroPosition; 
+					   		}
+
+					   		return Math.abs(height - (height - y(d)));
+					   	}
 
 				   		if (barHeight < minBarHeight)
 				   			return minBarHeight;
@@ -545,30 +571,45 @@
 				   .append("text")
 				   .attr("class", "barTopValue")    
 				   .text(function(d) {
-					return d;
+				   		if (d3.min(dados.value) > 1)
+							return removeZeroFormat(numberFormat(d));
+
+						return d;
 				   })
 				   .attr("text-anchor", "middle")
 				   .attr("x", function(d, i) {
 					return x(i) + x.bandwidth() / 2 ;
 				   })
 				   .attr("y", function(d) {
-				   		var isValorNegative = d < 0;
-				   		var isValorPositiveOrZero = d >= 0;
+				   		var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				   		var isMinValueNegative = zeroPosition !== false;
+				   		var isValueNegative = d < 0;
+				   		var isValuePositiveOrZero = d >= 0;
 				   		var areValuesHigh = Math.abs(y(d) - y(0)) > height;
 				   		var zeroPosition = y(0);
 				   		var zeroPositionExists = zeroPosition < height;
 				   		var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
+				   		var barHeight = height - y(d);
+
+				   		if (isMinValueNegative){
+
+				   			if (isValueNegative)
+				   				return y(d) + topLabelHeight;
+
+				   			return zeroPosition - y(d) - 5;
+
+				   		}
+
+				   		if (barHeight <= minBarHeight){
+				   			return y(d) - minBarHeight - 4;
+				   		}
 
 				   		if(areValuesHigh)
 				   			isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
 				   		
 
-						if (isBarSmallerThanMinimum && isValorPositiveOrZero)
+						if (isBarSmallerThanMinimum && isValuePositiveOrZero)
 							return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
-
-						
-						if(isValorNegative)
-							return y(d) + topLabelHeight;
 
 						return y(d) - 5;		
 				   });
@@ -577,7 +618,10 @@
 				var xAxis = d3.axisBottom(x)
 					.tickFormat(function(d){ return dados.key[d];})
 					.tickSize(5)
-					.tickPadding(5); 
+					.tickPadding(5);
+
+				var yAxis = d3.axisLeft()
+							.scale(y);
 
 			//adiciona eixo X
 				svg.append("g")
@@ -586,7 +630,8 @@
 
 			//adiciona eixo Y
 				svg.append("g")
-				   .call(d3.axisLeft(y));
+					.attr("transform", "translate(0, 0)")
+				   .call(yAxis);
 
 		};
 
