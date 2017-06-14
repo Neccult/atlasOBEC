@@ -439,7 +439,7 @@
 					.rangeRound([height, 0], .2);
 
 			y.domain(d3.extent(dados.value, function(d) {
-		        return d < 0? d - .4: d + .2;
+		        return d < 1? d - .002: d + .02;
 		        //return d;
 		    })).nice();
 				
