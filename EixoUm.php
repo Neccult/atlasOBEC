@@ -19,6 +19,7 @@ class EixoUm {
 	public $Ano;
 	public $Valor;
 	public $Percentual;
+	public $Taxa;
 
 	//informações UF
 	public $UFNome;
