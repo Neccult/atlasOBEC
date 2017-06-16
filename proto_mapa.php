@@ -46,7 +46,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
 
 		<!--===== css ====-->
-		<link href="css/main.css" rel="stylesheet">
+		<link href="css/proto.css" rel="stylesheet">
 
 		<style type="text/css">
 			.states{
@@ -343,7 +343,7 @@
 				  .enter()
 				  .append("path")
 				  // ERRO MAPA AQUI
-				  .style('fill', function(d){return "#" + color(dict[d.id].valor);})
+				  .style('fill', function(d){return color(dict[d.id].valor);})
 				  .attr("d", path)
 				  
 			//mouseover

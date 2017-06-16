@@ -73,7 +73,7 @@
 		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
 		<!-- === CSS === -->
-		<link href="css/main.css" rel="stylesheet">
+		<link href="css/proto.css" rel="stylesheet">
 
 		<style type="text/css">
 			.axis path,
@@ -300,10 +300,10 @@
 			// return matching color value
 		var color = function(colorId){
 			if(colorJSON.cadeias[colorId]){
-				return "#" + colorJSON.cadeias[colorId].color;
+				return colorJSON.cadeias[colorId].color;
 			} else {
 				console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
-				return "#" + colorJSON.cadeias[0].color;
+				return colorJSON.cadeias[0].color;
 			}
 		}
 
