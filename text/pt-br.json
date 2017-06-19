@@ -6,6 +6,7 @@
 	
 	"uf":"Essa visualização apresenta a variável de interesse...",
 	"prt":"Essa visualização apresenta a variável de interesse...",
+	"atc":"Essa visualização apresenta a variável de interesse...",
 	"ano":"Essa visualização apresenta a variável de interesse...",
 	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
 
@@ -113,21 +114,21 @@
 			],
 			"treemap_region":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_scc":[
 				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["prt","uf"],"treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 			}	
 		},
 		{
@@ -146,21 +147,21 @@
 			],
 			"treemap_region":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_scc":[
 				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["prt","uf"],"treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 			}		
 		},
 		{
@@ -179,21 +180,21 @@
 			],
 			"treemap_region":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_scc":[
 				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["prt","uf"],"treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 			}	
 		},
 		{
@@ -211,10 +212,10 @@
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["prt","uf"],"barras":["ano"]
+				"mapa":["prt","uf","atc"],"barras":["ano","prt"]
 			}	
 		},
 		{
@@ -233,21 +234,21 @@
 			],
 			"treemap_region":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_scc":[
 				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["prt","uf"],"treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 			}	
 		},
 		{
@@ -262,26 +263,26 @@
 			],
 			"mapa":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_region":[
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"treemap_scc":[
 				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
+				{"name":"Atuação","id":"atc"},
 				{"name":"Ano","id":"ano"}
 			],
 			"barras":[
 				{"name":"UF","id":"uf"},
 				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
+				{"name":"Atuação","id":"atc"}
 			],
 			"inativos":{
-				"mapa":["uf"],"treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 			}	
 		},
 		{

@@ -127,7 +127,19 @@ $(document).ready(function(){
 										*/
 	if(url['cad']==0 && url['view']!='treemap_scc'){
 		$('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+		$('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
 		$('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+		$('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+	}
+
+	/* restringe filtro de atuação ==> comércio */
+	function controlAtc(select,isPrt){
+
+		if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9){
+			
+			if(isPrt) $(select).find('option[value="atc-1"]').remove();
+			else $(select).find('option[value="1"]').remove();
+		}
 	}
 
 	/* set selects com os valores da url */
@@ -145,6 +157,9 @@ $(document).ready(function(){
 			/* valor atuação */
 			$(this).val('atc-'+url['atc']);	
 		}
+
+		if(selectId=='prt') controlAtc(this,1);
+		if(selectId=='atc') controlAtc(this,0);
 
 	});
 

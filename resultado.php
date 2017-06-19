@@ -29,6 +29,9 @@
 									foreach($text['inativos'][$view] as $filter){
 										$_GET[$filter]=0;
 									}
+									if(($cad!=4 && $cad!=5 && $cad!=9) && $atc==1){
+										$_GET['atc']=0;	
+									}
 
 								?>
 								<!--
