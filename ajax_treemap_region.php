@@ -39,7 +39,7 @@ $treemap .= '
 					      "children": [
 			';
 						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", "size": "'.$tupla->Valor.'"},';
+							$treemap .= '{"name": "'.$tupla->UFSigla.'", "estado": "'.$tupla->UFNome.'", "size": "'.$tupla->Valor.'"},';
 						}
 
 						$size = strlen($treemap);
@@ -64,7 +64,7 @@ $treemap .= '
 					      "children": [
 			';
 						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", "size": "'.$tupla->Valor.'"},';
+							$treemap .= '{"name": "'.$tupla->UFSigla.'", "estado": "'.$tupla->UFNome.'", "size": "'.$tupla->Valor.'"},';
 						}
 
 						$size = strlen($treemap);
@@ -88,7 +88,7 @@ $treemap .= '
 					      "children": [
 			';
 						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", "size": "'.$tupla->Valor.'"},';
+							$treemap .= '{"name": "'.$tupla->UFSigla.'", "estado": "'.$tupla->UFNome.'", "size": "'.$tupla->Valor.'"},';
 						}
 
 						$size = strlen($treemap);
@@ -112,7 +112,7 @@ $treemap .= '
 					      "children": [
 			';
 						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", "size": "'.$tupla->Valor.'"},';
+							$treemap .= '{"name": "'.$tupla->UFSigla.'", "estado": "'.$tupla->UFNome.'", "size": "'.$tupla->Valor.'"},';
 						}
 
 						$size = strlen($treemap);
@@ -136,7 +136,7 @@ $treemap .= '
 					      "children": [
 			';
 						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", "size": "'.$tupla->Valor.'"},';
+							$treemap .= '{"name": "'.$tupla->UFSigla.'", "estado": "'.$tupla->UFNome.'", "size": "'.$tupla->Valor.'"},';
 						}
 
 						$size = strlen($treemap);
