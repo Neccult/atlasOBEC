@@ -139,7 +139,7 @@ $(document).ready(function(){
 	/* restringe filtro de atuação ==> comércio */
 	function controlAtc(select,isPrt){
 
-		if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9){
+		if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9 && url['cad']!=0){
 			
 			if(isPrt) $(select).find('option[value="atc-1"]').remove();
 			else $(select).find('option[value="1"]').remove();
