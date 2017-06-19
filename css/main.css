@@ -17,6 +17,13 @@ body{
 	font-family: Lato Regular;
 }
 
+.fadeIn{
+	opacity: 0;
+	transition: 1.0s all ease;
+}
+.fadeIn.done{
+	opacity: 1;
+}
 .legendLinear{
 	position: absolute;
 }

@@ -4,6 +4,9 @@
 function controlAnimation(){
 	/*### escolheu variável ###*/
 	if(url['var']!=='' && pageTitle!==''){
+
+		$('.fadeIn').addClass('done');
+
 		$('html, body').scrollTop($("#resultado").offset().top); /* move scroll para o gráfico */		
 	}else{
 		$("#animacao").load('animacaomenu.php');
