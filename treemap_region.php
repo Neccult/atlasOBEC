@@ -191,7 +191,7 @@
 
         /* atualiza nome tooltip */
         d3.select(".tooltip .heading")
-            .text(d['data']['name']);
+            .text(d['data']['estado']);
 
         d3.select(".tooltip .size")
             .text(d['data']['size']);
