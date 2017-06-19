@@ -52,6 +52,11 @@
 
 <div id="corpo"></div>
 
+<!--================ TOOLTIP! ===============-->
+<div id="tooltip" class="tooltip none">
+    <p><strong class="heading"></strong></p>
+</div>
+
 <script>
 	
 	/*==== Barras JS ====*/
@@ -184,12 +189,12 @@
 			d3.select(".tooltip .size")
 				.text(numberFormat(d));
 
-			d3.select(".tooltip").classed("hidden", false);
+			d3.select(".tooltip").classed("none", false);
 		};
 
 		/* esconder */
 		var mouseOut = function() {
-			d3.select(".tooltip").classed("hidden", true);
+			d3.select(".tooltip").classed("none", true);
 		};            
 
 		/*==================*/
