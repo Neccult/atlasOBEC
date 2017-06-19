@@ -88,7 +88,7 @@
 							<a href="#" class="link">
 								<div class="square-icon"></div>
 								<div class="text">
-									<p>MERDCADO<br/>DE TRABALHO</p>
+									<p>MERCADO<br/>DE TRABALHO</p>
 								</div>
 							</a>
 
