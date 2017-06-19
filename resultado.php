@@ -171,6 +171,16 @@
 						<div class="col-xs-4 col-btn"><button class="opt">CSV</button></div>
 						<div class="col-xs-4 col-btn"><button class="opt">IMG</button></div>
 					</div>
+
+					<div class="row">
+
+						<br/><br/>
+						<p class="text-center">
+							<a href="#menuSection" class="scroll-link"><img src="images/arrowUp.png"/></a>
+						</p>
+
+					</div>
+
 				</div>
 			</div>
 		</div>
