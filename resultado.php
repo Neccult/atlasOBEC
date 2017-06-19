@@ -1,4 +1,4 @@
-<article class="results-article">
+<article class="results-article fadeInPage">
 	<div class="results-content">
 		<div class="container">
 			<div class="row">

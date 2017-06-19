@@ -5,6 +5,7 @@ function controlAnimation(){
 	/*### escolheu variável ###*/
 	if(url['var']!=='' && pageTitle!==''){
 
+		$('.fadeInPage').addClass('done');
 		$('.fadeIn').addClass('done');
 
 		$('html, body').scrollTop($("#resultado").offset().top); /* move scroll para o gráfico */		
