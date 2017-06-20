@@ -51,7 +51,7 @@
 <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
 <!--================== SVG! =================-->
-<div id="corpo"><svg></svg></div>
+<div id="corpo" class="fadeIn"><svg></svg></div>
 
 <!--================ TOOLTIP! ===============-->
 <div id="tooltip" class="tooltip none">

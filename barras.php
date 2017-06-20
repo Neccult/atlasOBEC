@@ -50,10 +50,14 @@
 <!-- D3 QUEUE -->
 <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
+<<<<<<< HEAD
 <!-- Utilidades -->
 <script src="js/functions.js"></script>
 
 <div id="corpo"></div>
+=======
+<div id="corpo" class="fadeIn"></div>
+>>>>>>> 6a9ef86c9a56dfb94a116df442674a32264c0559
 
 <!--================ TOOLTIP! ===============-->
 <div id="tooltip" class="tooltip none">
