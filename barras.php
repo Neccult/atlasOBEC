@@ -190,7 +190,6 @@
 				.text(formatNumber(d));
 
 			d3.select(".tooltip .size")
-				// AQUI REPLACE NUMBER FORMAT FUNCTION
 				.text(formatNumber(d));
 
 			d3.select(".tooltip").classed("none", false);
@@ -217,19 +216,44 @@
 				.rangeRound([height, 0], .002);
 
 		y.domain(d3.extent(dados.value, function(d) {
-				
-			var isMinValueNegative = y(0) !== false;
+			var isValueNegative = y(0) !== false && d < 0;
 			var isNegativeBarTooHigh = y(d) + 5 >= height;
-			var isPositiveBarTooHigh = y(d) <= minBarHeight;
+			var isPositiveBarTooHigh = height - y(d) >= height - 20;
 
-			if (isMinValueNegative){
-				if (isNegativeBarTooHigh) return d - 0.005;
+			// new vars
+			var isMaxValue = d3.max(dados.value) === d;
+			var isMinValue = d3.min(dados.value) === d;
+
+			// logs
+			isMaxValue? console.log("Max: ", d) : "";
+			isMinValue? console.log("Min: ", d) : "";
+
+			if(isMaxValue || isMinValue){
+				var decimalZeroDigits = countValidDecimalDigits(d);
+				var newDecimal = "0";
+				var isMaxvalue = isMaxvalue;
+
+				while(decimalZeroDigits > (isMaxvalue? 1 : 0)){
+					newDecimal += "0"
+					decimalZeroDigits--;
+				}
 			}
+
+			if(isMaxValue){
+				//console.log(d, d + parseFloat("0." + newDecimal + "1"));
+
+				if(d < 1 && d > -1){
+					return d + parseFloat("0." + newDecimal + "1");
+				}
+			}
+
+			if(isMinValue){
+				if (isValueNegative)
+					return d - parseFloat("0." + newDecimal + "5");
+			}
+
 			return d;
 		})).nice();
-
-				   
-		
 
 		var formatYAxis = function(d){
 			var higherZeroOcur = 0;
@@ -319,183 +343,196 @@
 					
 		//Cria barras
 		svg.selectAll("rect")
-				   .data(dados.value, function(d) { return d; })
-				   .enter().append("rect")
-				   .attr("class", "bar")
-				   .attr("x", function(d, i) {
-						return x(i);
-				   })
-				   .attr("y", function(d) {
-						var graphBottom = height;
-						var barPosition = Math.abs(y(d));
-						//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
-						var barHeight = height - y(d);
-						var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
-						var isMinValueNegative = zeroPosition !== false;
-						var isValueNegative = d < 0;
-						var isBarTooSmall = barHeight < minBarHeight;
-						var zeroPositionExists = zeroPosition < height;
-						var isValueZero = d === 0;
-						var isYAxisZero = y(d) <= 5;
+		   .data(dados.value, function(d) { return d; })
+		   .enter().append("rect")
+		   .attr("class", "bar")
+		   .attr("x", function(d, i) {
+				return x(i);
+		   })
+		   .attr("y", function(d) {
+				var graphBottom = height;
+				var barPosition = Math.abs(y(d));
+				//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+				var barHeight = height - y(d);
+				var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				var isMinValueNegative = zeroPosition !== false;
+				var isValueNegative = d < 0;
+				var isBarTooSmall = barHeight <= minBarHeight;
+				var zeroPositionExists = zeroPosition < height;
+				var isValueZero = d === 0;
+				var isYAxisZero = y(d) <= 5;
+				var isMaxValue = d3.max(dados.value) == d;
 
 
-						// TEM VALOR NEGATIVO
-						if (isMinValueNegative) {
+				// TEM VALOR NEGATIVO
+				if (isMinValueNegative) {
 
-							// NÚMERO NEGATIVO
-							if(isValueNegative)
-								return zeroPosition;
+					// NÚMERO NEGATIVO
+					if(isValueNegative)
+						return zeroPosition;
 
-							// NÚMERO 0
-							if(isValueZero)
-								return zeroPosition - 5;
-							
-							// BARRA MUITO PEQUENA
-							/*if (isBarTooSmall)
-								return barPosition - 5;*/
+					// NÚMERO 0
+					if(isValueZero)
+						return zeroPosition - 5;
+					
+					// BARRA MUITO PEQUENA
+					/*if (isBarTooSmall)
+						return barPosition - 5;*/
 
-							// SE RESULTADO DE y(d) FOR ZERO (0)
-							if (isYAxisZero)
-								return 0;
+					// SE RESULTADO DE y(d) FOR ZERO (0)
+					if (isYAxisZero)
+						return 0;
 
-							return zeroPosition - y(d);
-						}
+					if (isMaxValue){
+						console.log(y(d), height - zeroPosition);
+						return y(d);
+					}
 
-						// BARRA MUITO PEQUENA
-						if (isBarTooSmall){
-							return barPosition;
-						}
+					return zeroPosition - y(d);
+				}
 
-						return barPosition;
-					})
-				   .attr("width", x.bandwidth())
-				   .attr("height", function(d) {
-						var minValue = d3.min(dados.value);
-						var maxValue = d3.max(dados.value);
-						var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
-						var minValueIsNegative = minValue < 0;
-						var isValueSmallerThanMax = d < maxValue + .1;
-						var isRangeTooHigh = maxValue - minValue > maxValue / 2; 
-						var isMinValueNegative = zeroPosition !== false;
-						var isValueNegative = d < 0;
-						var isValueZero = d === 0;
-						var isYAxisZero = y(d) <= 5;
-						var barHeight = height - y(d);
-						//var barHeight = Math.abs(y(d) - y(0)) < height? Math.abs(y(d) - y(0)) : height - y(d);
+				console.log(d, height - y(d));
 
+				// BARRA MUITO PEQUENA
+				if (isBarTooSmall)
+					return barPosition - 5;
 
-						// TEM VALOR NEGATIVO
-						if (isMinValueNegative){
+				return barPosition;
+			})
+		   .attr("width", x.bandwidth())
+		   .attr("height", function(d) {
+				var minValue = d3.min(dados.value);
+				var maxValue = d3.max(dados.value);
+				var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				var minValueIsNegative = minValue < 0;
+				var isValueSmallerThanMax = d < maxValue + .1;
+				var isRangeTooHigh = maxValue - minValue > maxValue / 2; 
+				var isMinValueNegative = zeroPosition !== false;
+				var isValueNegative = d < 0;
+				var isValueZero = d === 0;
+				var isYAxisZero = y(d) <= 5;
+				var barHeight = height - y(d);
+				var isMaxValue = d3.max(dados.value) == d;
 
-							// NÚMERO NEGATIVO
-							if (isValueNegative){
-								if (barHeight < minBarHeight || isValueZero)
-									return minBarHeight;
+				// TEM VALOR NEGATIVO
+				if (isMinValueNegative){
 
-								return Math.abs(y(d)) - zeroPosition; 
-							}
-
-							// NÚMERO POSITIVO
-							if (barHeight < minBarHeight || isValueZero){
-								return minBarHeight;
-							}
-
-							if (isYAxisZero)
-								return Math.abs(y(0));
-
-							return Math.abs(height - (height - y(d)));
-						}
-
-						if (barHeight < minBarHeight)
+					// NÚMERO NEGATIVO
+					if (isValueNegative){
+						if (barHeight < minBarHeight || isValueZero)
 							return minBarHeight;
 
-						return barHeight;
-				   })
-				   .attr("fill", function(d) {
-					return color(cad);
-				   })
-				   .on("mouseover", mouseOn)
-					.on("mouseout", mouseOut);
+						return Math.abs(y(d)) - zeroPosition; 
+					}
 
-			//cria labels barras 
-				svg.selectAll("text g")
-				   .data(dados.value, function(d) { return d; })
-				   .enter()
-				   .append("text")
-				   .attr("class", "barTopValue")    
-				   .text(function(d) {
-						return formatNumber(d);
-				   })
-				   .attr("text-anchor", "middle")
-				   .attr("x", function(d, i) {
-					return x(i) + x.bandwidth() / 2 ;
-				   })
-				   .attr("y", function(d) {
-						var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
-						var isMinValueNegative = zeroPosition !== false;
-						var isValueNegative = d < 0;
-						var isValuePositiveOrZero = d >= 0;
-						var areValuesHigh = Math.abs(y(d) - y(0)) > height;
-						var zeroPosition = y(0);
-						var zeroPositionExists = zeroPosition < height;
-						var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
-						var barHeight = height - y(d);
-						var isValueZero = d === 0;
-						var isYAxisZero = y(d) <= 5;
+					// NÚMERO POSITIVO
+					if (barHeight < minBarHeight || isValueZero){
+						return minBarHeight;
+					}
 
-						// TEM VALOR NEGATIVO
-						if (isMinValueNegative){
+					if (isYAxisZero)
+						return Math.abs(y(0));
 
-							// VALOR NEGATIVO
-							if (isValueNegative)
-								return y(d) + minBarHeight + 5;
+					if (isMaxValue)
+						return Math.abs(height - barHeight - zeroPosition);
 
-							// BARRA MUITO PEQUENA
-							if (barHeight <= minBarHeight || isValueZero){
-								return y(d) - minBarHeight - 4;
-							}
+					return Math.abs(height - barHeight);
+				}
 
-							// SE RESULTADO DE y(d) FOR ZERO (0)
-							if (isYAxisZero)
-								return -5;
+				if (barHeight < minBarHeight)
+					return minBarHeight;
 
-							return zeroPosition - y(d) - 4;
-						}
+				return barHeight;
+		   })
+		   .attr("fill", function(d) {
+			return color(cad);
+		   })
+		   .on("mouseover", mouseOn)
+			.on("mouseout", mouseOut);
 
-						// BARRA MUITO PEQUENA
-						//if (barHeight <= minBarHeight/* || isValueZero*/){
-						//  return y(d) - minBarHeight - 4;
-						//}
+		//cria labels barras 
+		svg.selectAll("text g")
+		   .data(dados.value, function(d) { return d; })
+		   .enter()
+		   .append("text")
+		   .attr("class", "barTopValue")    
+		   .text(function(d) {
+				return formatNumber(d);
+		   })
+		   .attr("text-anchor", "middle")
+		   .attr("x", function(d, i) {
+			return x(i) + x.bandwidth() / 2 ;
+		   })
+		   .attr("y", function(d) {
+				var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
+				var isMinValueNegative = zeroPosition !== false;
+				var isValueNegative = d < 0;
+				var isValuePositiveOrZero = d >= 0;
+				var areValuesHigh = Math.abs(y(d) - y(0)) > height;
+				var zeroPosition = y(0);
+				var zeroPositionExists = zeroPosition < height;
+				var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
+				var barHeight = height - y(d);
+				var isValueZero = d === 0;
+				var isYAxisZero = y(d) <= 5;
+				var isMaxValue = d3.max(dados.value) == d;
 
-						
-						if(areValuesHigh)
-							isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
+				// TEM VALOR NEGATIVO
+				if (isMinValueNegative){
 
-						if (isBarSmallerThanMinimum && isValuePositiveOrZero)
-							return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
+					// VALOR NEGATIVO
+					if (isValueNegative)
+						return y(d) + minBarHeight + 6;
 
-						return y(d) - 5;        
-				   });
+					// BARRA MUITO PEQUENA
+					if (barHeight <= minBarHeight || isValueZero){
+						return y(d) - minBarHeight - 4;
+					}
 
-			//formata labels eixo X
-				var xAxis = d3.axisBottom(x)
-					.tickFormat(function(d){ return dados.key[d];})
-					.tickSize(5)
-					.tickPadding(5);
+					// SE RESULTADO DE y(d) FOR ZERO (0)
+					if (isYAxisZero)
+						return -5;
 
-				var yAxis = d3.axisLeft()
-							.scale(y)
-							.tickFormat(formatYAxis);
+					if (isMaxValue)
+						return y(d) - 4;
 
-			//adiciona eixo X
-				svg.append("g")
-				   .attr("transform", "translate(0," + height + ")")
-				   .call(xAxis);
+					return zeroPosition - y(d) - 4;
+				}
 
-			//adiciona eixo Y
-				svg.append("g")
-					.attr("transform", "translate(0, 0)")
-				   .call(yAxis);
+				// BARRA MUITO PEQUENA
+				//if (barHeight <= minBarHeight/* || isValueZero*/){
+				//  return y(d) - minBarHeight - 4;
+				//}
 
-		};
+				
+				if(areValuesHigh)
+					isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
+
+				if (isBarSmallerThanMinimum && isValuePositiveOrZero)
+					return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
+
+				return y(d) - 5;        
+		   });
+
+		//formata labels eixo X
+		var xAxis = d3.axisBottom(x)
+			.tickFormat(function(d){ return dados.key[d];})
+			.tickSize(5)
+			.tickPadding(5);
+
+		var yAxis = d3.axisLeft()
+					.scale(y)
+					.tickFormat(formatYAxis);
+
+		//adiciona eixo X
+		svg.append("g")
+		   .attr("transform", "translate(0," + height + ")")
+		   .call(xAxis);
+
+		//adiciona eixo Y
+		svg.append("g")
+			.attr("transform", "translate(0, 0)")
+		   .call(yAxis);
+
+	};
 </script>

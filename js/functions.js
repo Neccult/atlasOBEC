@@ -36,8 +36,6 @@ var formatNumber = function(value){
 		var valueSplit = zeroesFilter.split(dot);
 		var finalReturn;
 
-		// AQUI FIX ponto não está sendo mostrado no hover
-
 		if (valueSplit.length > 1){
 			var intSplit = valueSplit[0].replace(commaMatch, dot);
 			var decSplit = valueSplit[1];
