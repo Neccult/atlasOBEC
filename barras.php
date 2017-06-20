@@ -50,11 +50,14 @@
 <!-- D3 QUEUE -->
 <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
+<!-- Utilidades -->
+<script src="js/functions.js"></script>
+
 <div id="corpo"></div>
 
 <!--================ TOOLTIP! ===============-->
 <div id="tooltip" class="tooltip none">
-    <p><strong class="heading"></strong></p>
+	<p><strong class="heading"></strong></p>
 </div>
 
 <script>
@@ -184,10 +187,11 @@
 				.style("top", yPosition + "px");
 
 			d3.select(".tooltip .heading")
-				.text(d);
+				.text(formatNumber(d));
 
 			d3.select(".tooltip .size")
-				.text(numberFormat(d));
+				// AQUI REPLACE NUMBER FORMAT FUNCTION
+				.text(formatNumber(d));
 
 			d3.select(".tooltip").classed("none", false);
 		};
@@ -219,95 +223,75 @@
 			var isPositiveBarTooHigh = y(d) <= minBarHeight;
 
 			if (isMinValueNegative){
-				if (isNegativeBarTooHigh) return d - 0.05;
+				if (isNegativeBarTooHigh) return d - 0.005;
 			}
 			return d;
 		})).nice();
+
 				   
-		var numberFormat = d3.format(".2f");
+		
 
-		var removeZeroFormat = function(num){
-			var numSplit = num.split(".");
+		var formatYAxis = function(d){
+			var higherZeroOcur = 0;
+			var dadosCounter = 0;
+			var minFraction = 3;
 
-			if (parseInt(numSplit[1]) === 0)
-				num = Math.round(num);;
+			var formatInit = d3.format(".2f");
+			var formatDefault = function(d) { return removeDecimalZeroes(formatInit(d)); };
+			var formatThousands = function(d) { return removeDecimalZeroes(formatInit(d / 1e3)) + "K"; };
+			var formatMillions = function(d) { return removeDecimalZeroes(formatInit(d / 1e6)) + "M"; };
+			var formatFraction = function(d) {
+				var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
+				var decimalDigits = decimalDigitsCount < minFraction? minFraction : decimalDigitsCount;
+				var format = d3.format("."+decimalDigits+"f");
+				dadosCounter++;
+				return (format(d)).replace(".", ",");
+			};
 
-			return num;
-		};
+			var axisCountValidDecimalDigits = function(value, acum) {
+				var acum = acum || 0;
+				var digitString = typeof value !== 'string' && typeof value !== 'undefined'? (value).toString() : value;
 
-		var     formatDefault = function(d) { return numberFormat(d); }
-				formatThousands = function(d) { return numberFormat(d / 1e3) + "K"; },
-				formatMillions = function(d) { return numberFormat(d / 1e6) + "M"; };
 
-		var formatYAxis = function(){
-			var maxValue = ''+d3.max(dados.value);
-			var minValue = ''+d3.min(dados.value);
+				// break condition
+				if(!value){
+					if (acum > higherZeroOcur)
+						higherZeroOcur = acum;
+
+					return higherZeroOcur;
+				}
+
+				// if has dot (first iteration)
+				if (digitString.match(/\./g))
+					digitString = digitString.split(".")[1];
+
+				var isZero = parseInt(digitString[0]) === 0? 1: 0;
+				var newValue = isZero? digitString.substring(1) : "";
+				var newAcum = acum + isZero;
+
+				return axisCountValidDecimalDigits(newValue, newAcum);
+			};
+
+			var maxValue = d3.max(dados.value);
+			var minValue = d3.min(dados.value);
 
 			var preFormat = d3.format('.2f');
-			var preFormatted = preFormat(maxValue);
-			//var preFormattedNum= preFormatted.split(".").join("");
-			var preFormattedLength = preFormatted.split(".").join("").length;
-			var preFormattedIntLength = preFormatted.split(".")[0].length;
+			var preFormatted = removeDecimalZeroes(preFormat(maxValue));
+			var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
 
+			// has decimal
+			if(preFormatted.match(/\./g))
+				return formatFraction;
 
-			// Valores pequeno (1,1)
-			if (minValue < 1 && minValue > 1){
+			var preFormattedIntLength = preFormatted.length;
 
-			}
-
-			if(preFormattedIntLength <= 6 && preFormattedIntLength > 3)
-				return formatThousands;
-			else if (preFormattedIntLength <=9 && preFormattedIntLength > 6)
-				return formatMillions;
-			else
+			if (preFormattedIntLength <= 3)
 				return formatDefault;
+			else if (preFormattedIntLength <= 6)
+				return formatThousands;
+			else if (preFormattedIntLength <= 9)
+				return formatMillions;
 		}();
-
-		var rightFormat = function(d){
-			var tempFormat = d3.format(",.2f");
-			return tempFormat(d);
-		}
-
-		var numberMagnitude = function(value){
-			var value = value || 0;
-			var arrValue = ""+value;
-			var intValue = arrValue.split(".")[0];
-
-			var hundred = intValue.slice(0,3);
-			var thousand = intValue.slice(3,6);
-			var million = intValue.slice(6,9);
-
-			return !!hundred? (!!thousand? (!!million? 'million': 'thousand'): 'hundred'): 'hundred';
-		}
-
-
-		var niceNumbers = function(value){
-			var intSeparator = ".";
-			var decSeparator = ",";
-			var arrValue = ""+value;
-			var intValue = arrValue.split(".")[0];
-			var valueSeparatorFixed = arrValue.replace(".", ",");
-			var magnitude = numberMagnitude(intValue);
-
-			var temp = rightFormat(value);
-
-			if(magnitude === "million" || magnitude === "thousand")
-				temp = temp.split(".")[0];
-			else if(magnitude === "fractional")
-				temp = temp.split(".")[1];
-
-			console.log(temp);
-
-			var match = /,/g;
-
-			//temp = temp.match(match);
-			temp = temp.replace(match, ".");
-
-			console.log(temp);
-
-			return temp;
-		};
-
 
 		// cria SVG
 		var svg = d3.select("#corpo").append("svg")
@@ -440,7 +424,7 @@
 				   .append("text")
 				   .attr("class", "barTopValue")    
 				   .text(function(d) {
-						return niceNumbers(d);
+						return formatNumber(d);
 				   })
 				   .attr("text-anchor", "middle")
 				   .attr("x", function(d, i) {
@@ -464,7 +448,7 @@
 
 							// VALOR NEGATIVO
 							if (isValueNegative)
-								return y(d) + topLabelHeight;
+								return y(d) + minBarHeight + 5;
 
 							// BARRA MUITO PEQUENA
 							if (barHeight <= minBarHeight || isValueZero){
@@ -475,7 +459,7 @@
 							if (isYAxisZero)
 								return -5;
 
-							return zeroPosition - y(d) - 5;
+							return zeroPosition - y(d) - 4;
 						}
 
 						// BARRA MUITO PEQUENA
