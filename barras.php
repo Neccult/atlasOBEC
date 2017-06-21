@@ -451,7 +451,7 @@
 			.on("mouseout", mouseOut);
 
 		//cria labels barras 
-		svg.selectAll("text g")
+/*		svg.selectAll("text g")
 		   .data(dados.value, function(d) { return d; })
 		   .enter()
 		   .append("text")
@@ -500,7 +500,7 @@
 				}
 
 				// BARRA MUITO PEQUENA
-				//if (barHeight <= minBarHeight/* || isValueZero*/){
+				//if (barHeight <= minBarHeight/* || isValueZero){
 				//  return y(d) - minBarHeight - 4;
 				//}
 
@@ -512,7 +512,7 @@
 					return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;
 
 				return y(d) - 5;        
-		   });
+		   });*/
 
 		//formata labels eixo X
 		var xAxis = d3.axisBottom(x)
