@@ -1,13 +1,13 @@
 {
 	"barras":"Essa visualização permite observar a evolução da variável de interesse ao longo dos anos que compõem a amostra.",
-	"mapa":"Essa visualização permite observar a variável de interesse ...",
-	"treemap_region":"Essa visualização permite observar a variável de interesse ...",
-	"treemap_scc":"Essa visualização permite observar a variável de interesse ...",
+	"mapa":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
+	"treemap_region":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
+	"treemap_scc":"Essa visualização permite observar a variável de interesse segmentada pelos Setores Culturais e Criativos.",
 	
-	"uf":"Essa visualização apresenta a variável de interesse...",
-	"prt":"Essa visualização apresenta a variável de interesse...",
-	"atc":"Essa visualização apresenta a variável de interesse...",
-	"ano":"Essa visualização apresenta a variável de interesse...",
+	"uf":"Essa visualização permite observar a variável de interesse apenas para a Unidade Federativa selecionada.",
+	"prt":"Essa visualização permite observar a variável de interesse apenas para o porte selecionado.",
+	"atc":"Essa visualização permite observar a variável de interesse apenas para a atuação selecionada.",
+	"ano":"Essa visualização permite observar a variável de interesse apenas para o ano selecionado.",
 	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
 
 	"var":[
