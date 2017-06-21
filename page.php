@@ -52,6 +52,14 @@
 
 				$text = $json_text['var'][$_GET["var"]-1]; /*== informações da variável ==*/
 				$select = $json_text['select'];			   /*== informação dos selects ==*/
+
+				/*
+					busca a view do gráfico, 
+					se esta não existir busca a 
+					primeira declarada no json
+				*/	
+				if(!isset($text[$view])) $view = $text['type'][0]['id']; 	
+
 				$descView = $json_text[$view];			   /*== descrição da visualização ==*/
 			?>
 

@@ -33,15 +33,6 @@
 										$_GET['atc']=0;	
 									}
 
-								?>
-								<!--
-									inclui a view do gráfico, 
-									se esta não existir busca a 
-									primeira declarada no json
-								-->	
-								<?php
-
-									if(!isset($text[$view])) $view = $text['type'][0]['id']; 								
 									include $view.'.php';
 								?>
 
