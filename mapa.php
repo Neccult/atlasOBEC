@@ -50,6 +50,9 @@
 <!-- D3 QUEUE -->
 <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
+<!-- Utilidades -->
+<script src="js/functions.js"></script>
+
 <!--================== SVG! =================-->
 <div id="corpo" class="mapa fadeIn"></div>
 
@@ -244,7 +247,7 @@
                 .text(d['properties']['name']);
 
             d3.select(".tooltip .size")
-                .text(dict[d.id].valor);
+                .text(formatNumber(dict[d.id].valor));
 
             /*== posição do gráfico na tela ==*/
             var chartOffset = $('.chart').offset(), 
