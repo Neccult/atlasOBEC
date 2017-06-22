@@ -333,7 +333,9 @@
                 $(this).text("Maior que "+formatNumber(dom[i-1]));
             } 
             else{
-                var newText = "Entre "+ $(this).text().replace('to', 'e').replace(dom[i], formatNumber(dom[i]));
+                var newText = "Entre "+ $(this).text().replace('to', 'e');
+                newText = newText.replace(dom[i], formatNumber(dom[i]));
+                newText = newText.replace(dom[i-1], formatNumber(dom[i-1]));
                 $(this).text(newText);
             }
         });
