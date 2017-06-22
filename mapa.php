@@ -325,14 +325,15 @@
         $(legendLabels).each(function(i){
 
             if (i === 0 ){
-                var newText = $(this).text().replace('NaN to', 'Menor que');
+                var newText = $(this).text().replace('NaN to', 'Menor que').replace(dom[i], formatNumber(dom[i]));
                 $(this).text(newText);
+                console.log();
             } 
             else if (i === legendLabels.length - 1) {
-                $(this).text("Maior que "+dom[7]);
+                $(this).text("Maior que "+formatNumber(dom[i-1]));
             } 
             else{
-                var newText = "Entre "+ $(this).text().replace('to', 'e');
+                var newText = "Entre "+ $(this).text().replace('to', 'e').replace(dom[i], formatNumber(dom[i]));
                 $(this).text(newText);
             }
         });
