@@ -211,36 +211,19 @@
         var quant = 9;
         var range = maxValue - minValue; 
         var amp = minValue < 1 && minValue > -1 ? range / quant : Math.round(range / quant);
-        //console.log(amp);
 
         //domino de valores para as cores do mapa
-        var dom;
-
-       // if(amp > 1){
-            dom = [
-                (minValue+(amp/4)), 
-                (minValue+amp), 
-                (minValue+(2*amp)), 
-                (minValue+(3*amp)), 
-                (minValue+(4*amp)), 
-                (minValue+(5*amp)), 
-                (minValue+(6*amp)), 
-                (minValue+(7*amp)), 
-                (minValue+(8*amp))
-              ];
-       /* } else {
-            dom = [
-                (minValue+(amp/4)), 
-                (minValue+amp), 
-                (minValue+(2*amp)), 
-                (minValue+(3*amp)), 
-                (minValue+(4*amp)), 
-                (minValue+(5*amp)), 
-                (minValue+(6*amp)), 
-                (minValue+(7*amp)), 
-                (minValue+(8*amp))
-              ];
-        }*/
+        var dom = [
+                    (minValue+(amp/4)), 
+                    (minValue+amp), 
+                    (minValue+(2*amp)), 
+                    (minValue+(3*amp)), 
+                    (minValue+(4*amp)), 
+                    (minValue+(5*amp)), 
+                    (minValue+(6*amp)), 
+                    (minValue+(7*amp)), 
+                    (minValue+(8*amp))
+                ];
 
         //ajuste do dominio
         var i = 0;
@@ -341,20 +324,13 @@
         $(legendLabels).each(function(i){
 
             if (i === 0 ){
-                console.log($(this).text());
                 $(this).text('Menor que ' + formatNumber(dom[i]));
-               // $(this).text(newText);
             } 
             else if (i === legendLabels.length - 1) {
                 $(this).text("Maior que "+formatNumber(dom[i-1]));
             } 
             else{
-                //var newText = "Entre "+ $(this).text().replace('to', 'e');
-                //newText = newText.replace(dom[i], formatNumber(dom[i]));
-                //newText = newText.replace(dom[i-1], formatNumber(dom[i-1
-
-                $(this).text("Entre " + formatNumber(dom[i]) + " e " + formatNumber(dom[i-1]))                
-               // $(this).text(newText);
+                $(this).text("Entre " + formatNumber(dom[i]) + " e " + formatNumber(dom[i-1]));
             }
         });
     };
