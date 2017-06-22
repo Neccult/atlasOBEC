@@ -211,7 +211,7 @@
 				.domain(d3.extent(dados.value))
 				.rangeRound([height, 0], .002);
 
-		/*y.domain(d3.extent(dados.value, function(d) {
+		y.domain(d3.extent(dados.value, function(d) {
 			var isValueNegative = y(0) !== false && d < 0;
 			var isNegativeBarTooHigh = y(d) + 5 >= height;
 			var isPositiveBarTooHigh = height - y(d) >= height - 20;
@@ -250,9 +250,9 @@
 
 			return d;
 		})).nice();
-*/
+
 		
-		y.domain([d3.min(dados.value), d3.max(dados.value)]).nice();
+		//y.domain([d3.min(dados.value), d3.max(dados.value)]).nice();
 
 
 		var formatYAxis = function(d){
