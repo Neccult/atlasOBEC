@@ -210,28 +210,46 @@
         //distribuicao de frequencias    
         var quant = 9;
         var range = maxValue - minValue; 
-        var amp = minValue <= 1 ? range / quant : Math.round(range / quant);
-
+        var amp = minValue < 1 && minValue > -1 ? range / quant : Math.round(range / quant);
+        //console.log(amp);
 
         //domino de valores para as cores do mapa
-        var dom = [
-                    (minValue+(amp/4)), 
-                    (minValue+amp), 
-                    (minValue+(2*amp)), 
-                    (minValue+(3*amp)), 
-                    (minValue+(4*amp)), 
-                    (minValue+(5*amp)), 
-                    (minValue+(6*amp)), 
-                    (minValue+(7*amp)), 
-                    (minValue+(8*amp))
-                  ];
+        var dom;
+
+       // if(amp > 1){
+            dom = [
+                (minValue+(amp/4)), 
+                (minValue+amp), 
+                (minValue+(2*amp)), 
+                (minValue+(3*amp)), 
+                (minValue+(4*amp)), 
+                (minValue+(5*amp)), 
+                (minValue+(6*amp)), 
+                (minValue+(7*amp)), 
+                (minValue+(8*amp))
+              ];
+       /* } else {
+            dom = [
+                (minValue+(amp/4)), 
+                (minValue+amp), 
+                (minValue+(2*amp)), 
+                (minValue+(3*amp)), 
+                (minValue+(4*amp)), 
+                (minValue+(5*amp)), 
+                (minValue+(6*amp)), 
+                (minValue+(7*amp)), 
+                (minValue+(8*amp))
+              ];
+        }*/
 
         //ajuste do dominio
-        var i = 0; 
-        while(i<=9){
-            dom[i] = dom[i] - (dom[i] % 5);
-            i++;
-        }
+        var i = 0;
+        if(amp > 1){
+            while(i<=9){
+                dom[i] = dom[i] - (dom[i] % 5);
+                i++;
+            }
+        } 
                 
         // creates cadeia's color range array from color.json file
         var colorsRange = [];             
@@ -316,8 +334,6 @@
             .orient('vertical')
             .scale(color);
 
-            console.log(color);
-
         legend_svg.select(".legendLinear").call(legendLinear);
 
         var legendLabels = $('.legendCells').find('.cell').children('.label');
@@ -325,18 +341,20 @@
         $(legendLabels).each(function(i){
 
             if (i === 0 ){
-                var newText = $(this).text().replace('NaN to', 'Menor que').replace(dom[i], formatNumber(dom[i]));
-                $(this).text(newText);
-                console.log();
+                console.log($(this).text());
+                $(this).text('Menor que ' + formatNumber(dom[i]));
+               // $(this).text(newText);
             } 
             else if (i === legendLabels.length - 1) {
                 $(this).text("Maior que "+formatNumber(dom[i-1]));
             } 
             else{
-                var newText = "Entre "+ $(this).text().replace('to', 'e');
-                newText = newText.replace(dom[i], formatNumber(dom[i]));
-                newText = newText.replace(dom[i-1], formatNumber(dom[i-1]));
-                $(this).text(newText);
+                //var newText = "Entre "+ $(this).text().replace('to', 'e');
+                //newText = newText.replace(dom[i], formatNumber(dom[i]));
+                //newText = newText.replace(dom[i-1], formatNumber(dom[i-1
+
+                $(this).text("Entre " + formatNumber(dom[i]) + " e " + formatNumber(dom[i-1]))                
+               // $(this).text(newText);
             }
         });
     };
