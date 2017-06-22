@@ -67,7 +67,6 @@
 	var chartWidth = $('.chart').width();
 	var chartHeight = chartWidth/2;
 	var minBarHeight = 5;
-	var topLabelHeight = 17;
 	var withLabels = false;
 
 	//Variaveis/Objetos
@@ -302,12 +301,13 @@
 			var preFormat = d3.format('.2f');
 			var preFormatted = removeDecimalZeroes(preFormat(maxValue));
 			var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
+			var isSmall = preFormatted < 1 && preFormatted > -1;
 
 			// has decimal
-			if(preFormatted.match(/\./g))
+			if(isSmall)
 				return formatFraction;
 
-			var preFormattedIntLength = preFormatted.length;
+			var preFormattedIntLength = Math.round(preFormatted).toString().length;
 
 			if (preFormattedIntLength <= 3)
 				return formatDefault;
