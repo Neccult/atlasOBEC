@@ -324,13 +324,13 @@
         $(legendLabels).each(function(i){
 
             if (i === 0 ){
-                $(this).text('Menor que ' + formatDecimalLimit(dom[i], 4));
+                $(this).text('Menor que ' + formatDecimalLimit(dom[i]));
             } 
             else if (i === legendLabels.length - 1) {
-                $(this).text("Maior que "+formatDecimalLimit(dom[i-1]), 4);
+                $(this).text("Maior que "+formatDecimalLimit(dom[i-1]));
             } 
             else{
-                $(this).text("Entre " + formatDecimalLimit(dom[i], 4) + " e " + formatDecimalLimit(dom[i-1], 4));
+                $(this).text("Entre " + formatDecimalLimit(dom[i]) + " e " + formatDecimalLimit(dom[i-1]));
             }
         });
     };
