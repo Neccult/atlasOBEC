@@ -102,7 +102,27 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
   ou
   127.0.0.1/atlasOBEC
  ```
- 
+
+### Configurar Banco de Dados
+
+Para facilitar a explicação vamos assumir o uso do mysql via terminal
+
+  Criar banco de dados:
+  ```
+    mysql CREATE DATABASE Atlas
+  ```
+
+  Importar _dump_ do banco de dados:
+  ```
+    mysql -u [username] -p [password] Atlas < data/dump-Atlas.sql
+  ```
+
+  Após importado os dados manter a _consistência_ de usuário e senha do banco de dados no arquivo ``EixoUm.php``
+  ```
+      define('DB_USUARIO', 'username');
+      define('DB_SENHA', 'password');
+  ```
+
 ## Documentação Detalhada
 
  - [Requisitos e Funcionalidades](https://drive.google.com/open?id=1awAMcvdPkXRN4dj4NJ1wAWA6tklW87aBFzwSc7-U1Xg)
