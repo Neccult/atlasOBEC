@@ -5,12 +5,12 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 
  - PHP 7.0
  - JavaScript
-  - D3JS (gráficos)
-  - TopoJSON (coordenadas geográficas)
-  - JQuery
+    - D3JS (gráficos)
+    - TopoJSON (coordenadas geográficas)
+    - JQuery
  - HTML5
  - CSS3
-  - Bootstrap (framework frontend)
+    - Bootstrap (framework frontend)
  - MySQL
 
 
@@ -64,17 +64,6 @@ vamos começar atualizando o sistema para garantir que tudo corra bem
 
  ```
 
- Após instalado e _Clonado_ é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
- ``` 
-    ScriptAlias /cgi-bin/ [DIR]
-        <Directory "[DIR]">
-              AllowOverride None
-              Options ExecCGI
-              AddHandler cgi-script cgi pl
-              Require all granted
-        </Directory>
- ```
-
  e o Git:
  ```
   sudo apt-get install git
@@ -121,5 +110,3 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
 ## DER e Banco de Dados
 
 [Documento Google Drive] (https://drive.google.com/open?id=1WcOf5DdOZvBE5u3fzjbd6unO4dAXoQwPKn8P6FQK-aY)
-
-### end
