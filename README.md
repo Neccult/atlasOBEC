@@ -18,12 +18,12 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 
 ### Dependências para instalação
 
-- Apache
-- Git
-- MySQL
-- NPM
-- PHP
-- PERL
+ - Apache
+ - Git
+ - MySQL
+ - NPM
+ - PHP
+ - PERL
 
 Em ambiente linux(Ubuntu),
 vamos começar atualizando o sistema para garantir que tudo corra bem
@@ -84,14 +84,7 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
   cd atlasOBEC
  ```
 
-  E para acessar através do navegador no link:
- ```
-  localhost/atlasOBEC
-  ou
-  127.0.0.1/atlasOBEC
- ```
-
- Após instalado e _Clonado_ é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
+ Após instalado é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
  Adicionar o seguinte bloco de código
  ``` 
     ScriptAlias /cgi-bin/ /var/www/html/atlasOBEC
@@ -102,11 +95,16 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
               Require all granted
         </Directory>
  ```
+
+  E para acessar através do navegador no link:
+ ```
+  localhost/atlasOBEC
+  ou
+  127.0.0.1/atlasOBEC
+ ```
  
-## Detalhamento de requisitos e funcionalidades
+## Documentação Detalhada
 
-[Documento Google Drive] (https://drive.google.com/open?id=1awAMcvdPkXRN4dj4NJ1wAWA6tklW87aBFzwSc7-U1Xg)
+ - [Requisitos e Funcionalidades](https://drive.google.com/open?id=1awAMcvdPkXRN4dj4NJ1wAWA6tklW87aBFzwSc7-U1Xg)
 
-## DER e Banco de Dados
-
-[Documento Google Drive] (https://drive.google.com/open?id=1WcOf5DdOZvBE5u3fzjbd6unO4dAXoQwPKn8P6FQK-aY)
+ - [DER e Banco de Dados](https://drive.google.com/open?id=1WcOf5DdOZvBE5u3fzjbd6unO4dAXoQwPKn8P6FQK-aY)
