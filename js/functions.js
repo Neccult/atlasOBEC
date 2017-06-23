@@ -1,7 +1,6 @@
 // format value number
 var formatNumber = function(value, decimalLimit){
 	var decimalLimit = decimalLimit || 8;
-	console.log("formatNumbDecDigit:", decimalLimit);
 	var minimumIntDigitsNumberToCapDecValues = 3;
 
 	var intFormat = function(d){
@@ -78,8 +77,8 @@ var countValidDecimalDigits = function(value, acum) {
 	return countValidDecimalDigits(newValue, newAcum);
 };
 
-
 var formatDecimalLimit = function(value, limit){
+	var limit = limit || 3;
 	var fracLeadingZeroes = countValidDecimalDigits(value);
-	return formatNumber(value, fracLeadingZeroes + 3);;
+	return formatNumber(value, fracLeadingZeroes + limit);
 };
