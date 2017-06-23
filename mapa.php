@@ -87,7 +87,7 @@
             .scale(550)                     
             .translate([width/2, height/1.2]);  
 
-        var legendTransform = "translate(400,220)";
+        var legendTransform = "translate(365,220)";
         var shapeWidth = 80;
     }
     /**** tablet landscape! ****/
@@ -324,13 +324,13 @@
         $(legendLabels).each(function(i){
 
             if (i === 0 ){
-                $(this).text('Menor que ' + formatNumber(dom[i]));
+                $(this).text('Menor que ' + formatDecimalLimit(dom[i], 4));
             } 
             else if (i === legendLabels.length - 1) {
-                $(this).text("Maior que "+formatNumber(dom[i-1]));
+                $(this).text("Maior que "+formatDecimalLimit(dom[i-1]), 4);
             } 
             else{
-                $(this).text("Entre " + formatNumber(dom[i]) + " e " + formatNumber(dom[i-1]));
+                $(this).text("Entre " + formatDecimalLimit(dom[i], 4) + " e " + formatDecimalLimit(dom[i-1], 4));
             }
         });
     };
