@@ -356,13 +356,13 @@
 				var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
 				var isMinValueNegative = zeroPosition !== false;
 				var isValueNegative = d < 0;
-				var isBarTooSmall = barHeight <= minBarHeight;
+				var isBarTooSmall = isMinValueNegative? barHeight == zeroPosition : barHeight <= minBarHeight;
 				var zeroPositionExists = zeroPosition < height;
 				var isValueZero = d === 0;
 				var isMaxValue = d3.max(dados.value) == d;
 
 				// TEM VALOR NEGATIVO
-				if (isMinValueNegative) {
+				if (isMinValueNegative){
 
 					// NÚMERO NEGATIVO
 					if(isValueNegative)
@@ -371,7 +371,7 @@
 					// S barra for muito pequena
 					if(isBarTooSmall)
 						return zeroPosition - 5;
-
+					
 					return y(d);
 				}
 
@@ -389,7 +389,6 @@
 				var isMinValueNegative = minValue < 0;
 				var isValueNegative = d < 0;
 				var isValueZero = d === 0;
-				var isYAxisZero = y(d) <= 5;
 				var barHeight = y(d);
 
 				// TEM VALOR NEGATIVO
@@ -407,12 +406,8 @@
 					}
 
 					// NÚMERO POSITIVO
-					if (barHeight < minBarHeight || isValueZero){
+					if (isValueZero)
 						return minBarHeight;
-					}
-
-					/*if (isYAxisZero)
-						return Math.abs(y(0));*/
 
 					return Math.abs(y(d) - zeroPosition);
 				}
