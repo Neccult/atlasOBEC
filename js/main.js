@@ -65,12 +65,57 @@ function createUrl(url){
 	return newUrl;
 }
 
+/*======
+	ALTO CONTRASTE (replicado no index.php)
+======*/
+var createCookie = function(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+function bodyDark(active){
+
+	if(active==1){
+		$('body').addClass('dark');
+	}else{
+		$('body').removeClass('dark');
+	}
+}
+
+
+var dark = getCookie('dark');
+
 /*====== 
 	documento carregando
 ======*/
 $(window).bind("load", function() { 
 
 	controlMenu(1); /* controla menu círculos! */
+
+	bodyDark(dark);/* alto contraste */
+
 	console.log('loaded!');
 
 });
@@ -79,6 +124,21 @@ $(window).bind("load", function() {
 	documento pronto
 ======*/
 $(document).ready(function(){
+
+	/***************** alto contraste **************** (replicado no index.php )*/
+	$(document).on('click', "#contraste", function(){
+		
+		var darkValue = getCookie("dark");
+
+		if(darkValue==0){
+			createCookie('dark',1,'30');
+			darkValue=1;
+		}else if(darkValue==1){
+			createCookie('dark',0,'30');
+			darkValue=0;
+		}
+		bodyDark(darkValue);
+	});
 
 	/***************************************************/
 	/******************** menu círculos ****************/

@@ -161,6 +161,48 @@
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 
+
+			/*======
+				ALTO CONTRASTE (replicado no main.js)
+			======*/
+			var createCookie = function(name, value, days) {
+			    var expires;
+			    if (days) {
+			        var date = new Date();
+			        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			        expires = "; expires=" + date.toGMTString();
+			    }
+			    else {
+			        expires = "";
+			    }
+			    document.cookie = name + "=" + value + expires + "; path=/";
+			}
+
+			function getCookie(c_name) {
+			    if (document.cookie.length > 0) {
+			        c_start = document.cookie.indexOf(c_name + "=");
+			        if (c_start != -1) {
+			            c_start = c_start + c_name.length + 1;
+			            c_end = document.cookie.indexOf(";", c_start);
+			            if (c_end == -1) {
+			                c_end = document.cookie.length;
+			            }
+			            return unescape(document.cookie.substring(c_start, c_end));
+			        }
+			    }
+			    return "";
+			}
+			var dark = getCookie('dark');
+
+			function bodyDark(active){
+
+				if(active==1){
+					$('body').addClass('dark');
+				}else{
+					$('body').removeClass('dark');
+				}
+			}
+
 			/* ajusta o tamanho do vídeo, 
 				para seguir da altura do container */
 			function videoHeight(){
@@ -173,6 +215,9 @@
 			/* quando a janela é carregada */
 			$(window).bind("load", function() { 
 				videoHeight();
+
+				bodyDark(dark);/* alto contraste */
+
 			});
 
 			$(document).ready(function(){				
@@ -181,6 +226,22 @@
 				$(window).resize(function() {
 					videoHeight();
 				});
+
+				/***************** alto contraste **************** (replicado no main.js )*/
+				$(document).on('click', "#contraste", function(){
+					
+					var darkValue = getCookie("dark");
+
+					if(darkValue==0){
+						createCookie('dark',1,'30');
+						darkValue=1;
+					}else if(darkValue==1){
+						createCookie('dark',0,'30');
+						darkValue=0;
+					}
+					bodyDark(darkValue);
+				});
+
 			});
 		</script>
 	</body>

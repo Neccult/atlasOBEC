@@ -15,6 +15,7 @@
 /*=== geral =================*/
 body{
 	font-family: Lato Regular;
+	transition: .5s all ease;
 }
 
 .fadeIn{
@@ -240,7 +241,10 @@ video::-webkit-media-controls {
 
 /*==== menu círculos ====*/
 .logo-min{
+	width: 91px;
+	height: 78px;
 	margin: 60px auto 60px auto;
+	background-image: url(../images/logo_min.png);
 }
 p.title{
 	color: #c4c431;
@@ -447,6 +451,61 @@ select[disabled].opt-select{
 	color: #808080;
 }
 
+
+/*===== dark =====*/
+body.dark{
+	background: #000 !important;
+	color: #FFF !important;
+}
+.dark a.link{
+	color: #FFF;
+}
+.dark a.link p{
+	text-decoration: underline;
+}
+.dark .desc{
+	color: #FFF;
+}
+.dark .square-icon{
+	background-color: #FFF !important;
+}
+.dark a.home.button{
+	background-color: #FFF;
+	color: #2F2F2F;
+}
+.dark .logo-min{
+	background-image: url(../images/logo_min_dark.png);
+}
+.dark p.title{
+	color: #EAE9E8;
+}
+
+.dark .circles{
+	fill: #EAE9E8;
+}
+.dark .circles.text{
+	fill: #2F2F2F;
+}
+.dark article.results-article{
+	background-color: #2F2F2F;
+}
+.dark .container-chart .content .chart{
+	border-color: #808080;
+}
+.dark button.opt{
+	background-color: #fff;
+	color: #000;
+}
+.dark button.opt:hover, .dark button.opt.active{
+	background-color: #808080;
+	color: #fff;
+}
+.dark .opt-title{
+	color: #FFF;
+}
+
+
+/*==== responsivo ====*/
 @media (max-width: 1499px){
 	.menu-content{
 		font-size: 12px;
@@ -563,7 +622,6 @@ select[disabled].opt-select{
 	    font-size: 9px;
 	}
 }
-
 @media (max-width: 479px){
 	.show-xxs{
 		display: block;

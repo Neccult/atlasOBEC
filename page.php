@@ -15,7 +15,7 @@
 							<div class="menu-circles">
 								<div class="content text-center">
 
-									<a href="index.php" class="img-link"><img src="images/logo_min.png" class="logo-min" alt="Logo Atlas"></a>
+									<a href="index.php<?php if(isset($dark)) echo "?dark=1";?>" class="img-link"><div class="logo-min" alt="Logo Atlas"></div></a>
 
 									<p class="title">Empreendimentos Culturais</p>
 
