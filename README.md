@@ -127,4 +127,4 @@ Para facilitar a explicação vamos assumir o uso do mysql via terminal
 
  - [Requisitos e Funcionalidades](https://drive.google.com/open?id=1awAMcvdPkXRN4dj4NJ1wAWA6tklW87aBFzwSc7-U1Xg)
 
- - [DER e Banco de Dados](https://drive.google.com/open?id=1WcOf5DdOZvBE5u3fzjbd6unO4dAXoQwPKn8P6FQK-aY)
+ - [DER e Banco de Dados](https://drive.google.com/open?id=1Smfc-PtpTKp-7ksgZ548cBFgSvh_oaANwgHiy5WSThM)
