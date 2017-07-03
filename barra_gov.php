@@ -55,7 +55,7 @@
 
 		    <div id="logo">
 		    	<a id="portal-logo" title="" href="index.php">
-		            <img src="images/logo2.png"/>
+		            <img src="images/logo2.png" alt="Logo ATLAS"/>
 		    	</a>
 			</div>
 

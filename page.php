@@ -21,7 +21,7 @@
 								<div class="col-md-12">
 								
 
-									<a href="index.php<?php if(isset($dark)) echo "?dark=1";?>" class="img-link"><div class="logo-min" alt="Logo Atlas"></div></a>
+									<a href="index.php<?php if(isset($dark)) echo "?dark=1";?>" class="img-link"><div class="logo-min"></div></a>
 
 									<p class="title">Empreendimentos Culturais</p>
 

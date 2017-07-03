@@ -167,7 +167,7 @@
 
 						<br/><br/>
 						<p class="text-center">
-							<a href="#menuSection" class="scroll-link"><img src="images/arrowUp.png"/></a>
+							<a href="#menuSection" class="scroll-link"><img src="images/arrowUp.png" alt="Voltar ao menu"/></a>
 						</p>
 
 					</div>
