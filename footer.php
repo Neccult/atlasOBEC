@@ -63,23 +63,23 @@
 </div>
 <div id="footer-brasil-custom">
 	<div id="wrapper-footer-brasil" class="container">
-		<a href="http://www.acessoainformacao.gov.br/">
+		<a target="_blank" href="http://www.acessoainformacao.gov.br/">
 			<span class="logo-acesso-footer"></span>
 		</a>
-		<a href="http://ufrgs.br/obec/neccult">
+		<a target="_blank" href="http://ufrgs.br/obec/neccult">
 			<span class="logo-neccult-footer logo-footer"></span>
 		</a>
-		<a href="http://ufrgs.br/">
+		<a target="_blank" href="http://ufrgs.br/">
 			<span class="logo-ufrgs-footer logo-footer"></span>
 		</a>
-		<a href="http://ufrgs.br/">
+		<a target="_blank" href="http://www.cultura.gov.br/secretaria-da-economia-da-cultura">
 			<span class="logo-ecocultura-footer logo-footer"></span>
 		</a>
-		<a href="http://ufrgs.br/">
+		<a target="_blank" href="http://www.cultura.gov.br/">
 			<span class="logo-minc-footer logo-footer"></span>
 		</a>
 		
-		<a href="http://www.brasil.gov.br/">
+		<a target="_blank" href="http://www.brasil.gov.br/">
 			<span class="logo-brasil-footer"></span>
 		</a>
 	</div>
