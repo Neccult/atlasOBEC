@@ -1,29 +1,29 @@
 <?php 
-    
-    if (!empty($_GET["var"]))
-        $var = $_GET["var"];
-    else
-        $var = 1;
+	
+	if (!empty($_GET["var"]))
+		$var = $_GET["var"];
+	else
+		$var = 1;
 
-    if (!empty($_GET["uf"]))
-        $uf = $_GET["uf"];
-    else
-        $uf = 0;
+	if (!empty($_GET["uf"]))
+		$uf = $_GET["uf"];
+	else
+		$uf = 0;
 
-    if (!empty($_GET["atc"]))
-        $atc = $_GET["atc"];
-    else
-        $atc = 0;
+	if (!empty($_GET["atc"]))
+		$atc = $_GET["atc"];
+	else
+		$atc = 0;
 
-    if (!empty($_GET["prt"]))
-        $prt = $_GET["prt"];
-    else
-        $prt = 0;
+	if (!empty($_GET["prt"]))
+		$prt = $_GET["prt"];
+	else
+		$prt = 0;
 
-    if (!empty($_GET["ano"]))
-        $ano = $_GET["ano"];
-    else
-        $ano = 2014;
+	if (!empty($_GET["ano"]))
+		$ano = $_GET["ano"];
+	else
+		$ano = 2014;
 ?>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -58,306 +58,377 @@
 
 <!--================ TOOLTIP! ===============-->
 <div id="tooltip" class="tooltip none">
-    <p><strong class="heading"></strong></p>
-    <p><span class="size"></span></p>
+	<p><strong class="heading"></strong></p>
+	<p><span class="size"></span></p>
 </div>
 
 <script>
 
-    var windowWidth = $(window).width();
+	var windowWidth = $(window).width();
 
-    /*=== dimensões do gráfico ===*/        
-    if(windowWidth>350){
-        $('#corpo').find('svg').attr('width',$('.chart').width());
-        $('#corpo').find('svg').attr('height',$('.chart').width()/2);
-    }
-    else{
-        $('#corpo').find('svg').attr('width',$('.chart').width()-50);
-        $('#corpo').find('svg').attr('height',$('.chart').width());
-    }
+	/*=== dimensões do gráfico ===*/        
+	if(windowWidth>350){
+		$('#corpo').find('svg').attr('width',$('.chart').width());
+		$('#corpo').find('svg').attr('height',$('.chart').width()/2);
+	}
+	else{
+		$('#corpo').find('svg').attr('width',$('.chart').width()-50);
+		$('#corpo').find('svg').attr('height',$('.chart').width());
+	}
 
-    var svg = d3.select("svg"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
+	var svg = d3.select("svg"),
+		width = +svg.attr("width"),
+		height = +svg.attr("height");
 
+	var textLeftPadding = 10; // initial padding left for text
+	var textTopPadding = 15; // initial padding top for text
 
-    var textLeftPadding = 10; // initial padding top for text
-    var textTopPadding = 15; // initial padding top for text
-    var letterTopPadding = 20; // initial padding top for vertical letters
-    var textTopSubPadding = 13; // padding top for subsequent word lines (line height)
-    var textVerticalTopSubPadding = 12; // padding top for subsequent letters on vertical position words
-    var textVerticalLeftSubPadding = 11; // padding left for subsequent letters on vertical position words
+	var letterTopPadding = 20; // initial padding top for vertical letters
 
-    // return node box width
-    function nodeWidth(d){ return d.x1 - d.x0; }
-    
-    // return node box height
-    function nodeHeight(d){ return d.y1 - d.y0; }
+	var textTopSubPadding = 13; // padding top for subsequent word lines (line height)
 
-    // appends multiline text// REVISAR TEXT TO => THAT
-    function genMultiLineText(that){
-        var words = that.text().split(' ');
-        var thisCell = that.append('g');
+	var letterTopSubPadding = 7; // padding top for subsequent letters on vertical position words
+	var letterLeftSubPadding = 10; // padding left for subsequent letters on vertical position words
 
-        that.select('text').remove();
+	// return node box width
+	function nodeWidth(d){ return d.x1 - d.x0; }
+	
+	// return node box height
+	function nodeHeight(d){ return d.y1 - d.y0; }
 
-        for(var i=0; i<words.length; i++){
-            if (i == 0) {
-                thisCell.append('text')
-                    .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-                    .text(function(d) {
-                        return d.data.name.split(' ')[i];
-                    })
-                    .attr("y", textTopPadding + 5)
-                    .attr('x', function(d){
-                        return textLeftPadding;
-                    });
-            }else{
-                thisCell.append('text')
-                .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-                .text(function(d) { 
-                    return d.data.name.split(' ')[i]; 
-                })
-                .attr('x', textLeftPadding)
-                .attr('y', function(d){
-                    return (textTopPadding + 5 + (i * textTopSubPadding) );
-                });
-            } 
-        }
-    }
+	// appends multiline text// REVISAR TEXT TO => THAT
+	function genMultiLineText(that){
+		var words = that.text().split(' ');
+		var thisCell = that.append('g');
 
-    // appends svg element to body for testing width/height purposes then removes itself
-    function appendTest(text){
-        var placeholder = d3.select("body")
-                            .append("div")
-                            .attr("id", "testDiv")
-                            .append("svg")
-                            .append("g");
+		that.select('text').remove();
 
-        for(var i=0; i<text.length; i++){
+		for(var i=0; i<words.length; i++){
+			if (i == 0) {
+				thisCell.append('text')
+					.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+					.text(function(d) {
+						return d.data.name.split(' ')[i];
+					})
+					.attr("y", textTopPadding + 5)
+					.attr('x', function(d){
+						return textLeftPadding;
+					});
+			}else{
+				thisCell.append('text')
+				.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+				.text(function(d) { 
+					return d.data.name.split(' ')[i]; 
+				})
+				.attr('x', textLeftPadding)
+				.attr('y', function(d){
+					return (textTopPadding + 5 + (i * textTopSubPadding) );
+				});
+			} 
+		}
+	}
 
-            placeholder.append('text')
-            .text(function(d) {
-                return text[i]; 
-            })
-            .attr('x', function(d){
-                return textLeftPadding;
-            })
-            .attr('y', function(d){
-                return (textTopSubPadding + (i * textVerticalTopSubPadding) );
-            });
-        }
+	// appends svg element to body for testing width/height purposes then removes itself
+	function appendTest(text){
+		var placeholder = d3.select("body")
+							.append("div")
+							.attr("id", "testDiv")
+							.append("svg")
+							.append("g")
+							.append("text")
+							.attr('x', textLeftPadding);
 
-        var pNode = placeholder.node().parentNode;
-        var bbox = placeholder.node().getBBox();
+		for (var i = 0; i < text.length; i++){
 
-        d3.select(pNode.parentNode).remove();
+			placeholder.append('tspan')
+			.text(function(d) {
+				return text[i]; 
+			})
+			/*.attr('x', function(d){
+				return textLeftPadding;
+			})*/
+			.attr('y', function(d){
+				return textTopSubPadding + (i * letterTopSubPadding);
+			});
+		}
 
-        return bbox;
-    }
+		var pNode = placeholder.node().parentNode
+		var bbox = placeholder.node().getBBox();
+		
+		d3.select(pNode.parentNode).remove();
 
-    /*==================*/
-    /* ***  cores   *** */
-    /*==================*/
+		return bbox;
+	}
 
-    /* importa arquivo de cores */
-    var colorJSON;
-    d3.json('colors.json', function(error, data) {
-        if(error) throw error;
-        colorJSON = data;
-    })
+	/*==================*/
+	/* ***  cores   *** */
+	/*==================*/
 
-    var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
-        format = d3.format(",d");
+	/* importa arquivo de cores */
+	var colorJSON;
+	d3.json('colors.json', function(error, data) {
+		if(error) throw error;
+		colorJSON = data;
+	})
 
-    /* retorna cor do elemento */
-    var color = function(colorId){
-        if(colorJSON.cadeias[colorId]){
-            return colorJSON.cadeias[colorId].color;
-        }else{
-            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
-            return colorJSON.cadeias[0].color;
-        }
-    }
+	var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
+		format = d3.format(",d");
 
-    /*==================*/
-    /* *** tooltips *** */
-    /*==================*/
+	/* retorna cor do elemento */
+	var color = function(colorId){
+		if(colorJSON.cadeias[colorId]){
+			return colorJSON.cadeias[colorId].color;
+		}else{
+			console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+			return colorJSON.cadeias[0].color;
+		}
+	}
 
-    /* mostrar */
-    var mouseOn = function(d) {
+	/*==================*/
+	/* *** tooltips *** */
+	/*==================*/
 
-        /* atualiza nome tooltip */
-        d3.select(".tooltip .heading")
-            .text(d['data']['name']);
+	/* mostrar */
+	var mouseOn = function(d) {
 
-        d3.select(".tooltip .size")
-            .text(formatNumber(d['data']['size']));
+		/* atualiza nome tooltip */
+		d3.select(".tooltip .heading")
+			.text(d['data']['name']);
 
-        /*== posição do gráfico na tela ==*/
-        var chartOffset = $('.chart').offset(), 
-            leftOffset = chartOffset.left,
-            leftOffsetEnd = leftOffset+$('.chart').width(),
-            topOffset = chartOffset.top;
+		d3.select(".tooltip .size")
+			.text(formatNumber(d['data']['size']));
 
-        /* tamanho do tooltip */
-        var tooltipWidth = $('.tooltip').width();
+		/*== posição do gráfico na tela ==*/
+		var chartOffset = $('.chart').offset(), 
+			leftOffset = chartOffset.left,
+			leftOffsetEnd = leftOffset+$('.chart').width(),
+			topOffset = chartOffset.top;
 
-        /*== posição do tooltip ==*/
-        var xPosition = d3.event.pageX-leftOffset+30;
-        var xPositionEnd = xPosition+tooltipWidth;
-        var yPosition = d3.event.pageY -topOffset+5;
+		/* tamanho do tooltip */
+		var tooltipWidth = $('.tooltip').width();
 
-       
-        /* se a posição final do tooltip for além do final da tela */
-        if(xPositionEnd>leftOffsetEnd){
-            xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
-        }
+		/*== posição do tooltip ==*/
+		var xPosition = d3.event.pageX-leftOffset+30;
+		var xPositionEnd = xPosition+tooltipWidth;
+		var yPosition = d3.event.pageY -topOffset+5;
 
-        d3.select(".tooltip")
-            .style("left", xPosition + "px")
-            .style("top", yPosition + "px");
+	   
+		/* se a posição final do tooltip for além do final da tela */
+		if(xPositionEnd>leftOffsetEnd){
+			xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
+		}
 
-        d3.select(".tooltip").classed("none", false);
-    };
+		d3.select(".tooltip")
+			.style("left", xPosition + "px")
+			.style("top", yPosition + "px");
 
-    /* esconder tooltip */
-    var mouseOut = function() {
-        d3.select(".tooltip").classed("none", true);
-    };
+		d3.select(".tooltip").classed("none", false);
+	};
 
-    /*==================*/
-    /* ***  treemap *** */
-    /*==================*/
-    var treemap = d3.treemap()
-        .tile(d3.treemapResquarify)
-        .size([width, height])
-        .round(true)
-        .paddingInner(1);
+	/* esconder tooltip */
+	var mouseOut = function() {
+		d3.select(".tooltip").classed("none", true);
+	};
 
-
-    //variaveis configuracao query
-    var vrv = <?php echo $var; ?>;
-    var atc = <?php echo $atc; ?>;
-    var prt = <?php echo $prt; ?>;
-    var ano = <?php echo $ano; ?>;
-    var uf = <?php echo $uf; ?>;    
-
-    var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ano="+ano+"";
-
-    d3.json("ajax_treemap_scc.php"+config, function(error, data) {
-        if (error) throw error;
-
-        var attachColor=function(d){
-            return (d.depth==3)? d.data.colorId=d.parent.parent.data.colorId : ''; 
-        };
-
-        var root = d3.hierarchy(data)
-                    .eachBefore(function(d) {
-                        attachColor(d);
-                        d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
-                    })
-                    .sum(sumBySize)
-                    .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
-
-        treemap(root);
-
-        var cell = svg.selectAll("g")
-                    .data(root.leaves())
-                    .enter().append("g")
-                    .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-                    .on("mousemove", mouseOn)
-                    .on("mouseout", mouseOut);
-
-        cell.append("rect")
-            .attr("id", function(d) { return d.data.id; })
-            .attr("width", function(d) { return nodeWidth(d); })
-            .attr("height", function(d) { return d.y1 - d.y0; })
-            .attr("fill", function(d) { return color(d.data.colorId); });
-
-        cell.append("clipPath")
-            .attr("id", function(d) { return "clip-" + d.data.id; })
-            .append("use")
-            .attr("xlink:href", function(d) { return "#" + d.data.id; });
+	/*==================*/
+	/* ***  treemap *** */
+	/*==================*/
+	var treemap = d3.treemap()
+		.tile(d3.treemapResquarify)
+		.size([width, height])
+		.round(true)
+		.paddingInner(1);
 
 
-        cell.append("text")
-            .attr("x", function(d) { return textLeftPadding; })
-            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-            .attr("y", function(d, i) { return textTopPadding; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "start")
-            //.style("opacity", 1)
-            .text(function(d) {return d.data.name; });
+	//variaveis configuracao query
+	var vrv = <?php echo $var; ?>;
+	var atc = <?php echo $atc; ?>;
+	var prt = <?php echo $prt; ?>;
+	var ano = <?php echo $ano; ?>;
+	var uf = <?php echo $uf; ?>;    
 
-        var g = d3.selectAll("#corpo svg g");
+	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ano="+ano+"";
 
-        g.each(function(d){
-            var that = d3.select(this);
-            var words = that.text().split(' ');
-            var boxWidth = nodeWidth(d) - textLeftPadding;
-            var boxHeight = nodeHeight(d) - textTopPadding;
-            var name = d.data.name;
-            var nodeText = d3.select(this).select('text').node();
-            var thisCell;
-            d.w = nodeText.getComputedTextLength();
-            // if tests
-            var nameLongerThanOneWord = words.length > 1;
-            var wordWiderThanContainer = d.w > boxWidth;
-            var oneWordName = words.length === 1;   
+	d3.json("ajax_treemap_scc.php"+config, function(error, data) {
+		if (error) throw error;
 
-            // if name has more than one word calls genMultiLineText function
-            if (nameLongerThanOneWord)
-                return genMultiLineText(that);  
+		var attachColor=function(d){
+			return (d.depth==3)? d.data.colorId=d.parent.parent.data.colorId : ''; 
+		};
 
-            if (oneWordName){
+		var root = d3.hierarchy(data)
+					.eachBefore(function(d) {
+						attachColor(d);
+						d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
+					})
+					.sum(sumBySize)
+					.sort(function(a, b) { return b.height - a.height || b.value - a.value; });
 
-                // if horizontal word is bigger than the container box width
-                if (wordWiderThanContainer){
-                    var testElement = appendTest(name);
-                    var verticalWordSmallerThanContainer = testElement.height < boxHeight;
+		treemap(root);
 
-                    // if vertical word is smaller than container box height
-                    if (verticalWordSmallerThanContainer){
-                        thisCell = that.append('g').attr("text-anchor", "start");
+		var cell = svg.selectAll("g")
+					.data(root.leaves())
+					.enter().append("g")
+					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
+					.on("mousemove", mouseOn)
+					.on("mouseout", mouseOut);
 
-                        // remove horizontal text from g element
-                        that.select('text').remove();
+		cell.append("rect")
+			.attr("id", function(d) { return d.data.id; })
+			.attr("width", function(d) { return nodeWidth(d); })
+			.attr("height", function(d) { return d.y1 - d.y0; })
+			.attr("fill", function(d) { return color(d.data.colorId); });
 
-                        // append letters on vertical position
-                        for(var i=0; i<name.length; i++){
-                            
-                            thisCell.append('text')
-                                .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-                                .attr("text-anchor", "start")
-                                .text(function(d) {
-                                    return name[i]; 
-                                })
-                                .attr('x', function(d){
-                                    return i === 0? textLeftPadding : textVerticalLeftSubPadding;
-                                })
-                                .attr('y', function(d){
-                                    return (letterTopPadding + (i * textVerticalTopSubPadding) );
-                                });
-                        }
-                    }
-                    else{
-                        
-                        // sets 0 opacity to text that doesnt fit neither horizontal or vertical
-                        that.select("text").style("opacity", 0);
-                    }
+		cell.append("clipPath")
+			.attr("id", function(d) { return "clip-" + d.data.id; })
+			.append("use")
+			.attr("xlink:href", function(d) { return "#" + d.data.id; });
 
-                }
-            }
-        });
 
-    });
+		cell.append("text")
+			.attr("x", function(d) { return textLeftPadding; })
+			.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+			.attr("y", function(d, i) { return textTopPadding; })
+			.attr("dy", ".35em")
+			.attr("text-anchor", "start")
+			//.style("opacity", 1)
+			.text(function(d) {return d.data.name; });
 
-    function sumByCount(d) {
-        return d.children ? 0 : 1;
-    }
+	   /*=== controla texto ===*/
+		var g = d3.selectAll("#corpo svg g");
+		g.each(function(d){
+			var that = d3.select(this);
+			var words = that.text().split(' ');
+			var name = d.data.name;
 
-    function sumBySize(d) {
-        return d.size;
-    }
+			var box = that.select('rect').node();
+			var boxWidth = box.getBBox().width;
+			var boxHeight = box.getBBox().height;
+
+			var boxText = d3.select(this).select('text').node();
+			var textWidth = boxText.getBBox().width;
+			var textHeight = boxText.getBBox().height;
+			d.w = textWidth;
+
+			var minMargin = 8;
+			var offsetMargin = 5;
+			var oneWordName = words.length === 1;
+
+			// if multiple words text
+			if (!oneWordName)
+				return genMultiLineText(that);
+
+			// if only one word
+
+			// if tests
+			var wordTallerThanContainer = (boxHeight - textHeight - textTopPadding) <= minMargin;
+			var wordWiderThanContainer = (boxWidth - textWidth - textLeftPadding) <= minMargin;			
+
+			// if horizontal word is NARROW than the container (box width - leftPadding)
+			if(!wordWiderThanContainer){
+
+				var isVerticalMarginAvailable = (boxHeight - textHeight) / 2 > minMargin;
+				var wordOnVerticalEdge = boxHeight - textHeight - textTopPadding <= minMargin	;
+
+				if (!isVerticalMarginAvailable)
+					return that.select("text").style("opacity", 0);
+
+				// if text still taller than container tries to fit it in for the last time
+				if (wordOnVerticalEdge)
+					that.select('text').attr('y', (boxHeight - textHeight) / 2 + minMargin);
+
+			} else {
+				// if horizontal word is BIGGER than the container break it into vertical letters
+
+				// tries to horizontally fit word first
+				that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+
+				// test if is still wider
+				var textStillWiderThanBox = boxWidth < d3.select(this).select('text').node().getBBox().width + minMargin;
+
+				if (textStillWiderThanBox){
+					var textMock = appendTest(name);
+					var textMockWiderThanContainer = 10 > boxWidth; // 10 means max text width (only one letter per line)
+					var textMockTallerThanContainer = textMock.height > boxHeight;
+
+					// if textMock height is taller than boxHeight sets opacity to 0
+					if (textMockTallerThanContainer)
+						return that.select("text").style("opacity", 0);
+
+					// if textMock width isn't wider than container box width
+					if (!textMockWiderThanContainer){
+
+						// remove horizontal text from g element
+						that.select('text').remove();
+
+						// append new text element
+						var textElement = that.append('text')
+									.attr("text-anchor", "middle")
+									.attr('x', 0)
+									.attr('dx', 0)
+									.attr('y', textTopPadding + 2);
+
+						// append letters on vertical position
+						for (var i = 0; i < name.length; i++){
+
+							textElement.append('tspan')
+							.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+							.attr("text-anchor", "middle")
+							.text(function(d) {
+								return name[i]; 
+							})
+							.attr('x', 0)
+							.attr('dx', textLeftPadding + 4)
+							.attr('dy', function(d){
+								if (i != 0)
+									return letterTopSubPadding + 2;
+							});
+						}
+
+					}
+					
+				}
+
+				// reavaluate/refresh variables and conditions value
+				box = that.select('rect').node();
+				boxWidth = box.getBBox().width;
+				boxHeight = box.getBBox().height;
+				boxText = d3.select(this).select('text').node();
+				textWidth = boxText.getBBox().width;
+				textHeight = boxText.getBBox().height;
+
+				wordTallerThanContainer = (boxHeight - textHeight) / 2 <= minMargin;
+				wordWiderThanContainer = (boxWidth - textWidth) / 2 <= minMargin;
+
+				// if text still taller or wider than container tries to fit it in for the last time
+				if (wordTallerThanContainer)
+					that.select('text').attr('y', (boxHeight - textHeight) / 2 + offsetMargin);
+
+				wordTallerThanContainer = boxHeight - textHeight <= minMargin;
+				wordWiderThanContainer = boxWidth - textWidth <= minMargin;
+
+				// if didn't fit sets opacity to 0
+				if (wordWiderThanContainer || wordTallerThanContainer)
+					that.select("text").style("opacity", 0);
+			}
+		});
+
+
+	});
+
+	function sumByCount(d) {
+		return d.children ? 0 : 1;
+	}
+
+	function sumBySize(d) {
+		return d.size;
+	}
+
+	// função apenas para debug
+	function debug(value, match, args){
+		if(value === match){
+			args.unshift(value);
+			console.log.apply(console, args);
+		}
+	}
 </script>
