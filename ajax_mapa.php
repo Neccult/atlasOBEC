@@ -24,17 +24,29 @@ else{
 
 $mapa = array();
 foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
-	
+
+/*
 	$mapa[$tupla->idUF] = [
 
 		'id' => (int) $tupla->idUF,
 		'uf' => $tupla->UFNome,
 		'valor' => (double) $tupla->Valor
 	];
+*/
+
+	
+	$id = $tupla->idUF;
+	$mapa[$id]['id'] = (int) $tupla->idUF;
+	$mapa[$id]['uf'] = $tupla->UFNome;
+	$mapa[$id]['valor'] = (double) $tupla->Valor;
+	$mapa[$id]['percentual'] = (double) $tupla->Percentual;
+	$mapa[$id]['taxa'] = (double) $tupla->Taxa;
+
 
 }
 
 //var_dump($mapa);
-echo json_encode($mapa, JSON_UNESCAPED_UNICODE);
+// echo json_encode($mapa, JSON_UNESCAPED_UNICODE);
+echo json_encode($mapa);
 
 ?>

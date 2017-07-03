@@ -77,6 +77,7 @@ var countValidDecimalDigits = function(value, acum) {
 	return countValidDecimalDigits(newValue, newAcum);
 };
 
+// format decimal numbers with X limit digits after leading zeroes
 var formatDecimalLimit = function(value, limit){
 	var limit = limit || 3;
 	var fracLeadingZeroes = countValidDecimalDigits(value);
