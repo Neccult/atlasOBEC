@@ -15,20 +15,16 @@ function controlAnimation(){
 }
 
 /*======
-	controla tipo de menu círculos (desk, tablet, mobile)
+	controla tipo de menu círculos (desk, mobile)
 ======*/
 function controlMenu(firstload){
 	
 	var windowWidth = $(window).width();
 
-	if(windowWidth>1199){
+	if(windowWidth>767){
 		$("#menuvariaveis").load('menudesktop.php', function(){
 			if(firstload) controlAnimation();
 		});			
-	}else if(windowWidth>767){
-		$("#menuvariaveis").load('menutablet.php', function(){
-			if(firstload) controlAnimation();
-		});
 	}else{
 		$("#menuvariaveis").load('menumobile.php', function(){
 			if(firstload) controlAnimation();
@@ -110,7 +106,7 @@ $(document).ready(function(){
 	});
 
 	/*=== selecionar variável circulo ===*/
-	$(document).on('click', ".circles", function(){
+	$(document).on('click', ".var-click", function(){
 		controlVar($(this).attr('href'));				
 	});	
 	/* mobile! */

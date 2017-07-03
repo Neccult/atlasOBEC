@@ -12,22 +12,25 @@
 		<!--=== menu variaveis ===-->
 		<section id="menuSection"> 
 			<article>
-				<div class="container-fluid">
+				<div class="container">
 					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="menu-circles">
-								<div class="content text-center">
+					<div class="menu-circles">
+						<div class="content text-center">
+
+							<div class="row">
+								<div class="col-md-12">
+								
 
 									<a href="index.php<?php if(isset($dark)) echo "?dark=1";?>" class="img-link"><div class="logo-min" alt="Logo Atlas"></div></a>
 
 									<p class="title">Empreendimentos Culturais</p>
 
-									<!--==== jquery load menu ===-->
-									<div id="menuvariaveis"></div>
-
 								</div>
-							</div>			
+							</div>
+
+							<!--==== jquery load menu ===-->
+							<div id="menuvariaveis"></div>
+
 						</div>			
 					</div>
 

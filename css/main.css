@@ -260,25 +260,39 @@ p.title{
 	letter-spacing: 3px;
 	text-transform: uppercase;
 }
-.menu-circles{
-	display: table;
-	height: 75vh;
-	width: 100%;
+.var-list-line{
+	margin: 55px 0 150px 0;
 }
-.menu-circles .content{
-	display: table-cell; 
-	vertical-align: middle;
-	color: #FFF;
-	font-size: 12px;
+ul.var-list{
+	list-style: none;
+	padding: 0px;
 	text-transform: uppercase;
+	font-size: 16px;
+	letter-spacing: 2px;
 }
-.circlesMenu{
-	width: 1120px;
-	height: 800px;
-	margin-top: -90px;
-	margin-bottom: -20vh;
+ul.var-list li{
+	margin: 25px 0px;
+	text-align: center;
+	padding: 15px 0;
+	min-height: 55px;
 }
-.circles{cursor: pointer;} /* specific elements */
+ul.var-list li{
+	color: #FFF;
+	cursor: pointer;
+}
+
+.green1 li{
+	background: #deda00;
+}
+.green2 li{
+	background: #e6e3a1;
+}
+.green3 li{
+	background: #7eba79;
+}
+.green4 li{
+	background: #4ea840;
+}
 
 /*=============  resultados =================*/
 article.results-article{
@@ -488,12 +502,10 @@ body.contraste{
 	color: #EAE9E8;
 }
 
-.contraste .circles{
-	fill: #EAE9E8;
+.contraste ul.var-list li{
+	background: #333;
 }
-.contraste .circles.text{
-	fill: #2F2F2F;
-}
+
 .contraste article.results-article{
 	background-color: #2F2F2F;
 }
@@ -529,9 +541,6 @@ body.contraste{
 	}
 }
 @media (max-width: 1199px){
-	.circlesMenu{
-		width: 715px;
-	}
 	.menu-content{
 		font-size: 9px;
 		letter-spacing: 0px;
