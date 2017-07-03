@@ -5,6 +5,10 @@
 	</head>
 	<body>
 
+		<!--===== barra do governo =====-->
+		<?php include 'barra_gov.php'; ?>
+
+
 		<!--=== menu variaveis ===-->
 		<section id="menuSection"> 
 			<article>
@@ -127,15 +131,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
+				<!--<div class="row">
 					<div class="col-xs-12">
 						<div class="text-center">
 							<a href="index.php" class="home button">Home</a>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</section>
+
+		<!-- se existem informações desta variável -->
+		<?php if(!empty($text)):?>
+			<?php include 'footer.php'; ?>
+		<?php endif;?>
 
 		<!---/* url atual para o js */-->
 		<script type="text/javascript">
@@ -151,9 +160,10 @@
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";
 		</script>
 
-		
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/contraste.js"></script>
 
 	</body>
 </html>

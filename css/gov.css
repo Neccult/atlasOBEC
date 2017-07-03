@@ -1,0 +1,422 @@
+/*=== GOVERNO ===============*//* =========================================
+   
+   Cabeçalho do portal
+ ========================================================================== */
+
+#header{
+	font-family: 'Open Sans' !important;
+    padding: 14px 0 0 0;
+    background-color: #c4c432;
+}
+#header > div{
+	font-size: 1.2em;
+}
+
+/*=== menu de acessibilidade ===*/
+#accessibility{
+	display: block !important;
+	float: left;
+	width: 50%;
+	font-size: 0.88em;
+	padding: 0px;
+}
+#accessibility a{
+	margin-right: 8px;
+	color: #FFF;
+}
+#accessibility span{ 
+	padding: 0 4px; 
+	background-color: #FFF;
+    color: #000;
+}
+#accessibility li{
+	display: inline;
+}
+
+/*=== idioma ===*/
+#language{
+	float: right;
+	margin-left: 20px;
+	padding-left: 0px;
+	padding-bottom: 2px;
+	border-bottom: 1px dotted #9a9614;
+	font-size: 0.93em;
+}
+#language a{
+	padding: 4px 0 4px 10px;
+	color: #d9ffe3;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+#language a, 
+#language a:hover{
+	color: #fff !important;
+}
+#language .language-en{
+	margin-right: 0.5em;
+}
+#language .language-es a{
+	padding-left: 0px;
+}
+#language li{
+	display: inline;
+}
+
+/*=== menu de ações (acessibilidade, contraste, mapa) ===*/
+#portal-siteactions{
+	display: block;
+	float: right;
+	clear: none;
+	padding-left: 0px;
+	padding-bottom: 2px;
+	font-size: 0.93em;
+}
+#portal-siteactions a,
+#portal-siteactions a:hover,
+#portal-language a,
+#portal-language a:hover{
+	color: #fff !important;
+}
+#portal-siteactions a{
+	padding: 4px 0 4px 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+#portal-siteactions li{
+	display: inline;
+}
+#portal-siteactions,
+#portal-language{
+	border-bottom: 1px dotted #9a9614
+}
+#siteaction-accessibility a{
+	padding-left: 0px;
+}
+
+/*=== logo ===*/
+#logo{
+	float: left;
+	padding: 0;
+	width: auto;
+}
+#portal-title{
+	margin: 0;
+	margin: 30px 0 46px;
+	font-size: 3.35em;
+	font-weight: bold;
+	line-height: 1em;
+}
+#logo .logo{
+	margin-bottom: 0.2em;
+	font-size: 3em !important;
+	line-height: 1.1em;
+}
+#portal-logo{
+	display: block;
+	margin: 0;
+	margin-top: 10px;
+	width: 100%;
+}
+
+/*=== barra de busca ===*/
+input.searchField{
+	-moz-appearance: none;
+}
+#portal-searchbox{
+	float: right;
+	clear: right !important;
+	margin: 3.12em 0 0 0;
+	padding: 2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #fff;
+	text-align: right;
+	font-size: 80%;
+}
+#portal-searchbox .searchField{
+	padding: 0.3em 0.35em;
+	width: 186px;
+	border: none;
+	border-right: none;
+	font-size: 1.2em;
+	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
+}
+#portal-searchbox .searchSection label{
+	cursor: pointer;
+}
+#searchGadget,
+#header input.searchButton{
+	padding: 0.3em;
+	padding: 4px 15px;
+	border: none;
+	background: transparent;
+	text-indent: -2000px;
+}
+#header input.searchButton{
+	background-position: -1px -1px; 
+	padding-right: 7px;
+}
+#LSResult{
+	z-index: 1;
+	margin-top: 0.5%;
+}
+#portal-searchbox{border: 1px solid #CCCCCC;}
+/* */
+.hiddenStructure{
+	display: block;
+	background: transparent;
+	background-image: none; /* */
+	border: none;
+	height: 0.1em;
+	overflow: hidden;
+	padding: 0;
+	margin: -0.1em 0 0 -0.1em;
+	width: 1px;
+}
+/* */
+/* */
+.ie6 .hiddenStructure,
+.ie7 .hiddenStructure{
+	position: absolute;
+}
+
+/*=== redes sociais ===*/
+#social-icons a,
+/* central de conteudo */
+.item-central .link-videos,
+.item-central .link-audios,
+.item-central .link-infograficos,
+.item-central .link-publicacoes,
+.item-central .link-fotos,
+.item-central .link-aplicativos,
+.item-central .link-dadosabertos,
+/* icone do botão de busca */
+#header input.searchButton{
+	background-image: url("../images/sprite.png");
+}
+
+/* icone do botão de relatar erros */
+#content .relatar-erros a{
+	background: url("../images/icon-reportar-erros.png") no-repeat;
+}
+
+/* Summary view */
+#content .summary-view-icon [class*="icon"]{
+    background-image: url("../images/summary-view-icons-sprite.png");
+}
+
+/* */
+#social-icons{
+	float: right;
+	clear: right;
+	margin: 1.167em 0;
+}
+#social-icons li{
+	display: inline-block;
+}
+#social-icons a{
+	display: block;
+	overflow: hidden;
+	margin: 0 0 0 5px;
+	width: 20px;
+	height: 20px;
+	border: none;
+	text-indent: 100%;
+	white-space: nowrap;
+	opacity: .85;
+	filter: alpha(opacity=85);
+	border-radius: 4px;
+}
+#social-icons a:focus,
+#social-icons a:hover{
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+#portalredes-facebook a{ background-position: -80px -25px; }
+#portalredes-twitter a{ background-position: -155px -25px; }
+#portalredes-youtube a{ background-position: -130px -25px; }
+#portalredes-flickr a{ background-position: -105px -25px; }
+#portalredes-googleplus a{ background-position: -130px 0; }
+#portalredes-slideshare a{ background-position: 45px 0; }
+#portalredes-soundcloud a{ background-position: 20px 0; }
+#portalredes-rss a{ background-position: 145px -25px; }
+#portalredes-instagram a{ background-position: 69px -49px; }
+#portalredes-tumblr a{ background-position: 96px -49px; }
+/* */
+
+/*=== barra sobre ===*/
+#sobre{
+	clear: both;
+	margin: 0;
+	padding: 5px 0;
+	max-width: 100% !important;
+	line-height: 20px;
+	background-color: #003f34;
+}
+#sobre ul{
+	margin: 0 auto;
+	text-align: right;
+	list-style: none;
+	padding: 0px;
+}
+#sobre ul li{
+	display: inline;
+}
+#sobre a{
+	color: #fff;
+}
+#sobre .portalservicos-item a{
+	border-right: 1px solid #6c9072;
+}
+#sobre .portalservicos-item a{
+	padding: 0 10px;
+}
+#sobre .last-item a{
+	padding: 0 0 0 10px;
+	border-right: none !important;
+}
+/* ========================================================================   
+   Rodapé
+ ========================================================================== */
+div#wrapper-footer-brasil{
+	padding: 0px 15px !important;
+}
+.site-map{
+	font-family: "Open Sans",Arial,Helvetica,sans-serif;
+	font-size: 16px;
+	line-height: 18px;
+	background-color: #c4c431;
+	padding: 95px 0px 150px 0;
+	color: #FFF;
+}
+#footer-brasil-custom{
+	position: absolute;
+   	background: none repeat scroll 0% 0% #DFDD00;
+   	padding: 50px 0px;
+   	max-width: 100%;
+   	width: 100%;
+}
+.footer-content{
+	border-left: 3px solid #FFF;
+}
+.footer-content ul{
+	padding-left: 20px;
+	list-style: none;
+}
+.logo-acesso-footer{
+	float: left;
+	width: 107px;
+	height: 49px;
+}
+.logo-ufrgs-footer{
+	width: 65px;
+	height: 50px;
+	background-image: url(../images/logos/ufrgs.png);
+}
+.logo-neccult-footer{
+	width: 110px;
+	height: 50px;
+	background-image: url(../images/logos/neccult.png);
+}
+.logo-minc-footer{
+	width: 110px;
+	height: 50px;
+	background-image: url(../images/logos/minc.png);
+}
+.logo-ecocultura-footer{
+	width: 175px;
+	height: 55px;
+	background-image: url(../images/logos/ecoCultura.png);
+}
+.logo-footer{
+	float: right;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin: 0px 25px;
+}
+/* ========================================================================   
+ Contraste!
+ ========================================================================== */
+body.contraste #header{
+	background: #000 !important;
+}
+body.contraste #sobre{
+	background: #333;	
+}
+body.contraste #accessibility span{
+	background: #fff !important;
+	color: #000 !important;
+}
+body.contraste #logo a{
+	color: #FFF !important;
+}
+body.contraste #portal-searchbox .searchField{
+	background-color: #000;
+	color: #FFF;
+}
+body.contraste #portal-searchbox{
+	border-color: #FFF;
+	background-color: #000;
+}
+
+body.contraste .site-map{
+	background-color: #000;
+}
+body.contraste #footer-brasil-custom{
+	background-color: #333;
+}
+body.contraste #social-icons a,
+body.contraste #header input.searchButton,
+body.contraste .item-central .link-videos,
+body.contraste .item-central .link-audios,
+body.contraste .item-central .link-infograficos,
+body.contraste .item-central .link-publicacoes,
+body.contraste .item-central .link-fotos,
+body.contraste .item-central .link-aplicativos,
+body.contraste .item-central .link-dadosabertos {
+	background-image: url("../images/sprite-contraste.png");
+}
+
+@media (max-width: 991px){
+	.logo-footer{
+		margin: 0px 10px;
+	}
+	.logo-minc-footer,.logo-minc-footer,.logo-neccult-footer{
+		width: 90px;
+	}
+	.logo-ecocultura-footer{
+		width: 135px;
+	}
+}
+@media (max-width: 767px){
+	#portal-logo img{
+		width: 100px;
+		margin-left: 10px;
+	}
+	#footer-brasil-custom{
+		text-align: right;
+	}
+	.logo-footer, .logo-brasil-footer{
+		display: inline-block;
+		float: none;
+		margin-bottom: 25px;
+	}
+}
+@media (max-width: 480px){
+	#logo{
+		margin: 25px 0px;
+		width: 100%;
+		text-align: center;
+	}
+	#header > div{
+		font-size: 9px;
+	}
+	#sobre .last-item a{
+		padding-left: 1px;
+	}
+	#sobre .portalservicos-item a{
+		padding: 0px 2px;
+	}
+}

@@ -5,7 +5,10 @@
 	</head>
 	<body class="home">
 
-		<section>
+		<!--===== barra do governo =====-->
+		<?php include 'barra_gov.php'; ?>
+
+		<section id="startContent">
 			<article>
 				<div class="container-fluid">
 
@@ -16,13 +19,13 @@
 							
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2 col-xxs-10 col-xxs-offset-1">
-									<div class="home-info">
+									<div class="home-info control-height">
 										<div class="content">
 
-											<div class="logo-img text-center">
-												<img src="images/logo.png" alt="Logo ATLAS" title="Atlas Econômico da Cultura Brasileira"/>
+											<div class="desc-title text-center">
+												Atlas Econômico<br/>
+												da Cultura Brasileira
 											</div>
-
 											<div class="separator"></div>
 
 											<div class="desc">
@@ -64,7 +67,7 @@
 								
 								<a href="page.php" class="img-link">
 									<div class="col-sm-3 col-xs-6 menu-col">
-										<div class="menu-item">
+										<div class="menu-item control-height">
 
 											<div class="video">
 											    <video autoplay class="thevideo" loop preload="none">
@@ -89,7 +92,7 @@
 
 								<a href="#" class="img-link">
 									<div class="col-sm-3 col-xs-6 menu-col">
-										<div class="menu-item">
+										<div class="menu-item control-height">
 											<div class="menu-content" id="item2">
 
 												<div class="text-wrapper">
@@ -106,7 +109,7 @@
 
 								<a href="#" class="img-link">
 									<div class="col-sm-3 col-xs-6 menu-col">
-										<div class="menu-item">
+										<div class="menu-item control-height">
 											<div class="menu-content" id="item3">
 
 												<div class="text-wrapper">
@@ -123,7 +126,7 @@
 
 								<a href="#" class="img-link">
 									<div class="col-sm-3 col-xs-6 menu-col">
-										<div class="menu-item">
+										<div class="menu-item control-height">
 											<div class="menu-content" id="item4">
 
 												<div class="text-wrapper">
@@ -144,7 +147,7 @@
 						<!--=== neccult ===-->
 						<div class="col-md-1 col-xs-1 col-xxs-12">
 							<div class="row">
-								<div class="neccult-info">
+								<div class="neccult-info control-height">
 									<div class="content">
 										<a href="http://obec.ufrgs.br/neccult/" target="_blank">
 											<img src="images/neccult.png" class="logo-neccult hidden-xxs" alt="Neccult"/>
@@ -158,49 +161,20 @@
 				</div>
 			</article>
 		</section>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+		
+		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/contraste.js"></script>
+		
 		<script type="text/javascript">
+			
+			function controlHeight(){
 
+				var windowHeight = $(window).height(),
+					headerHeight = $('.barra-gov').height(),
+					contentHeight = windowHeight - headerHeight;
 
-			/*======
-				ALTO CONTRASTE (replicado no main.js)
-			======*/
-			var createCookie = function(name, value, days) {
-			    var expires;
-			    if (days) {
-			        var date = new Date();
-			        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-			        expires = "; expires=" + date.toGMTString();
-			    }
-			    else {
-			        expires = "";
-			    }
-			    document.cookie = name + "=" + value + expires + "; path=/";
-			}
-
-			function getCookie(c_name) {
-			    if (document.cookie.length > 0) {
-			        c_start = document.cookie.indexOf(c_name + "=");
-			        if (c_start != -1) {
-			            c_start = c_start + c_name.length + 1;
-			            c_end = document.cookie.indexOf(";", c_start);
-			            if (c_end == -1) {
-			                c_end = document.cookie.length;
-			            }
-			            return unescape(document.cookie.substring(c_start, c_end));
-			        }
-			    }
-			    return "";
-			}
-			var dark = getCookie('dark');
-
-			function bodyDark(active){
-
-				if(active==1){
-					$('body').addClass('dark');
-				}else{
-					$('body').removeClass('dark');
-				}
+				$('.control-height').css('max-height',contentHeight);
 			}
 
 			/* ajusta o tamanho do vídeo, 
@@ -213,7 +187,10 @@
 			}
 
 			/* quando a janela é carregada */
-			$(window).bind("load", function() { 
+			$(window).bind("load", function() {
+
+				controlHeight();
+
 				videoHeight();
 
 				bodyDark(dark);/* alto contraste */
@@ -226,22 +203,6 @@
 				$(window).resize(function() {
 					videoHeight();
 				});
-
-				/***************** alto contraste **************** (replicado no main.js )*/
-				$(document).on('click', "#contraste", function(){
-					
-					var darkValue = getCookie("dark");
-
-					if(darkValue==0){
-						createCookie('dark',1,'30');
-						darkValue=1;
-					}else if(darkValue==1){
-						createCookie('dark',0,'30');
-						darkValue=0;
-					}
-					bodyDark(darkValue);
-				});
-
 			});
 		</script>
 	</body>

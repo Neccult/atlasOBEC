@@ -11,10 +11,10 @@
     font-family: Lato Bold;
     src: url('../fonts/Lato-Black.ttf');
 }
-
 /*=== geral =================*/
 body{
 	font-family: Lato Regular;
+	font-size: 10px;
 	transition: .5s all ease;
 }
 
@@ -138,6 +138,13 @@ button.opt:hover, button.opt.active{
 .home-info .content{
 	display: table-cell; 
 	vertical-align: middle;
+}
+.desc-title{
+	color: #737277;
+	text-transform: uppercase;
+	font-size: 14px;
+	line-height: 18px;
+	letter-spacing: 3px;
 }
 .desc{
 	color: #737277;
@@ -281,6 +288,7 @@ article.results-article{
 	padding: 10vh 0px;
 	background-color: #c4c431;
 	color: #FFF;
+	font-size: 14px;
 	font-weight: bold;
 	line-height: 1.1em;
 }
@@ -453,54 +461,54 @@ select[disabled].opt-select{
 
 
 /*===== dark =====*/
-body.dark{
+body.contraste{
 	background: #000 !important;
 	color: #FFF !important;
 }
-.dark a.link{
+.contraste a.link{
 	color: #FFF;
 }
-.dark a.link p{
+.contraste a.link p{
 	text-decoration: underline;
 }
-.dark .desc{
+.contraste .desc{
 	color: #FFF;
 }
-.dark .square-icon{
+.contraste .square-icon{
 	background-color: #FFF !important;
 }
-.dark a.home.button{
+.contraste a.home.button{
 	background-color: #FFF;
 	color: #2F2F2F;
 }
-.dark .logo-min{
+.contraste .logo-min{
 	background-image: url(../images/logo_min_dark.png);
 }
-.dark p.title{
+.contraste p.title{
 	color: #EAE9E8;
 }
 
-.dark .circles{
+.contraste .circles{
 	fill: #EAE9E8;
 }
-.dark .circles.text{
+.contraste .circles.text{
 	fill: #2F2F2F;
 }
-.dark article.results-article{
+.contraste article.results-article{
 	background-color: #2F2F2F;
 }
-.dark .container-chart .content .chart{
+.contraste .container-chart .content .chart{
 	border-color: #808080;
 }
-.dark button.opt{
+.contraste button.opt{
 	background-color: #fff;
 	color: #000;
 }
-.dark button.opt:hover, .dark button.opt.active{
+.contraste button.opt:hover, .contraste button.opt.active{
 	background-color: #808080;
 	color: #fff;
 }
-.dark .opt-title{
+.contraste .opt-title{
 	color: #FFF;
 }
 
