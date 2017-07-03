@@ -100,13 +100,13 @@
 	// appends multiline text // REVISAR TEXT TO => THAT
 	function genMultiLineText(that){
 		var words = that.text().split(' ');
-		var thisCell = that.append('g');
+		var thisCell = that.append('g').append('text').attr("clip-path", function(d){ return "url(#clip-" + d.data.id + ")"; });
 
 		that.select('text').remove();
 
 		for (var i = 0; i < words.length; i++){
 			if (i == 0) {
-				thisCell.append('text')
+				thisCell.append('tspan')
 				.attr("clip-path", function(d){ 
 					return "url(#clip-" + d.data.id + ")"; 
 				})
@@ -118,7 +118,7 @@
 					return textLeftPadding;
 				});
 			}else{
-				thisCell.append('text')
+				thisCell.append('tspan')
 				.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
 				.text(function(d) { 
 					return d.data.name.split(' ')[i]; 
@@ -151,18 +151,9 @@
 				return textLeftPadding;
 			})*/
 			.attr('y', function(d){
-				return textTopSubPadding + (i * letterTopSubPadding);
+				return textTopSubPadding + (i * letterTopSubPadding + (i!==0? 2 : 0));
 			});
 		}
-
-
-		/*placeholder.append('text')
-			.attr("x", function(d) { return textLeftPadding; })
-			.attr("y", function(d, i) { return textTopPadding; })
-			.attr("dy", ".35em")
-			.attr("text-anchor", "start")
-			.text(function(d) {return text; });*/
-
 
 		var pNode = placeholder.node().parentNode
 		var bbox = placeholder.node().getBBox();
@@ -312,7 +303,140 @@
 			.text(function(d) {return d.data.name; });
 
 
+		
+		
 		/*=== controla texto ===*/
+		var g = d3.selectAll("#corpo svg g");
+		g.each(function(d){
+			var that = d3.select(this);
+			var words = that.text().split(' ');
+			var name = d.data.name;
+
+			var box = that.select('rect').node();
+			var boxWidth = box.getBBox().width;
+			var boxHeight = box.getBBox().height;
+
+			var boxText = d3.select(this).select('text').node();
+			var textWidth = boxText.getBBox().width;
+			var textHeight = boxText.getBBox().height;
+			d.w = textWidth;
+
+			var minMargin = 6;
+			var offsetXMargin = 5;
+			var offsetYMargin = 8;
+			var oneWordName = words.length === 1;
+
+			// if multiple words text
+			if (!oneWordName)
+				return genMultiLineText(that);
+
+			// if only one word
+
+			// if tests
+			var wordTallerThanContainer = (boxHeight - textHeight - textTopPadding) <= minMargin;
+			var wordWiderThanContainer = (boxWidth - textWidth - textLeftPadding) <= minMargin;			
+
+			// if horizontal word is NARROW than the container (box width - leftPadding)
+			if(!wordWiderThanContainer){
+
+				var isVerticalMarginAvailable = (boxHeight - textHeight) / 2 > minMargin;
+				var wordOnVerticalEdge = boxHeight - textHeight - textTopPadding <= minMargin	;
+
+				if (!isVerticalMarginAvailable)
+					return that.select("text").style("opacity", 0);
+
+				// if text still taller than container tries to fit it in for the last time
+				if (wordOnVerticalEdge)
+					that.select('text').attr('y', (boxHeight - textHeight) / 2 + minMargin);
+
+			} else {
+				// if horizontal word is BIGGER than the container break it into vertical letters
+
+				// tries to horizontally fit word first
+				that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+
+				// test if is still wider
+				var textStillWiderThanBox = boxWidth < d3.select(this).select('text').node().getBBox().width + minMargin;
+
+				if (textStillWiderThanBox){
+					var textMock = appendTest(name);
+					var textMockWiderThanContainer = 10 > boxWidth; // 10 means max text width (only one letter per line)
+					var textMockTallerThanContainer = textMock.height > boxHeight;
+
+					// if textMock height is taller than boxHeight sets opacity to 0
+					if (textMockTallerThanContainer)
+						return that.select("text").style("opacity", 0);
+
+					// if textMock width isn't wider than container box width
+					if (!textMockWiderThanContainer){
+
+						// remove horizontal text from g element
+						that.select('text').remove();
+
+						// append new text element
+						var textElement = that.append('text')
+									.attr("text-anchor", "middle")
+									.attr('x', 0)
+									.attr('dx', 0)
+									.attr('y', textTopPadding + 2);
+
+						// append letters on vertical position
+						for (var i = 0; i < name.length; i++){
+
+							textElement.append('tspan')
+							.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+							.attr("text-anchor", "middle")
+							.text(function(d) {
+								return name[i]; 
+							})
+							.attr('x', 0)
+							.attr('dx', textLeftPadding)
+							.attr('dy', function(d){
+								if (i != 0)
+									return letterTopSubPadding + 2;
+								else
+									return 0;
+							});
+						}
+
+					}
+					
+				}
+
+				// reavaluate/refresh variables and conditions value
+				boxText = d3.select(this).select('text').node();
+				textWidth = boxText.getBBox().width;
+				textHeight = boxText.getBBox().height;
+
+				wordTallerThanContainer = (boxHeight - textHeight) / 2 <= minMargin;
+				wordWiderThanContainer = (boxWidth - textWidth) / 2 <= minMargin;
+
+				// if text still wider than container tries to fit it in for the last time
+				if (wordWiderThanContainer)
+					// if text element has tspan children
+					if (that.select('tspan')){
+						that.selectAll('tspan').each(function(i, el){
+							d3.select(this).attr('dx', Math.ceil((boxWidth - textWidth) / 2 + offsetXMargin));
+						});
+					} else
+						that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+
+				// if text still taller than container tries to fit it in for the last time
+				if (wordTallerThanContainer)
+					that.select('text').attr('y', (boxHeight - textHeight) / 2 + offsetYMargin);
+
+				wordTallerThanContainer = boxHeight - textHeight <= minMargin;
+				wordWiderThanContainer = boxWidth - textWidth <= minMargin;
+
+				// if didn't fit sets opacity to 0
+				if (wordWiderThanContainer || wordTallerThanContainer)
+					that.select("text").style("opacity", 0);
+			}
+		});
+
+
+		/*=== controla texto ===*/
+		/*
 		var g = d3.selectAll("#corpo svg g");
 		g.each(function(d){
 			var that = d3.select(this);
@@ -360,14 +484,11 @@
 
 				} else {
 
-					//debug(name, 'PI', [boxWidth, textWidth, wordWiderThanContainer])
-
 					// if horizontal word is  bigger than the container (box width - leftPadding)
 
 					var testText = appendTest(name);
 					var verticalTextWiderThanContainer = testText.width > boxWidth - textLeftPadding;
-					var verticalTextTallerThanContainer = testText.height > boxHeight - testText.height - textTopPadding;
-
+					var verticalTextTallerThanContainer = testText.height > boxHeight - textTopPadding;
 
 					// if vertical word is wider than container box height
 					if (verticalTextWiderThanContainer || verticalTextTallerThanContainer){
@@ -381,7 +502,7 @@
 						// append new text element
 						var textElement = that.append('text')
 									.attr("text-anchor", "middle")
-									.attr('x', (boxWidth - textWidth) / 2)
+									.attr('x', (boxWidth - testText.width) / 2)
 									.attr('y', textTopPadding + 2);
 
 						// append letters on vertical position
@@ -396,7 +517,7 @@
 							.attr('x', textLeftPadding + (boxWidth - testText.width) / 2)
 							.attr('dy', function(d){
 								if (i != 0)
-									return i * letterTopSubPadding + 4;
+									return letterTopSubPadding + 4;
 							});
 						}
 					}
@@ -438,139 +559,7 @@
 
 			}
 
-		});
-
-
-		/*=== controla texto ===*/
-		/*var g = d3.selectAll("#corpo svg g");
-		g.each(function(d){
-			var that = d3.select(this);
-			var box = that.node();
-			var words = that.text().split(' ');
-
-			// var boxWidth = nodeWidth(d);
-			// var boxHeight = nodeHeight(d);
-
-			var boxWidth = box.getBBox().width;
-			var boxHeight = box.getBBox().height;
-
-			var boxText = d3.select(this).select('text').node();
-			var textWidth = boxText.getBBox().width;
-			var textHeight = boxText.getBBox().height;
-
-			var name = d.data.name;
-			var thisCell;
-
-			d.w = textWidth;
-
-			// if tests
-			var wordWiderThanContainer = d.w > boxWidth - textLeftPadding;
-			var oneWordName = words.length === 1;
-			var wordPaddingWrong = d.w > textWidth - textLeftPadding;
-			
-			//debug(d.data.name, 'RN', [d.w, boxWidth, wordWiderThanContainer]);
-		   // console.log(d.data.name, d.w, boxWidth, wordWiderThanContainer);
-
-			// if name has more than one word calls genMultiLineText function
-			if (!oneWordName)
-				return genMultiLineText(that);
-			else {
-
-				// AQUI RESOLVER ISSO
-
-				// if horizontal word is bigger than the container box width
-				if (wordWiderThanContainer){
-
-					var testText = appendTest(name);
-					var verticalWordNarrowThanContainer = testText.width < boxWidth - textLeftPadding;
-					var verticalWordSmallerThanContainer = testText.height > boxHeight + textTopPadding;
-
-
-					// if vertical word is narrow than container box height
-					if (verticalWordNarrowThanContainer){
-
-						thisCell = that.append('text')
-									.attr("text-anchor", "start");
-
-						// remove horizontal text from g element
-						that.select('text').remove();
-
-
-						// append letters on vertical position
-						for (var i = 0; i < name.length; i++){
-							thisCell.append('tspan')
-							.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-							.attr("text-anchor", "start")
-							.text(function(d) {
-								return name[i]; 
-							})
-							.attr('x', function(d){
-								var minusValue = 4;
-
-								// if container is too small to use normal padding values
-								//if ( (this.getBBox().width + 2) >= (that.node().getBBox().width / 2)){
-									return (i === 0)? textLeftPadding - minusValue : textVerticalLeftSubPadding - minusValue;
-								/*}else{
-									return (i === 0)? textLeftPadding : textVerticalLeftSubPadding;
-								}*//*
-
-							})
-							.attr('y', function(d){
-
-								// se palavra quebrada ainda é mais alta que o container + textTopPadding
-								if(boxHeight < testText.height + textTopPadding){
-									var topPad = ((boxHeight - textHeight) / 2 + 2);
-
-									if (i == 0)
-										return topPad + 2;
-									else
-										return topPad + i * textVerticalTopSubPadding;
-
-								} else {
-
-									if (i == 0)
-										return textTopPadding;
-									else
-										return (letterTopPadding + (i * textVerticalTopSubPadding) );
-
-								}
-							});
-						}
-
-					}
-
-					/*else if (verticalWordNarrowThanContainer && !verticalWordSmallerThanContainer){
-						 return (letterTopPadding + (i * textVerticalTopSubPadding) );
-					}*//*
-
-
-					else{
-						
-						// sets 0 opacity to text that doesnt fit neither horizontal or vertical
-						that.select("text").style("opacity", 0);
-					}
-
-				} else{
-
-					var textHeight = boxText.getBBox().height;
-					var boxInfo = box.getBBox();
-
-					// if vertical padding is wrong
-				   // debug(d.data.name, 'MT', [boxHeight, boxInfo, textHeight]) : "";
-				
-					// if container is too small to use the normal padding values
-					if (wordPaddingWrong){
-						that.select('text')
-							.attr('x', function(d){
-								return textLeftPadding - 3;
-							});
-					}
-				}
-			}
-
-
 		});*/
-
 
 	});
 
