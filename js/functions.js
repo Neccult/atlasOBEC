@@ -104,11 +104,11 @@ var tooltip = (function(){
 				.attr('class', 'tooltip none');		
 		}
 
-		function returnTooltip(){
-			return tp;
-		}
+		function returnTooltip(){ return tp; }
 
-		function createElements(d, toolt, arr) {
+		function createElements(d, arr) {
+			var valSeparator = " = ";
+			
 			arr.forEach(function(el, i){
 
 				var clss = el[0];
@@ -124,7 +124,7 @@ var tooltip = (function(){
 					}
 				}();
 
-				var p = toolt
+				var p = tp
 					.append('p');
 
 				var element = p
@@ -132,17 +132,15 @@ var tooltip = (function(){
 
 				element
 					.attr('class', clss.toLowerCase())
-					.text(clss === 'title'? val : clss +" = "+ val);
+					.text(clss === 'title'? val : clss + valSeparator + val);
 			});
 		};
 
 		function showTooltip(d, arr) {
-			var toolt = instance.tpElement();
-
 			// remove all elements inside tooltip
-			toolt.text('');
+			tp.text('');
 			// create all elements passed via array: arr
-			createElements(d, toolt, arr);
+			createElements(d, arr);
 
 			// graph position on screen
 			var chartOffset = $('.chart').offset(), 
@@ -194,76 +192,3 @@ var tooltip = (function(){
 		}
 	};
 })();
-
-// creates and format tooltip
-// var mouseOn = function(d, toolt, arr) {
-
-// 	toolt.text('');
-
-
-// 	arr.forEach(function(el, i){
-
-// 		var clss = el[0];
-// 		var val = el[1];
-
-// 		var elType = function(val){
-// 			switch(clss.toLowerCase()){
-// 				case 'title':
-// 					return 'strong';
-// 					break;
-// 				default:
-// 					return'span';
-// 			}
-// 		}();
-
-// 		var p = toolt
-// 			.append('p');
-
-// 		var element = p
-// 			.append(elType);
-
-// 		element
-// 			.attr('class', clss.toLowerCase())
-// 			.text(clss === 'title'? val : clss +" = "+ val);
-
-// 		// console.log(clss, val);
-// 	});
-
-// 	/* atualiza nome tooltip */
-// /*	d3.select(".tooltip .heading")
-// 		.text(d['properties']['name']);
-
-// 	d3.select(".tooltip .size")
-// 		.text(formatNumber(dict[d.id].valor));
-// */
-// 	/*== posição do gráfico na tela ==*/
-// 	var chartOffset = $('.chart').offset(), 
-// 		leftOffset = chartOffset.left,
-// 		leftOffsetEnd = leftOffset+$('.chart').width(),
-// 		topOffset = chartOffset.top;
-
-// 	/* tamanho do tooltip */
-// 	var tooltipWidth = $('.tooltip').width();
-
-// 	/*== posição do tooltip ==*/
-// 	var xPosition = d3.event.pageX-leftOffset+30;
-// 	var xPositionEnd = xPosition+tooltipWidth;
-// 	var yPosition = d3.event.pageY -topOffset+5;
-
-   
-// 	/* se a posição final do tooltip for além do final da tela */
-// 	if(xPositionEnd>leftOffsetEnd){
-// 		xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
-// 	}
-
-// 	d3.select(".tooltip")
-// 		.style("left", xPosition + "px")
-// 		.style("top", yPosition + "px");
-
-// 	d3.select(".tooltip").classed("none", false);
-
-// };
-
-// var mouseOut = function() {
-// 	d3.select(".tooltip").classed("none", true);
-// };
