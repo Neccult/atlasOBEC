@@ -86,90 +86,114 @@ var formatDecimalLimit = function(value, limit){
 	return formatNumber(value, fracLeadingZeroes + limit);
 };
 
+// tooltip singleton function
+var tooltip = (function(){
 
-var tooltip = function(){
+	var instance;
 
-	function createTooltip(){
-		d3.select('#corpo > #tooltip').remove();
+	function create(){
 
-		return d3.select('#corpo')
-			.append('div')
-			.attr('id', 'tooltip')
-			.attr('class', 'tooltip none');
-	}; 
+		var tp;
 
-	function createElements(d, toolt, arr) {
-		arr.forEach(function(el, i){
+		if (!tp){
+			d3.select('#corpo > #tooltip').remove();
 
-			var clss = el[0];
-			var val = el[1];
-
-			var elType = function(val){
-				switch(clss.toLowerCase()){
-					case 'title':
-						return 'strong';
-						break;
-					default:
-						return'span';
-				}
-			}();
-
-			var p = toolt
-				.append('p');
-
-			var element = p
-				.append(elType);
-
-			element
-				.attr('class', clss.toLowerCase())
-				.text(clss === 'title'? val : clss +" = "+ val);
-		});
-	};
-
-	function showTooltip(d, toolt, arr) {
-		// remove all elements inside tooltip
-		toolt.text('');
-		// create all elements passed via array: arr
-		createElements(d, toolt, arr);
-
-		// graph position on screen
-		var chartOffset = $('.chart').offset(), 
-			leftOffset = chartOffset.left,
-			leftOffsetEnd = leftOffset+$('.chart').width(),
-			topOffset = chartOffset.top;
-
-		// tooltip dimensions
-		var tooltipWidth = $('.tooltip').width();
-
-		/*== posição do tooltip ==*/
-		var xPosition = d3.event.pageX-leftOffset+30;
-		var xPositionEnd = xPosition+tooltipWidth;
-		var yPosition = d3.event.pageY -topOffset+5;
-
-		// if tooltips final position is outside screen boundries
-		if(xPositionEnd>leftOffsetEnd){
-			xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
+			tp = d3.select('#corpo')
+				.append('div')
+				.attr('id', 'tooltip')
+				.attr('class', 'tooltip none');		
 		}
 
-		// sets tooltips new position
-		d3.select(".tooltip")
-			.style("left", xPosition + "px")
-			.style("top", yPosition + "px");
+		function returnTooltip(){
+			return tp;
+		}
 
-		// shows tooltip
-		d3.select(".tooltip").classed("none", false);
-	};
+		function createElements(d, toolt, arr) {
+			arr.forEach(function(el, i){
 
-	function hideTooltip() {
-		d3.select(".tooltip").classed("none", true);
+				var clss = el[0];
+				var val = el[1];
+
+				var elType = function(val){
+					switch(clss.toLowerCase()){
+						case 'title':
+							return 'strong';
+							break;
+						default:
+							return'span';
+					}
+				}();
+
+				var p = toolt
+					.append('p');
+
+				var element = p
+					.append(elType);
+
+				element
+					.attr('class', clss.toLowerCase())
+					.text(clss === 'title'? val : clss +" = "+ val);
+			});
+		};
+
+		function showTooltip(d, arr) {
+			var toolt = instance.tpElement();
+
+			// remove all elements inside tooltip
+			toolt.text('');
+			// create all elements passed via array: arr
+			createElements(d, toolt, arr);
+
+			// graph position on screen
+			var chartOffset = $('.chart').offset(), 
+				leftOffset = chartOffset.left,
+				leftOffsetEnd = leftOffset+$('.chart').width(),
+				topOffset = chartOffset.top;
+
+			// tooltip dimensions
+			var tooltipWidth = $('.tooltip').width();
+
+			/*== posição do tooltip ==*/
+			var xPosition = d3.event.pageX-leftOffset+30;
+			var xPositionEnd = xPosition+tooltipWidth;
+			var yPosition = d3.event.pageY -topOffset+5;
+
+			// if tooltips final position is outside screen boundries
+			if(xPositionEnd>leftOffsetEnd){
+				xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
+			}
+
+			// sets tooltips new position
+			d3.select(".tooltip")
+				.style("left", xPosition + "px")
+				.style("top", yPosition + "px");
+
+			// shows tooltip
+			d3.select(".tooltip").classed("none", false);
+		};
+
+		function hideTooltip() {
+			d3.select(".tooltip").classed("none", true);
+		};
+
+		return {
+			tpElement: returnTooltip,
+			showTooltip: showTooltip,
+			hideTooltip: hideTooltip
+		};
 	};
 
 	return {
-		addTooltip: createTooltip,
-		showTooltip: showTooltip,
-		hideTooltip: hideTooltip
+		getInstance: function(){
+			if (instance)
+				return instance;
+
+			instance = create();
+
+			return instance;
+		}
 	};
-}
+})();
 
 // creates and format tooltip
 // var mouseOn = function(d, toolt, arr) {
