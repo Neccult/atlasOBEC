@@ -182,7 +182,7 @@
 
 			// console.log(key, mapa[key]);
 			info.push(mapa[key]);
-			return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, percentual:mapa[key].percentual*100, taxa:mapa[key].taxa};
+			return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
 
 		});
 
@@ -233,26 +233,12 @@
 				colorsRange.push(rgb);
 		});
 
-		/*
-		{
-			1: {
-				el: '.heading',
-				data: d['properties']['name']
-			},
-			2: {
-				el: '.size',
-				data: d['properties']['dict[d.id].valor']
-			}
-		}
-		 */
-		
-		var toolFun = tooltip();
-		var tooltipEl = toolFun.addTooltip();
-
 		//coloração do mapa
 		var color = d3.scaleThreshold()
 			.domain(dom)
 			.range(colorsRange);
+
+		var tooltipInstance = tooltip.getInstance();
 
 		//concatena propriedades
 		svg.append("g")
@@ -267,14 +253,14 @@
 				  
 			//mouseover
 			.on("mouseover", function(d){
-				toolFun.showTooltip(d, tooltipEl, [
+				tooltipInstance.showTooltip(d, [
 					["title", d['properties']['name']],
 					["Valor", formatNumber(dict[d.id].valor)],
-					["Percentual", formatDecimalLimit(dict[d.id].percentual, 2) + "%"],
+					["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
 					["Taxa", formatDecimalLimit(dict[d.id].valor, 2)],
 				]);
 			})
-			.on("mouseout", toolFun.hideTooltip);
+			.on("mouseout", tooltipInstance.hideTooltip);
 
 		//legenda
 		var legend_svg = d3.select("#corpo svg");

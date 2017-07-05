@@ -57,10 +57,10 @@
 <div id="corpo" class="fadeIn"><svg></svg></div>
 
 <!--================ TOOLTIP! ===============-->
-<div id="tooltip" class="tooltip none">
+<!-- <div id="tooltip" class="tooltip none">
 	<p><strong class="heading"></strong></p>
 	<p><span class="size"></span></p>
-</div>
+</div> -->
 
 <script>
 
@@ -189,46 +189,46 @@
 	/*==================*/
 
 	/* mostrar */
-	var mouseOn = function(d) {
+	// var mouseOn = function(d) {
 
-		/* atualiza nome tooltip */
-		d3.select(".tooltip .heading")
-			.text(d['data']['name']);
+	// 	/* atualiza nome tooltip */
+	// 	d3.select(".tooltip .heading")
+	// 		.text(d['data']['name']);
 
-		d3.select(".tooltip .size")
-			.text(formatNumber(d['data']['size']));
+	// 	d3.select(".tooltip .size")
+	// 		.text(formatNumber(d['data']['size']));
 
-		/*== posição do gráfico na tela ==*/
-		var chartOffset = $('.chart').offset(), 
-			leftOffset = chartOffset.left,
-			leftOffsetEnd = leftOffset+$('.chart').width(),
-			topOffset = chartOffset.top;
+	// 	/*== posição do gráfico na tela ==*/
+	// 	var chartOffset = $('.chart').offset(), 
+	// 		leftOffset = chartOffset.left,
+	// 		leftOffsetEnd = leftOffset+$('.chart').width(),
+	// 		topOffset = chartOffset.top;
 
-		/* tamanho do tooltip */
-		var tooltipWidth = $('.tooltip').width();
+	// 	/* tamanho do tooltip */
+	// 	var tooltipWidth = $('.tooltip').width();
 
-		/*== posição do tooltip ==*/
-		var xPosition = d3.event.pageX-leftOffset+30;
-		var xPositionEnd = xPosition+tooltipWidth;
-		var yPosition = d3.event.pageY -topOffset+5;
+	// 	/*== posição do tooltip ==*/
+	// 	var xPosition = d3.event.pageX-leftOffset+30;
+	// 	var xPositionEnd = xPosition+tooltipWidth;
+	// 	var yPosition = d3.event.pageY -topOffset+5;
 
 	   
-		/* se a posição final do tooltip for além do final da tela */
-		if(xPositionEnd>leftOffsetEnd){
-			xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
-		}
+	// 	/* se a posição final do tooltip for além do final da tela */
+	// 	if(xPositionEnd>leftOffsetEnd){
+	// 		xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
+	// 	}
 
-		d3.select(".tooltip")
-			.style("left", xPosition + "px")
-			.style("top", yPosition + "px");
+	// 	d3.select(".tooltip")
+	// 		.style("left", xPosition + "px")
+	// 		.style("top", yPosition + "px");
 
-		d3.select(".tooltip").classed("none", false);
-	};
+	// 	d3.select(".tooltip").classed("none", false);
+	// };
 
-	/* esconder tooltip */
-	var mouseOut = function() {
-		d3.select(".tooltip").classed("none", true);
-	};
+	// /* esconder tooltip */
+	// var mouseOut = function() {
+	// 	d3.select(".tooltip").classed("none", true);
+	// };
 
 	/*==================*/
 	/* ***  treemap *** */
@@ -266,12 +266,23 @@
 
 		treemap(root);
 
+		
+		var tooltipInstance = tooltip.getInstance();
+
 		var cell = svg.selectAll("g")
 					.data(root.leaves())
 					.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-					.on("mousemove", mouseOn)
-					.on("mouseout", mouseOut);
+					//mouseover
+					.on("mouseover", function(d){
+						tooltipInstance.showTooltip(d, [
+							["title", d.data.name],
+							["Valor", formatNumber(d.data.size)],
+							["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+							["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+						]);
+					})
+					.on("mouseout", tooltipInstance.hideTooltip);
 
 		cell.append("rect")
 			.attr("id", function(d) { return d.data.id; })

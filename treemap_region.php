@@ -271,12 +271,21 @@
 
 		treemap(root);
 
+		var tooltipInstance = tooltip.getInstance();
+
 		var cell = svg.selectAll("g")
 						.data(root.leaves())
 						.enter().append("g")
 							.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-							.on("mousemove", mouseOn)
-							.on("mouseout", mouseOut);
+							.on("mouseover", function(d){
+								tooltipInstance.showTooltip(d, [
+									["title", d.data.name],
+									["Valor", formatNumber(d.data.size)],
+									["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+									["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+								]);
+							})
+							.on("mouseout", tooltipInstance.hideTooltip);
 
 		cell.append("rect")
 			.attr("id", function(d) { return d.data.id; })
