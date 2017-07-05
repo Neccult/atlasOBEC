@@ -185,52 +185,6 @@
 	}
 
 	/*==================*/
-	/* *** tooltips *** */
-	/*==================*/
-
-	/* mostrar */
-	// var mouseOn = function(d) {
-
-	// 	/* atualiza nome tooltip */
-	// 	d3.select(".tooltip .heading")
-	// 		.text(d['data']['name']);
-
-	// 	d3.select(".tooltip .size")
-	// 		.text(formatNumber(d['data']['size']));
-
-	// 	/*== posição do gráfico na tela ==*/
-	// 	var chartOffset = $('.chart').offset(), 
-	// 		leftOffset = chartOffset.left,
-	// 		leftOffsetEnd = leftOffset+$('.chart').width(),
-	// 		topOffset = chartOffset.top;
-
-	// 	/* tamanho do tooltip */
-	// 	var tooltipWidth = $('.tooltip').width();
-
-	// 	/*== posição do tooltip ==*/
-	// 	var xPosition = d3.event.pageX-leftOffset+30;
-	// 	var xPositionEnd = xPosition+tooltipWidth;
-	// 	var yPosition = d3.event.pageY -topOffset+5;
-
-	   
-	// 	/* se a posição final do tooltip for além do final da tela */
-	// 	if(xPositionEnd>leftOffsetEnd){
-	// 		xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
-	// 	}
-
-	// 	d3.select(".tooltip")
-	// 		.style("left", xPosition + "px")
-	// 		.style("top", yPosition + "px");
-
-	// 	d3.select(".tooltip").classed("none", false);
-	// };
-
-	// /* esconder tooltip */
-	// var mouseOut = function() {
-	// 	d3.select(".tooltip").classed("none", true);
-	// };
-
-	/*==================*/
 	/* ***  treemap *** */
 	/*==================*/
 	var treemap = d3.treemap()
@@ -238,7 +192,6 @@
 		.size([width, height])
 		.round(true)
 		.paddingInner(1);
-
 
 	//variaveis configuracao query
 	var vrv = <?php echo $var; ?>;
@@ -266,7 +219,9 @@
 
 		treemap(root);
 
-		
+		/*==========================*/
+		/* *** nodes & tooltips *** */
+		/*==========================*/
 		var tooltipInstance = tooltip.getInstance();
 
 		var cell = svg.selectAll("g")
@@ -423,8 +378,7 @@
 					that.select("text").style("opacity", 0);
 			}
 		});
-
-
+		
 	});
 
 	function sumByCount(d) {
