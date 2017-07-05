@@ -120,7 +120,8 @@
 		dados.value = dados.value.map(Number);;
 
 		//tamanho do grafico
-		var margin = {top: 20, right: 20, bottom: 30, left: 50},
+		// AQUI automatizar map center
+		var margin = {top: 20, right: 20, bottom: 30, left: 55},
 			width = chartWidth - margin.left - margin.right,
 			height = chartHeight - margin.top - margin.bottom;
 
@@ -239,7 +240,7 @@
 
 			if(isMaxValue){
 				if(d < 1 && d > -1)
-					return d + parseFloat("0." + newDecimal + "1");
+					return d + parseFloat("0." + newDecimal + "01");
 				
 			}
 
@@ -266,7 +267,7 @@
 			var formatMillions = function(d) { return removeDecimalZeroes(formatInit(d / 1e6)) + "M"; };
 			var formatFraction = function(d) {
 				var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
-				var decimalDigits = decimalDigitsCount < minFraction? minFraction : decimalDigitsCount;
+				var decimalDigits = decimalDigitsCount < minFraction? minFraction : decimalDigitsCount + 3;
 				var format = d3.format("."+decimalDigits+"f");
 				dadosCounter++;
 				return (format(d)).replace(".", ",");
@@ -356,7 +357,6 @@
 				var zeroPosition = d3.min(dados.value) < 0? y(0) : false;
 				var isMinValueNegative = zeroPosition !== false;
 				var isValueNegative = d < 0;
-				var isBarTooSmall = isMinValueNegative? barHeight == zeroPosition : barHeight <= minBarHeight;
 				var zeroPositionExists = zeroPosition < height;
 				var isValueZero = d === 0;
 				var isMaxValue = d3.max(dados.value) == d;
@@ -369,15 +369,23 @@
 						return zeroPosition;
 
 					// S barra for muito pequena
-					if(isBarTooSmall)
+					if(barHeight == zeroPosition)
 						return zeroPosition - 5;
 					
 					return y(d);
 				}
 
+				barHeight = height - barHeight;
+
+				console.log(d, y(d), barHeight);	
+
 				// BARRA MUITO PEQUENA
-				if (isBarTooSmall)
-					return barPosition - 5;
+				if (barHeight <= 3)
+					return barPosition - barHeight - 1;
+
+				// BARRA PEQUENA
+				if (barHeight <= minBarHeight)
+					return y(d);
 
 				return barPosition;
 			})
@@ -412,10 +420,12 @@
 					return Math.abs(y(d) - zeroPosition);
 				}
 
+				barHeight = height - barHeight;
+
 				if (barHeight < minBarHeight)
 					return minBarHeight;
 
-				return height - barHeight;
+				return barHeight;
 		   })
 		   .attr("fill", function(d) {
 			return color(cad);
