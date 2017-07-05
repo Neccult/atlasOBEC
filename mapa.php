@@ -182,7 +182,7 @@
 
 			// console.log(key, mapa[key]);
 			info.push(mapa[key]);
-			return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, percentual:mapa[key].percentual*100, taxa:mapa[key].taxa};
+			return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
 
 		});
 
@@ -256,7 +256,7 @@
 				tooltipInstance.showTooltip(d, [
 					["title", d['properties']['name']],
 					["Valor", formatNumber(dict[d.id].valor)],
-					["Percentual", formatDecimalLimit(dict[d.id].percentual, 2) + "%"],
+					["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
 					["Taxa", formatDecimalLimit(dict[d.id].valor, 2)],
 				]);
 			})
