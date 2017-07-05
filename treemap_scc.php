@@ -267,8 +267,7 @@
 		treemap(root);
 
 		
-		var toolFun = tooltip();
-		var tooltipEl = toolFun.addTooltip();
+		var tooltipInstance = tooltip.getInstance();
 
 		var cell = svg.selectAll("g")
 					.data(root.leaves())
@@ -276,14 +275,14 @@
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					//mouseover
 					.on("mouseover", function(d){
-						toolFun.showTooltip(d, tooltipEl, [
-							["title", d['properties']['name']],
-							["Valor", formatNumber(dict[d.id].valor)],
-							["Percentual", formatDecimalLimit(dict[d.id].percentual, 2) + "%"],
-							["Taxa", formatDecimalLimit(dict[d.id].valor, 2)],
+						tooltipInstance.showTooltip(d, [
+							["title", d.data.name],
+							["Valor", formatNumber(d.data.size)],
+							["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+							["Taxa", formatDecimalLimit(d.data.taxa, 2)],
 						]);
 					})
-					.on("mouseout", toolFun.hideTooltip);
+					.on("mouseout", tooltipInstance.hideTooltip);
 
 		cell.append("rect")
 			.attr("id", function(d) { return d.data.id; })
