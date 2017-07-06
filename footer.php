@@ -35,10 +35,10 @@
 				
 					<ul>
 						<li><b>Redes Sociais</b></li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
+						<li><a href="http://www.facebook.com/MinisterioDaCultura">Facebook</a></li>
+						<li><a href="http://www.instagram.com/culturagovbr/">Instagram</a></li>
+						<li><a href="http://twitter.com/culturagovbr">Twitter</a></li>
+						<li><a href="http://www.youtube.com/user/ministeriodacultura">YouTube</a></li>
 					</ul>
 
 				</div>

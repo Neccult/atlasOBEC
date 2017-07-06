@@ -304,6 +304,9 @@ div#wrapper-footer-brasil{
 	padding-left: 20px;
 	list-style: none;
 }
+.footer-content a{
+	color: #FFF;
+}
 .logo-acesso-footer{
 	float: left;
 	width: 107px;

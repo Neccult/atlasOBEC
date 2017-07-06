@@ -78,22 +78,16 @@
 	        <div id="social-icons">
 	            <ul>
 	            	<li id="portalredes-facebook" class="portalredes-item">
-	            		<a href="http://facebook.com/AgoraCidadania">Facebook</a>
-	            	</li>
-	            	<li id="portalredes-googleplus" class="portalredes-item">
-	                	<a href="http://plus.google.com/+PortalBrasil">Google+</a>
+	            		<a href="http://www.facebook.com/MinisterioDaCultura">Facebook</a>
 	            	</li>
 	            	<li id="portalredes-instagram" class="portalredes-item">
-	                	<a href="http://instagram.com/portalbrasil">Instagram</a>
+	                	<a href="http://www.instagram.com/culturagovbr/">Instagram</a>
 	            	</li>
 	            	<li id="portalredes-twitter" class="portalredes-item">
-	                	<a href="https://twitter.com/AgoraCidadania">Twitter</a>
+	                	<a href="http://twitter.com/culturagovbr">Twitter</a>
 	            	</li>
 	            	<li id="portalredes-youtube" class="portalredes-item">
-	                	<a href="http://youtube.com/canalportalbrasil">YouTube</a>
-	            	</li>
-	            	<li id="portalredes-rss" class="portalredes-item last-item">
-	                	<a href="/rss">RSS</a>
+	                	<a href="http://www.youtube.com/user/ministeriodacultura">YouTube</a>
 	            	</li>
 	            </ul>
 	        </div>
