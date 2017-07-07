@@ -227,7 +227,18 @@
 			var formatMillions = function(d) { return removeDecimalZeroes(formatInit(d / 1e6)) + "M"; };
 			var formatFraction = function(d) {
 				var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
-				var decimalDigits = decimalDigitsCount < minFraction? minFraction : decimalDigitsCount + 3;
+				var decimalDigits;
+
+				// test decimal number and sets decimal digits that will be visible
+				if (decimalDigitsCount < minFraction)
+					// if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
+					if (decimalDigitsCount === 2)
+						decimalDigits = minFraction + 1;
+					else
+						decimalDigits = minFraction;
+				else
+					decimalDigits = decimalDigitsCount + 3;
+				
 				var format = d3.format("."+decimalDigits+"f");
 				dadosCounter++;
 				return (format(d)).replace(".", ",");
@@ -289,7 +300,7 @@
 		function make_y_gridlines() {     
 			return d3.axisLeft(y)
 				.scale(y)
-				.ticks(4)
+				.ticks(3)
 		}
 	
 		//add the Y gridlines
