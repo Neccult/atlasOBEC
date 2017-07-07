@@ -55,11 +55,6 @@
 
 <div id="corpo" class="fadeIn"></div>
 
-<!--================ TOOLTIP! ===============-->
-<div id="tooltip" class="tooltip none">
-	<p><strong class="heading"></strong></p>
-</div>
-
 <script>
 	
 	/*==== Barras JS ====*/
@@ -163,41 +158,6 @@
 		});
 
 		/*==================*/
-		/* *** tooltips *** */
-		/*==================*/
-
-		/* mostrar */
-		var mouseOn = function(d) {
-
-			/*== posição do gráfico na tela ==*/
-			var chartOffset = $('.chart').offset(), 
-				leftOffset = chartOffset.left,
-				topOffset = chartOffset.top;
-
-			/*== posição do tooltip ==*/
-			var xPosition = d3.event.pageX-leftOffset+30;
-			var yPosition = d3.event.pageY -topOffset+5;
-
-			/* ajusta posição */
-			d3.select(".tooltip")
-				.style("left", xPosition + "px")
-				.style("top", yPosition + "px");
-
-			d3.select(".tooltip .heading")
-				.text(formatNumber(d));
-
-			d3.select(".tooltip .size")
-				.text(formatNumber(d));
-
-			d3.select(".tooltip").classed("none", false);
-		};
-
-		/* esconder */
-		var mouseOut = function() {
-			d3.select(".tooltip").classed("none", true);
-		};            
-
-		/*==================*/
 		/* *** gráfico! *** */
 		/*==================*/
 
@@ -238,16 +198,16 @@
 
 			//console.log(d, y(d));
 
-			if(isMaxValue){
-				if(d < 1 && d > -1)
-					return d + parseFloat("0." + newDecimal + "01");
+			// if(isMaxValue){
+			// 	if(d < 1 && d > -1)
+			// 		return d + parseFloat("0." + newDecimal + "01");
 				
-			}
+			// }
 
-			if(isMinValue){
-				if (isValueNegative)
-					return d - parseFloat("0." + newDecimal + "5");
-			}
+			// if(isMinValue){
+			// 	if (isValueNegative)
+			// 		return d - parseFloat("0." + newDecimal + "5");
+			// }
 
 			return d;
 		})).nice();
@@ -341,6 +301,8 @@
 				.tickSizeOuter(0)
 				.tickFormat("")
 			)
+
+		var tooltipInstance = tooltip.getInstance();
 					
 		//Cria barras
 		svg.selectAll("rect")
@@ -375,17 +337,19 @@
 					return y(d);
 				}
 
-				barHeight = height - barHeight;
+				barHeight = Math.abs(height - barHeight);
 
-				console.log(d, y(d), barHeight);	
+				if (d === 121)
+					console.log(d, barHeight);
 
 				// BARRA MUITO PEQUENA
 				if (barHeight <= 3)
-					return barPosition - barHeight - 1;
+					//return barHeight < 5? height - (5 - barHeight) : (barPosition - barHeight) - 1 ;
+					return height - (minBarHeight - barHeight);
 
 				// BARRA PEQUENA
 				if (barHeight <= minBarHeight)
-					return y(d);
+					return height - minBarHeight;
 
 				return barPosition;
 			})
@@ -430,8 +394,13 @@
 		   .attr("fill", function(d) {
 			return color(cad);
 		   })
-		   .on("mouseover", mouseOn)
-			.on("mouseout", mouseOut);
+		   //mouseover
+			.on("mouseover", function(d){
+				tooltipInstance.showTooltip(d, [
+					["title", formatNumber(d)]
+				]);
+			})
+			.on("mouseout", tooltipInstance.hideTooltip);
 
 		//cria labels barras
 		if(withLabels){
@@ -515,5 +484,24 @@
 			.attr("transform", "translate(0, 0)")
 		   .call(yAxis);
 
+		// center #corpo>svg>g element conditionally to Y axis label number width
+		var centerCanvas = function(){
+			var svg = d3.selectAll("#corpo>svg>g");
+			var g = d3.selectAll("#corpo svg g g:last-child g");
+			// max width that can fit in without centring
+			var maxNormalWidth = 45;
+			var currentMaxWidth = 0;
+
+			g.each(function(d){
+				var that = d3.select(this).select('text').node();
+				var labelWidth = that.getBBox().width;
+				
+				if (labelWidth > currentMaxWidth)
+					currentMaxWidth = labelWidth;
+			});
+
+			if (currentMaxWidth > maxNormalWidth)
+				svg.attr("transform", "translate(" + Math.round(margin.left +  (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
+		}();
 	};
 </script>
