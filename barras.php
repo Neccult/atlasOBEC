@@ -300,7 +300,7 @@
 		function make_y_gridlines() {     
 			return d3.axisLeft(y)
 				.scale(y)
-				.ticks(3)
+				.ticks(4)
 		}
 	
 		//add the Y gridlines
