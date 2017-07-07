@@ -257,7 +257,7 @@
 					["title", d['properties']['name']],
 					["Valor", formatNumber(dict[d.id].valor)],
 					["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-					["Taxa", formatDecimalLimit(dict[d.id].valor, 2)],
+					["Taxa", formatDecimalLimit(dict[d.id].taxa, 2)],
 				]);
 			})
 			.on("mouseout", tooltipInstance.hideTooltip);
