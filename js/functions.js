@@ -114,25 +114,31 @@ var tooltip = (function(){
 				var clss = el[0];
 				var val = el[1];
 
-				var elType = function(val){
-					switch(clss.toLowerCase()){
-						case 'title':
-							return 'strong';
-							break;
-						default:
-							return'span';
-					}
-				}();
+				var testVal = [val.split(',')[0].replace('.', ','), val.split(',')[1]];
+				var ifVal = testVal.join('.');
 
-				var p = tp
-					.append('p');
+				if (ifVal !== 0){
 
-				var element = p
-					.append(elType);
+					var elType = function(val){
+						switch(clss.toLowerCase()){
+							case 'title':
+								return 'strong';
+								break;
+							default:
+								return'span';
+						}
+					}();
 
-				element
-					.attr('class', clss.toLowerCase())
-					.text(clss === 'title'? val : clss + valSeparator + val);
+					var p = tp
+						.append('p');
+
+					var element = p
+						.append(elType);
+
+					element
+						.attr('class', clss.toLowerCase())
+						.text(clss === 'title'? val : clss + valSeparator + val);
+				}
 			});
 		};
 
