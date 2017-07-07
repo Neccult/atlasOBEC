@@ -110,12 +110,12 @@ var tooltip = (function(){
 			var valSeparator = " = ";
 			
 			arr.forEach(function(el, i){
-
 				var clss = el[0];
 				var val = el[1];
 
-				var testVal = [val.split(',')[0].replace('.', ','), val.split(',')[1]];
-				var ifVal = testVal.join('.');
+				var undoValFormat = [val.split(',')[0].replace('.', ','), val.split(',')[1]];
+				var ifVal = undoValFormat.join('.');
+				ifVal = parseFloat(ifVal.replace(/[%-\+]/g, ''));
 
 				if (ifVal !== 0){
 
