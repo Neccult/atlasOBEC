@@ -55,7 +55,11 @@ vamos começar atualizando o sistema para garantir que tudo corra bem
  Instalar o PERL para poder utilizar o rsvg-convert:
  ```
   sudo apt-get install perl
-  sudo apt-get install apache2 mod_perl
+
+    sudo apt-get install apache2 mod_perl
+    ou
+    sudo aptitude install libapache2-mod-perl2
+  
   sudo a2enmod cgi
   sudo ln -s /etc/apache2/mods-available/cgid.conf /etc/apache2/mods-enabled/
   sudo ln -s /etc/apache2/mods-available/cgid.load /etc/apache2/mods-enabled/
@@ -82,6 +86,8 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
  ```
   git clone https://github.com/dlazarosps/atlasOBEC.git
   cd atlasOBEC
+
+  sudo chmod 777 -R cgi/ 
  ```
 
  Após instalado é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
