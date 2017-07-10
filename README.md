@@ -87,8 +87,8 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
  Após instalado é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
  Adicionar o seguinte bloco de código:
  ``` 
-    ScriptAlias /cgi-bin/ /var/www/html/atlasOBEC
-        <Directory "/var/www/html/atlasOBEC">
+    ScriptAlias /cgi-bin/ /var/www/html/atlasOBEC/cgi
+        <Directory "/var/www/html/atlasOBEC/cgi">
               AllowOverride None
               Options ExecCGI
               AddHandler cgi-script cgi pl
