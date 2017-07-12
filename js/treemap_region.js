@@ -1,5 +1,8 @@
 var windowWidth = $(window).width(); /* dimensão da tela */
 
+/* cria svg */
+var svg = d3.select("#corpo").append("svg");
+
 /*=== dimensões do gráfico ===*/        
 if(windowWidth>350){
 	$('#corpo').find('svg').attr('width',$('.chart').width());
@@ -10,7 +13,7 @@ else{
 	$('#corpo').find('svg').attr('height',$('.chart').width());
 }
 
-var svg = d3.select("svg"),
+svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 
