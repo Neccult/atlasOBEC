@@ -162,7 +162,7 @@
 
 						<div class="row contexto">
 							<div class="col-md-12 opt-title text-center">DOWNLOAD</div>
-							<div class="col-xs-4 col-btn"><button class="opt select active" id="pdf">PDF</button></div>
+							<div class="col-xs-4 col-btn"><button class="opt select" id="pdf">PDF</button></div>
 							<div class="col-xs-4 col-btn"><button class="opt select" id="csv">CSV</button></div>
 							<div class="col-xs-4 col-btn"><button class="opt select" id="img">IMG</button></div>
 						</div>
@@ -178,7 +178,7 @@
 
 							?>
 							
-							<div class="select-group" id="select-pdf">					
+							<div class="select-group hide" id="select-pdf">					
 								<input type="text" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
 							</div>
 							<div class="select-group hide" id="select-csv">					

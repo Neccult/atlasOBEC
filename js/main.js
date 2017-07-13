@@ -186,15 +186,20 @@ $(document).ready(function(){
 	/* alterar janela filtro */
 	$(document).on('click', ".opt.select", function(){
 
-		contexto = $(this).parents('.contexto');
+		var contexto = $(this).parents('.contexto'),
+			active = $(this).hasClass('active');
 
-		/* altera button active */
-		$(contexto).find('.opt.select').removeClass('active');
-		$(contexto).find(this).addClass('active');
+		/* remove classe active dos botões */
+		$(contexto).find('.opt.select').removeClass('active');	
 
-		/* altera visualização filtro */
+		/* esconde todos os blocos */
 		$(contexto).find('.select-group').addClass('hide');
-		$(contexto).find('.select-group#select-'+$(this).attr('id')).removeClass('hide');
+
+		/* se está abrindo outro */
+		if(!active){
+			$(contexto).find(this).addClass('active');
+			$(contexto).find('.select-group#select-'+$(this).attr('id')).removeClass('hide');
+		}
 	});
 
 	/* escolher novo filtro */
