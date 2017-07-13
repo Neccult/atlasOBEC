@@ -179,13 +179,13 @@
 							?>
 							
 							<div class="select-group hide" id="select-pdf">					
-								<input type="text" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
 							</div>
 							<div class="select-group hide" id="select-csv">					
-								<input type="text" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
 							</div>
 							<div class="select-group hide" id="select-img">					
-								<input type="text" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl ?>" readonly/><button class="button-control"></button>
 							</div>
 							
 						</div>
