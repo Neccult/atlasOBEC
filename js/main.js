@@ -186,13 +186,15 @@ $(document).ready(function(){
 	/* alterar janela filtro */
 	$(document).on('click', ".opt.select", function(){
 
+		contexto = $(this).parents('.contexto');
+
 		/* altera button active */
-		$('.opt.select').removeClass('active');
-		$(this).addClass('active');
+		$(contexto).find('.opt.select').removeClass('active');
+		$(contexto).find(this).addClass('active');
 
 		/* altera visualização filtro */
-		$('.select-group').addClass('hide');
-		$('.select-group#select-'+$(this).attr('id')).removeClass('hide');
+		$(contexto).find('.select-group').addClass('hide');
+		$(contexto).find('.select-group#select-'+$(this).attr('id')).removeClass('hide');
 	});
 
 	/* escolher novo filtro */
