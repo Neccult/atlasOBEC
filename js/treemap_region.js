@@ -372,6 +372,55 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 		}
 	});
 
+	// aumenta a altura do svg pra caber a legenda
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 25);
+
+	// creates cadeia's color range array from color.json file
+	var colors = { domain: [], range: [] };             
+	$.each(colorJSON.regioes, function(i, regiao){		
+		if (i>0) {
+			colors.domain.push(regiao.name);
+			colors.range.push(regiao.color);
+		}
+	});
+
+	//  legends
+	var ordinal = d3.scaleOrdinal()
+	.domain(colors.domain)
+	.range(colors.range);
+
+	svg.append("g")
+		.attr("class", "legendOrdinal")
+		.attr("transform", "translate(1," + (height + 10) + ")");
+
+	var legendOrdinal = d3.legendColor()
+		.cells(colors.domain)
+		//.orient('horizontal')
+		.labelAlign("start")
+		.scale(ordinal);
+
+	svg.select(".legendOrdinal")
+		.call(legendOrdinal);
+
+	// reposiciona elementos da legenda
+	var legendElements = d3.selectAll('.legendOrdinal g');
+	legendElements.each(function(d, i){
+		var that = d3.select(this);
+		var space = width / 5;
+		var tWidth;
+
+		if(i===1)
+			tWidth = 0;
+		else
+			tWidth = (i - 1) * (space + 15);
+
+		if (i>0) {
+			that.attr('transform', function(){
+				return "translate("+ tWidth +",0)";
+			});			
+		}
+	});
+
 });
 
 function sumByCount(d) {
