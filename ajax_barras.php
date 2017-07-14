@@ -28,7 +28,7 @@ foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 	// $barras[$tupla->Ano] = $tupla->Valor;
 
 	$id = $tupla->Ano;
-	$barras[$id]['uf'] = $tupla->UFSigla;
+	$barras[$id]['uf'] = $tupla->UFNome;
 	$barras[$id]['ano'] = (int) $tupla->Ano;
 	$barras[$id]['valor'] = (double) $tupla->Valor;
 	$barras[$id]['percentual'] = (double) $tupla->Percentual;
