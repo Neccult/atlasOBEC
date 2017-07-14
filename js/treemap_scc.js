@@ -383,7 +383,6 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 		.call(legendOrdinalRight);
 
 	d3.selectAll('#testDiv').remove();
-	
 });
 
 function sumByCount(d) {
