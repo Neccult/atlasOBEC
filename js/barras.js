@@ -42,25 +42,16 @@
 			console.log(error); 
 		}
 
-		// console.log(data)
-
 		var dados = {key: [], value: [], percentual: [], taxa: []};
-		// var dados = {};
 
 		Object.keys(data).forEach(function(key) {
 			dados.key.push(data[key].ano);
 			dados.value.push(data[key].valor);
 			dados.percentual.push(data[key].percentual);
 			dados.taxa.push(data[key].taxa);
-		});
+		});	
 
 		dados.key = d3.keys(data);
-		// dados.value = d3.values(data);
-		
-		// console.log(dados);
-
-		// dados.key = dados.key.map(Number);
-		// dados.value = dados.value.map(Number);
 
 		//tamanho do grafico
 		// AQUI automatizar map center
@@ -121,48 +112,8 @@
 				.rangeRound([height, 0], .002);
 
 		y.domain(d3.extent(dados.value, function(d) {
-			// var isValueNegative = y(0) !== false && d < 0;
-			// var isNegativeBarTooHigh = y(d) + 5 >= height;
-			// var isPositiveBarTooHigh = height - y(d) >= height - 20;
-
-			// // new vars
-			// var isMaxValue = d3.max(dados.value) === d;
-			// var isMinValue = d3.min(dados.value) === d;
-
-			// // logs
-			// // isMaxValue? console.log("Max: ", d) : "";
-			// // isMinValue? console.log("Min: ", d) : "";
-
-			// if(isMaxValue || isMinValue){
-			// 	var decimalZeroDigits = countValidDecimalDigits(d);
-			// 	var newDecimal = "0";
-			// 	var isMaxvalue = isMaxvalue;
-
-			// 	while(decimalZeroDigits > (isMaxvalue? 1 : 0)){
-			// 		newDecimal += "0"
-			// 		decimalZeroDigits--;
-			// 	}
-			// }
-
-			//console.log(d, y(d));
-
-			// if(isMaxValue){
-			// 	if(d < 1 && d > -1)
-			// 		return d + parseFloat("0." + newDecimal + "01");
-				
-			// }
-
-			// if(isMinValue){
-			// 	if (isValueNegative)
-			// 		return d - parseFloat("0." + newDecimal + "5");
-			// }
-
 			return d;
 		})).nice();
-
-		
-		//y.domain([d3.min(dados.value), d3.max(dados.value)]).nice();
-
 
 		var formatYAxis = function(d){
 			var higherZeroOcur = 0;
@@ -298,9 +249,6 @@
 
 				barHeight = Math.abs(height - barHeight);
 
-				if (d === 121)
-					console.log(d, barHeight);
-
 				// BARRA MUITO PEQUENA
 				if (barHeight <= 3)
 					//return barHeight < 5? height - (5 - barHeight) : (barPosition - barHeight) - 1 ;
@@ -354,12 +302,24 @@
 			return color(cad);
 		   })
 		   //mouseover
-			.on("mouseover", function(d){
+		   .on("mouseover", function(d,i,obj){			   
 				tooltipInstance.showTooltip(d, [
-					["title", formatNumber(d)]
+					["title", dados.key[i]],
+					["Valor", formatNumber(dados.value[i])],
+					["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
+					["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
 				]);
 			})
 			.on("mouseout", tooltipInstance.hideTooltip);
+
+		// cria título do gráfico
+		svg.append("text")
+			.attr("x", (width / 2))             
+			.attr("y", 0 - 7)
+			.attr("text-anchor", "middle")  
+			.style("font-size", "16px")
+			.text(data[dados.key[0]].uf);	
+			
 
 		//cria labels barras
 		if(withLabels){
@@ -406,18 +366,6 @@
 						return y(d) - 5;
 
 					}
-					
-					/*
-					Código possivelmente útil futuramente
-
-					var isValuePositiveOrZero = d >= 0;
-					var areValuesHigh = Math.abs(y(d) - y(0)) > height;
-					var isBarSmallerThanMinimum = Math.abs(zeroPosition - y(d)) <= 5;
-					if(areValuesHigh)
-						isBarSmallerThanMinimum = minBarHeight - (height - Math.abs(y(d))) >= 0;
-
-					if (isBarSmallerThanMinimum && isValuePositiveOrZero)
-						return (areValuesHigh? y(d) : zeroPosition) - minBarHeight - 5;*/
 
 					return y(d) - 5;        
 			   });
