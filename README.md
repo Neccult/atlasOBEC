@@ -87,7 +87,8 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
   git clone https://github.com/dlazarosps/atlasOBEC.git
   cd atlasOBEC
 
-  sudo chmod 777 -R cgi/ 
+  sudo chmod 777 -R cgi/
+  sudo chmod 777 -R cgi/download.pl 
  ```
 
  Após instalado é necessário configurar Apache para rodar os scripts PERL em  ``etc/apache2/sites-available/default``
