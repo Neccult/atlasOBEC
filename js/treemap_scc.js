@@ -89,7 +89,7 @@ function appendTest(text){
 		});
 	}
 
-	var pNode = placeholder.node().parentNode
+	var pNode = placeholder.node().parentNode;
 	var bbox = placeholder.node().getBBox();
 	
 	d3.select(pNode.parentNode).remove();
@@ -148,6 +148,19 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 				.sort(function(a, b) { return b.height - a.height || b.value - a.value; });
 
 	treemap(root);
+
+	// creates cadeia's color range array from color.json file
+	var colors = { domain: [], range: [] };             
+	$.each(colorJSON.cadeias, function(i, cadeia){
+		if (i>0) {
+			colors.domain.push(cadeia.name);
+			colors.range.push(cadeia.color);
+		}
+	});
+
+	var colorsRange = d3.scaleOrdinal()
+	.domain(colors.domain)
+	.range(colors.range);
 
 	/*==========================*/
 	/* *** nodes & tooltips *** */
@@ -308,6 +321,68 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 				that.select("text").style("opacity", 0);
 		}
 	});
+
+	// aumenta a altura do svg pra caber a legenda
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 73);	
+
+	// legenda 
+	var legLeftRange = [0, 4];
+	var legMiddleRange = [4, 8];
+	var legRightRange = [8, 10];
+
+	var legendPartOne = { domain: colors.domain.slice(legLeftRange[0], legLeftRange[1]), range: colors.range.slice(legLeftRange[0], legLeftRange[1])};
+	var legendPartTwo = { domain: colors.domain.slice(legMiddleRange[0], legMiddleRange[1]), range: colors.range.slice(legMiddleRange[0], legMiddleRange[1]) };
+	var legendPartThree = { domain: colors.domain.slice(legRightRange[0], legRightRange[1]), range: colors.range.slice(legRightRange[0], legRightRange[1]) };
+	
+	// left legends
+	var ordinal = d3.scaleOrdinal()
+		.domain(legendPartOne.domain)
+		.range(legendPartOne.range);
+
+	svg.append("g")
+		.attr("class", "legendOrdinalLeft")
+		.attr("transform", "translate(1," + (height + 10) + ")");
+
+	var legendOrdinalLeft = d3.legendColor()
+		.cells(legendPartOne.domain)
+		.scale(ordinal);
+
+	svg.select(".legendOrdinalLeft")
+		.call(legendOrdinalLeft);
+
+	// middle legends
+	var ordinal = d3.scaleOrdinal()
+		.domain(legendPartTwo.domain)
+		.range(legendPartTwo.range);
+
+	svg.append("g")
+		.attr("class", "legendOrdinalMiddle")
+		.attr("transform", "translate(250," + (height + 5) + ")");
+
+	var legendOrdinalMiddle = d3.legendColor()
+		.cells(legendPartTwo.domain)
+		.scale(ordinal);
+
+	svg.select(".legendOrdinalMiddle")
+		.call(legendOrdinalMiddle);
+
+	// right legends
+	var ordinal = d3.scaleOrdinal()
+		.domain(legendPartThree.domain)
+		.range(legendPartThree.range);
+
+	svg.append("g")
+		.attr("class", "legendOrdinalRight")
+		.attr("transform", "translate(501," + (height + 5) + ")");
+
+	var legendOrdinalRight = d3.legendColor()
+		.cells(legendPartThree.domain)
+		.scale(ordinal);
+
+	svg.select(".legendOrdinalRight")
+		.call(legendOrdinalRight);
+
+	d3.selectAll('#testDiv').remove();
 	
 });
 
