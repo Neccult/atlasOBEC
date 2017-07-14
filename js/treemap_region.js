@@ -107,7 +107,7 @@ function appendTest(text){
 
 /* importa o arquivo de cores */
 var colorJSON;
-d3.json('colors.json', function(error, data) {
+d3.json('../colors.json', function(error, data) {
 	if (error) throw error;
 	colorJSON = data;
 })
@@ -381,7 +381,6 @@ function sumByCount(d) {
 function sumBySize(d) {
 	return d.size;
 }
-
 
 // função apenas para debug
 function debug(value, match, args){
