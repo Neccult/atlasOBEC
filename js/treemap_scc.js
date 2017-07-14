@@ -103,7 +103,7 @@ function appendTest(text){
 
 /* importa arquivo de cores */
 var colorJSON;
-d3.json('../colors.json', function(error, data) {
+d3.json('colors.json', function(error, data) {
 	if(error) throw error;
 	colorJSON = data;
 })
@@ -350,6 +350,10 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 	svg.select(".legendOrdinalLeft")
 		.call(legendOrdinalLeft);
 
+	var ajuste = windowWidth>480 ? 30 : 0,
+		centerLeg = width/3 + ajuste,
+		rightLeg = centerLeg*2;
+
 	// middle legends
 	var ordinal = d3.scaleOrdinal()
 		.domain(legendPartTwo.domain)
@@ -357,7 +361,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinalMiddle")
-		.attr("transform", "translate(250," + (height + 5) + ")");
+		.attr("transform", "translate("+centerLeg+"," + (height + 5) + ")");
 
 	var legendOrdinalMiddle = d3.legendColor()
 		.cells(legendPartTwo.domain)
@@ -373,7 +377,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinalRight")
-		.attr("transform", "translate(501," + (height + 5) + ")");
+		.attr("transform", "translate("+rightLeg+"," + (height + 5) + ")");
 
 	var legendOrdinalRight = d3.legendColor()
 		.cells(legendPartThree.domain)
