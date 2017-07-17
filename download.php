@@ -39,8 +39,6 @@
 <html>
 	<head>
 		<?php include 'head.php';?>
-	</head>
-	<body>
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -66,6 +64,14 @@
 		<!-- D3 QUEUE -->
 		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 		<script src="js/functions.js"></script>
+
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/contraste.js"></script>
+	</head>
+	<body>
+
+		
 
 		<div class="chart" style="width: 637px; height: 346px;">
 			<div id="corpo" class="<?php echo $view === 'mapa'? 'mapa' : ''; ?>"></div>
@@ -97,11 +103,42 @@
 
 		<script src="js/<?php echo $view; ?>.js"></script>
 
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/contraste.js"></script>
+<div class="container" style="margin-top: 100px;">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Export </h2>
+
+				<br/>
+				<button class="btn btn-success" id="save_as_pdf" value="">Save as PDF</button>
+				<button class="btn btn-success" id="save_as_png" value="">Save as PNG</button>
+				<br>
+			</div>
+		</div>
+
+		<form id="svgform" method="post" action="cgi/download.pl">
+		 <input type="hidden" id="output_format" name="output_format" value="">
+		 <input type="hidden" id="data" name="data" value="">
+		</form>
+</div>
+		
 
 		<script type="text/javascript">
+
+			function submit_download_form(output_format)
+			{
+				// Get the d3js SVG element
+				var tmp = document.getElementById("corpo");
+				var svg = tmp.getElementsByTagName("svg")[0];
+				// Extract the data as SVG text string
+				var svg_xml = (new XMLSerializer).serializeToString(svg);
+
+				// Submit the <FORM> to the server.
+				// The result will be an attachment file to download.
+				var form = document.getElementById("svgform");
+				form['output_format'].value = output_format;
+				form['data'].value = svg_xml ;
+				form.submit();
+			}
 
 			$(document).ready(function(){
 				if (view === 'mapa')
@@ -110,7 +147,14 @@
 						.attr('transform', 'translate(400, 220)');
 					}, 20);
 				// AQUI - verificar se setTimeout funciona com a funcionalidade PEARL
+
+
+				$("#save_as_pdf").click(function() { submit_download_form("pdf"); });
+
+				$("#save_as_png").click(function() { submit_download_form("png"); });
 			});
+
+			
 			
 		</script>
 	</body>
