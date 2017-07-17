@@ -373,7 +373,7 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 	});
 
 	// aumenta a altura do svg pra caber a legenda
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 25);
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 35);
 
 	// creates cadeia's color range array from color.json file
 	var colors = { domain: [], range: [] };             
@@ -391,7 +391,7 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinal")
-		.attr("transform", "translate(1," + (height + 10) + ")");
+		.attr("transform", "translate(1," + (height + 20) + ")");
 
 	var legendOrdinal = d3.legendColor()
 		.cells(colors.domain)
