@@ -378,6 +378,12 @@ article.results-article div.results-content{
 #corpo svg line {
     stroke: black;
 }
+.barras-title{
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 12px !important;
+	font-weight: bold;
+}
 .tooltip {
 	position: absolute;         
 	text-align: center;         

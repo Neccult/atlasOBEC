@@ -189,12 +189,14 @@
 		}();
 
 		// cria SVG
+
+		var valueTop = margin.top+5;
 		var svg = d3.select("#corpo").append("svg")
 					.attr("width", width + margin.left + margin.right)
 					.attr("height", height + margin.top + margin.bottom)
 					.append("g")
 					.attr("transform", 
-						  "translate(" + margin.left + "," + margin.top + ")");
+						  "translate(" + margin.left + "," + valueTop + ")");
 
 		function make_y_gridlines() {     
 			return d3.axisLeft(y)
@@ -315,9 +317,9 @@
 		// cria título do gráfico
 		svg.append("text")
 			.attr("x", (width / 2))             
-			.attr("y", 0 - 7)
+			.attr("y", 0 - 12)
 			.attr("text-anchor", "middle")  
-			.style("font-size", "16px")
+			.attr("class","barras-title")
 			.text(data[dados.key[0]].uf);	
 			
 
