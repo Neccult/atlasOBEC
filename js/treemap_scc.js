@@ -324,7 +324,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 	// });
 
 	// aumenta a altura do svg pra caber a legenda
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 73);	
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 83);	
 
 	// legenda 
 	var legLeftRange = [0, 4];
@@ -342,7 +342,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinalLeft")
-		.attr("transform", "translate(1," + (height + 10) + ")");
+		.attr("transform", "translate(1," + (height + 20) + ")");
 
 	var legendOrdinalLeft = d3.legendColor()
 		.cells(legendPartOne.domain)
@@ -362,7 +362,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinalMiddle")
-		.attr("transform", "translate("+centerLeg+"," + (height + 5) + ")");
+		.attr("transform", "translate("+centerLeg+"," + (height + 15) + ")");
 
 	var legendOrdinalMiddle = d3.legendColor()
 		.cells(legendPartTwo.domain)
@@ -378,7 +378,7 @@ d3.json("ajax_treemap_scc.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinalRight")
-		.attr("transform", "translate("+rightLeg+"," + (height + 5) + ")");
+		.attr("transform", "translate("+rightLeg+"," + (height + 15) + ")");
 
 	var legendOrdinalRight = d3.legendColor()
 		.cells(legendPartThree.domain)
