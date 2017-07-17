@@ -154,14 +154,10 @@
 						.attr('transform', 'translate(400, 220)');
 					}
 					submit_download_form(type);		
-					}, 20);
-				
-				 
+					}, 50);		 
 
 				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
-
 				// $("#save_as_png").click(function() { submit_download_form("png"); });
-
 				
 			});
 
