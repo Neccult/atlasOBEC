@@ -39,7 +39,8 @@ for ($cad=1; $cad <= 10; $cad++) {
 					    {
 					      "name": "'.$tupla->CadeiaNome.'",
 					      "children": [
-					        {"name": "'.$tupla->CadeiaNome.'", 
+					        {"name": "'.$tupla->CadeiaNome.'",
+					         "estado": "'.$tupla->UFNome.'",  
 							 "percentual": "'.$tupla->Percentual.'",
 							 "taxa": "'.$tupla->Taxa.'", 
 							 "size": "'.$tupla->Valor.'"}
