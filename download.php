@@ -33,6 +33,11 @@
 		$view = $_GET["view"];
 	else
 		$view = "mapa";
+
+	if (!empty($_GET["type"]))
+		$type = $_GET["type"];
+	else
+		$type = "pdf";
 ?>
 
 <!DOCTYPE html>
@@ -87,6 +92,7 @@
 			var ano = <?php echo $ano; ?>;
 			var uf = <?php echo $uf; ?>;
 			var view = '<?php echo $view; ?>';
+			var type = '<?php echo $type; ?>';
 
 			var url = {
 				view: "<?php echo $view; ?>", 
@@ -95,7 +101,8 @@
 				atc: "<?php echo $atc; ?>", 
 				cad: "<?php echo $cad; ?>", 
 				ano: "<?php echo $ano; ?>",
-				uf: "<?php echo $uf; ?>"
+				uf: "<?php echo $uf; ?>",
+				type: "<?php echo $type; ?>"
 			};
 
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";
@@ -141,17 +148,21 @@
 			}
 
 			$(document).ready(function(){
-				if (view === 'mapa')
-					setTimeout(function(){
+				setTimeout(function(){
+					if(view === 'mapa'){
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
+					}
+					submit_download_form(type);		
 					}, 20);
-				// AQUI - verificar se setTimeout funciona com a funcionalidade PEARL
+				
+				 
 
+				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
 
-				$("#save_as_pdf").click(function() { submit_download_form("pdf"); });
+				// $("#save_as_png").click(function() { submit_download_form("png"); });
 
-				$("#save_as_png").click(function() { submit_download_form("png"); });
+				
 			});
 
 			
