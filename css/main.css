@@ -343,10 +343,13 @@ article.results-article div.results-content{
 	padding-right: 15px;
 }
 .container-chart .content .chart{
-	width: 100%; 
+	max-width: 100%; 
 	border-bottom: 10px solid #ada937;
 	background-color: #FFF;
 	padding: 15px;
+}
+#corpo{
+	text-align: center;
 }
 #corpo svg text{
     font-size: 10px;
