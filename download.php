@@ -153,7 +153,7 @@
 					submit_download_form(type);		
 					}, 50);		 
 
-				setTimeout("window.close()", 1000);
+				setTimeout("window.close()", 2000);
 
 				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
 				// $("#save_as_png").click(function() { submit_download_form("png"); });
