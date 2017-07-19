@@ -202,6 +202,13 @@ $(document).ready(function(){
 		}
 	});
 
+	/* download doc */
+	$(document).on('click', '.button-control-down', function(){
+
+		var downloadUrl = $(this).siblings('.url-input').val();
+		window.open(downloadUrl, '_blank');
+	});
+
 	/* escolher novo filtro */
 	$(document).on('change', ".opt-select", function(){
 		
