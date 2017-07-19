@@ -145,14 +145,17 @@
 			}
 
 			$(document).ready(function(){
-				setTimeout(function(){
-					if(view === 'mapa'){
+				if(view === 'mapa'){
+					setTimeout(function(){
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
-					}
-					submit_download_form(type);		
-				}, 50);		 
-
+						submit_download_form(type);		
+					}, 50);		 
+				}else{
+					setTimeout(function(){
+						submit_download_form(type);		
+					}, 200);
+				}
 				setTimeout(function(){
 					window.close();
 					window.location = "http://localhost/atlasOBEC/";
