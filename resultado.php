@@ -173,8 +173,11 @@
 
 								/* cria links download */
 
-								$basicUrl = 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
+								$basicUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 								$downloadUrl = str_replace('page.php','download.php',$basicUrl);
+
+								/* csv */
+								$csvUrl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/data/csv/ATLAS_EixoI_V_'.$var.'.csv'
 
 							?>
 							
@@ -182,7 +185,7 @@
 								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=pdf'?>" readonly/><button class="button-control-down"></button>
 							</div>
 							<div class="select-group hide" id="select-csv">					
-								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=csv'?>" readonly/><button class="button-control-down"></button>
+								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $csvUrl?>" readonly/><button class="button-control-down"></button>
 							</div>
 							<div class="select-group hide" id="select-img">					
 								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=png'?>" readonly/><button class="button-control-down"></button>
