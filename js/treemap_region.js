@@ -76,7 +76,7 @@ function appendTest(text){
 						.append("svg")
 						.append("g")
 						.append("text")
-						.attr('x', textLeftPadding);
+						.attr('x', 0);
 
 	for (var i = 0; i < text.length; i++){
 
@@ -84,15 +84,14 @@ function appendTest(text){
 		.text(function(d) {
 			return text[i]; 
 		})
-		/*.attr('x', function(d){
-			return textLeftPadding;
-		})*/
+		.attr('x', 0)
+		.attr('dx', textLeftPadding)
 		.attr('y', function(d){
 			return textTopSubPadding + (i * letterTopSubPadding + (i!==0? 2 : 0));
 		});
 	}
 
-	var pNode = placeholder.node().parentNode
+	var pNode = placeholder.node().parentNode;
 	var bbox = placeholder.node().getBBox();
 	
 	d3.select(pNode.parentNode).remove();
@@ -115,7 +114,6 @@ d3.json('colors.json', function(error, data) {
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
 	format = d3.format(",d");
-
 
 /* retorna cor do elemento */
 var color = function(colorId){
@@ -154,7 +152,6 @@ var mouseOn = function(d) {
 	var xPosition = d3.event.pageX-leftOffset+30;
 	var xPositionEnd = xPosition+tooltipWidth;
 	var yPosition = d3.event.pageY -topOffset+5;
-
    
 	/* se a posição final do tooltip for além do final da tela */
 	if(xPositionEnd>leftOffsetEnd){
@@ -182,8 +179,6 @@ var treemap = d3.treemap()
 	.size([width, height])
 	.round(true)
 	.paddingInner(1);
-
-
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
 
@@ -224,7 +219,6 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 		.attr("width", function(d) { return d.x1 - d.x0; })
 		.attr("height", function(d) { return d.y1 - d.y0; })
 		.attr("fill", function(d){
-
 			return color(d.data.colorId);
 		});
 
@@ -233,16 +227,83 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 		.append("use")
 		.attr("xlink:href", function(d) { return "#" + d.data.id; });
 
-
-	cell.append("text")
-		.attr("x", function(d) { return textLeftPadding; })
-		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-		.attr("y", function(d, i) { return textTopPadding; })
-		.attr("dy", ".35em")
+	var titleTextElement = cell.append("text")
 		.attr("text-anchor", "start")
-		//.style("opacity", 1)
-		.text(function(d) {return d.data.name; });
+		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+		.attr("class", "title");
+		
+	titleTextElement.append('tspan')
+		.text(function(d) {return d.data.name; })
+		.attr("x", 0)
+		.attr("dx", function(d) { return textLeftPadding; })
+		.attr("dy", 0).attr("y", function(d, i) { return textTopPadding; })
+		.attr("dy", ".35em");
+	
+	var percentageTextElement = cell.append("text")
+		.attr("text-anchor", "start")
+		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+		.attr("class", "percentage");
 
+	percentageTextElement.append('tspan')
+		.text(function(d) { return formatNumber(d.data.percentual*100, 2) + '%'; })
+		.attr("x", 0)
+		.attr("dx", function(d) {
+			var nWidth = nodeWidth(d);
+			var nTextPosition = nodeWidth(d) - 40;
+
+			var nodePercentage = Math.round(100 * nWidth / width);
+
+			var fontOrdinalSize = d3.scaleThreshold()
+				.domain([12, 25, 30, 40])
+				.range([8, 12, 16, 20]);
+
+			var fontSize = fontOrdinalSize(nodePercentage);
+
+			if (fontSize < 12) {
+				minusValue = 28;
+			} else if (fontSize < 16 && fontSize >= 12){
+				minusValue = 38;
+			} else if (fontSize < 20 && fontSize >= 16){
+				minusValue = 50;
+			} else if (fontSize >= 20){
+				minusValue = 75;
+			}
+
+			// test space left to use and sets {minusValue} to decrement position accordingly
+			// if (nTextPosition <= 30)
+			// 	minusValue = 25;
+			// else if(nTextPosition <= 100)
+			// 	minusValue = 40;
+			// else if(nTextPosition <= 150)
+			// 	minusValue = 50;
+			// else
+			// 	minusValue = 75;			
+			
+			return nodeWidth(d) - minusValue;
+		})
+		.attr("dy", 0).attr("y", function(d, i) {
+			var minusValue = nodeHeight(d) - 20 <= nodeHeight(d) / 2? nodeHeight(d) / 2 - 12 : 10;
+			return nodeHeight(d) - minusValue;
+		})
+		.attr("opacity", function(d, i) {
+			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
+			return parseFloat(formatNumber(d.data.percentual*100, 2).replace(",", ".")) === 0? 0 : 1;
+		})
+		.attr("font-size", function(d) {
+			var nWidth = nodeWidth(d);
+			var nodePercentage = Math.round(100 * nWidth / width);
+
+			var fontOrdinalSize = d3.scaleThreshold()
+				.domain([12, 25, 30, 40])
+				.range([8, 12, 16, 20]);
+
+			var fontSize = fontOrdinalSize(nodePercentage);
+			
+			return fontSize;	
+		});
+
+	// AQUI - refatorar função pra deixar de remover todo text, deixando de remover também a porcentagem.
+	// AQUI - reposicionar horizontalmente apenas quando necessário
 	/*=== controla texto ===*/
 	var g = d3.selectAll("#corpo svg g");
 	g.each(function(d){
@@ -254,73 +315,81 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 		var boxWidth = box.getBBox().width;
 		var boxHeight = box.getBBox().height;
 
-		var boxText = d3.select(this).select('text').node();
+		var boxText = d3.select(this).select('text.title').node();
 		var textWidth = boxText.getBBox().width;
 		var textHeight = boxText.getBBox().height;
 		d.w = textWidth;
 
 		var minMargin = 6;
+		var minVerticalMargin = 4;
 		var offsetXMargin = 5;
 		var offsetYMargin = 8;
-		var oneWordName = words.length === 1;
-
-		// if multiple words text
-		if (!oneWordName)
-			return genMultiLineText(that);
 
 		// if only one word
 
 		// if tests
 		var wordTallerThanContainer = (boxHeight - textHeight - textTopPadding) <= minMargin;
-		var wordWiderThanContainer = (boxWidth - textWidth - textLeftPadding) <= minMargin;			
+		var wordWiderThanContainer = (boxWidth - textWidth - textLeftPadding) <= minMargin;
+
+		// debug(name, 'MS', [boxWidth, textWidth, ((boxWidth - textWidth - textLeftPadding) / 2) <= minMargin])
 
 		// if horizontal word is NARROW than the container (box width - leftPadding)
 		if(!wordWiderThanContainer){
+			var isVerticalMarginAvailable = (boxHeight - textHeight) / 2> minVerticalMargin;
+			var wordOnVerticalEdge = boxHeight - textHeight - textTopPadding <= minVerticalMargin;
 
-			var isVerticalMarginAvailable = (boxHeight - textHeight) / 2 > minMargin;
-			var wordOnVerticalEdge = boxHeight - textHeight - textTopPadding <= minMargin	;
-
-			if (!isVerticalMarginAvailable)
-				return that.select("text").style("opacity", 0);
+			if (!isVerticalMarginAvailable){
+				that.select("text.title").style("opacity", 0);
+				that.select("text.percentage").style("opacity", 0);
+			}
 
 			// if text still taller than container tries to fit it in for the last time
-			if (wordOnVerticalEdge)
-				that.select('text').attr('y', (boxHeight - textHeight) / 2 + minMargin);
+			if (wordOnVerticalEdge){
+				that.select('text.title tspan').attr('y', (boxHeight - textHeight) / 2 + minMargin);
+				that.select('text.percentage tspan').attr('y', (boxHeight - textHeight) / 2 + minMargin + 3.5);
+			}
 
 		} else {
 			// if horizontal word is BIGGER than the container break it into vertical letters
+			// var textStillWiderThanBox = boxWidth < d3.select(this).select('text.title').node().getBBox().width + minMargin;
+			var textStillWiderThanBox;
 
 			// tries to horizontally fit word first
-			that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+			// if(textStillWiderThanBox)
+				that.select('text.title').attr('x', Math.ceil((boxWidth - textWidth) / 2));		
+				that.select('text.percentage tspan').attr('dx', Math.ceil((boxWidth - that.select('text.percentage').node().getBBox().width) / 2));		
 
 			// test if is still wider
-			var textStillWiderThanBox = boxWidth < d3.select(this).select('text').node().getBBox().width + minMargin;
-
+			textStillWiderThanBox = (boxWidth - d3.select(this).select('text.title').node().getBBox().width - textLeftPadding) / 2 <= minMargin;
+			
 			if (textStillWiderThanBox){
+				
 				var textMock = appendTest(name);
 				var textMockWiderThanContainer = 10 > boxWidth; // 10 means max text width (only one letter per line)
 				var textMockTallerThanContainer = textMock.height > boxHeight;
 
 				// if textMock height is taller than boxHeight sets opacity to 0
-				if (textMockTallerThanContainer)
-					return that.select("text").style("opacity", 0);
+				if (textMockTallerThanContainer){
+					that.select("text.percentage").style("opacity", 0);
+					return that.select("text.title").style("opacity", 0);
+				}
 
 				// if textMock width isn't wider than container box width
 				if (!textMockWiderThanContainer){
 
 					// remove horizontal text from g element
-					that.select('text').remove();
+					that.select('text.title').remove();
 
 					// append new text element
 					var textElement = that.append('text')
 								.attr("text-anchor", "middle")
+								.attr("class", "title")
 								.attr('x', 0)
 								.attr('dx', 0)
 								.attr('y', textTopPadding + 2);
 
 					// append letters on vertical position
 					for (var i = 0; i < name.length; i++){
-
 						textElement.append('tspan')
 						.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
 						.attr("text-anchor", "middle")
@@ -328,7 +397,14 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 							return name[i]; 
 						})
 						.attr('x', 0)
-						.attr('dx', textLeftPadding)
+						.attr('dx', function(d){
+							var sum = Math.floor((boxWidth - textMock.width) / 2 + minMargin);
+
+							if (textMock.width + sum - minMargin > boxWidth)
+								sum = Math.floor((boxWidth - textMock.width) / 2);							
+
+							return sum;
+						})
 						.attr('dy', function(d){
 							if (i != 0)
 								return letterTopSubPadding + 2;
@@ -341,8 +417,8 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 				
 			}
 
-			// reavaluate/refresh variables and conditions value
-			boxText = d3.select(this).select('text').node();
+			// reavaluate/refresh variables and conditions values			
+			boxText = d3.select(this).select('text.title').node();
 			textWidth = boxText.getBBox().width;
 			textHeight = boxText.getBBox().height;
 
@@ -350,26 +426,56 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 			wordWiderThanContainer = (boxWidth - textWidth) / 2 <= minMargin;
 
 			// if text still wider than container tries to fit it in for the last time
-			if (wordWiderThanContainer)
+			if (wordWiderThanContainer){
 				// if text element has tspan children
-				if (that.select('tspan')){
-					that.selectAll('tspan').each(function(i, el){
-						d3.select(this).attr('dx', Math.ceil((boxWidth - textWidth) / 2 + offsetXMargin));
+				if (d3.select(this).select('text.title tspan').node()){
+					d3.select(this).selectAll('text.title tspan').each(function(i, el){
+						d3.select(this).attr('x', 0);
+						d3.select(this).attr('dx', function(d) {
+							var sum = Math.ceil((boxWidth - textWidth) / 2) + minMargin;
+							
+							if (textWidth + sum > boxWidth) 
+								sum = Math.ceil((boxWidth - textWidth) / 2 + 5);
+
+							return sum;
+						});
 					});
-				} else
-					that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+				} else{
+					that.select('text.title').attr('x', Math.ceil((boxWidth - textWidth) / 2));
+				}
+			}
 
 			// if text still taller than container tries to fit it in for the last time
 			if (wordTallerThanContainer)
-				that.select('text').attr('y', (boxHeight - textHeight) / 2 + offsetYMargin);
+				that.select('text.title').attr('y', (boxHeight - textHeight) / 2 + offsetYMargin);
 
 			wordTallerThanContainer = boxHeight - textHeight <= minMargin;
 			wordWiderThanContainer = boxWidth - textWidth <= minMargin;
 
 			// if didn't fit sets opacity to 0
-			if (wordWiderThanContainer || wordTallerThanContainer)
-				that.select("text").style("opacity", 0);
+			if (wordWiderThanContainer || wordTallerThanContainer){
+				that.select("text.title").style("opacity", 0);
+				that.select("text.percentage").style("opacity", 0);
+			}
 		}
+
+		// test if only percentage text element has a limit margin of 2 pixels
+		var percentageWider = (boxWidth - that.select('text.percentage').node().getBBox().width) / 2 >= 2;
+		if(!percentageWider)
+			that.select("text.percentage").style("opacity", 0);
+
+		// test if percentage and title interpolate
+		var bothTaller = (boxWidth - d3.select(this).select('text.title').node().getBBox().width - d3.select(this).select('text.percentage').node().getBBox().width) / 2 < minMargin;
+		var bothWider = (boxHeight - d3.select(this).select('text.title').node().getBBox().height - d3.select(this).select('text.percentage').node().getBBox().height) / 2 <= minVerticalMargin;
+
+		// if both title and percentage togheter are taller and wider than container but only title isnt
+		if (!wordWiderThanContainer && bothTaller && bothWider){
+			that.select("text.percentage").style("opacity", 0);
+		} else if (bothTaller && bothWider){
+		// if both title and percentage are wider and taller, opacity 0 on both
+			that.select("text.title").style("opacity", 0);
+			that.select("text.percentage").style("opacity", 0);
+		} 
 	});
 
 	// aumenta a altura do svg pra caber a legenda
