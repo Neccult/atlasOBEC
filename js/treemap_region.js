@@ -4,12 +4,12 @@ var windowWidth = $(window).width(); /* dimensão da tela */
 var svg = d3.select("#corpo").append("svg");
 
 /*=== dimensões do gráfico ===*/        
-if(windowWidth>350){
+if(windowWidth>768){
 	$('#corpo').find('svg').attr('width',$('.chart').width());
 	$('#corpo').find('svg').attr('height',$('.chart').width()/2);
 }
 else{
-	$('#corpo').find('svg').attr('width',$('.chart').width()-50);
+	$('#corpo').find('svg').attr('width',$('.chart').width()-20);
 	$('#corpo').find('svg').attr('height',$('.chart').width());
 }
 
@@ -479,7 +479,10 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 	});
 
 	// aumenta a altura do svg pra caber a legenda
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 35);
+	var mobileSubtitle = windowWidth<480 ? 1 : 0,
+		subtitleHeight = mobileSubtitle ? 70 : 35;
+
+	$('#corpo').find('svg').attr('height',$('.chart').height() + subtitleHeight);
 
 	// creates cadeia's color range array from color.json file
 	var colors = { domain: [], range: [] };             
@@ -510,21 +513,31 @@ d3.json("ajax_treemap_region.php"+config, function(error, data) {
 
 	// reposiciona elementos da legenda
 	var legendElements = d3.selectAll('.legendOrdinal g');
+	var cont = 0;
+
 	legendElements.each(function(d, i){
 		var that = d3.select(this);
-		var space = width / 5;
+		var space = mobileSubtitle ? width/3 : width/5;
 		var tWidth;
 
-		if(i===1)
+		if(i===1 || mobileSubtitle && i===3){
 			tWidth = 0;
+			cont = 1;
+		}
 		else
-			tWidth = (i - 1) * (space + 15);
+			tWidth = (cont - 1) * (space + 5);
 
 		if (i>0) {
+			
+			if(mobileSubtitle && i>2) var translateY = 25;
+			else var translateY = 0;
+					
 			that.attr('transform', function(){
-				return "translate("+ tWidth +",0)";
-			});			
+				return "translate("+ tWidth +","+translateY+")";
+			});	
 		}
+		
+		cont ++;
 	});
 
 });

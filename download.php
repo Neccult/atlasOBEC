@@ -33,6 +33,11 @@
 		$view = $_GET["view"];
 	else
 		$view = "mapa";
+
+	if (!empty($_GET["type"]))
+		$type = $_GET["type"];
+	else
+		$type = "pdf";
 ?>
 
 <!DOCTYPE html>
@@ -71,9 +76,9 @@
 	</head>
 	<body>
 
-		
+		<img src="images/loading.gif" class="down-loading"/>
 
-		<div class="chart" style="width: 637px; height: 346px;">
+		<div class="chart" style="width: 637px; height: 346px; opacity: 0">
 			<div id="corpo" class="<?php echo $view === 'mapa'? 'mapa' : ''; ?>"></div>
 		</div>
 
@@ -87,6 +92,7 @@
 			var ano = <?php echo $ano; ?>;
 			var uf = <?php echo $uf; ?>;
 			var view = '<?php echo $view; ?>';
+			var type = '<?php echo $type; ?>';
 
 			var url = {
 				view: "<?php echo $view; ?>", 
@@ -95,7 +101,8 @@
 				atc: "<?php echo $atc; ?>", 
 				cad: "<?php echo $cad; ?>", 
 				ano: "<?php echo $ano; ?>",
-				uf: "<?php echo $uf; ?>"
+				uf: "<?php echo $uf; ?>",
+				type: "<?php echo $type; ?>"
 			};
 
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";
@@ -103,27 +110,24 @@
 
 		<script src="js/<?php echo $view; ?>.js"></script>
 
-<div class="container" style="margin-top: 100px;">
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Export </h2>
-
-				<br/>
-				<button class="btn btn-success" id="save_as_pdf" value="">Save as PDF</button>
-				<button class="btn btn-success" id="save_as_png" value="">Save as PNG</button>
-				<br>
-			</div>
-		</div>
+		<!--<div class="container" style="margin-top: 100px;">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Export </h2>
+					<br/>
+					<button class="btn btn-success" id="save_as_pdf" value="">Save as PDF</button>
+					<button class="btn btn-success" id="save_as_png" value="">Save as PNG</button>
+					<br>
+				</div>
+			</div>	
+		</div>-->
 
 		<form id="svgform" method="post" action="cgi/download.pl">
-		 <input type="hidden" id="output_format" name="output_format" value="">
-		 <input type="hidden" id="data" name="data" value="">
+			 <input type="hidden" id="output_format" name="output_format" value="">
+			 <input type="hidden" id="data" name="data" value="">
 		</form>
-</div>
-		
 
 		<script type="text/javascript">
-
 			function submit_download_form(output_format)
 			{
 				// Get the d3js SVG element
@@ -141,21 +145,26 @@
 			}
 
 			$(document).ready(function(){
-				if (view === 'mapa')
+				if(view === 'mapa'){
 					setTimeout(function(){
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
-					}, 20);
-				// AQUI - verificar se setTimeout funciona com a funcionalidade PEARL
+						submit_download_form(type);		
+					}, 50);		 
+				}else{
+					setTimeout(function(){
+						submit_download_form(type);		
+					}, 200);
+				}
+				setTimeout(function(){
+					window.close();
+					window.location = "http://localhost/atlasOBEC/";
+				}, 2000);
 
-
-				$("#save_as_pdf").click(function() { submit_download_form("pdf"); });
-
-				$("#save_as_png").click(function() { submit_download_form("png"); });
-			});
-
-			
-			
+				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
+				// $("#save_as_png").click(function() { submit_download_form("png"); });
+				
+			});		
 		</script>
 	</body>
 </html>

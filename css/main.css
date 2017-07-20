@@ -348,6 +348,9 @@ article.results-article div.results-content{
 	background-color: #FFF;
 	padding: 15px;
 }
+#corpo{
+	text-align: center;
+}
 #corpo svg text{
     font-size: 10px;
 }
@@ -490,7 +493,7 @@ select[disabled].opt-select{
 	width: 85%;
     margin: 15px 0px;	
 }
-.button-control{
+.button-control-down{
 	background-color: #1b452e;
 	background-image: url('../images/download.png');
 	background-repeat: no-repeat;
@@ -501,6 +504,12 @@ select[disabled].opt-select{
 	height: 25px;
     margin: 15px 0px;	
     vertical-align: middle;
+}
+.down-loading{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
 }
 /*===== dark =====*/
 body.contraste{

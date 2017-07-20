@@ -47,8 +47,8 @@ die "Invalid output_format value"
 
 my $data = param('data')
 	or die "Missing 'data' parameter";
-die "Invalid data value"
-	unless $data =~ /^[\x20-\x7E\t\n\r ]+$/;
+# die "Invalid data value"
+# 	unless $data =~ /^[\x20-\x7E\t\n\r ]+$/;
 
 
 ##

@@ -173,19 +173,22 @@
 
 								/* cria links download */
 
-								$basicUrl = 'http://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
-								$downloadUrl = str_replace('page.php','download.php',$basicUrl);
+								$basicUrl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
+								$downloadUrl = $basicUrl.'/download.php?var='.$var.'&view='.$view.'&uf='.$uf.'&prt='.$prt.'&atc='.$atc.'&cad='.$cad.'&ano='.$ano;
+
+								/* csv */
+								$csvUrl = $basicUrl.'/data/csv/ATLAS_EixoI_V_'.$var.'.csv'
 
 							?>
 							
 							<div class="select-group hide" id="select-pdf">					
-								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl.'&type=pdf'?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=pdf'?>" readonly/><button class="button-control-down"></button>
 							</div>
 							<div class="select-group hide" id="select-csv">					
-								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl.'&type=csv'?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $csvUrl?>" readonly/><button class="button-control-down"></button>
 							</div>
 							<div class="select-group hide" id="select-img">					
-								<input type="text" onClick="this.select();" class="input-control" value="<?php echo $downloadUrl.'&type=img'?>" readonly/><button class="button-control"></button>
+								<input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=png'?>" readonly/><button class="button-control-down"></button>
 							</div>
 							
 						</div>

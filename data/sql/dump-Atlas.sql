@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: localhost    Database: Atlas
+-- Host: 143.54.231.143    Database: Atlas
 -- ------------------------------------------------------
--- Server version	5.7.18-0ubuntu0.16.04.1
+-- Server version	5.7.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -154,7 +154,7 @@ CREATE TABLE `UF` (
 
 LOCK TABLES `UF` WRITE;
 /*!40000 ALTER TABLE `UF` DISABLE KEYS */;
-INSERT INTO `UF` VALUES (0,'Todos','Todas','Todas'),(11,'Rondônia','Norte','RO'),(12,'Acre','Norte','AC'),(13,'Amazonas','Norte','AM'),(14,'Roraima','Norte','RR'),(15,'Pará','Norte','PA'),(16,'Amapá','Norte','AP'),(17,'Tocantins','Norte','TO'),(21,'Maranhão','Nordeste','MA'),(22,'Piauí','Nordeste','PI'),(23,'Ceará','Nordeste','CE'),(24,'Rio Grande Do Norte','Nordeste','RN'),(25,'Paraíba','Nordeste','PB'),(26,'Pernambuco','Nordeste','PE'),(27,'Alagoas','Nordeste','AL'),(28,'Sergipe','Nordeste','SE'),(29,'Bahia','Nordeste','BA'),(31,'Minas Gerais','Sudeste','MG'),(32,'Espírito Santo','Sudeste','ES'),(33,'Rio De Janeiro','Sudeste','RJ'),(35,'São Paulo','Sudeste','SP'),(41,'Paraná','Sul','PR'),(42,'Santa Catarina','Sul','SC'),(43,'Rio Grande Do Sul','Sul','RS'),(50,'Mato Grosso Do Sul','Centro-Oeste','MS'),(51,'Mato Grosso','Centro-Oeste','MT'),(52,'Goiás','Centro-Oeste','GO'),(53,'Distrito Federal','Centro-Oeste','DF');
+INSERT INTO `UF` VALUES (0,'Brasil','Todas','BR'),(11,'Rondônia','Norte','RO'),(12,'Acre','Norte','AC'),(13,'Amazonas','Norte','AM'),(14,'Roraima','Norte','RR'),(15,'Pará','Norte','PA'),(16,'Amapá','Norte','AP'),(17,'Tocantins','Norte','TO'),(21,'Maranhão','Nordeste','MA'),(22,'Piauí','Nordeste','PI'),(23,'Ceará','Nordeste','CE'),(24,'Rio Grande Do Norte','Nordeste','RN'),(25,'Paraíba','Nordeste','PB'),(26,'Pernambuco','Nordeste','PE'),(27,'Alagoas','Nordeste','AL'),(28,'Sergipe','Nordeste','SE'),(29,'Bahia','Nordeste','BA'),(31,'Minas Gerais','Sudeste','MG'),(32,'Espírito Santo','Sudeste','ES'),(33,'Rio De Janeiro','Sudeste','RJ'),(35,'São Paulo','Sudeste','SP'),(41,'Paraná','Sul','PR'),(42,'Santa Catarina','Sul','SC'),(43,'Rio Grande Do Sul','Sul','RS'),(50,'Mato Grosso Do Sul','Centro-Oeste','MS'),(51,'Mato Grosso','Centro-Oeste','MT'),(52,'Goiás','Centro-Oeste','GO'),(53,'Distrito Federal','Centro-Oeste','DF');
 /*!40000 ALTER TABLE `UF` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-23 15:07:27
+-- Dump completed on 2017-07-19 12:09:24
