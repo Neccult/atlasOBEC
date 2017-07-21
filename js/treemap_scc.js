@@ -167,7 +167,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 			yVal = parseFloat(transformValues[1]);	
 
 		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
-				
+
 		var box = that.select('rect').node();
 		var boxWidth = box.getBBox().width;
 		var boxHeight = box.getBBox().height;
@@ -208,23 +208,19 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 			}
 		}
 
-		// if text is on edge
-		console.log(boxText.getBBox().y1);
-		
-		var isTextOnedge = boxHeight > boxHeight;
+		// if text is on edge align vertically
+		var isTextOnedge = boxHeight - textTopPadding < textTopPadding;
 		if (isTextOnedge) {
-			console.log(this, boxHeight, textHeight);
-			
+			that.select("text")
+				.attr("y", (boxHeight - textHeight) / 2 + minMargin + 2);
 		}
-
-
 		
 	});
 
 	// aumenta a altura do svg pra caber a legenda
 	$('#corpo').find('svg').attr('height',$('.chart').height() + 63);	
 
-	// legenda 
+	// legenda
 	var legLeftRange = [0, 4];
 	var legMiddleRange = [4, 8];
 	var legRightRange = [8, 10];
