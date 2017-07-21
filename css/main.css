@@ -381,7 +381,7 @@ article.results-article div.results-content{
 #corpo svg line {
     stroke: black;
 }
-.barras-title{
+.barras-title, .treemap-title{
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 12px !important;
