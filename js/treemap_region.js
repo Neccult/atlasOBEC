@@ -262,9 +262,9 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			if (fontSize < 12) {
 				minusValue = 28;
 			} else if (fontSize < 16 && fontSize >= 12){
-				minusValue = 38;
+				minusValue = 46;
 			} else if (fontSize < 20 && fontSize >= 16){
-				minusValue = 50;
+				minusValue = 58;
 			} else if (fontSize >= 20){
 				minusValue = 75;
 			}
@@ -302,6 +302,21 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			return fontSize;	
 		});
 
+		// aumenta o tamanho do gráfico pra caber o título
+	$('#corpo').find('svg').attr('height',$('.chart').height()+30);
+	
+	// new svg margin top value
+	var svgMarginTop = 35;
+	// cria título
+	svg.append("text").append("tspan")
+		.data(root.leaves())
+		.attr("x", (width / 2))             
+		.attr("y", 20)
+		.attr("font-size", 20)
+		.attr("text-anchor", "middle")  
+		.attr("class","treemap-title")
+		.text(function(d){ return "Brasil" });
+
 	// AQUI - refatorar função pra deixar de remover todo text, deixando de remover também a porcentagem.
 	// AQUI - reposicionar horizontalmente apenas quando necessário
 	/*=== controla texto ===*/
@@ -310,6 +325,13 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		var that = d3.select(this);
 		var words = that.text().split(' ');
 		var name = d.data.name;
+
+		// creates a top margin for title positioning
+		var transformValues = that.attr("transform").split("(")[1].replace(/\)/g, "").split(",");
+		var xVal = parseFloat(transformValues[0]),
+			yVal = parseFloat(transformValues[1]);	
+
+		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
 
 		var box = that.select('rect').node();
 		var boxWidth = box.getBBox().width;
@@ -459,19 +481,22 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			}
 		}
 
-		// test if only percentage text element has a limit margin of 2 pixels
+		// test if only percentage text element has a limit margin of 2 pixels, if not hides percentage and uf title
 		var percentageWider = (boxWidth - that.select('text.percentage').node().getBBox().width) / 2 >= 2;
-		if(!percentageWider)
+		if(!percentageWider){
 			that.select("text.percentage").style("opacity", 0);
+			that.select("text.title").style("opacity", 0);
+		}
 
 		// test if percentage and title interpolate
 		var bothTaller = (boxWidth - d3.select(this).select('text.title').node().getBBox().width - d3.select(this).select('text.percentage').node().getBBox().width) / 2 < minMargin;
 		var bothWider = (boxHeight - d3.select(this).select('text.title').node().getBBox().height - d3.select(this).select('text.percentage').node().getBBox().height) / 2 <= minVerticalMargin;
 
 		// if both title and percentage togheter are taller and wider than container but only title isnt
-		if (!wordWiderThanContainer && bothTaller && bothWider){
-			that.select("text.percentage").style("opacity", 0);
-		} else if (bothTaller && bothWider){
+		/*if (!wordWiderThanContainer && bothTaller && bothWider){
+			that.select("text.title").style("opacity", 0);
+		} else*/
+		if (bothTaller && bothWider){
 		// if both title and percentage are wider and taller, opacity 0 on both
 			that.select("text.title").style("opacity", 0);
 			that.select("text.percentage").style("opacity", 0);
@@ -500,7 +525,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinal")
-		.attr("transform", "translate(1," + (height + 20) + ")");
+		.attr("transform", "translate(1," + (height + 20 + svgMarginTop) + ")");
 
 	var legendOrdinal = d3.legendColor()
 		.cells(colors.domain)
