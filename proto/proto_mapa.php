@@ -18,17 +18,17 @@
 		<!-- BOOTSTRAP -->
 
 		<!-- Bootstrap core CSS -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
 		<!-- Custom styles for this template -->
-		<link href="css/navbar.css" rel="stylesheet">
+		<link href="../css/navbar.css" rel="stylesheet">
 
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-		<script src="js/ie-emulation-modes-warning.js"></script>
+		<script src="../js/ie-emulation-modes-warning.js"></script>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -46,7 +46,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
 
 		<!--===== css ====-->
-		<link href="css/proto.css" rel="stylesheet">
+		<link href="../css/proto.css" rel="stylesheet">
 
 		<style type="text/css">
 			.states{
@@ -102,7 +102,7 @@
 							<span class="icon-bar"></span>
 						</button>
 						
-						<a class="navbar-brand" href="#"><img src="images/logo.png" class="logo"></a>
+						<a class="navbar-brand" href="#"><img src="../images/logo.png" class="logo"></a>
 					</div>
 
 					<div id="navbar" class="navbar-collapse collapse text-center">
@@ -187,9 +187,9 @@
 				<div id="corpo" align="center"></div>
 
 				<!-- download -->
-				<a href=""><img src="images/icons/pdf.png" class="icon-download"></a>
-				<a href=""><img src="images/icons/xls.png" class="icon-download"></a>
-				<a href=""><img src="images/icons/csv.png" class="icon-download"></a>
+				<a href=""><img src="../images/icons/pdf.png" class="icon-download"></a>
+				<a href=""><img src="../images/icons/xls.png" class="icon-download"></a>
+				<a href=""><img src="../images/icons/csv.png" class="icon-download"></a>
 			</div> 
 
 			<!-- tooltip showed when hovering node -->
@@ -229,7 +229,7 @@
 
 			 // import colors.json file
 			var colorJSON;
-			d3.json('colors.json', function(error, data) {
+			d3.json('../colors.json', function(error, data) {
 			  if (error) throw error;
 
 			  colorJSON = data;
@@ -237,8 +237,8 @@
 
 			//pre-load arquivos
 			  d3.queue()
-				.defer(d3.json, "br-min.json")
-				.defer(d3.csv, "total.csv")
+				.defer(d3.json, "../data/br-min.json")
+				.defer(d3.csv, "../data/total.csv")
 				.await(ready);
 
 			//leitura
@@ -395,8 +395,8 @@
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js"></script>
+		<script>window.jQuery || document.write('<script src="../js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../js/bootstrap.min.js"></script>
 
 	</body>
 </html>
