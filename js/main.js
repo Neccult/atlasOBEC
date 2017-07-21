@@ -246,10 +246,10 @@ Entrada:
 Saída:
     void
 -----------------------------------------------------------------------------*/
-function smoothScroll(){
-	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+function smoothScroll(link){
+	if (location.pathname.replace(/^\//,'') == link.pathname.replace(/^\//,'') && location.hostname == link.hostname) {
+        var target = $(link.hash);
+        target = target.length ? target : $('[name=' + link.hash.slice(1) +']');
 
         if (target.length) {
             $('html, body').animate({
@@ -294,7 +294,7 @@ $(document).ready(function(){
 
 	/* velocidade scroll */
 	$(document).on('click','a[href*="#"]:not([href="#"])',function(){
-    	smoothScroll(); 
+    	smoothScroll(this); 
     });
 
 	/*=== resultado ===*/
