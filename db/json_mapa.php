@@ -1,4 +1,13 @@
 <?php 
+/*-----------------------------------------------------------------------------
+Função: Mapa
+    função para gerar um JSON para o Gráfico Mapa
+Entrada: 
+    $_GET = Parâmetros para consulta EixoUm::getter_mapa
+Saída:
+    Dados formatados para o JSON Mapa
+-----------------------------------------------------------------------------*/
+
 header('charset=utf-8');
 
 require_once("EixoUm.php");

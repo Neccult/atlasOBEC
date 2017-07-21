@@ -1,4 +1,13 @@
 <?php 
+/*-----------------------------------------------------------------------------
+Função: Treemap SCC
+    função para gerar um JSON para o Gráfico Treemap SCC
+Entrada: 
+    $_GET = Parâmetros para consulta EixoUm::find
+Saída:
+    Dados formatados para o JSON SCC
+-----------------------------------------------------------------------------*/
+
 header('charset=utf-8');
 
 require_once("EixoUm.php");
@@ -60,7 +69,5 @@ $treemap .= '
 			';
 
 echo $treemap;
-//var_dump($mapa);
-//echo json_encode($mapa, JSON_UNESCAPED_UNICODE);
 
 ?>

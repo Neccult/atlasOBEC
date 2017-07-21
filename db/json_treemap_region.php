@@ -1,4 +1,13 @@
-<?php 
+<?php
+/*-----------------------------------------------------------------------------
+Função: Treemap Region
+    função para gerar um JSON para o Gráfico Treemap Region
+Entrada: 
+    $_GET = Parâmetros para consulta EixoUm::getter_region
+Saída:
+    Dados formatados para o JSON region
+-----------------------------------------------------------------------------*/
+
 header('charset=utf-8');
 
 require_once("EixoUm.php");
@@ -175,10 +184,5 @@ $treemap .= '
 			';
 
 echo $treemap;
-
-
-// $teste = EixoUm::getter_region($var, $atc, $cad, $prt, $ano, "Sul");
-// var_dump($teste);
-//echo json_encode($mapa, JSON_UNESCAPED_UNICODE);
 
 ?>

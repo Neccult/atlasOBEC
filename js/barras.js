@@ -33,7 +33,7 @@
 	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"";
 
 	d3.queue()
-		.defer(d3.json, "ajax_barras.php"+config)
+		.defer(d3.json, "./db/json_barras.php"+config)
 		.await(analyze);
 
 	function analyze(error, data) {

@@ -68,7 +68,7 @@ var treemap = d3.treemap()
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ano="+ano+"";
 
-d3.json("ajax_treemap_scc.php"+config, function(error, data) {
+d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	if (error) throw error;
 
 	var attachColor=function(d){

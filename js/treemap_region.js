@@ -183,7 +183,7 @@ var treemap = d3.treemap()
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
 
 /* cria treemap */
-d3.json("ajax_treemap_region.php"+config, function(error, data) {
+d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	if (error) throw error;
 
 	var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };

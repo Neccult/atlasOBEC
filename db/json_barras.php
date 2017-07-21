@@ -1,4 +1,13 @@
 <?php
+/*-----------------------------------------------------------------------------
+Função: Barras
+    função para gerar um JSON para o Gráfico Barras
+Entrada: 
+    $_GET = Parâmetros para consulta EixoUm::getter_barras
+Saída:
+    Dados formatados para o JSON barras
+-----------------------------------------------------------------------------*/
+
 header('charset=utf-8');
 
 require_once("EixoUm.php");
@@ -35,7 +44,6 @@ foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 	$barras[$id]['taxa'] = (double) $tupla->Taxa;
 
 }
-
 
 echo json_encode($barras);
 

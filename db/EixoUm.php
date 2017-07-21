@@ -4,7 +4,7 @@
 
 class EixoUm {
 
-## Atributos
+## Atributos ##
 
 	protected static $table = 'Eixo_1';
 	private static $conn;
@@ -36,9 +36,18 @@ class EixoUm {
 	public $PorteNome;
 
 
-## Metodos
+## Metodos ##
 
-	//função de conexão com o banco de dados
+	
+	/*-----------------------------------------------------------------------------
+	Função: Connect
+	    função para estabelecer conexão do objeto com o banco de dados
+	Entrada: 
+	    void
+	Saída:
+	    Positivo = Retorna PDO de conexão com o banco de dados
+	    Negativo = Erro de conexão
+	-----------------------------------------------------------------------------*/
 	public static function connect(){
 		define('DB_NOME', 'Atlas');
 		define('DB_USUARIO', 'root');
@@ -57,12 +66,31 @@ class EixoUm {
 		mysqli_query($conexao, 'SET NAMES utf8');
 	}
 
-	//função para desconectar
+	/*-----------------------------------------------------------------------------
+	Função: Disconnect
+	    função para desconectar o objeto do banco de dados
+	Entrada: 
+	    void
+	Saída:
+	    valor de retorno do mysql_close()
+	-----------------------------------------------------------------------------*/
 	public static function disconnect(){
 		mysqli_close(self::$conn);
 	}
 
-	//função para buscar uma tupla
+	/*-----------------------------------------------------------------------------
+	Função: Find
+	    função para buscar um conjunto de tupla no banco de dados
+	Entrada: 
+	    $var = número da váriavel 
+	    $ufs = id do UF 
+	    $atc = id da atuação
+	    $cad = id do SCC 
+	    $prt = id do porte
+	    $anos = ano 
+	Saída:
+	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
+	-----------------------------------------------------------------------------*/
 	public static function find($var, $ufs, $atc, $cad, $prt, $anos){
 
 		self::connect();
@@ -83,7 +111,14 @@ class EixoUm {
 		return ($obj == false) ? NULL : $obj;
 	}
 
-	//função para buscar todas tuplas
+	/*-----------------------------------------------------------------------------
+	Função: All
+	    função para buscar todas tupla no banco de dados
+	Entrada: 
+	    void
+	Saída:
+	    Todas instancia da Classe EixoUm com seus devidos atributos 
+	-----------------------------------------------------------------------------*/
 	public static function all(){
 		self::connect();
 			// $query = "SELECT * FROM ".self::$table." ORDER BY id";
@@ -106,7 +141,18 @@ class EixoUm {
 		return $allObjects;
 	}
 
-	//função para pegar conjunto de tuplas para o mapa
+	/*-----------------------------------------------------------------------------
+	Função: Getter Mapa
+	    função para obter um conjunto de tuplas para o mapa
+	Entrada: 
+	    $var = número da váriavel 
+	    $atc = id da atuação
+	    $cad = id do SCC 
+	    $prt = id do porte
+	    $anos = ano 
+	Saída:
+	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
+	-----------------------------------------------------------------------------*/
 	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
 
 		self::connect();		
@@ -131,7 +177,18 @@ class EixoUm {
 		return $allObjects;
 	}
 
-	//função para pegar conjunto de tuplas para as barras
+	/*-----------------------------------------------------------------------------
+	Função: Getter Barras
+	    função para obter um conjunto de tuplas para o barras
+	Entrada: 
+	    $var = número da váriavel 
+	    $ufs = id do UF 
+	    $atc = id da atuação
+	    $cad = id do SCC 
+	    $prt = id do porte
+	Saída:
+	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
+	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $atc, $cad, $prt){
 
 		self::connect();		
@@ -155,7 +212,19 @@ class EixoUm {
 	}
 	
 
-	//função para pegar conjunto de tuplas para o mapa
+	/*-----------------------------------------------------------------------------
+	Função: Getter Region
+	    função para obter um conjunto de tuplas para treemap region
+	Entrada: 
+	    $var = número da váriavel 
+	    $atc = id da atuação
+	    $cad = id do SCC 
+	    $prt = id do porte
+	    $anos = ano 
+	    $regiao = região do Brasil
+	Saída:
+	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
+	-----------------------------------------------------------------------------*/
 	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
 		self::connect();		
@@ -181,7 +250,5 @@ class EixoUm {
 	}
 
 }
-
-// echo "teste!";
 
 ?>
