@@ -39,7 +39,7 @@ function nodeHeight(d){ return d.y1 - d.y0; }
 
 /* importa arquivo de cores */
 var colorJSON;
-d3.json('colors.json', function(error, data) {
+d3.json('data/colors.json', function(error, data) {
 	if(error) throw error;
 	colorJSON = data;
 })
