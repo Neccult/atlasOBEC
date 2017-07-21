@@ -1,4 +1,12 @@
-// format value number
+/*-----------------------------------------------------------------------------
+	Função: formatNumber
+		executa sequencialmente funções para formatar valor pra notação comum brasileira
+	Entrada: 
+		{number} value | ex.: 200,300.123456
+		{int} decimalLimit | ex.: 2
+	Saída:
+		{string} ex.: "200.300,12"
+-----------------------------------------------------------------------------*/
 var formatNumber = function(value, decimalLimit){
 	var decimalLimit = decimalLimit || 8;
 	var minimumIntDigitsNumberToCapDecValues = 3;
@@ -13,6 +21,14 @@ var formatNumber = function(value, decimalLimit){
 		return tempFormat(d);
 	}
 
+/*-----------------------------------------------------------------------------
+	Função: numberMagnitude
+		calcula magnitude da parte inteira do valor passado levando em consideração a variável {minimumIntDigitsNumberToCapDecValues}
+	Entrada: 
+		{number} value | ex.: 200,300.12345
+	Saída:
+		{boolean} ex.: true || false
+-----------------------------------------------------------------------------*/
 	var numberMagnitude = function(value){
 		var arrValue = value.toString();
 		var intValue = arrValue.split(".")[0];
@@ -20,6 +36,14 @@ var formatNumber = function(value, decimalLimit){
 		return intTwoDigitOrMore? true : false;
 	}
 
+/*-----------------------------------------------------------------------------
+	Função: niceNumbers
+		transforma valor passado do padrão americano para o comum brasileiro com ponto (.) para separar magnitudes inteiras e vírgula (,) para separar decimais
+	Entrada: 
+		{number} value | ex.: 200,300.12345
+	Saída:
+		{string} ex.: "200.300,123"
+-----------------------------------------------------------------------------*/
 	var niceNumbers = function(value){
 		var dot = ".";
 		var comma = ",";
@@ -51,13 +75,27 @@ var formatNumber = function(value, decimalLimit){
 	return niceNumbers(value);
 }
 
-// remove decimal if only zeroes
+/*-----------------------------------------------------------------------------
+	Função: removeDecimalZeroes
+		remove zeros decimais inúteis
+	Entrada: 
+		{number} value | ex.: 200,300.000
+	Saída:
+		{number} ex.: 200.300
+-----------------------------------------------------------------------------*/
 var removeDecimalZeroes = function(value){
 	var decValue = value.split(".")[1];
 	return parseInt(decValue) === 0? value.split(".")[0] : value;
 }
 
-// recursive function return number of digits until non zero fraction number
+/*-----------------------------------------------------------------------------
+	Função: countValidDecimalDigits
+		recursivamente conta quantidade de números decimais válidos após zeros iniciais
+	Entrada: 
+		{number} value | ex.: 200,300.00026
+	Saída:
+		{number} ex.: 3
+-----------------------------------------------------------------------------*/
 var countValidDecimalDigits = function(value, acum) {
 	var acum = acum || 0;
 	var digitString = typeof value !== 'string' && typeof value !== 'undefined'? (value).toString() : value;
@@ -77,7 +115,15 @@ var countValidDecimalDigits = function(value, acum) {
 	return countValidDecimalDigits(newValue, newAcum);
 };
 
-// format decimal numbers with X limit digits after leading zeroes
+/*-----------------------------------------------------------------------------
+	Função: formatDecimalLimit
+		calcula quantidade de casas válidas após zeros iniciais e chama formatNumber com esses parâmetros
+	Entrada: 
+		{number} value | ex.: 200,300.00026
+		{int} decimalLimit | ex.: 2
+	Saída:
+		{string} ex.: "200.300,00026"
+-----------------------------------------------------------------------------*/
 var formatDecimalLimit = function(value, limit){
 	var limit = limit || 3;
 	var intValue = parseInt(value.toString().split(".")[0]);
@@ -86,13 +132,27 @@ var formatDecimalLimit = function(value, limit){
 	return formatNumber(value, fracLeadingZeroes + limit);
 };
 
-// tooltip singleton function
+/*-----------------------------------------------------------------------------
+	Função: tooltip
+		função singleton (retorna sempre a mesma instância) do objeto tooltip 
+	Entrada: 
+		N/A
+	Saída:
+		{object}
+-----------------------------------------------------------------------------*/
 var tooltip = (function(){
 
 	var instance;
 
+	/*-----------------------------------------------------------------------------
+		Função: create
+			cria elemento #tooltip no html
+		Entrada: 
+			N/A
+		Saída:
+			Renderiza objeto no DOM
+	-----------------------------------------------------------------------------*/
 	function create(){
-
 		var tp;
 
 		if (!tp){
@@ -104,8 +164,25 @@ var tooltip = (function(){
 				.attr('class', 'tooltip none');		
 		}
 
+		/*-----------------------------------------------------------------------------
+			Função: returnTooltip
+				retorna instância
+			Entrada: 
+				N/A
+			Saída:
+				{object}
+		-----------------------------------------------------------------------------*/
 		function returnTooltip(){ return tp; }
 
+		/*-----------------------------------------------------------------------------
+			Função: createElements
+				cria elementos e dá append deles dentro da tooltip
+			Entrada: 
+				{object} d: objeto dado pelo D3 que contém dados
+				{array} arr: array com valores dos elementos a serem criados ex.: [ ["title", "Título teste"], ["Valor", 1234]]
+			Saída:
+				Dá append dos elementos no elemento Tooltip
+		-----------------------------------------------------------------------------*/
 		function createElements(d, arr) {
 			var valSeparator = " = ";
 			
@@ -142,6 +219,15 @@ var tooltip = (function(){
 			});
 		};
 
+		/*-----------------------------------------------------------------------------
+			Função: showTooltip
+				renderiza elementos dentro da tooltip e posiciona eles de acordo com a posição do mouse.event
+			Entrada: 
+				{object} d: objeto dado pelo D3 que contém dados
+				{array} arr: array com valores dos elementos a serem criados ex.: [ ["title", "Título teste"], ["Valor", 1234]]
+			Saída:
+				Renderiza elementos dentro do elemento #tooltip
+		-----------------------------------------------------------------------------*/
 		function showTooltip(d, arr) {
 			// remove all elements inside tooltip
 			tp.text('');
@@ -176,10 +262,19 @@ var tooltip = (function(){
 			d3.select(".tooltip").classed("none", false);
 		};
 
+		/*-----------------------------------------------------------------------------
+			Função: hideTooltip
+				esconde o element tooltip
+			Entrada: 
+				N/A
+			Saída:
+				N/A
+		-----------------------------------------------------------------------------*/
 		function hideTooltip() {
 			d3.select(".tooltip").classed("none", true);
 		};
 
+		// API do objeto tooltip
 		return {
 			tpElement: returnTooltip,
 			showTooltip: showTooltip,
@@ -187,6 +282,7 @@ var tooltip = (function(){
 		};
 	};
 
+	// api do objeto singleton
 	return {
 		getInstance: function(){
 			if (instance)
