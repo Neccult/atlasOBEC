@@ -100,7 +100,7 @@ var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
 
 //pre-load arquivos
 d3.queue()
-	.defer(d3.json, "br-min.json")
+	.defer(d3.json, "./data/br-min.json")
 	.defer(d3.json, "ajax_mapa.php"+config)
 	.await(ready);
 
