@@ -209,10 +209,10 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		}
 
 		// if text is on edge align vertically
-		var isTextOnedge = boxHeight - textTopPadding < textTopPadding;
+		var isTextOnedge = boxHeight - textTopPadding < 15;
 		if (isTextOnedge) {
-			that.select("text")
-				.attr("y", (boxHeight - textHeight) / 2 + minMargin + 2);
+			that.select("text tspan")
+				.attr("dy", (boxHeight - textHeight) / 2 - minMargin);
 		}
 		
 	});
