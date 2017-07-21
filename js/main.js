@@ -1,51 +1,44 @@
-/*======
-	controla se deve ter animação dos círculos
-======*/
-function controlAnimation(){
-	/*### escolheu variável ###*/
-	if(url['var']!=='' && pageTitle!==''){
+var windowWidth = $(window).width();
 
-		$('.fadeInPage').addClass('done');
-		$('.fadeIn').addClass('done');
-
-		$('html, body').scrollTop($("#resultado").offset().top); /* move scroll para o gráfico */		
-	}else{
-		$("#animacao").load('animacaomenu.php');
-	}
-}
-
-/*======
-	controla tipo de menu círculos (desk, mobile)
-======*/
-function controlMenu(firstload){
-	
-	var windowWidth = $(window).width();
-
-	if(windowWidth>767){
-		$("#menuvariaveis").load('menudesktop.php', function(){
-			if(firstload) controlAnimation();
-		});			
-	}else{
-		$("#menuvariaveis").load('menumobile.php', function(){
-			if(firstload) controlAnimation();
-			$('.menu-select').val(url['var']);
-		});
-	}
-}
-
-/*======
-	redireciona ao resultado,
-	ao selecionar variável no menu
-======*/
+/*-----------------------------------------------------------------------------
+Função: controlVar
+    redireciona a página para o resultado da variável escolhida.
+Entrada: 
+    clickVar = variável escolhida
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function controlVar(clickVar){
 	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ano=2014';
 	/* variáveis com valores default */
 }
 
-/*======
-	monta url com filtros selecionados
-======*/
-function createUrl(url){
+/*-----------------------------------------------------------------------------
+Função: defaultUrl
+    atualiza url para valores default (menos a url['var'])
+Entrada: 
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function defaultUrl(){
+	url['view'] = 'mapa';
+	url['uf'] = 0;
+	url['cad'] = 0;
+	url['prt'] = 0;
+	url['atc'] = 0;
+	url['ano'] = 2014;
+}
+
+/*-----------------------------------------------------------------------------
+Função: changeChart
+    redireciona a página de acordo com os parametros da url
+Entrada: 
+    url = objeto com os parâmetros e seus valores
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function changeChart(url){
 
 	var newUrl = "",
 		count = 0,
@@ -58,71 +51,114 @@ function createUrl(url){
 		if((++count)!=size) newUrl = newUrl+"&";
 	});
 
-	return newUrl;
+	window.location.href = 'page.php?'+newUrl;
 }
 
-/*====== 
-	documento carregando
-======*/
-$(window).bind("load", function() { 
+/*-----------------------------------------------------------------------------
+Função: openFilter
+    abre ou fecha o filtro que foi clicado
+Entrada: 
+    filter => filtro que foi clicado
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function openFilter(filter){
+	var contexto = $(filter).parents('.contexto'),
+		active = $(filter).hasClass('active');
 
-	controlMenu(1); /* controla menu círculos! */
+	/* remove classe active dos botões */
+	$(contexto).find('.opt.select').removeClass('active');	
 
-	bodyDark(dark);/* alto contraste */
+	/* esconde todos os blocos */
+	$(contexto).find('.select-group').addClass('hide');
 
-	console.log('loaded!');
+	/* se está abrindo outro */
+	if(!active){
+		$(contexto).find(filter).addClass('active');
+		$(contexto).find('.select-group#select-'+$(filter).attr('id')).removeClass('hide');
+	}
+}
 
-});
-
-/*====== 
-	documento pronto
-======*/
-$(document).ready(function(){
-
-	/***************************************************/
-	/******************** menu círculos ****************/
-	/***************************************************/
-
-	var windowWidth = $(window).width();
-
-	/* se a janela for redimensionada */
-	$(window).resize(function() {
-
-		var wait;
-		clearTimeout(wait);
-			wait = setTimeout(controlMenu(), 100); /* controla menu círculos! */
+/*-----------------------------------------------------------------------------
+Função: controlFilter
+    controla relações entre os filtros
+Entrada: 
+    selectvalue => valor do select
+    selectid => id do select
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function controlFilter(selectvalue, selectid){
+	
+	/* se for PORTE x ATUAÇÃO */
+	if(selectid=='prt'){
+		
+		/* filtro atuação */
+		if(selectvalue.match('atc-','')){
 			
-		var newWidth = $(window).width();
-
-		/*  só redimensionar o gráfico
-			se a largura for alterada! */
-		if(newWidth!=windowWidth){
-
-			windowWidth = newWidth;
-			var wait2;
-			clearTimeout(wait2);
-			wait2 = setTimeout(location.reload(), 100); /* reload pg! */
+			url['atc'] = selectvalue.replace('atc-','');
+			url['prt'] = '0'; /* se for atuação, não há filtro por porte */
 		}
-	});
 
-	/*=== selecionar variável circulo ===*/
-	$(document).on('click', ".var-click", function(){
-		controlVar($(this).attr('href'));				
-	});	
-	/* mobile! */
-	$(document).on('change', ".menu-select", function(){
-		controlVar(this.value);				
-	});	
+		/* filtro porte */
+		else{
+			url['prt'] = selectvalue;
+			url['atc'] = '0';/* se for porte, não há filtro por atuação */
+		}
 
+	}else{
+		url[selectid] = selectvalue;
+	}
 
-	/***************************************************/
-	/******************** resultado ********************/
-	/***************************************************/
+	/*  se não há setor cadastrado,
+		não  é permitido filtro por porte X atuacao
+		(exceto treemap por setores) 
+									*/
+	if(url['cad']==0 && url['view']!='treemap_scc'){
+		url['atc'] = 0;
+		url['prt'] = 0;
+	}
+}
+
+/*-----------------------------------------------------------------------------
+Função: controlAtc
+   restringe filtro de atuação ==> comércio apenas para os setores 4 - 5 - 9 - todos
+Entrada: 
+    select => objeto do select
+    isPrt => boolean é ou não select de porte  
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function controlAtc(select,isPrt){
+
+	if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9 && url['cad']!=0){
+		
+		if(isPrt) $(select).find('option[value="atc-1"]').remove();
+		else $(select).find('option[value="1"]').remove();
+	}
+}
+
+/*-----------------------------------------------------------------------------
+Função: loadResult
+   carrega página de resultado e filtros; 
+Entrada: 
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function loadResult(){
 
 	/* ajusta nome da página */
-	if(url['var']!=='' && pageTitle!==''){
-		$(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
-	}
+	$(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
+	$('.menu-select').val(url['var']); /* atualiza select versao mobile */
+
+	/* move scroll para o gráfico */	
+	$('html, body').scrollTop($("#resultado").offset().top); 
+
+	/* fade in no resultado */
+	$('.fadeInPage').addClass('done');
+	$('.fadeIn').addClass('done');
+
 
 	/*  se não existe setor selecionado,
 		não é possível escolher porte x atuação 
@@ -133,16 +169,6 @@ $(document).ready(function(){
 		$('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
 		$('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
 		$('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-	}
-
-	/* restringe filtro de atuação ==> comércio */
-	function controlAtc(select,isPrt){
-
-		if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9 && url['cad']!=0){
-			
-			if(isPrt) $(select).find('option[value="atc-1"]').remove();
-			else $(select).find('option[value="1"]').remove();
-		}
 	}
 
 	/* set selects com os valores da url */
@@ -166,40 +192,133 @@ $(document).ready(function(){
 
 	});
 
+}
+
+/*-----------------------------------------------------------------------------
+Função: loadPage
+    controla tipo de menu (desk/mobile); chama função para carregar os resultados;
+Entrada: 
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function loadPage(){
+	
+	var menuView = 'menudesktop.php';
+
+	if(windowWidth<768)	menuView = 'menumobile.php';
+
+	$("#menuvariaveis").load(menuView, function(){
+		if(url['var']!=='' && pageTitle!==''){
+			loadResult();		
+		}
+		
+	});	
+}
+
+/*-----------------------------------------------------------------------------
+Função: controlPageWidth
+    controla se largura da tela foi alterada: recarrega a página se for preciso, para que os gráficos não fiquem com o tamanho errado.
+Entrada: 
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function controlPageWidth(){
+	var newWidth = $(window).width();
+
+	/*  só redimensionar o gráfico
+		se a largura for alterada! */
+	if(newWidth!=windowWidth){
+
+		windowWidth = newWidth;
+		var wait;
+		clearTimeout(wait);
+		wait = setTimeout(location.reload(), 100); /* reload pg! */
+	}
+}
+
+/*-----------------------------------------------------------------------------
+Função: smoothScroll
+    controla velocidade do scroll
+Entrada: 
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function smoothScroll(){
+	if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+
+        if (target.length) {
+            $('html, body').animate({
+                scrollTop: target.offset().top
+            }, 500);
+            return false;
+        }
+    }
+}
+
+/*====== 
+	documento carregando
+======*/
+$(window).bind("load", function() { 
+
+	loadPage(); /* controla menu e fade */
+
+	bodyDark(dark);/* alto contraste */
+
+	console.log('loaded!');
+
+});
+
+/*====== 
+	documento pronto
+======*/
+$(document).ready(function(){
+
+	/* se a janela for redimensionada */
+	$(window).resize(function() {
+		controlPageWidth();
+	});
+
+	/*=== selecionar variável ===*/
+	$(document).on('click', ".var-click", function(){
+		controlVar($(this).attr('href'));				
+	});	
+	/* mobile! */
+	$(document).on('change', ".menu-select", function(){
+		controlVar(this.value);				
+	});	
+
+	/* velocidade scroll */
+	$(document).on('click','a[href*="#"]:not([href="#"])',function(){
+    	smoothScroll(); 
+    });
+
+	/*=== resultado ===*/
+
 	/* alterar tipo de visualização */
 	$(document).on('click', ".opt.view", function(){
 	
-		url['view'] =  $(this).attr('id');
-		
-		/* muda view, filtros valores default */
-		url['uf'] = 0;
-		url['cad'] = 0;
-		url['prt'] = 0;
-		url['atc'] = 0;
-		url['ano'] = 2014;
-
-		var newUrl = createUrl(url);
-		window.location.href = 'page.php?'+newUrl;
+		defaultUrl();/* valores de filtros default */
+		url['view'] =  $(this).attr('id');/* muda visualização */
+		changeChart(url);/* atualiza gráfico */
 
 	});
 
 	/* alterar janela filtro */
 	$(document).on('click', ".opt.select", function(){
+		openFilter($(this));
+	});
 
-		var contexto = $(this).parents('.contexto'),
-			active = $(this).hasClass('active');
-
-		/* remove classe active dos botões */
-		$(contexto).find('.opt.select').removeClass('active');	
-
-		/* esconde todos os blocos */
-		$(contexto).find('.select-group').addClass('hide');
-
-		/* se está abrindo outro */
-		if(!active){
-			$(contexto).find(this).addClass('active');
-			$(contexto).find('.select-group#select-'+$(this).attr('id')).removeClass('hide');
-		}
+	/* escolher novo filtro */
+	$(document).on('change', ".opt-select", function(){
+		
+		controlFilter($(this).val(),$(this).attr('data-id')); /* controla relações entre filtros */
+		changeChart(url); /* altera gráfico */
+		
 	});
 
 	/* download doc */
@@ -207,65 +326,6 @@ $(document).ready(function(){
 
 		var downloadUrl = $(this).siblings('.url-input').val();
 		window.open(downloadUrl, '_blank');
+
 	});
-
-	/* escolher novo filtro */
-	$(document).on('change', ".opt-select", function(){
-		
-		var selectid = $(this).attr('data-id'),
-			selectvalue = $(this).val();
-
-
-		/* se for PORTE x ATUAÇÃO */
-		if(selectid=='prt'){
-			
-			/* filtro atuação */
-			if(selectvalue.match('atc-','')){
-				
-				url['atc'] = selectvalue.replace('atc-','');
-				url['prt'] = '0'; /* se for atuação, não há filtro por porte */
-			}
-
-			/* filtro porte */
-			else{
-				url['prt'] = selectvalue;
-				url['atc'] = '0';/* se for porte, não há filtro por atuação */
-			}
-
-		}else{
-			url[selectid] = selectvalue;
-		}
-
-		/*  se não há setor cadastrado,
-			não  é permitido filtro por porte X atuacao
-			(exceto treemap por setores) 
-										*/
-		if(url['cad']==0 && url['view']!='treemap_scc'){
-			url['atc'] = 0;
-			url['prt'] = 0;
-		}
-
-		var newUrl = createUrl(url);
-		window.location.href = 'page.php?'+newUrl;
-				
-	});
-
-	/* velocidade scroll */
-	$(function() {
-	    $('a[href*="#"]:not([href="#"])').click(function(){
-
-	        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-	            var target = $(this.hash);
-	            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-
-	            if (target.length) {
-	                $('html, body').animate({
-	                    scrollTop: target.offset().top
-	                }, 500);
-	                return false;
-	            }
-	        }
-	    });
-	});
-
 });

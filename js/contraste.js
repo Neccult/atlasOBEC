@@ -1,6 +1,15 @@
-/*======
-	ALTO CONTRASTE (replicado no main.js)
-======*/
+var dark = getCookie('dark');
+
+/*-----------------------------------------------------------------------------
+Função: createCookie
+    cria um cookie
+Entrada: 
+    name => nome do cookie
+    value => valor do cookie
+    days => tempo de duração do cookie
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 var createCookie = function(name, value, days) {
     var expires;
     if (days) {
@@ -14,6 +23,15 @@ var createCookie = function(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
+/*-----------------------------------------------------------------------------
+Função: getCookie
+    busca valor de um cookie
+Entrada: 
+    c_name => nome do cookie
+Saída:
+    encontrou cookie : retorna valor
+    não encontrou : retorna em branco
+-----------------------------------------------------------------------------*/
 function getCookie(c_name) {
     if (document.cookie.length > 0) {
         c_start = document.cookie.indexOf(c_name + "=");
@@ -28,8 +46,15 @@ function getCookie(c_name) {
     }
     return "";
 }
-var dark = getCookie('dark');
 
+/*-----------------------------------------------------------------------------
+Função: bodyDark
+    altera cores do layout - alto contraste ou normal
+Entrada: 
+    active => boolean : quando true, adiciona alto contraste; falso, volta ao layout normal
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function bodyDark(active){
 
 	if(active==1){
@@ -38,7 +63,7 @@ function bodyDark(active){
 		$('body').removeClass('contraste');
 	}
 }
-/***************** alto contraste **************** (replicado no main.js )*/
+
 $(document).on('click', "#contraste", function(){
 	
 	var darkValue = getCookie("dark");
