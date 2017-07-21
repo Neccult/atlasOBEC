@@ -54,7 +54,7 @@
 
 
 				/* informações JSON */
-				$json = file_get_contents('text/pt-br.json');
+				$json = file_get_contents('data/pt-br.json');
 				$json_text = json_decode($json, true);
 
 				$text = $json_text['var'][$_GET["var"]-1]; /*== informações da variável ==*/
