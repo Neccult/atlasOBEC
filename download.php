@@ -125,6 +125,7 @@
 		<form id="svgform" method="post" action="cgi/download.pl">
 			 <input type="hidden" id="output_format" name="output_format" value="">
 			 <input type="hidden" id="data" name="data" value="">
+			 <input type="hidden" id="name" name="name" value="<?php echo $view?>">
 		</form>
 
 		<script type="text/javascript">

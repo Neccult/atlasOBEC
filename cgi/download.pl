@@ -47,6 +47,8 @@ die "Invalid output_format value"
 
 my $data = param('data')
 	or die "Missing 'data' parameter";
+
+my $name = param('name'); 
 # die "Invalid data value"
 # 	unless $data =~ /^[\x20-\x7E\t\n\r ]+$/;
 
@@ -85,8 +87,21 @@ elsif ($output_format eq "pdf" || $output_format eq "png") {
 
 	## All is fine, send the data back to the user
 	my $mime_type = ($output_format eq "pdf")?"application/x-pdf":"image/png";
-	print header(-type=>$mime_type,
-		     -attachment=>"d3js_export_demo.$output_format");
+
+	if ($name eq "mapa" ||
+		$name eq "treemap_scc" ||
+		$name eq "treemap_region" ||
+		$name eq "barras") {
+
+		my $name = $name . "Atlas";
+		print header(-type=>$mime_type,
+		     -attachment=>"$name.$output_format");
+	
+		}else{
+			my $name = "Atlas";
+			print header(-type=>$mime_type,
+		     -attachment=>"$name.$output_format");
+		}
 	print $pdf_data;
 
 	exit(0);
