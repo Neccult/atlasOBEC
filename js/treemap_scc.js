@@ -151,8 +151,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("dy", ".35em")
 		.attr("text-anchor", "start")
 		.append("tspan")
-		.text(function(d) {return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
-		.attr('fill', "#fff");
+		.text(function(d) { return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
+		.attr("fill", "#fff")
+		.attr("opacity", function(d){ return d.data.percentual === 0 || !d.data.percentual? 0 : 1; });
 
    /*=== controla texto ===*/
 	var g = d3.selectAll("#corpo svg g");
@@ -201,7 +202,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				.attr("dy", (boxWidth - textWidth) / 2 - minVerticalMargin);
 			
 			// if percentage is wider than container
-			var isTextStillTaller = boxHeight - textHeight - minVerticalMargin > boxHeight || boxHeight - textHeight - minVerticalMargin  < 0;
+			var isTextStillTaller = boxHeight - textHeight - minVerticalMargin > boxHeight || boxHeight - textHeight - minVerticalMargin < 0;
 			if (isTextStillTaller){
 				return that.select("text")
 					.attr("opacity", 0);
