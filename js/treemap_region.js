@@ -126,51 +126,6 @@ var color = function(colorId){
 }   
 
 /*==================*/
-/* *** tooltips *** */
-/*==================*/
-
-/* mostrar */
-var mouseOn = function(d) {
-
-	/* atualiza nome tooltip */
-	d3.select(".tooltip .heading")
-		.text(d['data']['estado']);
-
-	d3.select(".tooltip .size")
-		.text(formatNumber(d['data']['size']));
-
-	/*== posição do gráfico na tela ==*/
-	var chartOffset = $('.chart').offset(), 
-		leftOffset = chartOffset.left,
-		leftOffsetEnd = leftOffset+$('.chart').width(),
-		topOffset = chartOffset.top;
-
-	/* tamanho do tooltip */
-	var tooltipWidth = $('.tooltip').width();
-
-	/*== posição do tooltip ==*/
-	var xPosition = d3.event.pageX-leftOffset+30;
-	var xPositionEnd = xPosition+tooltipWidth;
-	var yPosition = d3.event.pageY -topOffset+5;
-   
-	/* se a posição final do tooltip for além do final da tela */
-	if(xPositionEnd>leftOffsetEnd){
-		xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
-	}
-
-	d3.select(".tooltip")
-		.style("left", xPosition + "px")
-		.style("top", yPosition + "px");
-
-	d3.select(".tooltip").classed("none", false);
-};
-
-/* remover tooltip */
-var mouseOut = function() {
-	d3.select(".tooltip").classed("none", true);
-};
-
-/*==================*/
 /* ***  treemap *** */
 /*==================*/
 
@@ -310,10 +265,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	// cria título
 	svg.append("text").append("tspan")
 		.data(root.leaves())
-		.attr("x", (width / 2))             
+		.attr("x", (width / 2))
 		.attr("y", 20)
 		.attr("font-size", 20)
-		.attr("text-anchor", "middle")  
+		.attr("text-anchor", "middle")
 		.attr("class","treemap-title")
 		.text(function(d){ return "Brasil" });
 
@@ -482,8 +437,8 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		}
 
 		// test if only percentage text element has a limit margin of 2 pixels, if not hides percentage and uf title
-		var percentageWider = (boxWidth - that.select('text.percentage').node().getBBox().width) / 2 >= 2;
-		if(!percentageWider){
+		var percentageWider = (boxWidth - that.select('text.percentage').node().getBBox().width) / 2 < 2;
+		if(percentageWider){			
 			that.select("text.percentage").style("opacity", 0);
 			that.select("text.title").style("opacity", 0);
 		}
@@ -497,7 +452,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			that.select("text.title").style("opacity", 0);
 		} else*/
 		if (bothTaller && bothWider){
-		// if both title and percentage are wider and taller, opacity 0 on both
+			if (!percentageWider) {
+				return that.select("text.title").style("opacity", 0);
+			}
+			// if both title and percentage are wider and taller, opacity 0 on both
 			that.select("text.title").style("opacity", 0);
 			that.select("text.percentage").style("opacity", 0);
 		} 
