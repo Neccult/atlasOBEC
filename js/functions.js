@@ -294,3 +294,137 @@ var tooltip = (function(){
 		}
 	};
 })();
+
+// função apenas para debug
+function debug(value, match, args){
+	if(value === match.toUpperCase()){
+		args.unshift(value);
+		console.log.apply(console, args);
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Função: formatTreemapText
+		função formata texto interno nos nódulos do treemap
+	Entrada: 
+		N/A
+	Saída:
+		manipula elementos na página/DOM
+-----------------------------------------------------------------------------*/
+var formatTreemapText = function(d) {
+	var g = d3.selectAll("#corpo svg g");
+	g.each(function(d){
+		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
+		var minMargin = { horizontal:1, vertical: 2, betweenText: 3 };
+
+		var that = d3.select(this);	
+		var box = that.select('rect').node();	
+		box = {
+			self: box,
+			width: box.getBBox().width,
+			height: box.getBBox().height
+		}
+	
+		var title = d3.select(this).select('text.title');
+		title = {
+			self: title,
+			width: title.node().getBBox().width,
+			height: title.node().getBBox().height
+		}
+
+		var percentage = d3.select(this).select('text.percentage');
+		percentage = {
+			self: percentage,
+			width: percentage.node().getBBox().width,
+			height: percentage.node().getBBox().height
+		}
+	
+		percentage.self
+			.attr("x", box.width - acceptableMargin.horizontal)	
+			.attr("y", box.height - acceptableMargin.vertical)	
+			.attr("text-anchor", "end");
+
+		var calc = {
+			title: {
+				width: box.width - title.width - acceptableMargin.horizontal,
+				height: box.height - title.height - acceptableMargin.vertical
+			},
+			percentage: {
+				width: box.width - percentage.width - acceptableMargin.horizontal,
+				height: box.height - percentage.height - acceptableMargin.vertical
+			}
+		}
+		var doesTitleFit = calc.title.width > acceptableMargin.horizontal*2 && calc.title.width > 0 && calc.title.height > acceptableMargin.vertical*2 && calc.title.height > 0;
+		var doesPercentageFit = calc.percentage.width > acceptableMargin.horizontal*2 && calc.percentage.width > 0 && calc.percentage.height > acceptableMargin.vertical*2 && calc.percentage.height > 0;
+		var doBothFit = doesTitleFit && doesPercentageFit;
+
+		// first try
+		if (!doBothFit) {
+
+			// second try with smaller margin
+			calc = {
+				title: {
+					width: box.width - title.width - minMargin.horizontal,
+					height: box.height - title.height - minMargin.vertical
+				},
+				percentage: {
+					width: box.width - percentage.width - minMargin.vertical,
+					height: box.height - percentage.height - minMargin.vertical
+				}
+			}
+
+			// var isBoxHeightSmall = box.height - title.height - percentage.height - minMargin.betweenText < minMargin.vertical*2;
+			// var isBoxWidthSmall = box.width - title.width - percentage.width - minMargin.betweenText < minMargin.horizontal*2;
+			// var areBothSmall = isBoxHeightSmall && isBoxWidthSmall;
+
+			var doBothFitVertically = box.height - title.height - percentage.height - minMargin.betweenText > minMargin.vertical*2 && box.height - title.height - percentage.height - minMargin.betweenText > 0;
+			var doBothFitHorizontally = box.width - title.width - percentage.width - minMargin.betweenText > minMargin.horizontal*2 && box.width - title.width - percentage.width - minMargin.betweenText > 0;
+
+			doesTitleFit = calc.title.width > minMargin.horizontal*2 && calc.title.width > 0 && calc.title.height > minMargin.vertical*2 && calc.title.height > 0;
+			doesPercentageFit = calc.percentage.width > minMargin.horizontal*2 && calc.percentage.width > 0 && calc.percentage.height > minMargin.vertical*2 && calc.percentage.height > 0;
+			doBothFit = doesTitleFit && doesPercentageFit;
+		
+			// se title não couber
+			if (!doesTitleFit)
+				title.self.attr("opacity", 0);
+			
+			// se porcentagem não couber esconde title e porcentagem
+			if (!doesPercentageFit){
+				title.self.attr("opacity", 0);
+				percentage.self.attr("opacity", 0);
+			}
+
+			// se apenas porcentagem couber esconder title
+			if (doesPercentageFit && !(doBothFitHorizontally || doBothFitVertically))
+				title.self.attr("opacity", 0);
+
+			// se os dois não couberem esconde os dois
+			if (!doBothFit && !(doBothFitHorizontally || doBothFitVertically)) {
+				title.self.attr("opacity", 0);
+				percentage.self.attr("opacity", 0);
+			}
+
+			// se os dois (cabem verticalmente, !horizontalmente, espaço vertical disponível < margem vertical) && (!cabem verticalmente, horizontalmente, espaço horizontal disponível < margem horizontal)
+			var isBoxSmallForText = ((doBothFitVertically
+									&& !doBothFitHorizontally)
+									&& box.height - title.height - percentage.height < minMargin.vertical*2)
+									|| ((!doBothFitVertically
+										&& doBothFitHorizontally)
+										&& box.width - title.width - percentage.width < minMargin.horizontal*2);
+
+			// se espaço horizontal || vertical - tamanho horizontal || vertical do percentagem < margem vertical || horizontal
+			var isBoxSmallForPercentage = box.height - percentage.height < minMargin.vertical*2
+										|| box.width - percentage.width < (minMargin.horizontal+2)*2 ;
+
+			if (isBoxSmallForText){
+				title.self
+				.attr("x", minMargin.horizontal + 4)
+				.attr("y", minMargin.vertical + 11);
+			}
+
+			if (isBoxSmallForPercentage){
+				percentage.self.attr("x", box.width - minMargin.horizontal - 2);
+			}			
+		}
+	});
+}
