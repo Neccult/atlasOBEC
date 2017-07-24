@@ -341,7 +341,7 @@
 
 		// import colors.json file
 		var colorJSON;
-		d3.json('../colors.json', function(error, data) {
+		d3.json('../data/colors.json', function(error, data) {
 		  if (error) throw error;
 
 		  colorJSON = data;
