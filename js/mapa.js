@@ -225,7 +225,7 @@ function ready(error, br_states, mapa){
 			$(this).text("Maior que "+formatDecimalLimit(dom[i-1]));
 		} 
 		else{
-			$(this).text("Entre " + formatDecimalLimit(dom[i]) + " e " + formatDecimalLimit(dom[i-1]));
+			$(this).text("Entre " + formatDecimalLimit(dom[i-1]) + " e " + formatDecimalLimit(dom[i]));
 		}
 	});
 };
