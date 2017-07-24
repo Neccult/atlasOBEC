@@ -78,7 +78,7 @@
 
 		<img src="images/loading.gif" class="down-loading"/>
 
-		<div class="chart" style="width: 637px; height: 346px; opacity: 0">
+		<div class="chart" style="width: 637px; height: 400px; opacity: 0">
 			<div id="corpo" class="<?php echo $view === 'mapa'? 'mapa' : ''; ?>"></div>
 		</div>
 

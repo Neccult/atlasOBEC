@@ -39,7 +39,7 @@ function nodeHeight(d){ return d.y1 - d.y0; }
 
 /* importa arquivo de cores */
 var colorJSON;
-d3.json('colors.json', function(error, data) {
+d3.json('data/colors.json', function(error, data) {
 	if(error) throw error;
 	colorJSON = data;
 })
@@ -130,7 +130,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("xlink:href", function(d) { return "#" + d.data.id; });
 
 	// aumenta o tamanho do gráfico pra caber o título
-	$('#corpo').find('svg').attr('height',$('.chart').width()/2+50);
+	$('#corpo').find('svg').attr('height',$('.chart').height()+50);
 	
 	// new svg margin top value
 	var svgMarginTop = 35;
@@ -151,8 +151,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("dy", ".35em")
 		.attr("text-anchor", "start")
 		.append("tspan")
-		.text(function(d) {return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
-		.attr('fill', "#fff");
+		.text(function(d) { return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
+		.attr("fill", "#fff")
+		.attr("opacity", function(d){ return d.data.percentual === 0 || !d.data.percentual? 0 : 1; });
 
    /*=== controla texto ===*/
 	var g = d3.selectAll("#corpo svg g");
@@ -167,7 +168,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 			yVal = parseFloat(transformValues[1]);	
 
 		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
-		
+
 		var box = that.select('rect').node();
 		var boxWidth = box.getBBox().width;
 		var boxHeight = box.getBBox().height;
@@ -183,137 +184,44 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 			that.select("text tspan")
 				.attr("font-size", 8)
 				.attr("dx", (boxWidth - textWidth) / 2 - minMargin);
+
+			// if percentage is wider than container
+			var isTextStillWider = boxWidth - textWidth - minMargin > boxWidth || boxWidth - textWidth - minMargin < -2;
+
+			//debug(d.data.name, 'Arquitetura', [boxWidth, textWidth, boxWidth - textWidth - minMargin, isTextStillWider]);
+
+			if (isTextStillWider){
+				that.select("text")
+					.attr("opacity", 0);
+			}
 		}
 
-		if ((boxHeight - textHeight) / 2 < minMargin) {
+		if (isTextTaller) {
 			that.select("text tspan")
 				.attr("font-size", 8)
 				.attr("dy", (boxWidth - textWidth) / 2 - minVerticalMargin);
-		}
-	});
-
-	/*g.each(function(d){
-		var that = d3.select(this);
-		var words = that.text().split(' ');
-		var name = d.data.name;
-
-		var box = that.select('rect').node();
-		var boxWidth = box.getBBox().width;
-		var boxHeight = box.getBBox().height;
-
-		var boxText = d3.select(this).select('text').node();
-		var textWidth = boxText.getBBox().width;
-		var textHeight = boxText.getBBox().height;
-		d.w = textWidth;
-
-		var minMargin = 8;
-		var offsetMargin = 5;
-		var oneWordName = words.length === 1;
-
-		// if multiple words text
-		if (!oneWordName)
-			return genMultiLineText(that);
-
-		// if only one word
-
-		// if tests
-		var wordTallerThanContainer = (boxHeight - textHeight - textTopPadding) <= minMargin;
-		var wordWiderThanContainer = (boxWidth - textWidth - textLeftPadding) <= minMargin;			
-
-		// if horizontal word is NARROW than the container (box width - leftPadding)
-		if(!wordWiderThanContainer){
-
-			var isVerticalMarginAvailable = (boxHeight - textHeight) / 2 > minMargin;
-			var wordOnVerticalEdge = boxHeight - textHeight - textTopPadding <= minMargin	;
-
-			if (!isVerticalMarginAvailable)
-				return that.select("text").style("opacity", 0);
-
-			// if text still taller than container tries to fit it in for the last time
-			if (wordOnVerticalEdge)
-				that.select('text').attr('y', (boxHeight - textHeight) / 2 + minMargin);
-
-		} else {
-			// if horizontal word is BIGGER than the container break it into vertical letters
-
-			// tries to horizontally fit word first
-			that.select('text').attr('x', Math.ceil((boxWidth - textWidth) / 2));
-
-			// test if is still wider
-			var textStillWiderThanBox = boxWidth < d3.select(this).select('text').node().getBBox().width + minMargin;
-
-			if (textStillWiderThanBox){
-				var textMock = appendTest(name);
-				var textMockWiderThanContainer = 10 > boxWidth; // 10 means max text width (only one letter per line)
-				var textMockTallerThanContainer = textMock.height > boxHeight;
-
-				// if textMock height is taller than boxHeight sets opacity to 0
-				if (textMockTallerThanContainer)
-					return that.select("text").style("opacity", 0);
-
-				// if textMock width isn't wider than container box width
-				if (!textMockWiderThanContainer){
-
-					// remove horizontal text from g element
-					that.select('text').remove();
-
-					// append new text element
-					var textElement = that.append('text')
-								.attr("text-anchor", "middle")
-								.attr('x', 0)
-								.attr('dx', 0)
-								.attr('y', textTopPadding + 2);
-
-					// append letters on vertical position
-					for (var i = 0; i < name.length; i++){
-
-						textElement.append('tspan')
-						.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-						.attr("text-anchor", "middle")
-						.text(function(d) {
-							return name[i]; 
-						})
-						.attr('x', 0)
-						.attr('dx', textLeftPadding + 4)
-						.attr('dy', function(d){
-							if (i != 0)
-								return letterTopSubPadding + 2;
-						});
-					}
-
-				}
-				
+			
+			// if percentage is wider than container
+			var isTextStillTaller = boxHeight - textHeight - minVerticalMargin > boxHeight || boxHeight - textHeight - minVerticalMargin < 0;
+			if (isTextStillTaller){
+				return that.select("text")
+					.attr("opacity", 0);
 			}
-
-			// reavaluate/refresh variables and conditions value
-			box = that.select('rect').node();
-			boxWidth = box.getBBox().width;
-			boxHeight = box.getBBox().height;
-			boxText = d3.select(this).select('text').node();
-			textWidth = boxText.getBBox().width;
-			textHeight = boxText.getBBox().height;
-
-			wordTallerThanContainer = (boxHeight - textHeight) / 2 <= minMargin;
-			wordWiderThanContainer = (boxWidth - textWidth) / 2 <= minMargin;
-
-			// if text still taller or wider than container tries to fit it in for the last time
-			if (wordTallerThanContainer)
-				that.select('text').attr('y', (boxHeight - textHeight) / 2 + offsetMargin);
-
-			wordTallerThanContainer = boxHeight - textHeight <= minMargin;
-			wordWiderThanContainer = boxWidth - textWidth <= minMargin;
-
-			// if didn't fit sets opacity to 0
-			if (wordWiderThanContainer || wordTallerThanContainer)
-				that.select("text").style("opacity", 0);
 		}
+
+		// if text is on edge align vertically
+		var isTextOnedge = boxHeight - textTopPadding < 15;
+		if (isTextOnedge) {
+			that.select("text tspan")
+				.attr("dy", (boxHeight - textHeight) / 2 - minMargin);
+		}
+		
 	});
-*/
 
 	// aumenta a altura do svg pra caber a legenda
 	$('#corpo').find('svg').attr('height',$('.chart').height() + 63);	
 
-	// legenda 
+	// legenda
 	var legLeftRange = [0, 4];
 	var legMiddleRange = [4, 8];
 	var legRightRange = [8, 10];
