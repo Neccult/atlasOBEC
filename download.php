@@ -129,6 +129,14 @@
 		</form>
 
 		<script type="text/javascript">
+			/*-----------------------------------------------------------------------------
+			Função: Submit Download Form
+			    função para submeter o formulário que gera o download do arquivo
+			Entrada: 
+			    output_format = formato do arquivo
+			Saída:
+			    POST dados do formulário
+			-----------------------------------------------------------------------------*/
 			function submit_download_form(output_format)
 			{
 				// Get the d3js SVG element
@@ -145,6 +153,14 @@
 				form.submit();
 			}
 
+			/*-----------------------------------------------------------------------------
+			Função: Ready (JQUERY)
+			    função que usa setTimeout para efetuar download do gráfico
+			Entrada: 
+			    void
+			Saída:
+			    chamada da função submit_download_form e redirecionamento
+			-----------------------------------------------------------------------------*/
 			$(document).ready(function(){
 				if(view === 'mapa'){
 					setTimeout(function(){
