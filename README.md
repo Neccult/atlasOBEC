@@ -102,8 +102,12 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
               Require all granted
         </Directory>
  ```
+Reiniciar o Apache para carregar as modificações:
+```
+ sudo service apache2 restart
 
-  E para acessar através do navegador no link:
+```
+  E para acessar através do navegador no link:
  ```
   localhost/atlasOBEC
   ou
@@ -121,7 +125,7 @@ Para facilitar a explicação vamos assumir o uso do mysql via terminal
 
   Importar _dump_ do banco de dados:
   ```
-    mysql -u [username] -p [password] Atlas < data/dump-Atlas.sql
+    mysql -u [username] -p [password] Atlas < data/sql/dump-Atlas.sql
   ```
 
   Após importado os dados manter a _consistência_ de usuário e senha do banco de dados no arquivo ``EixoUm.php``
