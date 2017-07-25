@@ -105,7 +105,6 @@ Para facilitar a explicação vamos assumir  a instalação local (_localhost_)
 Reiniciar o Apache para carregar as modificações:
 ```
  sudo service apache2 restart
-
 ```
   E para acessar através do navegador no link:
  ```
@@ -116,7 +115,7 @@ Reiniciar o Apache para carregar as modificações:
 
 ### Configurar Banco de Dados
 
-Para facilitar a explicação vamos assumir o uso do mysql via terminal
+Para facilitar a explicação vamos assumir o uso do mysql via terminal no diretório raiz do Projeto
 
   Criar banco de dados:
   ```
