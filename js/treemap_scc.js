@@ -144,23 +144,57 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("class","treemap-title")
 		.text(function(d){ return d.data.estado; });
 
-	cell.append("text")
-		.attr("x", function(d) { return textLeftPadding; })
+	// cell.append("text")
+	// 	.attr("x", function(d) { return textLeftPadding; })
+	// 	.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+	// 	.attr("y", function(d, i) { return textTopPadding; })
+	// 	.attr("dy", ".35em")
+	// 	.attr("text-anchor", "start")
+	// 	.append("tspan")
+	// 	.text(function(d) { return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
+	// 	.attr("fill", "#fff")
+	// 	.attr("opacity", function(d){ return d.data.percentual === 0 || !d.data.percentual? 0 : 1; });
+
+	var titleTextElement = cell.append("text")
+		.text(function(d) {return d.data.name; })
 		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-		.attr("y", function(d, i) { return textTopPadding; })
-		.attr("dy", ".35em")
+		.attr("class", "title")
+		.attr("x", 10)
+		.attr("y", 19)
+		.attr("text-anchor", "start");
+			
+	var percentageTextElement = cell.append("text")
 		.attr("text-anchor", "start")
-		.append("tspan")
-		.text(function(d) { return formatDecimalLimit(d.data.percentual * 100, 2) + "%"; })
-		.attr("fill", "#fff")
-		.attr("opacity", function(d){ return d.data.percentual === 0 || !d.data.percentual? 0 : 1; });
+		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+		.attr("class", "percentage");
+
+	percentageTextElement.append('tspan')
+		.text(function(d) { return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.attr("opacity", function(d, i) {			
+			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
+			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? 0 : 1;
+		})
+		.attr("font-size", function(d) {
+			var nWidth = nodeWidth(d);
+			var nodePercentage = Math.round(100 * nWidth / width);
+
+			var fontOrdinalSize = d3.scaleThreshold()
+				.domain([12, 25, 30, 40])
+				.range([8, 12, 16, 20]);
+
+			var fontSize = fontOrdinalSize(nodePercentage);
+			
+			return fontSize;	
+		});
+
+	formatTreemapText();
 
    /*=== controla texto ===*/
 	var g = d3.selectAll("#corpo svg g");
 	g.each(function(d){
 		var that = d3.select(this);
-		var minMargin = 6;
-		var minVerticalMargin = 2;
+		// var minMargin = 6;
+		// var minVerticalMargin = 2;
 
 		// creates a top margin for title positioning
 		var transformValues = that.attr("transform").split("(")[1].replace(/\)/g, "").split(",");
@@ -169,52 +203,52 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
 
-		var box = that.select('rect').node();
-		var boxWidth = box.getBBox().width;
-		var boxHeight = box.getBBox().height;
+		// var box = that.select('rect').node();
+		// var boxWidth = box.getBBox().width;
+		// var boxHeight = box.getBBox().height;
 
-		var boxText = d3.select(this).select('text').node();
-		var textWidth = boxText.getBBox().width;
-		var textHeight = boxText.getBBox().height;
+		// var boxText = d3.select(this).select('text').node();
+		// var textWidth = boxText.getBBox().width;
+		// var textHeight = boxText.getBBox().height;
 
-		var isTextWider = (boxWidth - textWidth) / 2 < minMargin;
-		var isTextTaller = (boxHeight - textHeight) / 2 < minMargin;
+		// var isTextWider = (boxWidth - textWidth) / 2 < minMargin;
+		// var isTextTaller = (boxHeight - textHeight) / 2 < minMargin;
 
-		if (isTextWider) {
-			that.select("text tspan")
-				.attr("font-size", 8)
-				.attr("dx", (boxWidth - textWidth) / 2 - minMargin);
+		// if (isTextWider) {
+		// 	that.select("text tspan")
+		// 		.attr("font-size", 8)
+		// 		.attr("dx", (boxWidth - textWidth) / 2 - minMargin);
 
-			// if percentage is wider than container
-			var isTextStillWider = boxWidth - textWidth - minMargin > boxWidth || boxWidth - textWidth - minMargin < -2;
+		// 	// if percentage is wider than container
+		// 	var isTextStillWider = boxWidth - textWidth - minMargin > boxWidth || boxWidth - textWidth - minMargin < -2;
 
-			//debug(d.data.name, 'Arquitetura', [boxWidth, textWidth, boxWidth - textWidth - minMargin, isTextStillWider]);
+		// 	//debug(d.data.name, 'Arquitetura', [boxWidth, textWidth, boxWidth - textWidth - minMargin, isTextStillWider]);
 
-			if (isTextStillWider){
-				that.select("text")
-					.attr("opacity", 0);
-			}
-		}
+		// 	if (isTextStillWider){
+		// 		that.select("text")
+		// 			.attr("opacity", 0);
+		// 	}
+		// }
 
-		if (isTextTaller) {
-			that.select("text tspan")
-				.attr("font-size", 8)
-				.attr("dy", (boxWidth - textWidth) / 2 - minVerticalMargin);
+		// if (isTextTaller) {
+		// 	that.select("text tspan")
+		// 		.attr("font-size", 8)
+		// 		.attr("dy", (boxWidth - textWidth) / 2 - minVerticalMargin);
 			
-			// if percentage is wider than container
-			var isTextStillTaller = boxHeight - textHeight - minVerticalMargin > boxHeight || boxHeight - textHeight - minVerticalMargin < 0;
-			if (isTextStillTaller){
-				return that.select("text")
-					.attr("opacity", 0);
-			}
-		}
+		// 	// if percentage is wider than container
+		// 	var isTextStillTaller = boxHeight - textHeight - minVerticalMargin > boxHeight || boxHeight - textHeight - minVerticalMargin < 0;
+		// 	if (isTextStillTaller){
+		// 		return that.select("text")
+		// 			.attr("opacity", 0);
+		// 	}
+		// }
 
-		// if text is on edge align vertically
-		var isTextOnedge = boxHeight - textTopPadding < 15;
-		if (isTextOnedge) {
-			that.select("text tspan")
-				.attr("dy", (boxHeight - textHeight) / 2 - minMargin);
-		}
+		// // if text is on edge align vertically
+		// var isTextOnedge = boxHeight - textTopPadding < 15;
+		// if (isTextOnedge) {
+		// 	that.select("text tspan")
+		// 		.attr("dy", (boxHeight - textHeight) / 2 - minMargin);
+		// }
 		
 	});
 

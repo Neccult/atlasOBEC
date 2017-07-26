@@ -307,11 +307,11 @@ function debug(value, match, args){
 	Função: formatTreemapText
 		função formata texto interno nos nódulos do treemap
 	Entrada: 
-		N/A
+		{string} type: tipo do gráfico usado ex.: 'scc', 'region'
 	Saída:
 		manipula elementos na página/DOM
 -----------------------------------------------------------------------------*/
-var formatTreemapText = function(d) {
+var formatTreemapText = function() {
 	var g = d3.selectAll("#corpo svg g");
 	g.each(function(d){
 		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
@@ -386,12 +386,12 @@ var formatTreemapText = function(d) {
 		
 			// se title não couber
 			if (!doesTitleFit)
-				title.self.attr("opacity", 0);
+				title.self.attr("display", "none");
 			
 			// se porcentagem não couber esconde title e porcentagem
 			if (!doesPercentageFit){
-				title.self.attr("opacity", 0);
-				percentage.self.attr("opacity", 0);
+				title.self.attr("display", "none");
+				percentage.self.attr("display", "none");
 			}
 
 			// se apenas porcentagem couber esconder title
@@ -400,24 +400,20 @@ var formatTreemapText = function(d) {
 
 			// se os dois não couberem esconde os dois
 			if (!doBothFit && !(doBothFitHorizontally || doBothFitVertically)) {
-				title.self.attr("opacity", 0);
-				percentage.self.attr("opacity", 0);
-			}	
+				title.self.attr("display", "none");
+				percentage.self.attr("display", "none");
+			}
 
 			// se os dois (cabem verticalmente, !horizontalmente, espaço vertical disponível < margem vertical) && (!cabem verticalmente, horizontalmente, espaço horizontal disponível < margem horizontal)
 			var isBoxSmallForText = ((doBothFitVertically
 									&& !doBothFitHorizontally)
-									&& box.height - title.height - percentage.height < minMargin.vertical*2)
+									|| box.height - title.height - percentage.height < minMargin.vertical*2)
 									|| ((!doBothFitVertically
 										&& doBothFitHorizontally)
 										&& box.width - title.width - percentage.width < minMargin.horizontal*2);
 
 			var doTitleHorizontalMarginExist = (box.width - title.width - percentage.width - minMargin.betweenText) / 2 >= minMargin.horizontal*2 + 2;
 			var doTitleVerticalMarginExist = (box.height - title.height - minMargin.vertical) / 2 >= acceptableMargin.vertical*2;
-
-		//	console.log(d.data.name, doMarginExist);
-
-			debug(d.data.name, 'MT', [!doTitleHorizontalMarginExist, !doTitleVerticalMarginExist])	
 			
 			// se espaço horizontal || vertical - tamanho horizontal || vertical do percentagem < margem vertical || horizontal
 			var isBoxSmallForPercentage = box.height - percentage.height < minMargin.vertical*2
@@ -431,7 +427,7 @@ var formatTreemapText = function(d) {
 
 			if (isBoxSmallForPercentage){
 				percentage.self.attr("x", box.width - minMargin.horizontal - 2);
-			}			
+			}
 		}
 	});
 }
