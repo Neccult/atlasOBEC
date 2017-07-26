@@ -315,7 +315,7 @@ var formatTreemapText = function(d) {
 	var g = d3.selectAll("#corpo svg g");
 	g.each(function(d){
 		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
-		var minMargin = { horizontal:1, vertical: 2, betweenText: 3 };
+		var minMargin = { horizontal:1, vertical: 2, betweenText: 4 };
 
 		var that = d3.select(this);	
 		var box = that.select('rect').node();	
@@ -378,7 +378,7 @@ var formatTreemapText = function(d) {
 			// var areBothSmall = isBoxHeightSmall && isBoxWidthSmall;
 
 			var doBothFitVertically = box.height - title.height - percentage.height - minMargin.betweenText > minMargin.vertical*2 && box.height - title.height - percentage.height - minMargin.betweenText > 0;
-			var doBothFitHorizontally = box.width - title.width - percentage.width - minMargin.betweenText > minMargin.horizontal*2 && box.width - title.width - percentage.width - minMargin.betweenText > 0;
+			var doBothFitHorizontally = box.width - title.width - percentage.width - acceptableMargin.betweenText > minMargin.horizontal*2 && box.width - title.width - percentage.width - minMargin.betweenText > 0;
 
 			doesTitleFit = calc.title.width > minMargin.horizontal*2 && calc.title.width > 0 && calc.title.height > minMargin.vertical*2 && calc.title.height > 0;
 			doesPercentageFit = calc.percentage.width > minMargin.horizontal*2 && calc.percentage.width > 0 && calc.percentage.height > minMargin.vertical*2 && calc.percentage.height > 0;
@@ -402,7 +402,7 @@ var formatTreemapText = function(d) {
 			if (!doBothFit && !(doBothFitHorizontally || doBothFitVertically)) {
 				title.self.attr("opacity", 0);
 				percentage.self.attr("opacity", 0);
-			}
+			}	
 
 			// se os dois (cabem verticalmente, !horizontalmente, espaço vertical disponível < margem vertical) && (!cabem verticalmente, horizontalmente, espaço horizontal disponível < margem horizontal)
 			var isBoxSmallForText = ((doBothFitVertically
@@ -412,14 +412,21 @@ var formatTreemapText = function(d) {
 										&& doBothFitHorizontally)
 										&& box.width - title.width - percentage.width < minMargin.horizontal*2);
 
+			var doTitleHorizontalMarginExist = (box.width - title.width - percentage.width - minMargin.betweenText) / 2 >= minMargin.horizontal*2 + 2;
+			var doTitleVerticalMarginExist = (box.height - title.height - minMargin.vertical) / 2 >= acceptableMargin.vertical*2;
+
+		//	console.log(d.data.name, doMarginExist);
+
+			debug(d.data.name, 'MT', [!doTitleHorizontalMarginExist, !doTitleVerticalMarginExist])	
+			
 			// se espaço horizontal || vertical - tamanho horizontal || vertical do percentagem < margem vertical || horizontal
 			var isBoxSmallForPercentage = box.height - percentage.height < minMargin.vertical*2
-										|| box.width - percentage.width < (minMargin.horizontal+2)*2 ;
+										|| box.width - percentage.width < (minMargin.horizontal+2)*2;
 
-			if (isBoxSmallForText){
+			if (isBoxSmallForText || ((!doTitleHorizontalMarginExist || !doTitleVerticalMarginExist) && !doBothFitVertically)){
 				title.self
-				.attr("x", minMargin.horizontal + 4)
-				.attr("y", minMargin.vertical + 11);
+					.attr("x", minMargin.horizontal + 4)
+					.attr("y", minMargin.vertical + 11);
 			}
 
 			if (isBoxSmallForPercentage){
