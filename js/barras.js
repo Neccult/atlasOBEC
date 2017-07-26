@@ -134,16 +134,8 @@
 				var decimalDigits;
 
 				// test decimal number and sets decimal digits that will be visible
-				if (decimalDigitsCount < minFraction){
-					// if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
-					if (decimalDigitsCount === 2){
-						decimalDigits = minFraction + 1;
-					} else {
-						decimalDigits = minFraction + higherZeroOcur;
-					}
-				} else {
-					decimalDigits = decimalDigitsCount + 3;
-				}
+				// if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
+				decimalDigits = minFraction + higherZeroOcur;
 				
 				var format = d3.format("."+decimalDigits+"f");
 				dadosCounter++;
