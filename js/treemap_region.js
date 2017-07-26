@@ -202,9 +202,9 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		// 	var minusValue = nodeHeight(d) - 20 <= nodeHeight(d) / 2? nodeHeight(d) / 2 - 12 : 10;
 		// 	return nodeHeight(d) - minusValue;
 		// })
-		.attr("opacity", function(d, i) {			
+		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? 0 : 1;
+			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
 		})
 		.attr("font-size", function(d) {
 			var nWidth = nodeWidth(d);

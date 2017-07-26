@@ -170,9 +170,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	percentageTextElement.append('tspan')
 		.text(function(d) { return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
-		.attr("opacity", function(d, i) {			
+		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? 0 : 1;
+			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
 		})
 		.attr("font-size", function(d) {
 			var nWidth = nodeWidth(d);

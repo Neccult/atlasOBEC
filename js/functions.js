@@ -396,7 +396,7 @@ var formatTreemapText = function() {
 
 			// se apenas porcentagem couber esconder title
 			if (doesPercentageFit && !(doBothFitHorizontally || doBothFitVertically))
-				title.self.attr("opacity", 0);
+				title.self.attr("display", "none");
 
 			// se os dois não couberem esconde os dois
 			if (!doBothFit && !(doBothFitHorizontally || doBothFitVertically)) {
