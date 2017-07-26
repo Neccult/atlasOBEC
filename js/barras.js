@@ -115,8 +115,13 @@
 			return d;
 		})).nice();
 
+		var maxDecimalAxis = 0;
+		$.each(dados.value, function(i, d){
+			maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis? countValidDecimalDigits(d): maxDecimalAxis;			
+		});
+
 		var formatYAxis = function(d){
-			var higherZeroOcur = 0;
+			var higherZeroOcur = maxDecimalAxis;
 			var dadosCounter = 0;
 			var minFraction = 3;
 
@@ -129,14 +134,16 @@
 				var decimalDigits;
 
 				// test decimal number and sets decimal digits that will be visible
-				if (decimalDigitsCount < minFraction)
+				if (decimalDigitsCount < minFraction){
 					// if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
-					if (decimalDigitsCount === 2)
+					if (decimalDigitsCount === 2){
 						decimalDigits = minFraction + 1;
-					else
-						decimalDigits = minFraction;
-				else
+					} else {
+						decimalDigits = minFraction + higherZeroOcur;
+					}
+				} else {
 					decimalDigits = decimalDigitsCount + 3;
+				}
 				
 				var format = d3.format("."+decimalDigits+"f");
 				dadosCounter++;
@@ -146,7 +153,7 @@
 			var axisCountValidDecimalDigits = function(value, acum) {
 				var acum = acum || 0;
 				var digitString = typeof value !== 'string' && typeof value !== 'undefined'? (value).toString() : value;
-
+				
 				// break condition
 				if(!value){
 					if (acum > higherZeroOcur)

@@ -108,7 +108,7 @@ var countValidDecimalDigits = function(value, acum) {
 	if (digitString.match(/\./g))
 		digitString = digitString.split(".")[1];
 
-	var isZero = parseInt(digitString[0])	 === 0? 1: 0;
+	var isZero = parseInt(digitString[0]) === 0? 1: 0;
 	var newValue = isZero? digitString.substring(1) : "";
 	var newAcum = acum + isZero;
 
@@ -307,7 +307,7 @@ function debug(value, match, args){
 	Função: formatTreemapText
 		função formata texto interno nos nódulos do treemap
 	Entrada: 
-		{string} type: tipo do gráfico usado ex.: 'scc', 'region'
+		N/A
 	Saída:
 		manipula elementos na página/DOM
 -----------------------------------------------------------------------------*/
