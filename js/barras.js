@@ -371,7 +371,7 @@
 					return y(d) - 5;        
 			   });
 		}
-
+		
 		//formata labels eixo X
 		var xAxis = d3.axisBottom(x)
 			.tickFormat(function(d){ return dados.key[d];})
@@ -411,4 +411,27 @@
 			if (currentMaxWidth > maxNormalWidth)
 				svg.attr("transform", "translate(" + Math.round(margin.left +  (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
 		}();
+
+		// testa se TODOS os valores estão zerados
+		var isValueZero = dados.value.reduce(function(sum, val){ return sum + val; }, 0) === 0;
+		var isTaxaZero = dados.taxa.reduce(function(sum, val){ return sum + val; }, 0) === 0;
+		var isPercentageZero = dados.percentual.reduce(function(sum, val){ return sum + val; }, 0) === 0;
+		if (isValueZero && isTaxaZero && isPercentageZero) {		
+			d3.selectAll("#corpo>svg>g>*")
+				.filter(function(d){
+					// não aplica display none no título
+					var clss = d3.select(this).attr("class");					
+					return !/title/g.test(clss);					
+				})
+				.attr("display", "none");
+			
+			d3.select("#corpo>svg")
+				.append("g")
+				.attr("class", "no-info")
+				.append("text")
+				.text("Não há dados sobre essa desagregação")
+				.attr("x", d3.select("#corpo>svg").attr("width") / 2)
+				.attr("y", d3.select("#corpo>svg").attr("height") / 2)
+				.attr("text-anchor", "middle");
+		}
 	};
