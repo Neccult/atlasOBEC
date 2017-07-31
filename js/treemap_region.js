@@ -275,6 +275,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		cont ++;
 	});
 
+	// testa e mostra mesagem de valor zerado/indisponível
 	var isValueZero = false;
 	d3.selectAll("#corpo>svg>g")
 	.data(root.leaves())

@@ -258,6 +258,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	d3.selectAll('#testDiv').remove();
 
+	// testa e mostra mesagem de valor zerado/indisponível
 	var isValueZero = false;
 	d3.selectAll("#corpo>svg>g")
 	.data(root.leaves())

@@ -412,7 +412,7 @@
 				svg.attr("transform", "translate(" + Math.round(margin.left +  (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
 		}();
 
-		// testa se TODOS os valores estão zerados
+		// testa e mostra mesagem de valor zerado/indisponível
 		var isValueZero = dados.value.reduce(function(sum, val){ return sum + val; }, 0) === 0;
 		var isTaxaZero = dados.taxa.reduce(function(sum, val){ return sum + val; }, 0) === 0;
 		var isPercentageZero = dados.percentual.reduce(function(sum, val){ return sum + val; }, 0) === 0;
