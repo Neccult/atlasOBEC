@@ -105,7 +105,6 @@
 				type: "<?php echo $type; ?>"
 			};
 
-			var pageTitle = "<?php echo strip_tags($text['title'])?>";
 		</script>
 
 		<script src="js/<?php echo $view; ?>.js"></script>
