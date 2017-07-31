@@ -259,13 +259,13 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	d3.selectAll('#testDiv').remove();
 
 	// testa e mostra mensagem de valor zerado/indisponível
-	var isValueZero = false;
+	var isValueZero = true;
 	d3.selectAll("#corpo>svg>g")
 	.data(root.leaves())
 	.attr("display", function(d){
 		var size = parseFloat(d.data.size);
 		var isSizeZero = size === 0 || size === null || size === undefined;
-		if (isSizeZero && isValueZero)
+		if (!isSizeZero && isValueZero)
 			isValueZero = false;
 	});
 

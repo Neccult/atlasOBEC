@@ -281,8 +281,8 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	.data(root.leaves())
 	.attr("display", function(d){
 		var size = parseFloat(d.data.size);
-		var isSizeZero = size === 0 || size === null || size === undefined;
-		if (isSizeZero && isValueZero)
+		var isSizeZero = size === 0 || size === null || size === undefined;		
+		if (!isSizeZero && isValueZero)
 			isValueZero = false;
 	});
 
