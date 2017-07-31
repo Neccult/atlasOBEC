@@ -316,7 +316,7 @@
 		// cria título do gráfico
 		svg.append("text")
 			.attr("x", (width / 2))             
-			.attr("y", 0 - 12)
+			.attr("y", 0 - 9)
 			.attr("text-anchor", "middle")  
 			.attr("class","barras-title")
 			.text(data[dados.key[0]].uf);	
@@ -412,7 +412,7 @@
 				svg.attr("transform", "translate(" + Math.round(margin.left +  (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
 		}();
 
-		// testa e mostra mesagem de valor zerado/indisponível
+		// testa e mostra mensagem de valor zerado/indisponível
 		var isValueZero = dados.value.reduce(function(sum, val){ return sum + val; }, 0) === 0;
 		var isTaxaZero = dados.taxa.reduce(function(sum, val){ return sum + val; }, 0) === 0;
 		var isPercentageZero = dados.percentual.reduce(function(sum, val){ return sum + val; }, 0) === 0;

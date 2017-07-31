@@ -275,15 +275,15 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		cont ++;
 	});
 
-	// testa e mostra mesagem de valor zerado/indisponível
-	var isValueZero = false;
+	// testa e mostra mensagem de valor zerado/indisponível
+	var isValueZero = true;
 	d3.selectAll("#corpo>svg>g")
 	.data(root.leaves())
 	.attr("display", function(d){
-		//console.log(d.data);
 		var size = parseFloat(d.data.size);
 		var isSizeZero = size === 0 || size === null || size === undefined;
-		isValueZero = isSizeZero;
+		if (isSizeZero && isValueZero)
+			isValueZero = false;
 	});
 
 	// testa se o valor de size é zero
