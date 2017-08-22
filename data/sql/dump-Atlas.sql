@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
--- Host: 143.54.231.143    Database: Atlas
+-- Host: localhost    Database: Atlas
 -- ------------------------------------------------------
--- Server version	5.7.18
+-- Server version	5.7.19-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -109,6 +109,154 @@ INSERT INTO `Eixo_1` VALUES (61736,7,50,2,7,0,2009,764.3877875401,0.0000147795,0
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Eixo_2`
+--
+
+DROP TABLE IF EXISTS `Eixo_2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Eixo_2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Numero` int(11) NOT NULL,
+  `idUF` int(11) NOT NULL,
+  `idCadeia` int(11) NOT NULL,
+  `idOcupacao` int(11) NOT NULL,
+  `idPorte` int(11) NOT NULL,
+  `idEscolaridade` int(11) NOT NULL,
+  `idEtinia` int(11) NOT NULL,
+  `idIdade` int(11) NOT NULL,
+  `Formalidade` tinyint(1) DEFAULT NULL,
+  `Previdencia` tinyint(1) DEFAULT NULL,
+  `Sindical` tinyint(1) DEFAULT NULL,
+  `Sexo` tinyint(1) DEFAULT NULL COMMENT 'True = Masculino\nFalse = Feminino\nNull = none',
+  `Ano` int(11) DEFAULT NULL,
+  `Valor` double DEFAULT NULL,
+  `Percentual` double DEFAULT NULL,
+  `Taxa` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Variavel_UF2_idx` (`idUF`),
+  KEY `fk_Variavel_Cadeias2_idx` (`idCadeia`),
+  KEY `fk_Variavel_Porte2_idx` (`idPorte`),
+  KEY `fk_Eixo_2_Etinia1_idx` (`idEtinia`),
+  KEY `fk_Eixo_2_Idade1_idx` (`idIdade`),
+  KEY `fk_Eixo_2_Escolaridade1_idx` (`idEscolaridade`),
+  KEY `fk_Eixo_2_Ocupacao1_idx` (`idOcupacao`),
+  CONSTRAINT `fk_Eixo_2_Escolaridade1` FOREIGN KEY (`idEscolaridade`) REFERENCES `Escolaridade` (`idEscolaridade`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Eixo_2_Etinia1` FOREIGN KEY (`idEtinia`) REFERENCES `Etinia` (`idEtinia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Eixo_2_Idade1` FOREIGN KEY (`idIdade`) REFERENCES `Idade` (`idIdade`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Eixo_2_Ocupacao1` FOREIGN KEY (`idOcupacao`) REFERENCES `Ocupacao` (`idOcupacao`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_Cadeias2` FOREIGN KEY (`idCadeia`) REFERENCES `Cadeia` (`idCadeia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_Porte2` FOREIGN KEY (`idPorte`) REFERENCES `Porte` (`idPorte`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_UF2` FOREIGN KEY (`idUF`) REFERENCES `UF` (`idUF`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Eixo_2`
+--
+
+LOCK TABLES `Eixo_2` WRITE;
+/*!40000 ALTER TABLE `Eixo_2` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Eixo_2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Escolaridade`
+--
+
+DROP TABLE IF EXISTS `Escolaridade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Escolaridade` (
+  `idEscolaridade` int(11) NOT NULL,
+  `EscolaridadeNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idEscolaridade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Escolaridade`
+--
+
+LOCK TABLES `Escolaridade` WRITE;
+/*!40000 ALTER TABLE `Escolaridade` DISABLE KEYS */;
+INSERT INTO `Escolaridade` VALUES (0,'Todas'),(1,'Sem Instrução'),(2,'Fundamental Incompleto'),(3,'Fundamental Completo'),(4,'Médio Completo'),(5,'Superior Incompleto'),(6,'Superior Completo'),(7,'Não Determinado');
+/*!40000 ALTER TABLE `Escolaridade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Etinia`
+--
+
+DROP TABLE IF EXISTS `Etinia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Etinia` (
+  `idEtinia` int(11) NOT NULL,
+  `EtiniaNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idEtinia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Etinia`
+--
+
+LOCK TABLES `Etinia` WRITE;
+/*!40000 ALTER TABLE `Etinia` DISABLE KEYS */;
+INSERT INTO `Etinia` VALUES (0,'Todas'),(1,'Indígena'),(2,'Branca'),(3,'Preta'),(4,'Amarela'),(5,'Parda');
+/*!40000 ALTER TABLE `Etinia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Idade`
+--
+
+DROP TABLE IF EXISTS `Idade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Idade` (
+  `idIdade` int(11) NOT NULL,
+  `IdadeNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idIdade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Idade`
+--
+
+LOCK TABLES `Idade` WRITE;
+/*!40000 ALTER TABLE `Idade` DISABLE KEYS */;
+INSERT INTO `Idade` VALUES (0,'Todas'),(1,'10 a 17'),(2,'18 a 29'),(3,'30 a 49'),(4,'50 a 64'),(5,'65 ou mais'),(6,'Não classificado');
+/*!40000 ALTER TABLE `Idade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Ocupacao`
+--
+
+DROP TABLE IF EXISTS `Ocupacao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Ocupacao` (
+  `idOcupacao` int(11) NOT NULL,
+  `OcupacaoNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idOcupacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Ocupacao`
+--
+
+LOCK TABLES `Ocupacao` WRITE;
+/*!40000 ALTER TABLE `Ocupacao` DISABLE KEYS */;
+INSERT INTO `Ocupacao` VALUES (0,'Setorial'),(1,'Ocupacional - Atividades Relacionadas'),(2,'Ocupacional - Cultura'),(3,'Ocupacional - Todas');
+/*!40000 ALTER TABLE `Ocupacao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Porte`
 --
 
@@ -154,7 +302,7 @@ CREATE TABLE `UF` (
 
 LOCK TABLES `UF` WRITE;
 /*!40000 ALTER TABLE `UF` DISABLE KEYS */;
-INSERT INTO `UF` VALUES (0,'Brasil','Todas','BR'),(11,'Rondônia','Norte','RO'),(12,'Acre','Norte','AC'),(13,'Amazonas','Norte','AM'),(14,'Roraima','Norte','RR'),(15,'Pará','Norte','PA'),(16,'Amapá','Norte','AP'),(17,'Tocantins','Norte','TO'),(21,'Maranhão','Nordeste','MA'),(22,'Piauí','Nordeste','PI'),(23,'Ceará','Nordeste','CE'),(24,'Rio Grande Do Norte','Nordeste','RN'),(25,'Paraíba','Nordeste','PB'),(26,'Pernambuco','Nordeste','PE'),(27,'Alagoas','Nordeste','AL'),(28,'Sergipe','Nordeste','SE'),(29,'Bahia','Nordeste','BA'),(31,'Minas Gerais','Sudeste','MG'),(32,'Espírito Santo','Sudeste','ES'),(33,'Rio De Janeiro','Sudeste','RJ'),(35,'São Paulo','Sudeste','SP'),(41,'Paraná','Sul','PR'),(42,'Santa Catarina','Sul','SC'),(43,'Rio Grande Do Sul','Sul','RS'),(50,'Mato Grosso Do Sul','Centro-Oeste','MS'),(51,'Mato Grosso','Centro-Oeste','MT'),(52,'Goiás','Centro-Oeste','GO'),(53,'Distrito Federal','Centro-Oeste','DF');
+INSERT INTO `UF` VALUES (0,'Todos','Todas','Todas'),(11,'Rondônia','Norte','RO'),(12,'Acre','Norte','AC'),(13,'Amazonas','Norte','AM'),(14,'Roraima','Norte','RR'),(15,'Pará','Norte','PA'),(16,'Amapá','Norte','AP'),(17,'Tocantins','Norte','TO'),(21,'Maranhão','Nordeste','MA'),(22,'Piauí','Nordeste','PI'),(23,'Ceará','Nordeste','CE'),(24,'Rio Grande Do Norte','Nordeste','RN'),(25,'Paraíba','Nordeste','PB'),(26,'Pernambuco','Nordeste','PE'),(27,'Alagoas','Nordeste','AL'),(28,'Sergipe','Nordeste','SE'),(29,'Bahia','Nordeste','BA'),(31,'Minas Gerais','Sudeste','MG'),(32,'Espírito Santo','Sudeste','ES'),(33,'Rio De Janeiro','Sudeste','RJ'),(35,'São Paulo','Sudeste','SP'),(41,'Paraná','Sul','PR'),(42,'Santa Catarina','Sul','SC'),(43,'Rio Grande Do Sul','Sul','RS'),(50,'Mato Grosso Do Sul','Centro-Oeste','MS'),(51,'Mato Grosso','Centro-Oeste','MT'),(52,'Goiás','Centro-Oeste','GO'),(53,'Distrito Federal','Centro-Oeste','DF');
 /*!40000 ALTER TABLE `UF` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-19 12:09:24
+-- Dump completed on 2017-08-22 16:49:08
