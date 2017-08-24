@@ -161,6 +161,44 @@ LOCK TABLES `Eixo_2` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Eixo_3`
+--
+
+DROP TABLE IF EXISTS `Eixo_3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Eixo_3` (
+  `id` int(11) NOT NULL,
+  `Numero` int(11) NOT NULL,
+  `idUF` int(11) NOT NULL,
+  `idMecanismo` int(11) NOT NULL,
+  `idCadeia` int(11) NOT NULL,
+  `PessoaFisica` tinyint(1) DEFAULT NULL COMMENT 'TRUE = PF\nFALSE = PJ\nNULL = none',
+  `Modalidade` tinyint(1) DEFAULT NULL COMMENT 'TRUE = direto\nFALSE = indireto\nNULL = none',
+  `Ano` int(11) DEFAULT NULL,
+  `Valor` double DEFAULT NULL,
+  `Percentual` double DEFAULT NULL,
+  `Taxa` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Variavel_UF3_idx` (`idUF`),
+  KEY `fk_Variavel_Atuacao3_idx` (`idMecanismo`),
+  KEY `fk_Variavel_Cadeias3_idx` (`idCadeia`),
+  CONSTRAINT `fk_Variavel_Atuacao3` FOREIGN KEY (`idMecanismo`) REFERENCES `Mecanismo` (`idMecanismo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_Cadeias3` FOREIGN KEY (`idCadeia`) REFERENCES `Cadeia` (`idCadeia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_UF3` FOREIGN KEY (`idUF`) REFERENCES `UF` (`idUF`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Eixo_3`
+--
+
+LOCK TABLES `Eixo_3` WRITE;
+/*!40000 ALTER TABLE `Eixo_3` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Eixo_3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Escolaridade`
 --
 
@@ -230,6 +268,30 @@ LOCK TABLES `Idade` WRITE;
 /*!40000 ALTER TABLE `Idade` DISABLE KEYS */;
 INSERT INTO `Idade` VALUES (0,'Todas'),(1,'10 a 17'),(2,'18 a 29'),(3,'30 a 49'),(4,'50 a 64'),(5,'65 ou mais'),(6,'Não classificado');
 /*!40000 ALTER TABLE `Idade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Mecanismo`
+--
+
+DROP TABLE IF EXISTS `Mecanismo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Mecanismo` (
+  `idMecanismo` int(11) NOT NULL,
+  `MecanismoNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idMecanismo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Mecanismo`
+--
+
+LOCK TABLES `Mecanismo` WRITE;
+/*!40000 ALTER TABLE `Mecanismo` DISABLE KEYS */;
+INSERT INTO `Mecanismo` VALUES (0,'Todos'),(1,'FNC'),(2,'Mecenato'),(3,'Fundo Cultura'),(4,'Outros');
+/*!40000 ALTER TABLE `Mecanismo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -319,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-22 16:49:08
+-- Dump completed on 2017-08-24 14:41:31
