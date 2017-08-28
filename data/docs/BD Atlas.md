@@ -5,7 +5,7 @@ Documentação referente ao banco de dados da plataforma
 
 ![Diagrama Entidade Relacional Eixo I](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/eixo1-DER.png)
 
-1 -||---<- n
+	1 -||---<- n
 
 ## Estrutura das tuplas do Eixo I:
 	(ID, Num, UF, Atuacao, Cadeia, Porte, Ano, Valor, Percentual, Taxa)
@@ -35,7 +35,7 @@ Documentação referente ao banco de dados da plataforma
 
 ![Tabela Eixo I](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/table-eixo1.png)
 
-Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
+	Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
 
 ## Exemplo de Consultas Eixo I:
 
@@ -110,8 +110,8 @@ Por definição o valor “0” (zero) foi usado para identificar chaves primár
 			(4,52,2,5,0,2012,178426.34473636,0.0012165521,-0.1455579282),
 			(4,53,2,5,0,2012,609413.415215906,0.0041551215,-0.0745132902),
 			(4,0,2,5,0,2012,2.12741181513047E7,0.1450518546,-0.0498197883);
-
-##Observações numéricas importantes Eixo I:
+			
+## Observações numéricas importantes Eixo I:
 
 	-Quantidade de observações (registros/tuplas) no banco de dados da -Variável 1 (V1) = ~ 20.000
 	-Para cada combinação possível de desagregações há 224 registros (observações) no banco de dados relacional
@@ -130,13 +130,13 @@ Por definição o valor “0” (zero) foi usado para identificar chaves primár
 	-Todas Variáveis do Eixo I = 279104
 	-Devido a restrição de não poder combinar Atuações com Portes livremente o total de registros do Eixo I cai aproximadamente pela metade.
 
-##Diagrama Entidade Relacional Eixo II:
+## Diagrama Entidade Relacional Eixo II:
 
 ![Diagrama Entidade Relacional Eixo II](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/eixo2-DER.png)
 
-1 -||---<- n
+	1 -||---<- n
 
-##Estrutura das tuplas do Eixo II:
+## Estrutura das tuplas do Eixo II:
 
 	(ID, Num, UF, Cadeia, Porte, Ocupacao, Escolaridade, Etinia, Idade, Formalidade, Previdencia, Sindical, Sexo, Ano, Valor, Percentual, Taxa)
 
@@ -190,20 +190,20 @@ Por definição o valor “0” (zero) foi usado para identificar chaves primár
 
 	* não obrigatório
 
-##Exemplo de Dados Eixo II:
+## Exemplo de Dados Eixo II:
 
 ![Tabela Eixo II](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/table-eixo2.png)
 
-Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
-EXCETO na ocupação cuja semântica de total é o id 3
+	Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
+	EXCETO na ocupação cuja semântica de total é o id 3
 
-##Diagrama Entidade Relacional Eixo III:
+## Diagrama Entidade Relacional Eixo III:
 
 ![Diagrama Entidade Relacional Eixo III](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/eixo3-DER.png)
 
 1 -||---<- n
 
-##Estrutura das tuplas do Eixo III:
+## Estrutura das tuplas do Eixo III:
 
 	(ID, Num, UF, Mecanismo, Cadeia, PessoaFisica, Modalidade, Ano, Valor, Percentual, Taxa)
 
@@ -239,11 +239,11 @@ EXCETO na ocupação cuja semântica de total é o id 3
 
 	* não obrigatório
 
-##Exemplo de Dados Eixo III:
+## Exemplo de Dados Eixo III:
 
 ![Tabela Eixo II](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/table-eixo3.png)
 
-Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
-NO CASO dos mecanismos há dois conjuntos excludentes 
-FNC U MECENATO e FUNDO CULTURA U OUTROS
-TODOS (“0”) se aplica somente ao total de cada conjunto excludente
+	Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
+	NO CASO dos mecanismos há dois conjuntos excludentes 
+	FNC U MECENATO e FUNDO CULTURA U OUTROS
+	TODOS (“0”) se aplica somente ao total de cada conjunto excludente
