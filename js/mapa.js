@@ -93,7 +93,13 @@ d3.json('data/colors.json', function(error, data) {
   colorJSON = data;
 });
 
+// import pt-br.json file for get the title
+var textJSON;
+d3.json('data/pt-br.json', function(error, data) {
+  if(error) throw error;
 
+  textJSON = data;
+});
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
 // console.log(config);
@@ -204,8 +210,12 @@ function ready(error, br_states, mapa){
 		.attr("class", "legendLinear")
 		.attr("transform", legendTransform);
 
+	//retira tag <span> do title
+	var title_content = textJSON.var[vrv-1].title;
+	var title = $(title_content).text();
+
 	var legendLinear = d3.legendColor()
-		.title("Total de Empresas "+ano)
+		.title(title+" "+ano)
 		.labelFormat(d3.format(".0f"))
 		.shapeWidth(shapeWidth)
 		.shapePadding(5)
