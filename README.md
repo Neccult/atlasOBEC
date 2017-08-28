@@ -135,6 +135,6 @@ Para facilitar a explicação vamos assumir o uso do mysql via terminal no diret
 
 ## Documentação Detalhada
 
- - [Requisitos e Funcionalidades](https://drive.google.com/open?id=1awAMcvdPkXRN4dj4NJ1wAWA6tklW87aBFzwSc7-U1Xg)
+ - [Requisitos e Funcionalidades](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/Requisitos%20Atlas.md)
 
- - [DER e Banco de Dados](https://drive.google.com/open?id=1Smfc-PtpTKp-7ksgZ548cBFgSvh_oaANwgHiy5WSThM)
+ - [DER e Banco de Dados](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/BD%20Atlas.md)
