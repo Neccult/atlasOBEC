@@ -212,7 +212,8 @@ function ready(error, br_states, mapa){
 
 	//retira tag <span> do title
 	var title_content = textJSON.var[vrv-1].title;
-	var title = $(title_content).text();
+	var title = title_content.replace("<span>", "");
+	var title = title.replace("</span>", "");
 
 	var legendLinear = d3.legendColor()
 		.title(title+" "+ano)
