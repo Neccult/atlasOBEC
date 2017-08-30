@@ -1,7 +1,7 @@
 # Atlas da Cultura OBEC/UFRGS
 Descrição textual sobre a implementação da paltaforma.
 
-##Requisitos Funcionais:
+## Requisitos Funcionais:
 	- Menu dinâmico para os 4 eixos contendo para cada eixo os menus de variáveis, desagregações e periodicidade respectivos de cada eixo;
 
 	- Para cada combinação possível e viável de variável, desagregação e período plotar informações nos seguintes formatos:

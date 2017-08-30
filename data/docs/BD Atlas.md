@@ -201,7 +201,7 @@ Documentação referente ao banco de dados da plataforma
 
 ![Diagrama Entidade Relacional Eixo III](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/eixo3-DER.png)
 
-1 -||---<- n
+	1 -||---<- n
 
 ## Estrutura das tuplas do Eixo III:
 
@@ -247,3 +247,45 @@ Documentação referente ao banco de dados da plataforma
 	NO CASO dos mecanismos há dois conjuntos excludentes 
 	FNC U MECENATO e FUNDO CULTURA U OUTROS
 	TODOS (“0”) se aplica somente ao total de cada conjunto excludente
+
+## Diagrama Entidade Relacional Eixo IV:
+
+![Diagrama Entidade Relacional Eixo III](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/eixo4-DER.png)
+
+	1 -||---<- n
+
+## Estrutura das tuplas do Eixo IV:
+
+	(ID, Num, Cadeia, Parceiro, Tipo, Ano, Valor, Percentual, Taxa)
+
+	ID = identificador único autoincremento (chave primária)
+
+	Num = número da variável 
+	(Ex: Variável 1 V1 -> Num =  1)
+
+	Cadeia = número identificador da Cadeia 
+	(chave estrangeira, EX: Artes -> Cadeia = 2)
+
+	Parceiro = número identificador do Parceiro Comercial 
+	(chave estrangeira, EX: Europa -> Parceiro = 5)
+
+	Tipo = número identificador do Tipo do valor
+	(chave estrangeira, EX: Exportação -> Tipo = 1)
+
+	Ano = ano referente
+	(EX:  ano de 2014 -> Ano = 2014)
+
+	Valor = quantidade/valor da variável 
+		(quantidade numérica em ponto flutuante de precisão dupla)
+
+	Percentual =  DOUBLE  referente ao percentual do Valor *
+
+	Taxa =  DOUBLE referente a taxa de variação do Valor / Ano *
+
+	* não obrigatório
+
+## Exemplo de Dados Eixo IV:
+
+![Tabela Eixo II](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/table-eixo4.png)
+
+	Por definição o valor “0” (zero) foi usado para identificar chaves primárias com a semântica de total/conjunto
