@@ -107,9 +107,9 @@ class EixoDois {
 	    $etn = id do etinia
 	    $idd = id da idade
 	    $form = flag formalidade
-		$prev = flag previdencia;
-		$sind = flag sindical;
-		$sexo = flag sexos;
+		$prev = flag previdencia
+		$sind = flag sindical
+		$sexo = flag sexos
 	    $anos = ano 
 	Saída:
 	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
@@ -179,29 +179,23 @@ class EixoDois {
 	    função para obter um conjunto de tuplas para o mapa
 	Entrada: 
 	    $var = número da váriavel 
-	    $ufs = id do UF 
 	    $cad = id do SCC 
-	    $prt = id do porte
 	    $ocp = id da ocupação
-	    $esc = id da escolaridade
-	    $etn = id do etinia
-	    $idd = id da idade
-	    $form = flag formalidade
-		$prev = flag previdencia;
-		$sind = flag sindical;
-		$sexo = flag sexos;
 	    $anos = ano
 	Saída:
 	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
+	public static function getter_mapa($var, $cad, $ocp, $anos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF"
-					." JOIN Atuacao AS atc ON atc.idAtuacao = ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
+					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte"
+					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
+					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade"
+					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia"
+					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade"
 					." WHERE ex.Numero = ".$var;
 
 				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
@@ -224,21 +218,35 @@ class EixoDois {
 	Entrada: 
 	    $var = número da váriavel 
 	    $ufs = id do UF 
-	    $atc = id da atuação
 	    $cad = id do SCC 
 	    $prt = id do porte
+	    $ocp = id da ocupação
+	    $esc = id da escolaridade
+	    $etn = id do etinia
+	    $idd = id da idade
+	    $form = flag formalidade
+		$prev = flag previdencia
+		$sind = flag sindical
+		$sexo = flag sexos
 	Saída:
 	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $atc, $cad, $prt){
+	public static function getter_barras($var, $ufs, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Atuacao AS atc ON atc.idAtuacao = ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE ex.Numero = ".$var;
+					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
+					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
+					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
+					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+					." WHERE ex.Numero = ".$var
+					." AND ex.Formalidade = ".$form 
+					." AND ex.Previdencia = ".$prev
+					." AND ex.Sindical = ".$sind
+					." AND ex.Sexo = ".$sexos;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
@@ -257,24 +265,38 @@ class EixoDois {
 	Função: Getter Region
 	    função para obter um conjunto de tuplas para treemap region
 	Entrada: 
-	    $var = número da váriavel 
-	    $atc = id da atuação
+	    $var = número da váriavel  
 	    $cad = id do SCC 
 	    $prt = id do porte
+	    $ocp = id da ocupação
+	    $esc = id da escolaridade
+	    $etn = id do etinia
+	    $idd = id da idade
+	    $form = flag formalidade
+		$prev = flag previdencia
+		$sind = flag sindical
+		$sexo = flag sexos
 	    $anos = ano 
 	    $regiao = região do Brasil
 	Saída:
 	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
+	public static function getter_region($var, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos $anos, $regiao){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '".$regiao."'"
-					." JOIN Atuacao AS atc ON atc.idAtuacao = ex.idAtuacao AND atc.idAtuacao = ".$atc
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE ex.Numero = ".$var;
+					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
+					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
+					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
+					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+					." WHERE ex.Numero = ".$var
+					." AND ex.Formalidade = ".$form 
+					." AND ex.Previdencia = ".$prev
+					." AND ex.Sindical = ".$sind
+					." AND ex.Sexo = ".$sexos;
 
 				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 

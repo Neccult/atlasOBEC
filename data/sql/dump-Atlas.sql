@@ -199,6 +199,42 @@ LOCK TABLES `Eixo_3` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Eixo_4`
+--
+
+DROP TABLE IF EXISTS `Eixo_4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Eixo_4` (
+  `id` int(11) NOT NULL,
+  `Numero` int(11) NOT NULL,
+  `idCadeia` int(11) NOT NULL,
+  `idParceiro` int(11) NOT NULL,
+  `idTipo` int(11) NOT NULL,
+  `Ano` int(11) DEFAULT NULL,
+  `Valor` double DEFAULT NULL,
+  `Percentual` double DEFAULT NULL,
+  `Taxa` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_Variavel_UF4_idx` (`idParceiro`),
+  KEY `fk_Variavel_Atuacao4_idx` (`idTipo`),
+  KEY `fk_Variavel_Cadeias4_idx` (`idCadeia`),
+  CONSTRAINT `fk_Variavel_Atuacao4` FOREIGN KEY (`idTipo`) REFERENCES `Tipo` (`idTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_Cadeias4` FOREIGN KEY (`idCadeia`) REFERENCES `Cadeia` (`idCadeia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Variavel_UF4` FOREIGN KEY (`idParceiro`) REFERENCES `Parceiro` (`idParceiro`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Eixo_4`
+--
+
+LOCK TABLES `Eixo_4` WRITE;
+/*!40000 ALTER TABLE `Eixo_4` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Eixo_4` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Escolaridade`
 --
 
@@ -319,6 +355,30 @@ INSERT INTO `Ocupacao` VALUES (0,'Setorial'),(1,'Ocupacional - Atividades Relaci
 UNLOCK TABLES;
 
 --
+-- Table structure for table `Parceiro`
+--
+
+DROP TABLE IF EXISTS `Parceiro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Parceiro` (
+  `idParceiro` int(11) NOT NULL,
+  `ParceiroNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idParceiro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Parceiro`
+--
+
+LOCK TABLES `Parceiro` WRITE;
+/*!40000 ALTER TABLE `Parceiro` DISABLE KEYS */;
+INSERT INTO `Parceiro` VALUES (0,'Todos'),(1,'África'),(2,'América do Norte'),(3,'América do Sul'),(4,'Ásia'),(5,'Europa'),(6,'Oceania');
+/*!40000 ALTER TABLE `Parceiro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Porte`
 --
 
@@ -340,6 +400,30 @@ LOCK TABLES `Porte` WRITE;
 /*!40000 ALTER TABLE `Porte` DISABLE KEYS */;
 INSERT INTO `Porte` VALUES (0,'Todas'),(1,'Micro'),(2,'Pequena'),(3,'Média'),(4,'Grande');
 /*!40000 ALTER TABLE `Porte` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Tipo`
+--
+
+DROP TABLE IF EXISTS `Tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Tipo` (
+  `idTipo` int(11) NOT NULL,
+  `TipoNome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idTipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Tipo`
+--
+
+LOCK TABLES `Tipo` WRITE;
+/*!40000 ALTER TABLE `Tipo` DISABLE KEYS */;
+INSERT INTO `Tipo` VALUES (0,'Todos'),(1,'Exportação'),(2,'Importação'),(3,'Saldo Comercial'),(4,'Valor Transacionado');
+/*!40000 ALTER TABLE `Tipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -381,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-08-24 14:41:31
+-- Dump completed on 2017-08-30 16:17:38
