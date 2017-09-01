@@ -2,28 +2,22 @@
 
 ###	Classe que manipula as variáveis do Eixo 2 ###
 
-class EixoDois {
+class EixoTres {
 
 ## Atributos ##
 
-	protected static $table = 'Eixo_2';
+	protected static $table = 'Eixo_3';
 	private static $conn;
 
- 	//informações Eixo_2
+ 	//informações Eixo_3
 	protected $id;
 	public $Numero;
 	public $idUF;
 	public $idCadeia;
-	public $idPorte;
-	public $idOcupacao;
-	public $idEscolaridade;
-	public $idEtinia;
-	public $idIdade;
+	public $idMecanismo;
 
-	public $Formalidade;
-	public $Previdencia;
-	public $Sindical;
-	public $Sexo;
+	public $PessoaFisica;
+	public $Modalidade;
 
 	public $Ano;
 	public $Valor;
@@ -38,20 +32,9 @@ class EixoDois {
 	//informações Cadeia
 	public $CadeiaNome;
 	
-	//informações Porte
-	public $PorteNome;
+	//informações Mecanismo
+	public $MecanismoNome;
 
-	//informações Ocupação
-	public $OcupacaoNome;
-
-	//informações Escolaridade
-	public $EscolaridadeNome;
-
-	//informações Etinia
-	public $EtiniaNome;
-
-	//informações Idade
-	public $IdadeNome;
 
 ## Metodos ##
 	
@@ -101,40 +84,28 @@ class EixoDois {
 	    $var = número da váriavel 
 	    $ufs = id do UF 
 	    $cad = id do SCC 
-	    $prt = id do porte
-	    $ocp = id da ocupação
-	    $esc = id da escolaridade
-	    $etn = id do etinia
-	    $idd = id da idade
-	    $form = flag formalidade
-		$prev = flag previdencia
-		$sind = flag sindical
-		$sexo = flag sexos
+	    $mec = id do mecanismo
+	    $pf =  flag pessoa fisica
+		$mod = flag modalidade
 	    $anos = ano 
 	Saída:
-	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
+	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $ufs, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $anos){
+	public static function find($var, $ufs, $cad, $mec, $pf, $mod, $anos){
 
 		self::connect();
 
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var
-					." AND ex.Formalidade = ".$form 
-					." AND ex.Previdencia = ".$prev
-					." AND ex.Sindical = ".$sind
-					." AND ex.Sexo = ".$sexos 
+					." AND ex.PessoaFisica = ".$pf 
+					." AND ex.Modalidade = ".$mod
 					." AND ex.Ano = ".$anos;
 
 			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoDois');
+			$obj = mysqli_fetch_object($result, 'EixoTres');
 
 		self::disconnect();
 
@@ -147,7 +118,7 @@ class EixoDois {
 	Entrada: 
 	    void
 	Saída:
-	    Todas instancia da Classe EixoDois com seus devidos atributos 
+	    Todas instancia da Classe EixoTres com seus devidos atributos 
 	-----------------------------------------------------------------------------*/
 	public static function all(){
 		self::connect();
@@ -155,17 +126,13 @@ class EixoDois {
 			$query = "SELECT * FROM ".self::$table." AS ex"
 						." JOIN UF AS uf ON uf.idUF = ex.idUF"
 						." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
-						." JOIN Porte AS prt ON prt.idPorte = ex.idPorte"
-						." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao"
-						." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade"
-						." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia"
-						." JOIN Idade AS idd ON idd.idIdade = ex.idIdade"
+						." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo"				
 						." ORDER BY id";
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
 
-			while($obj = mysqli_fetch_object($result, 'EixoDois')){
+			while($obj = mysqli_fetch_object($result, 'EixoTres')){
 				$allObjects[] = $obj;
 			}
 
@@ -180,22 +147,18 @@ class EixoDois {
 	Entrada: 
 	    $var = número da váriavel 
 	    $cad = id do SCC 
-	    $ocp = id da ocupação
+	    $mec = id da mecanismo
 	    $anos = ano
 	Saída:
-	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
+	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $ocp, $anos){
+	public static function getter_mapa($var, $cad, $mec, $anos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF"
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte"
-					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade"
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia"
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade"
+					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var;
 
 				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
@@ -203,7 +166,7 @@ class EixoDois {
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
 
-			while($obj = mysqli_fetch_object($result, 'EixoDois')){
+			while($obj = mysqli_fetch_object($result, 'EixoTres')){
 				$allObjects[] = $obj;
 			}
 
@@ -219,39 +182,27 @@ class EixoDois {
 	    $var = número da váriavel 
 	    $ufs = id do UF 
 	    $cad = id do SCC 
-	    $prt = id do porte
-	    $ocp = id da ocupação
-	    $esc = id da escolaridade
-	    $etn = id do etinia
-	    $idd = id da idade
-	    $form = flag formalidade
-		$prev = flag previdencia
-		$sind = flag sindical
-		$sexo = flag sexos
+	    $mec = id do Mecanismo
+	    $pf = flag PessoaFisica
+		$mod = flag Modalidade
 	Saída:
-	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
+	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos){
+	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var
-					." AND ex.Formalidade = ".$form 
-					." AND ex.Previdencia = ".$prev
-					." AND ex.Sindical = ".$sind
-					." AND ex.Sexo = ".$sexos;
+					." AND ex.PessoaFisica = ".$pf 
+					." AND ex.Modalidade = ".$mod;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
 
-			while($obj = mysqli_fetch_object($result, 'EixoDois')){
+			while($obj = mysqli_fetch_object($result, 'EixoTres')){
 				$allObjects[] = $obj;
 			}
 
@@ -267,43 +218,31 @@ class EixoDois {
 	Entrada: 
 	    $var = número da váriavel  
 	    $cad = id do SCC 
-	    $prt = id do porte
-	    $ocp = id da ocupação
-	    $esc = id da escolaridade
-	    $etn = id do etinia
-	    $idd = id da idade
-	    $form = flag formalidade
-		$prev = flag previdencia
-		$sind = flag sindical
-		$sexo = flag sexos
+	    $mec = id do Mecanismo
+	    $pf = flag PessoaFisica
+		$mod = flag Modalidade
 	    $anos = ano 
 	    $regiao = região do Brasil
 	Saída:
-	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
+	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_region($var, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $anos, $regiao){
+	public static function getter_region($var, $cad, $mec, $pf, $mod, $anos, $regiao){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '".$regiao."'"
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var
-					." AND ex.Formalidade = ".$form 
-					." AND ex.Previdencia = ".$prev
-					." AND ex.Sindical = ".$sind
-					." AND ex.Sexo = ".$sexos;
+					." AND ex.PessoaFisica = ".$pf 
+					." AND ex.Modalidade = ".$mod;
 
 				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
 
-			while($obj = mysqli_fetch_object($result, 'EixoDois')){
+			while($obj = mysqli_fetch_object($result, 'EixoTres')){
 				$allObjects[] = $obj;
 			}
 
