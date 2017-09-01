@@ -138,3 +138,5 @@ Para facilitar a explicação vamos assumir o uso do mysql via terminal no diret
  - [Requisitos e Funcionalidades](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/Requisitos%20Atlas.md)
 
  - [DER e Banco de Dados](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/BD%20Atlas.md)
+
+ - [Fluxograma do atlas OBEC](https://github.com/dlazarosps/atlasOBEC/blob/master/data/docs/Fluxograma%20atlas%20obec.md)
