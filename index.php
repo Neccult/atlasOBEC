@@ -65,7 +65,7 @@
 
 							<div class="row menu-home">
 								
-								<a href="page.php" class="img-link">
+								<a href="page.php#empreendimentos" class="img-link">
 									<div class="col-sm-3 col-xs-6 menu-col">
 										<div class="menu-item control-height">
 

@@ -24,6 +24,7 @@
 		$ano = $_GET["ano"];
 	else
 		$ano = 2014;
+
 ?>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -64,6 +65,23 @@
 	var cad = <?php echo $cad; ?>;
 	var prt = <?php echo $prt; ?>;
 	var ano = <?php echo $ano; ?>;
+	var eixo;
+	switch(window.location.hash.substring(1)) {
+        case "empreendimentos":
+            eixo = 0;
+            break;
+        case "mercado":
+            eixo = 1;
+            break;
+        case "politicas":
+            eixo = 2;
+            break;
+        case "comercio":
+            eixo = 3;
+            break;
+        default:
+            eixo = 0;
+    }
 						
 </script>
 

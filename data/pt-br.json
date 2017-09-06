@@ -11,312 +11,638 @@
 	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
 
 	"var":[
-		{
-			"id":"1",
-			"title":"Total <span>de</span> Empresas",
-			"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
-			],
-			"inativos":{
-				"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+		[
+			{
+				"id":"1",
+				"title":"Total <span>de</span> Empresas",
+				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"title":"Peso <span>das</span> Empresas",
+				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"<span>Natalidade e Mortalidade</span>",
+				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"4",
+				"title":"Receita Total",
+				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				}
+			},
+			{
+				"id":"5",
+				"title":"Receita Líquida",
+				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"6",
+				"title":"Custo",
+				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"7",
+				"title":"Lucro",
+				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"8",
+				"title":"<span>Valor Adicionado (VA)</span>",
+				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"9",
+				"title":"VA PIB",
+				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"10",
+				"title":"IHH Empresas",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"11",
+				"title":"IHH VA",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"C4 Empresas",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"C4 VA",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
 			}
-		},
-		{
-			"id":"2",
-			"title":"Peso <span>das</span> Empresas",
-			"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Porte","id":"prt"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
-			],
-			"inativos":{
-				"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-			}	
-		},
-		{
-			"id":"3",
-			"title":"<span>Natalidade e Mortalidade</span>",
-			"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Porte","id":"prt"}
-			],
-			"inativos":{
-				"mapa":["prt","uf"],"barras":["ano"]
-			}	
-		},
-		{
-			"id":"4",
-			"title":"Receita Total",
-			"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
-			}	
-		},
-		{
-			"id":"5",
-			"title":"Receita Líquida",
-			"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-			}		
-		},
-		{
-			"id":"6",
-			"title":"Custo",
-			"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-			}	
-		},
-		{
-			"id":"7",
-			"title":"Lucro",
-			"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["prt","uf","atc"],"barras":["ano","prt"]
-			}	
-		},
-		{
-			"id":"8",
-			"title":"<span>Valor Adicionado (VA)</span>",
-			"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-			}	
-		},
-		{
-			"id":"9",
-			"title":"VA PIB",
-			"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
-			"type":[
-				{"name":"Mapa", "id":"mapa"},
-				{"name":"Treemap", "id":"treemap_region"},
-				{"name":"Treemap SCC", "id":"treemap_scc"},
-				{"name":"Barras", "id":"barras"}
-			],
-			"mapa":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_region":[
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"treemap_scc":[
-				{"name":"UF","id":"uf"},
-				{"name":"Atuação","id":"atc"},
-				{"name":"Ano","id":"ano"}
-			],
-			"barras":[
-				{"name":"UF","id":"uf"},
-				{"name":"Setor","id":"cad"},
-				{"name":"Atuação","id":"atc"}
-			],
-			"inativos":{
-				"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-			}	
-		},
-		{
-			"id":"10",
-			"title":"IHH Empresas",
-			"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-			"type":[
-				{"name":"Barras", "id":"barras"}
-			]
-		},
-		{
-			"id":"11",
-			"title":"IHH VA",
-			"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-			"type":[
-				{"name":"Barras", "id":"barras"}
-			]
-		},
-		{
-			"id":"12",
-			"title":"C4 Empresas",
-			"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-			"type":[
-				{"name":"Barras", "id":"barras"}
-			]
-		},
-		{
-			"id":"13",
-			"title":"C4 VA",
-			"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-			"type":[
-				{"name":"Barras", "id":"barras"}
-			]
-		}
+		],
+		[
+			{
+				"id":"1",
+				"title":"Total <span>de</span> Trabalhadores",
+				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"title":"Participação <span>da</span> Cultura no Emprego",
+				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"<span>Horas trabalhadas na cultura</span>",
+				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"4",
+				"title":"Remuneração média",
+				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				}
+			},
+			{
+				"id":"5",
+				"title":"Remuneração x Hora Trabalhada",
+				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"6",
+				"title":"Jornada de Trabalho",
+				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"7",
+				"title":"Massa Salarial Cultural",
+				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"8",
+				"title":"<span>Valor Adicionado por Trabalhador</span>",
+				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"9",
+				"title":"Massa Salarial x Valor Adicionado",
+				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"10",
+				"title":"Variação na Ocupação x Variação do Valor Adicionado",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"11",
+				"title":"Custo Total x Salários Pagos",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"Concentração do Emprego Cultural",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"Concentração da Massa Salarial",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+          {
+            "id":"14",
+            "title":"IHH de Número de Trabalhadores",
+            "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+            "type":[
+              {"name":"Barras", "id":"barras"}
+            ]
+          },
+          {
+            "id":"15",
+            "title":"IHH da Massa de Rendimentos",
+            "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+            "type":[
+              {"name":"Barras", "id":"barras"}
+            ]
+          }
+		]
 	],
 	"select":
 	{

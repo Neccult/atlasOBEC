@@ -30,7 +30,7 @@
 		}
 	}
 
-	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"";
+	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&eixo="+eixo;
 
 	d3.queue()
 		.defer(d3.json, "./db/json_barras.php"+config)

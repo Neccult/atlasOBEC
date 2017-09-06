@@ -101,7 +101,7 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"&eixo="+eixo;
 // console.log(config);
 
 //pre-load arquivos
@@ -211,7 +211,7 @@ function ready(error, br_states, mapa){
 		.attr("transform", legendTransform);
 
 	//retira tag <span> do title
-	var title_content = textJSON.var[vrv-1].title;
+	var title_content = textJSON.var[eixo][vrv-1].title;
 	var title = title_content.replace("<span>", "");
 	var title = title.replace("</span>", "");
 

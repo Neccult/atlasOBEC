@@ -9,7 +9,8 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
-	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ano=2014';
+	newHash = window.location.hash;
+	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
 	/* variáveis com valores default */
 }
 
@@ -43,15 +44,13 @@ function changeChart(url){
 	var newUrl = "",
 		count = 0,
 		size = Object.keys(url).length;
-
 	$.each(url, function(key,value){
 
 		newUrl = newUrl+key+"="+value;
 				
 		if((++count)!=size) newUrl = newUrl+"&";
 	});
-
-	window.location.href = 'page.php?'+newUrl;
+	window.location.href = 'page.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
 }
 
 /*-----------------------------------------------------------------------------
@@ -138,6 +137,32 @@ function controlAtc(select,isPrt){
 	}
 }
 
+
+/*-----------------------------------------------------------------------------
+Função: getEixo
+   Dicionário para o eixo, recebe o nome string e retorna o id int
+Entrada:
+    eixo => string do eixo
+Saída:
+    eixo_id => int
+-----------------------------------------------------------------------------*/
+function getEixo(eixo){
+
+    if(eixo == 'empreendedimentos') {
+    	return 0;
+	}
+	else if(eixo == 'mercado') {
+    	return 1;
+	}
+	else if(eixo == 'politicas') {
+		return 2;
+	}
+    else if(eixo == 'comercio') {
+		return 3;
+    }
+}
+
+
 /*-----------------------------------------------------------------------------
 Função: loadResult
    carrega página de resultado e filtros; 
@@ -203,10 +228,9 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadPage(){
-	
-	var menuView = 'menudesktop.php';
-
-	if(windowWidth<768)	menuView = 'menumobile.php';
+	newHash = window.location.hash.substring(1);
+	var menuView = 'menudesktop.php?'+newHash+'=1';
+	if(windowWidth<768)	menuView = 'menumobile.php?'+newHash;
 
 	$("#menuvariaveis").load(menuView, function(){
 		if(url['var']!=='' && pageTitle!==''){
@@ -277,7 +301,11 @@ $(window).bind("load", function() {
 	documento pronto
 ======*/
 $(document).ready(function(){
-
+	$(window).on('hashchange', function() {
+        loadPage();
+        window.location.href = window.location.pathname+window.location.hash;
+        scrollTo(0, 0);
+	});
 	/* se a janela for redimensionada */
 	$(window).resize(function() {
 		controlPageWidth();

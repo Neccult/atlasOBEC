@@ -20,6 +20,7 @@ if (!empty($_GET["var"])) {
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
 	$ano = $_GET["ano"];
+    $eixo = $_GET['eixo'];
 }
 else{
 	$var = 1;
@@ -28,161 +29,629 @@ else{
 	$cad = 0;
 	$prt = 0;
 	$ano = 2014;
+	$eixo = 0;
 }
 
 
-$treemap = '{
+if($eixo == 0) {
+    $treemap = '{
  			  "name": "region",
  			  	"children": [
 			';
 
 
-$regiao = "Sul";
-$treemap .= '
-					{
-					  "colorId": 5,
-					  "name": "'.$regiao.'",
-					  "children": [
-					    {
-					      "name": "'.$regiao.'",
-					      "children": [
+    $regiao = "Sul";
+    $treemap .= '
+                        {
+                          "colorId": 5,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+
+    $regiao = "Sudeste";
+    $treemap .= '
+                        {
+                          "colorId": 4,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Centro-Oeste";
+    $treemap .= '
+                        {
+                          "colorId": 1,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Nordeste";
+    $treemap .= '
+                        {
+                          "colorId": 2,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Norte";
+    $treemap .= '
+                        {
+                          "colorId": 3,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        }
+                ';
+
+    $treemap .= '
+                    ]
+                }
+                ';
+
+    echo $treemap;
+}
+else if($eixo == 1) {
+    $treemap = '{
+ 			  "name": "region",
+ 			  	"children": [
 			';
-						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", 
-										  "estado": "'.$tupla->UFNome.'",
-										  "percentual": "'.$tupla->Percentual.'",
-										  "taxa": "'.$tupla->Taxa.'", 
-										  "size": "'.$tupla->Valor.'"},';
-						}
 
-						$size = strlen($treemap);
-						$treemap = substr($treemap,0, $size-1);
 
-$treemap .= '	        
-					      ]
-					    } 
-					  ]
-					},
+    $regiao = "Sul";
+    $treemap .= '
+                        {
+                          "colorId": 5,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+
+    $regiao = "Sudeste";
+    $treemap .= '
+                        {
+                          "colorId": 4,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Centro-Oeste";
+    $treemap .= '
+                        {
+                          "colorId": 1,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Nordeste";
+    $treemap .= '
+                        {
+                          "colorId": 2,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Norte";
+    $treemap .= '
+                        {
+                          "colorId": 3,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        }
+                ';
+
+    $treemap .= '
+                    ]
+                }
+                ';
+
+    echo $treemap;
+}
+else if($eixo == 2) {
+    $treemap = '{
+ 			  "name": "region",
+ 			  	"children": [
 			';
 
 
-$regiao = "Sudeste";
-$treemap .= '
-					{
-					  "colorId": 4,
-					  "name": "'.$regiao.'",
-					  "children": [
-					    {
-					      "name": "'.$regiao.'",
-					      "children": [
+    $regiao = "Sul";
+    $treemap .= '
+                        {
+                          "colorId": 5,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoTres::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+
+    $regiao = "Sudeste";
+    $treemap .= '
+                        {
+                          "colorId": 4,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoTres::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Centro-Oeste";
+    $treemap .= '
+                        {
+                          "colorId": 1,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoTres::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Nordeste";
+    $treemap .= '
+                        {
+                          "colorId": 2,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoTres::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Norte";
+    $treemap .= '
+                        {
+                          "colorId": 3,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoTres::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        }
+                ';
+
+    $treemap .= '
+                    ]
+                }
+                ';
+
+    echo $treemap;
+}
+else if($eixo == 3) {
+    $treemap = '{
+ 			  "name": "region",
+ 			  	"children": [
 			';
-						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", 
-										  "estado": "'.$tupla->UFNome.'",
-										  "percentual": "'.$tupla->Percentual.'",
-										  "taxa": "'.$tupla->Taxa.'", 
-										  "size": "'.$tupla->Valor.'"},';
-						}
 
-						$size = strlen($treemap);
-						$treemap = substr($treemap,0, $size-1);
 
-$treemap .= '	        
-					      ]
-					    } 
-					  ]
-					},
-			';
+    $regiao = "Sul";
+    $treemap .= '
+                        {
+                          "colorId": 5,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
 
-$regiao = "Centro-Oeste";
-$treemap .= '
-					{
-					  "colorId": 1,
-					  "name": "'.$regiao.'",
-					  "children": [
-					    {
-					      "name": "'.$regiao.'",
-					      "children": [
-			';
-						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", 
-										  "estado": "'.$tupla->UFNome.'",
-										  "percentual": "'.$tupla->Percentual.'",
-										  "taxa": "'.$tupla->Taxa.'", 
-										  "size": "'.$tupla->Valor.'"},';
-						}
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
 
-						$size = strlen($treemap);
-						$treemap = substr($treemap,0, $size-1);
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
 
-$treemap .= '	        
-					      ]
-					    } 
-					  ]
-					},
-			';
 
-$regiao = "Nordeste";
-$treemap .= '
-					{
-					  "colorId": 2,
-					  "name": "'.$regiao.'",
-					  "children": [
-					    {
-					      "name": "'.$regiao.'",
-					      "children": [
-			';
-						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", 
-										  "estado": "'.$tupla->UFNome.'",
-										  "percentual": "'.$tupla->Percentual.'",
-										  "taxa": "'.$tupla->Taxa.'", 
-										  "size": "'.$tupla->Valor.'"},';
-						}
+    $regiao = "Sudeste";
+    $treemap .= '
+                        {
+                          "colorId": 4,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
 
-						$size = strlen($treemap);
-						$treemap = substr($treemap,0, $size-1);
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
 
-$treemap .= '	        
-					      ]
-					    } 
-					  ]
-					},
-			';
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
 
-$regiao = "Norte";
-$treemap .= '
-					{
-					  "colorId": 3,
-					  "name": "'.$regiao.'",
-					  "children": [
-					    {
-					      "name": "'.$regiao.'",
-					      "children": [
-			';
-						foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
-							$treemap .= '{"name": "'.$tupla->UFSigla.'", 
-										  "estado": "'.$tupla->UFNome.'",
-										  "percentual": "'.$tupla->Percentual.'",
-										  "taxa": "'.$tupla->Taxa.'", 
-										  "size": "'.$tupla->Valor.'"},';
-						}
+    $regiao = "Centro-Oeste";
+    $treemap .= '
+                        {
+                          "colorId": 1,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
 
-						$size = strlen($treemap);
-						$treemap = substr($treemap,0, $size-1);
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
 
-$treemap .= '	        
-					      ]
-					    } 
-					  ]
-					}
-			';
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
 
-$treemap .= '
-				]
-			}
-			';
+    $regiao = "Nordeste";
+    $treemap .= '
+                        {
+                          "colorId": 2,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
 
-echo $treemap;
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        },
+                ';
+
+    $regiao = "Norte";
+    $treemap .= '
+                        {
+                          "colorId": 3,
+                          "name": "' . $regiao . '",
+                          "children": [
+                            {
+                              "name": "' . $regiao . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                              "estado": "' . $tupla->UFNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        }
+                ';
+
+    $treemap .= '
+                    ]
+                }
+                ';
+
+    echo $treemap;
+}
 
 ?>

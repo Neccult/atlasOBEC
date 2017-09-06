@@ -20,6 +20,7 @@ if (!empty($_GET["var"])) {
 	$atc = $_GET["atc"];
 	$prt = $_GET["prt"];
 	$ano = $_GET["ano"];
+    $eixo = $_GET['eixo'];
 }
 else{
 	$var = 1;
@@ -28,6 +29,7 @@ else{
 	$atc = 0;
 	$prt = 0;
 	$ano = 2014;
+	$eixo = 0;
 }
 
 
@@ -36,11 +38,12 @@ $treemap = '{
  			  	"children": [
 			';
 
-for ($cad=1; $cad <= 10; $cad++) { 
+if($eixo == 0) {
+    for ($cad=1; $cad <= 10; $cad++) {
 
-	$tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano);
+        $tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano);
 
-	$treemap .= '
+        $treemap .= '
 					{
 					  "colorId": "'.$cad.'", 
 					  "name": "'.$tupla->CadeiaNome.'",
@@ -59,8 +62,93 @@ for ($cad=1; $cad <= 10; $cad++) {
 					}
 				';
 
-	$treemap .= ($cad != 10) ? ',' : '' ;
+        $treemap .= ($cad != 10) ? ',' : '' ;
 
+    }
+}
+else if($eixo == 1) {
+    for ($cad=1; $cad <= 10; $cad++) {
+
+        $tupla = EixoDois::find($var, $uf, $atc, $cad, $prt, $ano);
+
+        $treemap .= '
+					{
+					  "colorId": "'.$cad.'", 
+					  "name": "'.$tupla->CadeiaNome.'",
+					  "children": [
+					    {
+					      "name": "'.$tupla->CadeiaNome.'",
+					      "children": [
+					        {"name": "'.$tupla->CadeiaNome.'",
+					         "estado": "'.$tupla->UFNome.'",  
+							 "percentual": "'.$tupla->Percentual.'",
+							 "taxa": "'.$tupla->Taxa.'", 
+							 "size": "'.$tupla->Valor.'"}
+					      ]
+					    } 
+					  ]
+					}
+				';
+
+        $treemap .= ($cad != 10) ? ',' : '' ;
+
+    }
+}
+else if($eixo == 2) {
+    for ($cad=1; $cad <= 10; $cad++) {
+
+        $tupla = EixoTres::find($var, $uf, $atc, $cad, $prt, $ano);
+
+        $treemap .= '
+					{
+					  "colorId": "'.$cad.'", 
+					  "name": "'.$tupla->CadeiaNome.'",
+					  "children": [
+					    {
+					      "name": "'.$tupla->CadeiaNome.'",
+					      "children": [
+					        {"name": "'.$tupla->CadeiaNome.'",
+					         "estado": "'.$tupla->UFNome.'",  
+							 "percentual": "'.$tupla->Percentual.'",
+							 "taxa": "'.$tupla->Taxa.'", 
+							 "size": "'.$tupla->Valor.'"}
+					      ]
+					    } 
+					  ]
+					}
+				';
+
+        $treemap .= ($cad != 10) ? ',' : '' ;
+
+    }
+}
+if($eixo == 3) {
+    for ($cad=1; $cad <= 10; $cad++) {
+
+        $tupla = EixoQuatro::find($var, $uf, $atc, $cad, $prt, $ano);
+
+        $treemap .= '
+					{
+					  "colorId": "'.$cad.'", 
+					  "name": "'.$tupla->CadeiaNome.'",
+					  "children": [
+					    {
+					      "name": "'.$tupla->CadeiaNome.'",
+					      "children": [
+					        {"name": "'.$tupla->CadeiaNome.'",
+					         "estado": "'.$tupla->UFNome.'",  
+							 "percentual": "'.$tupla->Percentual.'",
+							 "taxa": "'.$tupla->Taxa.'", 
+							 "size": "'.$tupla->Valor.'"}
+					      ]
+					    } 
+					  ]
+					}
+				';
+
+        $treemap .= ($cad != 10) ? ',' : '' ;
+
+    }
 }
 
 $treemap .= '

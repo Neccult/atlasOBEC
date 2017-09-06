@@ -62,6 +62,23 @@
 	var cad = <?php echo $cad; ?>;
 	var prt = <?php echo $prt; ?>;
 	var uf = <?php echo $uf; ?>;
+    var eixo;
+    switch(window.location.hash.substring(1)) {
+        case "empreendimentos":
+            eixo = 0;
+            break;
+        case "mercado":
+            eixo = 1;
+            break;
+        case "politicas":
+            eixo = 2;
+            break;
+        case "comercio":
+            eixo = 3;
+            break;
+        default:
+            eixo = 0;
+    }
 </script>
 
 <script src="js/barras.js"></script>

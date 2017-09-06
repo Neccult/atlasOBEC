@@ -17,16 +17,7 @@
 					<div class="menu-circles">
 						<div class="content text-center">
 
-							<div class="row">
-								<div class="col-md-12">
-								
 
-									<a href="index.php<?php if(isset($dark)) echo "?dark=1";?>" class="img-link"><div class="logo-min"></div></a>
-
-									<p class="title">Empreendimentos Culturais</p>
-
-								</div>
-							</div>
 
 							<!--==== jquery load menu ===-->
 							<div id="menuvariaveis"></div>
@@ -51,13 +42,25 @@
 				$cad = $_GET["cad"];   /*== setor/cadeia ==*/
 				$var = $_GET["var"];   /*== variável selecionada ==*/
 				$view = $_GET['view']; /*== modo de visualização ==*/
+                $eixo = $_GET['eixo']; /*== modo de visualização ==*/
 
 
 				/* informações JSON */
 				$json = file_get_contents('data/pt-br.json');
 				$json_text = json_decode($json, true);
 
-				$text = $json_text['var'][$_GET["var"]-1]; /*== informações da variável ==*/
+				if($eixo == "empreendimentos") {
+				    $text = $json_text['var'][0][$_GET["var"]-1]; /*== informações da variável ==*/
+                }
+                else if($eixo == "mercado") {
+                    $text = $json_text['var'][1][$_GET["var"]-1]; /*== informações da variável ==*/
+                }
+                else if($eixo == "politicas") {
+                    $text = $json_text['var'][2][$_GET["var"]-1]; /*== informações da variável ==*/
+                }
+                else if($eixo == "comercio") {
+                    $text = $json_text['var'][3][$_GET["var"]-1]; /*== informações da variável ==*/
+                }
 				$select = $json_text['select'];			   /*== informação dos selects ==*/
 
 				/*
@@ -88,7 +91,7 @@
 					<div class="col-xs-3">
 						<div class="menu-content" id="item1">
 
-							<a href="#" class="link">
+							<a href="#empreendimentos" class="link">
 								<div class="square-icon"></div>
 								<div class="text">
 									<p>EMPRENDIMENTOS<br/>CULTURAIS</p>
@@ -100,7 +103,7 @@
 					<div class="col-xs-3">
 						<div class="menu-content" id="item2">
 
-							<a href="#" class="link">
+							<a href="#mercado" class="link">
 								<div class="square-icon"></div>
 								<div class="text">
 									<p>MERCADO<br/>DE TRABALHO</p>
@@ -112,7 +115,7 @@
 					<div class="col-xs-3">
 						<div class="menu-content" id="item3">
 
-							<a href="#" class="link">
+							<a href="#politicas" class="link">
 								<div class="square-icon"></div>
 								<div class="text">
 									<p>POLÍTICAS<br/>PÚBLICAS</p>
@@ -124,7 +127,7 @@
 					<div class="col-xs-3">
 						<div class="menu-content" id="item4">
 
-							<a href="#" class="link">
+							<a href="#comercio" class="link">
 								<div class="square-icon"></div>
 								<div class="text">
 									<p>COMÉRCIO<br/>INTERNACIONAL</p>

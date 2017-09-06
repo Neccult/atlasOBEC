@@ -101,7 +101,7 @@ var treemap = d3.treemap()
 	.round(true)
 	.paddingInner(1);
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"";
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"&eixo="+eixo;
 
 /* cria treemap */
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {

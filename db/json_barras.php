@@ -20,6 +20,7 @@ if (!empty($_GET["var"])) {
 	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
+    $eixo = $_GET['eixo'];
 }
 else{
 	$var = 1;
@@ -28,21 +29,66 @@ else{
 	$atc = 0;
 	$cad = 0;
 	$prt = 0;
+	$eixo = 0;
 }
 
 
 $barras = array();
-foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+if($eixo == 0) {
+    foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
-	// $barras[$tupla->Ano] = $tupla->Valor;
+        // $barras[$tupla->Ano] = $tupla->Valor;
 
-	$id = $tupla->Ano;
-	$barras[$id]['uf'] = $tupla->UFNome;
-	$barras[$id]['ano'] = (int) $tupla->Ano;
-	$barras[$id]['valor'] = (double) $tupla->Valor;
-	$barras[$id]['percentual'] = (double) $tupla->Percentual;
-	$barras[$id]['taxa'] = (double) $tupla->Taxa;
+        $id = $tupla->Ano;
+        $barras[$id]['uf'] = $tupla->UFNome;
+        $barras[$id]['ano'] = (int) $tupla->Ano;
+        $barras[$id]['valor'] = (double) $tupla->Valor;
+        $barras[$id]['percentual'] = (double) $tupla->Percentual;
+        $barras[$id]['taxa'] = (double) $tupla->Taxa;
 
+    }
+}
+else if($eixo == 1) {
+    foreach (EixoDois::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+
+        // $barras[$tupla->Ano] = $tupla->Valor;
+
+        $id = $tupla->Ano;
+        $barras[$id]['uf'] = $tupla->UFNome;
+        $barras[$id]['ano'] = (int) $tupla->Ano;
+        $barras[$id]['valor'] = (double) $tupla->Valor;
+        $barras[$id]['percentual'] = (double) $tupla->Percentual;
+        $barras[$id]['taxa'] = (double) $tupla->Taxa;
+
+    }
+}
+else if($eixo == 2) {
+    foreach (EixoTres::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+
+        // $barras[$tupla->Ano] = $tupla->Valor;
+
+        $id = $tupla->Ano;
+        $barras[$id]['uf'] = $tupla->UFNome;
+        $barras[$id]['ano'] = (int) $tupla->Ano;
+        $barras[$id]['valor'] = (double) $tupla->Valor;
+        $barras[$id]['percentual'] = (double) $tupla->Percentual;
+        $barras[$id]['taxa'] = (double) $tupla->Taxa;
+
+    }
+}
+else if($eixo == 3) {
+    foreach (EixoQuatro::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+
+        // $barras[$tupla->Ano] = $tupla->Valor;
+
+        $id = $tupla->Ano;
+        $barras[$id]['uf'] = $tupla->UFNome;
+        $barras[$id]['ano'] = (int) $tupla->Ano;
+        $barras[$id]['valor'] = (double) $tupla->Valor;
+        $barras[$id]['percentual'] = (double) $tupla->Percentual;
+        $barras[$id]['taxa'] = (double) $tupla->Taxa;
+
+    }
 }
 
 echo json_encode($barras);

@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c8cc3841-7aef-471f-b03c-0cf66a703b5e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icon.png" afterPath="$PROJECT_DIR$/css/icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/diagram_atlas_obec.png" afterPath="$PROJECT_DIR$/data/docs/diagram_atlas_obec.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo1-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo1-DER.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo2-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo2-DER.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo3-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo3-DER.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo4-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo4-DER.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo1.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo2.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo3.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo4.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_1.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_1.mwb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_2.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_2.mwb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_3.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_3.mwb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_4.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_4.mwb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Black.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Black.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Bold_0.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Bold_0.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Light.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Light.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Regular.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/1_menu.png" afterPath="$PROJECT_DIR$/images/1_menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/1_menu1.jpg" afterPath="$PROJECT_DIR$/images/1_menu1.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/2_menu.png" afterPath="$PROJECT_DIR$/images/2_menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/3_menu.png" afterPath="$PROJECT_DIR$/images/3_menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/4_menu.png" afterPath="$PROJECT_DIR$/images/4_menu.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrow.png" afterPath="$PROJECT_DIR$/images/arrow.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrowUp.png" afterPath="$PROJECT_DIR$/images/arrowUp.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrow_pb.png" afterPath="$PROJECT_DIR$/images/arrow_pb.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/download.png" afterPath="$PROJECT_DIR$/images/download.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/csv.png" afterPath="$PROJECT_DIR$/images/icons/csv.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/pdf.png" afterPath="$PROJECT_DIR$/images/icons/pdf.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/stock-vector-vector-file-extensions-icons-set-pdf-mp-txt-doc-docx-html-jpg-zip-csv-ppt-xls-rar-161323757.jpg" afterPath="$PROJECT_DIR$/images/icons/stock-vector-vector-file-extensions-icons-set-pdf-mp-txt-doc-docx-html-jpg-zip-csv-ppt-xls-rar-161323757.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/xls.png" afterPath="$PROJECT_DIR$/images/icons/xls.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/loading.gif" afterPath="$PROJECT_DIR$/images/loading.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo.png" afterPath="$PROJECT_DIR$/images/logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo2.png" afterPath="$PROJECT_DIR$/images/logo2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_dark.png" afterPath="$PROJECT_DIR$/images/logo_dark.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_min.png" afterPath="$PROJECT_DIR$/images/logo_min.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_min_dark.png" afterPath="$PROJECT_DIR$/images/logo_min_dark.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_white.png" afterPath="$PROJECT_DIR$/images/logo_white.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/ecoCultura.png" afterPath="$PROJECT_DIR$/images/logos/ecoCultura.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/minc.png" afterPath="$PROJECT_DIR$/images/logos/minc.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/neccult.png" afterPath="$PROJECT_DIR$/images/logos/neccult.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/ufrgs.png" afterPath="$PROJECT_DIR$/images/logos/ufrgs.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/neccult.png" afterPath="$PROJECT_DIR$/images/neccult.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/neccult_mobile.png" afterPath="$PROJECT_DIR$/images/neccult_mobile.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/sprite-contraste.png" afterPath="$PROJECT_DIR$/images/sprite-contraste.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/sprite.png" afterPath="$PROJECT_DIR$/images/sprite.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/video1.mp4" afterPath="$PROJECT_DIR$/images/video1.mp4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/video1.webm" afterPath="$PROJECT_DIR$/images/video1.webm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/barra_gov.php" afterPath="$PROJECT_DIR$/barra_gov.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/barras.php" afterPath="$PROJECT_DIR$/barras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bugs-conhecidos.md" afterPath="$PROJECT_DIR$/bugs-conhecidos.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/css/bootstrap-theme.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/css/bootstrap-theme.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/css/bootstrap-theme.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/css/bootstrap-theme.min.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="$PROJECT_DIR$/css/bootstrap.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/css/bootstrap.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/css/bootstrap.min.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/gov.css" afterPath="$PROJECT_DIR$/css/gov.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/ie10-viewport-bug-workaround.css" afterPath="$PROJECT_DIR$/css/ie10-viewport-bug-workaround.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/navbar.css" afterPath="$PROJECT_DIR$/css/navbar.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/proto.css" afterPath="$PROJECT_DIR$/css/proto.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/br-min.json" afterPath="$PROJECT_DIR$/data/br-min.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/br.json" afterPath="$PROJECT_DIR$/data/br.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/colors.json" afterPath="$PROJECT_DIR$/data/colors.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_1.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_1.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_10.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_10.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_11.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_11.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_12.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_12.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_13.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_13.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_2.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_2.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_3.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_3.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_4.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_4.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_5.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_5.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_6.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_6.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_7.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_7.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_8.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_8.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_9.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_9.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/BD Atlas.md" afterPath="$PROJECT_DIR$/data/docs/BD Atlas.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/Fluxograma atlas obec.md" afterPath="$PROJECT_DIR$/data/docs/Fluxograma atlas obec.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/Requisitos Atlas.md" afterPath="$PROJECT_DIR$/data/docs/Requisitos Atlas.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/pt-br.json" afterPath="$PROJECT_DIR$/data/pt-br.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/region.json" afterPath="$PROJECT_DIR$/data/region.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scc.json" afterPath="$PROJECT_DIR$/data/scc.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/Parser_EixoUm.py" afterPath="$PROJECT_DIR$/data/sql/Parser_EixoUm.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/dump-Atlas.sql" afterPath="$PROJECT_DIR$/data/sql/dump-Atlas.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/total.csv" afterPath="$PROJECT_DIR$/data/total.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoDois.php" afterPath="$PROJECT_DIR$/db/EixoDois.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoQuatro.php" afterPath="$PROJECT_DIR$/db/EixoQuatro.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoTres.php" afterPath="$PROJECT_DIR$/db/EixoTres.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoUm.php" afterPath="$PROJECT_DIR$/db/EixoUm.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_barras.php" afterPath="$PROJECT_DIR$/db/json_barras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_mapa.php" afterPath="$PROJECT_DIR$/db/json_mapa.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_teste.php" afterPath="$PROJECT_DIR$/db/json_teste.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_region.php" afterPath="$PROJECT_DIR$/db/json_treemap_region.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_scc.php" afterPath="$PROJECT_DIR$/db/json_treemap_scc.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/download.php" afterPath="$PROJECT_DIR$/download.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/footer.php" afterPath="$PROJECT_DIR$/footer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/head.php" afterPath="$PROJECT_DIR$/head.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/barras.js" afterPath="$PROJECT_DIR$/js/barras.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bootstrap.js" afterPath="$PROJECT_DIR$/js/bootstrap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/contraste.js" afterPath="$PROJECT_DIR$/js/contraste.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/functions.js" afterPath="$PROJECT_DIR$/js/functions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ie-emulation-modes-warning.js" afterPath="$PROJECT_DIR$/js/ie-emulation-modes-warning.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ie-emulation-modes-warning.min.js" afterPath="$PROJECT_DIR$/js/ie-emulation-modes-warning.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jquery-2.2.0.min.js" afterPath="$PROJECT_DIR$/js/jquery-2.2.0.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.min.js" afterPath="$PROJECT_DIR$/js/main.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mapa.js" afterPath="$PROJECT_DIR$/js/mapa.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/npm.js" afterPath="$PROJECT_DIR$/js/npm.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_region.js" afterPath="$PROJECT_DIR$/js/treemap_region.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_scc.js" afterPath="$PROJECT_DIR$/js/treemap_scc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mapa.php" afterPath="$PROJECT_DIR$/mapa.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menudesktop.php" afterPath="$PROJECT_DIR$/menudesktop.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menumobile.php" afterPath="$PROJECT_DIR$/menumobile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page.php" afterPath="$PROJECT_DIR$/page.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_barras.php" afterPath="$PROJECT_DIR$/proto/proto_barras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_mapa.php" afterPath="$PROJECT_DIR$/proto/proto_mapa.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_treemap_region.php" afterPath="$PROJECT_DIR$/proto/proto_treemap_region.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_treemap_scc.php" afterPath="$PROJECT_DIR$/proto/proto_treemap_scc.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resultado.php" afterPath="$PROJECT_DIR$/resultado.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_region.php" afterPath="$PROJECT_DIR$/treemap_region.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_scc.php" afterPath="$PROJECT_DIR$/treemap_scc.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1296">
+              <caret line="51" column="7" lean-forward="false" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/page.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="678">
+              <caret line="58" column="47" lean-forward="false" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menudesktop.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/menudesktop.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menumobile.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/menumobile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resultado.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resultado.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sa</find>
+      <find>lista de variáveis</find>
+      <find>varia</find>
+      <find>loadPa</find>
+      <find>1</find>
+      <find>pageTitle</find>
+      <find>textJSON</find>
+      <find>eixo</find>
+      <find>window.location.href</find>
+      <find>url</find>
+    </findStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/js/mapa.js" />
+        <option value="$PROJECT_DIR$/data/pt-br.json" />
+        <option value="$PROJECT_DIR$/mapa.php" />
+        <option value="$PROJECT_DIR$/treemap_scc.php" />
+        <option value="$PROJECT_DIR$/treemap_region.php" />
+        <option value="$PROJECT_DIR$/barras.php" />
+        <option value="$PROJECT_DIR$/js/treemap_region.js" />
+        <option value="$PROJECT_DIR$/js/treemap_scc.js" />
+        <option value="$PROJECT_DIR$/js/barras.js" />
+        <option value="$PROJECT_DIR$/db/json_mapa.php" />
+        <option value="$PROJECT_DIR$/db/json_barras.php" />
+        <option value="$PROJECT_DIR$/db/json_treemap_region.php" />
+        <option value="$PROJECT_DIR$/db/json_treemap_scc.php" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/menudesktop.php" />
+        <option value="$PROJECT_DIR$/resultado.php" />
+        <option value="$PROJECT_DIR$/page.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="330" />
+    <option name="y" value="50" />
+    <option name="width" value="1398" />
+    <option name="height" value="1020" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="atlasOBEC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="atlasOBEC" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="atlasOBEC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="atlasOBEC" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="data" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="atlasOBEC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="atlasOBEC" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="db" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="atlasOBEC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="atlasOBEC" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8cc3841-7aef-471f-b03c-0cf66a703b5e" name="Default" comment="" />
+      <created>1504721459701</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1504721459701</updated>
+      <workItem from="1504721461606" duration="4610000" />
+      <workItem from="1504726097519" duration="4060000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8670000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06630728" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1206">
+          <caret line="67" column="65" lean-forward="false" selection-start-line="67" selection-start-column="49" selection-end-line="67" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="954">
+          <caret line="53" column="17" lean-forward="false" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/pt-br.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11286">
+          <caret line="627" column="13" lean-forward="false" selection-start-line="627" selection-start-column="13" selection-end-line="627" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resultado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="35" column="55" lean-forward="true" selection-start-line="35" selection-start-column="55" selection-end-line="35" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="76" column="21" lean-forward="false" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/mapa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3834">
+          <caret line="213" column="49" lean-forward="false" selection-start-line="213" selection-start-column="49" selection-end-line="213" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_mapa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="56" column="18" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menudesktop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="33" lean-forward="false" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3654">
+          <caret line="203" column="28" lean-forward="false" selection-start-line="203" selection-start-column="28" selection-end-line="203" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/EixoDois.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1728">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error_log.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="67" column="65" lean-forward="false" selection-start-line="67" selection-start-column="49" selection-end-line="67" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/pt-br.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="324" column="60" lean-forward="false" selection-start-line="324" selection-start-column="25" selection-end-line="324" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/barra_gov.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/treemap_scc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="71" column="32" lean-forward="true" selection-start-line="71" selection-start-column="32" selection-end-line="88" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/treemap_region.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="887">
+          <caret line="88" column="5" lean-forward="false" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/vkbeautify.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/barras.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="887">
+          <caret line="80" column="5" lean-forward="false" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_teste.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/barras.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="32" column="82" lean-forward="true" selection-start-line="32" selection-start-column="82" selection-end-line="32" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_mapa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_barras.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="78" column="16" lean-forward="false" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_treemap_region.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="630" column="23" lean-forward="false" selection-start-line="630" selection-start-column="23" selection-end-line="630" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_treemap_scc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="127" column="27" lean-forward="false" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="68" column="78" lean-forward="true" selection-start-line="68" selection-start-column="78" selection-end-line="68" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/treemap_region.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="103" column="86" lean-forward="false" selection-start-line="103" selection-start-column="86" selection-end-line="103" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/mapa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="100" column="18" lean-forward="true" selection-start-line="100" selection-start-column="18" selection-end-line="100" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="67" column="4" lean-forward="true" selection-start-line="67" selection-start-column="4" selection-end-line="83" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resultado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menumobile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menudesktop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="5" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1296">
+          <caret line="51" column="7" lean-forward="false" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="58" column="47" lean-forward="false" selection-start-line="58" selection-start-column="47" selection-end-line="58" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
