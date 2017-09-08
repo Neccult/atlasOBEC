@@ -10,7 +10,7 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
 	newHash = window.location.hash;
-	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
 	/* variáveis com valores default */
 }
 
@@ -28,6 +28,7 @@ function defaultUrl(){
 	url['cad'] = 0;
 	url['prt'] = 0;
 	url['atc'] = 0;
+    url['ocp'] = 0;
 	url['ano'] = 2014;
 }
 
@@ -201,10 +202,10 @@ function loadResult(){
 		
 		var selectId = $(this).attr('data-id'),
 			selectValue = url[selectId];
-		
+
 		/* atualiza valor select */
 		$(this).val(selectValue);	
-
+		console.log(url);
 		/* select porte default */
 		if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
 			
@@ -287,7 +288,7 @@ function smoothScroll(link){
 /*====== 
 	documento carregando
 ======*/
-$(window).bind("load", function() { 
+$(window).bind("load", function() {
 
 	loadPage(); /* controla menu e fade */
 

@@ -18,6 +18,7 @@ if (!empty($_GET["var"])) {
 	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
+    $ocp = $_GET["ocp"];
 	$ano = $_GET["ano"];
 	$eixo = $_GET['eixo'];
 }
@@ -27,6 +28,7 @@ else{
 	$atc = 0;
 	$cad = 0;
 	$prt = 0;
+	$ocp = 0;
 	$ano = 2014;
 	$eixo = 0;
 }
@@ -56,7 +58,7 @@ if($eixo == 0) {
     }
 }
 else if($eixo == 1) {
-    foreach (EixoDois::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
+    foreach (EixoDois::getter_mapa($var, $cad, $ocp, $ano) as $tupla) {
 
         /*
             $mapa[$tupla->idUF] = [

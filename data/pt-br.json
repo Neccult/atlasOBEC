@@ -9,6 +9,7 @@
 	"atc":"Essa visualização permite observar a variável de interesse apenas para a atuação selecionada.",
 	"ano":"Essa visualização permite observar a variável de interesse apenas para o ano selecionado.",
 	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
+	"ocp":"Essa visualização apresenta a variável de interesse apenas para a ocupação cultural e criativa selecionada.",
 
 	"var":[
 		[
@@ -332,6 +333,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -365,6 +367,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -396,6 +399,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -419,6 +423,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -452,6 +457,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -485,6 +491,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -516,6 +523,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -539,6 +547,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -572,7 +581,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -1330,6 +1339,12 @@
 			{"name":"Gestão","value":"8"},
 			{"name":"Música","value":"9"},
 			{"name":"Patrimônio","value":"10"}
+		],
+		"ocp":[
+			{"name":"Setorial","value":"0"},
+			{"name":"Ocupacional - Atividades Relacionadas", "value":"1"},
+			{"name":"Ocupacional - Cultura","value":"2"},
+			{"name":"Ocupacional - Todas", "value":"3"}
 		],
 		"prt":[
 			{"name":"Todos","value":"0"},
