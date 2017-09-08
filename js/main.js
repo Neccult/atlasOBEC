@@ -230,7 +230,7 @@ Saída:
 function loadPage(){
 	newHash = window.location.hash.substring(1);
 	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<768)	menuView = 'menumobile.php?'+newHash;
+	if(windowWidth<768)	menuView = 'menumobile.php?'+newHash+'=1';
 
 	$("#menuvariaveis").load(menuView, function(){
 		if(url['var']!=='' && pageTitle!==''){

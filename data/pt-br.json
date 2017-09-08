@@ -322,7 +322,7 @@
 		[
 			{
 				"id":"1",
-				"title":"Total <span>de</span> Trabalhadores",
+				"title":"Total <span>de</span> Trabalha<br>dores",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -355,7 +355,7 @@
 			},
 			{
 				"id":"2",
-				"title":"Participação <span>da</span> Cultura no Emprego",
+				"title":"<span>Participação no Emprego</span>",
 				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -388,7 +388,7 @@
 			},
 			{
 				"id":"3",
-				"title":"<span>Horas trabalhadas na cultura</span>",
+				"title":"<span>Horas Trabalhadas</span>",
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -409,7 +409,7 @@
 			},
 			{
 				"id":"4",
-				"title":"Remuneração média",
+				"title":"<span>Remuneração Média</span>",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -442,7 +442,7 @@
 			},
 			{
 				"id":"5",
-				"title":"Remuneração x Hora Trabalhada",
+				"title":"<span>Remuneração / Hora Trabalhada<span>",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -475,7 +475,7 @@
 			},
 			{
 				"id":"6",
-				"title":"Jornada de Trabalho",
+				"title":"<span>Jornada de Trabalho</span>",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -508,7 +508,7 @@
 			},
 			{
 				"id":"7",
-				"title":"Massa Salarial Cultural",
+				"title":"Massa Salarial",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -529,7 +529,7 @@
 			},
 			{
 				"id":"8",
-				"title":"<span>Valor Adicionado por Trabalhador</span>",
+				"title":"<span>Valor Adicionado (VA)</span>",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -562,7 +562,7 @@
 			},
 			{
 				"id":"9",
-				"title":"Massa Salarial x Valor Adicionado",
+				"title":"Massa Salarial / VA",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -596,7 +596,7 @@
 			},
 			{
 				"id":"10",
-				"title":"Variação na Ocupação x Variação do Valor Adicionado",
+				"title":"Ocupação / VA",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -604,7 +604,7 @@
 			},
 			{
 				"id":"11",
-				"title":"Custo Total x Salários Pagos",
+				"title":"Custo / Salários",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -612,7 +612,7 @@
 			},
 			{
 				"id":"12",
-				"title":"Concentração do Emprego Cultural",
+				"title":"<span>Concentração do Emprego</span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -620,7 +620,7 @@
 			},
 			{
 				"id":"13",
-				"title":"Concentração da Massa Salarial",
+				"title":"<span>Concentração da Massa Salarial<span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -628,7 +628,7 @@
 			},
           {
             "id":"14",
-            "title":"IHH de Número de Trabalhadores",
+            "title":"<span>IHH de Número de Trabalha<br>dores<span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
             "type":[
               {"name":"Barras", "id":"barras"}
@@ -636,12 +636,644 @@
           },
           {
             "id":"15",
-            "title":"IHH da Massa de Rendimentos",
+            "title":"<span>IHH da Massa de Rendimentos<span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
             "type":[
               {"name":"Barras", "id":"barras"}
             ]
           }
+		],
+		[
+			{
+				"id":"1",
+				"title":"<span>Financiamento Público Total</span>",
+				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"title":"<span>Financiamento do Vale-Cultura</span>",
+				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"<span>Financiamento do Fundo Cultural BNDES</span>",
+				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"4",
+				"title":"<span>Valor total de incentivos privados</span>",
+				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				}
+			},
+			{
+				"id":"5",
+				"title":"<span>Valor total de incentivos via empresas públicas<span>",
+				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"6",
+				"title":"<span>Despesa FNC / Mecenato</span>",
+				"desc":"Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"7",
+				"title":"<span>Recursos Privados / Incentivo Fiscal</span>",
+				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"8",
+				"title":"<span>Financiamento Público no VA</span>",
+				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"9",
+				"title":"<span>Total Bruto na Massa Salarial</span>",
+				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"10",
+				"title":"<span>Despesa em Cultura nas Contas Públicas</span>",
+				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"11",
+				"title":"<span>Total das propostas de projetos</span>",
+				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"<span>Total dos projetos aprovados</span>",
+				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"<span>Tempo médio de aprovação<span>",
+				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"14",
+				"title":"<span>Total Solicitado/ Efetivo Aprovado<span>",
+				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"15",
+				"title":"<span>Índice Razão para Concentração Regional dos Incentivadores<span>",
+				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"16",
+				"title":"<span>IHH para Concentração Regional dos Projetos Fomentados<span>",
+				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			}
+		],
+		[
+			{
+				"id":"1",
+				"title":"Valor Absoluto",
+				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"title":"<span>Participação no PIB</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"<span>Relação com o Comércio Global</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"4",
+				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				}
+			},
+			{
+				"id":"5",
+				"title":"<span>Relação com o VA da Cultura<span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"6",
+				"title":"<span>Relação com a Massa Salarial</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com a massa salarial da cultura por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"7",
+				"title":"<spna>Relação com Investimento Público em Cultura</span>",
+				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"8",
+				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
+				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"9",
+				"title":"<span>Razão de Concentração (C2) do Valor Absoluto</span>",
+				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"10",
+				"title":"<span>Razão de Concentração (C4) do Valor Absoluto</span>",
+				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"11",
+				"title":"IHH do Valor Absoluto",
+				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"IVCR do VA",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				]
+			}
 		]
 	],
 	"select":
