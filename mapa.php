@@ -20,6 +20,11 @@
 	else
 		$prt = 0;
 
+    if (!empty($_GET["ocp"]))
+        $ocp = $_GET["ocp"];
+    else
+        $ocp = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -63,6 +68,7 @@
 	var vrv = <?php echo $var; ?>;
 	var atc = <?php echo $atc; ?>;
 	var cad = <?php echo $cad; ?>;
+    var ocp = <?php echo $ocp; ?>;
 	var prt = <?php echo $prt; ?>;
 	var ano = <?php echo $ano; ?>;
 	var eixo;

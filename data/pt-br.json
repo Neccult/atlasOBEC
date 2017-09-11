@@ -10,6 +10,13 @@
 	"ano":"Essa visualização permite observar a variável de interesse apenas para o ano selecionado.",
 	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
 	"ocp":"Essa visualização apresenta a variável de interesse apenas para a ocupação cultural e criativa selecionada.",
+	"sex":"Essa visualização apresenta a variável de interesse apenas para o sexo selecionada.",
+	"fax":"Essa visualização apresenta a variável de interesse apenas para a faixa etária selecionada.",
+	"esc":"Essa visualização apresenta a variável de interesse apenas para a escolaridade selecionada.",
+	"cor":"Essa visualização apresenta a variável de interesse apenas para a cor e raça selecionada.",
+	"frm":"Essa visualização apresenta a variável de interesse apenas para a formalidade selecionada.",
+	"prv":"Essa visualização apresenta a variável de interesse apenas para a contribuição previdenciária selecionada.",
+	"snd":"Essa visualização apresenta a variável de interesse apenas para a contribuição sindical selecionada.",
 
 	"var":[
 		[
@@ -339,7 +346,14 @@
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
@@ -1338,7 +1352,8 @@
 			{"name":"Formação","value":"7"},
 			{"name":"Gestão","value":"8"},
 			{"name":"Música","value":"9"},
-			{"name":"Patrimônio","value":"10"}
+			{"name":"Patrimônio","value":"10"},
+			{"name":"Outros","value":"11"}
 		],
 		"ocp":[
 			{"name":"Setorial","value":"0"},
@@ -1357,6 +1372,50 @@
 			{"name":"Todos","value":"0"},
 			{"name":"Comércio","value":"1"},
 			{"name":"Serviço Não Financeiro","value":"2"}				
+		],
+		"sex":[
+			{"name":"Todos","value":"0"},
+			{"name":"Masculino","value":"1"},
+			{"name":"Feminino","value":"2"}
+		],
+		"fax":[
+			{"name":"Todas","value":"0"},
+			{"name":"10 a 17","value":"1"},
+			{"name":"18 a 29","value":"2"},
+			{"name":"30 a 49","value":"3"},
+			{"name":"50 a 64","value":"4"},
+			{"name":"65 ou mais","value":"5"},
+			{"name":"Não classificado","value":"6"}
+		],
+		"esc":[
+			{"name":"Todos","value":"0"},
+			{"name":"Sem Instrução","value":"1"},
+			{"name":"Fundamental Incompleto","value":"2"},
+			{"name":"Fundamental Completo","value":"3"},
+			{"name":"Médio Completo","value":"4"},
+			{"name":"Superior Inompleto","value":"5"},
+			{"name":"Superior Completo","value":"6"},
+			{"name":"Não Determinado","value":"7"}
+		],
+		"cor":[
+			{"name":"Todas","value":"0"},
+			{"name":"Indígena","value":"1"},
+			{"name":"Branca","value":"2"},
+			{"name":"Preta","value":"3"},
+			{"name":"Amarela","value":"4"},
+			{"name":"Parda","value":"5"}
+		],
+		"frm":[
+			{"name":"Sim","value":"0"},
+			{"name":"Não","value":"1"}
+		],
+		"prv":[
+			{"name":"Sim","value":"0"},
+			{"name":"Não","value":"1"}
+		],
+		"snd":[
+			{"name":"Sim","value":"0"},
+			{"name":"Não","value":"1"}
 		]
 	}
 	

@@ -10,7 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-require_once("EixoUm.php");
 
 if (!empty($_GET["var"])) {
 
@@ -19,6 +18,7 @@ if (!empty($_GET["var"])) {
 
 	$atc = $_GET["atc"];
 	$prt = $_GET["prt"];
+    $ocp = $_GET["ocp"];
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
 }
@@ -28,10 +28,10 @@ else{
 	
 	$atc = 0;
 	$prt = 0;
+	$ocp = 0;
 	$ano = 2014;
 	$eixo = 0;
 }
-
 
 $treemap = '{
  			  "name": "scc",
@@ -39,6 +39,7 @@ $treemap = '{
 			';
 
 if($eixo == 0) {
+    require_once("EixoUm.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
         $tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano);
@@ -67,6 +68,7 @@ if($eixo == 0) {
     }
 }
 else if($eixo == 1) {
+    require_once("EixoDois.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
         $tupla = EixoDois::find($var, $uf, $atc, $cad, $prt, $ano);
@@ -95,6 +97,7 @@ else if($eixo == 1) {
     }
 }
 else if($eixo == 2) {
+    require_once("EixoTres.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
         $tupla = EixoTres::find($var, $uf, $atc, $cad, $prt, $ano);
@@ -123,6 +126,7 @@ else if($eixo == 2) {
     }
 }
 if($eixo == 3) {
+    require_once("EixoQuatro.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
         $tupla = EixoQuatro::find($var, $uf, $atc, $cad, $prt, $ano);

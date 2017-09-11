@@ -11,6 +11,7 @@ if (!empty($_GET["var"])) {
 	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
+    $ocp = $_GET["ocp"];
 
 	$anos = $_GET["ano"];
 }
@@ -21,6 +22,7 @@ else{
 	$atc = 0;
 	$cad = 0;
 	$prt = 0;
+	$ocp = 0;
 
 	$anos = 2014;
 }

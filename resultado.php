@@ -89,7 +89,7 @@
 						<div class="row">
 
 							<?php
-								$buttons = sizeof($text[$view]);
+								if(isset($text[$view])) $buttons = sizeof($text[$view]);
 
 								/*	quebra de colunas de acordo com
 									número de opções */
@@ -104,7 +104,7 @@
 							?>
 
 							<!--=== botões com os filtros do gráfico ===-->
-							<?php foreach($text[$view] as $key => $value):?>
+							<?php if(isset($text[$view])) foreach($text[$view] as $key => $value):?>
 
 								<div class="<?php echo $col;?> col-btn">
 									<button class="opt select <?php if($key==0) echo 'active'?>" id="<?php echo $value['id']?>"><?php echo $value['name']?></button>
@@ -116,7 +116,7 @@
 
 						<div class="row">
 
-							<?php foreach($text[$view] as $key=>$value):?>		
+							<?php if(isset($text[$view])) foreach($text[$view] as $key=>$value):?>
 
 								<div class="select-group <?php if($key!=0) echo 'hide'?>" id="select-<?php echo $value['id']?>">					
 									
@@ -129,7 +129,11 @@
 
 										<!-- opções! -->
 										<?php foreach($select[$value['id']] as $option):?>
-											<option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                            <?php if($eixo !="politicas" && $option['name'] != "Outros") { ?>
+											    <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                            <?php } else if($eixo == "politicas") { ?>
+                                                <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                            <?php } ?>
 										<?php endforeach;?>		
 
 										<!--=== select group atuação ===-->

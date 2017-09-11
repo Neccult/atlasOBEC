@@ -2,6 +2,11 @@
 
 ###	Classe que manipula as variáveis do Eixo 2 ###
 
+define('DB_NOME', 'Atlas');
+define('DB_USUARIO', 'root');
+define('DB_SENHA', 'root');
+// define('DB_HOST', 'localhost');
+define('DB_HOST', '143.54.231.143');
 class EixoDois {
 
 ## Atributos ##
@@ -65,11 +70,6 @@ class EixoDois {
 	    Negativo = Erro de conexão
 	-----------------------------------------------------------------------------*/
 	public static function connect(){
-		define('DB_NOME', 'Atlas');
-		define('DB_USUARIO', 'root');
-		define('DB_SENHA', 'root');
-		// define('DB_HOST', 'localhost');
-		define('DB_HOST', '143.54.231.143');
 
 		$conexao = mysqli_connect(DB_HOST, DB_USUARIO, DB_SENHA, DB_NOME);
 

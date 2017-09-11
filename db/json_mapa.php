@@ -10,7 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-require_once("EixoUm.php");
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
@@ -35,6 +34,7 @@ else{
 
 $mapa = array();
 if($eixo == 0) {
+    require_once("EixoUm.php");
 	foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 
         /*
@@ -58,6 +58,7 @@ if($eixo == 0) {
     }
 }
 else if($eixo == 1) {
+    require_once("EixoDois.php");
     foreach (EixoDois::getter_mapa($var, $cad, $ocp, $ano) as $tupla) {
 
         /*
@@ -81,6 +82,7 @@ else if($eixo == 1) {
     }
 }
 else if($eixo == 2) {
+    require_once("EixoTres.php");
     foreach (EixoTres::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 
         /*
@@ -104,6 +106,7 @@ else if($eixo == 2) {
     }
 }
 else if($eixo == 3) {
+    require_once("EixoQuatro.php");
     foreach (EixoQuatro::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 
         /*

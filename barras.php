@@ -25,6 +25,11 @@
 	else
 		$prt = 0;
 
+    if (!empty($_GET["ocp"]))
+        $ocp = $_GET["ocp"];
+    else
+        $ocp = 0;
+
 ?>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -61,6 +66,7 @@
 	var atc = <?php echo $atc; ?>;
 	var cad = <?php echo $cad; ?>;
 	var prt = <?php echo $prt; ?>;
+    var ocp = <?php echo $ocp; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

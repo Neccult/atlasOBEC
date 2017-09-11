@@ -20,6 +20,46 @@
 	else
 		$prt = 0;
 
+    if (!empty($_GET["ocp"]))
+        $ocp = $_GET["ocp"];
+    else
+        $ocp = 0;
+
+    if (!empty($_GET["sex"]))
+        $sex = $_GET["sex"];
+    else
+        $sex = 0;
+
+    if (!empty($_GET["fax"]))
+        $fax = $_GET["fax"];
+    else
+        $fax = 0;
+
+    if (!empty($_GET["esc"]))
+        $esc = $_GET["esc"];
+    else
+        $esc = 0;
+
+    if (!empty($_GET["cor"]))
+        $cor = $_GET["cor"];
+    else
+        $cor = 0;
+
+    if (!empty($_GET["frm"]))
+        $frm = $_GET["frm"];
+    else
+        $frm = 0;
+
+    if (!empty($_GET["prv"]))
+        $prv = $_GET["prv"];
+    else
+        $prv = 0;
+
+    if (!empty($_GET["snd"]))
+        $snd = $_GET["snd"];
+    else
+        $snd = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -69,6 +109,14 @@
 	var atc = <?php echo $atc; ?>;
 	var cad = <?php echo $cad; ?>;
 	var prt = <?php echo $prt; ?>;
+    var ocp = <?php echo $ocp; ?>;
+    var sex = <?php echo $prt; ?>;
+    var fax = <?php echo $prt; ?>;
+    var esc = <?php echo $prt; ?>;
+    var cor = <?php echo $prt; ?>;
+    var frm = <?php echo $prt; ?>;
+    var prv = <?php echo $prt; ?>;
+    var snd = <?php echo $prt; ?>;
 	var ano = <?php echo $ano; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

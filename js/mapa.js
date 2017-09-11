@@ -101,7 +101,7 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&ano="+ano+"&eixo="+eixo;
 // console.log(config);
 
 //pre-load arquivos
@@ -112,7 +112,6 @@ d3.queue()
 
 //leitura
 function ready(error, br_states, mapa){
-
 	if (error) return console.error(error);
 
 	//variaveis informacao

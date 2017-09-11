@@ -10,7 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-require_once("EixoUm.php");
 
 if (!empty($_GET["var"])) {
 
@@ -35,6 +34,7 @@ else{
 
 $barras = array();
 if($eixo == 0) {
+    require_once("EixoUm.php");
     foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
@@ -49,6 +49,7 @@ if($eixo == 0) {
     }
 }
 else if($eixo == 1) {
+    require_once("EixoDois.php");
     foreach (EixoDois::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
@@ -63,6 +64,7 @@ else if($eixo == 1) {
     }
 }
 else if($eixo == 2) {
+    require_once("EixoTres.php");
     foreach (EixoTres::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
@@ -77,6 +79,7 @@ else if($eixo == 2) {
     }
 }
 else if($eixo == 3) {
+    require_once("EixoQuatro.php");
     foreach (EixoQuatro::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
