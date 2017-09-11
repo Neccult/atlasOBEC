@@ -358,7 +358,14 @@
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
 					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1371,7 +1378,7 @@
 		"atc":[
 			{"name":"Todos","value":"0"},
 			{"name":"Comércio","value":"1"},
-			{"name":"Serviço Não Financeiro","value":"2"}				
+			{"name":"Serviço Não Financeiro","value":"2"}
 		],
 		"sex":[
 			{"name":"Todos","value":"0"},

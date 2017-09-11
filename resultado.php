@@ -126,6 +126,10 @@
 										<?php if($value['id']=='prt'):?>
 											<optgroup label="Porte">
 										<?php endif;?>
+                                        <!--=== select group Setor ===-->
+                                        <?php if($view == "treemap_region" && $eixo == "mercado" && $value['id']=='cad'):?>
+                                                <optgroup label="Setor">
+										<?php endif;?>
 
 										<!-- opções! -->
 										<?php foreach($select[$value['id']] as $option):?>
@@ -134,8 +138,22 @@
                                             <?php } else if($eixo == "politicas") { ?>
                                                 <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
                                             <?php } ?>
-										<?php endforeach;?>		
+										<?php endforeach;?>
 
+                                        <!--=== select group Setor ===-->
+                                        <?php if($view == "treemap_region" && $eixo == "mercado" && $value['id']=='cad'):?>
+                                                    </optgroup>
+
+                                                    <optgroup label="Ocupação">
+
+                                                    <?php foreach($select['ocp'] as $option):?>
+
+                                                        <option value="ocp-<?php echo $option['value']?>"><?php echo $option['name']?></option>
+
+                                                    <?php endforeach;?>
+
+                                                    </optgroup>
+                                            <?php endif;?>
 										<!--=== select group atuação ===-->
 										<?php if($value['id']=='prt'):?>
 											

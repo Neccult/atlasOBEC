@@ -106,7 +106,21 @@ function controlFilter(selectvalue, selectid){
 			url['atc'] = '0';/* se for porte, não há filtro por atuação */
 		}
 
-	}else{
+	}
+	else if(selectid=='cad') {
+        if(selectvalue.match('ocp-','')){
+
+            url['ocp'] = selectvalue.replace('ocp-','');
+            url['prt'] = '0'; /* se for atuação, não há filtro por porte */
+        }
+
+        /* filtro porte */
+        else{
+            url['cad'] = selectvalue;
+            url['ocp'] = '0';/* se for porte, não há filtro por atuação */
+        }
+	}
+	else{
 		url[selectid] = selectvalue;
 	}
 
@@ -196,6 +210,25 @@ function loadResult(){
 		$('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
 		$('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
 	}
+
+
+    if(url['ocp']==0 && url['view']!='treemap_scc'){
+        $('#select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        $('#select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        $('#select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
+        $('#select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+    }
+
+    if(url['ocp']!=0 && url['view']!='treemap_scc'){
+        $('#select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+        $('#select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+    }
 
 	/* set selects com os valores da url */
 	$(".opt-select").each(function(){
