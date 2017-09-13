@@ -51,6 +51,7 @@
                 $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
                 $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
                 $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
+                $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
 
 				/* informações JSON */
 				$json = file_get_contents('data/pt-br.json');
@@ -179,6 +180,9 @@
                 url['frm'] = "<?php echo $frm; ?>";
                 url['prv'] = "<?php echo $prv; ?>";
                 url['snd'] = "<?php echo $snd; ?>";
+            <?php } ?>
+            <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
+                url['slc'] = "<?php echo $slc; ?>";
             <?php } ?>
             console.log(url);
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";

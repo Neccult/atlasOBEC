@@ -127,7 +127,7 @@
 											<optgroup label="Porte">
 										<?php endif;?>
                                         <!--=== select group Setor ===-->
-                                        <?php if($view == "treemap_region" && $eixo == "mercado" && $value['id']=='cad'):?>
+                                        <?php if(($view == "treemap_region" || $view == "barras") && $eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
                                                 <optgroup label="Setor">
 										<?php endif;?>
 
@@ -141,7 +141,7 @@
 										<?php endforeach;?>
 
                                         <!--=== select group Setor ===-->
-                                        <?php if($view == "treemap_region" && $eixo == "mercado" && $value['id']=='cad'):?>
+                                        <?php if(($view == "treemap_region" || $view == "barras") && $eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
                                                     </optgroup>
 
                                                     <optgroup label="Ocupação">

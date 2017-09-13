@@ -17,6 +17,7 @@
 	"frm":"Essa visualização apresenta a variável de interesse apenas para a formalidade selecionada.",
 	"prv":"Essa visualização apresenta a variável de interesse apenas para a contribuição previdenciária selecionada.",
 	"snd":"Essa visualização apresenta a variável de interesse apenas para a contribuição sindical selecionada.",
+	"slc":"Essa visualização apresenta a variável de interesse apenas para a visualização selecionada.",
 
 	"var":[
 		[
@@ -356,6 +357,7 @@
 					{"name":"Sindicato","id":"snd"}
 				],
 				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
 					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"},
@@ -370,7 +372,14 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -394,17 +403,39 @@
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
 					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -416,6 +447,8 @@
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -423,10 +456,42 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
@@ -438,8 +503,6 @@
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -447,20 +510,17 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
@@ -472,8 +532,6 @@
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -481,20 +539,17 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -506,8 +561,6 @@
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -515,20 +568,17 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -540,6 +590,8 @@
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -547,10 +599,42 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Porte","id":"prt"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
@@ -562,8 +646,6 @@
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -571,20 +653,9 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -596,8 +667,6 @@
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
@@ -605,20 +674,9 @@
 					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -629,7 +687,17 @@
 				"title":"Ocupação / VA",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -637,7 +705,17 @@
 				"title":"Custo / Salários",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -645,7 +723,17 @@
 				"title":"<span>Concentração do Emprego</span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -653,24 +741,54 @@
 				"title":"<span>Concentração da Massa Salarial<span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
           {
             "id":"14",
             "title":"<span>IHH de Número de Trabalha<br>dores<span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-            "type":[
-              {"name":"Barras", "id":"barras"}
-            ]
+			  "type":[
+				  {"name":"Mapa", "id":"mapa"},
+				  {"name":"Barras", "id":"barras"}
+			  ],
+			  "mapa":[
+				  {"name":"Setor","id":"cad"},
+				  {"name":"Ocupação","id":"ocp"},
+				  {"name":"Ano","id":"ano"}
+			  ],
+			  "barras":[
+				  {"name":"UF","id":"uf"},
+				  {"name":"Setor","id":"cad"}
+			  ]
           },
           {
             "id":"15",
             "title":"<span>IHH da Massa de Rendimentos<span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-            "type":[
-              {"name":"Barras", "id":"barras"}
-            ]
+			  "type":[
+				  {"name":"Mapa", "id":"mapa"},
+				  {"name":"Barras", "id":"barras"}
+			  ],
+			  "mapa":[
+				  {"name":"Setor","id":"cad"},
+				  {"name":"Ocupação","id":"ocp"},
+				  {"name":"Ano","id":"ano"}
+			  ],
+			  "barras":[
+				  {"name":"UF","id":"uf"},
+				  {"name":"Setor","id":"cad"}
+			  ]
           }
 		],
 		[
@@ -1423,6 +1541,10 @@
 		"snd":[
 			{"name":"Sim","value":"0"},
 			{"name":"Não","value":"1"}
+		],
+		"slc":[
+			{"name":"Setor","value":"0"},
+			{"name":"Ocupação","value":"1"}
 		]
 	}
 	
