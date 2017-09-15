@@ -25,6 +25,21 @@
     else
         $ocp = 0;
 
+    if (!empty($_GET["mec"]))
+        $mec = $_GET["mec"];
+    else
+        $mec = 0;
+
+    if (!empty($_GET["mod"]))
+        $mod = $_GET["mod"];
+    else
+        $mod = 0;
+
+    if (!empty($_GET["pfj"]))
+        $pfj = $_GET["pfj"];
+    else
+        $pfj = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -70,6 +85,9 @@
 	var cad = <?php echo $cad; ?>;
     var ocp = <?php echo $ocp; ?>;
 	var prt = <?php echo $prt; ?>;
+    var mec = <?php echo $mec; ?>;
+    var mod = <?php echo $mod; ?>;
+    var pfj = <?php echo $pfj; ?>;
 	var ano = <?php echo $ano; ?>;
 	var eixo;
 	switch(window.location.hash.substring(1)) {

@@ -18,6 +18,9 @@
 	"prv":"Essa visualização apresenta a variável de interesse apenas para a contribuição previdenciária selecionada.",
 	"snd":"Essa visualização apresenta a variável de interesse apenas para a contribuição sindical selecionada.",
 	"slc":"Essa visualização apresenta a variável de interesse apenas para a visualização selecionada.",
+	"mec":"Essa visualização apresenta a variável de interesse apenas para o mecanismo selecionado.",
+	"mod":"Essa visualização apresenta a variável de interesse apenas para a modalidade selecionado.",
+	"pfj":"Essa visualização apresenta a variável de interesse apenas para o tipo de pessoa selecionado.",
 
 	"var":[
 		[
@@ -804,22 +807,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -864,16 +868,27 @@
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
 				],
+				"treemap_region":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"cad"},
+					{"name":"Modalidade","id":"mod"}
+				],
+				"treemap_scc":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"cad"},
+					{"name":"Modalidade","id":"mod"}
+				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
@@ -886,27 +901,19 @@
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Tipo de Pessoa","id":"pfj"}
 				],
 				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Tipo de Pessoa","id":"pfj"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo de Pessoa","id":"pfj"}
 				],
 				"inativos":{
 					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
@@ -919,27 +926,16 @@
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
-					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"UF","id":"uf"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -961,18 +957,15 @@
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -984,16 +977,17 @@
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
-					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"UF","id":"uf"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
@@ -1015,18 +1009,17 @@
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1044,23 +1037,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Mecanismo","id":"mec"}
 				],
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1079,7 +1072,26 @@
 				"title":"<span>Total das propostas de projetos</span>",
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -1087,7 +1099,26 @@
 				"title":"<span>Total dos projetos aprovados</span>",
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -1095,7 +1126,26 @@
 				"title":"<span>Tempo médio de aprovação<span>",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
 				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -1104,6 +1154,9 @@
 				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Ano","id":"ano"}
 				]
 			},
 			{
@@ -1112,6 +1165,9 @@
 				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Ano","id":"ano"}
 				]
 			},
 			{
@@ -1120,6 +1176,9 @@
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Ano","id":"ano"}
 				]
 			}
 		],
@@ -1468,16 +1527,16 @@
 		],
 		"cad":[
 			{"name":"Todos","value":"0"},
-			{"name":"Arquitetura", "value":"1"},
-			{"name":"Artes","value":"2"},
+			{"name":"Arquitetura e Design", "value":"1"},
+			{"name":"Artes Cênicas e Espetáculos","value":"2"},
 			{"name":"Audiovisual", "value":"3"},
-			{"name":"Design","value":"4"},
-			{"name":"Editoração","value":"5"},
-			{"name":"Entretenimento","value":"6"},
-			{"name":"Formação","value":"7"},
-			{"name":"Gestão","value":"8"},
-			{"name":"Música","value":"9"},
-			{"name":"Patrimônio","value":"10"},
+			{"name":"Cultura Digital","value":"4"},
+			{"name":"Editorial","value":"5"},
+			{"name":"Educação e Criação em Artes","value":"6"},
+			{"name":"Entretenimento","value":"7"},
+			{"name":"Música","value":"8"},
+			{"name":"Patrimônio","value":"9"},
+			{"name":"Publicidade","value":"10"},
 			{"name":"Outros","value":"11"}
 		],
 		"ocp":[
@@ -1545,6 +1604,23 @@
 		"slc":[
 			{"name":"Setor","value":"0"},
 			{"name":"Ocupação","value":"1"}
+		],
+		"mec":[
+			{"name":"Todos","value":"0"},
+			{"name":"FNC","value":"1"},
+			{"name":"Mecenato","value":"2"},
+			{"name":"Fundo Cultura","value":"3"},
+			{"name":"Outros","value":"4"}
+		],
+		"mod":[
+			{"name":"Todos","value":"0"},
+			{"name":"Direto","value":"1"},
+			{"name":"Indireto","value":"2"}
+		],
+		"pfj":[
+			{"name":"Todos","value":"0"},
+			{"name":"Pessoa Física","value":"1"},
+			{"name":"Pessoa Jurídica","value":"2"}
 		]
 	}
 	

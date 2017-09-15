@@ -25,6 +25,16 @@
     else
         $ocp = 0;
 
+    if (!empty($_GET["mec"]))
+        $mec = $_GET["mec"];
+    else
+        $mec = 0;
+
+    if (!empty($_GET["mod"]))
+        $mod = $_GET["mod"];
+    else
+        $mod = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -74,6 +84,8 @@
 	var atc = <?php echo $atc; ?>;
 	var prt = <?php echo $prt; ?>;
     var ocp = <?php echo $ocp; ?>;
+    var mec = <?php echo $mec; ?>;
+    var mod = <?php echo $mod; ?>;
 	var ano = <?php echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
 	var eixo;

@@ -101,7 +101,7 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 // console.log(config);
 
 //pre-load arquivos

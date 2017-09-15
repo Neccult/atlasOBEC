@@ -29,6 +29,14 @@ function defaultUrl(){
 	url['prt'] = 0;
 	url['atc'] = 0;
     url['ocp'] = 0;
+    url['fax'] = 0;
+    url['cor'] = 0;
+    url['frm'] = 0;
+    url['snd'] = 0;
+    url['prv'] = 0;
+    url['mec'] = 0;
+    url['mod'] = 0;
+    url['pfj'] = 0;
 	url['ano'] = 2014;
 }
 
@@ -145,7 +153,7 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlAtc(select,isPrt){
 
-	if(url['cad']!=4 && url['cad']!=5 && url['cad']!=9 && url['cad']!=0){
+	if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
 		
 		if(isPrt) $(select).find('option[value="atc-1"]').remove();
 		else $(select).find('option[value="1"]').remove();

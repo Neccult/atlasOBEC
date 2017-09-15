@@ -30,6 +30,21 @@
     else
         $ocp = 0;
 
+    if (!empty($_GET["mec"]))
+        $mec = $_GET["mec"];
+    else
+        $mec = 0;
+
+    if (!empty($_GET["mod"]))
+        $mod = $_GET["mod"];
+    else
+        $mod = 0;
+
+    if (!empty($_GET["pfj"]))
+        $pfj = $_GET["pfj"];
+    else
+        $pfj = 0;
+
 ?>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -67,6 +82,9 @@
 	var cad = <?php echo $cad; ?>;
 	var prt = <?php echo $prt; ?>;
     var ocp = <?php echo $ocp; ?>;
+    var mec = <?php echo $mec; ?>;
+    var mod = <?php echo $mod; ?>;
+    var pfj = <?php echo $pfj; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

@@ -52,6 +52,9 @@
                 $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
                 $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
                 $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
+                $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
+                $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
+                $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
 
 				/* informações JSON */
 				$json = file_get_contents('data/pt-br.json');
@@ -181,8 +184,15 @@
                 url['prv'] = "<?php echo $prv; ?>";
                 url['snd'] = "<?php echo $snd; ?>";
             <?php } ?>
+
             <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
                 url['slc'] = "<?php echo $slc; ?>";
+            <?php } ?>
+
+            <?php if ($eixo == "politicas") {?>
+                url['mec'] = "<?php echo $mec; ?>";
+                url['mod'] = "<?php echo $mod; ?>";
+                url['pfj'] = "<?php echo $pfj; ?>";
             <?php } ?>
             console.log(url);
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";

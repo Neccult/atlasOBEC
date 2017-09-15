@@ -66,7 +66,7 @@ var treemap = d3.treemap()
 	.round(true)
 	.paddingInner(1); 
 
-var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	if (error) throw error;
