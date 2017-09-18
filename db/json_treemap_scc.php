@@ -43,28 +43,26 @@ if($eixo == 0) {
     for ($cad=1; $cad <= 10; $cad++) {
 
         $tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano);
-
         $treemap .= '
-					{
-					  "colorId": "'.$cad.'", 
-					  "name": "'.$tupla->CadeiaNome.'",
-					  "children": [
-					    {
-					      "name": "'.$tupla->CadeiaNome.'",
-					      "children": [
-					        {"name": "'.$tupla->CadeiaNome.'",
-					         "estado": "'.$tupla->UFNome.'",  
-							 "percentual": "'.$tupla->Percentual.'",
-							 "taxa": "'.$tupla->Taxa.'", 
-							 "size": "'.$tupla->Valor.'"}
-					      ]
-					    } 
-					  ]
-					}
-				';
+                {
+                  "colorId": "' . $cad . '", 
+                  "name": "' . $tupla->CadeiaNome . '",
+                  "children": [
+                    {
+                      "name": "' . $tupla->CadeiaNome . '",
+                      "children": [
+                        {"name": "' . $tupla->CadeiaNome . '",
+                         "estado": "' . $tupla->UFNome . '",  
+                         "percentual": "' . $tupla->Percentual . '",
+                         "taxa": "' . $tupla->Taxa . '", 
+                         "size": "' . $tupla->Valor . '"}
+                      ]
+                    } 
+                  ]
+                }
+            ';
 
-        $treemap .= ($cad != 10) ? ',' : '' ;
-
+        $treemap .= ($cad != 10) ? ',' : '';
     }
 }
 else if($eixo == 1) {

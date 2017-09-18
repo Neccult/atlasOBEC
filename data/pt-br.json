@@ -878,7 +878,7 @@
 				],
 				"treemap_region":[
 					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"cad"},
+					{"name":"Mecanismo","id":"mec"},
 					{"name":"Modalidade","id":"mod"}
 				],
 				"treemap_scc":[

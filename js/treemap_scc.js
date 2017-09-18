@@ -68,6 +68,10 @@ var treemap = d3.treemap()
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
 
+$.get("./db/json_treemap_scc.php"+config, function(data) {
+	console.log(data);
+});
+
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	if (error) throw error;
 
