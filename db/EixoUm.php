@@ -109,7 +109,13 @@ class EixoUm {
 
 		self::disconnect();
 
-		return ($obj == false) ? NULL : $obj;
+
+        if(($var > 3 && $var < 8) || ($var > 10)) {
+            return NULL;
+        }
+        else {
+            return ($obj == false) ? NULL : $obj;
+        }
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -175,7 +181,12 @@ class EixoUm {
 
 		self::disconnect();
 		
-		return $allObjects;
+		if(($var > 3 && $var < 8) || ($var > 10)) {
+		    return NULL;
+        }
+		else {
+            return $allObjects;
+        }
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -208,8 +219,13 @@ class EixoUm {
 			}
 
 		self::disconnect();
-		
-		return $allObjects;
+
+        if(($var > 3 && $var < 8) || ($var > 10)) {
+            return NULL;
+        }
+        else {
+            return $allObjects;
+        }
 	}
 	
 
@@ -246,8 +262,13 @@ class EixoUm {
 			}
 
 		self::disconnect();
-		
-		return $allObjects;
+
+        if(($var > 3 && $var < 8) || ($var > 10)) {
+            return NULL;
+        }
+        else {
+            return $allObjects;
+        }
 	}
 
 }

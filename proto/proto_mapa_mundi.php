@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
@@ -41,3 +42,20 @@
     });
 </script>
 <div id="map123" style="width: 720px; height: 400px"></div>
+<canvas width="960" height="500"></canvas>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script>
+
+var context = d3.select("canvas").node().getContext("2d"),
+    path = d3.geoPath(d3.geoOrthographic(), context);
+
+d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
+  if (error) throw error;
+
+  context.beginPath();
+  path(topojson.mesh("us"));
+  context.stroke();
+});
+
+</script>
