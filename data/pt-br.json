@@ -1590,16 +1590,16 @@
 			{"name":"Parda","value":"5"}
 		],
 		"frm":[
-			{"name":"Sim","value":"0"},
-			{"name":"Não","value":"1"}
+			{"name":"Não","value":"0"},
+			{"name":"Sim","value":"1"}
 		],
 		"prv":[
-			{"name":"Sim","value":"0"},
-			{"name":"Não","value":"1"}
+			{"name":"Não","value":"0"},
+			{"name":"Sim","value":"1"}
 		],
 		"snd":[
-			{"name":"Sim","value":"0"},
-			{"name":"Não","value":"1"}
+			{"name":"Não","value":"0"},
+			{"name":"Sim","value":"1"}
 		],
 		"slc":[
 			{"name":"Setor","value":"0"},

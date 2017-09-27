@@ -66,8 +66,7 @@ var treemap = d3.treemap()
 	.round(true)
 	.paddingInner(1); 
 
-var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
-
+var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
 $.get("./db/json_treemap_scc.php"+config, function(data) {
 	console.log(data);
 });
@@ -90,13 +89,25 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	treemap(root);
 
 	// creates cadeia's color range array from color.json file
-	var colors = { domain: [], range: [] };             
-	$.each(colorJSON.cadeias, function(i, cadeia){
-		if (i>0) {
-			colors.domain.push(cadeia.name);
-			colors.range.push(cadeia.color);
-		}
-	});
+	if(slc == 0) {
+        var colors = {domain: [], range: []};
+        $.each(colorJSON.cadeias, function (i, cadeia) {
+            if (i > 0) {
+                colors.domain.push(cadeia.name);
+                colors.range.push(cadeia.color);
+            }
+        });
+    }
+    else {
+        var colors = {domain: [], range: []};
+        $.each(colorJSON.ocupacoes, function (i, ocupacao) {
+            if (i > 0) {
+                colors.domain.push(ocupacao.name);
+                colors.range.push(ocupacao.color);
+            }
+        });
+	}
+
 
 	var colorsRange = d3.scaleOrdinal()
 	.domain(colors.domain)

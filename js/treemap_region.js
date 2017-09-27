@@ -108,8 +108,8 @@ else {
 	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 }
 
-/* cria treemap */
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
+	console.log(data);
 	if (error) throw error;
 
 	var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };

@@ -47,6 +47,20 @@ else{
 	$eixo = 0;
 }
 
+//Trata o sexo
+switch($sex) {
+    case "0":
+        $sex = NULL;
+        break;
+    case "1":
+        $sex = 1;
+        break;
+    case "2":
+        $sex = 0;
+        break;
+    default:
+        $sex = NULL;
+}
 
 if($eixo == 0) {
     require_once("EixoUm.php");
@@ -222,7 +236,7 @@ else if($eixo == 1) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+    foreach (EixoDois::getter_region($var, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -251,7 +265,7 @@ else if($eixo == 1) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+    foreach (EixoDois::getter_region($var, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -279,7 +293,7 @@ else if($eixo == 1) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+    foreach (EixoDois::getter_region($var, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -307,7 +321,7 @@ else if($eixo == 1) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+    foreach (EixoDois::getter_region($var, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -335,7 +349,7 @@ else if($eixo == 1) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoDois::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
+    foreach (EixoDois::getter_region($var, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",

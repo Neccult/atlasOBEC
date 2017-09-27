@@ -119,7 +119,7 @@ function controlFilter(selectvalue, selectid){
         if(selectvalue.match('ocp-','')){
 
             url['ocp'] = selectvalue.replace('ocp-','');
-            url['prt'] = '0'; /* se for atuação, não há filtro por porte */
+            url['cad'] = '0'; /* se for atuação, não há filtro por porte */
         }
 
         /* filtro porte */
@@ -232,30 +232,33 @@ function loadResult(){
 		não é possível escolher porte x atuação 
 		(exceto no treemap por setores)
 										*/
-	if(url['cad']==0 && url['view']!='treemap_scc'){
-		$('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-		$('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
-		$('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-		$('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-	}
-
-
-    if(url['ocp']==0 && url['view']!='treemap_scc'){
-        $('#select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        $('#select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        $('#select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
-        $('#select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+	if(window.location.hash.substring(1) == "empreendimentos") {
+		if(url['cad']==0 && url['view']!='treemap_scc'){
+            $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        }
     }
 
-    if(url['ocp']!=0 && url['view']!='treemap_scc'){
-        $('#select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-        $('#select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+
+    if(window.location.hash.substring(1) == "mercado") {
+		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
+            $('#select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('#select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('#select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
+            $('#select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        }
+        if((url['ocp']!=0 && url['view']!='treemap_scc') || (url['slc'] == 1)){
+            $('#select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('#select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        }
     }
 
 	/* set selects com os valores da url */
@@ -273,6 +276,12 @@ function loadResult(){
 			/* valor atuação */
 			$(this).val('atc-'+url['atc']);	
 		}
+
+        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
+
+            /* valor atuação */
+            $(this).val('ocp-'+url['ocp']);
+        }
 
 		if(selectId=='prt') controlAtc(this,1);
 		if(selectId=='atc') controlAtc(this,0);

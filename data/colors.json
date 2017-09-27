@@ -1,4 +1,70 @@
 {
+	"ocupacoes": {
+		"0": {
+			"name": "Principal",
+			"color": "#071342",
+			"gradient": {
+				"1": "#F2F0F4",
+				"2": "#D9D5DE",
+				"3": "#BBB1C1",
+				"4": "#9D90A4",
+				"5": "#7F718A",
+				"6": "#685D78",
+				"7": "#544B68",
+				"8": "#413A5B",
+				"9": "#2C294E",
+				"10": "#121945"
+			}
+		},
+		"1": {
+			"name": "Ocupacional - Atividades Relacionadas",
+			"color": "#87A8CA",
+			"gradient": {
+				"1": "#F3F6FA",
+				"2": "#E8EEF5",
+				"3": "#DCE5F0",
+				"4": "#C6D5E7",
+				"5": "#B9CDE1",
+				"6": "#ADC4DC",
+				"7": "#A0BAD6",
+				"8": "#98B4D2",
+				"9": "#8BABCC",
+				"10": "#87A8CA"
+			}
+		},
+		"2": {
+			"name": "Ocupacional - Cultura",
+			"color": "#077DDD",
+			"gradient": {
+				"1": "#F6F8FC",
+				"2": "#EDF1F9",
+				"3": "#DEE5F4",
+				"4": "#C6D3EB",
+				"5": "#AFC1E2",
+				"6": "#A0B5DB",
+				"7": "#8AA4D2",
+				"8": "#678CC4",
+				"9": "#437AB9",
+				"10": "#3474B6"
+			}
+		},
+		"3": {
+			"name": "Ocupacional - Todas",
+			"color": "#0F4B67",
+			"gradient": {
+				"1": "#F3F4F6",
+				"2": "#E5E5EA",
+				"3": "#CACAD5",
+				"4": "#B3B3C2",
+				"5": "#A3A2B3",
+				"6": "#8A8B9E",
+				"7": "#797D91",
+				"8": "#5E6980",
+				"9": "#31536D",
+				"10": "#0F4B67"
+			}
+		}
+	},
 	"cadeias": {
 		"0": {
 			"name": "Principal",

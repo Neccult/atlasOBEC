@@ -43,6 +43,16 @@
 </script>
 <div id="map123" style="width: 720px; height: 400px"></div>
 <canvas width="960" height="500"></canvas>
+
+<div class="col-md-7 col-xs-12">
+    <div class="container-chart">
+        <div class="content">
+            <div class="chart">
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://unpkg.com/topojson-client@3"></script>
 <script>
