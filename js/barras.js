@@ -29,8 +29,11 @@
 			return colorJSON.cadeias[0].color;
 		}
 	}
+	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&uos="+uos+"&ano="+ano+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
 
-	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
+	$.get("./db/json_barras.php"+config, function(data) {
+		console.log(data);
+	});
 
 	d3.queue()
 		.defer(d3.json, "./db/json_barras.php"+config)
@@ -178,7 +181,6 @@
 				return formatFraction;
 
 			var preFormattedIntLength = Math.round(preFormatted).toString().length;
-
 			if (preFormattedIntLength <= 3)
 				return formatDefault;
 			else if (preFormattedIntLength <= 6)

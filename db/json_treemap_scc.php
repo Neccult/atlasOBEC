@@ -26,6 +26,9 @@ if (!empty($_GET["var"])) {
     $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
     $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
     $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
+    $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
+    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
+    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== visualizacao ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
@@ -42,11 +45,60 @@ else{
     $esc = 0;
     $cor = 0;
     $frm = 0;
+    $mec = 0;
+    $mod = 0;
+    $prf = 0;
+    $pfj = 0;
     $slc = 0;
     $prv = 0;
     $snd = 0;
 	$ano = 2014;
 	$eixo = 0;
+}
+
+//Trata o sexo
+switch($sex) {
+    case "0":
+        $sex = NULL;
+        break;
+    case "1":
+        $sex = 1;
+        break;
+    case "2":
+        $sex = 0;
+        break;
+    default:
+        $sex = NULL;
+}
+
+//Trata a modalidade
+switch($mod) {
+    case "0":
+        $mod = NULL;
+        break;
+    case "1":
+        $mod = 1;
+        break;
+    case "2":
+        $mod = 0;
+        break;
+    default:
+        $mod = NULL;
+}
+
+//Trata a pessoa fisica/juridica
+switch($pfj) {
+    case "0":
+        $pfj = NULL;
+        break;
+    case "1":
+        $pfj = 1;
+        break;
+    case "2":
+        $pfj = 0;
+        break;
+    default:
+        $pfj = NULL;
 }
 
 $treemap = '{
@@ -140,8 +192,7 @@ else if($eixo == 1) {
 else if($eixo == 2) {
     require_once("EixoTres.php");
     for ($cad=1; $cad <= 10; $cad++) {
-
-        $tupla = EixoTres::find($var, $uf, $atc, $cad, $prt, $ano);
+        $tupla = EixoTres::find($var, $uf, $cad, $mec, $pfj, $mod, $ano);
 
         $treemap .= '
 					{

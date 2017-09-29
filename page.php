@@ -55,6 +55,7 @@
                 $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
                 $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
                 $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
+                $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
 
 				/* informações JSON */
 				$json = file_get_contents('data/pt-br.json');
@@ -193,6 +194,7 @@
                 url['mec'] = "<?php echo $mec; ?>";
                 url['mod'] = "<?php echo $mod; ?>";
                 url['pfj'] = "<?php echo $pfj; ?>";
+                url['uos'] = "<?php echo $uos; ?>";
             <?php } ?>
             console.log(url);
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";

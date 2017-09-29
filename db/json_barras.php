@@ -11,6 +11,33 @@ Saída:
 header('charset=utf-8');
 
 
+function sigla_cadeia($cadeia) {
+    switch($cadeia) {
+        case "Arquitetura e Design":
+            return "Arq e D";
+        case "Publicidade":
+            return "Publ.";
+        case "Patrimônio":
+            return $cadeia;
+        case "Música":
+            return $cadeia;
+        case "Entretenimento":
+            return "Entret.";
+        case "Educação e Criação em Artes":
+            return "Edu. Art.";
+        case "Editorial":
+            return "Edit.";
+        case "Cultura Digital":
+            return "Cult. Dig.";
+        case "Audiovisual":
+            return "Audio";
+        case "Artes Cênicas e Espetáculos":
+            return "Artes";
+        case "Outros":
+            return $cadeia;
+    }
+}
+
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
@@ -27,6 +54,12 @@ if (!empty($_GET["var"])) {
     $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
     $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
     $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
+    $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
+    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
+    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
+    $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setores ==*/
+    $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
+
     $eixo = $_GET['eixo'];
 }
 else{
@@ -41,10 +74,60 @@ else{
     $fax = 0;
     $esc = 0;
     $cor = 0;
+    $mec = 0;
+    $mod = 0;
+    $pjj = 0;
     $frm = 0;
     $prv = 0;
+    $uos = 0;
+    $ano = NULL;
     $snd = 0;
 	$eixo = 0;
+}
+
+//Trata o sexo
+switch($sex) {
+    case "0":
+        $sex = NULL;
+        break;
+    case "1":
+        $sex = 1;
+        break;
+    case "2":
+        $sex = 0;
+        break;
+    default:
+        $sex = NULL;
+}
+
+//Trata a modalidade
+switch($mod) {
+    case "0":
+        $mod = NULL;
+        break;
+    case "1":
+        $mod = 1;
+        break;
+    case "2":
+        $mod = 0;
+        break;
+    default:
+        $mod = NULL;
+}
+
+//Trata a pessoa fisica/juridica
+switch($pfj) {
+    case "0":
+        $pfj = NULL;
+        break;
+    case "1":
+        $pfj = 1;
+        break;
+    case "2":
+        $pfj = 0;
+        break;
+    default:
+        $pfj = NULL;
 }
 
 
@@ -81,17 +164,33 @@ else if($eixo == 1) {
 }
 else if($eixo == 2) {
     require_once("EixoTres.php");
-    foreach (EixoTres::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+    foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
-
-        $id = $tupla->Ano;
-        $barras[$id]['uf'] = $tupla->UFNome;
-        $barras[$id]['ano'] = (int) $tupla->Ano;
-        $barras[$id]['valor'] = (double) $tupla->Valor;
-        $barras[$id]['percentual'] = (double) $tupla->Percentual;
-        $barras[$id]['taxa'] = (double) $tupla->Taxa;
-
+        if($var < 14) {
+            $id = $tupla->Ano;
+            $barras[$id]['uf'] = $tupla->UFNome;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id]['valor'] = (double)$tupla->Valor;
+            $barras[$id]['percentual'] = (double)$tupla->Percentual;
+            $barras[$id]['taxa'] = (double)$tupla->Taxa;
+        }
+        else if($uos == 0) {
+            $id = $tupla->UFSigla;
+            $barras[$id]['uf'] = $tupla->UFNome;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id]['valor'] = (double)$tupla->Valor;
+            $barras[$id]['percentual'] = (double)$tupla->Percentual;
+            $barras[$id]['taxa'] = (double)$tupla->Taxa;
+        }
+        else if($uos == 1) {
+            $id = sigla_cadeia($tupla->CadeiaNome);
+            $barras[$id]['uf'] = $tupla->UFNome;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id]['valor'] = (double)$tupla->Valor;
+            $barras[$id]['percentual'] = (double)$tupla->Percentual;
+            $barras[$id]['taxa'] = (double)$tupla->Taxa;
+        }
     }
 }
 else if($eixo == 3) {

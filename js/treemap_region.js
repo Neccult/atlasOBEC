@@ -108,6 +108,10 @@ else {
 	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 }
 
+$.get("./db/json_treemap_region.php"+config, function(data) {
+	console.log(data);
+});
+
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	console.log(data);
 	if (error) throw error;

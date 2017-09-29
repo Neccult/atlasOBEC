@@ -80,6 +80,16 @@
     else
         $pfj = 0;
 
+    if (!empty($_GET["uos"]))
+        $uos = $_GET["uos"];
+    else
+        $uos = 0;
+
+    if (!empty($_GET["ano"]))
+        $ano = $_GET["ano"];
+    else
+        $ano = NULL;
+
 ?>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -127,6 +137,8 @@
     var mec = <?php echo $mec; ?>;
     var mod = <?php echo $mod; ?>;
     var pfj = <?php echo $pfj; ?>;
+    var uos = <?php echo $uos; ?>;
+    var ano = <?php echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

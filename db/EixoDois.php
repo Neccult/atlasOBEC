@@ -251,19 +251,35 @@ class EixoDois {
 	public static function getter_barras($var, $ufs, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos){
 
 		self::connect();		
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
-					." WHERE ex.Numero = ".$var
-					." AND ex.Formalidade = ".$form 
-					." AND ex.Previdencia = ".$prev
-					." AND ex.Sindical = ".$sind
-					." AND ex.Sexo = ".$sexos;
+			if(!is_null($sexos)) {
+			    $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
+                    ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+                    ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
+                    ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
+                    ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
+                    ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
+                    ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+                    ." WHERE ex.Numero = ".$var
+                    ." AND ex.Formalidade = ".$form
+                    ." AND ex.Previdencia = ".$prev
+                    ." AND ex.Sindical = ".$sind
+                    ." AND ex.Sexo = ".$sexos;
+            }
+            else {
+                $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
+                    ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+                    ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
+                    ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
+                    ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
+                    ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
+                    ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+                    ." WHERE ex.Numero = ".$var
+                    ." AND ex.Formalidade = ".$form
+                    ." AND ex.Previdencia = ".$prev
+                    ." AND ex.Sindical = ".$sind;
+            }
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();

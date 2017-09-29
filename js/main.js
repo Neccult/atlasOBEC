@@ -37,6 +37,7 @@ function defaultUrl(){
     url['mec'] = 0;
     url['mod'] = 0;
     url['pfj'] = 0;
+    url['uos'] = 0;
 	url['ano'] = 2014;
 }
 

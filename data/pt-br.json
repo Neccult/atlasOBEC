@@ -21,6 +21,7 @@
 	"mec":"Essa visualização apresenta a variável de interesse apenas para o mecanismo selecionado.",
 	"mod":"Essa visualização apresenta a variável de interesse apenas para a modalidade selecionado.",
 	"pfj":"Essa visualização apresenta a variável de interesse apenas para o tipo de pessoa selecionado.",
+	"uos":"Essa visualização apresenta a variável de interesse apenas para o tipo de barras selecionado.",
 
 	"var":[
 		[
@@ -344,7 +345,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -400,7 +400,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -456,7 +455,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -510,7 +508,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -531,7 +528,7 @@
 			},
 			{
 				"id":"5",
-				"title":"<span>Remuneração / Hora Trabalhada<span>",
+				"title":"<span>Remuneração / Hora Trabalhada</span>",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -539,7 +536,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -568,7 +564,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -599,7 +594,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -653,7 +647,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -674,7 +667,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -695,7 +687,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -713,7 +704,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -731,7 +721,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -741,7 +730,7 @@
 			},
 			{
 				"id":"13",
-				"title":"<span>Concentração da Massa Salarial<span>",
+				"title":"<span>Concentração da Massa Salarial</span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -749,7 +738,6 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -759,7 +747,7 @@
 			},
           {
             "id":"14",
-            "title":"<span>IHH de Número de Trabalha<br>dores<span>",
+            "title":"<span>IHH de Número de Trabalha<br>dores</span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 			  "type":[
 				  {"name":"Mapa", "id":"mapa"},
@@ -767,7 +755,6 @@
 			  ],
 			  "mapa":[
 				  {"name":"Setor","id":"cad"},
-				  {"name":"Ocupação","id":"ocp"},
 				  {"name":"Ano","id":"ano"}
 			  ],
 			  "barras":[
@@ -777,7 +764,7 @@
           },
           {
             "id":"15",
-            "title":"<span>IHH da Massa de Rendimentos<span>",
+            "title":"<span>IHH da Massa de Rendimentos</span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 			  "type":[
 				  {"name":"Mapa", "id":"mapa"},
@@ -785,7 +772,6 @@
 			  ],
 			  "mapa":[
 				  {"name":"Setor","id":"cad"},
-				  {"name":"Ocupação","id":"ocp"},
 				  {"name":"Ano","id":"ano"}
 			  ],
 			  "barras":[
@@ -845,18 +831,15 @@
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Setor","id":"cad"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -1156,6 +1139,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				]
 			},
@@ -1167,6 +1151,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				]
 			},
@@ -1178,6 +1163,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				]
 			}
@@ -1621,6 +1607,10 @@
 			{"name":"Todos","value":"0"},
 			{"name":"Pessoa Física","value":"1"},
 			{"name":"Pessoa Jurídica","value":"2"}
+		],
+		"uos":[
+			{"name":"UF","value":"0"},
+			{"name":"Setores","value":"1"}
 		]
 	}
 	

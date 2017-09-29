@@ -99,10 +99,15 @@ class EixoTres {
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-					." WHERE ex.Numero = ".$var
-					." AND ex.PessoaFisica = ".$pf 
-					." AND ex.Modalidade = ".$mod
-					." AND ex.Ano = ".$anos;
+					." WHERE ex.Numero = ".$var;
+
+            if(!is_null($pf)) {
+			    $query .= " AND ex.PessoaFisica = ".$pf;
+            }
+            if(!is_null($mod)) {
+			    $query .= " AND ex.Modalidade = ".$mod;
+            }
+            $query .= " AND ex.Ano = ".$anos;
 
 			$result = mysqli_query(self::$conn, $query);
 			$obj = mysqli_fetch_object($result, 'EixoTres');
@@ -152,7 +157,7 @@ class EixoTres {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $mec, $anos){
+	public static function getter_mapa($var, $cad, $mec, $pf, $anos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -160,7 +165,9 @@ class EixoTres {
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var;
-
+            if(!is_null($pf)) {
+                $query .= " AND ex.PessoaFisica = ".$pf;
+            }
 				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
 
 			$result = mysqli_query(self::$conn, $query);
@@ -188,16 +195,53 @@ class EixoTres {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod){
+	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
 
 		self::connect();		
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-					." WHERE ex.Numero = ".$var
-					." AND ex.PessoaFisica = ".$pf 
-					." AND ex.Modalidade = ".$mod;
+			if(is_null($ano) || $var < 14) {
+                $query = "SELECT * FROM " . self::$table . " AS ex"
+                    . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                    . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                    . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = " . $mec
+                    . " WHERE ex.Numero = " . $var;
+
+                if (!is_null($pf)) {
+                    $query .= " AND ex.PessoaFisica = " . $pf;
+                }
+                if (!is_null($mod)) {
+                    $query .= " AND ex.Modalidade = " . $mod;
+                }
+            }
+            else if($uos == 0) {
+                $query = "SELECT * FROM " . self::$table . " AS ex"
+                    . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF"
+                    . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                    . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = " . $mec
+                    . " WHERE ex.Numero = " . $var
+                    . " AND ex.Ano = ".$ano;
+
+                if (!is_null($pf)) {
+                    $query .= " AND ex.PessoaFisica = " . $pf;
+                }
+                if (!is_null($mod)) {
+                    $query .= " AND ex.Modalidade = " . $mod;
+                }
+            }
+            else if($uos == 1) {
+                $query = "SELECT * FROM " . self::$table . " AS ex"
+                    . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                    . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia"
+                    . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = " . $mec
+                    . " WHERE ex.Numero = " . $var
+                    . " AND ex.Ano = ".$ano;
+
+                if (!is_null($pf)) {
+                    $query .= " AND ex.PessoaFisica = " . $pf;
+                }
+                if (!is_null($mod)) {
+                    $query .= " AND ex.Modalidade = " . $mod;
+                }
+            }
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
@@ -233,9 +277,13 @@ class EixoTres {
 					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '".$regiao."'"
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-					." WHERE ex.Numero = ".$var
-					." AND ex.PessoaFisica = ".$pf 
-					." AND ex.Modalidade = ".$mod;
+					." WHERE ex.Numero = ".$var;
+			if(!is_null($pf)) {
+                $query .= " AND ex.PessoaFisica = " . $pf;
+            }
+            if(!is_null($mod)) {
+                $query .= " AND ex.Modalidade = ".$mod;
+            }
 
 				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 

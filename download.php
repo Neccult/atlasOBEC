@@ -29,6 +29,71 @@
 	else
 		$cad = 0;
 
+    if (!empty($_GET["ocp"]))
+        $ocp = $_GET["ocp"];
+    else
+        $ocp = 0;
+
+    if (!empty($_GET["sex"]))
+        $sex = $_GET["sex"];
+    else
+        $sex = 0;
+
+    if (!empty($_GET["fax"]))
+        $fax = $_GET["fax"];
+    else
+        $fax = 0;
+
+    if (!empty($_GET["esc"]))
+        $esc = $_GET["esc"];
+    else
+        $esc = 0;
+
+    if (!empty($_GET["cor"]))
+        $cor = $_GET["cor"];
+    else
+        $cor = 0;
+
+    if (!empty($_GET["frm"]))
+        $frm = $_GET["frm"];
+    else
+        $frm = 0;
+
+    if (!empty($_GET["prv"]))
+        $prv = $_GET["prv"];
+    else
+        $prv = 0;
+
+    if (!empty($_GET["snd"]))
+        $snd = $_GET["snd"];
+    else
+        $snd = 0;
+
+    if (!empty($_GET["slc"]))
+        $slc = $_GET["slc"];
+    else
+        $slc = 0;
+
+    if (!empty($_GET["mec"]))
+        $mec = $_GET["mec"];
+    else
+        $mec = 0;
+
+    if (!empty($_GET["mod"]))
+        $mod = $_GET["mod"];
+    else
+        $mod = 0;
+
+    if (!empty($_GET["pfj"]))
+        $pfj = $_GET["pfj"];
+    else
+        $pfj = 0;
+
+    if (!empty($_GET["eixo"]))
+        $eixo = $_GET["eixo"];
+    else
+        $eixo = "empreendimentos";
+
 	if (!empty($_GET["view"]))
 		$view = $_GET["view"];
 	else
@@ -90,9 +155,38 @@
 			var cad = <?php echo $cad; ?>;
 			var prt = <?php echo $prt; ?>;
 			var ano = <?php echo $ano; ?>;
+            var ocp = <?php echo $ocp; ?>;
+            var sex = <?php echo $sex; ?>;
+            var fax = <?php echo $fax; ?>;
+            var esc = <?php echo $esc; ?>;
+            var cor = <?php echo $cor; ?>;
+            var frm = <?php echo $frm; ?>;
+            var prv = <?php echo $prv; ?>;
+            var snd = <?php echo $snd; ?>;
+            var mec = <?php echo $mec; ?>;
+            var mod = <?php echo $mod; ?>;
+            var slc = <?php echo $slc; ?>;
+            var pfj = <?php echo $pfj; ?>;
 			var uf = <?php echo $uf; ?>;
 			var view = '<?php echo $view; ?>';
 			var type = '<?php echo $type; ?>';
+			var eixo = '<?php echo $eixo; ?>';
+            switch(eixo) {
+                case "empreendimentos":
+                    eixo = 0;
+                    break;
+                case "mercado":
+                    eixo = 1;
+                    break;
+                case "politicas":
+                    eixo = 2;
+                    break;
+                case "comercio":
+                    eixo = 3;
+                    break;
+                default:
+                    eixo = 0;
+            }
 
 			var url = {
 				view: "<?php echo $view; ?>", 
@@ -102,9 +196,9 @@
 				cad: "<?php echo $cad; ?>", 
 				ano: "<?php echo $ano; ?>",
 				uf: "<?php echo $uf; ?>",
+                eixo: eixo,
 				type: "<?php echo $type; ?>"
 			};
-
 		</script>
 
 		<script src="js/<?php echo $view; ?>.js"></script>
@@ -166,21 +260,21 @@
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
 						submit_download_form(type);		
-					}, 50);		 
+					}, 500);
 				}else{
 					setTimeout(function(){
 						submit_download_form(type);		
-					}, 200);
+					}, 3000);
 				}
 				setTimeout(function(){
 					window.close();
 					window.location = "http://localhost/atlasOBEC/";
-				}, 2000);
+				}, 4000);
 
 				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
 				// $("#save_as_png").click(function() { submit_download_form("png"); });
 				
-			});		
+			});
 		</script>
 	</body>
 </html>
