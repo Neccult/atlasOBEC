@@ -220,8 +220,7 @@ else if($eixo == 2) {
 if($eixo == 3) {
     require_once("EixoQuatro.php");
     for ($cad=1; $cad <= 10; $cad++) {
-
-        $tupla = EixoQuatro::find($var, $uf, $atc, $cad, $prt, $ano);
+        $tupla = EixoQuatro::find($var, $parc, $cad, $tipo, $ano);
 
         $treemap .= '
 					{
@@ -232,7 +231,7 @@ if($eixo == 3) {
 					      "name": "'.$tupla->CadeiaNome.'",
 					      "children": [
 					        {"name": "'.$tupla->CadeiaNome.'",
-					         "estado": "'.$tupla->UFNome.'",  
+					         "estado": "'.$tupla->ParceiroNome.'",  
 							 "percentual": "'.$tupla->Percentual.'",
 							 "taxa": "'.$tupla->Taxa.'", 
 							 "size": "'.$tupla->Valor.'"}

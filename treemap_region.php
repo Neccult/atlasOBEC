@@ -75,6 +75,16 @@
     else
         $pfj = 0;
 
+    if (!empty($_GET["typ"]))
+        $typ = $_GET["typ"];
+    else
+        $typ = 0;
+
+    if (!empty($_GET["prc"]))
+        $prc = $_GET["prc"];
+    else
+        $prc = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -135,6 +145,8 @@
     var mec = <?php echo $mec; ?>;
     var mod = <?php echo $mod; ?>;
     var pfj = <?php echo $pfj; ?>;
+    var typ = <?php echo $typ; ?>;
+    var prc = <?php echo $prc; ?>;
 	var ano = <?php echo $ano; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

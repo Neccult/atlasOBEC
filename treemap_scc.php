@@ -75,6 +75,16 @@
     else
         $mod = 0;
 
+    if (!empty($_GET["typ"]))
+        $typ = $_GET["typ"];
+    else
+        $typ = 0;
+
+    if (!empty($_GET["prc"]))
+        $prc = $_GET["prc"];
+    else
+        $prc = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -134,6 +144,8 @@
     var slc = <?php echo $slc; ?>;
     var mec = <?php echo $mec; ?>;
     var mod = <?php echo $mod; ?>;
+    var typ = <?php echo $typ; ?>;
+    var prc = <?php echo $prc; ?>;
 	var ano = <?php echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
 	var eixo;

@@ -22,6 +22,8 @@
 	"mod":"Essa visualização apresenta a variável de interesse apenas para a modalidade selecionado.",
 	"pfj":"Essa visualização apresenta a variável de interesse apenas para o tipo de pessoa selecionado.",
 	"uos":"Essa visualização apresenta a variável de interesse apenas para o tipo de barras selecionado.",
+	"typ":"Essa visualização apresenta a variável de interesse apenas para o tipo selecionado.",
+	"prc":"Essa visualização apresenta a variável de interesse apenas para o parceiro selecionado.",
 
 	"var":[
 		[
@@ -1181,22 +1183,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -1214,22 +1217,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
@@ -1241,16 +1245,29 @@
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
@@ -1268,22 +1285,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
@@ -1301,22 +1319,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1334,22 +1353,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1361,16 +1381,29 @@
 				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
@@ -1388,22 +1421,23 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
+					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
+					{"name":"Tipo","id":"typ"}
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1414,34 +1448,11 @@
 				"title":"<span>Razão de Concentração (C2) do Valor Absoluto</span>",
 				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+					{"name":"Tipo","id":"typ"}
+				]
 			},
 			{
 				"id":"10",
@@ -1449,6 +1460,9 @@
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Tipo","id":"typ"}
 				]
 			},
 			{
@@ -1457,6 +1471,9 @@
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Tipo","id":"typ"}
 				]
 			},
 			{
@@ -1465,6 +1482,9 @@
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
 				]
 			}
 		]
@@ -1611,6 +1631,22 @@
 		"uos":[
 			{"name":"UF","value":"0"},
 			{"name":"Setores","value":"1"}
+		],
+		"typ":[
+			{"name":"Todos","value":"0"},
+			{"name":"Exportação","value":"1"},
+			{"name":"Importação","value":"2"},
+			{"name":"Saldo Comercial","value":"3"},
+			{"name":"Valor Transicionado","value":"4"}
+		],
+		"prc":[
+			{"name":"Todos","value":"0"},
+			{"name":"África","value":"1"},
+			{"name":"América do Norte","value":"2"},
+			{"name":"América do Sul","value":"3"},
+			{"name":"Ásia","value":"4"},
+			{"name":"Europa","value":"5"},
+			{"name":"Oceania","value":"6"}
 		]
 	}
 	

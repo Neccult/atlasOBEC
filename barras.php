@@ -85,6 +85,16 @@
     else
         $uos = 0;
 
+    if (!empty($_GET["typ"]))
+        $typ = $_GET["typ"];
+    else
+        $typ = 0;
+
+    if (!empty($_GET["prc"]))
+        $prc = $_GET["prc"];
+    else
+        $prc = 0;
+
     if (!empty($_GET["ano"]))
         $ano = $_GET["ano"];
     else
@@ -138,7 +148,9 @@
     var mod = <?php echo $mod; ?>;
     var pfj = <?php echo $pfj; ?>;
     var uos = <?php echo $uos; ?>;
-    var ano = <?php echo $ano; ?>;
+    var typ = <?php echo $typ; ?>;
+    var prc = <?php echo $prc; ?>;
+    var ano = <?php if($ano == NULL) echo "null"; else echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {

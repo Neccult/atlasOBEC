@@ -20,6 +20,8 @@ if (!empty($_GET["var"])) {
     $ocp = $_GET["ocp"];
     $mec = $_GET["mec"];
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
+    $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
 	$eixo = $_GET['eixo'];
 }
@@ -32,6 +34,8 @@ else{
 	$prt = 0;
 	$ocp = 0;
     $mec = 0;
+    $typ = 0;
+    $prc = 0;
 	$ano = 2014;
 	$eixo = 0;
 }
@@ -126,7 +130,7 @@ else if($eixo == 2) {
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
-    foreach (EixoQuatro::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
+    foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano) as $tupla) {
 
         /*
             $mapa[$tupla->idUF] = [

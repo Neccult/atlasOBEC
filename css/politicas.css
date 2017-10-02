@@ -1,0 +1,22 @@
+p.title {
+    color: #00926D;
+}
+
+.results-article {
+    background-color: #00926D !important;
+}
+
+.container-chart .content .chart {
+    border-bottom: 10px solid #00825D;
+}
+
+button.opt {
+    background-color: #00723D;
+}
+button.opt:hover, button.opt.active {
+     background-color: #00220D;
+}
+
+.opt-title {
+    color: white;
+}

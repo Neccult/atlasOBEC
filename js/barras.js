@@ -314,14 +314,32 @@
 				]);
 			})
 			.on("mouseout", tooltipInstance.hideTooltip);
-
+		console.log(data);
 		// cria título do gráfico
-		svg.append("text")
-			.attr("x", (width / 2))             
-			.attr("y", 0 - 9)
-			.attr("text-anchor", "middle")  
-			.attr("class","barras-title")
-			.text(data[dados.key[0]].uf);	
+		if(data[dados.key[0]].uos == undefined) {
+			svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 0 - 9)
+                .attr("text-anchor", "middle")
+                .attr("class","barras-title")
+                .text(data[dados.key[0]].uf);
+        }
+        else if(data[dados.key[0]].uos != 2) {
+            svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 0 - 9)
+                .attr("text-anchor", "middle")
+                .attr("class","barras-title")
+                .text(data[dados.key[0]].ano);
+		}
+		else {
+            svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 0 - 9)
+                .attr("text-anchor", "middle")
+                .attr("class","barras-title")
+                .text(data[dados.key[0]].uf);
+		}
 			
 
 		//cria labels barras

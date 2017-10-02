@@ -56,6 +56,8 @@
                 $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
                 $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
                 $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
+                $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+                $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
 
 				/* informações JSON */
 				$json = file_get_contents('data/pt-br.json');
@@ -195,6 +197,11 @@
                 url['mod'] = "<?php echo $mod; ?>";
                 url['pfj'] = "<?php echo $pfj; ?>";
                 url['uos'] = "<?php echo $uos; ?>";
+            <?php } ?>
+
+            <?php if ($eixo == "comercio") {?>
+            url['typ'] = "<?php echo $typ; ?>";
+            url['prc'] = "<?php echo $prc; ?>";
             <?php } ?>
             console.log(url);
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";

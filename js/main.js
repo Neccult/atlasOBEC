@@ -307,10 +307,9 @@ function loadPage(){
 
 	$("#menuvariaveis").load(menuView, function(){
 		if(url['var']!=='' && pageTitle!==''){
-			loadResult();		
+			loadResult();
 		}
-		
-	});	
+	});
 }
 
 /*-----------------------------------------------------------------------------
@@ -429,4 +428,5 @@ $(document).ready(function(){
 		window.open(downloadUrl, '_blank');
 
 	});
+
 });
