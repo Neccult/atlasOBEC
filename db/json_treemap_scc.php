@@ -30,6 +30,8 @@ if (!empty($_GET["var"])) {
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== visualizacao ==*/
+    $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
 }
@@ -52,6 +54,8 @@ else{
     $slc = 0;
     $prv = 0;
     $snd = 0;
+    $typ = 0;
+    $prc = 0;
 	$ano = 2014;
 	$eixo = 0;
 }
@@ -220,7 +224,7 @@ else if($eixo == 2) {
 if($eixo == 3) {
     require_once("EixoQuatro.php");
     for ($cad=1; $cad <= 10; $cad++) {
-        $tupla = EixoQuatro::find($var, $parc, $cad, $tipo, $ano);
+        $tupla = EixoQuatro::find($var, $prc, $cad, $typ, $ano);
 
         $treemap .= '
 					{

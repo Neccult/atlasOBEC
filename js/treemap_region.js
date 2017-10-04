@@ -83,12 +83,22 @@ var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 
 /* retorna cor do elemento */
 var color = function(colorId){
-	if(colorJSON.regioes[colorId]){
-		return colorJSON.regioes[colorId].color;
-	}else{
-		console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
-		return colorJSON.regioes[0].color;
+	if(eixo == 3) {
+        if(colorJSON.parceiros[colorId]){
+            return colorJSON.parceiros[colorId].color;
+        }else{
+            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+            return colorJSON.parceiros[0].color;
+        }
 	}
+    else {
+		if(colorJSON.regioes[colorId]){
+            return colorJSON.regioes[colorId].color;
+        }else{
+            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+            return colorJSON.regioes[0].color;
+        }
+    }
 }   
 
 /*==================*/
@@ -105,7 +115,7 @@ if(eixo == 1) {
     var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&ano="+ano+"&eixo="+eixo;
 }
 else {
-	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&typ="+typ+"&prc="+prc+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 }
 
 $.get("./db/json_treemap_region.php"+config, function(data) {
@@ -202,7 +212,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.attr("font-size", 20)
 		.attr("text-anchor", "middle")
 		.attr("class","treemap-title")
-		.text(function(d){ return "Brasil" });
+		.text(function(d){ if(eixo == 3) return "Mundo"; else return "Brasil"; });
 
 	/*=== move nódulos pra baixo pra caber o título ===*/
 	var g = d3.selectAll("#corpo svg g");
@@ -229,13 +239,24 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	$('#corpo').find('svg').attr('height',$('.chart').height() + subtitleHeight);
 
 	// creates cadeia's color range array from color.json file
-	var colors = { domain: [], range: [] };             
-	$.each(colorJSON.regioes, function(i, regiao){		
-		if (i>0) {
-			colors.domain.push(regiao.name);
-			colors.range.push(regiao.color);
-		}
-	});
+	var colors = { domain: [], range: [] };
+	console.log(colorJSON);
+	if(eixo == 3) {
+        $.each(colorJSON.parceiros, function(i, parceiro){
+            if (i>0) {
+                colors.domain.push(parceiro.name);
+                colors.range.push(parceiro.color);
+            }
+        });
+    }
+    else {
+		$.each(colorJSON.regioes, function(i, regiao){
+            if (i>0) {
+                colors.domain.push(regiao.name);
+                colors.range.push(regiao.color);
+            }
+        });
+    }
 
 	//  legends
 	var ordinal = d3.scaleOrdinal()

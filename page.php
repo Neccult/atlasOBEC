@@ -200,8 +200,8 @@
             <?php } ?>
 
             <?php if ($eixo == "comercio") {?>
-            url['typ'] = "<?php echo $typ; ?>";
-            url['prc'] = "<?php echo $prc; ?>";
+                url['typ'] = "<?php echo $typ; ?>";
+                url['prc'] = "<?php echo $prc; ?>";
             <?php } ?>
             console.log(url);
 			var pageTitle = "<?php echo strip_tags($text['title'])?>";

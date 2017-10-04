@@ -29,6 +29,8 @@ if (!empty($_GET["var"])) {
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
+    $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
 }
@@ -48,6 +50,8 @@ else{
     $mod = 0;
     $pfj = 0;
     $prv = 0;
+    $typ = 0;
+    $prc = 0;
     $snd = 0;
 	$ano = 2014;
 	$eixo = 0;
@@ -577,14 +581,14 @@ else if($eixo == 3) {
     $prc = "África";
     $treemap .= '
                         {
-                          "colorId": 5,
+                          "colorId": 1,
                           "name": "' . $prc . '",
                           "children": [
                             {
                               "name": "' . $prc . '",
                               "children": [
                 ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
         $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
                                               "estado": "' . $tupla->ParceiroNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -606,14 +610,14 @@ else if($eixo == 3) {
     $prc = "América do Norte";
     $treemap .= '
                         {
-                          "colorId": 4,
+                          "colorId": 2,
                           "name": "' . $prc . '",
                           "children": [
                             {
                               "name": "' . $prc . '",
                               "children": [
                 ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
         $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
                                               "estado": "' . $tupla->ParceiroNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -634,14 +638,14 @@ else if($eixo == 3) {
     $prc = "América do Sul";
     $treemap .= '
                         {
-                          "colorId": 1,
+                          "colorId": 3,
                           "name": "' . $prc . '",
                           "children": [
                             {
                               "name": "' . $prc . '",
                               "children": [
                 ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
         $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
                                               "estado": "' . $tupla->ParceiroNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -662,14 +666,14 @@ else if($eixo == 3) {
     $prc = "Ásia";
     $treemap .= '
                         {
-                          "colorId": 2,
+                          "colorId": 4,
                           "name": "' . $prc . '",
                           "children": [
                             {
                               "name": "' . $prc . '",
                               "children": [
                 ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
         $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
                                               "estado": "' . $tupla->ParceiroNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -690,42 +694,14 @@ else if($eixo == 3) {
     $prc = "Europa";
     $treemap .= '
                         {
-                          "colorId": 3,
+                          "colorId": 5,
                           "name": "' . $prc . '",
                           "children": [
                             {
                               "name": "' . $prc . '",
                               "children": [
                 ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
-        $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
-                                              "estado": "' . $tupla->ParceiroNome . '",
-                                              "percentual": "' . $tupla->Percentual . '",
-                                              "taxa": "' . $tupla->Taxa . '", 
-                                              "size": "' . $tupla->Valor . '"},';
-    }
-
-    $size = strlen($treemap);
-    $treemap = substr($treemap, 0, $size - 1);
-
-    $treemap .= '	        
-                              ]
-                            } 
-                          ]
-                        }
-                ';
-
-    $prc = "Oceania";
-    $treemap .= '
-                        {
-                          "colorId": 2,
-                          "name": "' . $prc . '",
-                          "children": [
-                            {
-                              "name": "' . $prc . '",
-                              "children": [
-                ';
-    foreach (EixoQuatro::getter_region($var, $cad, $tipo, $ano, $prc) as $tupla) {
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
         $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
                                               "estado": "' . $tupla->ParceiroNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
@@ -741,6 +717,34 @@ else if($eixo == 3) {
                             } 
                           ]
                         },
+                ';
+
+    $prc = "Oceania";
+    $treemap .= '
+                        {
+                          "colorId": 6,
+                          "name": "' . $prc . '",
+                          "children": [
+                            {
+                              "name": "' . $prc . '",
+                              "children": [
+                ';
+    foreach (EixoQuatro::getter_region($var, $cad, $typ, $ano, $prc) as $tupla) {
+        $treemap .= '{"name": "' . $tupla->ParceiroSigla . '", 
+                                              "estado": "' . $tupla->ParceiroNome . '",
+                                              "percentual": "' . $tupla->Percentual . '",
+                                              "taxa": "' . $tupla->Taxa . '", 
+                                              "size": "' . $tupla->Valor . '"},';
+    }
+
+    $size = strlen($treemap);
+    $treemap = substr($treemap, 0, $size - 1);
+
+    $treemap .= '	        
+                              ]
+                            } 
+                          ]
+                        }
                 ';
 
     $treemap .= '

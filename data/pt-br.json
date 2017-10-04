@@ -1561,7 +1561,7 @@
 		"atc":[
 			{"name":"Todos","value":"0"},
 			{"name":"Comércio","value":"1"},
-			{"name":"Serviço Não Financeiro","value":"2"}
+			{"name":"Serviços e Indústria","value":"2"}
 		],
 		"sex":[
 			{"name":"Todos","value":"0"},

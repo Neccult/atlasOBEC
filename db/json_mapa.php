@@ -142,9 +142,9 @@ else if($eixo == 3) {
         */
 
 
-        $id = $tupla->idUF;
-        $mapa[$id]['id'] = (int) $tupla->idUF;
-        $mapa[$id]['uf'] = $tupla->UFNome;
+        $id = $tupla->idParceiro;
+        $mapa[$id]['id'] = (int) $tupla->idParceiro;
+        $mapa[$id]['prc'] = $tupla->ParceiroNome;
         $mapa[$id]['valor'] = (double) $tupla->Valor;
         $mapa[$id]['percentual'] = (double) $tupla->Percentual;
         $mapa[$id]['taxa'] = (double) $tupla->Taxa;

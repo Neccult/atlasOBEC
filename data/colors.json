@@ -268,5 +268,35 @@
 			"name": "Sul",
 			"color": "#D8D1AE"
 		}
+	},
+	"parceiros": {
+		"0": {
+			"name": "Todos",
+			"color": "#2F484F"
+		},
+		"1": {
+			"name": "África",
+			"color": "#657F7B"
+		},
+		"2": {
+			"name": "América do Norte",
+			"color": "#8D8E69"
+		},
+		"3": {
+			"name": "América do Sul",
+			"color": "#656F70"
+		},
+		"4": {
+			"name": "Ásia",
+			"color": "#FAEECF"
+		},
+		"5": {
+			"name": "Europa",
+			"color": "#D8D1AE"
+		},
+		"6": {
+			"name": "Oceania",
+			"color": "#EFD1AE"
+		}
 	}
 }

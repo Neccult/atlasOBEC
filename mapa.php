@@ -59,6 +59,7 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./css/jquery-jvectormap-2.0.3.css">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -68,12 +69,15 @@
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="./js/jquery-jvectormap-2.0.3.min.js"></script>
+  <script src="./js/continents-mill.js"></script>
 <![endif]-->
 
 <!-- TopoJSON -->
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 
-<!-- D3 JS v4 --> 
+<!-- D3 JS v4 -->
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
@@ -85,7 +89,14 @@
 <script src="js/functions.js"></script>
 
 <!--================== SVG! =================-->
-<div id="corpo" class="mapa fadeIn"></div>
+<?php
+    if($eixo == "comercio") {
+        echo "<div id=\"corpo-mundi\" style=\"width: 100%; height: 400px\" class=\"mapa fadeIn\"></div>";
+    }
+    else {
+        echo "<div id=\"corpo\" class=\"mapa fadeIn\"></div>";
+    }
+?>
 
 <script type="text/javascript">
 
@@ -121,4 +132,11 @@
 						
 </script>
 
-<script src="js/mapa.js"></script>
+<?php
+    if($eixo == "comercio") {
+        echo "<script src=\"js/mapa_mundi.js\"></script>";
+    }
+    else {
+        echo "<script src=\"js/mapa.js\"></script>";
+    }
+?>

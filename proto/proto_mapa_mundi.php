@@ -17,13 +17,40 @@
 
 <title>Atlas Econômico da Cultura Brasileira</title>
 <script language="javascript">
-    var gdpData = [];
-    gdpData["AF"] = 400;
-    gdpData["NA"] = 1000;
-    gdpData["SA"] = 900;
-    gdpData["AS"] = 200;
-    gdpData["OC"] = 100;
-    gdpData["EU"] = 300;
+    function convertCode(code) {
+        switch(code) {
+            case "AF":
+                return 1;
+            case "NA":
+                return 2;
+            case "SA":
+                return 3;
+            case "AS":
+                return 4;
+            case "EU":
+                return 5;
+            case "OC":
+                return 6;
+        }
+    }
+    //variaveis configuracao query
+    var vrv = 1;
+    var atc = 0;
+    var cad = 0;
+    var ocp = 0;
+    var prt = 0;
+    var mec = 0;
+    var mod = 0;
+    var pfj = 0;
+    var typ = 0;
+    var prc = 0;
+    var ano = 2014;
+    var eixo = 3;
+    var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+    var gdpData;
+    $.get("../db/json_mapa.php"+config, function(data) {
+        gdpData = JSON.parse(data);
+    });
     $(function(){
         $('#map123').vectorMap({
             map: 'continents_mill',
@@ -35,37 +62,12 @@
                 }]
             },
             onRegionTipShow: function(e, el, code){
-                console.log(code);
-                el.html(el.html()+' (GDP - '+gdpData[code]+')');
+                console.log(gdpData[convertCode(code)].valor);
+                el.html(el.html()+'<br>Valor: '+gdpData[convertCode(code)].valor+'');
+                el.html(el.html()+'<br>Taxa: '+gdpData[convertCode(code)].taxa+'');
+                el.html(el.html()+'<br>Percentual: '+gdpData[convertCode(code)].percentual+'');
             }
         });
     });
 </script>
 <div id="map123" style="width: 720px; height: 400px"></div>
-<canvas width="960" height="500"></canvas>
-
-<div class="col-md-7 col-xs-12">
-    <div class="container-chart">
-        <div class="content">
-            <div class="chart">
-            </div>
-        </div>
-    </div>
-</div>
-
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://unpkg.com/topojson-client@3"></script>
-<script>
-
-var context = d3.select("canvas").node().getContext("2d"),
-    path = d3.geoPath(d3.geoOrthographic(), context);
-
-d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
-  if (error) throw error;
-
-  context.beginPath();
-  path(topojson.mesh("us"));
-  context.stroke();
-});
-
-</script>

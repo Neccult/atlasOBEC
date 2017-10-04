@@ -212,13 +212,12 @@ class EixoQuatro {
 	-----------------------------------------------------------------------------*/
 	public static function getter_region($var, $cad, $tipo, $anos, $parc){
 
-		self::connect();		
+		self::connect();
 			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
+					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.ParceiroNome LIKE '".$parc."'"
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var
-                    ." AND ex.idParceiro = ".$parc;
+					." WHERE ex.Numero = ".$var;
 
 				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
 
@@ -230,7 +229,6 @@ class EixoQuatro {
 			}
 
 		self::disconnect();
-		
 		return $allObjects;
 	}
 
