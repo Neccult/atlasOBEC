@@ -89,6 +89,16 @@
     else
         $pfj = 0;
 
+    if (!empty($_GET["prc"]))
+        $prc = $_GET["prc"];
+    else
+        $prc = 0;
+
+    if (!empty($_GET["typ"]))
+        $typ = $_GET["typ"];
+    else
+        $typ = 0;
+
     if (!empty($_GET["eixo"]))
         $eixo = $_GET["eixo"];
     else
@@ -144,7 +154,15 @@
 		<img src="images/loading.gif" class="down-loading"/>
 
 		<div class="chart" style="width: 637px; height: 400px; opacity: 0">
-			<div id="corpo" class="<?php echo $view === 'mapa'? 'mapa' : ''; ?>"></div>
+            <?php
+            $class_aux = ($view === 'mapa') ? 'mapa' : '';
+            if($eixo == "comercio"  && $view == "mapa") {
+                echo "<div id=\"corpo-mundi\" style=\"width: 100%; height: 400px\" class=\"".$class_aux."\"></div>";
+            }
+            else {
+                echo "<div id=\"corpo\" class=\"".$class_aux."\"></div>";
+            }
+            ?>
 		</div>
 
 		<script type="text/javascript">
@@ -167,6 +185,8 @@
             var mod = <?php echo $mod; ?>;
             var slc = <?php echo $slc; ?>;
             var pfj = <?php echo $pfj; ?>;
+            var prc = <?php echo $prc; ?>;
+            var typ = <?php echo $typ; ?>;
 			var uf = <?php echo $uf; ?>;
 			var view = '<?php echo $view; ?>';
 			var type = '<?php echo $type; ?>';
@@ -200,8 +220,14 @@
 				type: "<?php echo $type; ?>"
 			};
 		</script>
-
-		<script src="js/<?php echo $view; ?>.js"></script>
+        <?php
+            if($eixo == "comercio" && $view == "mapa") {
+                echo "<script src=\"js/mapa_mundi.js\"></script>";
+            }
+            else {
+                echo "<script src=\"js/".$view.".js\"></script>";
+            }
+        ?>
 
 		<!--<div class="container" style="margin-top: 100px;">
 			<div class="row">
@@ -233,7 +259,14 @@
 			function submit_download_form(output_format)
 			{
 				// Get the d3js SVG element
-				var tmp = document.getElementById("corpo");
+				<?php
+                    if($eixo == "comercio" && $view == "mapa") {
+                        echo "var tmp = document.getElementById(\"corpo-mundi\");";
+                    }
+                    else {
+                        echo "var tmp = document.getElementById(\"corpo\");";
+                    }
+                ?>
 				var svg = tmp.getElementsByTagName("svg")[0];
 				// Extract the data as SVG text string
 				var svg_xml = (new XMLSerializer).serializeToString(svg);
