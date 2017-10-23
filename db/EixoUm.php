@@ -3,7 +3,7 @@
 ###	Classe que manipula as variáveis do Eixo I ###
 
 define('DB_NOME', 'Atlas');
-define('DB_USUARIO', 'root');
+define('DB_USUARIO', 'phpmyadmin');
 define('DB_SENHA', 'root');
 // define('DB_HOST', 'localhost');
 define('DB_HOST', '143.54.231.143');
@@ -92,7 +92,7 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $ufs, $atc, $cad, $prt, $anos, $ok){
+	public static function find($var, $ufs, $atc, $cad, $prt, $anos){
 
 		self::connect();
 
@@ -109,17 +109,7 @@ class EixoUm {
 
 		self::disconnect();
 
-        if(!$ok) {
-            if(($var > 3 && $var < 8) || ($var > 10)) {
-                return NULL;
-            }
-            else {
-                return ($obj == false) ? NULL : $obj;
-            }
-        }
-        else {
-            return ($obj == false) ? NULL : $obj;
-        }
+        return ($obj == false) ? NULL : $obj;
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -164,7 +154,7 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $atc, $cad, $prt, $anos,$ok){
+	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -185,18 +175,7 @@ class EixoUm {
 
 		self::disconnect();
 
-
-        if(!$ok) {
-            if(($var > 3 && $var < 8) || ($var > 10)) {
-                return NULL;
-            }
-            else {
-                return $allObjects;
-            }
-        }
-        else {
-            return $allObjects;
-        }
+        return $allObjects;
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -211,7 +190,7 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $ok){
+	public static function getter_barras($var, $ufs, $atc, $cad, $prt){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -230,16 +209,7 @@ class EixoUm {
 
 		self::disconnect();
 
-        if(!$ok) {
-            if (($var > 3 && $var < 8) || ($var > 10)) {
-                return NULL;
-            } else {
-                return $allObjects;
-            }
-        }
-        else {
-            return $allObjects;
-        }
+        return $allObjects;
 	}
 	
 
@@ -256,7 +226,7 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao, $ok){
+	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
 		self::connect();		
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -277,17 +247,7 @@ class EixoUm {
 
 		self::disconnect();
 
-        if(!$ok) {
-            if(($var > 3 && $var < 8) || ($var > 10)) {
-                return NULL;
-            }
-            else {
-                return $allObjects;
-            }
-        }
-        else {
-            return $allObjects;
-        }
+        return $allObjects;
 	}
 
 }

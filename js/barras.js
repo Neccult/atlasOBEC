@@ -29,7 +29,7 @@
 			return colorJSON.cadeias[0].color;
 		}
 	}
-	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&versao_ok="+versao_ok+"&cad="+cad+"&uos="+uos+"&ano="+ano+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&typ="+typ+"&prc="+prc+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
+	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&uos="+uos+"&ano="+ano+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&typ="+typ+"&prc="+prc+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
 
 	$.get("./db/json_barras.php"+config, function(data) {
 		console.log(data);

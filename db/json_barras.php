@@ -10,7 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-$ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
 
 function sigla_cadeia($cadeia) {
     switch($cadeia) {
@@ -139,7 +138,7 @@ switch($pfj) {
 $barras = array();
 if($eixo == 0) {
     require_once("EixoUm.php");
-    foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt, $ok) as $tupla) {
+    foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
 

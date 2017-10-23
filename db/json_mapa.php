@@ -9,7 +9,6 @@ Saída:
 -----------------------------------------------------------------------------*/
 
 header('charset=utf-8');
-$ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
@@ -54,11 +53,10 @@ switch($pfj) {
     default:
         $pfj = NULL;
 }
-
 $mapa = array();
 if($eixo == 0) {
     require_once("EixoUm.php");
-	foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano, $ok) as $tupla) {
+	foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 
         /*
             $mapa[$tupla->idUF] = [

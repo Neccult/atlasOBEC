@@ -90,7 +90,6 @@
 	else
 		$ano = 2014;
 
-    $ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
 ?>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -148,7 +147,6 @@
     var mod = <?php echo $mod; ?>;
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
-    var versao_ok = <?php echo $ok; ?>;
 	var ano = <?php echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
 	var eixo;

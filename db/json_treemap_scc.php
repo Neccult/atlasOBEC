@@ -10,8 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-$ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
-
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
@@ -115,7 +113,7 @@ if($eixo == 0) {
     require_once("EixoUm.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
-        $tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano, $ok);
+        $tupla = EixoUm::find($var, $uf, $atc, $cad, $prt, $ano);
         $treemap .= '
                 {
                   "colorId": "' . $cad . '", 

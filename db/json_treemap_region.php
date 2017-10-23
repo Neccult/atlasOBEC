@@ -10,7 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-$ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
 
 if (!empty($_GET["var"])) {
 
@@ -121,7 +120,7 @@ if($eixo == 0) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao,$ok) as $tupla) {
+    foreach (EixoUm::getter_region($var, $atc, $cad, $prt, $ano, $regiao) as $tupla) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
