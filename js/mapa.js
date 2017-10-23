@@ -101,7 +101,7 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&versao_ok="+versao_ok;
 // console.log(config);
 
 $.get("./db/json_mapa.php"+config, function(data) {

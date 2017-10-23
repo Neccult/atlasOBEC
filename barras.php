@@ -100,6 +100,8 @@
     else
         $ano = NULL;
 
+    $ok     =   (isset($_GET['versao_ok'])) ?   1   :   0;
+
 ?>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -150,6 +152,7 @@
     var uos = <?php echo $uos; ?>;
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
+    var versao_ok = <?php echo $ok; ?>;
     var ano = <?php if($ano == NULL) echo "null"; else echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;

@@ -83,7 +83,7 @@
 					primeira declarada no json
 				*/	
 				if(!isset($text[$view])) $view = $text['type'][0]['id']; 	
-
+-
 				$descView = $json_text[$view];			   /*== descrição da visualização ==*/
 			?>
 
@@ -176,6 +176,7 @@
 				cad:"<?php echo $cad; ?>",
                 ocp:"<?php echo $ocp; ?>",
                 ano:"<?php echo $ano; ?>",
+                versao_ok:"<?php echo $_GET['versao_ok']; ?>",
 				uf:"<?php echo $uf; ?>"
 			};
 			<?php if ($eixo == "mercado" && $view != "mapa") {?>
