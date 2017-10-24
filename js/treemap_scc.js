@@ -42,7 +42,15 @@ var colorJSON;
 d3.json('data/colors.json', function(error, data) {
 	if(error) throw error;
 	colorJSON = data;
-})
+});
+
+// import pt-br.json file for get the title
+var textJSON;
+d3.json('data/pt-br.json', function(error, data) {
+    if(error) throw error;
+
+    textJSON = data;
+});
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	format = d3.format(",d");
@@ -157,7 +165,10 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("font-size", 20)
 		.attr("text-anchor", "middle")  
 		.attr("class","treemap-title")
-		.text(function(d){ return d.data.estado; });
+		.text(function(d){
+			if(atc == 0) return "UF: "+d.data.estado+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+            else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+		});
 
 	var titleTextElement = cell.append("text")
 		.text(function(d) {return d.data.name; })

@@ -14,31 +14,39 @@
 
 	// import colors.json file
 	var colorJSON;
+    var textJSON;
 	d3.json('data/colors.json', function(error, data) {
 		if (error) throw error;
 		colorJSON = data;
-	});
 
-	// return matching color value
-	var color = function(colorId){
 
-		if(colorJSON.cadeias[colorId]){
-			return colorJSON.cadeias[colorId].color;
-		} else{
-			console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
-			return colorJSON.cadeias[0].color;
-		}
-	}
-	var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&uos="+uos+"&ano="+ano+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&typ="+typ+"&prc="+prc+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
+		// import pt-br.json file for get the title
+        d3.json('data/pt-br.json', function(error, data) {
+            if(error) throw error;
 
-	$.get("./db/json_barras.php"+config, function(data) {
-		console.log(data);
-	});
+            textJSON = data;
+            var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&uos="+uos+"&ano="+ano+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&typ="+typ+"&prc="+prc+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&eixo="+eixo;
 
-	d3.queue()
-		.defer(d3.json, "./db/json_barras.php"+config)
-		.await(analyze);
+            $.get("./db/json_barras.php"+config, function(data) {
+                console.log(data);
+            });
 
+            d3.queue()
+                .defer(d3.json, "./db/json_barras.php"+config)
+                .await(analyze);
+        });
+
+    });
+    // return matching color value
+    var color = function(colorId){
+
+        if(colorJSON.cadeias[colorId]){
+            return colorJSON.cadeias[colorId].color;
+        } else{
+            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+            return colorJSON.cadeias[0].color;
+        }
+    }
 	function analyze(error, data) {
 		
 		if(error){ 
@@ -322,7 +330,10 @@
                 .attr("y", 0 - 9)
                 .attr("text-anchor", "middle")
                 .attr("class","barras-title")
-                .text(data[dados.key[0]].uf);
+                .text(function() {
+                	if(atc == 0) return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
+                    else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
+                });
         }
         else if(data[dados.key[0]].uos != 2) {
             svg.append("text")

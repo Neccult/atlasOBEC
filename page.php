@@ -33,7 +33,6 @@
 		<?php if(isset($_GET["var"])):?>
 		
 			<?php
-
 				/* GETS! */
 				$uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
                 $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
@@ -163,6 +162,7 @@
 
 		<!-- se existem informações desta variável -->
 		<?php if(!empty($text)):?>
+
 			<?php include 'footer.php'; ?>
 		<?php endif;?>
 
@@ -176,7 +176,6 @@
 				cad:"<?php echo $cad; ?>",
                 ocp:"<?php echo $ocp; ?>",
                 ano:"<?php echo $ano; ?>",
-                versao_ok:"<?php echo $_GET['versao_ok']; ?>",
 				uf:"<?php echo $uf; ?>"
 			};
 			<?php if ($eixo == "mercado" && $view != "mapa") {?>

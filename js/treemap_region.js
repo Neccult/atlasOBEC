@@ -77,6 +77,14 @@ d3.json('data/colors.json', function(error, data) {
 	colorJSON = data;
 })
 
+// import pt-br.json file for get the title
+var textJSON;
+d3.json('data/pt-br.json', function(error, data) {
+    if(error) throw error;
+
+    textJSON = data;
+});
+
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
 	format = d3.format(",d");
@@ -209,10 +217,18 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.data(root.leaves())
 		.attr("x", (width / 2))
 		.attr("y", 20)
-		.attr("font-size", 20)
+		.attr("font-size", 10)
 		.attr("text-anchor", "middle")
 		.attr("class","treemap-title")
-		.text(function(d){ if(eixo == 3) return "Mundo"; else return "Brasil"; });
+		.text(function(d) {
+			if(eixo == 3) {
+				return "Mundo";
+            }
+			else {
+				if(atc == 0) return "Brasil - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+                else return "Brasil - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+            }
+		});
 
 	/*=== move nódulos pra baixo pra caber o título ===*/
 	var g = d3.selectAll("#corpo svg g");

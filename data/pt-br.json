@@ -39,6 +39,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -57,7 +58,7 @@
 					{"name":"Porte","id":"prt"}
 				],
 				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				}
 			},
 			{
@@ -72,6 +73,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -90,7 +92,7 @@
 					{"name":"Porte","id":"prt"}
 				],
 				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				}
 			},
 			{
@@ -103,6 +105,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -111,7 +114,7 @@
 					{"name":"Porte","id":"prt"}
 				],
 				"inativos":{
-					"mapa":["prt","uf"],"barras":["ano"]
+					"mapa":["uf"],"barras":["ano"]
 				}
 			},
 			{
@@ -126,6 +129,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -144,7 +148,7 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"inativos":{
-					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 				}
 			},
 			{
@@ -159,6 +163,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -177,7 +182,7 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				}
 			},
 			{
@@ -192,6 +197,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -210,7 +216,7 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				}
 			},
 			{
@@ -223,6 +229,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"barras":[
@@ -231,7 +238,7 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"inativos":{
-					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+					"mapa":["prt","uf"],"barras":["ano","prt"]
 				}
 			},
 			{
@@ -246,6 +253,7 @@
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],
 				"treemap_region":[
@@ -264,7 +272,7 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				}
 			},
 			{

@@ -3,7 +3,7 @@
 ###	Classe que manipula as variáveis do Eixo I ###
 
 define('DB_NOME', 'Atlas');
-define('DB_USUARIO', 'phpmyadmin');
+define('DB_USUARIO', 'root');
 define('DB_SENHA', 'root');
 // define('DB_HOST', 'localhost');
 define('DB_HOST', '143.54.231.143');

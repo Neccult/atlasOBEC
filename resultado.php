@@ -30,7 +30,7 @@
 										$_GET[$filter]=0;
 									}
 									if($view!='treemap_scc' && (($cad!=4 && $cad!=5 && $cad!=9) && $atc==1)){
-										$_GET['atc']=0;	
+										//$_GET['atc']=0;
 									}
 
 									include $view.'.php';

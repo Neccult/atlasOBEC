@@ -3,20 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="c8cc3841-7aef-471f-b03c-0cf66a703b5e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/barras.php" afterPath="$PROJECT_DIR$/barras.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/pt-br.json" afterPath="$PROJECT_DIR$/data/pt-br.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoUm.php" afterPath="$PROJECT_DIR$/db/EixoUm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_barras.php" afterPath="$PROJECT_DIR$/db/json_barras.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_mapa.php" afterPath="$PROJECT_DIR$/db/json_mapa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_region.php" afterPath="$PROJECT_DIR$/db/json_treemap_region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_scc.php" afterPath="$PROJECT_DIR$/db/json_treemap_scc.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/barras.js" afterPath="$PROJECT_DIR$/js/barras.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mapa.js" afterPath="$PROJECT_DIR$/js/mapa.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_region.js" afterPath="$PROJECT_DIR$/js/treemap_region.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_scc.js" afterPath="$PROJECT_DIR$/js/treemap_scc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mapa.php" afterPath="$PROJECT_DIR$/mapa.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page.php" afterPath="$PROJECT_DIR$/page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_region.php" afterPath="$PROJECT_DIR$/treemap_region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_scc.php" afterPath="$PROJECT_DIR$/treemap_scc.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resultado.php" afterPath="$PROJECT_DIR$/resultado.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,93 +23,82 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="page.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/page.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="178" column="51" lean-forward="false" selection-start-line="178" selection-start-column="51" selection-end-line="178" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="barras.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/barras.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="102" column="4" lean-forward="false" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mapa.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mapa.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/mapa.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="108" selection-end-column="3" />
+            <state relative-caret-position="3315">
+              <caret line="221" column="29" lean-forward="false" selection-start-line="221" selection-start-column="29" selection-end-line="221" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapa.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapa.php">
+      <file leaf-file-name="EixoUm.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/db/EixoUm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="995">
-              <caret line="116" column="39" lean-forward="true" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="39" />
+            <state relative-caret-position="45">
+              <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="33" />
               <folding>
-                <marker date="1508786748657" expanded="true" signature="2458:2484" ph="..." />
+                <marker date="1508870621000" expanded="true" signature="2343:2752" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508870621000" expanded="true" signature="3382:3667" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508870621000" expanded="true" signature="4446:4807" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508870621000" expanded="true" signature="5663:6044" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508870621000" expanded="true" signature="6887:7283" ph="SELECT * FRO... ${self::$table}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="json_teste.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/json_teste.php">
+      <file leaf-file-name="EixoDois.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/EixoDois.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="4785">
+              <caret line="319" column="33" lean-forward="false" selection-start-line="319" selection-start-column="33" selection-end-line="319" selection-end-column="33" />
+              <folding>
+                <marker date="1508810113000" expanded="true" signature="2890:3841" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="3909:4921" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="5563:6038" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="6791:7317" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="8433:9400" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="9469:10391" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="11509:12446" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="12514:13496" ph="SELECT * FRO... ${self::$table}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="json_treemap_region.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/json_treemap_region.php">
+      <file leaf-file-name="EixoQuatro.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/EixoQuatro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="54" />
-              <folding />
+            <state relative-caret-position="1365">
+              <caret line="91" column="99" lean-forward="false" selection-start-line="91" selection-start-column="89" selection-end-line="91" selection-end-column="99" />
+              <folding>
+                <marker date="1508810113000" expanded="true" signature="2239:2588" ph="SELECT * FRO... ${self::$table}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="treemap_region.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/treemap_region.php">
+      <file leaf-file-name="EixoTres.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db/EixoTres.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="3465">
+              <caret line="231" column="81" lean-forward="true" selection-start-line="231" selection-start-column="81" selection-end-line="231" selection-end-column="81" />
+              <folding>
+                <marker date="1508810113000" expanded="true" signature="5886:6266" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="6586:7002" ph="SELECT * FRO... ${self::$table}" />
+                <marker date="1508810113000" expanded="true" signature="7320:7736" ph="SELECT * FRO... ${self::$table}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="treemap_scc.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/treemap_scc.php">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="json_treemap_scc.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/json_treemap_scc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="117" column="68" lean-forward="false" selection-start-line="117" selection-start-column="68" selection-end-line="117" selection-end-column="68" />
+            <state relative-caret-position="1620">
+              <caret line="108" column="29" lean-forward="false" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -122,8 +107,38 @@
       <file leaf-file-name="treemap_scc.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="68" column="106" lean-forward="false" selection-start-line="68" selection-start-column="106" selection-end-line="68" selection-end-column="106" />
+            <state relative-caret-position="675">
+              <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="52" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="barras.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/barras.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="treemap_region.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/treemap_region.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1170">
+              <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5790">
+              <caret line="386" column="17" lean-forward="false" selection-start-line="386" selection-start-column="17" selection-end-line="386" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -141,9 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>textJSON</find>
-      <find>eixo</find>
-      <find>window.location.href</find>
       <find>url</find>
       <find>.title span</find>
       <find>Essa visual</find>
@@ -167,10 +179,13 @@
       <find>&lt;!--=== lista de variáveis ===--&gt;</find>
       <find>menudesktop</find>
       <find>colorJSON</find>
-      <find>Brasil</find>
       <find>white</find>
       <find>corpo</find>
       <find>regio</find>
+      <find>$_GET[&quot;atc&quot;]</find>
+      <find>Brasil</find>
+      <find>treemap</find>
+      <find>Selecione</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -186,33 +201,23 @@
         <option value="$PROJECT_DIR$/menudesktop.php" />
         <option value="$PROJECT_DIR$/menumobile.php" />
         <option value="$PROJECT_DIR$/db/json_teste.php" />
-        <option value="$PROJECT_DIR$/css/main.css" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/data/Colombia.geo.json" />
         <option value="$PROJECT_DIR$/data/world-continents.geo.json" />
         <option value="$PROJECT_DIR$/proto/proto_mapa_mundi_test.php" />
         <option value="$PROJECT_DIR$/db/EixoDois.php" />
         <option value="$PROJECT_DIR$/db/EixoTres.php" />
-        <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/head.php" />
         <option value="$PROJECT_DIR$/css/mercado.css" />
         <option value="$PROJECT_DIR$/js/control-colors.js" />
         <option value="$PROJECT_DIR$/css/politicas.css" />
         <option value="$PROJECT_DIR$/css/comercio.css" />
-        <option value="$PROJECT_DIR$/resultado.php" />
-        <option value="$PROJECT_DIR$/data/pt-br.json" />
         <option value="$PROJECT_DIR$/db/EixoQuatro.php" />
         <option value="$PROJECT_DIR$/data/colors.json" />
         <option value="$PROJECT_DIR$/proto/proto_mapa_mundi.php" />
         <option value="$PROJECT_DIR$/js/mapa_mundi.js" />
         <option value="$PROJECT_DIR$/download.php" />
-        <option value="$PROJECT_DIR$/page.php" />
-        <option value="$PROJECT_DIR$/js/mapa.js" />
         <option value="$PROJECT_DIR$/db/json_mapa.php" />
-        <option value="$PROJECT_DIR$/db/EixoUm.php" />
-        <option value="$PROJECT_DIR$/js/treemap_scc.js" />
-        <option value="$PROJECT_DIR$/js/treemap_region.js" />
-        <option value="$PROJECT_DIR$/js/barras.js" />
         <option value="$PROJECT_DIR$/db/json_barras.php" />
         <option value="$PROJECT_DIR$/db/json_treemap_region.php" />
         <option value="$PROJECT_DIR$/db/json_treemap_scc.php" />
@@ -220,6 +225,16 @@
         <option value="$PROJECT_DIR$/barras.php" />
         <option value="$PROJECT_DIR$/treemap_region.php" />
         <option value="$PROJECT_DIR$/treemap_scc.php" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/resultado.php" />
+        <option value="$PROJECT_DIR$/page.php" />
+        <option value="$PROJECT_DIR$/data/pt-br.json" />
+        <option value="$PROJECT_DIR$/css/main.css" />
+        <option value="$PROJECT_DIR$/js/treemap_region.js" />
+        <option value="$PROJECT_DIR$/js/treemap_scc.js" />
+        <option value="$PROJECT_DIR$/js/mapa.js" />
+        <option value="$PROJECT_DIR$/js/barras.js" />
+        <option value="$PROJECT_DIR$/db/EixoUm.php" />
       </list>
     </option>
   </component>
@@ -230,10 +245,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -250,6 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,14 +312,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../leagueofsimulator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -364,26 +379,28 @@
       <workItem from="1508431048787" duration="1214000" />
       <workItem from="1508517977956" duration="1258000" />
       <workItem from="1508776570210" duration="4796000" />
+      <workItem from="1508811147865" duration="9499000" />
+      <workItem from="1508870882401" duration="125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113264000" />
+    <option name="totallyTimeSpent" value="122888000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1342318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13733906" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924336" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -469,13 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="310" column="9" lean-forward="false" selection-start-line="310" selection-start-column="9" selection-end-line="310" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/mercado.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -518,21 +528,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/EixoTres.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="231" column="81" lean-forward="true" selection-start-line="231" selection-start-column="81" selection-end-line="231" selection-end-column="81" />
-          <folding>
-            <marker date="1506715431465" expanded="true" signature="2376:2682" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506715431465" expanded="true" signature="2376:2916" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506715431465" expanded="true" signature="3544:3778" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506715431465" expanded="true" signature="4537:4823" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506715431465" expanded="true" signature="5886:6266" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506715431465" expanded="true" signature="6586:7002" ph="SELECT * FRO... ${self::$table}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/jquery-jvectormap-2.0.3.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="297">
@@ -558,28 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1062">
           <caret line="59" column="33" lean-forward="false" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/pt-br.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28134">
-          <caret line="1563" column="41" lean-forward="false" selection-start-line="1563" selection-start-column="41" selection-end-line="1563" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/EixoQuatro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1638">
-          <caret line="91" column="99" lean-forward="false" selection-start-line="91" selection-start-column="89" selection-end-line="91" selection-end-column="99" />
-          <folding>
-            <marker date="1507140479901" expanded="true" signature="2239:2588" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1507140479901" expanded="true" signature="3220:3463" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1507140479901" expanded="true" signature="4218:4510" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1507140479901" expanded="true" signature="5347:5668" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1507140479901" expanded="true" signature="6449:6780" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1507140479901" expanded="true" signature="6449:6786" ph="SELECT * FRO... ${self::$table}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -616,18 +589,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
           <caret line="56" column="39" lean-forward="false" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
-          <folding>
-            <marker date="1507321447508" expanded="true" signature="3245:3337" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3351:3438" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3370:3438" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3393:3438" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3572:3664" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3678:3765" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3697:3765" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3888:3980" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="3994:4081" ph="..." />
-            <marker date="1507321447508" expanded="true" signature="4013:4081" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -635,9 +597,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2124">
           <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding>
-            <marker date="1507749795841" expanded="true" signature="3610:3636" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -645,83 +605,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1368">
           <caret line="76" column="12" lean-forward="false" selection-start-line="76" selection-start-column="12" selection-end-line="76" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page_funciona.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2137">
-          <caret line="52" column="44" lean-forward="true" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/EixoDois.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="887">
-          <caret line="319" column="33" lean-forward="false" selection-start-line="319" selection-start-column="33" selection-end-line="319" selection-end-column="33" />
-          <folding>
-            <marker date="1506711851393" expanded="true" signature="2890:3841" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="3909:4921" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="5563:6038" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="6791:7317" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="8433:9400" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="9469:10391" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="9469:10398" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="11509:12446" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="11509:12453" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1506711851393" expanded="true" signature="12514:13496" ph="SELECT * FRO... ${self::$table}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resultado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3564">
-          <caret line="198" column="307" lean-forward="false" selection-start-line="198" selection-start-column="307" selection-end-line="198" selection-end-column="307" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/EixoUm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="111" column="12" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
-          <folding>
-            <marker date="1508785770950" expanded="true" signature="2348:2757" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1508785770950" expanded="true" signature="3631:3916" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1508785770950" expanded="true" signature="4699:5060" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1508785770950" expanded="true" signature="6148:6529" ph="SELECT * FRO... ${self::$table}" />
-            <marker date="1508785770950" expanded="true" signature="7592:7988" ph="SELECT * FRO... ${self::$table}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/treemap_region.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="114" column="76" lean-forward="false" selection-start-line="114" selection-start-column="76" selection-end-line="114" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/barras.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="31" column="74" lean-forward="false" selection-start-line="31" selection-start-column="74" selection-end-line="31" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/page_funciona.php" />
     <entry file="file://$PROJECT_DIR$/db/json_mapa.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -740,50 +627,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db/json_treemap_scc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="117" column="68" lean-forward="false" selection-start-line="117" selection-start-column="68" selection-end-line="117" selection-end-column="68" />
+        <state relative-caret-position="1650">
+          <caret line="117" column="17" lean-forward="false" selection-start-line="117" selection-start-column="17" selection-end-line="117" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/json_teste.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="68" column="106" lean-forward="false" selection-start-line="68" selection-start-column="106" selection-end-line="68" selection-end-column="106" />
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mapa.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="995">
-          <caret line="116" column="39" lean-forward="true" selection-start-line="116" selection-start-column="39" selection-end-line="116" selection-end-column="39" />
-          <folding>
-            <marker date="1508786748657" expanded="true" signature="2458:2484" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/barras.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="102" column="4" lean-forward="false" selection-start-line="102" selection-start-column="4" selection-end-line="102" selection-end-column="4" />
+        <state relative-caret-position="1740">
+          <caret line="116" column="31" lean-forward="false" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/json_treemap_region.php">
+    <entry file="file://$PROJECT_DIR$/treemap_scc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="54" />
+        <state relative-caret-position="1365">
+          <caret line="91" column="0" lean-forward="false" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resultado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2295">
+          <caret line="32" column="42" lean-forward="false" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -791,32 +667,141 @@
     <entry file="file://$PROJECT_DIR$/treemap_region.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
-          <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+          <caret line="92" column="2" lean-forward="false" selection-start-line="92" selection-start-column="2" selection-end-line="92" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/json_treemap_region.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/barras.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="102" column="0" lean-forward="false" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="178" column="51" lean-forward="false" selection-start-line="178" selection-start-column="51" selection-end-line="178" selection-end-column="51" />
+        <state relative-caret-position="225">
+          <caret line="174" column="43" lean-forward="false" selection-start-line="174" selection-start-column="43" selection-end-line="174" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/treemap_scc.php">
+    <entry file="file://$PROJECT_DIR$/data/pt-br.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="58" />
+        <state relative-caret-position="-17911">
+          <caret line="274" column="38" lean-forward="false" selection-start-line="274" selection-start-column="38" selection-end-line="274" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5790">
+          <caret line="386" column="17" lean-forward="false" selection-start-line="386" selection-start-column="17" selection-end-line="386" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1620">
+          <caret line="108" column="29" lean-forward="false" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/treemap_region.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/mapa.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="108" selection-end-column="3" />
+        <state relative-caret-position="3315">
+          <caret line="221" column="29" lean-forward="false" selection-start-line="221" selection-start-column="29" selection-end-line="221" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="52" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/barras.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/EixoDois.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4785">
+          <caret line="319" column="33" lean-forward="false" selection-start-line="319" selection-start-column="33" selection-end-line="319" selection-end-column="33" />
+          <folding>
+            <marker date="1508810113000" expanded="true" signature="2890:3841" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="3909:4921" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="5563:6038" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="6791:7317" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="8433:9400" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="9469:10391" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="11509:12446" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="12514:13496" ph="SELECT * FRO... ${self::$table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/EixoQuatro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="91" column="99" lean-forward="false" selection-start-line="91" selection-start-column="89" selection-end-line="91" selection-end-column="99" />
+          <folding>
+            <marker date="1508810113000" expanded="true" signature="2239:2588" ph="SELECT * FRO... ${self::$table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/EixoTres.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3465">
+          <caret line="231" column="81" lean-forward="true" selection-start-line="231" selection-start-column="81" selection-end-line="231" selection-end-column="81" />
+          <folding>
+            <marker date="1508810113000" expanded="true" signature="5886:6266" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="6586:7002" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508810113000" expanded="true" signature="7320:7736" ph="SELECT * FRO... ${self::$table}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/EixoUm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <marker date="1508870621000" expanded="true" signature="2343:2752" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508870621000" expanded="true" signature="3382:3667" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508870621000" expanded="true" signature="4446:4807" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508870621000" expanded="true" signature="5663:6044" ph="SELECT * FRO... ${self::$table}" />
+            <marker date="1508870621000" expanded="true" signature="6887:7283" ph="SELECT * FRO... ${self::$table}" />
+          </folding>
         </state>
       </provider>
     </entry>

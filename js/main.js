@@ -100,19 +100,20 @@ Saída:
 function controlFilter(selectvalue, selectid){
 	
 	/* se for PORTE x ATUAÇÃO */
+    console.log(selectvalue);
 	if(selectid=='prt'){
-		
 		/* filtro atuação */
 		if(selectvalue.match('atc-','')){
-			
 			url['atc'] = selectvalue.replace('atc-','');
 			url['prt'] = '0'; /* se for atuação, não há filtro por porte */
+            console.log(url);
 		}
 
 		/* filtro porte */
 		else{
 			url['prt'] = selectvalue;
 			url['atc'] = '0';/* se for porte, não há filtro por atuação */
+			console.log(url);
 		}
 
 	}
@@ -174,11 +175,11 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlAtc(select,isPrt){
 
-	if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
+	/*if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
 		
 		if(isPrt) $(select).find('option[value="atc-1"]').remove();
 		else $(select).find('option[value="1"]').remove();
-	}
+	}*/
 }
 
 
