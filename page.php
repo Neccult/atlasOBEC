@@ -176,6 +176,7 @@
 				cad:"<?php echo $cad; ?>",
                 ocp:"<?php echo $ocp; ?>",
                 ano:"<?php echo $ano; ?>",
+                uos:"<?php echo $uos; ?>",
 				uf:"<?php echo $uf; ?>"
 			};
 			<?php if ($eixo == "mercado" && $view != "mapa") {?>

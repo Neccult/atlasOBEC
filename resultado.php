@@ -13,6 +13,9 @@
 					
 						<!-- logo atlas -->
 						<a href="index.php"><img src="images/logo_white.png" class="logo-desc" alt="Logo Atlas"/></a>
+                        <br>
+                        <br>
+                        <div class="text text-justify" id="desc-var"><?php echo $text['desc_var'];?></div>
 
 					</div>				
 				</div>

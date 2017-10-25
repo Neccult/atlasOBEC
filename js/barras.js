@@ -56,10 +56,14 @@
 		var dados = {key: [], value: [], percentual: [], taxa: []};
 
 		Object.keys(data).forEach(function(key) {
+			if((vrv === 3) && data[key].ano === 2007) return;
 			dados.key.push(data[key].ano);
-			dados.value.push(data[key].valor);
-			dados.percentual.push(data[key].percentual);
-			dados.taxa.push(data[key].taxa);
+			if(vrv === 2 || vrv === 3) dados.value.push(100*data[key].valor);
+			else dados.value.push(data[key].valor);
+			if(vrv === 1 || vrv === 2 || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 9 || vrv === 8) dados.percentual.push(0);
+			else dados.percentual.push(data[key].percentual);
+			if(vrv === 2) dados.taxa.push(0);
+            else dados.taxa.push(data[key].taxa);
 		});	
 
 		dados.key = d3.keys(data);
@@ -314,12 +318,22 @@
 		   })
 		   //mouseover
 		   .on("mouseover", function(d,i,obj){			   
-				tooltipInstance.showTooltip(d, [
-					["title", dados.key[i]],
-					["Valor", formatNumber(dados.value[i])],
-					["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
-					["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
-				]);
+				if(vrv === 2 || vrv === 3) {
+					tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["Valor", formatNumber(dados.value[i])+"%"],
+                        ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
+                        ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
+                    ]);
+                }
+                else {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["Valor", formatNumber(dados.value[i])],
+                        ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
+                        ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
+                    ]);
+				}
 			})
 			.on("mouseout", tooltipInstance.hideTooltip);
 		console.log(data);
@@ -331,8 +345,14 @@
                 .attr("text-anchor", "middle")
                 .attr("class","barras-title")
                 .text(function() {
-                	if(atc == 0) return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
-                    else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
+                	if(data[dados.key[0]].uf === "Todos") {
+                		if(atc == 0) return "Brasil - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
+                        else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
+                    }
+                    else {
+                        if(atc == 0) return data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
+                        else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
+                    }
                 });
         }
         else if(data[dados.key[0]].uos != 2) {
@@ -405,7 +425,7 @@
 		
 		//formata labels eixo X
 		var xAxis = d3.axisBottom(x)
-			.tickFormat(function(d){ return dados.key[d];})
+			.tickFormat(function(d){ if(vrv === 3) return dados.key[d+1]; else return dados.key[d];})
 			.tickSize(5)
 			.tickPadding(5);
 

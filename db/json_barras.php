@@ -138,7 +138,7 @@ switch($pfj) {
 $barras = array();
 if($eixo == 0) {
     require_once("EixoUm.php");
-    foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt) as $tupla) {
+    foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt, $uos) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
 

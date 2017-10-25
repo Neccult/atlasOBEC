@@ -132,12 +132,26 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 				//mouseover
 				.on("mouseover", function(d){
-					tooltipInstance.showTooltip(d, [
-						["title", d.data.name],
-						["Valor", formatNumber(d.data.size)],
-						["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-						["Taxa", formatDecimalLimit(d.data.taxa, 2)],
-					]);
+					if(vrv === 2 || vrv === 9) {
+						tooltipInstance.showTooltip(d, [
+                            ["title", d.data.name],
+                            ["Valor", formatNumber((100*d.data.size))+"%"],
+                        ]);
+                    }
+                    else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
+                        tooltipInstance.showTooltip(d, [
+                            ["title", d.data.name],
+                            ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                        ]);
+					}
+                    else {
+                        tooltipInstance.showTooltip(d, [
+                            ["title", d.data.name],
+                            ["Valor", formatNumber(d.data.size)],
+                            ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                            ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                        ]);
+					}
 				})
 				.on("mouseout", tooltipInstance.hideTooltip);
 
@@ -166,8 +180,14 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("text-anchor", "middle")  
 		.attr("class","treemap-title")
 		.text(function(d){
-			if(atc == 0) return "UF: "+d.data.estado+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
-            else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+			if(d.data.estado === "Todos") {
+				if(atc == 0) return "Brasil - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+                else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+            }
+            else {
+                if(atc == 0) return d.data.estado+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+                else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+			}
 		});
 
 	var titleTextElement = cell.append("text")
@@ -184,10 +204,10 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
+			if(vrv !== 2) return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
 		})
 		.attr("font-size", function(d) {
 			var nWidth = nodeWidth(d);

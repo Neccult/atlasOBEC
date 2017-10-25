@@ -190,15 +190,26 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $atc, $cad, $prt){
+	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
 
-		self::connect();		
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
-					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE ex.Numero = ".$var;
+		self::connect();
+            if($uos == 0) {
+                $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
+                    ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+                    ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
+                    ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
+                    ." WHERE ex.Numero = ".$var;
+            }
+            else if($uos == 1) {
+                $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
+                    ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
+                    ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = 1"
+                    ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
+                    ." WHERE ex.Numero = ".$var;
+
+            }
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();

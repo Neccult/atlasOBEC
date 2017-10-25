@@ -309,6 +309,7 @@ function loadPage(){
 	$("#menuvariaveis").load(menuView, function(){
 		if(url['var']!=='' && pageTitle!==''){
 			loadResult();
+            changeDescVar();
 		}
 	});
 }
@@ -355,6 +356,64 @@ function smoothScroll(link){
             return false;
         }
     }
+}
+
+function getUf(textJSON) {
+	var uf_length = textJSON.length;
+	var i;
+	for(i = 0; i < uf_length; i++) {
+		if(textJSON[i].value === url['uf']) {
+			return textJSON[i].name;
+		}
+	}
+}
+
+function changeDescVar() {
+	console.log($("span").find("[data-id='setor']"));
+    // import pt-br.json file for get the title
+    var textJSON;
+    d3.json('data/pt-br.json', function(error, data) {
+        if(error) throw error;
+
+        textJSON = data;
+
+		if(url['cad'] === "0") {
+			$("span[data-id='setor']").html("dos Setores Culturais Criativos");
+		}
+		else {
+            $("span[data-id='setor']").html("do "+textJSON.select.cad[url['cad']].name);
+		}
+
+        if(url['view'] !== "mapa" && url['view'] !== "treemap_region") {
+			if(url['uf'] === "0") {
+                //$("span[data-id='uf']").html("no Brasil");
+            }
+            else {
+                $("span[data-id='uf']").html("em "+getUf(textJSON.select.uf));
+            }
+        }
+
+        if(url['var'] === "9") {
+            if(url['uf'] === "0") {
+                $("span[data-id='uf']").html("Brasil");
+            }
+            else {
+                $("span[data-id='uf']").html(getUf(textJSON.select.uf));
+            }
+		}
+
+        if(url['prt'] !== "0") {
+            $("span[data-id='porte']").html(textJSON.select.prt[url['prt']].name);
+		}
+
+        if(url['atc'] !== "0") {
+            $("span[data-id='atuacao']").html("de "+textJSON.select.atc[url['atc']].name);
+        }
+
+        if(url['view'] !== "barras") $("span[data-id='ano']").html("em "+ano);
+
+
+    });
 }
 
 /*====== 

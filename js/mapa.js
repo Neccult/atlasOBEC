@@ -183,7 +183,7 @@ function ready(error, br_states, mapa){
 		.range(colorsRange);
 
 	var tooltipInstance = tooltip.getInstance();
-
+console.log(eixo);
 	//concatena propriedades
 	svg.append("g")
 		.attr("class", "states")
@@ -197,12 +197,34 @@ function ready(error, br_states, mapa){
 			  
 		//mouseover
 		.on("mouseover", function(d){
-			tooltipInstance.showTooltip(d, [
-				["title", d['properties']['name']],
-				["Valor", formatNumber(dict[d.id].valor)],
-				["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-				["Taxa", formatDecimalLimit(dict[d.id].taxa, 2)],
-			]);
+			if(vrv === 2 || vrv === 3) {
+				tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["Valor", (100*dict[d.id].valor).toFixed(2)+"%"]
+                ]);
+            }
+            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["Valor", formatNumber(dict[d.id].valor)],
+                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                ]);
+
+			}
+			else if(vrv === 9 || vrv === 8) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                ]);
+			}
+            else {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["Valor", formatNumber(dict[d.id].valor)],
+                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                    ["Taxa", formatDecimalLimit(dict[d.id].taxa, 2)],
+                ]);
+			}
 		})
 		.on("mouseout", tooltipInstance.hideTooltip);
 
