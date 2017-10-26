@@ -183,6 +183,11 @@ function ready(error, br_states, mapa){
 		.range(colorsRange);
 
 	var tooltipInstance = tooltip.getInstance();
+    //retira tag <span> do title
+    var title_content = textJSON.var[eixo][vrv-1].title;
+    var title = title_content.replace("<span>", "");
+    title = title.replace("<br>", "");
+    title = title.replace("</span>", "");
 console.log(eixo);
 	//concatena propriedades
 	svg.append("g")
@@ -197,22 +202,22 @@ console.log(eixo);
 			  
 		//mouseover
 		.on("mouseover", function(d){
-			if(vrv === 2 || vrv === 3) {
+			if(vrv === 2 || vrv === 3 || vrv === 9) {
 				console.log(100*dict[d.id].valor);
 				tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["Valor", formatNumber(100*dict[d.id].valor)+"%"],
+                    [title, formatNumber(100*dict[d.id].valor)+"%"],
                 ]);
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["Valor", formatNumber(dict[d.id].valor)],
+                    [title, formatNumber(dict[d.id].valor)],
                     ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 ]);
 
 			}
-			else if(vrv === 9 || vrv === 8) {
+			else if(vrv === 8) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
@@ -221,7 +226,7 @@ console.log(eixo);
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["Valor", formatNumber(dict[d.id].valor)],
+                    [title, formatNumber(dict[d.id].valor)],
                     ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                     ["Taxa", formatDecimalLimit(dict[d.id].taxa, 2)],
                 ]);
@@ -236,16 +241,12 @@ console.log(eixo);
 		.attr("class", "legendLinear")
 		.attr("transform", legendTransform);
 
-	//retira tag <span> do title
-	var title_content = textJSON.var[eixo][vrv-1].title;
-	var title = title_content.replace("<span>", "");
-    title = title.replace("<br>", "");
-	title = title.replace("</span>", "");
-	if(atc == 0) title += " - "+textJSON.select.prt[prt].name;
-	if(atc != 0) title += " - "+textJSON.select.atc[atc].name;
+	var title_aux;
+	if(atc == 0) title_aux = title+" - "+textJSON.select.prt[prt].name;
+	if(atc != 0) title_aux = title+" - "+textJSON.select.atc[atc].name;
 
 	var legendLinear = d3.legendColor()
-		.title(title+" - "+ano)
+		.title(title_aux+" - "+ano)
 		.labelFormat(d3.format(".0f"))
 		.shapeWidth(shapeWidth)
 		.shapePadding(5)

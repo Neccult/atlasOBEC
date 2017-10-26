@@ -31,7 +31,7 @@
 				"id":"1",
 				"title":"Total <span>de</span> Empresas",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
-				"desc_var": "Os valores apresentados indicam Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='hide-barra'>O percentual apresentado indica a participação do Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> em relação ao Total de Empresas Culturais do país <span data-id='ano'></span>.</span>",
+				"desc_var": "Os valores apresentados indicam o Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='hide-barra'>O percentual apresentado indica a participação do Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> em relação ao Total de Empresas dos Setores Culturais e Criativos do país <span data-id='ano'></span>.</span>",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -65,20 +65,14 @@
 			{
 				"id":"2",
 				"title":"Peso <span>das</span> Empresas",
-				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
-				"desc_var":"Os valores apresentados indicam a Participação Relativa de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span><span data-id='ano'></span> no Total de Empresas Formais existentes no país.",
+				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas de cada estado. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"desc_var":"Os valores apresentados indicam a Participação Relativa de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span><span data-id='ano'></span> no Total de Empresas Formais de cada UF.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
 					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"}
 				],
@@ -118,7 +112,7 @@
 				"id":"4",
 				"title":"Receita Total",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-				"desc_var":"Os valores apresentados indicam a Receita Total das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa da Receita Total das Empresas Culturais de <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação a Receita Total dos Empreendimentos Culturais do país.",
+				"desc_var":"Os valores apresentados indicam a Receita Total das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa da Receita Total das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação a Receita Total dos Empreendimentos dos Setores Culturais e Criativos do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -153,7 +147,7 @@
 				"id":"5",
 				"title":"Receita Líquida",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-				"desc_var":"Os valores apresentados indicam a Receita Operacional Líquida das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa da Receita Operacional Líquida das Empresas Culturais <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação a Receita Total dos Empreendimentos Culturais do país.",
+				"desc_var":"Os valores apresentados indicam a Receita Operacional Líquida das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa da Receita Operacional Líquida das Empresas <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação a Receita Total dos Empreendimentosdos Setores Culturais e Criativos do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -188,7 +182,7 @@
 				"id":"6",
 				"title":"Custo",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
-				"desc_var":"Os valores apresentados indicam o Custo das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Custo das Empresas Culturais <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Custo Total dos Empreendimentos Culturais do país.",
+				"desc_var":"Os valores apresentados indicam o Custo das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Custo das Empresas <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Custo Total dos Empreendimentos dos Setores Culturais e Criativos do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -223,7 +217,7 @@
 				"id":"7",
 				"title":"Lucro",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
-				"desc_var":"Os valores apresentados indicam o Lucro das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Lucro das Empresas Culturais <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Lucro Total dos Empreendimentos Culturais do país.",
+				"desc_var":"Os valores apresentados indicam o Lucro das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Lucro das Empresas <span data-id='atuacao'></span> do <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Lucro Total dos Empreendimentosdos Setores Culturais e Criativos do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -258,7 +252,7 @@
 				"id":"8",
 				"title":"<span>Valor Adicionado (VA)</span>",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
-				"desc_var":"Os valores apresentados indicam o Valor Adicionado das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Valor Adicionado das Empresas Culturais <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Valor Adicionado Total dos Empreendimentos Culturais do país.",
+				"desc_var":"Os valores apresentados indicam o Valor Adicionado das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. O percentual apresentado indica a participação relativa do Valor Adicionado das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao Valor Adicionado Total dos Empreendimentos dos Setores Culturais e Criativos do país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -291,21 +285,15 @@
 			},
 			{
 				"id":"9",
-				"title":"VA PIB",
+				"title":"VA / PIB",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"desc_var":"Os valores percentuais apresentados indicam a razão entre Valor Adicionado e Produto Interno Bruto das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> em relação ao PIB do <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='show-barra' style='display: none;'>A taxa de variação mostra a variação da relação VA/PIB do Brasil de um ano em relação ao anterior.</span>",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
 					{"name":"Atuação","id":"atc"},
 					{"name":"Ano","id":"ano"}
 				],

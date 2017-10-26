@@ -132,22 +132,27 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 				//mouseover
 				.on("mouseover", function(d){
+                    var title_content = textJSON.var[eixo][vrv-1].title;
+                    var title = title_content.replace("<span>", "");
+                    title = title.replace("<br>", "");
+                    title = title.replace("</span>", "");
 					if(vrv === 2 || vrv === 9) {
 						tooltipInstance.showTooltip(d, [
                             ["title", d.data.name],
-                            ["Valor", formatNumber((100*d.data.size))+"%"],
+                            [title, formatNumber((100*d.data.size))+"%"],
                         ]);
                     }
                     else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                         tooltipInstance.showTooltip(d, [
                             ["title", d.data.name],
+                            [title, formatNumber(d.data.size)],
                             ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                         ]);
 					}
                     else {
                         tooltipInstance.showTooltip(d, [
                             ["title", d.data.name],
-                            ["Valor", formatNumber(d.data.size)],
+                            [title, formatNumber(d.data.size)],
                             ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                             ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
                         ]);

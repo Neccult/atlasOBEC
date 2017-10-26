@@ -175,11 +175,11 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlAtc(select,isPrt){
 
-	/*if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
+	if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
 		
 		if(isPrt) $(select).find('option[value="atc-1"]').remove();
 		else $(select).find('option[value="1"]').remove();
-	}*/
+	}
 }
 
 
@@ -378,10 +378,11 @@ function changeDescVar() {
         textJSON = data;
 
 		if(url['cad'] === "0") {
-			$("span[data-id='setor']").html("dos Setores Culturais Criativos");
+			if(url['var'] === "1" && url['view'] === "treemap_scc") $("span[data-id='setor']").html("de cada setor");
+			else $("span[data-id='setor']").html("dos Setores Culturais Criativos");
 		}
 		else {
-            $("span[data-id='setor']").html("do "+textJSON.select.cad[url['cad']].name);
+            $("span[data-id='setor']").html("do setor "+textJSON.select.cad[url['cad']].name);
 		}
 
         if(url['view'] !== "mapa" && url['view'] !== "treemap_region") {
@@ -389,7 +390,7 @@ function changeDescVar() {
                 //$("span[data-id='uf']").html("no Brasil");
             }
             else {
-                $("span[data-id='uf']").html("em "+getUf(textJSON.select.uf));
+                $("span[data-id='uf']").html("na UF "+getUf(textJSON.select.uf));
             }
         }
 

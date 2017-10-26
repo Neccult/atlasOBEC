@@ -230,6 +230,7 @@
 		var tooltipInstance = tooltip.getInstance();
 					
 		//Cria barras
+		console.log(dados.value);
 		svg.selectAll("rect")
 		   .data(dados.value, function(d) { return d; })
 		   .enter().append("rect")
@@ -317,11 +318,15 @@
 			return color(cad);
 		   })
 		   //mouseover
-		   .on("mouseover", function(d,i,obj){			   
+		   .on("mouseover", function(d,i,obj){
+               var title_content = textJSON.var[eixo][vrv-1].title;
+               var title = title_content.replace("<span>", "");
+               title = title.replace("<br>", "");
+               title = title.replace("</span>", "");
 				if(vrv === 2 || vrv === 3) {
 					tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        ["Valor", formatNumber(dados.value[i])+"%"],
+                        [title, formatNumber(dados.value[i])+"%"],
                         ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
                         ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
@@ -329,7 +334,7 @@
                 else {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        ["Valor", formatNumber(dados.value[i])],
+                        [title, formatNumber(dados.value[i])],
                         ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
                         ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
