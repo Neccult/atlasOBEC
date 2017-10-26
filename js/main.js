@@ -412,6 +412,20 @@ function changeDescVar() {
 
         if(url['view'] !== "barras") $("span[data-id='ano']").html("em "+ano);
 
+		if(url['uos'] === "0") {
+            $("span[data-id='mode-view']").html("por estado");
+		}
+		else {
+            $("span[data-id='mode-view']").html("por setor");
+		}
+
+		if(url['var'] === "1") {
+			if(url['view'] === "barras") $("span[data-id='hide-barra']").html("");
+		}
+
+        if(url['var'] === "9") {
+            if(url['view'] === "barras") $("span[data-id='show-barra']").css("display", "block");
+        }
 
     });
 }

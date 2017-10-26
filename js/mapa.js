@@ -198,9 +198,10 @@ console.log(eixo);
 		//mouseover
 		.on("mouseover", function(d){
 			if(vrv === 2 || vrv === 3) {
+				console.log(100*dict[d.id].valor);
 				tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["Valor", (100*dict[d.id].valor).toFixed(2)+"%"]
+                    ["Valor", formatNumber(100*dict[d.id].valor)+"%"],
                 ]);
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7) {
@@ -251,7 +252,23 @@ console.log(eixo);
 		.orient('vertical')
 		.scale(color);
 
-	legend_svg.select(".legendLinear").call(legendLinear);
+    var legendLinear1 = d3.legendColor()
+        .title(function(d) {
+        	if(cad === 0) {
+        		return "Setores Culturais Criativos";
+            }
+            else {
+                return textJSON.select.cad[cad].name;
+			}
+        })
+        .labelFormat(d3.format(".0f"))
+        .shapeWidth(shapeWidth)
+        .shapePadding(5)
+        .orient('vertical')
+        .scale(color);
+
+    legend_svg.select(".legendLinear").call(legendLinear);
+    legend_svg.select(".legendCells").call(legendLinear1);
 
 	var legendLabels = $('.legendCells').find('.cell').children('.label');
 

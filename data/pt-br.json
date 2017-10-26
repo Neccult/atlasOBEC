@@ -31,7 +31,7 @@
 				"id":"1",
 				"title":"Total <span>de</span> Empresas",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
-				"desc_var": "Os valores apresentados indicam Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> em <span data-id='ano'></span>. O percentual apresentado indica a participação do Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> em relação ao Total de Empresas Culturais do país em <span data-id='ano'></span>.",
+				"desc_var": "Os valores apresentados indicam Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='hide-barra'>O percentual apresentado indica a participação do Total de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> em relação ao Total de Empresas Culturais do país <span data-id='ano'></span>.</span>",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -293,7 +293,7 @@
 				"id":"9",
 				"title":"VA PIB",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
-				"desc_var":"Os valores percentuais apresentados indicam a razão entre Valor Adicionado e Produto Interno Bruto das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> em relação ao PIB do <span data-id='uf'></span> <span data-id='ano'></span>.",
+				"desc_var":"Os valores percentuais apresentados indicam a razão entre Valor Adicionado e Produto Interno Bruto das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> em relação ao PIB do <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='show-barra' style='display: none;'>A taxa de variação mostra a variação da relação VA/PIB do Brasil de um ano em relação ao anterior.</span>",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
@@ -322,6 +322,7 @@
 				"id":"10",
 				"title":"IHH Empresas",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var":"Os valores apresentados indicam o IHH <span data-id='mode-view'></span> dos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -333,6 +334,7 @@
 				"id":"11",
 				"title":"IHH VA",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var":"Os valores apresentados indicam o IHH <span data-id='mode-view'></span> do Valor Adicionado gerado pelos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -344,6 +346,7 @@
 				"id":"12",
 				"title":"C4 Empresas",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var":"Os valores apresentados indicam o C4 <span data-id='mode-view'></span> dos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do C4 de um ano em relação ao ano anterior.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -355,6 +358,7 @@
 				"id":"13",
 				"title":"C4 VA",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var":"Os valores apresentados indicam o C4 <span data-id='mode-view'></span> do Valor Adicionado gerado pelos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],

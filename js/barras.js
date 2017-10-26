@@ -345,14 +345,27 @@
                 .attr("text-anchor", "middle")
                 .attr("class","barras-title")
                 .text(function() {
-                	if(data[dados.key[0]].uf === "Todos") {
-                		if(atc == 0) return "Brasil - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
-                        else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
+                	if(eixo === 0 && vrv >= 10) {
+                        var title = textJSON.var[eixo][vrv-1].title.replace("<span>", "");
+                        title = title.replace("<br>", "");
+                        title = title.replace("</span>", "");
+                        if (uos === 0) {
+                            return title+" por uf";
+                        }
+                        else {
+                            return title+" por setor";
+                        }
                     }
                     else {
-                        if(atc == 0) return data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Porte: "+textJSON.select.prt[prt].name;
-                        else return "UF: "+ data[dados.key[0]].uf+" - Setor: "+textJSON.select.cad[cad].name+" - Atuacão: "+textJSON.select.atc[atc].name;
-                    }
+                        if (data[dados.key[0]].uf === "Todos") {
+                            if (atc == 0) return "Brasil - Setor: " + textJSON.select.cad[cad].name + " - Porte: " + textJSON.select.prt[prt].name;
+                            else return "UF: " + data[dados.key[0]].uf + " - Setor: " + textJSON.select.cad[cad].name + " - Atuacão: " + textJSON.select.atc[atc].name;
+                        }
+                        else {
+                            if (atc == 0) return data[dados.key[0]].uf + " - Setor: " + textJSON.select.cad[cad].name + " - Porte: " + textJSON.select.prt[prt].name;
+                            else return "UF: " + data[dados.key[0]].uf + " - Setor: " + textJSON.select.cad[cad].name + " - Atuacão: " + textJSON.select.atc[atc].name;
+                        }
+					}
                 });
         }
         else if(data[dados.key[0]].uos != 2) {
