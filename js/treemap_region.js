@@ -28,6 +28,15 @@ var textTopSubPadding = 13; // padding top for subsequent word lines (line heigh
 var letterTopSubPadding = 7; // padding top for subsequent letters on vertical position words
 var letterLeftSubPadding = 10; // padding left for subsequent letters on vertical position words
 
+function formatValor(valor) {
+	if(parseInt(valor)/1000 < 1000) {
+		return (parseInt(valor)/1000).toFixed(0)+"k";
+	}
+	else if(parseInt(valor)/1000000 < 1000) {
+        return (parseInt(valor)/1000000).toFixed(0)+"M";
+	}
+}
+
 // return node box width
 function nodeWidth(d){ return d.x1 - d.x0; }
 
@@ -164,19 +173,38 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             ]);
                         }
                         else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-                            tooltipInstance.showTooltip(d, [
-                                ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
-                                ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                            ]);
+                            if(cad !== 0) {
+                            	tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    [title, formatNumber(d.data.size)],
+                                    //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    [title, formatNumber(d.data.size)],
+                                    ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ]);
+							}
 						}
                         else {
-                            tooltipInstance.showTooltip(d, [
-                                ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
-                                ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
-                            ]);
+                            if(cad !== 0) {
+                            	tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    [title, formatNumber(d.data.size)],
+                                    //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    [title, formatNumber(d.data.size)],
+                                    ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                ]);
+							}
 						}
 					})
 					.on("mouseout", tooltipInstance.hideTooltip);
@@ -208,7 +236,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(cad !== 0) return ""; else if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";

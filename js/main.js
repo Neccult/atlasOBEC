@@ -424,6 +424,8 @@ function changeDescVar() {
 			if(url['view'] === "barras") $("span[data-id='hide-barra']").html("");
 		}
 
+		if(url['view'] === "treemap_region" || url['view'] === "treemap_scc") $("span[data-id='hide-barra']").html("");
+
         if(url['var'] === "9") {
             if(url['view'] === "barras") $("span[data-id='show-barra']").css("display", "block");
         }

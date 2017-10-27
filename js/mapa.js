@@ -209,19 +209,13 @@ console.log(eixo);
                     [title, formatNumber(100*dict[d.id].valor)+"%"],
                 ]);
             }
-            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7) {
+            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     [title, formatNumber(dict[d.id].valor)],
                     ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 ]);
 
-			}
-			else if(vrv === 8) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                ]);
 			}
             else {
                 tooltipInstance.showTooltip(d, [
