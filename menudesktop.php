@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6">
-                <ul class="var-list green2">
+                <ul class="var-list green1">
                     <span href="4" class="var-click"><li>Receita total</li></span>
                     <span href="5" class="var-click"><li>Receita Líquida</li></span>
                     <span href="7" class="var-click"><li>Lucro</li></span>
@@ -33,14 +33,14 @@
             </div>
 
             <div class="col-md-3 col-sm-6">
-                <ul class="var-list green3">
+                <ul class="var-list green1">
                     <span href="9" class="var-click"><li>VA/PIB</li></span>
                     <span href="8" class="var-click"><li>Valor Adicionado (VA)</li></span>
                 </ul>
             </div>
 
             <div class="col-md-3 col-sm-6">
-                <ul class="var-list green4">
+                <ul class="var-list green1">
                     <span href="12" class="var-click"><li>C4 Empresas</li></span>
                     <span href="11" class="var-click"><li>IHH/VA</li></span>
                     <span href="10" class="var-click"><li>IHH Empresas</li></span>

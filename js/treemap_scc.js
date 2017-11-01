@@ -148,40 +148,40 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 					if(vrv === 2 || vrv === 9) {
 						tooltipInstance.showTooltip(d, [
                             ["title", d.data.name],
-                            [title, formatNumber((100*d.data.size))+"%"]
+                            ["", formatNumber((100*d.data.size))+"%"]
                         ]);
                     }
                     else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-						if(uf !== 0) {
+						if(uf !== 0 || prt !== 0 || atc !== 0) {
                         	tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
+                                ["", formatNumber(d.data.size)],
                                 //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                             ]);
                         }
                         else {
                             tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
-                                ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatNumber(d.data.size)],
+                                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                             ]);
 						}
 					}
                     else {
-                        if(uf !== 0) {
+                        if(uf !== 0 || prt !== 0 || atc !== 0) {
                         	tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
+                                ["", formatNumber(d.data.size)],
                                 //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                ["", formatDecimalLimit(d.data.taxa, 2)],
                             ]);
                         }
                         else {
                             tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                [title, formatNumber(d.data.size)],
-                                ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                ["", formatNumber(d.data.size)],
+                                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatDecimalLimit(d.data.taxa, 2)],
                             ]);
 						}
 					}
@@ -237,7 +237,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(uf !== 0) return ""; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(uf !== 0 || prt !== 0 || atc !== 0) return ""; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			if(vrv !== 2) return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";

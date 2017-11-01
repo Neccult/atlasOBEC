@@ -326,17 +326,17 @@
 				if(vrv === 2 || vrv === 3) {
 					tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        [title, formatNumber(dados.value[i])+"%"],
-                        ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
-                        ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
+                        ["", formatNumber(dados.value[i])+"%"],
+                        ["", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
+                        ["", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
                 }
                 else {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        [title, formatNumber(dados.value[i])],
-                        ["Percentual", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
-                        ["Taxa", formatDecimalLimit(dados.taxa[i], 2)],
+                        ["", formatNumber(dados.value[i])],
+                        ["", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
+                        ["", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
 				}
 			})

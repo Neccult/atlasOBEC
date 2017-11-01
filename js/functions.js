@@ -184,7 +184,7 @@ var tooltip = (function(){
 				Dá append dos elementos no elemento Tooltip
 		-----------------------------------------------------------------------------*/
 		function createElements(d, arr) {
-			var valSeparator = " = ";
+			var valSeparator = "";
 			
 			arr.forEach(function(el, i){
 				var clss = el[0];

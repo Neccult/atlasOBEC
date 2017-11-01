@@ -144,27 +144,23 @@ function ready(error, br_states, mapa){
 	var maxValue = d3.max(info, function(d) {return d.valor; });
 
 	//distribuicao de frequencias    
-	var quant = 9;
+	var quant = 5;
 	var range = maxValue - minValue; 
 	var amp = minValue < 1 && minValue > -1 ? range / quant : Math.round(range / quant);
 
 	//domino de valores para as cores do mapa
 	var dom = [
-				(minValue+(amp/4)), 
-				(minValue+amp), 
-				(minValue+(2*amp)), 
-				(minValue+(3*amp)), 
-				(minValue+(4*amp)), 
-				(minValue+(5*amp)), 
-				(minValue+(6*amp)), 
-				(minValue+(7*amp)), 
-				(minValue+(8*amp))
+				(minValue+(amp/4)),
+				(minValue+amp),
+				(minValue+(2*amp)),
+				(minValue+(3*amp)),
+				(minValue+(4*amp))
 			];
 
 	//ajuste do dominio
 	var i = 0;
 	if(amp > 1){
-		while(i<=9){
+		while(i<=5){
 			dom[i] = dom[i] - (dom[i] % 5);
 			i++;
 		}
@@ -206,23 +202,23 @@ console.log(eixo);
 				console.log(100*dict[d.id].valor);
 				tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    [title, formatNumber(100*dict[d.id].valor)+"%"],
+                    ["", formatNumber(100*dict[d.id].valor)+"%"],
                 ]);
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    [title, formatNumber(dict[d.id].valor)],
-                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                    ["", formatNumber(dict[d.id].valor)],
+                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 ]);
 
 			}
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    [title, formatNumber(dict[d.id].valor)],
-                    ["Percentual", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                    ["Taxa", formatDecimalLimit(dict[d.id].taxa, 2)],
+                    ["", formatNumber(dict[d.id].valor)],
+                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                 ]);
 			}
 		})
@@ -258,7 +254,7 @@ console.log(eixo);
         })
         .labelFormat(d3.format(".0f"))
         .shapeWidth(shapeWidth)
-        .shapePadding(5)
+        .shapePadding(10)
         .orient('vertical')
         .scale(color);
 

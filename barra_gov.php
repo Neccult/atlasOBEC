@@ -41,9 +41,9 @@
 		        <!--<li class="language-es">
 		            <a href="#">Espa&#241;ol</a>
 		        </li>-->
-		        <li class="language-en last-item">
+		        <!--<li class="language-en last-item">
 		            <a href="http://www.brazilgovnews.gov.br" target="_blank">English</a>
-		        </li>
+		        </li>-->
 		    </ul>
 		    
 		    <ul id="portal-siteactions">
@@ -99,10 +99,10 @@
 		        		<a href="http://www.brasil.gov.br/servicos/perguntas-frequentes-1" title="Perguntas frequentes">Perguntas frequentes</a>
 		        	</li>
 		        	<li id="portalservicos-fale-com-o-governo" class="portalservicos-item">
-		        		<a href="http://www.brasil.gov.br/servicos/fale-com-o-governo" title="Fale com o Governo">Fale com o Governo</a>
+		        		<a href="http://www.brasil.gov.br/servicos/fale-com-o-governo" title="Glossário">Glossário</a>
 		        	</li>
 		        	<li id="portalservicos-fale-com-o-presidente" class="portalservicos-item last-item">
-		        		<a href="http://www.brasil.gov.br/servicos/fale-com-o-presidente" title="Fale com o Presidente">Fale com o Presidente</a>
+		        		<a onclick="" class="dropbtn" title="Links Relacionados">Links Relacionados</a>
 		        	</li>
 		        </ul>
 		    </div>

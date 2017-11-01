@@ -8,6 +8,68 @@
 		<!--===== barra do governo =====-->
 		<?php include 'barra_gov.php'; ?>
 
+        <!--=== navegação ===-->
+        <section class="menu-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="menu-content" id="item1">
+
+                            <a href="#empreendimentos" class="link">
+                                <div class="square-icon"></div>
+                                <div class="text">
+                                    <p>EMPRENDIMENTOS<br/>CULTURAIS</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="menu-content" id="item2">
+
+                            <a href="#mercado" class="link">
+                                <div class="square-icon"></div>
+                                <div class="text">
+                                    <p>MERCADO<br/>DE TRABALHO</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="menu-content" id="item3">
+
+                            <a href="#politicas" class="link">
+                                <div class="square-icon"></div>
+                                <div class="text">
+                                    <p>POLÍTICAS<br/>PÚBLICAS</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="menu-content" id="item4">
+
+                            <a href="#comercio" class="link">
+                                <div class="square-icon"></div>
+                                <div class="text">
+                                    <p>COMÉRCIO<br/>INTERNACIONAL</p>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">
+                    <div class="col-xs-12">
+                        <div class="text-center">
+                            <a href="index.php" class="home button">Home</a>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </section>
 
 		<!--=== menu variaveis ===-->
 		<section id="menuSection"> 
@@ -96,69 +158,6 @@
 			<?php endif;?>
 		
 		<?php endif;?>
-
-		<!--=== navegação ===-->
-		<section class="menu-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-3">
-						<div class="menu-content" id="item1">
-
-							<a href="#empreendimentos" class="link">
-								<div class="square-icon"></div>
-								<div class="text">
-									<p>EMPRENDIMENTOS<br/>CULTURAIS</p>
-								</div>
-							</a>
-
-						</div>
-					</div>
-					<div class="col-xs-3">
-						<div class="menu-content" id="item2">
-
-							<a href="#mercado" class="link">
-								<div class="square-icon"></div>
-								<div class="text">
-									<p>MERCADO<br/>DE TRABALHO</p>
-								</div>
-							</a>
-
-						</div>
-					</div>
-					<div class="col-xs-3">
-						<div class="menu-content" id="item3">
-
-							<a href="#politicas" class="link">
-								<div class="square-icon"></div>
-								<div class="text">
-									<p>POLÍTICAS<br/>PÚBLICAS</p>
-								</div>
-							</a>
-
-						</div>
-					</div>
-					<div class="col-xs-3">
-						<div class="menu-content" id="item4">
-
-							<a href="#comercio" class="link">
-								<div class="square-icon"></div>
-								<div class="text">
-									<p>COMÉRCIO<br/>INTERNACIONAL</p>
-								</div>
-							</a>
-							
-						</div>
-					</div>
-				</div>
-				<!--<div class="row">
-					<div class="col-xs-12">
-						<div class="text-center">
-							<a href="index.php" class="home button">Home</a>
-						</div>
-					</div>
-				</div>-->
-			</div>
-		</section>
 
 		<!-- se existem informações desta variável -->
 		<?php if(!empty($text)):?>

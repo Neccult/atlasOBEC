@@ -2,35 +2,20 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-sm-3 col-xs-6">
+			<div class="col-sm-4 col-xs-6">
 				<div class="footer-content">
 
 					<ul>
 						<li><b>Sobre o Atlas</b></li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
+                        <li><a href="http://www.brasil.gov.br/servicos/perguntas-frequentes-1" title="Perguntas frequentes">Perguntas Frequentes</a></li>
+                        <li><a href="http://www.brasil.gov.br/servicos/fale-com-o-governo" title="Glossário">Glossário</a></li>
+                        <li><a onclick="" class="dropbtn" title="Links Relacionados">Links Relacionados</a></li>
 					</ul>
 
 				</div>
 			</div>
 
-			<div class="col-sm-3 col-xs-6">
-				<div class="footer-content">
-				
-					<ul>
-						<li><b>Serviços</b></li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
-					</ul>
-
-				</div>
-			</div>
-
-			<div class="col-sm-3 col-xs-6">
+			<div class="col-sm-4 col-xs-6">
 				<div class="footer-content">
 				
 					<ul>
@@ -44,15 +29,14 @@
 				</div>
 			</div>
 
-			<div class="col-sm-3 col-xs-6">
+			<div class="col-sm-4 col-xs-6">
 				<div class="footer-content">
 				
 					<ul>
 						<li><b>Navegação</b></li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
-						<li>Teste</li>
+                        <li><a href="http://www.brasil.gov.br/acessibilidade" title="Acessibilidade" accesskey="5">Acessibilidade</a></li>
+                        <li><a href="#" title="Alto Contraste" accesskey="6">Alto Contraste</a></li>
+                        <li><a href="http://www.brasil.gov.br/mapadosite" title="Mapa do Site" accesskey="7">Mapa do Site</a></li>
 					</ul>
 
 				</div>

@@ -169,22 +169,22 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 						if(vrv === 2) {
 							tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                [title, (100*d.data.size).toFixed(2)+"%"]
+                                ["", (100*d.data.size).toFixed(2)+"%"]
                             ]);
                         }
                         else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                             if(cad !== 0) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    [title, formatNumber(d.data.size)],
+                                    ["", formatNumber(d.data.size)],
                                     //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                                 ]);
                             }
                             else {
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    [title, formatNumber(d.data.size)],
-                                    ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                                 ]);
 							}
 						}
@@ -192,17 +192,17 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             if(cad !== 0) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    [title, formatNumber(d.data.size)],
+                                    ["", formatNumber(d.data.size)],
                                     //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                    ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                    ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
                             }
                             else {
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    [title, formatNumber(d.data.size)],
-                                    ["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                    ["Taxa", formatDecimalLimit(d.data.taxa, 2)],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
 							}
 						}
