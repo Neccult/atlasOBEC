@@ -162,6 +162,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					.on("mouseover", function(d){
+					    console.log(d.data);
                         var title_content = textJSON.var[eixo][vrv-1].title;
                         var title = title_content.replace("<span>", "");
                         title = title.replace("<br>", "");
@@ -177,7 +178,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
                                     ["", formatNumber(d.data.size)],
-                                    //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.percentual_region*100, 2) + "%"],
                                 ]);
                             }
                             else {
@@ -193,7 +194,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
                                     ["", formatNumber(d.data.size)],
-                                    //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.percentual_region*100, 2) + "%"],
                                     ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
                             }

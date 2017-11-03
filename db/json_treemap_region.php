@@ -124,6 +124,8 @@ if($eixo == 0) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
+                                              "percentual_scc": "' . $tupla->percentual_scc . '",
+                                              "percentual_region": "' . $tupla->percentual_region . '",
                                               "taxa": "' . $tupla->Taxa . '", 
                                               "size": "' . $tupla->Valor . '"},';
     }
@@ -153,6 +155,8 @@ if($eixo == 0) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
+                                              "percentual_scc": "' . $tupla->percentual_scc . '",
+                                              "percentual_region": "' . $tupla->percentual_region . '",
                                               "taxa": "' . $tupla->Taxa . '", 
                                               "size": "' . $tupla->Valor . '"},';
     }
@@ -181,6 +185,8 @@ if($eixo == 0) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
+                                              "percentual_scc": "' . $tupla->percentual_scc . '",
+                                              "percentual_region": "' . $tupla->percentual_region . '",
                                               "taxa": "' . $tupla->Taxa . '", 
                                               "size": "' . $tupla->Valor . '"},';
     }
@@ -209,6 +215,8 @@ if($eixo == 0) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
+                                              "percentual_scc": "' . $tupla->percentual_scc . '",
+                                              "percentual_region": "' . $tupla->percentual_region . '",
                                               "taxa": "' . $tupla->Taxa . '", 
                                               "size": "' . $tupla->Valor . '"},';
     }
@@ -237,6 +245,8 @@ if($eixo == 0) {
         $treemap .= '{"name": "' . $tupla->UFSigla . '", 
                                               "estado": "' . $tupla->UFNome . '",
                                               "percentual": "' . $tupla->Percentual . '",
+                                              "percentual_scc": "' . $tupla->percentual_scc . '",
+                                              "percentual_region": "' . $tupla->percentual_region . '",
                                               "taxa": "' . $tupla->Taxa . '", 
                                               "size": "' . $tupla->Valor . '"},';
     }

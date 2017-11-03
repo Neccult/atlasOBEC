@@ -25,6 +25,8 @@ class EixoUm {
 	public $Ano;
 	public $Valor;
 	public $Percentual;
+    public $percentual_scc;
+    public $percentual_region;
 	public $Taxa;
 
 	//informações UF
