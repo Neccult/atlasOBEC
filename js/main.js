@@ -217,7 +217,10 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadResult(){
-
+	$("#title-view div").first().css("max-width", $(".container-chart").width()+"px");
+	var width_soma = $(".container-chart").width() - $("#title-view div").first().width();
+	console.log(width_soma);
+    $("#title-view div").first().css("margin-left", (width_soma-15)/2+"px");
 	/* ajusta nome da página */
 	$(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
 	$('.menu-select').val(url['var']); /* atualiza select versao mobile */
@@ -304,7 +307,7 @@ Saída:
 function loadPage(){
 	newHash = window.location.hash.substring(1);
 	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<768)	menuView = 'menumobile.php?'+newHash+'=1';
+	if(windowWidth<800)	menuView = 'menumobile.php?'+newHash+'=1';
 
 	$("#menuvariaveis").load(menuView, function(){
 		if(url['var']!=='' && pageTitle!==''){

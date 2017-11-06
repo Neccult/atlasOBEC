@@ -246,6 +246,24 @@ video::-webkit-media-controls {
 	background-image: url('../images/4_menu.png');
 }
 
+#title-view {
+	text-align: center;
+	font-size: 15px;
+}
+
+#title-view div {
+	position: relative;
+	float: left;
+}
+
+#option-title-view {
+	position: relative;
+	display: block;
+	float: left;
+	text-align: center;
+	margin-left: 5px;
+}
+
 /*==== menu círculos ====*/
 .logo-min{
 	width: 91px;
@@ -459,6 +477,32 @@ article.results-article div.results-content{
 .opt-select{
 	background-color: #FFF;
 	background-image: url('../images/arrow.png');
+	background-size: 10px;
+	background-position: right center;
+	background-repeat: no-repeat;
+	padding: 2px 10px 2px 5px;
+	color: #737277;
+	border: 1px solid #eee;
+	outline: none;
+	width: auto;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+    appearance:none;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    margin: 10px 0px;
+}
+select[disabled].opt-select{
+	background-image: url('../images/arrow_pb.png');
+	background-color: #d4d4d4;
+	border-color: #d4d4d4;
+	color: #808080;
+}
+
+.opt-select-title{
+	background-color: #FFF;
+	background-image: url('../images/arrow.png');
 	background-size: 20px;
 	background-position: right center;
 	background-repeat: no-repeat;
@@ -466,16 +510,16 @@ article.results-article div.results-content{
 	color: #737277;
 	border: 1px solid #eee;
 	outline: none;
-	width: 100%;
+	width: auto;
 	font-size: 10px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-    appearance:none;
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
-    margin: 15px 0px;
+	appearance:none;
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari and Chrome */
+	margin: 15px 0px;
 }
-select[disabled].opt-select{
+select[disabled].opt-select-title{
 	background-image: url('../images/arrow_pb.png');
 	background-color: #d4d4d4;
 	border-color: #d4d4d4;
@@ -581,7 +625,7 @@ body.contraste{
 		font-size: 9px;
 		letter-spacing: 0px;
 	}
-	.menu-item .menu-content .square-icon, 
+	.menu-item .menu-content .square-icon,
 	.menu-content .square-icon{
 		height: 45px;
 		width: 20px;

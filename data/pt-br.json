@@ -1513,7 +1513,7 @@
 	"select":
 	{
 		"uf":[
-			{"name":"Todos", "value":"0"},
+			{"name":"Brasil", "value":"0"},
 			{"name":"Acre", "value":"12"},
 			{"name":"Alagoas", "value":"27"},
 			{"name":"Amapá", "value":"16"},

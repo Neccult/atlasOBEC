@@ -30,7 +30,75 @@
                             $_GET['atc']=0;
                         }
                     ?>
-                    <h2></h2>
+                    <div id="title-view">
+                        Variável:
+                        <select class="opt-select" data-id="var">
+                        <?php
+                            foreach ($json_text['var'][0] as $variavel) {
+                                echo "<option value='".$variavel['id']."'>".$variavel['title'];
+                            }
+                        ?>
+                        </select>
+                        <br>
+                        <div><?php if(isset($text[$view])) foreach($text[$view] as $key => $value):?>
+                            <div id="option-title-view">
+                                <?= $value['name'] ?>:
+                                <select class="opt-select" data-id="<?php echo $value['id']?>">
+
+                                    <!--=== select group porte ===-->
+                                    <?php if($value['id']=='prt'):?>
+                                    <optgroup label="Porte">
+                                        <?php endif;?>
+                                        <!--=== select group Setor ===-->
+                                        <?php if($eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
+                                        <optgroup label="Setor">
+                                            <?php endif;?>
+
+                                            <!-- opções! -->
+                                            <?php foreach($select[$value['id']] as $option):?>
+                                                <?php if($eixo !="politicas" && $option['name'] != "Outros") { ?>
+                                                    <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                                <?php } else if($eixo == "politicas") { ?>
+                                                    <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                                <?php } ?>
+                                            <?php endforeach;?>
+
+                                            <!--=== select group Setor ===-->
+                                            <?php if($eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
+                                        </optgroup>
+
+                                        <optgroup label="Ocupação">
+
+                                            <?php foreach($select['ocp'] as $option):?>
+
+                                                <option value="ocp-<?php echo $option['value']?>"><?php echo $option['name']?></option>
+
+                                            <?php endforeach;?>
+
+                                        </optgroup>
+                                    <?php endif;?>
+                                        <!--=== select group atuação ===-->
+                                        <?php if($value['id']=='prt'):?>
+
+                                    </optgroup>
+
+                                    <optgroup label="Atuação">
+
+                                        <?php foreach($select['atc'] as $option):?>
+
+                                            <option value="atc-<?php echo $option['value']?>"><?php echo $option['name']?></option>
+
+                                        <?php endforeach;?>
+
+                                    </optgroup>
+                                <?php endif;?>
+
+                                </select>
+                            </div>
+
+                        <?php endforeach;?>
+                        </div>
+                    </div>
 					<div class="container-chart">
 						<div class="content">
 							<div class="chart">
@@ -113,18 +181,18 @@
 									<button class="opt select <?php if($key==0) echo 'active'?>" id="<?php echo $value['id']?>"><?php echo $value['name']?></button>
 								</div>
 
-							<?php endforeach;?>				
-				
+							<?php endforeach;?>
+
 						</div>
 
 						<div class="row">
 
 							<?php if(isset($text[$view])) foreach($text[$view] as $key=>$value):?>
 
-								<div class="select-group <?php if($key!=0) echo 'hide'?>" id="select-<?php echo $value['id']?>">					
-									
+								<div class="select-group <?php if($key!=0) echo 'hide'?>" id="select-<?php echo $value['id']?>">
+
 									<select class="opt-select" data-id="<?php echo $value['id']?>">
-										
+
 										<!--=== select group porte ===-->
 										<?php if($value['id']=='prt'):?>
 											<optgroup label="Porte">
@@ -159,27 +227,27 @@
                                             <?php endif;?>
 										<!--=== select group atuação ===-->
 										<?php if($value['id']=='prt'):?>
-											
+
 											</optgroup>
 
 											<optgroup label="Atuação">
-												
+
 											<?php foreach($select['atc'] as $option):?>
-										
+
 												<option value="atc-<?php echo $option['value']?>"><?php echo $option['name']?></option>
 
-											<?php endforeach;?>		
+											<?php endforeach;?>
 
-											</optgroup>	
+											</optgroup>
 										<?php endif;?>
 
-									</select>	
+									</select>
 
 									<p class="text-justify"><?php echo $json_text[$value['id']]?><br/><br/></p>
 
-								</div>	
+								</div>
 
-							<?php endforeach;?>							
+							<?php endforeach;?>
 						</div>
 					
 					</span>
