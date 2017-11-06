@@ -22,20 +22,20 @@
 				
 				<!-- gráfico -->
 				<div class="col-md-7 col-xs-12">
+                    <?php
+                        foreach($text['inativos'][$view] as $filter){
+                            $_GET[$filter]=0;
+                        }
+                        if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
+                            $_GET['atc']=0;
+                        }
+                    ?>
+                    <h2></h2>
 					<div class="container-chart">
 						<div class="content">
-							<div class="chart">								
-
+							<div class="chart">
 								<!-- controla filtros disponíveis -->
 								<?php
-
-									foreach($text['inativos'][$view] as $filter){
-										$_GET[$filter]=0;
-									}
-									if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
-										$_GET['atc']=0;
-									}
-
 									include $view.'.php';
 								?>
 
