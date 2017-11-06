@@ -27,7 +27,7 @@
                     <div class="col-xs-3">
                         <div class="menu-content" id="item2">
 
-                            <a href="#mercado" class="link">
+                            <a class="link">
                                 <div class="square-icon"></div>
                                 <div class="text">
                                     <p>MERCADO<br/>DE TRABALHO</p>
@@ -39,7 +39,7 @@
                     <div class="col-xs-3">
                         <div class="menu-content" id="item3">
 
-                            <a href="#politicas" class="link">
+                            <a class="link">
                                 <div class="square-icon"></div>
                                 <div class="text">
                                     <p>POLÍTICAS<br/>PÚBLICAS</p>
@@ -51,7 +51,7 @@
                     <div class="col-xs-3">
                         <div class="menu-content" id="item4">
 
-                            <a href="#comercio" class="link">
+                            <a class="link">
                                 <div class="square-icon"></div>
                                 <div class="text">
                                     <p>COMÉRCIO<br/>INTERNACIONAL</p>
