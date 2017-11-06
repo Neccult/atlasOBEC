@@ -156,7 +156,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         	tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
                                 ["", formatNumber(d.data.size)],
-                                //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                             ]);
                         }
                         else {
@@ -172,7 +172,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         	tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
                                 ["", formatNumber(d.data.size)],
-                                //["Percentual", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                 ["", formatDecimalLimit(d.data.taxa, 2)],
                             ]);
                         }
@@ -237,7 +237,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(uf !== 0 || prt !== 0 || atc !== 0) return ""; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(uf !== 0 || prt !== 0 || atc !== 0) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%"; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			if(vrv !== 2) return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";

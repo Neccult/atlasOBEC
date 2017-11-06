@@ -154,7 +154,6 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.sort(function(a, b) { return b.height - a.height || b.value - a.value; });
 
 	treemap(root);
-
 	var tooltipInstance = tooltip.getInstance();
 
 	var cell = svg.selectAll("g")
@@ -178,7 +177,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
                                     ["", formatNumber(d.data.size)],
-                                    ["", formatDecimalLimit(d.data.percentual_region*100, 2) + "%"],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                 ]);
                             }
                             else {
@@ -194,7 +193,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
                                     ["", formatNumber(d.data.size)],
-                                    ["", formatDecimalLimit(d.data.percentual_region*100, 2) + "%"],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                     ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
                             }
@@ -237,7 +236,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(cad !== 0) return ""; else if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(cad !== 0) return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%"; else if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
