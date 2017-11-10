@@ -77,7 +77,7 @@ a.link:hover{
 }
 button, .button{
 	text-transform: uppercase;
-	font-size: 7px;
+	font-size: 9px;
 	font-weight: bold;
 	letter-spacing: 2px;
 	border: none;
@@ -85,6 +85,19 @@ button, .button{
 	padding: 3px 0px;
 	transition: .2s all ease;
 }
+
+span.opt{
+    vertical-align: middle;
+    width: auto;
+    padding:  4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 17px;
+    background-color: #1b452e;
+    color: #FFF;
+    line-height: 12px;
+}
+
 button.opt{
 	vertical-align: middle;
 	width: 100%;
@@ -248,7 +261,10 @@ video::-webkit-media-controls {
 
 #title-view {
 	text-align: center;
-	font-size: 15px;
+	font-size: 9px;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 2px;
 }
 
 #title-view div {
@@ -272,10 +288,12 @@ video::-webkit-media-controls {
 	background-image: url(../images/logo_min.png);
 }
 p.title{
-	color: #c4c431;
-	font-size: 16px;
+	color: #fff;
+	font-size: 20px;
 	font-weight: bold;
+	text-align: center;
 	letter-spacing: 3px;
+	padding-bottom: 20px;
 	text-transform: uppercase;
 }
 .var-list-line{
@@ -315,9 +333,9 @@ ul.var-list li{
 /*=============  resultados =================*/
 article.results-article{
 	display: table;
-	height: 75vh;
+	height: 65vh;
 	width: 100%;
-	padding: 10vh 0px;
+	padding: 10px 0px;
 	background-color: #c4c431;
 	color: #FFF;
 	font-size: 14px;
@@ -429,11 +447,12 @@ article.results-article div.results-content{
 
 /* menu */
 .menu-bottom{
-	padding-top: 2vh;
-	height: 25vh;
+	padding-top: 0vh;
+	padding-bottom: 0vh;
+	height: auto;
 }
 .menu-bottom .menu-content{
-	padding: 60px 0px;
+	padding: 15px 0px 5px 0px;
 	width: 100%;
 	color: #737277;
 	font-size: 14px;
@@ -485,6 +504,7 @@ article.results-article div.results-content{
 	border: 1px solid #eee;
 	outline: none;
 	width: auto;
+	max-width: 150px;
 	font-size: 10px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
@@ -634,10 +654,14 @@ body.contraste{
 		margin: 8px 0px;
 	}
 	.desc-chart .title{
+		text-align: center;
 		font-size: 41px;
 	}
 	.desc-chart .title span{
 		font-size: 30px;
+	}
+	#desc-var {
+		text-align: center;
 	}
 }
 @media (max-width: 991px){

@@ -226,7 +226,7 @@ function loadResult(){
 	$('.menu-select').val(url['var']); /* atualiza select versao mobile */
 
 	/* move scroll para o gráfico */	
-	$('html, body').scrollTop($("#resultado").offset().top); 
+	$('html, body').scrollTop($("div.container").offset().top);
 
 	/* fade in no resultado */
 	$('.fadeInPage').addClass('done');
@@ -487,8 +487,10 @@ $(document).ready(function(){
 	/*=== selecionar variável ===*/
 	$(document).on('click', ".var-click", function(){
 		controlVar($(this).attr('href'));				
-	});	
-	/* mobile! */
+	});
+    if(url['var'] === "") controlVar(1);
+
+    /* mobile! */
 	$(document).on('change', ".menu-select", function(){
 		controlVar(this.value);				
 	});	

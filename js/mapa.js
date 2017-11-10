@@ -263,8 +263,11 @@ console.log(eixo);
 
 	var legendLabels = $('.legendCells').find('.cell').children('.label');
 
-	$(legendLabels).each(function(i){
+	$('.legendCells').find('.cell').each(function(i) {
+        $(this).attr("transform", "translate(0, "+(20*(i)+10)+")");
+	});
 
+	$(legendLabels).each(function(i){
 		if (i === 0 ){
 			$(this).text('Menor que ' + formatDecimalLimit(dom[i]));
 		} 

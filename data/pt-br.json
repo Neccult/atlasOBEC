@@ -36,7 +36,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -69,7 +69,7 @@
 				"desc_var":"Os valores apresentados indicam a Participação Relativa de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span><span data-id='ano'></span> no Total de Empresas Formais de cada UF.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -92,7 +92,7 @@
 				"desc_var":"Os valores apresentados indicam a taxa de natalidade e mortalidade de <span data-id='porte'></span> Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> <span data-id='uf'></span> <span data-id='ano'></span> em relação ao total de empreendimentos culturais existentes no ano anterior.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -117,7 +117,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -152,7 +152,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -187,7 +187,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -222,7 +222,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -257,7 +257,7 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -290,7 +290,7 @@
 				"desc_var":"Os valores percentuais apresentados indicam a razão entre Valor Adicionado e Produto Interno Bruto das Empresas <span data-id='atuacao'></span> <span data-id='setor'></span> em relação ao PIB do <span data-id='uf'></span> <span data-id='ano'></span>. <span data-id='show-barra' style='display: none;'>A taxa de variação mostra a variação da relação VA/PIB do Brasil de um ano em relação ao anterior.</span>",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -312,7 +312,7 @@
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"desc_var":"Os valores apresentados indicam o IHH <span data-id='mode-view'></span> dos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
@@ -324,7 +324,7 @@
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"desc_var":"Os valores apresentados indicam o IHH <span data-id='mode-view'></span> do Valor Adicionado gerado pelos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
@@ -336,7 +336,7 @@
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"desc_var":"Os valores apresentados indicam o C4 <span data-id='mode-view'></span> dos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do C4 de um ano em relação ao ano anterior.",
 				"type":[
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
@@ -348,7 +348,7 @@
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"desc_var":"Os valores apresentados indicam o C4 <span data-id='mode-view'></span> do Valor Adicionado gerado pelos Empreendimentos Culturais em cada ano. A taxa de variação representa a mudança percentual do IHH de um ano em relação ao ano anterior.",
 				"type":[
-					{"name":"Barras", "id":"barras"}
+					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}

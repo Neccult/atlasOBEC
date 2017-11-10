@@ -30,28 +30,17 @@
 
 											<div class="desc">
 
-												<p>
-													O PROJETO ATLAS ECONÔMICO DA CULTURA
-													BRASILEIRA BUSCA, PRINCIPALMENTE,
-													MENSURAR O IMPACTO DOS SETORES
-													CULTURAIS E CRIATIVOS (SCC) SOBRE A
-													EVOLUÇÃO DA ECONOMIA BRASILEIRA.
-												</p>
+                                                <p style="text-transform: uppercase;">
+                                                    O Atlas Econômico da Cultura Brasileira apresenta o impacto dos Setores Culturais e Criativos (SCC) sobre a evolução da economia brasileira.
+                                                </p>
 
-												<p>
-													ESSE ESFORÇO SERÁ ORGANIZADO EM
-													TORNO DE QUATRO EIXOS TEMÁTICOS:
-													EMPREENDIMENTOS CULTURAIS, MERCADO
-													DE TRABALHO, POLÍTICAS PÚBLICAS E
-													COMÉRCIO INTERNACIONAL.
-												</p>
+                                                <p style="text-transform: uppercase;">
+                                                    Tal informação está disponível para todas as unidades federativas e para dez Setores Culturais e Criativos. São eles: Arquitetura e Design, Artes Cênicas e Espetáculos, Audiovisual, Cultural Digital, Editorial, Educação e Criação em Artes, Entretenimento, Música, Patrimônio, e Publicidade.
+                                                </p>
 
-												<p>
-													AO LONGO DE TODAS AS VARIÁVEIS, SERÁ
-													PRIVILEGIADA A ANÁLISE EM TORNO DOS
-													RECORTES SETORIAL E REGIONAL.
-												</p>
-
+                                                <p style="text-transform: uppercase;">
+                                                    Os dados estão organizados em quatro eixos temáticos: Empreendimentos Culturais, Mercado de trabalho, Políticas Públicas e Comércio Internacional.
+                                                </p>
 											</div>
 										</div>
 									</div>
