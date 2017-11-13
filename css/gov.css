@@ -288,9 +288,26 @@ div#wrapper-footer-brasil{
 	margin-top: 0px;
 	line-height: 18px;
 	background-color: #c4c431;
-	padding: 95px 0px 70px 0;
+	padding: 25px 0px 10px 0;
 	color: #FFF;
 }
+
+.site-map b {
+	font-size: 18px;
+}
+
+.site-map a {
+	font-size: 14px;
+}
+
+.site-map li {
+	margin-bottom: 0px;
+}
+
+.site-map li:first-child {
+	margin-bottom: 5px;
+}
+
 #footer-brasil-custom{
 	position: absolute;
    	background: none repeat scroll 0% 0% #DFDD00;

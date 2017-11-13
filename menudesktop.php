@@ -3,8 +3,8 @@
 <?php
     if(isset($_GET['empreendimentos'])) {
         ?>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="">
+            <div class="">
                 <p class="title">Empreendimentos Culturais</p>
 
             </div>
@@ -14,8 +14,8 @@
     }
     else  if(isset($_GET['mercado'])) {
         ?>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="">
+            <div class="">
                 <p class="title">Mercado de Trabalho</p>
 
             </div>
@@ -25,8 +25,8 @@
     }
     else  if(isset($_GET['politicas'])) {
         ?>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="">
+            <div class="">
                 <p class="title">Políticas Públicas</p>
 
             </div>
@@ -36,8 +36,8 @@
     }
     else  if(isset($_GET['comercio'])) {
         ?>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="">
+            <div class="">
                 <p class="title">Comércio Internacional</p>
 
             </div>

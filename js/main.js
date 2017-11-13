@@ -217,10 +217,6 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadResult(){
-	$("#title-view div").first().css("max-width", $(".container-chart").width()+"px");
-	var width_soma = $(".container-chart").width() - $("#title-view div").first().width();
-	console.log(width_soma);
-    $("#title-view div").first().css("margin-left", (width_soma-15)/2+"px");
 	/* ajusta nome da página */
 	$(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
 	$('.menu-select').val(url['var']); /* atualiza select versao mobile */

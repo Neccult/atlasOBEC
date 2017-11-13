@@ -5,178 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8cc3841-7aef-471f-b03c-0cf66a703b5e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icon.png" afterPath="$PROJECT_DIR$/css/icon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/diagram_atlas_obec.png" afterPath="$PROJECT_DIR$/data/docs/diagram_atlas_obec.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo1-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo1-DER.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo2-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo2-DER.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo3-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo3-DER.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/eixo4-DER.png" afterPath="$PROJECT_DIR$/data/docs/eixo4-DER.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo1.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo2.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo3.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/table-eixo4.png" afterPath="$PROJECT_DIR$/data/docs/table-eixo4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_1.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_1.mwb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_2.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_2.mwb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_3.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_3.mwb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_4.mwb" afterPath="$PROJECT_DIR$/data/sql/ER_Atlas_Eixo_4.mwb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Black.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Black.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Bold_0.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Bold_0.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Light.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Light.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/Lato-Regular.ttf" afterPath="$PROJECT_DIR$/fonts/Lato-Regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/1_menu.png" afterPath="$PROJECT_DIR$/images/1_menu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/1_menu1.jpg" afterPath="$PROJECT_DIR$/images/1_menu1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/2_menu.png" afterPath="$PROJECT_DIR$/images/2_menu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/3_menu.png" afterPath="$PROJECT_DIR$/images/3_menu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/4_menu.png" afterPath="$PROJECT_DIR$/images/4_menu.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrow.png" afterPath="$PROJECT_DIR$/images/arrow.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrowUp.png" afterPath="$PROJECT_DIR$/images/arrowUp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/arrow_pb.png" afterPath="$PROJECT_DIR$/images/arrow_pb.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/download.png" afterPath="$PROJECT_DIR$/images/download.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/csv.png" afterPath="$PROJECT_DIR$/images/icons/csv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/pdf.png" afterPath="$PROJECT_DIR$/images/icons/pdf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/stock-vector-vector-file-extensions-icons-set-pdf-mp-txt-doc-docx-html-jpg-zip-csv-ppt-xls-rar-161323757.jpg" afterPath="$PROJECT_DIR$/images/icons/stock-vector-vector-file-extensions-icons-set-pdf-mp-txt-doc-docx-html-jpg-zip-csv-ppt-xls-rar-161323757.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/icons/xls.png" afterPath="$PROJECT_DIR$/images/icons/xls.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/loading.gif" afterPath="$PROJECT_DIR$/images/loading.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo.png" afterPath="$PROJECT_DIR$/images/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo2.png" afterPath="$PROJECT_DIR$/images/logo2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_dark.png" afterPath="$PROJECT_DIR$/images/logo_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_min.png" afterPath="$PROJECT_DIR$/images/logo_min.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_min_dark.png" afterPath="$PROJECT_DIR$/images/logo_min_dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logo_white.png" afterPath="$PROJECT_DIR$/images/logo_white.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/ecoCultura.png" afterPath="$PROJECT_DIR$/images/logos/ecoCultura.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/minc.png" afterPath="$PROJECT_DIR$/images/logos/minc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/neccult.png" afterPath="$PROJECT_DIR$/images/logos/neccult.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/logos/ufrgs.png" afterPath="$PROJECT_DIR$/images/logos/ufrgs.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/neccult.png" afterPath="$PROJECT_DIR$/images/neccult.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/neccult_mobile.png" afterPath="$PROJECT_DIR$/images/neccult_mobile.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/sprite-contraste.png" afterPath="$PROJECT_DIR$/images/sprite-contraste.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/sprite.png" afterPath="$PROJECT_DIR$/images/sprite.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/video1.mp4" afterPath="$PROJECT_DIR$/images/video1.mp4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/video1.webm" afterPath="$PROJECT_DIR$/images/video1.webm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_10.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_11.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_12.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_13.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_3.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_4.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_5.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_6.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_7.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_8.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_9.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/barra_gov.php" afterPath="$PROJECT_DIR$/barra_gov.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/barras.php" afterPath="$PROJECT_DIR$/barras.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bugs-conhecidos.md" afterPath="$PROJECT_DIR$/bugs-conhecidos.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cgi/download.pl" afterPath="$PROJECT_DIR$/cgi/download.pl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/css/bootstrap-theme.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/css/bootstrap-theme.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="$PROJECT_DIR$/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/css/bootstrap.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/css/bootstrap.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/comercio.css" afterPath="$PROJECT_DIR$/css/comercio.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/gov.css" afterPath="$PROJECT_DIR$/css/gov.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/ie10-viewport-bug-workaround.css" afterPath="$PROJECT_DIR$/css/ie10-viewport-bug-workaround.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/jquery-jvectormap-2.0.3.css" afterPath="$PROJECT_DIR$/css/jquery-jvectormap-2.0.3.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/mercado.css" afterPath="$PROJECT_DIR$/css/mercado.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/navbar.css" afterPath="$PROJECT_DIR$/css/navbar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/politicas.css" afterPath="$PROJECT_DIR$/css/politicas.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/proto.css" afterPath="$PROJECT_DIR$/css/proto.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Colombia.geo.json" afterPath="$PROJECT_DIR$/data/Colombia.geo.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/br-min.json" afterPath="$PROJECT_DIR$/data/br-min.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/br.json" afterPath="$PROJECT_DIR$/data/br.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/collection.json" afterPath="$PROJECT_DIR$/data/collection.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/colors.json" afterPath="$PROJECT_DIR$/data/colors.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_1.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_1.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_10.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_10.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_11.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_11.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_12.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_12.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_13.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_13.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_2.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_3.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_4.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_4.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_5.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_5.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_6.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_6.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_7.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_7.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_8.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_8.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_9.csv" afterPath="$PROJECT_DIR$/data/csv/ATLAS_EixoI_V_9.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/BD Atlas.md" afterPath="$PROJECT_DIR$/data/docs/BD Atlas.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/Fluxograma atlas obec.md" afterPath="$PROJECT_DIR$/data/docs/Fluxograma atlas obec.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/docs/Requisitos Atlas.md" afterPath="$PROJECT_DIR$/data/docs/Requisitos Atlas.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 1 eixo 1" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 1 eixo 1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 10 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 10 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 11 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 11 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 12 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 12 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 13 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 13 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 2 eixo 1" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 2 eixo 1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 3 eixo 1" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 3 eixo 1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 4 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 4 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 5 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 5 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 6 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 6 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 7 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 7 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 8 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 8 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/eixo1_atualizado/var 9 eixo 1.txt" afterPath="$PROJECT_DIR$/data/eixo1_atualizado/var 9 eixo 1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/pt-br.json" afterPath="$PROJECT_DIR$/data/pt-br.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/region.json" afterPath="$PROJECT_DIR$/data/region.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scc.json" afterPath="$PROJECT_DIR$/data/scc.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scripts/Parser_EixoUm - setores - atuacao.py" afterPath="$PROJECT_DIR$/data/scripts/Parser_EixoUm - setores - atuacao.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/scripts/Parser_EixoUmTotal.py" afterPath="$PROJECT_DIR$/data/scripts/Parser_EixoUmTotal.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/Parser_EixoUm.py" afterPath="$PROJECT_DIR$/data/sql/Parser_EixoUm.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/backup eixo 1 13-09-2017.sql" afterPath="$PROJECT_DIR$/data/sql/backup eixo 1 13-09-2017.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/backup eixo 1 22-09-2017 (variaveis 4-9 atualizadas).sql" afterPath="$PROJECT_DIR$/data/sql/backup eixo 1 22-09-2017 (variaveis 4-9 atualizadas).sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/backup-Atlas-03-11.sql" afterPath="$PROJECT_DIR$/data/sql/backup-Atlas-03-11.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/dump-Atlas-01-11.sql" afterPath="$PROJECT_DIR$/data/sql/dump-Atlas-01-11.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/sql/dump-Atlas.sql" afterPath="$PROJECT_DIR$/data/sql/dump-Atlas.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/total.csv" afterPath="$PROJECT_DIR$/data/total.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/world-continents.geo'.json" afterPath="$PROJECT_DIR$/data/world-continents.geo'.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/world-continents.geo.json" afterPath="$PROJECT_DIR$/data/world-continents.geo.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoDois.php" afterPath="$PROJECT_DIR$/db/EixoDois.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoQuatro.php" afterPath="$PROJECT_DIR$/db/EixoQuatro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoTres.php" afterPath="$PROJECT_DIR$/db/EixoTres.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/EixoUm.php" afterPath="$PROJECT_DIR$/db/EixoUm.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_barras.php" afterPath="$PROJECT_DIR$/db/json_barras.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_mapa.php" afterPath="$PROJECT_DIR$/db/json_mapa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_teste.php" afterPath="$PROJECT_DIR$/db/json_teste.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_region.php" afterPath="$PROJECT_DIR$/db/json_treemap_region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/json_treemap_scc.php" afterPath="$PROJECT_DIR$/db/json_treemap_scc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/download.php" afterPath="$PROJECT_DIR$/download.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/error_log.txt" afterPath="$PROJECT_DIR$/error_log.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/footer.php" afterPath="$PROJECT_DIR$/footer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/head.php" afterPath="$PROJECT_DIR$/head.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/barras.js" afterPath="$PROJECT_DIR$/js/barras.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bootstrap.js" afterPath="$PROJECT_DIR$/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/continents-mill.js" afterPath="$PROJECT_DIR$/js/continents-mill.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/contraste.js" afterPath="$PROJECT_DIR$/js/contraste.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/control-colors.js" afterPath="$PROJECT_DIR$/js/control-colors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/functions.js" afterPath="$PROJECT_DIR$/js/functions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ie-emulation-modes-warning.js" afterPath="$PROJECT_DIR$/js/ie-emulation-modes-warning.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/ie-emulation-modes-warning.min.js" afterPath="$PROJECT_DIR$/js/ie-emulation-modes-warning.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jquery-2.2.0.min.js" afterPath="$PROJECT_DIR$/js/jquery-2.2.0.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jquery-jvectormap-2.0.3.min.js" afterPath="$PROJECT_DIR$/js/jquery-jvectormap-2.0.3.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js.bkp" afterPath="$PROJECT_DIR$/js/main.js.bkp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.min.js" afterPath="$PROJECT_DIR$/js/main.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mapa.js" afterPath="$PROJECT_DIR$/js/mapa.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/mapa_mundi.js" afterPath="$PROJECT_DIR$/js/mapa_mundi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/npm.js" afterPath="$PROJECT_DIR$/js/npm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_region.js" afterPath="$PROJECT_DIR$/js/treemap_region.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_scc.js" afterPath="$PROJECT_DIR$/js/treemap_scc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/vkbeautify.js" afterPath="$PROJECT_DIR$/js/vkbeautify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mapa.php" afterPath="$PROJECT_DIR$/mapa.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menudesktop.php" afterPath="$PROJECT_DIR$/menudesktop.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/menumobile.php" afterPath="$PROJECT_DIR$/menumobile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page.php" afterPath="$PROJECT_DIR$/page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_barras.php" afterPath="$PROJECT_DIR$/proto/proto_barras.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_mapa.php" afterPath="$PROJECT_DIR$/proto/proto_mapa.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_mapa_mundi.php" afterPath="$PROJECT_DIR$/proto/proto_mapa_mundi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_mapa_mundi_test.php" afterPath="$PROJECT_DIR$/proto/proto_mapa_mundi_test.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_treemap_region.php" afterPath="$PROJECT_DIR$/proto/proto_treemap_region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proto/proto_treemap_scc.php" afterPath="$PROJECT_DIR$/proto/proto_treemap_scc.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resultado.php" afterPath="$PROJECT_DIR$/resultado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_region.php" afterPath="$PROJECT_DIR$/treemap_region.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_scc.php" afterPath="$PROJECT_DIR$/treemap_scc.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -187,11 +36,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="277" column="16" lean-forward="true" selection-start-line="277" selection-start-column="16" selection-end-line="277" selection-end-column="16" />
+            <state relative-caret-position="412">
+              <caret line="679" column="15" lean-forward="false" selection-start-line="679" selection-start-column="15" selection-end-line="679" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="693">
+              <caret line="125" column="81" lean-forward="false" selection-start-line="125" selection-start-column="81" selection-end-line="125" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="download.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/download.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1219">
+              <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -200,8 +69,8 @@
       <file leaf-file-name="gov.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/gov.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="287" column="17" lean-forward="false" selection-start-line="287" selection-start-column="17" selection-end-line="287" selection-end-column="17" />
+            <state relative-caret-position="287">
+              <caret line="284" column="9" lean-forward="false" selection-start-line="284" selection-start-column="1" selection-end-line="284" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -210,18 +79,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="233" column="0" lean-forward="true" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="6700" column="22" lean-forward="false" selection-start-line="6700" selection-start-column="19" selection-end-line="6700" selection-end-column="22" />
+            <state relative-caret-position="333">
+              <caret line="218" column="22" lean-forward="false" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -230,18 +89,18 @@
       <file leaf-file-name="page.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="887">
+            <state relative-caret-position="2844">
               <caret line="158" column="18" lean-forward="false" selection-start-line="158" selection-start-column="18" selection-end-line="158" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapa.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="mapa.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/mapa.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
-              <caret line="266" column="60" lean-forward="false" selection-start-line="266" selection-start-column="58" selection-end-line="266" selection-end-column="60" />
+            <state relative-caret-position="623">
+              <caret line="286" column="14" lean-forward="false" selection-start-line="286" selection-start-column="14" selection-end-line="286" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -250,18 +109,8 @@
       <file leaf-file-name="menudesktop.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/menudesktop.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menumobile.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/menumobile.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="35" lean-forward="false" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+            <state relative-caret-position="108">
+              <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -270,10 +119,10 @@
       <file leaf-file-name="resultado.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resultado.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="887">
-              <caret line="111" column="26" lean-forward="false" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
+            <state relative-caret-position="270">
+              <caret line="15" column="106" lean-forward="false" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
               <folding>
-                <marker date="1510337456600" expanded="true" signature="6315:8357" ph="..." />
+                <marker date="1510600351228" expanded="true" signature="6584:10878" ph="..." />
               </folding>
             </state>
           </provider>
@@ -282,7 +131,7 @@
       <file leaf-file-name="pt-br.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/pt-br.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
+            <state relative-caret-position="-20601">
               <caret line="350" column="38" lean-forward="false" selection-start-line="350" selection-start-column="38" selection-end-line="350" selection-end-column="38" />
               <folding />
             </state>
@@ -301,14 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>uf ou se</find>
-      <find>O perce</find>
-      <find>showTooltip</find>
-      <find>tooltipInstance</find>
-      <find>tooltip</find>
-      <find>legendCells</find>
-      <find>legend</find>
-      <find>col-md-7</find>
       <find>opt-select</find>
       <find>opt</find>
       <find>title-vie</find>
@@ -320,8 +161,6 @@
       <find>menu-content</find>
       <find>.menu</find>
       <find>button,</find>
-      <find>media</find>
-      <find>title</find>
       <find>max-width</find>
       <find>max-width:</find>
       <find>max-width: 16</find>
@@ -329,8 +168,18 @@
       <find>article.results-article</find>
       <find>scroll</find>
       <find>article.res</find>
+      <find>container</find>
+      <find>span.op</find>
+      <find>title</find>
+      <find>button</find>
+      <find>button.opt.active</find>
+      <find>button.opt</find>
+      <find>site</find>
+      <find>res</find>
       <find>site-map</find>
       <find>p.title</find>
+      <find>Em B</find>
+      <find>media</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -342,7 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/db/json_teste.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/data/Colombia.geo.json" />
@@ -376,15 +224,16 @@
         <option value="$PROJECT_DIR$/js/treemap_scc.js" />
         <option value="$PROJECT_DIR$/db/json_treemap_region.php" />
         <option value="$PROJECT_DIR$/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/menudesktop.php" />
         <option value="$PROJECT_DIR$/menumobile.php" />
         <option value="$PROJECT_DIR$/data/pt-br.json" />
-        <option value="$PROJECT_DIR$/js/mapa.js" />
-        <option value="$PROJECT_DIR$/js/main.js" />
-        <option value="$PROJECT_DIR$/resultado.php" />
         <option value="$PROJECT_DIR$/page.php" />
+        <option value="$PROJECT_DIR$/js/main.js" />
         <option value="$PROJECT_DIR$/css/gov.css" />
+        <option value="$PROJECT_DIR$/menudesktop.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/resultado.php" />
         <option value="$PROJECT_DIR$/css/main.css" />
+        <option value="$PROJECT_DIR$/js/mapa.js" />
       </list>
     </option>
   </component>
@@ -396,8 +245,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1122" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -541,15 +392,15 @@
       <workItem from="1509987114501" duration="2491000" />
       <workItem from="1509989775688" duration="4777000" />
       <workItem from="1510329195886" duration="5108000" />
+      <workItem from="1510591381358" duration="8858000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166561000" />
+    <option name="totallyTimeSpent" value="175419000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15579514" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -600,13 +451,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/world-continents.geo'.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/proto_mapa_mundi_test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
@@ -709,13 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
           <caret line="56" column="39" lean-forward="false" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/download.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2124">
-          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -880,34 +717,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/comercio.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap-theme.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7146">
           <caret line="397" column="62" lean-forward="false" selection-start-line="397" selection-start-column="61" selection-end-line="397" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
+        <state relative-caret-position="120600">
           <caret line="6700" column="22" lean-forward="false" selection-start-line="6700" selection-start-column="19" selection-end-line="6700" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/menudesktop.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -920,9 +740,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2844">
+          <caret line="158" column="18" lean-forward="false" selection-start-line="158" selection-start-column="18" selection-end-line="158" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/comercio.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menudesktop.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="24" lean-forward="false" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/gov.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="284" column="9" lean-forward="false" selection-start-line="284" selection-start-column="1" selection-end-line="284" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="125" column="81" lean-forward="false" selection-start-line="125" selection-start-column="81" selection-end-line="125" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/download.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1219">
+          <caret line="118" column="0" lean-forward="false" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resultado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="106" lean-forward="false" selection-start-line="15" selection-start-column="106" selection-end-line="15" selection-end-column="106" />
+          <folding>
+            <marker date="1510600351228" expanded="true" signature="6584:10878" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="679" column="15" lean-forward="false" selection-start-line="679" selection-start-column="15" selection-end-line="679" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="218" column="22" lean-forward="false" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/pt-br.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
+        <state relative-caret-position="-20601">
           <caret line="350" column="38" lean-forward="false" selection-start-line="350" selection-start-column="38" selection-end-line="350" selection-end-column="38" />
           <folding />
         </state>
@@ -930,50 +824,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/mapa.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="266" column="60" lean-forward="false" selection-start-line="266" selection-start-column="58" selection-end-line="266" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="233" column="0" lean-forward="true" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resultado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="887">
-          <caret line="111" column="26" lean-forward="false" selection-start-line="111" selection-start-column="26" selection-end-line="111" selection-end-column="26" />
-          <folding>
-            <marker date="1510337456600" expanded="true" signature="6315:8357" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="887">
-          <caret line="158" column="18" lean-forward="false" selection-start-line="158" selection-start-column="18" selection-end-line="158" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/gov.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="287" column="17" lean-forward="false" selection-start-line="287" selection-start-column="17" selection-end-line="287" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="277" column="16" lean-forward="true" selection-start-line="277" selection-start-column="16" selection-end-line="277" selection-end-column="16" />
+        <state relative-caret-position="623">
+          <caret line="286" column="14" lean-forward="false" selection-start-line="286" selection-start-column="14" selection-end-line="286" selection-end-column="14" />
           <folding />
         </state>
       </provider>

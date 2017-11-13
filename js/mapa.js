@@ -192,6 +192,7 @@ console.log(eixo);
 		.data(states.features)
 		.enter()
 		.append("path")
+		.attr("data-legend","oi")
 		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
 		.style('fill', function(d){return color(dict[d.id].valor);})
 		.attr("d", path)
@@ -258,24 +259,39 @@ console.log(eixo);
         .orient('vertical')
         .scale(color);
 
-    legend_svg.select(".legendLinear").call(legendLinear);
-    legend_svg.select(".legendCells").call(legendLinear1);
+    if(windowWidth > 520) {
+        legend_svg.select(".legendLinear").call(legendLinear);
+        legend_svg.select(".legendCells").call(legendLinear1);
 
-	var legendLabels = $('.legendCells').find('.cell').children('.label');
+        var legendLabels = $('.legendCells').find('.cell').children('.label');
 
-	$('.legendCells').find('.cell').each(function(i) {
-        $(this).attr("transform", "translate(0, "+(20*(i)+10)+")");
-	});
+        $('.legendCells').find('.cell').each(function (i) {
+            $(this).attr("transform", "translate(0, " + (20 * (i) + 10) + ")");
+        });
 
-	$(legendLabels).each(function(i){
-		if (i === 0 ){
-			$(this).text('Menor que ' + formatDecimalLimit(dom[i]));
-		} 
-		else if (i === legendLabels.length - 1) {
-			$(this).text("Maior que "+formatDecimalLimit(dom[i-1]));
-		} 
-		else{
-			$(this).text("Entre " + formatDecimalLimit(dom[i-1]) + " e " + formatDecimalLimit(dom[i]));
-		}
-	});
+        $(legendLabels).each(function (i) {
+            if (i === 0) {
+                $(this).text('Menor que ' + formatDecimalLimit(dom[i]));
+            }
+            else if (i === legendLabels.length - 1) {
+                $(this).text("Maior que " + formatDecimalLimit(dom[i - 1]));
+            }
+            else {
+                $(this).text("Entre " + formatDecimalLimit(dom[i - 1]) + " e " + formatDecimalLimit(dom[i]));
+            }
+        });
+    }
+    else {
+        d3.legend = function(g) {
+        	console.log();
+            g = $(svg._groups[0][0]).children().first().children().each(function(d) {
+
+			});
+        }
+        var legend = svg.append("g")
+            .attr("class","legend")
+            .attr("transform","translate(50,30)")
+            .style("font-size","12px")
+            .call(d3.legend);
+	}
 };

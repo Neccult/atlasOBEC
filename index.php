@@ -89,7 +89,7 @@
 													<div class="text"><p>MERCADO<br/>DE TRABALHO</p></div>
 												</div>
 
-												<p class="soon">EM BREVE</p>
+												<p class="soon">EM DEZEMBRO 2017</p>
 
 											</div>
 										</div>
@@ -106,7 +106,7 @@
 													<div class="text"><p>POLÍTICAS<br/>PÚBLICAS</p></div>
 												</div>
 
-												<p class="soon">EM BREVE</p>
+												<p class="soon">EM JANEIRO 2018</p>
 
 											</div>
 										</div>
@@ -123,7 +123,7 @@
 													<div class="text"><p>COMÉRCIO<br/>INTERNACIONAL</p></div>
 												</div>
 
-												<p class="soon">EM BREVE</p>
+												<p class="soon">EM FEVEREIRO 2018</p>
 												
 											</div>
 										</div>
