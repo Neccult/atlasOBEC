@@ -64,7 +64,7 @@ else if(windowWidth>=768){
 /**** mobile! ****/
 else{  
 
-	var height = 200;
+	var height = 290;
 	var shapeWidth = 20;
 
 	//cria svg
@@ -259,7 +259,7 @@ console.log(eixo);
         .orient('vertical')
         .scale(color);
 
-    if(windowWidth > 520) {
+    if(windowWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
 
@@ -282,16 +282,35 @@ console.log(eixo);
         });
     }
     else {
-        d3.legend = function(g) {
-        	console.log();
-            g = $(svg._groups[0][0]).children().first().children().each(function(d) {
-
-			});
-        }
-        var legend = svg.append("g")
-            .attr("class","legend")
-            .attr("transform","translate(50,30)")
-            .style("font-size","12px")
-            .call(d3.legend);
+    	var count = 0;
+    	d3.select(".legendLinear").append("text").text(title_aux+" - "+ano)
+            .style("font-size","9px")
+            .style("font-weight", "600");
+    	d3.select(".legendLinear").append("text").text(function(d) {
+            if(cad === 0) {
+                return "Setores Culturais Criativos";
+            }
+            else {
+                return textJSON.select.cad[cad].name;
+            }
+        }).attr("transform", "translate(0, 10)")
+            .style("font-size","8px")
+            .style("font-weight", "600");
+    	var ufs_legend = [];
+    	$.each(dict, function(index, value) {
+			ufs_legend.push({'uf': this.uf, 'valor': this.valor});
+		});
+        ufs_legend.sort(function(a,b) {
+            return a.uf < b.uf ? -1 : a.uf > b.uf ? 1 : 0;
+        });
+    	ufs_legend.forEach(function(d) {
+            d3.select(".legendLinear").append("text")
+                .attr("class","legend")
+                .attr("transform","translate(0,0)")
+                .style("font-size","7px")
+                .text(d.uf+": "+d.valor)
+                .attr("transform", "translate(0, " + (10 * (count) + 20) + ")");
+            count++;
+		});
 	}
 };
