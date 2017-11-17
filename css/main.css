@@ -125,6 +125,20 @@ button.opt:hover, button.opt.active{
 	padding: 1px;
 }
 
+#loading {
+	z-index: 9999;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+	background-image: url(http://i.kinja-img.com/gawker-media/image/upload/chag4hzw0pgvgy5ujnom.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 150px;
+	width: 100%;
+	height: 100%;
+}
+
 .show-xxs{
 	display: none;
 }
@@ -132,6 +146,7 @@ button.opt:hover, button.opt.active{
 	display: block;
 }
 .error{
+	text-align: justify;
 	color: #e4003f;
 }
 /*==== home ======================*/

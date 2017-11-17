@@ -10,8 +10,14 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
 	newHash = window.location.hash;
-	window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+	$('iframe').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
 	/* variáveis com valores default */
+}
+
+function controlVarPage(clickVar){
+    newHash = window.location.hash;
+    window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+    /* variáveis com valores default */
 }
 
 /*-----------------------------------------------------------------------------
@@ -60,7 +66,7 @@ function changeChart(url){
 				
 		if((++count)!=size) newUrl = newUrl+"&";
 	});
-	window.location.href = 'page.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
+	window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
 }
 
 /*-----------------------------------------------------------------------------
@@ -235,9 +241,9 @@ function loadResult(){
 										*/
 	if(window.location.hash.substring(1) == "empreendimentos") {
 		if(url['cad']==0 && url['view']!='treemap_scc'){
-            $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
             $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
             $('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
         }
     }
@@ -484,7 +490,8 @@ $(document).ready(function(){
 	$(document).on('click', ".var-click", function(){
 		controlVar($(this).attr('href'));				
 	});
-    if(url['var'] === "") controlVar(1);
+    if(url['var'] === "") controlVarPage(1);
+    if(url['var']) controlVar(url['var']);
 
     /* mobile! */
 	$(document).on('change', ".menu-select", function(){
