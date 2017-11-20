@@ -74,6 +74,7 @@
 			width = chartWidth - margin.left - margin.right,
 			height = chartHeight - margin.top - margin.bottom;
 
+		dados.value.push(0)
 		//valores maximos e minimos
 		var minValue = d3.min(dados.value);
 		var maxValue = d3.max(dados.value);
@@ -118,10 +119,9 @@
 		var minDisplayValue = minValue > 0? minValue - (minValue / 10) : 0;
 
 		var x = d3.scaleBand()
-						.domain(d3.range(dados.value.length))
+						.domain(d3.range(dados.value.length-1))
 						.rangeRound([0, width])
 						.padding(0.1);
-
 		var y = d3.scaleLinear()
 				.domain(d3.extent(dados.value))
 				.rangeRound([height, 0], .002);
@@ -135,6 +135,7 @@
 			maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis? countValidDecimalDigits(d): maxDecimalAxis;			
 		});
 
+		dados.value.pop()
 		var formatYAxis = function(d){
 			var higherZeroOcur = maxDecimalAxis;
 			var dadosCounter = 0;
