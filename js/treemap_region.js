@@ -6,7 +6,8 @@ var svg = d3.select("#corpo").append("svg");
 /*=== dimensões do gráfico ===*/        
 if(windowWidth>768){
 	$('#corpo').find('svg').attr('width',$('.chart').width());
-	$('#corpo').find('svg').attr('height',$('.chart').width()/2);
+	$('#corpo').find('svg').attr('height',($('.chart').width()/2));
+    $('#corpo').find('svg').css('padding-bottom',"30px");
 }
 else{
 	$('#corpo').find('svg').attr('width',$('.chart').width()-20);
@@ -299,7 +300,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	var mobileSubtitle = windowWidth<480 ? 1 : 0,
 		subtitleHeight = mobileSubtitle ? 70 : 35;
 
-	$('#corpo').find('svg').attr('height',$('.chart').height() + subtitleHeight);
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 70);
 
 	// creates cadeia's color range array from color.json file
 	var colors = { domain: [], range: [] };

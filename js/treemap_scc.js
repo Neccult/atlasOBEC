@@ -272,7 +272,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	});
 
 	// aumenta a altura do svg pra caber a legenda
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 63);	
+	$('#corpo').find('svg').attr('height',$('.chart').height() + 70);
 
 	// legenda
 	var legLeftRange = [0, 4];

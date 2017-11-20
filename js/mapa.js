@@ -203,13 +203,13 @@ console.log(eixo);
 				console.log(100*dict[d.id].valor);
 				tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatNumber(100*dict[d.id].valor)+"%"],
+                    ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
                 ]);
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatNumber(dict[d.id].valor)],
+                    ["", formatDecimalLimit(dict[d.id].valor, 2)],
                     ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 ]);
 
@@ -217,7 +217,7 @@ console.log(eixo);
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatNumber(dict[d.id].valor)],
+                    ["", formatDecimalLimit(dict[d.id].valor, 2)],
                     ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                     ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                 ]);

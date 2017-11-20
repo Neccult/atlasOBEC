@@ -90,7 +90,7 @@
 			<?php if(!empty($text)):?>
 				<section id="resultado">
 
-					<iframe src="'resultado.php'" style="border: none; width: 100%; height: 600px;" scrolling="no"></iframe>
+					<iframe src="resultado.php" style="border: none; width: 100%; height: 600px;" scrolling="no"></iframe>
 
 				</section>
 			<?php endif;?>

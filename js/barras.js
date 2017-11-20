@@ -327,7 +327,7 @@
 				if(vrv === 2 || vrv === 3) {
 					tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        ["", formatNumber(dados.value[i])+"%"],
+                        ["", formatDecimalLimit(dados.value[i], 2)+"%"],
                         ["", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
                         ["", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
@@ -335,7 +335,7 @@
                 else {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        ["", formatNumber(dados.value[i])],
+                        ["", formatDecimalLimit(dados.value[i], 2)],
                         ["", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"],
                         ["", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
