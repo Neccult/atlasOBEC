@@ -63,7 +63,7 @@
 			}
 		},
 		"1": {
-			"name": "Arquitetura",
+			"name": "Arquitetura e Design",
 			"color": "#87A8CA",
 			"gradient": {
 				"1": "#F3F6FA",
@@ -75,7 +75,7 @@
 			}
 		},
 		"2": {
-			"name": "Artes",
+			"name": "Artes Cênicas e Espetáculos",
 			"color": "#077DDD",
 			"gradient": {
 				"1": "#F6F8FC",
@@ -99,7 +99,7 @@
 			}
 		},
 		"4": {
-			"name": "Design",
+			"name": "Cultura Digital",
 			"color": "#8178AF",
 			"gradient": {
 				"1": "#F4F4F9",
@@ -111,7 +111,7 @@
 			}
 		},
 		"5": {
-			"name": "Editoração",
+			"name": "Editorial",
 			"color": "#F6D5AB",
 			"gradient": {
 				"1": "#FFFFFE",
@@ -123,7 +123,7 @@
 			}
 		},
 		"6": {
-			"name": "Entretenimento",
+			"name": "Educação e Criação em Artes",
 			"color": "#EC8A91",
 			"gradient": {
 				"1": "#FEF9F9",
@@ -135,7 +135,7 @@
 			}
 		},
 		"7": {
-			"name": "Formação",
+			"name": "Entretenimento",
 			"color": "#AD5468",
 			"gradient": {
 				"1": "#FEFDFC",
@@ -147,7 +147,7 @@
 			}
 		},
 		"8": {
-			"name": "Gestão",
+			"name": "Música",
 			"color": "#6A474D",
 			"gradient": {
 				"1": "#F6F4F4",
@@ -159,7 +159,7 @@
 			}
 		},
 		"9": {
-			"name": "Música",
+			"name": "Patrimônio",
 			"color": "#E96B00",
 			"gradient": {
 				"1": "#FFFBF7",
@@ -171,7 +171,7 @@
 			}
 		},
 		"10": {
-			"name": "Patrimônio",
+			"name": "Publicidade",
 			"color": "#B2510F",
 			"gradient": {
 				"1": "#FDFBF9",

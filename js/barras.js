@@ -332,6 +332,13 @@
                         ["", formatDecimalLimit(dados.taxa[i], 2)],
                     ]);
                 }
+                else if(vrv >= 4 && vrv <= 7) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatDecimalLimit(dados.value[i], 2)],
+                        ["", formatDecimalLimit(dados.percentual[i]*100, 2) + "%"]
+                    ]);
+				}
                 else {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],

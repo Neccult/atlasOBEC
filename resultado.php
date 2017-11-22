@@ -73,7 +73,22 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 						<div class="separator white"></div>
 					
 						<!-- logo atlas -->
-                        <div class="text text-justify" id="desc-var"><?php echo $text['desc_var'];?></div>
+                        <div class="text text-justify" id="desc-var">
+                            <?php
+                                if($view === "mapa") {
+                                    echo $text['desc_var_mapa'];
+                                }
+                                if($view === "treemap_scc") {
+                                    echo $text['desc_var_treemap_scc'];
+                                }
+                                if($view === "treemap_region") {
+                                    echo $text['desc_var_treemap_region'];
+                                }
+                                if($view === "barras") {
+                                    echo $text['desc_var_barras'];
+                                }
+                            ?>
+                        </div>
 
 					</div>				
 				</div>

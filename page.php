@@ -91,7 +91,15 @@
 				<section id="resultado">
 
 					<iframe src="resultado.php" style="border: none; width: 100%; height: 600px;" scrolling="no"></iframe>
-
+                    <script>
+                        function result_mobile() {
+                            if($(window).width() < 1200) {
+                                $("iframe").height("1200px");
+                                $("iframe").attr("scrolling", "no");
+                            }
+                        }
+                        setTimeout(result_mobile(), 500);
+                    </script>
 				</section>
 			<?php endif;?>
 		
