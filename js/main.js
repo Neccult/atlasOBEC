@@ -476,6 +476,14 @@ $(window).bind("load", function() {
 	documento pronto
 ======*/
 $(document).ready(function(){
+	$(".opt").mouseenter(function() {
+		$("#desc-item").html($(this).attr("data-desc"));
+	});
+
+    $(".opt").mouseleave(function() {
+        $("#desc-item").html("");
+    });
+
 	$(window).on('hashchange', function() {
         loadPage();
         window.location.href = window.location.pathname+window.location.hash;

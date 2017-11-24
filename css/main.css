@@ -91,6 +91,7 @@ span.opt{
     vertical-align: middle;
     width: 100%;
     padding:  4px;
+	cursor: pointer;
     padding-left: 5px;
     padding-right: 5px;
     height: 17px;
@@ -180,6 +181,10 @@ button.opt:hover, button.opt.active{
 	font-size: 12px;
 	letter-spacing:  0.5px;
 	text-align: justify;
+}
+
+#desc-item {
+	height: 80px;
 }
 
 .neccult-info{

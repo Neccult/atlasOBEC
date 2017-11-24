@@ -122,7 +122,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 				<!--============= opções gráfico! ============-->
 				<div class="col-md-2 col-xs-12 opts-result">
                     <div id="title-view">
-                        <span class="opt active">Variável:</span>
+                        <span  data-desc="<?= $descView ?>" class="opt active">Variável:</span>
                         <select class="opt-select" data-id="var">
                             <?php
                             foreach ($json_text['var'][0] as $variavel) {
@@ -134,7 +134,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <div><?php if(isset($text[$view])) foreach($text[$view] as $key => $value):?>
                                 <?php if($value['name'] !== "Atuação"): ?>
                                     <div id="option-title-view" <?php if($value['name'] === "Porte") echo "class='select-prt'"; ?>>
-                                    <span class="opt view active"><?= $value['name'] ?>:</span>
+                                    <span  data-desc="<?= $descView ?>" class="opt view active"><?= $value['name'] ?>:</span>
                                     <select class="opt-select" data-id="<?php echo $value['id']?>">
 
                                         <!--=== select group porte ===-->
@@ -197,7 +197,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <?php foreach($text['type'] as $key => $value):?>
 
                             <div class="<?php echo $col;?> col-btn">
-                                <button class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
+                                <button data-desc="<?= $descView ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
                             </div>
 
                         <?php endforeach;?>
@@ -208,7 +208,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     <div class="row">
 
                         <!--=== descrição do tipo de gráfico atual ===-->
-                        <p class="text-justify"><?php echo $descView; ?><br/><br/></p>
+                        <p id="desc-item" class="text-justify"><br/><br/></p>
 
                     </div>
 					<span class="contexto">
