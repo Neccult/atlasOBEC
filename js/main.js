@@ -107,6 +107,73 @@ function controlFilter(selectvalue, selectid){
 	
 	/* se for PORTE x ATUAÇÃO */
     console.log(selectvalue);
+
+    if(window.location.hash === "#mercado") {
+		if(selectid==='prt' && selectvalue!=='0') {
+			url['sex'] = 0;
+            url['fax'] = 0;
+            url['esc'] = 0;
+		}
+
+        if(selectid==='sex' && selectvalue!=='0') {
+            url['prt'] = 0;
+            url['fax'] = 0;
+            url['esc'] = 0;
+        }
+
+        if(selectid==='fax' && selectvalue!=='0') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['esc'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+        }
+
+        if(selectid==='esc' && selectvalue!=='0') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['fax'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+        }
+
+        if(selectid==='frm' && selectvalue!=='0') {
+            url['esc'] = 0;
+            url['fax'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+        }
+
+        if(selectid==='snd' && selectvalue!=='0') {
+            url['esc'] = 0;
+            url['fax'] = 0;
+            url['frm'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+        }
+
+        if(selectid==='cor' && selectvalue!=='0') {
+            url['esc'] = 0;
+            url['fax'] = 0;
+            url['snd'] = 0;
+            url['frm'] = 0;
+            url['prv'] = 0;
+        }
+
+        if(selectid==='prv' && selectvalue!=='0') {
+            url['esc'] = 0;
+            url['fax'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['frm'] = 0;
+        }
+	}
+
 	if(selectid=='prt'){
 		/* filtro atuação */
 		if(selectvalue.match('atc-','')){
@@ -243,7 +310,6 @@ function loadResult(){
 		if(url['cad']==0 && url['view']!='treemap_scc'){
             $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
             $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
             $('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
         }
     }
@@ -251,20 +317,32 @@ function loadResult(){
 
     if(window.location.hash.substring(1) == "mercado") {
 		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
-            $('#select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('#select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('#select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
-            $('#select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
+            $('.select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
         }
+
+        if(url['cad'] == 0 && url['ocp']==0 && url['view']!='treemap_scc') {
+            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-fax').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-esc').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-fax').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-esc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        }
+
         if((url['ocp']!=0 && url['view']!='treemap_scc') || (url['slc'] == 1)){
-            $('#select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('#select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
+            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
         }
     }
 

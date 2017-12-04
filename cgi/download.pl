@@ -106,4 +106,3 @@ elsif ($output_format eq "pdf" || $output_format eq "png") {
 
 	exit(0);
 }
-

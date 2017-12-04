@@ -6,6 +6,10 @@
 	var minBarHeight = 5;
 	var withLabels = false;
 
+
+    var fonteTransform = "translate("+(chartWidth-120)+","+(chartHeight-10)+")";
+    var valoresTransform = "translate(10,"+(chartHeight-10)+")";
+
 	//Variaveis/Objetos
 	var dict = {};
 
@@ -48,7 +52,7 @@
         }
     }
 	function analyze(error, data) {
-		
+        $('#loading').fadeToggle('fast');
 		if(error){ 
 			console.log(error); 
 		}
@@ -458,6 +462,18 @@
 		var yAxis = d3.axisLeft()
 					.scale(y)
 					.tickFormat(formatYAxis);
+
+
+
+        svg.append("g")
+            .attr("class", "fonte")
+            .attr("transform", fonteTransform)
+            .append("text").text("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+
+        svg.append("g")
+            .attr("class", "valores")
+            .attr("transform", valoresTransform)
+            .append("text").text(textJSON.var[eixo][vrv-1].barras_valores);
 
 		//adiciona eixo X
 		svg.append("g")

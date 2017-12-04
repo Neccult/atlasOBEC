@@ -3,12 +3,13 @@
 	"mapa":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_region":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_scc":"Essa visualização permite observar a variável de interesse segmentada pelos Setores Culturais e Criativos.",
-	
-	"uf":"Essa visualização permite observar a variável de interesse apenas para a Unidade Federativa selecionada.",
-	"prt":"Essa visualização permite observar a variável de interesse apenas para o porte selecionado.",
+
+	"var_desc": "Selecione aqui a variável que deseja visualizar.",
+	"uf":"Selecione aqui a Unidade da Federação que deseja visualizar.",
+	"prt":"Selecione aqui o porte de empresa que deseja visualizar. Este filtro só será habilitado quando você selecionar o setor.",
 	"atc":"Essa visualização permite observar a variável de interesse apenas para a atuação selecionada.",
 	"ano":"Essa visualização permite observar a variável de interesse apenas para o ano selecionado.",
-	"cad":"Essa visualização apresenta a variável de interesse apenas para o setor cultural e criativo selecionado.",
+	"cad":"Selecione aqui o setor que deseja visualizar.",
 	"ocp":"Essa visualização apresenta a variável de interesse apenas para a ocupação cultural e criativa selecionada.",
 	"sex":"Essa visualização apresenta a variável de interesse apenas para o sexo selecionada.",
 	"fax":"Essa visualização apresenta a variável de interesse apenas para a faixa etária selecionada.",
@@ -63,7 +64,11 @@
 				],
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				},
+				"fontes": "RAIS",
+				"mapa_valores": "",
+				"treemap_scc_valores": "",
+				"barras_valores": "Valores em milhares."
 			},
 			{
 				"id":"2",
@@ -89,7 +94,11 @@
 				],
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				},
+				"fontes": "RAIS",
+				"mapa_valores": "Valores em pecentual.",
+				"treemap_scc_valores": "Valores em pecentual.",
+				"barras_valores": "Valores em pecentual."
 			},
 			{
 				"id":"3",
@@ -115,7 +124,11 @@
 				],
 				"inativos":{
 					"mapa":["uf"],"barras":["ano"]
-				}
+				},
+				"fontes": "RAIS",
+				"mapa_valores": "Valores em pecentual.",
+				"treemap_scc_valores": "Valores em pecentual.",
+				"barras_valores": "Valores em pecentual."
 			},
 			{
 				"id":"4",
@@ -153,7 +166,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
 			},
 			{
 				"id":"5",
@@ -191,7 +208,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
 			},
 			{
 				"id":"6",
@@ -229,7 +250,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
 			},
 			{
 				"id":"7",
@@ -267,7 +292,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano","prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
 			},
 			{
 				"id":"8",
@@ -305,7 +334,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
 			},
 			{
 				"id":"9",
@@ -331,7 +364,8 @@
 				],
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+				"fontes": "RAIS e IBGE"
 			},
 			{
 				"id":"10",
@@ -346,7 +380,8 @@
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
-				]
+				],
+				"fontes": "RAIS e IBGE"
 			},
 			{
 				"id":"11",
@@ -361,7 +396,8 @@
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
-				]
+				],
+				"fontes": "RAIS e IBGE"
 			},
 			{
 				"id":"12",
@@ -376,7 +412,8 @@
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
-				]
+				],
+				"fontes": "RAIS e IBGE"
 			},
 			{
 				"id":"13",
@@ -391,7 +428,8 @@
 				],
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
-				]
+				],
+				"fontes": "RAIS e IBGE"
 			}
 		],
 		[
@@ -778,16 +816,10 @@
 				"title":"<span>Concentração do Emprego</span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
-					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
+					{"name":"UF ou Setores","id":"uos"}
 				]
 			},
 			{
@@ -795,16 +827,10 @@
 				"title":"<span>Concentração da Massa Salarial</span>",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
-					{"name":"Mapa", "id":"mapa"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
+					{"name":"UF ou Setores","id":"uos"}
 				]
 			},
           {
@@ -812,16 +838,10 @@
             "title":"<span>IHH de Número de Trabalha<br>dores</span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 			  "type":[
-				  {"name":"Mapa", "id":"mapa"},
 				  {"name":"Barras", "id":"barras"}
 			  ],
-			  "mapa":[
-				  {"name":"Setor","id":"cad"},
-				  {"name":"Ano","id":"ano"}
-			  ],
 			  "barras":[
-				  {"name":"UF","id":"uf"},
-				  {"name":"Setor","id":"cad"}
+				  {"name":"UF ou Setores","id":"uos"}
 			  ]
           },
           {
@@ -829,16 +849,10 @@
             "title":"<span>IHH da Massa de Rendimentos</span>",
             "desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 			  "type":[
-				  {"name":"Mapa", "id":"mapa"},
 				  {"name":"Barras", "id":"barras"}
 			  ],
-			  "mapa":[
-				  {"name":"Setor","id":"cad"},
-				  {"name":"Ano","id":"ano"}
-			  ],
 			  "barras":[
-				  {"name":"UF","id":"uf"},
-				  {"name":"Setor","id":"cad"}
+				  {"name":"UF ou Setores","id":"uos"}
 			  ]
           }
 		],
@@ -1656,16 +1670,19 @@
 			{"name":"Parda","value":"5"}
 		],
 		"frm":[
-			{"name":"Não","value":"0"},
-			{"name":"Sim","value":"1"}
+			{"name":"Todos","value":"0"},
+			{"name":"Não","value":"1"},
+			{"name":"Sim","value":"2"}
 		],
 		"prv":[
-			{"name":"Não","value":"0"},
-			{"name":"Sim","value":"1"}
+			{"name":"Todos","value":"0"},
+			{"name":"Não","value":"1"},
+			{"name":"Sim","value":"2"}
 		],
 		"snd":[
-			{"name":"Não","value":"0"},
-			{"name":"Sim","value":"1"}
+			{"name":"Todos","value":"0"},
+			{"name":"Não","value":"1"},
+			{"name":"Sim","value":"2"}
 		],
 		"slc":[
 			{"name":"Setor","value":"0"},

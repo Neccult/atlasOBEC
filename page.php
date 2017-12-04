@@ -122,7 +122,7 @@
                     <div class="col-xs-3">
                         <div class="menu-content" id="item2">
 
-                            <a class="link">
+                            <a href="page.php#mercado" class="link">
                                 <div class="square-icon"></div>
                                 <div class="text">
                                     <p>MERCADO<br/>DE TRABALHO</p>

@@ -53,6 +53,21 @@ $select = $json_text['select'];			   /*== informação dos selects ==*/
     se esta não existir busca a
     primeira declarada no json
 */
+$eixo_num = 0;
+switch($eixo) {
+    case "empreendimento":
+        $eixo_num = 0;
+        break;
+    case "mercado":
+        $eixo_num = 1;
+        break;
+    case "politicas":
+        $eixo_num = 2;
+        break;
+    case "comercio":
+        $eixo_num = 3;
+}
+
 if(!isset($text[$view])) $view = $text['type'][0]['id'];
 -
 $descView = $json_text[$view];			   /*== descrição da visualização ==*/
@@ -122,10 +137,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 				<!--============= opções gráfico! ============-->
 				<div class="col-md-2 col-xs-12 opts-result">
                     <div id="title-view">
-                        <span  data-desc="<?= $descView ?>" class="opt active">Variável:</span>
+                        <span  data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
                         <select class="opt-select" data-id="var">
                             <?php
-                            foreach ($json_text['var'][0] as $variavel) {
+                            foreach ($json_text['var'][$eixo_num] as $variavel) {
                                 echo "<option value='".$variavel['id']."'>".$variavel['title'];
                             }
                             ?>
@@ -133,8 +148,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <br>
                         <div><?php if(isset($text[$view])) foreach($text[$view] as $key => $value):?>
                                 <?php if($value['name'] !== "Atuação"): ?>
-                                    <div id="option-title-view" <?php if($value['name'] === "Porte") echo "class='select-prt'"; ?>>
-                                    <span  data-desc="<?= $descView ?>" class="opt view active"><?= $value['name'] ?>:</span>
+                                    <div id="option-title-view" <?php echo "class='select-".$value['id']."'"; ?>>
+                                    <span  data-desc="<?= $json_text[$value['id']] ?>" class="opt view active"><?= $value['name'] ?>:</span>
                                     <select class="opt-select" data-id="<?php echo $value['id']?>">
 
                                         <!--=== select group porte ===-->
@@ -197,7 +212,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <?php foreach($text['type'] as $key => $value):?>
 
                             <div class="<?php echo $col;?> col-btn">
-                                <button data-desc="<?= $descView ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
+                                <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
                             </div>
 
                         <?php endforeach;?>
@@ -353,8 +368,6 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 </div>
 <script>
     $(document).ready(function() {
-        setTimeout(function() {
-            $('#loading').fadeToggle('fast');
-        }, 200);
+
     });
 </script>

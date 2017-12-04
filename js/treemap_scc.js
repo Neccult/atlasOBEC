@@ -17,6 +17,10 @@ svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 
+
+var fonteTransform = "translate("+(width-120)+","+(height+140)+")";
+var valoresTransform = "translate(10,"+(height+140)+")";
+
 var textLeftPadding = 10; // initial padding left for text
 var textTopPadding = 15; // initial padding top for text
 
@@ -89,6 +93,7 @@ $.get("./db/json_treemap_scc.php"+config, function(data) {
 });
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
+    $('#loading').fadeToggle('fast');
 	if (error) throw error;
 
 	var attachColor=function(d){
@@ -200,7 +205,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("xlink:href", function(d) { return "#" + d.data.id; });
 
 	// aumenta o tamanho do gráfico pra caber o título
-	$('#corpo').find('svg').attr('height',$('.chart').height()+50);
+	$('#corpo').find('svg').attr('height',$('.chart').height()+100);
 	
 	// new svg margin top value
 	var svgMarginTop = 35;
@@ -237,7 +242,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(uf !== 0 || prt !== 0 || atc !== 0) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%"; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(uf) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%"; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			if(vrv !== 2) return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
@@ -284,6 +289,18 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	var legendPartThree = { domain: colors.domain.slice(legRightRange[0], legRightRange[1]), range: colors.range.slice(legRightRange[0], legRightRange[1]) };
 	
 	// left legends
+
+
+    svg.append("g")
+        .attr("class", "fonte")
+        .attr("transform", fonteTransform)
+        .append("text").text("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+
+    svg.append("g")
+        .attr("class", "valores")
+        .attr("transform", valoresTransform)
+        .append("text").text(textJSON.var[eixo][vrv-1].treemap_scc_valores);
+
 	var ordinal = d3.scaleOrdinal()
 		.domain(legendPartOne.domain)
 		.range(legendPartOne.range);

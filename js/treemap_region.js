@@ -19,6 +19,9 @@ svg = d3.select("svg"),
 	height = +svg.attr("height");
 
 
+var fonteTransform = "translate("+(width-120)+","+(height+100)+")";
+var valoresTransform = "translate(10,"+(height+100)+")";
+
 var textLeftPadding = 10; // initial padding left for text
 var textTopPadding = 15; // initial padding top for text
 
@@ -130,7 +133,7 @@ var treemap = d3.treemap()
 	.paddingInner(1);
 
 if(eixo == 1) {
-    var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&ano="+ano+"&eixo="+eixo;
+    var config = "?var="+vrv+"&atc="+atc+"&uos=0&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&ano="+ano+"&eixo="+eixo;
 }
 else {
 	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&typ="+typ+"&prc="+prc+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
@@ -141,6 +144,7 @@ $.get("./db/json_treemap_region.php"+config, function(data) {
 });
 
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
+    $('#loading').fadeToggle('fast');
 	console.log(data);
 	if (error) throw error;
 
@@ -237,7 +241,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.attr("class", "percentage");
 
 	percentageTextElement.append('tspan')
-		.text(function(d) { if(cad !== 0) return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%"; else if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
+		.text(function(d) { if(cad) return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%"; else if(vrv === 2) return formatDecimalLimit(d.data.size*100, 2) + '%'; else return formatDecimalLimit(d.data.percentual*100, 2) + '%'; })
 		.attr("display", function(d, i) {			
 			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
 			return parseFloat(formatDecimalLimit(d.data.percentual*100, 2).replace(",", ".")) === 0? "none" : "block";
@@ -326,6 +330,17 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	var ordinal = d3.scaleOrdinal()
 	.domain(colors.domain)
 	.range(colors.range);
+
+
+    svg.append("g")
+        .attr("class", "fonte")
+        .attr("transform", fonteTransform)
+        .append("text").text("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+
+    svg.append("g")
+        .attr("class", "valores")
+        .attr("transform", valoresTransform)
+        .append("text").text(textJSON.var[eixo][vrv-1].mapa_valores);
 
 	svg.append("g")
 		.attr("class", "legendOrdinal")

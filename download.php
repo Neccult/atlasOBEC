@@ -292,11 +292,11 @@
 					setTimeout(function(){
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
-						submit_download_form(type);		
+						submit_download_form(type);
 					}, 500);
 				}else{
 					setTimeout(function(){
-						submit_download_form(type);		
+						submit_download_form(type);
 					}, 3000);
 				}
 				setTimeout(function(){

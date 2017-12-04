@@ -6,6 +6,10 @@ var windowWidth = $(window).width(),
 
 var shapeWidth = 30;
 
+
+var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
+var valoresTransform = "translate(10,"+(height-10)+")";
+
  /**** desktop! ****/
 if(windowWidth>=1200){
   
@@ -116,6 +120,7 @@ d3.queue()
 
 //leitura
 function ready(error, br_states, mapa){
+    $('#loading').fadeToggle('fast');
 	if (error) return console.error(error);
 
 	//variaveis informacao
@@ -258,6 +263,17 @@ console.log(eixo);
         .shapePadding(10)
         .orient('vertical')
         .scale(color);
+
+
+    legend_svg.append("g")
+        .attr("class", "fonte")
+        .attr("transform", fonteTransform)
+		.append("text").text("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+
+    legend_svg.append("g")
+        .attr("class", "valores")
+        .attr("transform", valoresTransform)
+        .append("text").text(textJSON.var[eixo][vrv-1].mapa_valores);
 
     if(windowWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
