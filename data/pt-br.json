@@ -1596,6 +1596,8 @@
 			{"name":"Tocantins","value":"17"}				
 		],
 		"ano":[
+			{"name":"2016", "value":"2016"},
+			{"name":"2015", "value":"2015"},
 			{"name":"2014", "value":"2014"},
 			{"name":"2013", "value":"2013"},
 			{"name":"2012", "value":"2012"},
@@ -1622,8 +1624,7 @@
 		"ocp":[
 			{"name":"Setorial","value":"0"},
 			{"name":"Ocupacional - Atividades Relacionadas", "value":"1"},
-			{"name":"Ocupacional - Cultura","value":"2"},
-			{"name":"Ocupacional - Todas", "value":"3"}
+			{"name":"Ocupacional - Cultura","value":"2"}
 		],
 		"prt":[
 			{"name":"Todos","value":"0"},

@@ -255,6 +255,35 @@ function controlAtc(select,isPrt){
 	}
 }
 
+function controlAno(select){
+
+    if(window.location.hash==="#empreendimentos"){
+        $(select).find('option[value="2015"]').remove();
+        $(select).find('option[value="2016"]').remove();
+    }
+    else {
+        if(url['ocp'] == 0) {
+            var query = location.search.slice(1);
+            var partes = query.split('&');
+            var data = {};
+            partes.forEach(function (parte) {
+                var chaveValor = parte.split('=');
+                var chave = chaveValor[0];
+                var valor = chaveValor[1];
+                data[chave] = valor;
+            });
+            if (data['var'] >= 8 && data['var'] <= 11) {
+                $(select).find('option[value="2015"]').remove();
+                $(select).find('option[value="2016"]').remove();
+            }
+        }
+        else {
+            $(select).find('option[value="2010"]').remove();
+            $(select).find('option[value="2016"]').remove();
+        }
+    }
+}
+
 
 /*-----------------------------------------------------------------------------
 Função: getEixo
@@ -371,6 +400,7 @@ function loadResult(){
 		if(selectId=='prt') controlAtc(this,1);
 		if(selectId=='atc') controlAtc(this,0);
         if(selectId=='mec') controlMec(this);
+        if(selectId=='ano') controlAno(this)
 
 	});
 

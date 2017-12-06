@@ -16,4 +16,11 @@
 <link rel="icon" type="image/x-icon" href="css/icon.png" /> 
 <link rel="shortcut icon" type="image/x-icon"  href="css/icon.png" />
 
+<script type="text/javascript" src="js/jqplot/jquery.jqplot.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.barRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.pieRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.pointLabels.js"></script>
+<link rel="stylesheet" type="text/css" href="js/jqplot/jquery.jqplot.css" />
+
 <title>Atlas Econômico da Cultura Brasileira</title>
