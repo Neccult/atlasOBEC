@@ -143,27 +143,37 @@ else if($eixo == 1) {
         for ($cad=1; $cad <= 10; $cad++) {
 
             $tupla = EixoDois::find($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano);
-
             $treemap .= '
                 {
-                  "colorId": "'.$cad.'", 
-                  "name": "'.$tupla->CadeiaNome.'",
+                  "colorId": "' . $cad . '", 
+                  "name": "' . $tupla[0]->CadeiaNome . '",
                   "children": [
                     {
-                      "name": "'.$tupla->CadeiaNome.'",
-                      "children": [
-                        {"name": "'.$tupla->CadeiaNome.'",
-                         "estado": "'.$tupla->UFNome.'",  
-                         "percentual": "'.$tupla->Percentual.'",
-                         "taxa": "'.$tupla->Taxa.'", 
-                         "size": "'.$tupla->Valor.'"}
-                      ]
-                    } 
-                  ]
+                      "name": "' . $tupla[0]->CadeiaNome . '",
+                      "children": [';
+            foreach ($tupla as $index => $item) {
+                if($pŕt != 0) $treemap .= '{"name": "' . $item->PorteNome . '",';
+                else if($esc != 0) $treemap .= '{"name": "' . $item->EscolaridadeNome . '",';
+                else if($fax != 0) $treemap .= '{"name": "' . $item->IdadeNome . '",';
+                else if($sex != NULL) {
+                    if($item->Sexo == 0) $treemap .= '{"name": "Masculino",';
+                    if($item->Sexo == 1) $treemap .= '{"name": "Feminino",';
+                }
+                else $treemap .= '{"name": "' . $item->CadeiaNome . '",';
+                $treemap .= '"estado": "' . $item->UFNome . '",  
+                             "percentual": "' . $item->Percentual . '",
+                             "taxa": "' . $item->Taxa . '", 
+                             "desagreg": "' . ($index+1) . '", 
+                             "size": "' . $item->Valor . '"}';
+                $treemap .= ($index == sizeof($tupla)-1) ? '' : ',';
+            }
+            $treemap .= '   ]
+                        }
+                    ]
                 }
             ';
 
-            $treemap .= ($cad != 10) ? ',' : '' ;
+            $treemap .= ($cad === 10) ? '' : ',';
         }
     }
     else {

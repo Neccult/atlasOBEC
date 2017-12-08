@@ -118,25 +118,70 @@ class EixoDois {
 	public static function find($var, $ufs, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $anos){
 
 		self::connect();
-			if(is_null($sexos)) {
-			    if($ocp != 0) {
-			        $query = "SELECT * FROM ".self::$table." AS ex"
+            if($ocp != 0) {
+                if(!is_null($sexos)) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = " . $prt
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = " . $esc
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NOT NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($prt != 0) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte != 0"
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = " . $esc
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($esc != 0) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = " . $prt
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade != 0"
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($idd != 0) {
+                    $query = "SELECT * FROM ".self::$table." AS ex"
                         ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
                         ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
                         ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
                         ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
                         ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-                        ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+                        ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade != 0"
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
                         ." AND ex.Sindical = ".$sind
+                        ." AND ex.Sexo IS NULL"
                         ." AND ex.Ano = ".$anos;
                 }
                 else {
                     $query = "SELECT * FROM ".self::$table." AS ex"
                         ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-                        ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
                         ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
                         ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
                         ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
@@ -146,49 +191,103 @@ class EixoDois {
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
                         ." AND ex.Sindical = ".$sind
+                        ." AND ex.Sexo IS NULL"
                         ." AND ex.Ano = ".$anos;
                 }
             }
             else {
-                if($ocp != 0) {
+                if(!is_null($sexos)) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = " . $prt
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = " . $esc
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NOT NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($prt != 0) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte != 0"
+                        . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = " . $esc
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($esc != 0) {
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = " . $prt
+                        . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade != 0"
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NULL"
+                        . " AND ex.Ano = " . $anos;
+                }
+                else if($idd != 0) {
                     $query = "SELECT * FROM ".self::$table." AS ex"
                         ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
                         ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
+                        . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
                         ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
                         ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
                         ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-                        ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
+                        ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade != 0"
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
                         ." AND ex.Sindical = ".$sind
-                        ." AND ex.Sexo = ".$sexos
+                        ." AND ex.Sexo IS NULL"
                         ." AND ex.Ano = ".$anos;
                 }
                 else {
-                    $query = "SELECT * FROM ".self::$table." AS ex"
-                        ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-                        ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-                        ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
-                        ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-                        ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
-                        ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ".$etn
-                        ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ".$idd
-                        ." WHERE ex.Numero = ".$var
-                        ." AND ex.Formalidade = ".$form
-                        ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind
-                        ." AND ex.Sexo = ".$sexos
-                        ." AND ex.Ano = ".$anos;
+                    $query = "SELECT * FROM " . self::$table . " AS ex"
+                        . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
+                        . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = " . $cad
+                        . " JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = " . $prt
+                        . " JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = " . $ocp
+                        . " JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = " . $esc
+                        . " JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = " . $etn
+                        . " JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = " . $idd
+                        . " WHERE ex.Numero = " . $var
+                        . " AND ex.Formalidade = " . $form
+                        . " AND ex.Previdencia = " . $prev
+                        . " AND ex.Sindical = " . $sind
+                        . " AND ex.Sexo IS NULL"
+                        . " AND ex.Ano = " . $anos;
                 }
             }
 
 			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoDois');
+            $allObjects = array();
+
+            while($obj = mysqli_fetch_object($result, 'EixoDois')){
+                $allObjects[] = $obj;
+            }
 
 		self::disconnect();
 
-		return ($obj == false) ? NULL : $obj;
+		return $allObjects;
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -345,7 +444,8 @@ class EixoDois {
                             ." WHERE ex.Numero = ".$var
                             ." AND ex.Formalidade = ".$form
                             ." AND ex.Previdencia = ".$prev
-                            ." AND ex.Sindical = ".$sind;
+                            ." AND ex.Sindical = ".$sind
+                            ." AND ex.Sexo IS NULL";
                     }
                     else {
                         $query = "SELECT * FROM ".self::$table." AS ex"
@@ -359,7 +459,8 @@ class EixoDois {
                             ." WHERE ex.Numero = ".$var
                             ." AND ex.Formalidade = ".$form
                             ." AND ex.Previdencia = ".$prev
-                            ." AND ex.Sindical = ".$sind;
+                            ." AND ex.Sindical = ".$sind
+                            ." AND ex.Sexo IS NULL";
                     }
                 }
                 else {
@@ -374,7 +475,8 @@ class EixoDois {
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind;
+                        ." AND ex.Sindical = ".$sind
+                        ." AND ex.Sexo IS NULL";
                 }
             }
 
@@ -426,7 +528,8 @@ class EixoDois {
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind;
+                        ." AND ex.Sindical = ".$sind
+                        ." AND ex.Sexo IS NULL";
                 }
                 else {
                     $query = "SELECT * FROM ".self::$table." AS ex"
@@ -440,7 +543,8 @@ class EixoDois {
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind;
+                        ." AND ex.Sindical = ".$sind
+                        ." AND ex.Sexo IS NULL";
                 }
             }
             else {

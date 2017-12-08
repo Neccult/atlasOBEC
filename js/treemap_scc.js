@@ -70,11 +70,22 @@ var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 
 /* retorna cor do elemento */
 var color = function(colorId){
-	if(colorJSON.cadeias[colorId]){
-		return colorJSON.cadeias[colorId].color;
-	}else{
-		console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
-		return colorJSON.cadeias[0].color;
+	if(eixo == 1) {
+		if(colorJSON.cadeias[colorId]){
+            colorJSON.cadeias[colorId].gradient["7"] = colorJSON.cadeias[colorId].color;
+            return colorJSON.cadeias[colorId].gradient;
+        }else{
+            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+            return colorJSON.cadeias[0].gradient;
+        }
+    }
+    else {
+        if(colorJSON.cadeias[colorId]){
+            return colorJSON.cadeias[colorId].color;
+        }else{
+            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
+            return colorJSON.cadeias[0].color;
+        }
 	}
 }
 
@@ -193,11 +204,20 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				})
 				.on("mouseout", tooltipInstance.hideTooltip);
 
-	cell.append("rect")
-		.attr("id", function(d) { return d.data.id; })
-		.attr("width", function(d) { return nodeWidth(d); })
-		.attr("height", function(d) { return d.y1 - d.y0; })
-		.attr("fill", function(d) { return color(d.data.colorId); });
+	if(eixo == 1) {
+		cell.append("rect")
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId)[8-d.data.desagreg]; });
+    }
+    else {
+        cell.append("rect")
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); });
+	}
 
 	cell.append("clipPath")
 		.attr("id", function(d) { return "clip-" + d.data.id; })
