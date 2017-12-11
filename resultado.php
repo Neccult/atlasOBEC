@@ -23,6 +23,7 @@ $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade =
 $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
 $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
 $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
+$deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
 $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
 $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
 $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
@@ -131,65 +132,152 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 					</div>
 				</div>
 
-
-
-
-				<!--============= opções gráfico! ============-->
+                <!--============= opções gráfico! ============-->
 				<div class="col-md-2 col-xs-12 opts-result">
                     <div id="title-view">
-                        <span  data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
+                        <?php
+                        if($eixo == "mercado" && $view == "treemap_scc") {
+                        ?>
+                            <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
+                            <select class="opt-select" data-id="var">
+                                <?php
+                                foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                    echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'];
+                                }
+                                ?>
+                            </select>
+                            <br>
+                            <div>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                                </div>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
+                                </div>
+                                <br>
+                                <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
+                                    <?php if ($value['name'] === "Ano"): ?>
+                                        <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
+                                        <span data-desc="<?= $json_text[$value['id']] ?>"
+                                              class="opt view active"><?= $value['name'] ?>:</span>
+                                            <select class="opt-select" data-id="<?php echo $value['id'] ?>">
+                                                    <!-- opções! -->
+                                                    <?php foreach ($select[$value['id']] as $option): ?>
+                                                        <?php if ($eixo != "politicas" && $option['name'] != "Outros") { ?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php } else if ($eixo == "politicas") { ?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php } ?>
+                                                    <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+
+                                <?php
+                                    if($slc == 0) {
+                                ?>
+                                    <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
+                                        <?php if ($value['name'] === "Desagregação"): ?>
+                                            <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
+                                    <span data-desc="<?= $json_text[$value['id']] ?>"
+                                          class="opt view active"><?= $value['name'] ?>:</span>
+                                                <select class="opt-select" data-id="<?php echo $value['id'] ?>">
+                                                    <!-- opções! -->
+                                                    <?php foreach ($select[$value['id']] as $option): ?>
+                                                        <?php if($option['value'] <= 4):?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php
+                                    } else {
+                                ?>
+                                    <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
+                                        <?php if ($value['name'] === "Desagregação"): ?>
+                                            <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
+                                                <span data-desc="<?= $json_text[$value['id']] ?>" class="opt view active"><?= $value['name'] ?>:</span>
+                                                <select class="opt-select" data-id="<?php echo $value['id'] ?>">
+                                                    <!-- opções! -->
+                                                    <?php foreach ($select[$value['id']] as $option): ?>
+                                                        <?php if($option['value'] >= 3 || $option['value'] == 0):?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                <?php
+                                    }
+                                ?>
+                            </div>
+                        <?php
+                            } else {
+                        ?>
+                        <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
                         <select class="opt-select" data-id="var">
                             <?php
                             foreach ($json_text['var'][$eixo_num] as $variavel) {
-                                echo "<option value='".$variavel['id']."'>".$variavel['title'];
+                                echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'];
                             }
                             ?>
                         </select>
                         <br>
-                        <div><?php if(isset($text[$view])) foreach($text[$view] as $key => $value):?>
-                                <?php if($value['name'] !== "Atuação"): ?>
-                                    <div id="option-title-view" <?php echo "class='select-".$value['id']."'"; ?>>
-                                    <span  data-desc="<?= $json_text[$value['id']] ?>" class="opt view active"><?= $value['name'] ?>:</span>
-                                    <select class="opt-select" data-id="<?php echo $value['id']?>">
+                        <div><?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
+                                <?php if ($value['name'] !== "Atuação"): ?>
+                                    <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
+                                        <span data-desc="<?= $json_text[$value['id']] ?>"
+                                              class="opt view active"><?= $value['name'] ?>:</span>
+                                        <select class="opt-select" data-id="<?php echo $value['id'] ?>">
 
-                                        <!--=== select group porte ===-->
-                                        <?php if($value['id']=='prt'):?>
-                                            <?php endif;?>
+                                            <!--=== select group porte ===-->
+                                            <?php if ($value['id'] == 'prt'): ?>
+                                            <?php endif; ?>
                                             <!--=== select group Setor ===-->
-                                            <?php if($eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
+                                            <?php if ($eixo == "mercado" && $value['id'] == 'cad' && ($var < 8 || $var > 11)): ?>
                                             <optgroup label="Setor">
-                                                <?php endif;?>
+                                                <?php endif; ?>
 
                                                 <!-- opções! -->
-                                                <?php foreach($select[$value['id']] as $option):?>
-                                                    <?php if($eixo !="politicas" && $option['name'] != "Outros") { ?>
-                                                        <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
-                                                    <?php } else if($eixo == "politicas") { ?>
-                                                        <option value="<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                                <?php foreach ($select[$value['id']] as $option): ?>
+                                                    <?php if ($eixo != "politicas" && $option['name'] != "Outros") { ?>
+                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                    <?php } else if ($eixo == "politicas") { ?>
+                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
                                                     <?php } ?>
-                                                <?php endforeach;?>
+                                                <?php endforeach; ?>
 
                                                 <!--=== select group Setor ===-->
-                                                <?php if($eixo == "mercado" && $value['id']=='cad' && ($var < 8 || $var > 11)):?>
+                                                <?php if ($eixo == "mercado" && $value['id'] == 'cad' && ($var < 8 || $var > 11)): ?>
                                             </optgroup>
 
                                             <optgroup label="Ocupação">
 
-                                                <?php foreach($select['ocp'] as $option):?>
+                                                <?php foreach ($select['ocp'] as $option): ?>
 
-                                                    <option value="ocp-<?php echo $option['value']?>"><?php echo $option['name']?></option>
+                                                    <option value="ocp-<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
 
-                                                <?php endforeach;?>
+                                                <?php endforeach; ?>
 
                                             </optgroup>
-                                        <?php endif;?>
+                                        <?php endif; ?>
 
-                                    </select>
-                                </div>
+                                        </select>
+                                    </div>
 
-                                <?php endif;?>
-                            <?php endforeach;?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                     <!--=== tipo de gráfico ===-->
                     <div class="row">
@@ -344,6 +432,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
     <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
     url['slc'] = "<?php echo $slc; ?>";
+    url['deg'] = "<?php echo $deg; ?>";
     <?php } ?>
 
     <?php if ($eixo == "politicas") {?>

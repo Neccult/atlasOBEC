@@ -406,6 +406,15 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 			.attr("y", d3.select("#corpo>svg").attr("height") / 2)
 			.attr("text-anchor", "middle");
 	}
+
+	if(eixo === 1) {
+        svg.selectAll(".swatch").on('mouseover', function(d) {
+        		tooltipInstance.showTooltip(d, [
+                    ["color", "oi"]
+                ]);
+			});
+	}
+
 });
 
 function sumByCount(d) {

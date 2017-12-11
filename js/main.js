@@ -109,19 +109,37 @@ function controlFilter(selectvalue, selectid){
     console.log(selectvalue);
 
     if(window.location.hash === "#mercado") {
-		if(selectid==='prt' && selectvalue!=='0') {
-			url['sex'] = 0;
-            url['fax'] = 0;
+		if(selectid==='deg' && selectvalue==='0') {
+            url['prt'] = 0;
+            url['sex'] = 0;
             url['esc'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+            url['fax'] = 0;
 		}
-
-        if(selectid==='sex' && selectvalue!=='0') {
-            url['prt'] = 0;
-            url['fax'] = 0;
+        if(selectid==='deg' && selectvalue==='1') {
+            url['prt'] = 1;
+            url['sex'] = 0;
             url['esc'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+            url['fax'] = 0;
         }
-
-        if(selectid==='fax' && selectvalue!=='0') {
+        if(selectid==='deg' && selectvalue==='2') {
+            url['prt'] = 0;
+            url['sex'] = 1;
+            url['esc'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 0;
+            url['prv'] = 0;
+            url['fax'] = 0;
+        }
+        if(selectid==='deg' && selectvalue==='3') {
             url['prt'] = 0;
             url['sex'] = 0;
             url['esc'] = 0;
@@ -129,48 +147,57 @@ function controlFilter(selectvalue, selectid){
             url['snd'] = 0;
             url['cor'] = 0;
             url['prv'] = 0;
+            url['fax'] = 1;
         }
-
-        if(selectid==='esc' && selectvalue!=='0') {
+        if(selectid==='deg' && selectvalue==='4') {
             url['prt'] = 0;
             url['sex'] = 0;
-            url['fax'] = 0;
+            url['esc'] = 1;
             url['frm'] = 0;
             url['snd'] = 0;
             url['cor'] = 0;
             url['prv'] = 0;
-        }
-
-        if(selectid==='frm' && selectvalue!=='0') {
-            url['esc'] = 0;
             url['fax'] = 0;
+        }
+        if(selectid==='deg' && selectvalue==='5') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['esc'] = 0;
+            url['frm'] = 0;
+            url['snd'] = 0;
+            url['cor'] = 1;
+            url['prv'] = 0;
+            url['fax'] = 0;
+        }
+        if(selectid==='deg' && selectvalue==='6') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['esc'] = 0;
+            url['frm'] = 1;
             url['snd'] = 0;
             url['cor'] = 0;
             url['prv'] = 0;
-        }
-
-        if(selectid==='snd' && selectvalue!=='0') {
-            url['esc'] = 0;
             url['fax'] = 0;
+        }
+        if(selectid==='deg' && selectvalue==='7') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['esc'] = 0;
             url['frm'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-        }
-
-        if(selectid==='cor' && selectvalue!=='0') {
-            url['esc'] = 0;
-            url['fax'] = 0;
-            url['snd'] = 0;
-            url['frm'] = 0;
-            url['prv'] = 0;
-        }
-
-        if(selectid==='prv' && selectvalue!=='0') {
-            url['esc'] = 0;
-            url['fax'] = 0;
             url['snd'] = 0;
             url['cor'] = 0;
+            url['prv'] = 1;
+            url['fax'] = 0;
+        }
+        if(selectid==='deg' && selectvalue==='8') {
+            url['prt'] = 0;
+            url['sex'] = 0;
+            url['esc'] = 0;
             url['frm'] = 0;
+            url['snd'] = 1;
+            url['cor'] = 0;
+            url['prv'] = 0;
+            url['fax'] = 0;
         }
 	}
 
@@ -623,11 +650,16 @@ $(document).ready(function(){
 
 	/* alterar tipo de visualização */
 	$(document).on('click', ".opt.view", function(){
-	
-		defaultUrl();/* valores de filtros default */
-		url['view'] =  $(this).attr('id');/* muda visualização */
-		changeChart(url);/* atualiza gráfico */
-
+		if($(this).attr("id") !== "setor" && $(this).attr("id") !== "ocupacao") {
+            defaultUrl(); /* valores de filtros default */
+            url['view'] = $(this).attr('id'); /* muda visualização */
+            changeChart(url); /* atualiza gráfico */
+        }
+        else {
+		    if($(this).attr("id") === "setor") url['slc'] = 0;
+		    else url['slc'] = 1;
+            changeChart(url); /* altera gráfico */
+        }
 	});
 
 	/* alterar janela filtro */

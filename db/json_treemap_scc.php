@@ -152,7 +152,7 @@ else if($eixo == 1) {
                       "name": "' . $tupla[0]->CadeiaNome . '",
                       "children": [';
             foreach ($tupla as $index => $item) {
-                if($pŕt != 0) $treemap .= '{"name": "' . $item->PorteNome . '",';
+                if($prt != 0) $treemap .= '{"name": "' . $item->PorteNome . '",';
                 else if($esc != 0) $treemap .= '{"name": "' . $item->EscolaridadeNome . '",';
                 else if($fax != 0) $treemap .= '{"name": "' . $item->IdadeNome . '",';
                 else if($sex != NULL) {
@@ -177,7 +177,7 @@ else if($eixo == 1) {
         }
     }
     else {
-        for ($ocp=1; $ocp <= 3; $ocp++) {
+        for ($ocp=1; $ocp <= 2; $ocp++) {
             $tupla = EixoDois::find($var, $uf, 0, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano);
 
             $treemap .= '
@@ -187,19 +187,50 @@ else if($eixo == 1) {
                   "children": [
                     {
                       "name": "'.$tupla->OcupacaoNome.'",
-                      "children": [
-                        {"name": "'.$tupla->OcupacaoNome.'",
-                         "estado": "'.$tupla->UFNome.'",  
-                         "percentual": "'.$tupla->Percentual.'",
-                         "taxa": "'.$tupla->Taxa.'", 
-                         "size": "'.$tupla->Valor.'"}
-                      ]
-                    } 
-                  ]
+                      "children": [';
+            foreach ($tupla as $index => $item) {
+                if($frm != 0) {
+                    if($item->Formalidade == 1) {
+                        $treemap .= '{"name": "Não",';
+                    }
+                    else {
+                        $treemap .= '{"name": "Sim",';
+                    }
+                }
+                else if($prv != 0) {
+                    if($item->Previdencia == 1) {
+                        $treemap .= '{"name": "Não",';
+                    }
+                    else {
+                        $treemap .= '{"name": "Sim",';
+                    }
+                }
+                else if($snd != 0) {
+                    if($item->Sindical == 1) {
+                        $treemap .= '{"name": "Não",';
+                    }
+                    else {
+                        $treemap .= '{"name": "Sim",';
+                    }
+                }
+                else if($cor != 0) $treemap .= '{"name": "' . $item->EtiniaNome . '",';
+                else if($esc != 0) $treemap .= '{"name": "' . $item->EscolaridadeNome . '",';
+                else if($fax != 0) $treemap .= '{"name": "' . $item->IdadeNome . '",';
+                else $treemap .= '{"name": "' . $item->OcupacaoNome . '",';
+                $treemap .= '"estado": "' . $item->UFNome . '",  
+                             "percentual": "' . $item->Percentual . '",
+                             "taxa": "' . $item->Taxa . '", 
+                             "desagreg": "' . ($index+1) . '", 
+                             "size": "' . $item->Valor . '"}';
+                $treemap .= ($index == sizeof($tupla)-1) ? '' : ',';
+            }
+            $treemap .= '   ]
+                        }
+                    ]
                 }
             ';
 
-            $treemap .= ($ocp != 3) ? ',' : '' ;
+            $treemap .= ($ocp != 2) ? ',' : '' ;
         }
     }
 }

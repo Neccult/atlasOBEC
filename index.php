@@ -55,7 +55,7 @@
 							<div class="row menu-home">
 								
 								<a href="page.php#empreendimentos" class="img-link">
-									<div class="col-sm-3 col-xs-6 menu-col">
+									<div class="col-sm-3 menu-col">
 										<div class="menu-item control-height">
 
 											<div class="video">
@@ -80,7 +80,7 @@
 								</a>
 
 								<a href="#" class="img-link">
-									<div class="col-sm-3 col-xs-6 menu-col">
+									<div class="col-sm-3 menu-col">
 										<div class="menu-item control-height">
 											<div class="menu-content" id="item2">
 
@@ -97,7 +97,7 @@
 								</a>
 
 								<a href="#" class="img-link">
-									<div class="col-sm-3 col-xs-6 menu-col">
+									<div class="col-sm-3 menu-col">
 										<div class="menu-item control-height">
 											<div class="menu-content" id="item3">
 
@@ -114,7 +114,7 @@
 								</a>
 
 								<a href="#" class="img-link">
-									<div class="col-sm-3 col-xs-6 menu-col">
+									<div class="col-sm-3 menu-col">
 										<div class="menu-item control-height">
 											<div class="menu-content" id="item4">
 

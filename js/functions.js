@@ -201,6 +201,9 @@ var tooltip = (function(){
 							case 'title':
 								return 'strong';
 								break;
+                            case 'color':
+                                return 'rect';
+                                break;
 							default:
 								return'span';
 						}
@@ -214,7 +217,17 @@ var tooltip = (function(){
 
 					element
 						.attr('class', clss.toLowerCase())
-						.text(clss === 'title'? val : clss + valSeparator + val);
+						.text(function() {
+							if(clss === 'title') {
+								return val;
+                            }
+                            if(clss === 'color') {
+                                return val;
+                            }
+                            else {
+                                return clss + valSeparator + val;
+							}
+                        });
 				}
 			});
 		};

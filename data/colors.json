@@ -35,18 +35,6 @@
 				"5": "#AFC1E2",
 				"6": "#A0B5DB"
 			}
-		},
-		"3": {
-			"name": "Ocupacional - Todas",
-			"color": "#0F4B67",
-			"gradient": {
-				"1": "#F3F4F6",
-				"2": "#E5E5EA",
-				"3": "#CACAD5",
-				"4": "#B3B3C2",
-				"5": "#A3A2B3",
-				"6": "#8A8B9E"
-			}
 		}
 	},
 	"cadeias": {

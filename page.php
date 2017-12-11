@@ -51,6 +51,7 @@
                 $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
                 $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
                 $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
+                $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
                 $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
                 $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
                 $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
@@ -196,6 +197,7 @@
 
             <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
                 url['slc'] = "<?php echo $slc; ?>";
+                url['deg'] = "<?php echo $deg; ?>";
             <?php } ?>
 
             <?php if ($eixo == "politicas") {?>

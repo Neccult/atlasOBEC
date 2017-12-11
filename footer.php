@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="col-sm-4 col-xs-6">
+			<div class="col-sm-4">
 				<div class="footer-content">
 
 					<ul>
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-4 col-xs-6">
+			<div class="col-sm-4">
 				<div class="footer-content">
 				
 					<ul>
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 
-			<div class="col-sm-4 col-xs-6">
+			<div class="col-sm-4">
 				<div class="footer-content">
 				
 					<ul>

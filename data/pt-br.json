@@ -25,6 +25,9 @@
 	"uos":"Essa visualização apresenta a variável de interesse apenas para o tipo de barras selecionado.",
 	"typ":"Essa visualização apresenta a variável de interesse apenas para o tipo selecionado.",
 	"prc":"Essa visualização apresenta a variável de interesse apenas para o parceiro selecionado.",
+	"deg":"Essa visualização apresenta a variável de interesse para a desagregação desejada.",
+	"deg_setor":"Essa visualização apresenta a variável de interesse para os setores criativos e culturais.",
+	"deg_ocupacao":"Essa visualização apresenta a variável de interesse para as ocupações culturais.",
 
 	"var":[
 		[
@@ -462,15 +465,8 @@
 				"treemap_scc":[
 					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
+					{"name":"Desagregação","id":"deg"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -517,15 +513,8 @@
 				"treemap_scc":[
 					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
+					{"name":"Desagregação","id":"deg"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -572,15 +561,8 @@
 				"treemap_scc":[
 					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
+					{"name":"Desagregação","id":"deg"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -711,15 +693,8 @@
 				"treemap_scc":[
 					{"name":"Visualização","id":"slc"},
 					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
 					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
+					{"name":"Desagregação","id":"deg"}
 				],
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1725,6 +1700,17 @@
 			{"name":"Ásia","value":"4"},
 			{"name":"Europa","value":"5"},
 			{"name":"Oceania","value":"6"}
+		],
+		"deg":[
+			{"name":"Sem desagregação","value":"0"},
+			{"name":"Por porte","value":"1"},
+			{"name":"Por sexo","value":"2"},
+			{"name":"Por idade","value":"3"},
+			{"name":"Por escolaridade","value":"4"},
+			{"name":"Por cor","value":"5"},
+			{"name":"Por formalidade","value":"6"},
+			{"name":"Por previdência","value":"7"},
+			{"name":"Por sindicato","value":"8"}
 		]
 	}
 	
