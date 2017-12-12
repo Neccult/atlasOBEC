@@ -161,34 +161,54 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                     var title = title_content.replace("<span>", "");
                     title = title.replace("<br>", "");
                     title = title.replace("</span>", "");
-					if(vrv === 2 || vrv === 9) {
-						tooltipInstance.showTooltip(d, [
-                            ["title", d.data.name],
-                            ["", formatNumber((100*d.data.size))+"%"]
-                        ]);
-                    }
-                    else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-						if(uf !== 0 || prt !== 0 || atc !== 0) {
-                        	tooltipInstance.showTooltip(d, [
-                                ["title", d.data.name],
-                                ["", formatNumber(d.data.size)],
-                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                            ]);
-                        }
-                        else {
+					if(eixo !== 1) {
+						if(vrv === 2 || vrv === 9) {
                             tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                ["", formatNumber(d.data.size)],
-                                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatNumber((100*d.data.size))+"%"]
                             ]);
-						}
-					}
+                        }
+                        else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
+                            if(uf !== 0 || prt !== 0 || atc !== 0) {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ]);
+                            }
+                        }
+                        else {
+                            if(uf !== 0 || prt !== 0 || atc !== 0) {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.taxa, 2)],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatNumber(d.data.size)],
+                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.taxa, 2)],
+                                ]);
+                            }
+                        }
+                    }
                     else {
-                        if(uf !== 0 || prt !== 0 || atc !== 0) {
+                        if(deg !== 0) {
                         	tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
                                 ["", formatNumber(d.data.size)],
-                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                                ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
                                 ["", formatDecimalLimit(d.data.taxa, 2)],
                             ]);
                         }
@@ -196,7 +216,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                             tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
                                 ["", formatNumber(d.data.size)],
-                                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                 ["", formatDecimalLimit(d.data.taxa, 2)],
                             ]);
 						}
@@ -238,13 +258,23 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("text-anchor", "middle")  
 		.attr("class","treemap-title")
 		.text(function(d){
-			if(d.data.estado === "Todos") {
-				if(atc == 0) return "Brasil - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
-                else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+			if(eixo !== 1) {
+				if(d.data.estado === "Todos") {
+                    if(atc == 0) return "Brasil - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+                    else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+                }
+                else {
+                    if(atc == 0) return d.data.estado+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
+                    else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+                }
             }
             else {
-                if(atc == 0) return d.data.estado+" - Porte: "+textJSON.select.prt[prt].name+" - "+ano;
-                else return "UF: "+d.data.estado+" - Atuacão: "+textJSON.select.atc[atc].name+" - "+ano;
+                if(uf === 0) {
+                    return "Brasil - "+textJSON.select.deg[deg].name+" - "+ano;
+                }
+                else {
+                    return uf+" - "+textJSON.select.deg[deg].name+" - "+ano;
+                }
 			}
 		});
 
@@ -260,14 +290,15 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.attr("text-anchor", "start")
 		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
 		.attr("class", "percentage");
-
 	percentageTextElement.append('tspan')
 		.text(function(d) {
 			if(eixo == 0) {
 				if(uf) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%"; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit(d.data.percentual*100, 2) + '%';
             }
             else if(eixo == 1) {
-                return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
+                console.log(d.parent);
+                if(deg !== 0) return formatDecimalLimit((d.data.size/d.parent.value)*100,2)+"%";
+                else return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
 			}
 		})
 		.attr("display", function(d, i) {			
@@ -408,11 +439,57 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	}
 
 	if(eixo === 1) {
-        svg.selectAll(".swatch").on('mouseover', function(d) {
-        		tooltipInstance.showTooltip(d, [
-                    ["color", "oi"]
+        if(prt !== 0) {
+        	svg.selectAll(".swatch").on('mouseover', function(d, i) {
+                tooltipInstance.showTooltip(d, [
+                    [colorJSON.cadeias[i+1].color, "Micro"],
+                    [colorJSON.cadeias[i+1].gradient["6"], "Pequena"],
+                    [colorJSON.cadeias[i+1].gradient["5"], "Média"],
+                    [colorJSON.cadeias[i+1].gradient["4"], "Grande"]
                 ]);
-			});
+            }).on("mouseout", tooltipInstance.hideTooltip);
+        }
+        if(sex !== 0) {
+            svg.selectAll(".swatch").on('mouseover', function(d, i) {
+                tooltipInstance.showTooltip(d, [
+                    [colorJSON.cadeias[i+1].color, "Masculino"],
+                    [colorJSON.cadeias[i+1].gradient["6"], "Feminino"]
+                ]);
+            }).on("mouseout", tooltipInstance.hideTooltip);
+        }
+        if(fax !== 0) {
+            svg.selectAll(".swatch").on('mouseover', function(d, i) {
+                tooltipInstance.showTooltip(d, [
+                    [colorJSON.cadeias[i+1].color, "10 a 17"],
+                    [colorJSON.cadeias[i+1].gradient["6"], "18 a 29"],
+                    [colorJSON.cadeias[i+1].gradient["5"], "30 a 49"],
+                    [colorJSON.cadeias[i+1].gradient["4"], "50 a 64"],
+                    [colorJSON.cadeias[i+1].gradient["3"], "65 ou mais"],
+                    [colorJSON.cadeias[i+1].gradient["2"], "Não classificado"]
+                ]);
+            }).on("mouseout", tooltipInstance.hideTooltip);
+        }
+        if(esc !== 0) {
+            svg.selectAll(".swatch").on('mouseover', function(d, i) {
+                tooltipInstance.showTooltip(d, [
+                    [colorJSON.cadeias[i+1].color, "Sem Instrução"],
+                    [colorJSON.cadeias[i+1].gradient["6"], "Fundamental Incompleto"],
+                    [colorJSON.cadeias[i+1].gradient["5"], "Fundamental Completo"],
+                    [colorJSON.cadeias[i+1].gradient["4"], "Médio Completo"],
+                    [colorJSON.cadeias[i+1].gradient["3"], "Superior Inompleto"],
+                    [colorJSON.cadeias[i+1].gradient["2"], "Superior Completo"],
+                    [colorJSON.cadeias[i+1].gradient["1"], "Não determinado"]
+                ]);
+            }).on("mouseout", tooltipInstance.hideTooltip);;
+        }
+        if(frm !== 0 || snd !== 0 || prv !== 0) {
+            svg.selectAll(".swatch").on('mouseover', function(d, i) {
+                tooltipInstance.showTooltip(d, [
+                    [colorJSON.cadeias[i+1].color, "Não"],
+                    [colorJSON.cadeias[i+1].gradient["6"], "Sim"]
+                ]);
+            }).on("mouseout", tooltipInstance.hideTooltip);
+        }
 	}
 
 });

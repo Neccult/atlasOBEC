@@ -86,6 +86,21 @@ button, .button{
 	transition: .2s all ease;
 }
 
+i.color {
+	display: block;
+	float: left;
+	width: 15px;
+	height:	15px;
+	background-color: #fff;
+	border: 1px solid white;
+}
+
+.span-color {
+	display: block;
+	float: left;
+	padding-left: 5px;
+}
+
 span.opt{
 	display: inline-block;
     vertical-align: middle;
@@ -467,7 +482,10 @@ article.results-article div.results-content{
 	opacity: 0;
 }
 .tooltip p {
+	display: block;
+	height:15px;
 	margin: 0;
+	margin-bottom: 2px;
 	font-family: sans-serif;
 	font-size: 12px;
 	line-height: 14px;

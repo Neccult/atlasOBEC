@@ -197,15 +197,20 @@ var tooltip = (function(){
 				if (ifVal !== 0){
 
 					var elType = function(val){
-						switch(clss.toLowerCase()){
-							case 'title':
-								return 'strong';
-								break;
-                            case 'color':
-                                return 'rect';
-                                break;
-							default:
-								return'span';
+						if(clss.indexOf('#') === -1) {
+							switch(clss.toLowerCase()){
+                                case 'title':
+                                    return 'strong';
+                                    break;
+                                case 'color':
+                                    return 'i';
+                                    break;
+                                default:
+                                    return'span';
+                            }
+                        }
+                        else {
+							return "i";
 						}
 					}();
 
@@ -215,19 +220,32 @@ var tooltip = (function(){
 					var element = p
 						.append(elType);
 
-					element
-						.attr('class', clss.toLowerCase())
-						.text(function() {
-							if(clss === 'title') {
+                    if(clss.indexOf('#') !== -1) {
+                        element
+                            .attr('class', 'color')
+                            .attr("style", "background-color: "+clss);
+                            p.append('span')
+								.attr('class', 'span-color')
+								.text(function() {
 								return val;
-                            }
-                            if(clss === 'color') {
-                                return val;
-                            }
-                            else {
-                                return clss + valSeparator + val;
-							}
-                        });
+                            });
+                    }
+                    else {
+                    	element
+                            .attr('class', clss.toLowerCase())
+                            .text(function() {
+                                if(clss === 'title') {
+                                    return val;
+                                }
+                                if(clss === 'color') {
+                                    return val;
+                                }
+                                else {
+                                    return clss + valSeparator + val;
+                                }
+                            });
+                    }
+
 				}
 			});
 		};

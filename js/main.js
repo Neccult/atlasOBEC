@@ -42,6 +42,7 @@ function defaultUrl(){
     url['prv'] = 0;
     url['mec'] = 0;
     url['mod'] = 0;
+    url['deg'] = 0;
     url['pfj'] = 0;
     url['uos'] = 0;
 	url['ano'] = 2014;
@@ -656,8 +657,16 @@ $(document).ready(function(){
             changeChart(url); /* atualiza gráfico */
         }
         else {
-		    if($(this).attr("id") === "setor") url['slc'] = 0;
-		    else url['slc'] = 1;
+		    if($(this).attr("id") === "setor") {
+		        url['slc'] = 0;
+                url['deg'] = 0;
+                controlFilter('0', 'deg');
+            }
+		    else {
+		        url['slc'] = 1;
+                url['deg'] = 0;
+                controlFilter('0', 'deg');
+            }
             changeChart(url); /* altera gráfico */
         }
 	});

@@ -156,7 +156,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 </div>
                                 <br>
                                 <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
-                                    <?php if ($value['name'] === "Ano"): ?>
+                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF"): ?>
                                         <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
                                         <span data-desc="<?= $json_text[$value['id']] ?>"
                                               class="opt view active"><?= $value['name'] ?>:</span>
