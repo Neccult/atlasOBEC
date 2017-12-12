@@ -6,12 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8cc3841-7aef-471f-b03c-0cf66a703b5e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/functions.js" afterPath="$PROJECT_DIR$/js/functions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/treemap_scc.js" afterPath="$PROJECT_DIR$/js/treemap_scc.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resultado.php" afterPath="$PROJECT_DIR$/resultado.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/treemap_scc.php" afterPath="$PROJECT_DIR$/treemap_scc.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +22,8 @@
       <file leaf-file-name="resultado.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resultado.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-171">
-              <caret line="158" column="96" lean-forward="false" selection-start-line="158" selection-start-column="96" selection-end-line="158" selection-end-column="96" />
+            <state relative-caret-position="-1136">
+              <caret line="114" column="45" lean-forward="false" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -65,8 +62,8 @@
       <file leaf-file-name="treemap_scc.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="218" column="74" lean-forward="false" selection-start-line="218" selection-start-column="74" selection-end-line="218" selection-end-column="74" />
+            <state relative-caret-position="325">
+              <caret line="295" column="197" lean-forward="false" selection-start-line="295" selection-start-column="197" selection-end-line="295" selection-end-column="197" />
               <folding />
             </state>
           </provider>
@@ -105,8 +102,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="662" column="40" lean-forward="false" selection-start-line="662" selection-start-column="40" selection-end-line="662" selection-end-column="40" />
+            <state relative-caret-position="382">
+              <caret line="111" column="21" lean-forward="false" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -215,9 +212,9 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/js/functions.js" />
         <option value="$PROJECT_DIR$/css/main.css" />
-        <option value="$PROJECT_DIR$/resultado.php" />
         <option value="$PROJECT_DIR$/treemap_scc.php" />
         <option value="$PROJECT_DIR$/js/treemap_scc.js" />
+        <option value="$PROJECT_DIR$/resultado.php" />
         <option value="$PROJECT_DIR$/js/main.js" />
       </list>
     </option>
@@ -390,12 +387,12 @@
       <workItem from="1512580035328" duration="4691000" />
       <workItem from="1512752332596" duration="8651000" />
       <workItem from="1513009310572" duration="6861000" />
-      <workItem from="1513082806283" duration="6688000" />
+      <workItem from="1513082806283" duration="7603000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236919000" />
+    <option name="totallyTimeSpent" value="237834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="823" extended-state="6" />
@@ -771,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resultado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-171">
-          <caret line="158" column="96" lean-forward="false" selection-start-line="158" selection-start-column="96" selection-end-line="158" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/json_treemap_scc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2310">
@@ -797,16 +786,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/treemap_scc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="218" column="74" lean-forward="false" selection-start-line="218" selection-start-column="74" selection-end-line="218" selection-end-column="74" />
+        <state relative-caret-position="325">
+          <caret line="295" column="197" lean-forward="false" selection-start-line="295" selection-start-column="197" selection-end-line="295" selection-end-column="197" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resultado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1136">
+          <caret line="114" column="45" lean-forward="false" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="662" column="40" lean-forward="false" selection-start-line="662" selection-start-column="40" selection-end-line="662" selection-end-column="40" />
+        <state relative-caret-position="382">
+          <caret line="111" column="21" lean-forward="false" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
           <folding />
         </state>
       </provider>

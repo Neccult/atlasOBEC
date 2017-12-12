@@ -108,7 +108,9 @@ function controlFilter(selectvalue, selectid){
 	
 	/* se for PORTE x ATUAÇÃO */
     console.log(selectvalue);
-
+    if(selectid==='var') {
+        defaultUrl();
+    }
     if(window.location.hash === "#mercado") {
 		if(selectid==='deg' && selectvalue==='0') {
             url['prt'] = 0;
@@ -632,6 +634,7 @@ $(document).ready(function(){
 
 	/*=== selecionar variável ===*/
 	$(document).on('click', ".var-click", function(){
+        defaultUrl(); /* valores de filtros default */
 		controlVar($(this).attr('href'));				
 	});
     if(url['var'] === "") controlVarPage(1);

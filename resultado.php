@@ -112,6 +112,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 				<!-- gráfico -->
 				<div class="col-md-7 col-xs-12">
                     <?php
+                        if($view =='mapa' && $cad === 0) {
+                            $prt = 0;
+                        }
                         foreach($text['inativos'][$view] as $filter){
                             $_GET[$filter]=0;
                         }
