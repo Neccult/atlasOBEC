@@ -153,16 +153,11 @@ if($eixo == 0) {
 else if($eixo == 1) {
     require_once("EixoDois.php");
     foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos) as $tupla) {
-
         // $barras[$tupla->Ano] = $tupla->Valor;
-
         $id = $tupla->Ano;
-        $barras[$id]['uf'] = $tupla->UFNome;
-        $barras[$id]['ano'] = (int) $tupla->Ano;
-        $barras[$id]['valor'] = (double) $tupla->Valor;
-        $barras[$id]['percentual'] = (double) $tupla->Percentual;
-        $barras[$id]['taxa'] = (double) $tupla->Taxa;
-
+        $idEsc = $tupla->idEscolaridade;
+        $barras[intval($id-2007)]['year'] = $tupla->Ano;
+        $barras[intval($id-2007)][strtolower(str_replace("é", "e", $tupla->PorteNome))] = (double) $tupla->Valor;
     }
 }
 else if($eixo == 2) {

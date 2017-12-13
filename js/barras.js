@@ -1,4 +1,4 @@
-if(eixo == eixo) {    /*==== Barras JS ====*/
+if(eixo != 1) {    /*==== Barras JS ====*/
 
     /* tamanho container */
     var chartWidth = $('.chart').width();
@@ -79,7 +79,8 @@ if(eixo == eixo) {    /*==== Barras JS ====*/
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
-        dados.value.push(0)
+        dados.value.push(0);
+        if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
         //valores maximos e minimos
         var minValue = d3.min(dados.value);
         var maxValue = d3.max(dados.value);
@@ -123,10 +124,18 @@ if(eixo == eixo) {    /*==== Barras JS ====*/
 
         var minDisplayValue = minValue > 0 ? minValue - (minValue / 10) : 0;
 
-        var x = d3.scaleBand()
-            .domain(d3.range(dados.value.length - 1))
-            .rangeRound([0, width])
-            .padding(0.1);
+        if(eixo == 0 & (vrv >= 10 && vrv <= 13)) {
+            var x = d3.scaleBand()
+                .domain(d3.range(dados.value.length - 2))
+                .rangeRound([0, width])
+                .padding(0.1);
+        }
+        else {
+            var x = d3.scaleBand()
+                .domain(d3.range(dados.value.length - 1))
+                .rangeRound([0, width])
+                .padding(0.1);
+        }
         var y = d3.scaleLinear()
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
@@ -139,7 +148,7 @@ if(eixo == eixo) {    /*==== Barras JS ====*/
         $.each(dados.value, function (i, d) {
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
-
+        if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
         dados.value.pop()
         var formatYAxis = function (d) {
             var higherZeroOcur = maxDecimalAxis;
@@ -548,37 +557,213 @@ if(eixo == eixo) {    /*==== Barras JS ====*/
     };
 }
 else {
-    var s1 = [2, 6, 7, 10];
-    var s2 = [7, 5, 3, 2];
-    var ticks = ['a', 'b', 'c', 'd'];
 
-    plot2 = $.jqplot('corpo', [s1, s2], {
-        seriesDefaults: {
-            renderer: $.jqplot.BarRenderer,
-            pointLabels: {show: true}
-        },
-        axes: {
-            xaxis: {
-                renderer: $.jqplot.CategoryAxisRenderer,
-                ticks: ticks
-            }
-        }
+    // import colors.json file
+    var colorJSON;
+    var textJSON;
+    d3.json('data/colors.json', function (error, data) {
+        if (error) throw error;
+        colorJSON = data;
+
+
+        // import pt-br.json file for get the title
+        d3.json('data/pt-br.json', function (error, data) {
+            if (error) throw error;
+
+            textJSON = data;
+            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+
+            $.get("./db/json_barras.php" + config, function (data) {
+                console.log(data);
+            });
+
+            d3.queue()
+                .defer(d3.json, "./db/json_barras.php" + config)
+                .await(analyze);
+        });
+
     });
+    // return matching color value
+    var color = function (colorId) {
 
-    $('#chart2').bind('jqplotDataHighlight',
-        function (ev, seriesIndex, pointIndex, data) {
-            $('#info2').html('series: ' + seriesIndex + ', point: ' + pointIndex + ', data: ' + data);
+        if (colorJSON.cadeias[colorId]) {
+            return colorJSON.cadeias[colorId].color;
+        } else {
+            console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
+            return colorJSON.cadeias[0].color;
         }
-    );
+    }
 
-    $('#chart2').bind('jqplotDataUnhighlight',
-        function (ev) {
-            $('#info2').html('Nothing');
+    function analyze(error, data) {
+        $('#loading').fadeToggle('fast');
+        if (error) {
+            console.log(error);
         }
-    );
 
-    setTimeout(function() {$('#loading').fadeToggle('fast');}, 500);
-    var imgelem = evt.data.chart.jqplotToImageElem();
-    var imageSrc = imgelem.src; // this stores the base64 image url in imagesrc
-    open(imageSrc);
+        // Setup svg using Bostock's margin convention
+
+        setTimeout(function () {
+        }, 500);
+        var margin = {top: 20, right: 160, bottom: 35, left: 30};
+
+        var width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        var svg = d3.select("#corpo")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        /* Data in strings like it would be if imported from a csv */
+
+        var parse = d3.time.format("%Y").parse;
+
+
+        // Transpose the data into layers
+        var dataset = d3.layout.stack()(["micro", "pequena", "media", "grande"].map(function (fruit) {
+            return data.map(function (d) {
+                return {x: parse(d.year), y: +d[fruit]};
+            });
+        }));
+
+
+        // Set x, y and colors
+        var x = d3.scale.ordinal()
+            .domain(dataset[0].map(function (d) {
+                return d.x;
+            }))
+            .rangeRoundBands([10, width - 10], 0.02);
+
+        var y = d3.scale.linear()
+            .domain([0, d3.max(dataset, function (d) {
+                return d3.max(d, function (d) {
+                    return d.y0 + d.y;
+                });
+            })])
+            .range([height, 0]);
+
+        var colors = ["b33040", "#d25c4d", "#f2b447", "#d9d574"];
+
+
+        // Define and draw axes
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(5)
+            .tickSize(-width, 0, 0)
+            .tickFormat(function (d) {
+                return d
+            });
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .tickFormat(d3.time.format("%Y"));
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+
+        // Create groups for each series, rects for each segment
+        var groups = svg.selectAll("g.cost")
+            .data(dataset)
+            .enter().append("g")
+            .attr("class", "cost")
+            .style("fill", function (d, i) {
+                return colors[i];
+            });
+
+        var rect = groups.selectAll("rect")
+            .data(function (d) {
+                return d;
+            })
+            .enter()
+            .append("rect")
+            .attr("x", function (d) {
+                return x(d.x);
+            })
+            .attr("y", function (d) {
+                return y(d.y0 + d.y);
+            })
+            .attr("height", function (d) {
+                return y(d.y0) - y(d.y0 + d.y);
+            })
+            .attr("width", x.rangeBand())
+            .on("mouseover", function () {
+                tooltip.style("display", null);
+            })
+            .on("mouseout", function () {
+                tooltip.style("display", "none");
+            })
+            .on("mousemove", function (d) {
+                var xPosition = d3.mouse(this)[0] - 15;
+                var yPosition = d3.mouse(this)[1] - 25;
+                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                tooltip.select("text").text(d.y);
+            });
+
+
+        // Draw legend
+        var legend = svg.selectAll(".legend")
+            .data(colors)
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) {
+                return "translate(30," + i * 19 + ")";
+            });
+
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", function (d, i) {
+                return colors.slice().reverse()[i];
+            });
+
+        legend.append("text")
+            .attr("x", width + 5)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .style("text-anchor", "start")
+            .text(function (d, i) {
+                switch (i) {
+                    case 0:
+                        return "Anjou pears";
+                    case 1:
+                        return "Naval oranges";
+                    case 2:
+                        return "McIntosh apples";
+                    case 3:
+                        return "Red Delicious apples";
+                }
+            });
+
+
+        // Prep the tooltip bits, initial display is hidden
+        var tooltip = svg.append("g")
+            .attr("class", "tooltip")
+            .style("display", "none");
+
+        tooltip.append("rect")
+            .attr("width", 30)
+            .attr("height", 20)
+            .attr("fill", "white")
+            .style("opacity", 0.5);
+
+        tooltip.append("text")
+            .attr("x", 15)
+            .attr("dy", "1.2em")
+            .style("text-anchor", "middle")
+            .attr("font-size", "12px")
+            .attr("font-weight", "bold");
+    }
 }

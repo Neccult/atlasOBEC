@@ -55,6 +55,11 @@
     else
         $frm = 0;
 
+    if (!empty($_GET["deg"]))
+        $deg = $_GET["deg"];
+    else
+        $deg = 0;
+
     if (!empty($_GET["prv"]))
         $prv = $_GET["prv"];
     else
@@ -151,6 +156,7 @@
     var uos = <?php echo $uos; ?>;
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
+    var deg = <?php echo $deg; ?>;
     var ano = <?php if($ano == NULL) echo "null"; else echo $ano; ?>;
 	var uf = <?php echo $uf; ?>;
     var eixo;

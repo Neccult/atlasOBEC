@@ -39,7 +39,9 @@ function defaultUrl(){
     url['cor'] = 0;
     url['frm'] = 0;
     url['snd'] = 0;
+    url['sex'] = 0;
     url['prv'] = 0;
+    url['deg'] = 0;
     url['mec'] = 0;
     url['mod'] = 0;
     url['deg'] = 0;
@@ -402,6 +404,10 @@ function loadResult(){
             $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
             $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
             $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
+        }
+
+        if(url['view'] == "barras" && url['cad'] == 0) {
+            $('.select-deg').find('select').attr('disabled','disabled'); /* desabilita select */
         }
     }
 

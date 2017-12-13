@@ -1,5 +1,6 @@
 <head>
     <?php include 'head.php';?>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <!--=== resultados -> gráfico! ===-->
 <?php if(isset($_GET["var"])):?>
@@ -139,8 +140,15 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 				<div class="col-md-2 col-xs-12 opts-result">
                     <div id="title-view">
                         <?php
-                        if($eixo == "mercado" && $view == "treemap_scc") {
+                        if($eixo == "mercado" && ($view == "treemap_scc" || $view == "barras")) {
                         ?>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                            <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                            </div>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
+                            </div>
+                            <br>
                             <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
                             <select class="opt-select" data-id="var">
                                 <?php
@@ -151,15 +159,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             </select>
                             <br>
                             <div>
-                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                    <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
-                                </div>
-                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                    <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
-                                </div>
-                                <br>
                                 <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
-                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF"): ?>
+                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF" || ($view === "barras" && $value['name'] === "Setor")): ?>
                                         <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
                                         <span data-desc="<?= $json_text[$value['id']] ?>"
                                               class="opt view active"><?= $value['name'] ?>:</span>
@@ -435,6 +436,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
     <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
     url['slc'] = "<?php echo $slc; ?>";
+    url['deg'] = "<?php echo $deg; ?>";
+    <?php } ?>
+
+    <?php if ($eixo == "mercado" && $view == "barras") {?>
     url['deg'] = "<?php echo $deg; ?>";
     <?php } ?>
 

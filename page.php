@@ -200,6 +200,10 @@
                 url['deg'] = "<?php echo $deg; ?>";
             <?php } ?>
 
+            <?php if ($eixo == "mercado" && $view == "barras") {?>
+                url['deg'] = "<?php echo $deg; ?>";
+            <?php } ?>
+
             <?php if ($eixo == "politicas") {?>
                 url['mec'] = "<?php echo $mec; ?>";
                 url['mod'] = "<?php echo $mod; ?>";
