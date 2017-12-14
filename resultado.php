@@ -1,6 +1,22 @@
 <head>
     <?php include 'head.php';?>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <style type="text/css">
+        .axis path,
+        .axis line {
+            fill: none !important;
+            stroke: #000!important;
+        }
+
+        path.domain {
+            stroke: none!important;
+        }
+
+        .y .tick line {
+            stroke: #ddd!important;
+        }
+    </style>
+
 </head>
 <!--=== resultados -> gráfico! ===-->
 <?php if(isset($_GET["var"])):?>

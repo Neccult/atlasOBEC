@@ -1,14 +1,14 @@
-if(eixo != 1) {    /*==== Barras JS ====*/
-
-    /* tamanho container */
-    var chartWidth = $('.chart').width();
-    var chartHeight = chartWidth / 2;
-    var minBarHeight = 5;
-    var withLabels = false;
+/* tamanho container */
+var chartWidth = $('.chart').width();
+var chartHeight = chartWidth / 2;
+var minBarHeight = 5;
+var withLabels = false;
 
 
-    var fonteTransform = "translate(" + (chartWidth - 120) + "," + (chartHeight - 10) + ")";
-    var valoresTransform = "translate(10," + (chartHeight - 10) + ")";
+var fonteTransform = "translate(" + (chartWidth - 120) + "," + (chartHeight - 10) + ")";
+var valoresTransform = "translate(10," + (chartHeight - 10) + ")";
+
+if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
     //Variaveis/Objetos
     var dict = {};
@@ -557,7 +557,6 @@ if(eixo != 1) {    /*==== Barras JS ====*/
     };
 }
 else {
-
     // import colors.json file
     var colorJSON;
     var textJSON;
@@ -579,7 +578,7 @@ else {
 
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
-                .await(analyze);
+                .await(analyze_eixo1);
         });
 
     });
@@ -594,7 +593,7 @@ else {
         }
     }
 
-    function analyze(error, data) {
+    function analyze_eixo1(error, data) {
         $('#loading').fadeToggle('fast');
         if (error) {
             console.log(error);
@@ -604,10 +603,10 @@ else {
 
         setTimeout(function () {
         }, 500);
-        var margin = {top: 20, right: 160, bottom: 35, left: 30};
 
-        var width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        var margin = {top: 20, right: 20, bottom: 30, left: 55},
+            width = chartWidth - margin.left - margin.right,
+            height = chartHeight - margin.top - margin.bottom;
 
         var svg = d3.select("#corpo")
             .append("svg")
@@ -631,13 +630,13 @@ else {
 
 
         // Set x, y and colors
-        var x = d3.scale.ordinal()
+        var x_eixo1 = d3.scale.ordinal()
             .domain(dataset[0].map(function (d) {
                 return d.x;
             }))
             .rangeRoundBands([10, width - 10], 0.02);
 
-        var y = d3.scale.linear()
+        var y_eixo1 = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
                 return d3.max(d, function (d) {
                     return d.y0 + d.y;
@@ -649,8 +648,8 @@ else {
 
 
         // Define and draw axes
-        var yAxis = d3.svg.axis()
-            .scale(y)
+        var yAxis_eixo1 = d3.svg.axis()
+            .scale(y_eixo1)
             .orient("left")
             .ticks(5)
             .tickSize(-width, 0, 0)
@@ -658,19 +657,19 @@ else {
                 return d
             });
 
-        var xAxis = d3.svg.axis()
-            .scale(x)
+        var xAxis_eixo1 = d3.svg.axis()
+            .scale(x_eixo1)
             .orient("bottom")
             .tickFormat(d3.time.format("%Y"));
 
         svg.append("g")
             .attr("class", "y axis")
-            .call(yAxis);
+            .call(yAxis_eixo1);
 
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
+            .call(xAxis_eixo1);
 
 
         // Create groups for each series, rects for each segment
@@ -689,15 +688,15 @@ else {
             .enter()
             .append("rect")
             .attr("x", function (d) {
-                return x(d.x);
+                return x_eixo1(d.x);
             })
             .attr("y", function (d) {
-                return y(d.y0 + d.y);
+                return y_eixo1(d.y0 + d.y);
             })
             .attr("height", function (d) {
-                return y(d.y0) - y(d.y0 + d.y);
+                return y_eixo1(d.y0) - y_eixo1(d.y0 + d.y);
             })
-            .attr("width", x.rangeBand())
+            .attr("width", x_eixo1.rangeBand())
             .on("mouseover", function () {
                 tooltip.style("display", null);
             })
@@ -711,6 +710,7 @@ else {
                 tooltip.select("text").text(d.y);
             });
 
+        $('#corpo').find('svg').attr('height',$('.chart').height() + 350);
 
         // Draw legend
         var legend = svg.selectAll(".legend")
@@ -718,7 +718,12 @@ else {
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
-                return "translate(30," + i * 19 + ")";
+                if(i%4 == 0) {
+                    return "translate("+ (-500+(i%4)*120) +","+ (270+((i/4)*30)) + ")";
+                }
+                else {
+                    return "translate("+ (-500+(i%4)*120) +","+ (270+(Math.floor(i/4))*30) + ")";
+                }
             });
 
         legend.append("rect")

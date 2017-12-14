@@ -154,10 +154,20 @@ else if($eixo == 1) {
     require_once("EixoDois.php");
     foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos) as $tupla) {
         // $barras[$tupla->Ano] = $tupla->Valor;
-        $id = $tupla->Ano;
-        $idEsc = $tupla->idEscolaridade;
-        $barras[intval($id-2007)]['year'] = $tupla->Ano;
-        $barras[intval($id-2007)][strtolower(str_replace("é", "e", $tupla->PorteNome))] = (double) $tupla->Valor;
+        if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
+            $id = $tupla->Ano;
+            $barras[$id]['uf'] = $tupla->UFNome;
+            $barras[$id]['ano'] = (int) $tupla->Ano;
+            $barras[$id]['valor'] = (double) $tupla->Valor;
+            $barras[$id]['percentual'] = (double) $tupla->Percentual;
+            $barras[$id]['taxa'] = (double) $tupla->Taxa;
+        }
+        else {
+            $id = $tupla->Ano;
+            $idEsc = $tupla->idEscolaridade;
+            $barras[intval($id - 2007)]['year'] = $tupla->Ano;
+            $barras[intval($id - 2007)][strtolower(str_replace("é", "e", $tupla->PorteNome))] = (double)$tupla->Valor;
+        }
     }
 }
 else if($eixo == 2) {
