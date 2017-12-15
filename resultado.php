@@ -1,21 +1,5 @@
 <head>
     <?php include 'head.php';?>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <style type="text/css">
-        .axis path,
-        .axis line {
-            fill: none !important;
-            stroke: #000!important;
-        }
-
-        path.domain {
-            stroke: none!important;
-        }
-
-        .y .tick line {
-            stroke: #ddd!important;
-        }
-    </style>
 
 </head>
 <!--=== resultados -> gráfico! ===-->
@@ -29,7 +13,7 @@ $prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;	   /*== porte ==*/
 $atc    =   isset($_GET["atc"])   ?   $_GET["atc"]  :   0;	   /*== atuacao ==*/
 $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
 $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   0;	   /*== variavel ==*/
-$ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupacao ==*/
+$ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   1;	   /*== ocupacao ==*/
 $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
 $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
 $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
@@ -132,6 +116,12 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         if($view =='mapa' && $cad === 0) {
                             $prt = 0;
                         }
+                        if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
+                            $_GET['ocp']=1;
+                        }
+                        if($view == 'barras' && $eixo == "mercado" && $slc == 0) {
+                            $_GET['ocp']=0;
+                        }
                         foreach($text['inativos'][$view] as $filter){
                             $_GET[$filter]=0;
                         }
@@ -176,7 +166,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             <br>
                             <div>
                                 <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
-                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF" || ($view === "barras" && $value['name'] === "Setor")): ?>
+                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF" || ($view === "barras" && $slc == 0 && $value['name'] === "Setor")): ?>
                                         <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
                                         <span data-desc="<?= $json_text[$value['id']] ?>"
                                               class="opt view active"><?= $value['name'] ?>:</span>
@@ -189,6 +179,23 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                                             <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
                                                         <?php } ?>
                                                     <?php endforeach; ?>
+                                            </select>
+                                        </div>
+
+                                    <?php endif; ?>
+                                    <?php if (($view === "barras" && $slc == 1 && $value['name'] === "Ocupação")): ?>
+                                        <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
+                                        <span data-desc="<?= $json_text[$value['id']] ?>"
+                                              class="opt view active"><?= $value['name'] ?>:</span>
+                                            <select class="opt-select" data-id="<?php echo $value['id'] ?>">
+                                                <!-- opções! -->
+                                                <?php foreach ($select[$value['id']] as $option): ?>
+                                                    <?php if ($eixo != "politicas" && $option['name'] != "Outros") { ?>
+                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                    <?php } else if ($eixo == "politicas") { ?>
+                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                    <?php } ?>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
 
@@ -456,6 +463,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
     <?php } ?>
 
     <?php if ($eixo == "mercado" && $view == "barras") {?>
+    url['slc'] = "<?php echo $slc; ?>";
     url['deg'] = "<?php echo $deg; ?>";
     <?php } ?>
 

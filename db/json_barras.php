@@ -59,6 +59,7 @@ if (!empty($_GET["var"])) {
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setores ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
 
@@ -75,6 +76,7 @@ else{
     $sex = 0;
     $fax = 0;
     $esc = 0;
+    $slc = 0;
     $cor = 0;
     $mec = 0;
     $mod = 0;
@@ -152,7 +154,7 @@ if($eixo == 0) {
 }
 else if($eixo == 1) {
     require_once("EixoDois.php");
-    foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos) as $tupla) {
+    foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
         // $barras[$tupla->Ano] = $tupla->Valor;
         if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
             $id = $tupla->Ano;
@@ -164,9 +166,45 @@ else if($eixo == 1) {
         }
         else {
             $id = $tupla->Ano;
+            if($slc == 1) {
+                if($id == 2011) {
+                    $id = 2010;
+                }
+                if($id == 2012) {
+                    $id = 2011;
+                }
+                if($id == 2013) {
+                    $id = 2012;
+                }
+                if($id == 2014) {
+                    $id = 2013;
+                }
+                if($id == 2015) {
+                    $id = 2014;
+                }
+            }
             $idEsc = $tupla->idEscolaridade;
-            $barras[intval($id - 2007)]['year'] = $tupla->Ano;
-            $barras[intval($id - 2007)][strtolower(str_replace("é", "e", $tupla->PorteNome))] = (double)$tupla->Valor;
+            $barras[intval($id-2007)]['year'] = $tupla->Ano;
+            if($prt != 0) $barras[intval($id-2007)][$tupla->PorteNome] = (double)$tupla->Valor;
+            else if($sex != NULL) {
+                if($tupla->Sexo) $barras[intval($id-2007)]["Masculino"] = (double)$tupla->Valor;
+                else $barras[intval($id-2007)]["Feminino"] = (double)$tupla->Valor;
+            }
+            else if($fax != 0) $barras[intval($id-2007)][$tupla->IdadeNome] = (double)$tupla->Valor;
+            else if($esc != 0) $barras[intval($id-2007)][$tupla->EscolaridadeNome] = (double)$tupla->Valor;
+            else if($cor != 0) $barras[intval($id-2007)][$tupla->EtiniaNome] = (double)$tupla->Valor;
+            else if($frm != 0) {
+                if($tupla->Formalidade == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
+                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
+            }
+            else if($snd != 0) {
+                if($tupla->Sindical == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
+                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
+            }
+            else if($prv != 0) {
+                if($tupla->Previdencia == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
+                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
+            }
         }
     }
 }

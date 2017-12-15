@@ -471,6 +471,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -512,6 +513,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -553,6 +555,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -574,6 +577,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -595,6 +599,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -616,6 +621,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -657,6 +663,7 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
 					{"name":"Desagregação","id":"deg"}
 				],
 				"inativos":{
@@ -1548,16 +1555,15 @@
 			{"name":"Outros","value":"11"}
 		],
 		"ocp":[
-			{"name":"Setorial","value":"0"},
 			{"name":"Ocupacional - Atividades Relacionadas", "value":"1"},
 			{"name":"Ocupacional - Cultura","value":"2"}
 		],
 		"prt":[
 			{"name":"Todos","value":"0"},
-			{"name":"Micro","value":"1"},
-			{"name":"Pequenas","value":"2"},
-			{"name":"Médias","value":"3"},
-			{"name":"Grandes","value":"4"}
+			{"name":"Micro","name_bar": "Micro","value":"1"},
+			{"name":"Pequenas","name_bar": "Pequena","value":"2"},
+			{"name":"Médias","name_bar": "Média","value":"3"},
+			{"name":"Grandes","name_bar": "Grande","value":"4"}
 		],
 		"atc":[
 			{"name":"Todos","value":"0"},
@@ -1584,7 +1590,7 @@
 			{"name":"Fundamental Incompleto","value":"2"},
 			{"name":"Fundamental Completo","value":"3"},
 			{"name":"Médio Completo","value":"4"},
-			{"name":"Superior Inompleto","value":"5"},
+			{"name":"Superior Incompleto","value":"5"},
 			{"name":"Superior Completo","value":"6"},
 			{"name":"Não Determinado","value":"7"}
 		],

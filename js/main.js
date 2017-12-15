@@ -406,7 +406,7 @@ function loadResult(){
             $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
         }
 
-        if(url['view'] == "barras" && url['cad'] == 0) {
+        if(url['view'] == "barras" && url['cad'] == 0 && url['slc'] == 0) {
             $('.select-deg').find('select').attr('disabled','disabled'); /* desabilita select */
         }
     }

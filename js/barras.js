@@ -8,6 +8,7 @@ var withLabels = false;
 var fonteTransform = "translate(" + (chartWidth - 120) + "," + (chartHeight - 10) + ")";
 var valoresTransform = "translate(10," + (chartHeight - 10) + ")";
 
+var tooltipInstance = tooltip.getInstance();
 if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
     //Variaveis/Objetos
@@ -29,7 +30,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             if (error) throw error;
 
             textJSON = data;
-            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
 
             $.get("./db/json_barras.php" + config, function (data) {
                 console.log(data);
@@ -247,8 +248,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .tickSizeOuter(0)
                 .tickFormat("")
             )
-
-        var tooltipInstance = tooltip.getInstance();
 
         //Cria barras
         console.log(dados.value);
@@ -570,7 +569,7 @@ else {
             if (error) throw error;
 
             textJSON = data;
-            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
 
             $.get("./db/json_barras.php" + config, function (data) {
                 console.log(data);
@@ -583,14 +582,99 @@ else {
 
     });
     // return matching color value
-    var color = function (colorId) {
-
-        if (colorJSON.cadeias[colorId]) {
-            return colorJSON.cadeias[colorId].color;
-        } else {
-            console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
-            return colorJSON.cadeias[0].color;
+    function color_eixo1() {
+        if(ocp == 0) {
+            if (colorJSON.cadeias[cad]) {
+                if(prt != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"], colorJSON.cadeias[cad].gradient["5"], colorJSON.cadeias[cad].gradient["4"]];
+                if(fax != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"], colorJSON.cadeias[cad].gradient["5"], colorJSON.cadeias[cad].gradient["4"], colorJSON.cadeias[cad].gradient["3"], colorJSON.cadeias[cad].gradient["2"]];
+                if(esc != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"], colorJSON.cadeias[cad].gradient["5"], colorJSON.cadeias[cad].gradient["4"], colorJSON.cadeias[cad].gradient["3"], colorJSON.cadeias[cad].gradient["2"], colorJSON.cadeias[cad].gradient["1"]];
+                if(sex != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"]];
+            } else {
+                console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
+                return colorJSON.cadeias[0].color;
+            }
         }
+        else {
+            if (colorJSON.ocupacoes[ocp - 1]) {
+                if(fax != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"], colorJSON.ocupacoes[ocp].gradient["5"], colorJSON.ocupacoes[ocp].gradient["4"], colorJSON.ocupacoes[ocp].gradient["3"], colorJSON.ocupacoes[ocp].gradient["2"]];
+                if(esc != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"], colorJSON.ocupacoes[ocp].gradient["5"], colorJSON.ocupacoes[ocp].gradient["4"], colorJSON.ocupacoes[ocp].gradient["3"], colorJSON.ocupacoes[ocp].gradient["2"], colorJSON.ocupacoes[ocp].gradient["1"]];
+                if(frm != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"]];
+                if(snd != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"]];
+                if(prv != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"]];
+                if(cor != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"], colorJSON.ocupacoes[ocp].gradient["5"], colorJSON.ocupacoes[ocp].gradient["4"], colorJSON.ocupacoes[ocp].gradient["3"]];
+            } else {
+                console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
+                return colorJSON.ocupacoes[0].color;
+            }
+        }
+    }
+
+    function desagregacao_names() {
+        if(prt != 0) {
+            var array_names = [];
+            textJSON.select.prt.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name_bar);
+                }
+            });
+        }
+        if(esc != 0) {
+            var array_names = [];
+            textJSON.select.esc.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(fax != 0) {
+            var array_names = [];
+            textJSON.select.fax.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(sex != 0) {
+            var array_names = [];
+            textJSON.select.sex.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(frm != 0) {
+            var array_names = [];
+            textJSON.select.frm.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(snd != 0) {
+            var array_names = [];
+            textJSON.select.snd.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(prv != 0) {
+            var array_names = [];
+            textJSON.select.prv.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        if(cor != 0) {
+            var array_names = [];
+            textJSON.select.cor.forEach(function(d, i) {
+                if(i) {
+                    array_names.push(d.name);
+                }
+            });
+        }
+        return array_names;
     }
 
     function analyze_eixo1(error, data) {
@@ -622,7 +706,7 @@ else {
 
 
         // Transpose the data into layers
-        var dataset = d3.layout.stack()(["micro", "pequena", "media", "grande"].map(function (fruit) {
+        var dataset = d3.layout.stack()(desagregacao_names().map(function (fruit) {
             return data.map(function (d) {
                 return {x: parse(d.year), y: +d[fruit]};
             });
@@ -644,14 +728,14 @@ else {
             })])
             .range([height, 0]);
 
-        var colors = ["b33040", "#d25c4d", "#f2b447", "#d9d574"];
+        var colors = color_eixo1();
 
 
         // Define and draw axes
         var yAxis_eixo1 = d3.svg.axis()
             .scale(y_eixo1)
             .orient("left")
-            .ticks(5)
+            .ticks(10)
             .tickSize(-width, 0, 0)
             .tickFormat(function (d) {
                 return d
@@ -697,18 +781,13 @@ else {
                 return y_eixo1(d.y0) - y_eixo1(d.y0 + d.y);
             })
             .attr("width", x_eixo1.rangeBand())
-            .on("mouseover", function () {
-                tooltip.style("display", null);
+            .on("mouseover", function (d, i, obj) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", desagregacao_names()[obj]],
+                    ["", formatDecimalLimit(d.y, 2)]
+                ]);
             })
-            .on("mouseout", function () {
-                tooltip.style("display", "none");
-            })
-            .on("mousemove", function (d) {
-                var xPosition = d3.mouse(this)[0] - 15;
-                var yPosition = d3.mouse(this)[1] - 25;
-                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-                tooltip.select("text").text(d.y);
-            });
+            .on("mouseout", tooltipInstance.hideTooltip);
 
         $('#corpo').find('svg').attr('height',$('.chart').height() + 350);
 
@@ -718,11 +797,11 @@ else {
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
-                if(i%4 == 0) {
-                    return "translate("+ (-500+(i%4)*120) +","+ (270+((i/4)*30)) + ")";
+                if(i%3 == 0) {
+                    return "translate("+ (-500+(i%3)*150) +","+ (280+((i/3)*30)) + ")";
                 }
                 else {
-                    return "translate("+ (-500+(i%4)*120) +","+ (270+(Math.floor(i/4))*30) + ")";
+                    return "translate("+ (-500+(i%3)*150) +","+ (280+(Math.floor(i/3))*30) + ")";
                 }
             });
 
@@ -740,16 +819,7 @@ else {
             .attr("dy", ".35em")
             .style("text-anchor", "start")
             .text(function (d, i) {
-                switch (i) {
-                    case 0:
-                        return "Anjou pears";
-                    case 1:
-                        return "Naval oranges";
-                    case 2:
-                        return "McIntosh apples";
-                    case 3:
-                        return "Red Delicious apples";
-                }
+                return desagregacao_names()[(desagregacao_names().length-1)-i];
             });
 
 
