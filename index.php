@@ -1,162 +1,85 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php include 'head.php';?>
+		<?php include 'head_2.php';?>
 	</head>
 	<body class="home">
+		<div id="fullpage">
+			<div class="section " id="section0">
+				<!--===== barra do governo =====-->
+				<?php include 'barra_gov_2.php'; ?>
+				<!-- logo -->
+				<div class="row">
+				    <div>
+				        <div class="welcome text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				            <p>Bem-vindo ao</p>
+				            <img class="img_atlas" src="images/Atlas.png">
+				        </div>
+				    </div>
+				</div>
+				<!-- bottom para explorar -->
+				<div class="explorar text-center col-lg-2 col-lg-offset-5 col-md-offset-5 col-sm-6 col-sm-offset-3 col-xs-offset-3">
+					<a id="explorar" href="index.php#2" >explore</a>
+				</div>
+			</div>
 
-		<!--===== barra do governo =====-->
-		<?php include 'barra_gov.php'; ?>
-
-		<section id="startContent">
-			<article>
-				<div class="container-fluid">
-
-					<div class="row">
-
-						<!--=== logo! ===-->
-						<div class="col-lg-4 col-md-5 col-xs-12">
-							
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2 col-xxs-10 col-xxs-offset-1">
-									<div class="home-info control-height">
-										<div class="content">
-
-											<div class="desc-title text-center">
-												Atlas Econômico<br/>
-												da Cultura Brasileira
-											</div>
-											<div class="separator"></div>
-
-											<div class="desc">
-
-                                                <p style="text-transform: uppercase;">
-                                                    O Atlas Econômico da Cultura Brasileira apresenta o impacto dos Setores Culturais e Criativos (SCC) sobre a evolução da economia brasileira.
-                                                </p>
-
-                                                <p style="text-transform: uppercase;">
-                                                    Tal informação está disponível para todas as unidades federativas e para dez Setores Culturais e Criativos. São eles: Arquitetura e Design, Artes Cênicas e Espetáculos, Audiovisual, Cultural Digital, Editorial, Educação e Criação em Artes, Entretenimento, Música, Patrimônio, e Publicidade.
-                                                </p>
-
-                                                <p style="text-transform: uppercase;">
-                                                    Os dados estão organizados em quatro eixos temáticos: Empreendimentos Culturais, Mercado de trabalho, Políticas Públicas e Comércio Internacional.
-                                                </p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
+			<div class="section " id="section1">
+				<div class="content">
+					<div class="desc-title text-center">
+						<p>O Atlas é uma ferramenta de pesquisa e visualização de dados da<br/>cultura na economia brasileira. Ela permite que você:</p>
+					</div>
+					<div class="separator_2"></div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+							<a href="page.php#empreendimentos"><img class="img_icons" src="images/Icone_01.png"></a>
 						</div>
-
-						<!--=== links ===-->
-						<div class="col-lg-7 col-md-6 col-xs-10 col-xs-12 col-md-offset-0 col-xs-offset-1">
-
-							<div class="row menu-home">
-								
-								<a href="page.php#empreendimentos" class="img-link">
-									<div class="col-sm-3 menu-col">
-										<div class="menu-item control-height">
-
-											<div class="video">
-											    <video autoplay class="thevideo" loop preload="none">
-											    	<source src="images/video1.mp4" type="video/mp4">
-											    	<source src="images/video1.webm" type="video/webm">
-											   		Navegador não compatível.
-											    </video>
-
-											</div>
-
-											<div class="menu-content" id="item1">
-
-												<div class="text-wrapper">
-													<div class="square-icon"></div>
-													<div class="text"><p>EMPRENDIMENTOS<br/> CULTURAIS</p></div>	
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</a>
-
-								<a href="#" class="img-link">
-									<div class="col-sm-3 menu-col">
-										<div class="menu-item control-height">
-											<div class="menu-content" id="item2">
-
-												<div class="text-wrapper">
-													<div class="square-icon"></div>
-													<div class="text"><p>MERCADO<br/>DE TRABALHO</p></div>
-												</div>
-
-												<p class="soon">EM DEZEMBRO 2017</p>
-
-											</div>
-										</div>
-									</div>
-								</a>
-
-								<a href="#" class="img-link">
-									<div class="col-sm-3 menu-col">
-										<div class="menu-item control-height">
-											<div class="menu-content" id="item3">
-
-												<div class="text-wrapper">
-													<div class="square-icon"></div>
-													<div class="text"><p>POLÍTICAS<br/>PÚBLICAS</p></div>
-												</div>
-
-												<p class="soon">EM JANEIRO 2018</p>
-
-											</div>
-										</div>
-									</div>
-								</a>
-
-								<a href="#" class="img-link">
-									<div class="col-sm-3 menu-col">
-										<div class="menu-item control-height">
-											<div class="menu-content" id="item4">
-
-												<div class="text-wrapper">
-													<div class="square-icon"></div>
-													<div class="text"><p>COMÉRCIO<br/>INTERNACIONAL</p></div>
-												</div>
-
-												<p class="soon">EM FEVEREIRO 2018</p>
-												
-											</div>
-										</div>
-									</div>
-								</a>
-
+						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+							<a href="#"><img class="img_icons" src="images/Icone_02.png"></a>
+						</div>
+						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+							<a href="#"><img class="img_icons" src="images/Icone_03.png"></a>
+						</div>
+						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+							<a href="#"><img class="img_icons" src="images/Icone_04.png"></a>
+						</div>
+						<div class="text-atlas col-lg-11 col-md-12 col-sm-12 col-xs-12" id="background_2">
+							<div class="title-question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12"  style="padding: 0;">Por que construir um Atlas da Economia da Cultura no Brasil?</p>
+							</div>
+							<div class="separator_3 col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+							<div class="question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding: 0 10px 0 0;">O Atlas Econômico da Cultura Brasileira insere-se em uma proposta estratégica no que tange ao mapeamento e sistematização de um vasto conjunto de informações relacionadas ao panorama econômico e produtivo da cultura no Brasil. Com o objetivo de retratar a produção acadêmica e, atrelado a isto, apresentar e discutir dados, indicadores e estatísticas culturais, o Atlas consolida uma ampla capacidade de impulsionar o debate sobre o papel da cultura na economia brasileira, seus impactos e sua capacidade em mobilizar recursos e a geração de produto nacional.</p>
+							</div>
+							<div class="title-question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12"  style="padding: 0;">Por que dividir o Atlas em quatro eixos de análise?</p>
+							</div>
+							<div class="separator_3 col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+							<div class="question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+								<p class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">Para analisar todo o processo da economia criativa e da economia da cultura no território brasileiro, é importante que sejam estudados diversas dimensões e eixos de indicadores. Ao se identificar os gargalos em cada um dos âmbitos, é possível realizar políticas públicas mais consistentes e adequadas às necessidades do país, além de atingir de forma mais satisfatória as metas do Plano Nacional de Cultura.</p>
 							</div>
 						</div>
-
-						<!--=== neccult ===-->
-						<div class="col-md-1 col-xs-1 col-xxs-12">
-							<div class="row">
-								<div class="neccult-info control-height">
-									<div class="content">
-										<a href="http://obec.ufrgs.br/neccult/" target="_blank">
-											<img src="images/neccult.png" class="logo-neccult hidden-xxs" alt="Neccult"/>
-											<img src="images/neccult_mobile.png" class="logo-neccult show-xxs" alt="Neccult"/>
-										</a>
-									</div>
-								</div>
-							</div>
+						<div class="logo_fim text-center col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+							<img class="img_logofim" src="images/atlas_dark.png">
 						</div>
 					</div>
 				</div>
-			</article>
-		</section>
-		
+			</div>
+		</div>
+
+
+
+
+
+
+
+		<div class="footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<?php include 'footer_2.php'; ?>
+		</div>
 		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/contraste.js"></script>
-		
 		<script type="text/javascript">
-			
+
 			function controlHeight(){
 
 				var windowHeight = $(window).height(),
@@ -166,7 +89,7 @@
 				$('.control-height').css('max-height',contentHeight);
 			}
 
-			/* ajusta o tamanho do vídeo, 
+			/* ajusta o tamanho do vídeo,
 				para seguir da altura do container */
 			function videoHeight(){
 				$('.menu-item').find('.video').each(function(index){
@@ -186,13 +109,35 @@
 
 			});
 
-			$(document).ready(function(){				
+			$(document).on('click', '#explorar', function(){
+				var local = location.hash;
+				if(local == "#2")
+					location.reload();
+			});
+
+			$(document).ready(function(){
 
 				/* se a janela for redimensionada */
 				$(window).resize(function() {
 					videoHeight();
 				});
 			});
+
+
+
+			$(document).ready(function() {
+				$('#fullpage').fullpage({
+					'verticalCentered': false,
+					'css3': false,
+					'navigation': false,
+					'hybrid': false,
+					'offsetSections': true,
+					'autoScrolling': false,
+					'fitToSection': false,
+				});
+			});
+
+
 		</script>
 	</body>
 </html>
