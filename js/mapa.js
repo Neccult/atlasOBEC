@@ -120,7 +120,7 @@ d3.queue()
 
 //leitura
 function ready(error, br_states, mapa){
-    $('#loading').fadeToggle('fast');
+    $('#loading').fadeOut('fast');
 	if (error) return console.error(error);
 
 	//variaveis informacao

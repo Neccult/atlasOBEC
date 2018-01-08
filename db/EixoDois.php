@@ -518,8 +518,7 @@ class EixoDois {
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind
-                        ." AND ex.Sexo = ".$sexos;
+                        ." AND ex.Sindical = ".$sind;
                 }
             }
             else {
@@ -626,6 +625,7 @@ class EixoDois {
                 else {
                     $query = "SELECT * FROM ".self::$table." AS ex"
                         ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
+                        ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = 1"
                         ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ".$prt
                         ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
                         ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ".$esc
@@ -634,8 +634,7 @@ class EixoDois {
                         ." WHERE ex.Numero = ".$var
                         ." AND ex.Formalidade = ".$form
                         ." AND ex.Previdencia = ".$prev
-                        ." AND ex.Sindical = ".$sind
-                        ." AND ex.Sexo = ".$sexos;
+                        ." AND ex.Sindical = ".$sind;
                 }
             }
 

@@ -1,12 +1,12 @@
 <div class="barra-gov">
-	<div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;"> 
+	<div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
 		<ul id="menu-barra-temp" style="list-style:none;">
-			<li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a></li> 
+			<li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a></li>
 			<li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
 		</ul>
 	</div>
 
-	<div id="header" role="banner">
+	<div id="header-index" role="banner">
 
 	    <div class="container">
 
@@ -36,7 +36,7 @@
 	                </a>
 	            </li>
 	        </ul>-->
-	        
+
 		    <ul id="language">
 		        <!--<li class="language-es">
 		            <a href="#">Espa&#241;ol</a>
@@ -45,35 +45,19 @@
 		            <a href="http://www.brazilgovnews.gov.br" target="_blank">English</a>
 		        </li>-->
 		    </ul>
-		    
-		    <ul id="portal-siteactions">
+
+		    <ul id="portal-siteactions-index">
 
 			    <li id="siteaction-accessibility"><a href="http://www.brasil.gov.br/acessibilidade" title="Acessibilidade" accesskey="5">Acessibilidade</a></li>
 			    <li id="contraste"><a href="#" title="Alto Contraste" accesskey="6">Alto Contraste</a></li>
 			    <li id="siteaction-mapadosite" class="last-item"><a href="http://www.brasil.gov.br/mapadosite" title="Mapa do Site" accesskey="7">Mapa do Site</a></li>
 			</ul>
 
-		    <div id="logo">
+		    <!--div id="logo">
 		    	<a id="portal-logo" title="" href="index.php">
 		            <img src="images/logo2.png" alt="Logo ATLAS"/>
 		    	</a>
-			</div>
-
-	        <div id="portal-searchbox">
-
-			    <form id="nolivesearchGadget_form" action="http://www.brasil.gov.br/@@busca">
-			        <fieldset class="LSBox">
-			            <legend class="hiddenStructure">Buscar no portal</legend>
-			            <label class="hiddenStructure" for="nolivesearchGadget">Buscar no portal</label>
-
-			            <input name="SearchableText" type="text" size="18" title="Buscar no portal" placeholder="Buscar no portal" class="searchField" id="nolivesearchGadget">
-
-			            <input class="searchButton" type="submit" value="Buscar no portal">
-
-			        </fieldset>
-			    </form>
-
-			</div>
+			</div-->
 
 	        <div id="social-icons">
 	            <ul>
@@ -92,7 +76,7 @@
 	            </ul>
 	        </div>
 	    </div>
-	    <div id="sobre">
+	    <div id="sobre-index">
 	    	<div class="container">
 		        <ul>
 		        	<li id="portalservicos-perguntas-frequentes-1" class="portalservicos-item">

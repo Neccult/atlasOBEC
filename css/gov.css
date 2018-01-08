@@ -1,5 +1,5 @@
 /*=== GOVERNO ===============*//* =========================================
-   
+
    Cabeçalho do portal
  ========================================================================== */
 
@@ -8,7 +8,14 @@
     padding: 14px 0 0 0;
     background-color: #c4c432;
 }
+#header-index{
+	font-family: 'Open Sans' !important;
+    padding: 14px 0 0 0;
+}
 #header > div{
+	font-size: 1.2em;
+}
+#header-index > div{
 	font-size: 1.2em;
 }
 
@@ -24,8 +31,8 @@
 	margin-right: 8px;
 	color: #FFF;
 }
-#accessibility span{ 
-	padding: 0 4px; 
+#accessibility span{
+	padding: 0 4px;
 	background-color: #FFF;
     color: #000;
 }
@@ -48,7 +55,7 @@
 	text-decoration: none;
 	text-transform: uppercase;
 }
-#language a, 
+#language a,
 #language a:hover{
 	color: #fff !important;
 }
@@ -71,18 +78,30 @@
 	padding-bottom: 2px;
 	font-size: 0.93em;
 }
+#portal-siteactions-index{
+	display: block;
+	float: right;
+	clear: none;
+	padding-left: 0px;
+	padding-bottom: 2px;
+	font-size: 0.93em;
+}
 #portal-siteactions a,
 #portal-siteactions a:hover,
+#portal-siteactions-index a,
+#portal-siteactions-index a:hover,
 #portal-language a,
 #portal-language a:hover{
 	color: #fff !important;
 }
-#portal-siteactions a{
+#portal-siteactions a,
+#portal-siteactions-index a{
 	padding: 4px 0 4px 10px;
 	text-decoration: none;
 	text-transform: uppercase;
 }
-#portal-siteactions li{
+#portal-siteactions li,
+#portal-siteactions-index li{
 	display: inline;
 }
 #portal-siteactions,
@@ -134,7 +153,21 @@ input.searchField{
 	text-align: right;
 	font-size: 80%;
 }
-#portal-searchbox .searchField{
+
+#portal-searchbox-index{
+	float: right;
+	clear: right !important;
+	margin: 0 0 0 0;
+	padding: 2px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #fff;
+	text-align: right;
+	font-size: 80%;
+}
+#portal-searchbox .searchField,
+#portal-searchbox-index .searchField{
 	padding: 0.3em 0.35em;
 	width: 186px;
 	border: none;
@@ -142,26 +175,29 @@ input.searchField{
 	font-size: 1.2em;
 	font-family: "open_sansregular", Arial, Helvetica, sans-serif;
 }
-#portal-searchbox .searchSection label{
+#portal-searchbox .searchSection label,
+#portal-searchbox-index .searchSection label{
 	cursor: pointer;
 }
 #searchGadget,
-#header input.searchButton{
+#header input.searchButton,
+#header-index input.searchButton{
 	padding: 0.3em;
 	padding: 4px 15px;
 	border: none;
 	background: transparent;
 	text-indent: -2000px;
 }
-#header input.searchButton{
-	background-position: -1px -1px; 
+#header input.searchButton,
+#header-index input.searchButton{
+	background-position: -1px -1px;
 	padding-right: 7px;
 }
 #LSResult{
 	z-index: 1;
 	margin-top: 0.5%;
 }
-#portal-searchbox{border: 1px solid #CCCCCC;}
+#portal-searchbox, #portal-searchbox-index{border: 1px solid #CCCCCC;}
 /* */
 .hiddenStructure{
 	display: block;
@@ -183,6 +219,7 @@ input.searchField{
 
 /*=== redes sociais ===*/
 #social-icons a,
+#social-icons-index a,
 /* central de conteudo */
 .item-central .link-videos,
 .item-central .link-audios,
@@ -193,6 +230,9 @@ input.searchField{
 .item-central .link-dadosabertos,
 /* icone do botão de busca */
 #header input.searchButton{
+	background-image: url("../images/sprite.png");
+}
+#header-index input.searchButton{
 	background-image: url("../images/sprite.png");
 }
 
@@ -212,10 +252,17 @@ input.searchField{
 	clear: right;
 	margin: 1.167em 0;
 }
-#social-icons li{
+#social-icons-index{
+	float: right;
+	clear: right;
+	margin: 10px 0 -10px 0;
+}
+#social-icons li,
+#social-icons-index li{
 	display: inline-block;
 }
-#social-icons a{
+#social-icons a,
+#social-icons-index a{
 	display: block;
 	overflow: hidden;
 	margin: 0 0 0 5px;
@@ -229,7 +276,9 @@ input.searchField{
 	border-radius: 4px;
 }
 #social-icons a:focus,
-#social-icons a:hover{
+#social-icons a:hover,
+#social-icons-index a:focus,
+#social-icons-index a:hover{
 	opacity: 1;
 	filter: alpha(opacity=100);
 }
@@ -254,7 +303,21 @@ input.searchField{
 	line-height: 20px;
 	background-color: #003f34;
 }
+#sobre-index{
+	clear: both;
+	margin: 0;
+	padding: 5px 0;
+	max-width: 100% !important;
+	line-height: 20px;
+}
+
 #sobre ul{
+	margin: 0 auto;
+	text-align: right;
+	list-style: none;
+	padding: 0px;
+}
+#sobre-index ul{
 	margin: 0 auto;
 	text-align: right;
 	list-style: none;
@@ -263,20 +326,27 @@ input.searchField{
 #sobre ul li{
 	display: inline;
 }
-#sobre a{
+#sobre-index ul li{
+	display: inline;
+}
+#sobre a,
+#sobre-index a{
 	color: #fff;
 }
-#sobre .portalservicos-item a{
+#sobre .portalservicos-item a,
+#sobre-index .portalservicos-item a{
 	border-right: 1px solid #6c9072;
 }
-#sobre .portalservicos-item a{
+#sobre .portalservicos-item a,
+#sobre-index .portalservicos-item a{
 	padding: 0 10px;
 }
-#sobre .last-item a{
+#sobre .last-item a,
+#sobre-index .last-item a{
 	padding: 0 0 0 10px;
 	border-right: none !important;
 }
-/* ========================================================================   
+/* ========================================================================
    Rodapé
  ========================================================================== */
 div#wrapper-footer-brasil{
@@ -285,27 +355,18 @@ div#wrapper-footer-brasil{
 .site-map{
 	font-family: "Open Sans",Arial,Helvetica,sans-serif;
 	font-size: 16px;
-	margin-top: 0px;
 	line-height: 18px;
 	background-color: #c4c431;
-	padding: 25px 0px 10px 0;
+	padding: 95px 0px 150px 0;
 	color: #FFF;
 }
-
-.site-map b {
-	font-size: 18px;
-}
-
-.site-map a {
-	font-size: 14px;
-}
-
-.site-map li {
-	margin-bottom: 0px;
-}
-
-.site-map li:first-child {
-	margin-bottom: 5px;
+.site-map-index{
+	font-family: "Open Sans",Arial,Helvetica,sans-serif;
+	font-size: 16px;
+	line-height: 18px;
+	background-color: #ffffff;
+	padding: 20px 0px;
+	color: #5b5b5f;
 }
 
 #footer-brasil-custom{
@@ -315,15 +376,27 @@ div#wrapper-footer-brasil{
    	max-width: 100%;
    	width: 100%;
 }
-.footer-content{
-	border-left: 3px solid #FFF;
+#footer-brasil-custom-index{
+	position: absolute;
+   	background: none repeat scroll 0% 0% #6DBFC9;
+   	padding: 50px 0px;
+   	max-width: 100%;
+   	width: 100%;
 }
-.footer-content ul{
+.footer-content,
+.footer-content-index{
+	border-left: 3px solid #6DBFC9;
+}
+.footer-content ul,
+.footer-content-index ul{
 	padding-left: 20px;
 	list-style: none;
 }
 .footer-content a{
 	color: #FFF;
+}
+.footer-content-index a{
+	color: #5b5b5f;
 }
 .logo-acesso-footer{
 	float: left;
@@ -357,15 +430,20 @@ div#wrapper-footer-brasil{
 	background-size: 100%;
 	margin: 0px 25px;
 }
+.logo-realizadores{
+	display: flex;
+	align-content: center;
+	background-image: url(../images/realizadores.png);
+}
 
-/* ========================================================================   
+/* ========================================================================
  Contraste!
  ========================================================================== */
 body.contraste #header{
 	background: #000 !important;
 }
 body.contraste #sobre{
-	background: #333;	
+	background: #333;
 }
 body.contraste #accessibility span{
 	background: #fff !important;
@@ -417,7 +495,8 @@ body.contraste .item-central .link-dadosabertos {
 		width: 100px;
 		margin-left: 10px;
 	}
-	#footer-brasil-custom{
+	#footer-brasil-custom,
+	#footer-brasil-custom-index{
 		text-align: right;
 	}
 	.logo-footer, .logo-brasil-footer{
@@ -432,13 +511,16 @@ body.contraste .item-central .link-dadosabertos {
 		width: 100%;
 		text-align: center;
 	}
-	#header > div{
+	#header > div,
+	#header-index > div{
 		font-size: 9px;
 	}
-	#sobre .last-item a{
+	#sobre .last-item a,
+	#sobre-index .last-item a{
 		padding-left: 1px;
 	}
-	#sobre .portalservicos-item a{
+	#sobre .portalservicos-item a,
+	#sobre-index .portalservicos-item a{
 		padding: 0px 2px;
 	}
 }

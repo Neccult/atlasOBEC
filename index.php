@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php include 'head_2.php';?>
+		<?php include 'head.php';?>
 	</head>
 	<body class="home">
 		<div id="fullpage">
 			<div class="section " id="section0">
 				<!--===== barra do governo =====-->
-				<?php include 'barra_gov_2.php'; ?>
+				<?php include 'barra_gov.php'; ?>
 				<!-- logo -->
 				<div class="row">
 				    <div>
@@ -34,7 +34,7 @@
 							<a href="page.php#empreendimentos"><img class="img_icons" src="images/Icone_01.png"></a>
 						</div>
 						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-							<a href="#"><img class="img_icons" src="images/Icone_02.png"></a>
+							<a href="page.php#mercado"><img class="img_icons" src="images/Icone_02.png"></a>
 						</div>
 						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
 							<a href="#"><img class="img_icons" src="images/Icone_03.png"></a>
@@ -70,10 +70,8 @@
 
 
 
-
-
 		<div class="footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<?php include 'footer_2.php'; ?>
+			<?php include 'footer.php'; ?>
 		</div>
 		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>

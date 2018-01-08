@@ -75,7 +75,6 @@ if(!isset($text[$view])) $view = $text['type'][0]['id'];
 $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 ?>
 <?php endif; ?>
-<div id="menuvariaveis"></div>
 <article class="results-article fadeInPage">
 	<div class="results-content">
 		<div class="container">
@@ -144,6 +143,40 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 <!--============= opções gráfico! ============-->
 				<div class="col-md-2 col-xs-12 opts-result">
+
+                    <div class="row">
+
+                        <!--=== descrição do tipo de gráfico atual ===-->
+                        <p id="desc-item" class="text-justify"><br/><br/></p>
+
+                    </div>
+                    <!--=== tipo de gráfico ===-->
+                    <div class="row" style="margin-right: -15px; margin-left: -15px;">
+
+                        <?php
+                        $buttons = sizeof($text['type']);
+
+                        /*  quebra de colunas de acordo com
+                            número de opções */
+                        if($buttons==1){
+                            $col = "col-xs-12";
+                        }elseif($buttons==3){
+                            $col = "col-xs-4";
+                        }else{
+                            $col = "col-xs-6";
+                        }
+                        ?>
+
+                        <!--=== views gráfico ===-->
+                        <?php foreach($text['type'] as $key => $value):?>
+
+                            <div class="<?php echo $col;?> col-btn">
+                                <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
+                            </div>
+
+                        <?php endforeach;?>
+
+                    </div>
                     <div id="title-view">
                         <?php
                         if($eixo == "mercado" && ($view == "treemap_scc" || $view == "barras")) {
@@ -166,7 +199,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             <br>
                             <div>
                                 <?php if (isset($text[$view])) foreach ($text[$view] as $key => $value): ?>
-                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF" || ($view === "barras" && $slc == 0 && $value['name'] === "Setor")): ?>
+                                    <?php if ($value['name'] === "Ano" || $value['name'] === "UF" || ($value['name'] === "UF ou Setores" && $slc == 0) || ($view === "barras" && $slc == 0 && $value['name'] === "Setor")): ?>
                                         <div id="option-title-view" <?php echo "class='select-" . $value['id'] . "'"; ?>>
                                         <span data-desc="<?= $json_text[$value['id']] ?>"
                                               class="opt view active"><?= $value['name'] ?>:</span>
@@ -306,41 +339,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             }
                         ?>
                     </div>
-                    <!--=== tipo de gráfico ===-->
-                    <div class="row">
-
-                        <?php
-                        $buttons = sizeof($text['type']);
-
-                        /*  quebra de colunas de acordo com
-                            número de opções */
-                        if($buttons==1){
-                            $col = "col-xs-12";
-                        }elseif($buttons==3){
-                            $col = "col-xs-4";
-                        }else{
-                            $col = "col-xs-6";
-                        }
-                        ?>
-
-                        <!--=== views gráfico ===-->
-                        <?php foreach($text['type'] as $key => $value):?>
-
-                            <div class="<?php echo $col;?> col-btn">
-                                <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
-                            </div>
-
-                        <?php endforeach;?>
-
-                    </div>
 
                     <br>
-                    <div class="row">
-
-                        <!--=== descrição do tipo de gráfico atual ===-->
-                        <p id="desc-item" class="text-justify"><br/><br/></p>
-
-                    </div>
 					<span class="contexto">
 
 						<div class="row contexto">

@@ -2,7 +2,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/gov.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-2.0.3.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
