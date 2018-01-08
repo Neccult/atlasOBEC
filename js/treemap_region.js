@@ -144,7 +144,7 @@ $.get("./db/json_treemap_region.php"+config, function(data) {
 });
 
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
-    $('#loading').fadeToggle('fast');
+    $('#loading').fadeOut('fast');
 	console.log(data);
 	if (error) throw error;
 

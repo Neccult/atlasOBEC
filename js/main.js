@@ -455,12 +455,20 @@ function loadPage(){
 	var menuView = 'menudesktop.php?'+newHash+'=1';
 	if(windowWidth<800)	menuView = 'menumobile.php?'+newHash+'=1';
 
-	$("#menuvariaveis").load(menuView, function(){
-		if(url['var']!=='' && pageTitle!==''){
-			loadResult();
+	if($("#menuvariaveis").length != 0) {
+	    $("#menuvariaveis").load(menuView, function(){
+            if(url['var']!=='' && pageTitle!==''){
+                loadResult();
+                changeDescVar();
+            }
+        });
+    }
+    else {
+        if(url['var']!=='' && pageTitle!==''){
+            loadResult();
             changeDescVar();
-		}
-	});
+        }
+    }
 }
 
 /*-----------------------------------------------------------------------------
@@ -620,12 +628,14 @@ $(window).bind("load", function() {
 	documento pronto
 ======*/
 $(document).ready(function(){
+
+    $("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
 	$(".opt").mouseenter(function() {
 		$("#desc-item").html($(this).attr("data-desc"));
 	});
 
     $(".opt").mouseleave(function() {
-        $("#desc-item").html("");
+        $("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
     });
 
 	$(window).on('hashchange', function() {
@@ -687,9 +697,15 @@ $(document).ready(function(){
 
 	/* escolher novo filtro */
 	$(document).on('change', ".opt-select", function(){
-		
-		controlFilter($(this).val(),$(this).attr('data-id')); /* controla relações entre filtros */
-		changeChart(url); /* altera gráfico */
+		if($(this).attr("data-id") !== "eixo") {
+            controlFilter($(this).val(), $(this).attr('data-id'));
+            /* controla relações entre filtros */
+            changeChart(url);
+            /* altera gráfico */
+        }
+        else {
+		    parent.window.location = "page.php#"+$(this).val();
+        }
 		
 	});
 

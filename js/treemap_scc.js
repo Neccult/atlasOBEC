@@ -104,7 +104,7 @@ $.get("./db/json_treemap_scc.php"+config, function(data) {
 });
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
-    $('#loading').fadeToggle('fast');
+    $('#loading').fadeOut('fast');
 	if (error) throw error;
 
 	var attachColor=function(d){

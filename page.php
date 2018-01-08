@@ -5,30 +5,29 @@
 	</head>
 	<body>
 
-		<!--===== barra do governo =====-->
-		<?php include 'barra_gov.php'; ?>
+    <div id="fullpage">
+        <div class="section " id="section0">
+            <!--===== barra do governo =====-->
+            <?php include 'barra_gov.php'; ?>
+            <!-- logo -->
+            <div class="row">
+                <div>
+                    <a href="index.php">
+                        <div class="welcome text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <p>Bem-vindo ao</p>
+                            <img class="img_atlas" src="images/Atlas.png">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- bottom para explorar -->
+            <div class="explorar text-center col-lg-2 col-lg-offset-5 col-md-offset-5 col-sm-6 col-sm-offset-3 col-xs-offset-3">
+                <a id="explorar" href="index.php#2" >explore</a>
+            </div>
+        </div>
 
-        <!--=== navegação ===-->
-
-		<!--=== menu variaveis ===-->
-		<section id="menuSection"> 
-			<article>
-				<div class="container">
-					
-					<div class="menu-circles">
-						<div class="content text-center">
-
-
-
-
-
-						</div>			
-					</div>
-
-				</div>
-			</article>
-		</section>
-
+    </div>
+    <div class="section " id="section1">
 		<!--=== resultados -> gráfico! ===-->
 		<?php if(isset($_GET["var"])):?>
 		
@@ -90,8 +89,8 @@
 			<!-- se existem informações desta variável -->
 			<?php if(!empty($text)):?>
 				<section id="resultado">
-
-					<iframe src="resultado.php" style="border: none; width: 100%; height: 600px;" scrolling="no"></iframe>
+                    <div id="menuvariaveis"></div>
+					<iframe src="resultado.php" style="border: none; width: 100%; height: 550px;" scrolling="no"></iframe>
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
@@ -105,67 +104,8 @@
 			<?php endif;?>
 		
 		<?php endif;?>
-        <section class="menu-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div class="menu-content" id="item1">
-
-                            <a href="page.php#empreendimentos" class="link">
-                                <div class="square-icon"></div>
-                                <div class="text">
-                                    <p>EMPRENDIMENTOS<br/>CULTURAIS</p>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="menu-content" id="item2">
-
-                            <a href="page.php#mercado" class="link">
-                                <div class="square-icon"></div>
-                                <div class="text">
-                                    <p>MERCADO<br/>DE TRABALHO</p>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="menu-content" id="item3">
-
-                            <a class="link">
-                                <div class="square-icon"></div>
-                                <div class="text">
-                                    <p>POLÍTICAS<br/>PÚBLICAS</p>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="menu-content" id="item4">
-
-                            <a class="link">
-                                <div class="square-icon"></div>
-                                <div class="text">
-                                    <p>COMÉRCIO<br/>INTERNACIONAL</p>
-                                </div>
-                            </a>
-
-                        </div>
-                    </div>
-                </div>
-                <!--<div class="row">
-                    <div class="col-xs-12">
-                        <div class="text-center">
-                            <a href="index.php" class="home button">Home</a>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
-        </section>
+    </div>
+    <hr style="border-top: 3px solid #ddd; width: 70%;">
 		<!-- se existem informações desta variável -->
 		<?php if(!empty($text)):?>
 
@@ -223,6 +163,65 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/contraste.js"></script>
+        <script type="text/javascript">
+
+            function controlHeight(){
+
+                var windowHeight = $(window).height(),
+                    headerHeight = $('.barra-gov').height(),
+                    contentHeight = windowHeight - headerHeight;
+
+                $('.control-height').css('max-height',contentHeight);
+            }
+
+            /* ajusta o tamanho do vídeo,
+                para seguir da altura do container */
+            function videoHeight(){
+                $('.menu-item').find('.video').each(function(index){
+                    var parentHeight = $(this).parents('.menu-item').height();
+                    $(this).height(parentHeight);
+                });
+            }
+
+            /* quando a janela é carregada */
+            $(window).bind("load", function() {
+
+                controlHeight();
+
+                videoHeight();
+
+                bodyDark(dark);/* alto contraste */
+
+            });
+
+            $(document).ready(function(){
+
+                /* se a janela for redimensionada */
+                $(window).resize(function() {
+                    videoHeight();
+                });
+            });
+
+
+
+            $(document).ready(function() {
+                $('#fullpage').fullpage({
+                    'verticalCentered': false,
+                    'css3': false,
+                    'navigation': false,
+                    'hybrid': false,
+                    'offsetSections': true,
+                    'autoScrolling': false,
+                    'fitToSection': false,
+                });
+
+                $('html, body').animate({
+                    scrollTop: $("#section1").offset().top
+                }, 1000);
+            });
+
+
+        </script>
 
 	</body>
 </html>

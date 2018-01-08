@@ -86,6 +86,9 @@ else{
 	var legendTransform = "translate(0,10)";
 }
 
+var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
+var valoresTransform = "translate(10,"+(height-10)+")";
+
 var path = d3.geoPath()
 	.projection(projection);
 
@@ -120,7 +123,7 @@ d3.queue()
 
 //leitura
 function ready(error, br_states, mapa){
-    $('#loading').fadeToggle('fast');
+    $('#loading').fadeOut('fast');
 	if (error) return console.error(error);
 
 	//variaveis informacao

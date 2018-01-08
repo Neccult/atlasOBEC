@@ -54,7 +54,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     }
 
     function analyze(error, data) {
-        $('#loading').fadeToggle('fast');
+        $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }
@@ -678,7 +678,7 @@ else {
     }
 
     function analyze_eixo1(error, data) {
-        $('#loading').fadeToggle('fast');
+        $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }

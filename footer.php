@@ -1,9 +1,9 @@
-<div class="site-map">
+<div class="site-map-index">
 	<div class="container">
 		<div class="row">
 
 			<div class="col-sm-4">
-				<div class="footer-content">
+				<div class="footer-content-index">
 
 					<ul>
 						<li><b>Sobre o Atlas</b></li>
@@ -16,8 +16,8 @@
 			</div>
 
 			<div class="col-sm-4">
-				<div class="footer-content">
-				
+				<div class="footer-content-index">
+
 					<ul>
 						<li><b>Redes Sociais</b></li>
 						<li><a href="http://www.facebook.com/MinisterioDaCultura">Facebook</a></li>
@@ -30,8 +30,8 @@
 			</div>
 
 			<div class="col-sm-4">
-				<div class="footer-content">
-				
+				<div class="footer-content-index">
+
 					<ul>
 						<li><b>Navegação</b></li>
                         <li><a href="http://www.brasil.gov.br/acessibilidade" title="Acessibilidade" accesskey="5">Acessibilidade</a></li>
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 </div>
-<div id="footer-brasil-custom">
+<div id="footer-brasil-custom-index">
 	<div id="wrapper-footer-brasil" class="container">
 		<a target="_blank" href="http://www.acessoainformacao.gov.br/">
 			<span class="logo-acesso-footer"></span>
@@ -62,7 +62,7 @@
 		<a target="_blank" href="http://www.cultura.gov.br/">
 			<span class="logo-minc-footer logo-footer"></span>
 		</a>
-		
+
 		<a target="_blank" href="http://www.brasil.gov.br/">
 			<span class="logo-brasil-footer"></span>
 		</a>
