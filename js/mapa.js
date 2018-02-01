@@ -1,8 +1,9 @@
 // Mapa JS //
 /*=== tamanho do mapa ===*/
-var windowWidth = $(window).width(),
+var windowWidth = window.parent.outerWidth;
+var legendaWidth = window.parent.outerWidth;
 	width = $('.chart').width();
-	height = width/1.4;
+	height = width/1.2;
 
 var shapeWidth = 30;
 
@@ -10,8 +11,26 @@ var shapeWidth = 30;
 var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
 var valoresTransform = "translate(10,"+(height-10)+")";
 
+function destacaPais(ufId) {
+	$("path").each(function() {
+        if($(this).attr("data-legend") == ufId) {
+            if($(this).attr("class") !== "destacado") {
+                $(this).attr("class", "destacado");
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", "#6DBFC9");
+                $(this).animate({"opacity": "1"}, "fast");
+            }
+        }
+        else {
+            $(this).attr("class", "");
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+	});
+}
+
  /**** desktop! ****/
-if(windowWidth>=1200){
+ if(windowWidth>=1700){
   
 	/* cria svg */
 	var svg = d3.select("#corpo").append("svg")
@@ -20,17 +39,68 @@ if(windowWidth>=1200){
    
 	/* configura projeção */
 	var projection = d3.geoMercator()
-		.center([-40, -30])             
+		.center([-50, -28])
 		.rotate([4.4, 0])               
-		.scale(550)                     
+		.scale(455)
 		.translate([width/2, height/1.2]);  
 
-	var legendTransform = "translate(365,220)";
+	var legendTransform = "translate(565,350)";
 	var shapeWidth = 80;
 }
-/**** tablet landscape! ****/
-else if(windowWidth>=992){  
+else if(windowWidth>=1550) {
+    /* cria svg */
+    var svg = d3.select("#corpo").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
+    /* configura projeção */
+    var projection = d3.geoMercator()
+        .center([-50, -28])
+        .rotate([4.4, 0])
+        .scale(400)
+        .translate([width/2, height/1.2]);
+
+    var legendTransform = "translate(565,350)";
+    var shapeWidth = 80;
+}
+else if(windowWidth>=1280) {
+    /* cria svg */
+    var svg = d3.select("#corpo").append("svg")
+        .attr("width", width)
+        .attr("height", height*1.5);
+
+    /* configura projeção */
+    var projection = d3.geoMercator()
+        .center([-50, -20])
+        .rotate([4.4, 0])
+        .scale(380)
+        .translate([width/2, height/1.2]);
+     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
+     var valoresTransform = "translate(10,"+(height+30)+")";
+    var legendTransform = "translate(565,350)";
+    var shapeWidth = 80;
+}
+ else if(windowWidth>=1200) {
+     /* cria svg */
+     var svg = d3.select("#corpo").append("svg")
+         .attr("width", width)
+         .attr("height", height*1.5);
+
+     /* configura projeção */
+     var projection = d3.geoMercator()
+         .center([-50, -20])
+         .rotate([4.4, 0])
+         .scale(350)
+         .translate([width/2, height/1.2]);
+
+     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
+     var valoresTransform = "translate(10,"+(height+30)+")";
+     var legendTransform = "translate(565,350)";
+     var shapeWidth = 80;
+ }
+/**** tablet landscape! ****/
+else if(windowWidth>=1000){
+     var height = width/2.5;
 	//cria svg
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
@@ -38,16 +108,37 @@ else if(windowWidth>=992){
    
 	//configura projeção
 	var projection = d3.geoMercator()
-		.center([-40, -30])             
+		.center([-40, -32])
 		.rotate([4.4, 0])               
 		.scale(400)                     
 		.translate([width / 2, height / 1.2]);
 
+	 var fonteTransform = "translate("+(width-360)+","+(height-80)+")";
+	 var valoresTransform = "translate(70,"+(height-80)+")";
 	var translateX = width-150;
 	var legendTransform = "translate("+translateX+",110)";
 }
+else if(windowWidth>=800){
+     var height = width/2.2;
+     //cria svg
+     var svg = d3.select("#corpo").append("svg")
+         .attr("width", width)
+         .attr("height", height);
+
+     //configura projeção
+     var projection = d3.geoMercator()
+         .center([-40, -28])
+         .rotate([4.4, 0])
+         .scale(400)
+         .translate([width / 2, height / 1.2]);
+
+     var fonteTransform = "translate("+(width-300)+","+(height-20)+")";
+     var valoresTransform = "translate(70,"+(height-20)+")";
+     var translateX = width-150;
+     var legendTransform = "translate("+translateX+",110)";
+ }
 /**** tablet portrait! ****/
-else if(windowWidth>=768){  
+else if(windowWidth>=700){
 
 	var height = width/2;
 
@@ -58,13 +149,57 @@ else if(windowWidth>=768){
    
 	//configura projeção
 	var projection = d3.geoMercator()
-		.center([-40, -30])             
+		.center([-40, -28])
 		.rotate([4.4, 0])               
 		.scale(400)                     
 		.translate([width / 2, height / 1.2]);
 
+     var fonteTransform = "translate("+(width-320)+","+(height-30)+")";
+     var valoresTransform = "translate(120,"+(height-30)+")";
 	var legendTransform = "translate(500,110)";
 }
+ /**** tablet portrait! ****/
+ else if(windowWidth>=620){
+
+     var height = width/1.8;
+
+     //cria svg
+     var svg = d3.select("#corpo").append("svg")
+         .attr("width", width)
+         .attr("height", height);
+
+     //configura projeção
+     var projection = d3.geoMercator()
+         .center([-40, -27])
+         .rotate([4.4, 0])
+         .scale(400)
+         .translate([width / 2, height / 1.2]);
+
+     var fonteTransform = "translate("+(width-260)+","+(height-20)+")";
+     var valoresTransform = "translate(120,"+(height-20)+")";
+     var legendTransform = "translate(500,110)";
+ }
+ /**** tablet portrait! ****/
+ else if(windowWidth>=100){
+
+     var height = 290;
+
+     //cria svg
+     var svg = d3.select("#corpo").append("svg")
+         .attr("width", width)
+         .attr("height", height);
+
+     //configura projeção
+     var projection = d3.geoMercator()
+         .center([-46, -28])
+         .rotate([4.4, 0])
+         .scale(300)
+         .translate([width / 2, height / 1.2]);
+
+     var fonteTransform = "translate("+(width-90)+","+(height-20)+")";
+     var valoresTransform = "translate(120,"+(height-20)+")";
+     var legendTransform = "translate(500,110)";
+ }
 /**** mobile! ****/
 else{  
 
@@ -85,9 +220,6 @@ else{
 
 	var legendTransform = "translate(0,10)";
 }
-
-var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
-var valoresTransform = "translate(10,"+(height-10)+")";
 
 var path = d3.geoPath()
 	.projection(projection);
@@ -111,10 +243,6 @@ d3.json('data/pt-br.json', function(error, data) {
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 // console.log(config);
 
-$.get("./db/json_mapa.php"+config, function(data) {
-	console.log(data);
-});
-
 //pre-load arquivos
 d3.queue()
 	.defer(d3.json, "./data/br-min.json")
@@ -134,7 +262,7 @@ function ready(error, br_states, mapa){
 
 		// console.log(key, mapa[key]);
 		info.push(mapa[key]);
-		return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
+		return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
 
 	});
 
@@ -192,7 +320,6 @@ function ready(error, br_states, mapa){
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
-console.log(eixo);
 	//concatena propriedades
 	svg.append("g")
 		.attr("class", "states")
@@ -200,7 +327,7 @@ console.log(eixo);
 		.data(states.features)
 		.enter()
 		.append("path")
-		.attr("data-legend","oi")
+		.attr("data-legend",function(d) { return d.id; })
 		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
 		.style('fill', function(d){return color(dict[d.id].valor);})
 		.attr("d", path)
@@ -208,7 +335,6 @@ console.log(eixo);
 		//mouseover
 		.on("mouseover", function(d){
 			if(vrv === 2 || vrv === 3 || vrv === 9) {
-				console.log(100*dict[d.id].valor);
 				tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
@@ -231,7 +357,20 @@ console.log(eixo);
                 ]);
 			}
 		})
-		.on("mouseout", tooltipInstance.hideTooltip);
+		.on("mouseout", tooltipInstance.hideTooltip)
+		.on("click", function(d) {
+			var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
+            newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+            var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
+            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+			$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+            $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+            destacaPais(d.id);
+            setIntegerValueData(dict[d.id], eixo, vrv);
+            setPercentValueData(dict[d.id], eixo, vrv);
+            $(window.parent.document).find(".state-title").first().html(d['properties']['name']);
+		})
+		.style("cursor", "pointer");
 
 	//legenda
 	var legend_svg = d3.select("#corpo svg");
@@ -277,8 +416,7 @@ console.log(eixo);
         .attr("class", "valores")
         .attr("transform", valoresTransform)
         .append("text").text(textJSON.var[eixo][vrv-1].mapa_valores);
-
-    if(windowWidth > 768) {
+    /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
 
@@ -331,5 +469,18 @@ console.log(eixo);
                 .attr("transform", "translate(0, " + (10 * (count) + 20) + ")");
             count++;
 		});
+	}*/
+    if(url['uf'] != 0) {
+    	destacaPais(url['uf']);
+    	setPercentValueData(dict[url['uf']], eixo, vrv);
 	}
+
+	if(url['cad'] != 0 && url['uf'] != 0) {
+        setIntegerValueData(dict[url['uf']], eixo, vrv);
+        setPercentValueData(dict[url['uf']], eixo, vrv);
+	}
+
+    if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
+    $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
+    $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
 };

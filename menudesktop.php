@@ -3,12 +3,12 @@
 <?php
     if(isset($_GET['empreendimentos'])) {
         ?>
-        <div class="">
-            <div class="" style="width: 750px; margin: auto;">
-                <img src="./images/empreendimentos-icon-ativo.png" width="180" style="margin-right: 5px; margin-top: 25px">
-                <a href="page.php#mercado"><img src="./images/mercado-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#politicas"><img src="./images/politicas-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#comercio"><img src="./images/comercio-icon.png" width="180" style="margin-right: 5px;"></a>
+        <div class="" style="">
+            <div class="" style="width: 850px; height: 180px; margin: auto;">
+                <img id="empreendimentos" src="./images/empreendimentos-icon.png" class="eixo-ativo">
+                <a href="page.php#mercado"><img id="mercado" src="./images/mercado-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#politicas"><img id="politicas" src="./images/politicas-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#comercio"><img id="comercio" src="./images/comercio-icon.png" class="eixo-inativo"></a>
             </div>
         </div>
 
@@ -17,11 +17,11 @@
     else  if(isset($_GET['mercado'])) {
         ?>
         <div class="">
-            <div class="" style="width: 750px; margin: auto;">
-                <a href="page.php#empreendimentos"><img src="./images/empreendimentos-icon.png" width="180" style="margin-right: 5px;"></a>
-                <img src="./images/mercado-icon-ativo.png" width="180" style="margin-right: 5px; margin-top: 25px">
-                <a href="page.php#politicas"><img src="./images/politicas-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#comercio"><img src="./images/comercio-icon.png" width="180" style="margin-right: 5px;"></a>
+            <div class="" style="width: 850px; height: 180px; margin: auto;">
+                <a href="page.php#empreendimentos"><img id="empreendimentos" src="./images/empreendimentos-icon.png" class="eixo-inativo"></a>
+                <img id="mercado" src="./images/mercado-icon.png" class="eixo-ativo">
+                <a href="page.php#politicas"><img id="politicas" src="./images/politicas-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#comercio"><img id="comercio" src="./images/comercio-icon.png" class="eixo-inativo"></a>
 
             </div>
         </div>
@@ -31,11 +31,11 @@
     else  if(isset($_GET['politicas'])) {
         ?>
         <div class="">
-            <div class="" style="width: 750px; margin: auto;">
-                <a href="page.php#empreendimentos"><img src="./images/empreendimentos-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#mercado"><img src="./images/mercado-icon.png" width="180" style="margin-right: 5px;"></a>
-                <img src="./images/politicas-icon-ativo.png" width="180" style="margin-right: 5px; margin-top: 25px">
-                <a href="page.php#comercio"><img src="./images/comercio-icon.png" width="180" style="margin-right: 5px;"></a>
+            <div class="" style="width: 850px; height: 180px; margin: auto;">
+                <a href="page.php#empreendimentos"><img id="empreendimentos" src="./images/empreendimentos-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#mercado"><img id="mercado" src="./images/mercado-icon.png" class="eixo-inativo"></a>
+                <img id="politicas" src="./images/politicas-icon.png" class="eixo-ativo">
+                <a href="page.php#comercio"><img id="comercio" src="./images/comercio-icon.png" class="eixo-inativo"></a>
 
             </div>
         </div>
@@ -45,15 +45,26 @@
     else  if(isset($_GET['comercio'])) {
         ?>
         <div class="">
-            <div class="" style="width: 750px; margin: auto;">
-                <a href="page.php#empreendimentos"><img src="./images/empreendimentos-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#mercado"><img src="./images/mercado-icon.png" width="180" style="margin-right: 5px;"></a>
-                <a href="page.php#politicas"><img src="./images/politicas-icon.png" width="180" style="margin-right: 5px;"></a>
-                <img src="./images/comercio-icon-ativo.png" width="180" style="margin-right: 5px; margin-top: 25px">
+            <div class="" style="width: 850px; height: 180px; margin: auto;">
+                <a href="page.php#empreendimentos"><img id="empreendimentos" src="./images/empreendimentos-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#mercado"><img id="mercado" src="./images/mercado-icon.png" class="eixo-inativo"></a>
+                <a href="page.php#politicas"><img id="politicas" src="./images/politicas-icon.png" class="eixo-inativo"></a>
+                <img id="comercio" src="./images/comercio-icon.png" class="eixo-ativo">
 
             </div>
+            
         </div>
 
         <?php
     }
 ?>
+
+<div id="barra-slide">
+    <a href="page.php#empreendimentos"><div id="eixo1" class="eixo-barra"></div></a>
+    <a href="page.php#mercado"><div id="eixo2" class="eixo-barra" ></div></a>
+    <a href="page.php#politicas"><div id="eixo3" class="eixo-barra"></div></a>
+    <a href="page.php#comercio"><div id="eixo4" class="eixo-barra"></div></a>
+</div>
+
+<script src="js/barra_slide.js" type='text/javascript'></script>
+

@@ -3,20 +3,14 @@ var windowWidth = $(window).width();
 /* cria svg */
 var svg = d3.select("#corpo").append("svg");
 
-/*=== dimensões do gráfico ===*/        
-if(windowWidth>350){
-	$('#corpo').find('svg').attr('width',$('.chart').width());
-	$('#corpo').find('svg').attr('height',$('.chart').width()/2);
-}
-else{
-	$('#corpo').find('svg').attr('width',$('.chart').width()-50);
-	$('#corpo').find('svg').attr('height',$('.chart').width());
-}
+svg.attr('width',$('.chart').width());
+svg.attr('height',230);
 
 svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 
+svg.attr('height','230');
 
 var fonteTransform = "translate("+(width-120)+","+(height+140)+")";
 var valoresTransform = "translate(10,"+(height+140)+")";
@@ -30,6 +24,19 @@ var textTopSubPadding = 13; // padding top for subsequent word lines (line heigh
 
 var letterTopSubPadding = 7; // padding top for subsequent letters on vertical position words
 var letterLeftSubPadding = 10; // padding left for subsequent letters on vertical position words
+
+function destacaSetor(cadId) {
+    $("rect").each(function() {
+        if($(this).attr("data-legend") == cadId) {
+            $(this).attr("class", "destacado");
+            $(this).animate({"opacity": "1"}, "fast");
+        }
+        else {
+            $(this).attr("class", "");
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+    });
+}
 
 function formatValor(valor) {
     if(parseInt(valor)/1000 < 1000) {
@@ -75,7 +82,6 @@ var color = function(colorId){
             colorJSON.cadeias[colorId].gradient["7"] = colorJSON.cadeias[colorId].color;
             return colorJSON.cadeias[colorId].gradient;
         }else{
-            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
             return colorJSON.cadeias[0].gradient;
         }
     }
@@ -83,7 +89,6 @@ var color = function(colorId){
         if(colorJSON.cadeias[colorId]){
             return colorJSON.cadeias[colorId].color;
         }else{
-            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
             return colorJSON.cadeias[0].color;
         }
 	}
@@ -94,14 +99,12 @@ var color = function(colorId){
 /*==================*/
 var treemap = d3.treemap()
 	.tile(d3.treemapResquarify)
-	.size([width, height])
+	.size([width, height-50])
 	.round(true)
-	.paddingInner(1); 
+    .paddingInner(1);
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
-$.get("./db/json_treemap_scc.php"+config, function(data) {
-	console.log(data);
-});
+
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
     $('#loading').fadeOut('fast');
@@ -222,10 +225,23 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 						}
 					}
 				})
-				.on("mouseout", tooltipInstance.hideTooltip);
+				.on("mouseout", tooltipInstance.hideTooltip)
+				.on("click", function(d) {
+					var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad="+d.data.colorId);
+                    newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
+					var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad="+d.data.colorId);
+                    newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+					$(window.parent.document).find("#view_box").attr("src", newMapaSrc);
+					$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+                    $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
+                    enableDesag(eixo, vrv, d.data.colorId, true);
+                    destacaSetor(d.data.colorId);
+				})
+		        .style("cursor", "pointer");
 
 	if(eixo == 1) {
 		cell.append("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
             .attr("id", function(d) { return d.data.id; })
             .attr("width", function(d) { return nodeWidth(d); })
             .attr("height", function(d) { return d.y1 - d.y0; })
@@ -233,6 +249,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
     }
     else {
         cell.append("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
             .attr("id", function(d) { return d.data.id; })
             .attr("width", function(d) { return nodeWidth(d); })
             .attr("height", function(d) { return d.y1 - d.y0; })
@@ -244,8 +261,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.append("use")
 		.attr("xlink:href", function(d) { return "#" + d.data.id; });
 
-	// aumenta o tamanho do gráfico pra caber o título
-	$('#corpo').find('svg').attr('height',$('.chart').height()+100);
 	
 	// new svg margin top value
 	var svgMarginTop = 35;
@@ -296,7 +311,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				if(uf) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%"; else if(vrv == 2 || vrv === 9) return ((100*d.data.size)).toFixed(2)+"%"; else return formatDecimalLimit((d.data.size/root.value)*100,2) + '%';
             }
             else if(eixo == 1) {
-                console.log(d.parent);
                 if(deg !== 0) return formatDecimalLimit((d.data.size/d.parent.value)*100,2)+"%";
                 else return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
 			}
@@ -332,10 +346,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
 		
-	});
-
-	// aumenta a altura do svg pra caber a legenda
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 70);
+    });
+    
+	
 
 	// legenda
 	var legLeftRange = [0, 4];
@@ -363,7 +376,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		.domain(legendPartOne.domain)
 		.range(legendPartOne.range);
 
-	svg.append("g")
+	/*svg.append("g")
 		.attr("class", "legendOrdinalLeft")
 		.attr("transform", "translate(1," + (height + 15 + svgMarginTop) + ")");
 
@@ -409,7 +422,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	svg.select(".legendOrdinalRight")
 		.call(legendOrdinalRight);
-
+*/
 	d3.selectAll('#testDiv').remove();
 
 	// testa e mostra mensagem de valor zerado/indisponível
@@ -492,6 +505,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
         }
 	}
 
+    if(url['cad'] != 0) {
+        destacaSetor(url['cad']);
+    }
 });
 
 function sumByCount(d) {

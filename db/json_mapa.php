@@ -72,6 +72,7 @@ if($eixo == 0) {
         $mapa[$id]['id'] = (int) $tupla->idUF;
         $mapa[$id]['uf'] = $tupla->UFNome;
         $mapa[$id]['valor'] = (double) $tupla->Valor;
+        $mapa[$id]['ano'] = (double) $tupla->Ano;
         $mapa[$id]['percentual'] = (double) $tupla->Percentual;
         $mapa[$id]['taxa'] = (double) $tupla->Taxa;
 

@@ -1,12 +1,30 @@
 /* tamanho container */
-var chartWidth = $('.chart').width();
-var chartHeight = chartWidth / 2;
+var chartWidth = $('.chart').width()+25;
+var chartHeight = 254;
 var minBarHeight = 5;
 var withLabels = false;
 
 
 var fonteTransform = "translate(" + (chartWidth - 120) + "," + (chartHeight - 10) + ")";
 var valoresTransform = "translate(10," + (chartHeight - 10) + ")";
+
+function destacaBarra(barraId) {
+    $("rect").each(function() {
+        if($(this).attr("data-legend") == barraId) {
+            if($(this).attr("class") !== "destacado") {
+                $(this).attr("class", "destacado");
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", "#6DBFC9");
+                $(this).animate({"opacity": "1"}, "fast");
+            }
+        }
+        else {
+            $(this).attr("class", "");
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+    });
+}
 
 var tooltipInstance = tooltip.getInstance();
 if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
@@ -32,10 +50,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             textJSON = data;
             var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
 
-            $.get("./db/json_barras.php" + config, function (data) {
-                console.log(data);
-            });
-
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze);
@@ -48,7 +62,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         if (colorJSON.cadeias[colorId]) {
             return colorJSON.cadeias[colorId].color;
         } else {
-            console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
             return colorJSON.cadeias[0].color;
         }
     }
@@ -62,8 +75,10 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         var dados = {key: [], value: [], percentual: [], taxa: []};
 
         Object.keys(data).forEach(function (key) {
-            if ((vrv === 3) && data[key].ano === 2007) return;
-            dados.key.push(data[key].ano);
+            if ((vrv === 3) && data[key].ano === 2007) {
+            } else {
+                dados.key.push(data[key].ano);
+            }
             if (vrv === 2 || vrv === 3) dados.value.push(100 * data[key].valor);
             else dados.value.push(data[key].valor);
             if (vrv === 1 || vrv === 2 || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 9 || vrv === 8) dados.percentual.push(0);
@@ -71,12 +86,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             if (vrv === 2) dados.taxa.push(0);
             else dados.taxa.push(data[key].taxa);
         });
-
         dados.key = d3.keys(data);
-
+        console.log(dados);
+        if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
+        console.log(dados);
         //tamanho do grafico
         // AQUI automatizar map center
-        var margin = {top: 20, right: 20, bottom: 30, left: 55},
+        var margin = {top: 20, right: 20, bottom: 30, left: 25},
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
@@ -131,6 +147,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .rangeRound([0, width])
                 .padding(0.1);
         }
+        else if(eixo == 0 & (vrv == 3)) {
+            var x = d3.scaleBand()
+                .domain(d3.range(dados.value.length - 2))
+                .rangeRound([0, width])
+                .padding(0.1);
+        }
         else {
             var x = d3.scaleBand()
                 .domain(d3.range(dados.value.length - 1))
@@ -150,7 +172,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
         if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
-        dados.value.pop()
+        dados.value.pop();
+
+        if(vrv === 3) {
+            dados.value.remove(0);
+        }
         var formatYAxis = function (d) {
             var higherZeroOcur = maxDecimalAxis;
             var dadosCounter = 0;
@@ -231,7 +257,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform",
-                "translate(" + margin.left + "," + valueTop + ")");
+                "translate(" + (margin.left+5) + "," + valueTop + ")");
 
         function make_y_gridlines() {
             return d3.axisLeft(y)
@@ -250,13 +276,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             )
 
         //Cria barras
-        console.log(dados.value);
         svg.selectAll("rect")
             .data(dados.value, function (d) {
                 return d;
             })
             .enter().append("rect")
             .attr("class", "bar")
+            .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
             .attr("x", function (d, i) {
                 return x(i);
             })
@@ -369,8 +395,26 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     ]);
                 }
             })
-            .on("mouseout", tooltipInstance.hideTooltip);
-        console.log(data);
+            .on("mouseout", tooltipInstance.hideTooltip)
+            .on("click", function(d, i, obj) {
+                var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
+                newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
+                var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
+                newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+                $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
+                $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                $(window.parent.document).find("select[data-id='ano']").val(dados.key[i]);
+                destacaBarra(dados.key[i]);
+                if(eixo == 0 && vrv == 3) {
+                    dados.valor = dados.value[i]/100;
+                }
+                else {
+                    dados.valor = dados.value[i];
+                }
+                setIntegerValueData(dados, eixo, vrv);
+                setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i], ano: data[dados.key[i]].ano, uf: url['uf']}, eixo, vrv);
+            })
+            .style("cursor", "pointer");
         // cria título do gráfico
         if (data[dados.key[0]].uos == undefined) {
             svg.append("text")
@@ -475,7 +519,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         //formata labels eixo X
         var xAxis = d3.axisBottom(x)
             .tickFormat(function (d) {
-                if (vrv === 3) return dados.key[d + 1]; else return dados.key[d];
+                if (eixo == 0 && vrv === 3) return dados.key[d]; else return dados.key[d];
             })
             .tickSize(5)
             .tickPadding(5);
@@ -553,6 +597,23 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .attr("y", d3.select("#corpo>svg").attr("height") / 2)
                 .attr("text-anchor", "middle");
         }
+
+        destacaBarra(url['ano']);
+        if(url['uf'] == 0) {
+            if(vrv == 3) {
+                dados.valor = dados.value[6]/100;
+                setIntegerValueData(dados, eixo, vrv);
+                setPercentValueData({percentual: 1, taxa: dados.taxa[6]}, eixo, vrv);
+            }
+            else {
+                dados.valor = dados.value[7];
+                setIntegerValueData(dados, eixo, vrv);
+                setPercentValueData({percentual: 1, taxa: dados.taxa[7]}, eixo, vrv);
+            }
+        }
+
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
     };
 }
 else {
@@ -571,10 +632,6 @@ else {
             textJSON = data;
             var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
 
-            $.get("./db/json_barras.php" + config, function (data) {
-                console.log(data);
-            });
-
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze_eixo1);
@@ -590,7 +647,6 @@ else {
                 if(esc != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"], colorJSON.cadeias[cad].gradient["5"], colorJSON.cadeias[cad].gradient["4"], colorJSON.cadeias[cad].gradient["3"], colorJSON.cadeias[cad].gradient["2"], colorJSON.cadeias[cad].gradient["1"]];
                 if(sex != 0) return [colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient["6"]];
             } else {
-                console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
                 return colorJSON.cadeias[0].color;
             }
         }
@@ -603,7 +659,6 @@ else {
                 if(prv != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"]];
                 if(cor != 0) return [colorJSON.ocupacoes[ocp].color, colorJSON.ocupacoes[ocp].gradient["6"], colorJSON.ocupacoes[ocp].gradient["5"], colorJSON.ocupacoes[ocp].gradient["4"], colorJSON.ocupacoes[ocp].gradient["3"]];
             } else {
-                console.log("Cor correspondente ao id: \"" + colorId + "\" não encontrada no arquivo colors.json");
                 return colorJSON.ocupacoes[0].color;
             }
         }
@@ -688,7 +743,7 @@ else {
         setTimeout(function () {
         }, 500);
 
-        var margin = {top: 20, right: 20, bottom: 30, left: 55},
+        var margin = {top: 20, right: 20, bottom: 30, left: 25},
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
@@ -771,6 +826,7 @@ else {
             })
             .enter()
             .append("rect")
+            .attr("data-legend", function(d) { return d.x; })
             .attr("x", function (d) {
                 return x_eixo1(d.x);
             })
@@ -787,9 +843,19 @@ else {
                     ["", formatDecimalLimit(d.y, 2)]
                 ]);
             })
-            .on("mouseout", tooltipInstance.hideTooltip);
+            .on("mouseout", tooltipInstance.hideTooltip)
+            .on("click", function(d) {
+                var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+d.x);
+                var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano="+d.x);
+                newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+d.x);
+                $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
+                $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                $(window.parent.document).find("select[data-id='ano']").val(d.x);
+                destacaBarra(d.x);
+            })
+            .style("cursor", "pointer");
 
-        $('#corpo').find('svg').attr('height',$('.chart').height() + 350);
+        $('corpo').find('svg').attr('height',$('.chart').height() + 350);
 
         // Draw legend
         var legend = svg.selectAll(".legend")
@@ -798,10 +864,10 @@ else {
             .attr("class", "legend")
             .attr("transform", function (d, i) {
                 if(i%3 == 0) {
-                    return "translate("+ (-500+(i%3)*150) +","+ (280+((i/3)*30)) + ")";
+                    return "translate("+ (-780+(i%3)*150) +","+ (425+((i/3)*30)) + ")";
                 }
                 else {
-                    return "translate("+ (-500+(i%3)*150) +","+ (280+(Math.floor(i/3))*30) + ")";
+                    return "translate("+ (-780+(i%3)*150) +","+ (425+(Math.floor(i/3))*30) + ")";
                 }
             });
 
@@ -840,5 +906,15 @@ else {
             .style("text-anchor", "middle")
             .attr("font-size", "12px")
             .attr("font-weight", "bold");
+
+        destacaBarra(url['ano']);
+        $(window.parent.document).find(".state-title").first().html(function() {
+            if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf
+        });
+
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+
     }
+
 }

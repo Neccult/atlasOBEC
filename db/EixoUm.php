@@ -57,7 +57,6 @@ class EixoUm {
 	    Negativo = Erro de conexão
 	-----------------------------------------------------------------------------*/
 	public static function connect(){
-
 		$conexao = mysqli_connect(DB_HOST, DB_USUARIO, DB_SENHA, DB_NOME);
 
 			if (mysqli_connect_errno())

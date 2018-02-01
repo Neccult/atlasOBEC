@@ -10,8 +10,11 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
 	newHash = window.location.hash;
-	$('iframe').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
-	/* variáveis com valores default */
+	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+    /* variáveis com valores default */
 }
 
 function controlVarPage(clickVar){
@@ -70,6 +73,38 @@ function changeChart(url){
 		if((++count)!=size) newUrl = newUrl+"&";
 	});
 	window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
+    if($('iframe[id="view_box"]').length != 0) {
+        $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+    if($('iframe[id="view_box_barras"]').length != 0) {
+        $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+    if($('iframe[id="view_box_scc"]').length != 0) {
+        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+}
+
+function updateIframe(url){
+
+    var newUrl = "",
+        count = 0,
+        size = Object.keys(url).length;
+    $.each(url, function(key,value){
+
+        newUrl = newUrl+key+"="+value;
+
+        if((++count)!=size) newUrl = newUrl+"&";
+    });
+    if($('iframe[id="view_box"]').length != 0) {
+        $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+    if($('iframe[id="view_box_barras"]').length != 0) {
+        $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+    if($('iframe[id="view_box_scc"]').length != 0) {
+        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+    }
+
 }
 
 /*-----------------------------------------------------------------------------
@@ -107,9 +142,12 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlFilter(selectvalue, selectid){
-	
+    var SCCSrc = $("#view_box_scc").attr("src");
+    var BarraSrc = $("#view_box_barras").attr("src");
+    var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
+    var ano = SCCSrc.match(/ano=([0-9]*)/)[1];
+    var uf = SCCSrc.match(/uf=([0-9]*)/)[1];
 	/* se for PORTE x ATUAÇÃO */
-    console.log(selectvalue);
     if(selectid==='var') {
         defaultUrl();
     }
@@ -211,17 +249,36 @@ function controlFilter(selectvalue, selectid){
 		if(selectvalue.match('atc-','')){
 			url['atc'] = selectvalue.replace('atc-','');
 			url['prt'] = '0'; /* se for atuação, não há filtro por porte */
-            console.log(url);
 		}
 
 		/* filtro porte */
 		else{
 			url['prt'] = selectvalue;
 			url['atc'] = '0';/* se for porte, não há filtro por atuação */
-			console.log(url);
 		}
 
 	}
+	else if(selectid=='deg') {
+        url[selectid] = selectvalue;
+        if(selectvalue == 0) {
+            url['ano'] = ano;
+            url['uf'] = uf;
+            url['cad'] = setor;
+            url['prt'] = 0;
+        }
+        if(selectvalue >= 9 && selectvalue <= 12) {
+            url['ano'] = ano;
+            url['uf'] = uf;
+            url['cad'] = setor;
+            url['prt'] = selectvalue-8;
+        }
+        if(selectvalue >= 13 && selectvalue <= 14) {
+            url['ano'] = ano;
+            url['uf'] = uf;
+            url['cad'] = setor;
+            url['uos'] = selectvalue-13;
+        }
+    }
 	else if(selectid=='cad') {
         if(selectvalue.match('ocp-','')){
 
@@ -241,12 +298,13 @@ function controlFilter(selectvalue, selectid){
 
 	/*  se não há setor cadastrado,
 		não  é permitido filtro por porte X atuacao
-		(exceto treemap por setores) 
-									*/
+		(exceto treemap por setores)
+
 	if(url['cad']==0 && url['view']!='treemap_scc'){
 		url['atc'] = 0;
 		url['prt'] = 0;
 	}
+*/
 }
 
 /*-----------------------------------------------------------------------------
@@ -327,7 +385,7 @@ Saída:
 -----------------------------------------------------------------------------*/
 function getEixo(eixo){
 
-    if(eixo == 'empreendedimentos') {
+    if(eixo == 'empreendimentos') {
     	return 0;
 	}
 	else if(eixo == 'mercado') {
@@ -339,8 +397,8 @@ function getEixo(eixo){
     else if(eixo == 'comercio') {
 		return 3;
     }
+    else return 0;
 }
-
 
 /*-----------------------------------------------------------------------------
 Função: loadResult
@@ -356,18 +414,25 @@ function loadResult(){
 	$('.menu-select').val(url['var']); /* atualiza select versao mobile */
 
 	/* move scroll para o gráfico */	
-	$('html, body').scrollTop($("div.container").offset().top);
+	if($("div.container").length != 0)$('html, body').scrollTop($("div.container").offset().top);
 
 	/* fade in no resultado */
 	$('.fadeInPage').addClass('done');
 	$('.fadeIn').addClass('done');
-
 
 	/*  se não existe setor selecionado,
 		não é possível escolher porte x atuação 
 		(exceto no treemap por setores)
 										*/
 	if(window.location.hash.substring(1) == "empreendimentos") {
+        var SCCSrc = $("#view_box_scc").attr("src");
+        var setor = SCCSrc.match(/cad=([0-9]*)/)[1];
+        if(setor == 0) {
+            $('.select-deg').find('select').find('option[value="9"]').remove();
+            $('.select-deg').find('select').find('option[value="10"]').remove();
+            $('.select-deg').find('select').find('option[value="11"]').remove();
+            $('.select-deg').find('select').find('option[value="12"]').remove();
+        }
 		if(url['cad']==0 && url['view']!='treemap_scc'){
             $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
             $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
@@ -418,8 +483,7 @@ function loadResult(){
 			selectValue = url[selectId];
 
 		/* atualiza valor select */
-		$(this).val(selectValue);	
-		console.log(url);
+		$(this).val(selectValue);
 		/* select porte default */
 		if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
 			
@@ -453,7 +517,7 @@ Saída:
 function loadPage(){
 	newHash = window.location.hash.substring(1);
 	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<800)	menuView = 'menumobile.php?'+newHash+'=1';
+	if(windowWidth<850)	menuView = 'menumobile.php?'+newHash+'=1';
 
 	if($("#menuvariaveis").length != 0) {
 	    $("#menuvariaveis").load(menuView, function(){
@@ -526,7 +590,6 @@ function getUf(textJSON) {
 }
 
 function changeDescVar() {
-	console.log($("span").find("[data-id='setor']"));
     // import pt-br.json file for get the title
     var textJSON;
     d3.json('data/pt-br.json', function(error, data) {
@@ -568,7 +631,7 @@ function changeDescVar() {
             $("span[data-id='atuacao']").html("de "+textJSON.select.atc[url['atc']].name);
         }
 
-        if(url['view'] !== "barras") $("span[data-id='ano']").html("em "+ano);
+        if(url['view'] !== "barras") $("span[data-id='ano']").html("em "+url['ano']);
 
 		if(url['uos'] === "0") {
             $("span[data-id='mode-view']").html("por estado");
@@ -620,24 +683,38 @@ $(window).bind("load", function() {
 
 	bodyDark(dark);/* alto contraste */
 
-	console.log('loaded!');
-
 });
+
+function expandMenu(a) {
+    $(a).animate({width: "200px", margin: "5px"}, "fast");
+    $('.eixo-ativo').animate({width: "160px", margin: "15px"}, "fast");
+}
+
+function expandMenuEixoAtivo(a) {
+    $(a).animate({width: "200px", margin: "0px"}, "fast");
+}
+
+function minimizeMenu(a) {
+    $(a).animate({width: "160px", margin: "15px"}, "fast");
+}
+
+function expandMenuVariaveis(a) {
+    $('.eixo-ativo').animate({width: "200px", margin: "0px"}, "fast");
+}
 
 /*====== 
 	documento pronto
 ======*/
 $(document).ready(function(){
+    // TODO Verificar se ainda necessário (Novo design não vai ter a principio)
+    //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
+	//$(".opt").mouseenter(function() {
+		//$("#desc-item").html($(this).attr("data-desc"));
+	//});
 
-    $("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-	$(".opt").mouseenter(function() {
-		$("#desc-item").html($(this).attr("data-desc"));
-	});
-
-    $(".opt").mouseleave(function() {
-        $("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-    });
-
+    //$(".opt").mouseleave(function() {
+        //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
+    //});
 	$(window).on('hashchange', function() {
         loadPage();
         window.location.href = window.location.pathname+window.location.hash;
@@ -645,10 +722,31 @@ $(document).ready(function(){
 	});
 	/* se a janela for redimensionada */
 	$(window).resize(function() {
-		controlPageWidth();
+		//controlPageWidth();
 	});
 
 	/*=== selecionar variável ===*/
+
+	if(url['var'] < 10){
+        $(document).on('click', ".scc", function(){
+            var newSCCSrc = $("#view_box_scc").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
+            var change = newSCCSrc.match(/uf=([0-9]*)/);
+            var newBarrasSrc = $("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
+            var newSrc = $("#view_box").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
+            newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
+            if($(this).attr('data-id') == 0) {
+                newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
+                newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
+                newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
+            }
+            $("#view_box").attr("src", newSrc);
+            $("#view_box_barras").attr("src", newBarrasSrc);
+            $("#view_box_scc").attr("src", newSCCSrc);
+
+            enableDesag(getEixo(window.location.hash.substring(1)), url['var'], $(this).attr('data-id'), false);
+        });
+    }
+
 	$(document).on('click', ".var-click", function(){
         defaultUrl(); /* valores de filtros default */
 		controlVar($(this).attr('href'));				
@@ -717,4 +815,21 @@ $(document).ready(function(){
 
 	});
 
+
+	//////////////////// SCRIPT PARA O MENUDESKTOP /////////////////////
+	$(document).on('mouseenter', '.eixo-inativo', function() {
+        expandMenu(this);
+    });
+    $(document).on('mouseleave', '.eixo-inativo', function() {
+        minimizeMenu(this);
+    });
+    $("#menuvariaveis").on('mouseleave', function() {
+        expandMenuVariaveis(this);
+    });
+    $(document).on('mouseenter', '.eixo-ativo', function() {
+        expandMenuEixoAtivo(this);
+    });
+    ////////////////////////////////////////////////////////////////////
+
+    updateIframe(url);
 });

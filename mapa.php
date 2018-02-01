@@ -112,6 +112,7 @@
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
 	var ano = <?php echo $ano; ?>;
+	console.log(ano);
 	var eixo;
 	switch(window.location.hash.substring(1)) {
         case "empreendimentos":

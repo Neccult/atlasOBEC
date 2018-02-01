@@ -2,21 +2,20 @@ var windowWidth = $(window).width(); /* dimensão da tela */
 
 /* cria svg */
 var svg = d3.select("#corpo").append("svg");
-
 /*=== dimensões do gráfico ===*/        
 if(windowWidth>768){
 	$('#corpo').find('svg').attr('width',$('.chart').width());
-	$('#corpo').find('svg').attr('height',($('.chart').width()/2));
+	$('#corpo').find('svg').attr('height',($('.chart').height()/1.5));
     $('#corpo').find('svg').css('padding-bottom',"30px");
 }
 else{
 	$('#corpo').find('svg').attr('width',$('.chart').width()-20);
-	$('#corpo').find('svg').attr('height',$('.chart').width());
+	$('#corpo').find('svg').attr('height',$('.chart').height()/1.5);
 }
 
-svg = d3.select("svg"),
-	width = +svg.attr("width"),
-	height = +svg.attr("height");
+svg = d3.select("svg");
+	width = svg.attr("width"),
+	height = svg.attr("height");
 
 
 var fonteTransform = "translate("+(width-120)+","+(height+100)+")";
@@ -31,6 +30,66 @@ var textTopSubPadding = 13; // padding top for subsequent word lines (line heigh
 
 var letterTopSubPadding = 7; // padding top for subsequent letters on vertical position words
 var letterLeftSubPadding = 10; // padding left for subsequent letters on vertical position words
+
+
+function ufId(uf) {
+	switch(uf) {
+		case "RO":
+			return 11;
+        case "AC":
+            return 12;
+        case "AM":
+            return 13;
+        case "RR":
+            return 14;
+        case "PA":
+            return 15;
+        case "AP":
+            return 16;
+        case "TO":
+            return 17;
+        case "MA":
+            return 21;
+        case "PI":
+            return 22;
+        case "CE":
+            return 23;
+        case "RN":
+            return 24;
+        case "PB":
+            return 25;
+        case "PE":
+            return 26;
+        case "AL":
+            return 27;
+        case "SE":
+            return 28;
+        case "BA":
+            return 29;
+        case "MG":
+            return 31;
+        case "ES":
+            return 32;
+        case "RJ":
+            return 33;
+        case "SP":
+            return 35;
+        case "PR":
+            return 41;
+        case "SC":
+            return 42;
+        case "RS":
+            return 43;
+        case "MS":
+            return 50;
+        case "MT":
+            return 51;
+        case "GO":
+            return 52;
+        case "DF":
+            return 53;
+	}
+}
 
 function formatValor(valor) {
 	if(parseInt(valor)/1000 < 1000) {
@@ -108,7 +167,6 @@ var color = function(colorId){
         if(colorJSON.parceiros[colorId]){
             return colorJSON.parceiros[colorId].color;
         }else{
-            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
             return colorJSON.parceiros[0].color;
         }
 	}
@@ -116,7 +174,6 @@ var color = function(colorId){
 		if(colorJSON.regioes[colorId]){
             return colorJSON.regioes[colorId].color;
         }else{
-            console.log("Cor correspondente ao id: \"" + colorId +  "\" não encontrada no arquivo colors.json");
             return colorJSON.regioes[0].color;
         }
     }
@@ -139,13 +196,9 @@ else {
 	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&typ="+typ+"&prc="+prc+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 }
 
-$.get("./db/json_treemap_region.php"+config, function(data) {
-	console.log(data);
-});
 
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
     $('#loading').fadeOut('fast');
-	console.log(data);
 	if (error) throw error;
 
 	var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };
@@ -159,6 +212,25 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.sort(function(a, b) { return b.height - a.height || b.value - a.value; });
 
 	treemap(root);
+
+    function destacaPais(ufId) {
+        svg.selectAll("rect").each(function(d) {
+            if($(this).attr("data-legend") == ufId) {
+                if($(this).attr("class") === "destacado") {
+                    $(this).attr("class", "destacado");
+                    $(this).attr("data-color", $(this).css("fill"));
+                    $(this).css("fill", "#6DBFC9");
+                    $(this).animate({"opacity": "1"}, "fast");
+                }
+            }
+            else {
+                $(this).attr("class", "");
+                if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+                $(this).animate({"opacity": "0.7"}, "fast");
+            }
+        });
+    }
+
 	var tooltipInstance = tooltip.getInstance();
 
 	var cell = svg.selectAll("g")
@@ -166,7 +238,6 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					.on("mouseover", function(d){
-					    console.log(d.data);
                         var title_content = textJSON.var[eixo][vrv-1].title;
                         var title = title_content.replace("<span>", "");
                         title = title.replace("<br>", "");
@@ -212,9 +283,28 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 							}
 						}
 					})
-					.on("mouseout", tooltipInstance.hideTooltip);
+					.on("mouseout", tooltipInstance.hideTooltip)
+					.on("click", function(d) {
+						var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
+                        newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+						var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
+                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+						$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+						$(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+						destacaPais(ufId(d.data.name));
+                        if(vrv == 2) {
+                            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(d.data.size*100, 2));
+                        }
+                        else {
+                            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(d.data.size, 2));
+                        }
+                        $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit((d.data.size/root.value)*100, 2)+"%");
+                        $(window.parent.document).find(".state-title").first().html(d['properties']['name']);
+					})
+					.style("cursor", "pointer");
 
 	cell.append("rect")
+		.attr("data-legend", function(d) { return ufId(d.data.name); })
 		.attr("id", function(d) { return d.data.id; })
 		.attr("width", function(d) { return d.x1 - d.x0; })
 		.attr("height", function(d) { return d.y1 - d.y0; })
@@ -260,7 +350,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		});
 
 	// aumenta o tamanho do gráfico pra caber o título
-	$('#corpo').find('svg').attr('height',$('.chart').height()+30);
+	$('#corpo').find('svg').attr('height',$('#corpo').find('svg').height()+100);
 	
 	// new svg margin top value
 	var svgMarginTop = 35;
@@ -304,11 +394,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	var mobileSubtitle = windowWidth<480 ? 1 : 0,
 		subtitleHeight = mobileSubtitle ? 70 : 35;
 
-	$('#corpo').find('svg').attr('height',$('.chart').height() + 70);
+	//$('#corpo').find('svg').attr('height',$('.chart').height() + 70);
 
 	// creates cadeia's color range array from color.json file
 	var colors = { domain: [], range: [] };
-	console.log(colorJSON);
 	if(eixo == 3) {
         $.each(colorJSON.parceiros, function(i, parceiro){
             if (i>0) {
@@ -344,7 +433,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 
 	svg.append("g")
 		.attr("class", "legendOrdinal")
-		.attr("transform", "translate(1," + (height + 20 + svgMarginTop) + ")");
+		.attr("transform", "translate(1," + (265) + ")");
 
 	var legendOrdinal = d3.legendColor()
 		.cells(colors.domain)
@@ -409,6 +498,25 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			.attr("y", d3.select("#corpo>svg").attr("height") / 2)
 			.attr("text-anchor", "middle");
 	}
+
+
+    if(url['uf'] != 0) {
+        destacaPais(url['uf']);
+    }
+
+    if(url['cad'] != 0 && url['uf'] != 0) {
+        if(vrv == 2) {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit((d.data.size)*100, 2));
+        }
+        else {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(d.data.size, 2));
+        }
+        $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit((d.data.size/root.value)*100, 2)+"%");
+    }
+
+    if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
+    $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
+    $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
 
 });
 

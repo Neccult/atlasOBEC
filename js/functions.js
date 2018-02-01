@@ -1,3 +1,117 @@
+function ajustaAnos(keys) {
+	for(var i = 0; i < keys.length; i++) {
+		keys[i] = keys[i+1];
+    }
+	return keys;
+}
+
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
+
+
+function appendPorts(iframe){
+	if(iframe) {
+		if($("select[data-id='deg']").find("option[value='9']").length == 0) {
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
+        }
+    }
+    else {
+        if($("select[data-id='deg']").find("option[value='9']").length == 0) {
+            $("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
+            $("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
+            $("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
+            $("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
+        }
+	}
+}
+function removePorts(iframe){
+	if(iframe) {
+		if($("select[data-id='deg']").find("option[value='9']").length != 0) {
+            $(window.parent.document).find("select[data-id='deg']").find("option[value='9']").remove();
+            $(window.parent.document).find("select[data-id='deg']").find("option[value='10']").remove();
+            $(window.parent.document).find("select[data-id='deg']").find("option[value='11']").remove();
+            $(window.parent.document).find("select[data-id='deg']").find("option[value='13']").remove();
+        }
+    }
+    else {
+        if($("select[data-id='deg']").find("option[value='9']").length != 0) {
+            $("select[data-id='deg']").find("option[value='9']").remove();
+            $("select[data-id='deg']").find("option[value='10']").remove();
+            $("select[data-id='deg']").find("option[value='11']").remove();
+            $("select[data-id='deg']").find("option[value='12']").remove();
+        }
+	}
+}
+function enableDesag(eixo, vrv, setor, iframe){
+	if(eixo == 0){
+		switch(parseInt(vrv)){
+			case 1:
+			case 2:
+			case 3: appendPorts(iframe); break;
+			default: removePorts(iframe); break;
+		}
+	}
+
+	if(setor == 0) {
+        removePorts(iframe);
+	}
+
+}
+function setIntegerValueData(value, eixo, vrv) {
+    if(eixo == 0) {
+    	if(vrv == 2) {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor*100, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");;
+        }
+        else if(vrv == 3) {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor*100, 2)+"%").css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");;
+        }
+        else if(vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7) {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html("R$ "+formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");
+        }
+    	else {
+            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");
+        }
+    }
+}
+
+function setIntegerValueFontSize(length){
+	return (window.innerWidth/1.5/(length+1))
+}
+
+function setPercentValueData(value, eixo, vrv) {
+	if(eixo == 0){
+		if(vrv == 3) return;
+		if(vrv < 9) {
+			if(value.uf == 0) {
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html("100%");
+                return;
+			}
+		}
+
+		if(vrv >= 9 && vrv <= 13){
+			if(value.ano == 2007){
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html("Indisponível.").css("font-size","32");
+                return;
+            }
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.taxa*100, 2)+"%");
+			return;
+		}
+	}
+    $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+
+}
+
 /*-----------------------------------------------------------------------------
 	Função: formatNumber
 		executa sequencialmente funções para formatar valor pra notação comum brasileira
@@ -269,8 +383,8 @@ var tooltip = (function(){
 			var chartOffset = $('.chart').offset(), 
 				leftOffset = chartOffset.left,
 				leftOffsetEnd = leftOffset+$('.chart').width(),
-				topOffset = chartOffset.top;
-
+				topOffset = chartOffset.top,
+				bottomOffset = topOffset + $('.chart').height();
 			// tooltip dimensions
 			var tooltipWidth = $('.tooltip').width();
 
@@ -282,6 +396,10 @@ var tooltip = (function(){
 			// if tooltips final position is outside screen boundries
 			if(xPositionEnd>leftOffsetEnd){
 				xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
+			}
+
+			if(yPosition + $('.tooltip').height() > bottomOffset){
+				yPosition = bottomOffset - $('.tooltip').height();// - 30;
 			}
 
 			// sets tooltips new position
