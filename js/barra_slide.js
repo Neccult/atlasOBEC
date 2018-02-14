@@ -1,5 +1,6 @@
 var mapping = {"comercio":4,"politicas":3,"mercado":2,"empreendimentos":1};
 var cor_selected = "rgb(109, 191, 201)";
+var cor_background = "#e7e7e7";
 var id = d3.select(".eixo-ativo").attr("id");
 var duration_trans = 350;
 
@@ -19,20 +20,20 @@ d3.selectAll(".eixo-inativo")
 
 d3.selectAll(".eixo-barra")
     .on("click", function(){
-    d3.selectAll(".eixo-barra")
-    .transition()
-    .style("background-color", "#cccccc")
-    .duration(duration_trans);
+        d3.selectAll(".eixo-barra")
+        .transition()
+        .style("background-color", cor_background)
+        .duration(duration_trans);
 
-    d3.select(this)
-    .transition()
-    .style("background-color", cor_selected)
-    .duration(duration_trans);
+        d3.select(this)
+        .transition()
+        .style("background-color", cor_selected)
+        .duration(duration_trans);
     })
     .on("mouseover", function(){
         d3.selectAll(".eixo-barra")
         .transition()
-        .style("background-color", "#cccccc")
+        .style("background-color", cor_background)
         .duration(duration_trans);
         d3.select(this)
         .transition()
@@ -42,7 +43,7 @@ d3.selectAll(".eixo-barra")
     .on("mouseout", function(){
         d3.select(this)
         .transition()
-        .style("background-color", "#cccccc")
+        .style("background-color", cor_background)
         .duration(duration_trans);
         fade_in(mapping[id]);
     })
@@ -50,7 +51,7 @@ d3.selectAll(".eixo-barra")
 function fade_out(id){
     d3.select("#eixo"+id)
         .transition()
-        .style("background-color", "#cccccc")
+        .style("background-color", cor_background)
         .duration(duration_trans);
 }
 function fade_in(id){

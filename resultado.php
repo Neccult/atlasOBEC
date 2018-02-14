@@ -102,6 +102,76 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 </div>
             </div>
+
+            <!--=== BREADCRUMBS ===-->
+
+            <div class="bread-parent">
+
+
+                <div class="row breadcrumb">
+
+                    <div>
+                        <select class="bread-eixo" data-id="eixo">
+                            <?php
+                            foreach ($json_text['select']['eixo'] as $bread_eixo) {
+
+                                if($bread_eixo['value'] === $eixo){
+                                    echo "<option value='". $bread_eixo['value'] ."' selected>" . $bread_eixo['name'] . "</option>";
+                                }
+                                else{
+                                    echo "<option value='" . $bread_eixo['value'] . "'>" . $bread_eixo['name'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="bread-separator">/</div>
+                    <div>
+                        <select class="bread-select bread-select-var" data-id="var">
+                            <?php
+                            foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="bread-separator">/</div>
+                    <div>
+                        <select class="bread-select bread-uf" data-id="uf">
+                            <?php
+                            foreach ($json_text['select']['uf'] as $bread_uf) {
+                                echo "<option value='" . $bread_uf['value'] . "'>" . $bread_uf['name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="bread-separator">/</div>
+                    <div>
+                        <select class="bread-select" data-id="ano">
+                            <?php
+                            foreach ($json_text['select']['ano'] as $option) {
+                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="bread-separator">/</div>
+                    <div>
+                        <select class="bread-select" data-id="cad">
+                            <?php
+                            foreach ($json_text['select']['cad'] as $bread_cad) {
+                                echo "<option value='" . $bread_cad['value'] . "'>" . $bread_cad['name'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
             <!--==== jquery load menu ===-->
 			<div class="row" id="view-boxes">
 				<!-- gráfico -->
@@ -133,9 +203,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         }
                     ?>
                     <?php if(isset($text['mapa'])) { ?>
-                        <iframe id="view_box" src="<?php echo $view; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
+                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
                     <?php } else { ?>
-                        <iframe id="view_box" src="<?php echo $view; ?>_box.php" style="display: none; border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
+                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="display: none; border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
                         Variável não possui este tipo de visualização
                     <?php } ?>
                     <!--=== views gráfico ===-->
@@ -152,12 +222,15 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 <!--=============== DADOS! ================-->
 
-                <div class="col-md-4 col-xs-12" style="height: 246px;">
+                <div class="col-md-4 col-xs-12" style="height: 320px;">
                     <div class="view-title">
                         DADOS
                     </div>
                     <div class="state-title">
                         BRASIL
+                    </div>
+                    <div class="cad-title">
+                        TODOS SETORES
                     </div>
                     <div class="data-values">
                         <div class="integer-value">
@@ -169,10 +242,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             <span class="description-number"></span>
                         </div>
                     </div>
+                    <div class="value-info-title">
+                        *VALORES EM MILHARES DE REAIS
+                    </div>
+                    <div class="font-title">
+                        FONTE(S): RAIS
+                    </div>
                 </div>
 
                 <!--============= opções gráfico! ============-->
-				<div class="col-md-4 col-xs-12 opts-result" style="height: 246px;">
+				<div class="col-md-4 col-xs-12 opts-result" style="height: 320px;">
                     <div id="menu-view">
                         <div class="view-title">
                             MENU
@@ -286,7 +365,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     </div>
                     <?php if($var < 10){ ?>
                         <div id="menu-view">
-                            <div class="view-title">
+                            <div class="view-title" data-id="scc&ocp">
                                 SETORES
                             </div>
                             <div id="title-view-scc">
@@ -329,7 +408,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         Variável não possui este tipo de visualização
                     <?php } ?>
                 </div>
-                <div id="descricao" class="col-md-4 col-xs-12" style="height: 125px; overflow: auto; top: -140px;">
+                <div id="descricao" class="col-md-4 col-xs-12" style="height: 199px; overflow: auto; top: -210px;">
                     <div class="view-title">
                         DESCRIÇÃO
                     </div>
@@ -342,6 +421,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         if($(window).width() < 1200) {
                             $("#descricao").css("top", "0px");
                             $(".col-md-4").css('height', 'auto');
+                        }
+                        if($(window).width() < 850) {
+                            $(".bread-parent").hide();
                         }
                     }
                     setTimeout(result_mobile(), 500);
@@ -477,7 +559,6 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 </script>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/main.js"></script>

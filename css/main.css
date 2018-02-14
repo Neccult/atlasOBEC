@@ -265,6 +265,37 @@ button.opt:hover, button.opt.active{
 	margin-bottom: 15px;
 }
 
+.cad-title {
+	color: #ccc;
+	font-size: 14px;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	font-family: Lato Light;
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+
+.value-info-title {
+	position: absolute;
+	bottom: 0;
+	float: left;
+	color: #888;
+	font-size: 8px;
+	text-transform: uppercase;
+	font-family: Lato Light;
+}
+
+.font-title {
+	position: absolute;
+	bottom: 0;
+	right: 8;
+	float: right;
+	color: #888;
+	font-size: 8px;
+	text-transform: uppercase;
+	font-family: Lato Light;
+}
+
 .data-values {
 	width:	100%;
 	color: #bbb;
@@ -373,6 +404,7 @@ button.opt:hover, button.opt.active{
 	text-align: justify;
 	padding-right: 30px;
 	color: #737277;
+
 }
 
 .footer{
@@ -392,6 +424,8 @@ button.opt:hover, button.opt.active{
 .img_logofim{
 	width: 140px;
 	height: auto;
+	margin-top: 50px;
+
 }
 /*==== menu home ===*/
 .menu-col{
@@ -581,7 +615,12 @@ ul.var-list li{
 
 .destacado {
 	stroke:	#555 !important;
-	stroke-width: 3px;
+	stroke-width: 0px;
+}
+
+.destacado-scc {
+	stroke:	#555 !important;
+	stroke-width: 1px;
 }
 
 /*=============  resultados =================*/
@@ -826,6 +865,57 @@ article.results-article div.results-content{
 	-webkit-appearance: none;
 	margin: 5px 0px;
 }
+
+.bread-parent{
+
+}
+
+.breadcrumb{
+	display: block;
+	justify-content: center;
+	width: 80%;
+	background-color: #e7e7e7;
+	margin-left: auto;
+	margin-right: auto;
+
+
+}
+.bread-select, .bread-eixo{
+	float: left;
+	background-color: #f0f0f0;
+	background-size: 10px;
+	background-position: right center;
+	background-repeat: no-repeat;
+	padding: 2px 10px 2px 5px;
+	color: #737277;
+	border: 1px solid #e7e7e7;
+	outline: none;
+	width: auto;
+	font-size: 10px;
+	border-radius: 2px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	margin: 5px 0px;
+	background-image: url(../images/arrow.png);
+	cursor: pointer;
+	border: 1px #ddd solid;
+}
+
+.bread-select-var{
+	width: 20%;
+
+}
+
+.bread-separator{
+	margin: 8px 10px;
+	float:left;
+	font-size: 20px;
+	color: #ddd;
+}
+
 select[disabled].opt-select{
 	background-image: url('../images/arrow_pb.png');
 	background-color: #d4d4d4;
@@ -1141,8 +1231,8 @@ body.contraste{
 	position: absolute;
 	left: 40%; 
 	width: 20%;
-	height: 15px; 
-	background-color: #cccccc; 
+	height: 12px; 
+	background-color: #e7e7e7; 
 	border-radius: 8px;
 }
 .eixo-barra{

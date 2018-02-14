@@ -39,9 +39,9 @@ function destacaPais(ufId) {
    
 	/* configura projeção */
 	var projection = d3.geoMercator()
-		.center([-50, -28])
+		//.center([-50, -30])
 		.rotate([4.4, 0])               
-		.scale(455)
+		.scale(400)
 		.translate([width/2, height/1.2]);  
 
 	var legendTransform = "translate(565,350)";
@@ -55,7 +55,7 @@ else if(windowWidth>=1550) {
 
     /* configura projeção */
     var projection = d3.geoMercator()
-        .center([-50, -28])
+        //.center([-50, -28])
         .rotate([4.4, 0])
         .scale(400)
         .translate([width/2, height/1.2]);
@@ -71,7 +71,7 @@ else if(windowWidth>=1280) {
 
     /* configura projeção */
     var projection = d3.geoMercator()
-        .center([-50, -20])
+       // .center([-50, -20])
         .rotate([4.4, 0])
         .scale(380)
         .translate([width/2, height/1.2]);
@@ -88,7 +88,7 @@ else if(windowWidth>=1280) {
 
      /* configura projeção */
      var projection = d3.geoMercator()
-         .center([-50, -20])
+        // .center([-50, -20])
          .rotate([4.4, 0])
          .scale(350)
          .translate([width/2, height/1.2]);
@@ -108,7 +108,7 @@ else if(windowWidth>=1000){
    
 	//configura projeção
 	var projection = d3.geoMercator()
-		.center([-40, -32])
+		//.center([-40, -32])
 		.rotate([4.4, 0])               
 		.scale(400)                     
 		.translate([width / 2, height / 1.2]);
@@ -127,7 +127,7 @@ else if(windowWidth>=800){
 
      //configura projeção
      var projection = d3.geoMercator()
-         .center([-40, -28])
+         //.center([-40, -28])
          .rotate([4.4, 0])
          .scale(400)
          .translate([width / 2, height / 1.2]);
@@ -140,7 +140,7 @@ else if(windowWidth>=800){
 /**** tablet portrait! ****/
 else if(windowWidth>=700){
 
-	var height = width/2;
+     var height = 350;
 
 	//cria svg
 	var svg = d3.select("#corpo").append("svg")
@@ -149,7 +149,7 @@ else if(windowWidth>=700){
    
 	//configura projeção
 	var projection = d3.geoMercator()
-		.center([-40, -28])
+		//.center([-40, -28])
 		.rotate([4.4, 0])               
 		.scale(400)                     
 		.translate([width / 2, height / 1.2]);
@@ -161,7 +161,7 @@ else if(windowWidth>=700){
  /**** tablet portrait! ****/
  else if(windowWidth>=620){
 
-     var height = width/1.8;
+     var height = 350;
 
      //cria svg
      var svg = d3.select("#corpo").append("svg")
@@ -170,7 +170,7 @@ else if(windowWidth>=700){
 
      //configura projeção
      var projection = d3.geoMercator()
-         .center([-40, -27])
+         //.center([-40, -27])
          .rotate([4.4, 0])
          .scale(400)
          .translate([width / 2, height / 1.2]);
@@ -182,7 +182,7 @@ else if(windowWidth>=700){
  /**** tablet portrait! ****/
  else if(windowWidth>=100){
 
-     var height = 290;
+     var height = 350;
 
      //cria svg
      var svg = d3.select("#corpo").append("svg")
@@ -203,7 +203,7 @@ else if(windowWidth>=700){
 /**** mobile! ****/
 else{  
 
-	var height = 290;
+	var height = 350;
 	var shapeWidth = 20;
 
 	//cria svg
@@ -213,7 +213,7 @@ else{
    
 	//configura projeção
 	var projection = d3.geoMercator()
-		.center([-50, -28])             
+		//.center([-50, -28])             
 		.rotate([4.4, 0])               
 		.scale(250)                     
 		.translate([width / 1.5, height / 1.2]);
@@ -241,8 +241,10 @@ d3.json('data/pt-br.json', function(error, data) {
 });
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
-// console.log(config);
 
+$.get("./db/json_mapa.php"+config, function(data) {
+
+});
 //pre-load arquivos
 d3.queue()
 	.defer(d3.json, "./data/br-min.json")
@@ -268,7 +270,7 @@ function ready(error, br_states, mapa){
 
 	//carrega estados JSON
 	var states = topojson.feature(br_states, br_states.objects.states);
-
+    projection.fitExtent([[0,0],[width, 350*0.8]], states)//.fitSize([width, height-100], states)
 
 	//exclui linha de cabeçario do OBJ
 	info.splice(0,1);
@@ -334,11 +336,24 @@ function ready(error, br_states, mapa){
 			  
 		//mouseover
 		.on("mouseover", function(d){
-			if(vrv === 2 || vrv === 3 || vrv === 9) {
-				tooltipInstance.showTooltip(d, [
+            if(vrv === 2) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatDecimalLimit(dict[d.id].valor, 2)+"%"],
+                ]);
+            }
+            else if(vrv === 3) {
+                tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
                 ]);
+            }
+            else if(vrv === 9) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatDecimalLimit(100*dict[d.id].valor/100, 2)+"%"],
+                ]);
+
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                 tooltipInstance.showTooltip(d, [
@@ -365,10 +380,16 @@ function ready(error, br_states, mapa){
             newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
 			$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
             $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+            $(window.parent.document).find("select[data-id='uf']").val(d.id);
             destacaPais(d.id);
+
             setIntegerValueData(dict[d.id], eixo, vrv);
+
             setPercentValueData(dict[d.id], eixo, vrv);
+
+
             $(window.parent.document).find(".state-title").first().html(d['properties']['name']);
+            
 		})
 		.style("cursor", "pointer");
 
@@ -405,17 +426,87 @@ function ready(error, br_states, mapa){
         .shapePadding(10)
         .orient('vertical')
         .scale(color);
+    
+    
+/********* LEGENDA*********/
 
 
-    legend_svg.append("g")
-        .attr("class", "fonte")
-        .attr("transform", fonteTransform)
-		.append("text").text("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+var low_color = color(minValue);
+var high_color = color(maxValue);
+var x_barra = svg.attr("width")*0.3;
+var y_barra = 350*0.85;
+var max_barra = maxValue;
+var min_barra = minValue;
+var height_barra = 350*0.03;
+var width_barra = width*0.4;
+var prefix = ""
+var fontColor = "#aaa"
 
-    legend_svg.append("g")
-        .attr("class", "valores")
-        .attr("transform", valoresTransform)
-        .append("text").text(textJSON.var[eixo][vrv-1].mapa_valores);
+if(y_barra + height_barra + $("svg").offset().top > 350){
+    y_barra = 350 - 23 - $("svg").offset().top - height_barra;
+}
+
+
+
+gradient = svg.append("defs")
+                    .append("linearGradient")
+                    .attr("id", "grad")
+                    .attr("x1", "0%")
+                    .attr("y1", "100%")
+                    .attr("x2", "90%")
+                    .attr("y2", "100%")
+
+    gradient.append("stop")
+            .attr("offset", "0%")
+            .style("stop-color", low_color)
+            .style("stop-opacity", 1);
+
+    gradient.append("stop")
+            .attr("offset", "90%")
+            .style("stop-color", high_color)
+            .style("stop-opacity", 1);
+
+    svg.append("g")
+       .append("rect")
+       .attr("x", x_barra)
+       .attr("y", y_barra)
+       .attr("height", height_barra)
+       .attr("width", width_barra)
+       .attr("rx", height/150)
+       .attr("ry", height/150)
+       .style("fill", "url(#grad)")
+       .style("stroke-width", 1)
+       .style("stroke", fontColor);
+    
+    svg.selectAll("line")
+       .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
+       .enter()
+       .append("line")
+       .attr("x1", function(d,i){
+           var position = x_barra+i*width_barra/2;
+
+           texto = svg.append("text")
+                        .attr("id", "legenda"+i)
+                        .attr("x", position)
+                        .attr("y", y_barra+height_barra +12)
+                        .attr("fill", fontColor);
+            
+            formatBarTextMap(d, eixo, vrv, texto)
+                        
+           return position;
+        })
+       .attr("x2", function(d,i){return x_barra+i*width_barra/2})
+       .attr("y1", y_barra-2)
+       .attr("y2", y_barra+height_barra+2)
+       .style("stroke", fontColor)
+       .style("stroke-width", 1)
+/************************ */
+
+
+
+	$(window.parent.document).find('.value-info-title').html(textJSON.var[eixo][vrv-1].mapa_valores);
+    $(window.parent.document).find('.font-title').html("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+
     /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
@@ -472,7 +563,8 @@ function ready(error, br_states, mapa){
 	}*/
     if(url['uf'] != 0) {
     	destacaPais(url['uf']);
-    	setPercentValueData(dict[url['uf']], eixo, vrv);
+        setPercentValueData(dict[url['uf']], eixo, vrv);
+        setIntegerValueData(dict[url['uf']], eixo, vrv);
 	}
 
 	if(url['cad'] != 0 && url['uf'] != 0) {

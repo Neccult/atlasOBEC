@@ -96,13 +96,29 @@ function updateIframe(url){
         if((++count)!=size) newUrl = newUrl+"&";
     });
     if($('iframe[id="view_box"]').length != 0) {
-        $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        if(url['var'] > 9){
+            $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        } else{
+            $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        }
+
     }
     if($('iframe[id="view_box_barras"]').length != 0) {
         $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
     if($('iframe[id="view_box_scc"]').length != 0) {
-        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        if(url['var'] == 3){
+            $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        } else if  (url['var'] > 9){
+            newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
+            newUrl = newUrl.replace(/ano=[0-9]*/, "ano=");
+            $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+            $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+        } else {
+            $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        }
+
     }
 
 }
@@ -144,9 +160,16 @@ Saída:
 function controlFilter(selectvalue, selectid){
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
-    var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
-    var ano = SCCSrc.match(/ano=([0-9]*)/)[1];
-    var uf = SCCSrc.match(/uf=([0-9]*)/)[1];
+    if(BarraSrc != undefined) var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
+    else var setor = 0;
+    if(SCCSrc != undefined) {
+        var ano = SCCSrc.match(/ano=([0-9]*)/)[1];
+        var uf = SCCSrc.match(/uf=([0-9]*)/)[1];
+    }
+    else {
+        var ano = 2014;
+        var uf = 0;
+    }
 	/* se for PORTE x ATUAÇÃO */
     if(selectid==='var') {
         defaultUrl();
@@ -348,8 +371,11 @@ function controlAtc(select,isPrt){
 function controlAno(select){
 
     if(window.location.hash==="#empreendimentos"){
-        $(select).find('option[value="2015"]').remove();
-        $(select).find('option[value="2016"]').remove();
+        if(url['var'] > 3){
+            $(select).find('option[value="2015"]').remove();
+            $(select).find('option[value="2016"]').remove();
+        }
+
     }
     else {
         if(url['ocp'] == 0) {
@@ -426,12 +452,23 @@ function loadResult(){
 										*/
 	if(window.location.hash.substring(1) == "empreendimentos") {
         var SCCSrc = $("#view_box_scc").attr("src");
-        var setor = SCCSrc.match(/cad=([0-9]*)/)[1];
-        if(setor == 0) {
-            $('.select-deg').find('select').find('option[value="9"]').remove();
-            $('.select-deg').find('select').find('option[value="10"]').remove();
-            $('.select-deg').find('select').find('option[value="11"]').remove();
-            $('.select-deg').find('select').find('option[value="12"]').remove();
+        if(SCCSrc != undefined) {
+            var setor = SCCSrc.match(/cad=([0-9]*)/)[1];
+        }
+        else {
+            var setor = 0;
+        }
+        if(url['var'] > 3) {
+            $(window.parent.document).find('.select-deg').find('select').find('option[value="9"]').remove();
+            $(window.parent.document).find('.select-deg').find('select').find('option[value="10"]').remove();
+            $(window.parent.document).find('.select-deg').find('select').find('option[value="11"]').remove();
+            $(window.parent.document).find('.select-deg').find('select').find('option[value="12"]').remove();
+        }
+        else {
+            if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
+            if($(window.parent.document).find("select[data-id='deg']").find("option[value='10']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
+            if($(window.parent.document).find("select[data-id='deg']").find("option[value='11']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
+            if($(window.parent.document).find("select[data-id='deg']").find("option[value='12']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
         }
 		if(url['cad']==0 && url['view']!='treemap_scc'){
             $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
@@ -503,6 +540,33 @@ function loadResult(){
         if(selectId=='ano') controlAno(this)
 
 	});
+
+    $(".bread-select").each(function(){
+
+        var selectId = $(this).attr('data-id'),
+            selectValue = url[selectId];
+
+        /* atualiza valor select */
+        $(this).val(selectValue);
+        /* select porte default */
+        if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
+
+            /* valor atuação */
+            $(this).val('atc-'+url['atc']);
+        }
+
+        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
+
+            /* valor atuação */
+            $(this).val('ocp-'+url['ocp']);
+        }
+
+        if(selectId=='prt') controlAtc(this,1);
+        if(selectId=='atc') controlAtc(this,0);
+        if(selectId=='mec') controlMec(this);
+        if(selectId=='ano') controlAno(this)
+
+    });
 
 }
 
@@ -702,6 +766,42 @@ function expandMenuVariaveis(a) {
     $('.eixo-ativo').animate({width: "200px", margin: "0px"}, "fast");
 }
 
+function updateUrl() {
+    $('.bread-select').each(function() {
+        url[$(this).attr('data-id')] = $(this).val();
+    });
+}
+
+function switchToSetores() {
+    $(".view-title[data-id='scc&ocp']").html("SETORES");
+    $("#title-view-scc").empty();
+    $("#title-view-scc").append("<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
+        "                                <span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>");
+    $(".bread-select[data-id='ocp']").empty();
+    $(".bread-select[data-id='ocp']").append("<option value=\"0\">Todos</option><option value=\"1\">Arquitetura e Design</option><option value=\"2\">Artes Cênicas e Espetáculos</option><option value=\"3\">Audiovisual</option><option value=\"4\">Cultura Digital</option><option value=\"5\">Editorial</option><option value=\"6\">Educação e Criação em Artes</option><option value=\"7\">Entretenimento</option><option value=\"8\">Música</option><option value=\"9\">Patrimônio</option><option value=\"10\">Publicidade</option>");
+    $(".bread-select[data-id='ocp']").attr("data-id", "cad");
+}
+
+function switchToOcupations() {
+    $(".view-title[data-id='scc&ocp']").html("OCUPAÇÕES");
+    $("#title-view-scc").empty();
+    $("#title-view-scc").append("<span class=\"ocp\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Atividades Relacionadas<br></span>");
+    $("#title-view-scc").append("<span class=\"ocp\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Cultura<br></span>");
+    $(".bread-select[data-id='cad']").empty();
+    $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
+    $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
+    $(".bread-select[data-id='cad']").attr("data-id", "ocp");
+}
+
 /*====== 
 	documento pronto
 ======*/
@@ -727,14 +827,15 @@ $(document).ready(function(){
 
 	/*=== selecionar variável ===*/
 
-	if(url['var'] < 10){
-        $(document).on('click', ".scc", function(){
-            var newSCCSrc = $("#view_box_scc").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
+	$(document).on('click', ".scc", function(){
+        if(url['var'] < 10){
+            var setor = $(this).attr('data-id');
+            var newSCCSrc = $("#view_box_scc").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
             var change = newSCCSrc.match(/uf=([0-9]*)/);
-            var newBarrasSrc = $("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
-            var newSrc = $("#view_box").attr("src").replace(/cad=[0-9]*/, "cad="+$(this).attr('data-id'));
+            var newBarrasSrc = $("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
+            var newSrc = $("#view_box").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
             newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
-            if($(this).attr('data-id') == 0) {
+            if(setor == 0) {
                 newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
                 newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
                 newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
@@ -743,20 +844,61 @@ $(document).ready(function(){
             $("#view_box_barras").attr("src", newBarrasSrc);
             $("#view_box_scc").attr("src", newSCCSrc);
 
-            enableDesag(getEixo(window.location.hash.substring(1)), url['var'], $(this).attr('data-id'), false);
+            enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false);
+
+            d3.json('data/pt-br.json', function(error, data) {
+                if (error) throw error;
+
+                textJSON = data;
+                $(".cad-title").first().html(textJSON.select.cad[setor].name);
+
+            });
+
+            $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+        }
+    });
+
+    $(document).on('click', ".ocp", function(){
+        var ocupacao = $(this).attr('data-id');
+        var newSCCSrc = $("#view_box_scc").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
+        var change = newSCCSrc.match(/uf=([0-9]*)/);
+        var newBarrasSrc = $("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
+        var newSrc = $("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
+        newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
+        if(ocupacao == 0) {
+            newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
+            newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
+            newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
+        }
+        $("#view_box").attr("src", newSrc);
+        $("#view_box_barras").attr("src", newBarrasSrc);
+        $("#view_box_scc").attr("src", newSCCSrc);
+
+        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], ocupacao, false);
+
+        d3.json('data/pt-br.json', function(error, data) {
+            if (error) throw error;
+
+            textJSON = data;
+            $(".cad-title").first().html(textJSON.select.ocp[ocupacao-1].name);
+
         });
-    }
+
+        $(".bread-select[data-id='ocp']").val($(this).attr("data-id"));
+    });
 
 	$(document).on('click', ".var-click", function(){
         defaultUrl(); /* valores de filtros default */
-		controlVar($(this).attr('href'));				
+		controlVar($(this).attr('href'));
+
 	});
     if(url['var'] === "") controlVarPage(1);
     if(url['var']) controlVar(url['var']);
 
     /* mobile! */
 	$(document).on('change', ".menu-select", function(){
-		controlVar(this.value);				
+		controlVar(this.value);
+
 	});	
 
 	/* velocidade scroll */
@@ -767,45 +909,102 @@ $(document).ready(function(){
 	/*=== resultado ===*/
 
 	/* alterar tipo de visualização */
-	$(document).on('click', ".opt.view", function(){
+	$(document).on('click', "button.opt.view", function(){
 		if($(this).attr("id") !== "setor" && $(this).attr("id") !== "ocupacao") {
-            defaultUrl(); /* valores de filtros default */
+            updateUrl();
             url['view'] = $(this).attr('id'); /* muda visualização */
-            changeChart(url); /* atualiza gráfico */
+            updateIframe(url); /* atualiza gráfico */
         }
         else {
+            updateUrl();
 		    if($(this).attr("id") === "setor") {
+                switchToSetores();
 		        url['slc'] = 0;
                 url['deg'] = 0;
+                url['ocp'] = 0;
                 controlFilter('0', 'deg');
+                url['ocp'] = 0;
             }
 		    else {
+                d3.json('data/pt-br.json', function(error, data) {
+                    if (error) throw error;
+
+                    textJSON = data;
+                    $(".cad-title").first().html(textJSON.select.ocp[0].name);
+
+                });
+		        switchToOcupations();
 		        url['slc'] = 1;
                 url['deg'] = 0;
+                url['cad'] = 0;
+                url['ocp'] = 1;
                 controlFilter('0', 'deg');
+                url['cad'] = 0;
+                url['ocp'] = 1;
             }
-            changeChart(url); /* altera gráfico */
+            updateIframe(url); /* altera gráfico */
         }
 	});
 
 	/* alterar janela filtro */
 	$(document).on('click', ".opt.select", function(){
 		openFilter($(this));
+
 	});
 
 	/* escolher novo filtro */
 	$(document).on('change', ".opt-select", function(){
 		if($(this).attr("data-id") !== "eixo") {
-            controlFilter($(this).val(), $(this).attr('data-id'));
+            updateUrl();
+		    controlFilter($(this).val(), $(this).attr('data-id'));
             /* controla relações entre filtros */
-            changeChart(url);
+            updateIframe(url);            
+            $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
             /* altera gráfico */
+            if($(this).attr('data-id') == 'var'){
+                updateMenuSetor($(this).val())
+            }
         }
         else {
 		    parent.window.location = "page.php#"+$(this).val();
         }
-		
 	});
+
+    $(document).on('change', ".bread-select", function(e){
+        if($(this).attr("data-id") !== "eixo") {
+            updateUrl();
+            controlFilter($(this).val(), $(this).attr('data-id'));
+            /* controla relações entre filtros */
+            updateIframe(url);
+            if($(this).attr('data-id') =='var'){
+                $('.bread-select[data-id=uf]').val(0);
+                $('.bread-select[data-id=cad]').val(0);
+                $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
+                updateMenuSetor($(this).val());
+            }
+            if($(this).attr("data-id") == "uf") {
+                $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
+            }
+            if($(this).attr("data-id") === "cad") {
+                $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
+            }
+            if($(this).attr("data-id") === "ocp") {
+                $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
+            }
+
+            $(".opt-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
+
+            /* altera gráfico */
+        }
+        else {
+            parent.window.location = "page.php#"+$(this).val();
+        }
+
+    });
+
+    $(document).on('change', ".bread-eixo", function(){
+        parent.window.location = "page.php#"+$(this).val();
+    });
 
 	/* download doc */
 	$(document).on('click', '.button-control-down', function(){
@@ -829,7 +1028,7 @@ $(document).ready(function(){
     $(document).on('mouseenter', '.eixo-ativo', function() {
         expandMenuEixoAtivo(this);
     });
-    ////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
 
     updateIframe(url);
 });

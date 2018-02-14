@@ -183,14 +183,13 @@ else if($eixo == 1) {
     else {
         for ($ocp=1; $ocp <= 2; $ocp++) {
             $tupla = EixoDois::find($var, $uf, 0, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $ano);
-
             $treemap .= '
                 {
                   "colorId": "'.$ocp.'", 
-                  "name": "'.$tupla->OcupacaoNome.'",
+                  "name": "'.$tupla[0]->OcupacaoNome.'",
                   "children": [
                     {
-                      "name": "'.$tupla->OcupacaoNome.'",
+                      "name": "'.$tupla[0]->OcupacaoNome.'",
                       "children": [';
             foreach ($tupla as $index => $item) {
                 if($frm != 0) {
@@ -226,7 +225,7 @@ else if($eixo == 1) {
                              "taxa": "' . $item->Taxa . '", 
                              "desagreg": "' . ($index+1) . '", 
                              "size": "' . $item->Valor . '"}';
-                $treemap .= ($index == sizeof($tupla)-1) ? '' : ',';
+                $treemap .= ($index == sizeof($tupla[0])-1) ? '' : ',';
             }
             $treemap .= '   ]
                         }

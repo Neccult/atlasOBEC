@@ -19,7 +19,7 @@ Array.prototype.remove = function() {
 
 function appendPorts(iframe){
 	if(iframe) {
-		if($("select[data-id='deg']").find("option[value='9']").length == 0) {
+		if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) {
             $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
             $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
             $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
@@ -37,7 +37,7 @@ function appendPorts(iframe){
 }
 function removePorts(iframe){
 	if(iframe) {
-		if($("select[data-id='deg']").find("option[value='9']").length != 0) {
+		if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length != 0) {
             $(window.parent.document).find("select[data-id='deg']").find("option[value='9']").remove();
             $(window.parent.document).find("select[data-id='deg']").find("option[value='10']").remove();
             $(window.parent.document).find("select[data-id='deg']").find("option[value='11']").remove();
@@ -63,53 +63,148 @@ function enableDesag(eixo, vrv, setor, iframe){
 		}
 	}
 
-	if(setor == 0) {
-        removePorts(iframe);
-	}
-
 }
 function setIntegerValueData(value, eixo, vrv) {
-    if(eixo == 0) {
-    	if(vrv == 2) {
-            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor*100, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");;
-        }
-        else if(vrv == 3) {
-            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor*100, 2)+"%").css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");;
-        }
-        else if(vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7) {
-            $(window.parent.document).find(".integer-value").first().find(".number").first().html("R$ "+formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");
-        }
-    	else {
-            $(window.parent.document).find(".integer-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length)+"px");
-        }
-    }
+	$.get("./data/pt-br.json", function(description) {
+		sufixo = description.var[eixo][vrv-1].sufixo_valor;
+		prefixo = description.var[eixo][vrv-1].prefixo_valor;
+		valor = value.valor;
+		switch(eixo) {
+			case 0:
+				if(vrv == 3) {
+					valor = valor*100;
+				}else if(vrv == 9 && value.uf == null) {
+					valor = valor*100;
+				}
+				break;					
+			case 1:
+				if(vrv == 9){
+					valor=valor*100;
+				}
+				break;
+					
+		}
+
+		$(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+formatDecimalLimit(valor, 2)+sufixo).css("font-size", setIntegerValueFontSize(formatDecimalLimit(value.valor, 2).toString().length));
+			
+	});
 }
 
 function setIntegerValueFontSize(length){
-	return (window.innerWidth/1.5/(length+1))
+
+	ww = window.innerWidth/2.1;
+	one = ww/100;
+	size = one*(28-length*1.4);
+
+
+	return size+"px";
 }
 
 function setPercentValueData(value, eixo, vrv) {
 	if(eixo == 0){
-		if(vrv == 3) return;
+        if(vrv == 2) {
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+            return;
+        }
+        if(vrv == 3) {
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+			return;
+		}
 		if(vrv < 9) {
-			if(value.uf == 0) {
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html("100%");
+			if(value.uf == null) {
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%").css("font-size", setIntegerValueFontSize("100%".toString().length));
                 return;
 			}
 		}
 
-		if(vrv >= 9 && vrv <= 13){
+        if(vrv == 9){
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+            return;
+        }
+
+		if(vrv >= 10 && vrv <= 13){
 			if(value.ano == 2007){
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html("Indisponível.").css("font-size","32");
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html("Indisponível.").css("font-size", setIntegerValueFontSize("Indisponivel.".length))
                 return;
             }
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.taxa*100, 2)+"%");
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.taxa*100, 2)+"%").css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.taxa*100, 2)+"%").toString().length));
 			return;
 		}
 	}
-    $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+    $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%").css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.percentual*100, 2)+"%").toString().length));
 
+}
+
+function formatBarTextMap(value, eixo, vrv, obj){
+	
+	var font_size = 9
+
+	$.get("./data/pt-br.json", function(description) {
+		
+		sufixo = description.var[eixo][vrv-1].sufixo_valor;
+		prefixo = description.var[eixo][vrv-1].prefixo_valor;
+		valor = value;
+		switch(eixo) {
+			case 0:
+				if(vrv == 3) {
+					valor = valor*100;
+				}
+				break;					
+			case 1:
+				if(vrv == 9){
+					valor *= 100;
+				}
+				break;
+					
+		}
+
+		if(sufixo == 'h')
+			sufixo = '';
+
+		obj.text(formatGreatNumbers(valor, prefixo)+sufixo).style('font-size', font_size);
+
+		width_text =  Math.floor((obj.text()).length*font_size*0.7);
+		obj.attr("x", obj.attr("x")-Math.floor(width_text/2));
+	});
+
+	
+}
+
+function updateMenuSetor(vrv){
+	if(vrv > 9){
+		d3.selectAll('#menu-view').filter(function(d, i){
+			return i;
+		}).style("display", "none");
+	}
+	else{
+		d3.selectAll('#menu-view').filter(function(d, i){
+			return i;
+		}).style("display", "inline");
+	}
+}
+
+/*
+* Função para retornar um valor na casa dos milhões num formato encurtado
+* PARÂMETROS:
+* 	value: número a ser formatado
+* 	prefix: caso haja um prefixo na representação do valor. ex: "R$"
+*/
+function formatGreatNumbers(value, prefix){
+	exp_milhao = 6;
+	exp_bilhao = 9;
+
+	point = String(value).indexOf(".");
+
+	if(point > exp_milhao && point <= exp_bilhao || point == -1 && String(value).length > exp_milhao){
+		value = value / Math.pow(10, exp_milhao);
+		return prefix+formatDecimalLimit(value, 2) + "M";
+	}
+	else if(point > exp_bilhao || point == -1 && String(value).length > exp_bilhao){
+		value = value / Math.pow(10, exp_bilhao);
+		return prefix+formatDecimalLimit(value, 2) + "B";
+	}
+	
+	return prefix+formatDecimalLimit(value, 2);
 }
 
 /*-----------------------------------------------------------------------------

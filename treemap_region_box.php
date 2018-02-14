@@ -133,7 +133,6 @@
     <?php } ?>
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
 </script>
-<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/contraste.js"></script>
