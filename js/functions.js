@@ -96,8 +96,16 @@ function setIntegerValueFontSize(length){
 	one = ww/100;
 	size = one*(28-length*1.4);
 
-
 	return size+"px";
+}
+
+function setStateTitle(stateTitle){
+	len = stateTitle.length
+	ww = window.innerWidth;
+	size = Math.round(1.2*ww/len);
+	if(size > 30)
+		size = 30;
+	$(window.parent.document).find(".state-title").css('font-size', size).first().html(stateTitle);
 }
 
 function setPercentValueData(value, eixo, vrv) {
@@ -123,11 +131,7 @@ function setPercentValueData(value, eixo, vrv) {
         }
 
 		if(vrv >= 10 && vrv <= 13){
-			if(value.ano == 2007){
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html("Indisponível.").css("font-size", setIntegerValueFontSize("Indisponivel.".length))
-                return;
-            }
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.taxa*100, 2)+"%").css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.taxa*100, 2)+"%").toString().length));
+        	$(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.valor, 2)).toString().length));
 			return;
 		}
 	}

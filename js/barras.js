@@ -369,7 +369,14 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 var title = title_content.replace("<span>", "");
                 title = title.replace("<br>", "");
                 title = title.replace("</span>", "");
-                if (vrv === 2) {
+                if (vrv === 2 && url['uf'] == 0) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatDecimalLimit(dados.value[i], 2) + "%"],
+                        ["", formatDecimalLimit(dados.percentual[i] * 100, 2) + "%"],
+                        ["", formatDecimalLimit(dados.taxa[i], 2)],
+                    ]);
+                } else if (vrv === 2 && url['uf'] !== 0) {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatDecimalLimit(dados.value[i]/100, 2) + "%"],
@@ -388,7 +395,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 else if (vrv >= 4 && vrv <= 7) {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
-                        ["", formatDecimalLimit(dados.value[i], 2)],
+                        ["", "R$    " + formatDecimalLimit(dados.value[i], 2)],
                         ["", formatDecimalLimit(dados.percentual[i] * 100, 2) + "%"]
                     ]);
                 }
@@ -413,44 +420,56 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             .on("click", function(d, i, obj) {
                 var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
                 newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
-                if(url['uos'] == 0) {
-                    var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=");
-                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
-                    $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                if(url['uos'] == 1) {
+                    var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
                 }
                 else {
-                    var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=");
-                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
-                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                    var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                    $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                 }
                 $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                 $(window.parent.document).find("select[data-id='ano']").val(dados.key[i]);
-                if(url['ano'] == "") {
-                    if (url['uos'] == 0) {
-                        var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
-                    }
-                    else {
-                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
-                    }
-                }
                 destacaBarra(dados.key[i]);
-                if(eixo == 0 && (vrv == 3 || vrv == 2)) {
-                    dados.valor = dados.value[i]/100;
-                    setIntegerValueData(dados, eixo, vrv);
-                }
+                if(eixo == 0) {
+                    if ((vrv == 3)) {
+                        dados.valor = dados.value[i] / 100;
+                        setIntegerValueData(dados, eixo, vrv);
+                    } else if (eixo == 0 && (vrv == 1)) {
+                        dados.valor = dados.value[i];
+                        setIntegerValueData(dados, eixo, vrv);
 
-                else if(eixo == 0 && vrv == 9 && url['uf'] != 0)    {
-                    dados.valor = dados.value[i]/100;
-                }
-                else if(eixo == 0 && vrv > 0) {
-                    dados.valor = dados.value[i];
-                    setIntegerValueData(dados, eixo, vrv);
-                    setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
-                }else {
-                    dados.valor = dados.value[i];
-                    setIntegerValueData(dados, eixo, vrv);
+                    }
+                    else if ((vrv == 2) && url['uf'] == 0) {
+                        dados.valor = dados.value[i];
+                        setIntegerValueData(dados, eixo, vrv);
+
+                    } else if ((vrv == 2) && url['uf'] !== 0) {
+                        dados.valor = dados.value[i] / 100;
+                        setIntegerValueData(dados, eixo, vrv);
+                        setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
+                    }
+
+                    else if (vrv == 9 && url['uf'] != 0) {
+                        dados.valor = dados.value[i] / 100;
+                    }
+                    else if (vrv >= 4 && vrv <= 8) {
+                        dados.valor = dados.value[i];
+                        setIntegerValueData(dados, eixo, vrv);
+                    }
+                    else if (vrv > 9) {
+                        dados.valor = dados.value[i];
+                        if(url["uos"] == 0){
+                            setIntegerValueData(dados, eixo, vrv);
+                        } else if(url["uos"] == 1){
+                            setPercentValueData(dados, eixo, vrv);
+                        }
+
+
+
+                    }
                 }
 
 
@@ -611,13 +630,35 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         destacaBarra(url['ano']);
         if(url['uf'] == 0) {
-            if(vrv == 3) {
+            if(vrv == 1 && cad != 0) {
+                //if fantasma
+            }
+            else if(vrv == 3) {
                 dados.valor = dados.value[url['ano']-2008]/100;
                 setIntegerValueData(dados, eixo, vrv);
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
             }
+            else if((vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8) && url['cad'] == 0) {
+                dados.valor = dados.value[url['ano']-2007];
+                setIntegerValueData(dados, eixo, vrv);
+                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+            }
+            else if((vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8) && url['cad'] !== 0) {
+                dados.valor = dados.value[url['ano']-2007];
+                setIntegerValueData(dados, eixo, vrv);
+            }
+            else if(vrv > 9){
+                if(ano != null) {
+                    dados.valor = dados.value[url['ano']-2007];
+                    if(url['uos'] == 0){
+                        setIntegerValueData(dados, eixo, vrv);
+                    } else if(url['uos'] == 1){
+                        setPercentValueData(dados, eixo, vrv);
+                    }
+            
+                }
+            }
             else if(url['cad'] == 0){
-
                 dados.valor = dados.value[url['ano']-2007];
                 setIntegerValueData(dados, eixo, vrv);
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
@@ -628,7 +669,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 setIntegerValueData(dados, eixo, vrv);
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
             }
-
         }
 
 
@@ -930,9 +970,7 @@ else {
             .attr("font-weight", "bold");
 
         destacaBarra(url['ano']);
-        $(window.parent.document).find(".state-title").first().html(function() {
-            if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf
-        });
+        setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
         $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
         $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);

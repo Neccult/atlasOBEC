@@ -19,7 +19,7 @@ function destacaPais(ufId) {
                 $(this).attr("data-color", $(this).css("fill"));
                 $(this).css("fill", "#6DBFC9");
                 $(this).animate({"opacity": "1"}, "fast");
-            }
+            } 
         }
         else {
             $(this).attr("class", "");
@@ -49,6 +49,7 @@ function destacaPais(ufId) {
 }
 else if(windowWidth>=1550) {
     /* cria svg */
+     var height = 350;
     var svg = d3.select("#corpo").append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -65,6 +66,7 @@ else if(windowWidth>=1550) {
 }
 else if(windowWidth>=1280) {
     /* cria svg */
+     var height = 350;
     var svg = d3.select("#corpo").append("svg")
         .attr("width", width)
         .attr("height", height*1.5);
@@ -100,7 +102,7 @@ else if(windowWidth>=1280) {
  }
 /**** tablet landscape! ****/
 else if(windowWidth>=1000){
-     var height = width/2.5;
+     var height = 350;
 	//cria svg
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
@@ -119,7 +121,7 @@ else if(windowWidth>=1000){
 	var legendTransform = "translate("+translateX+",110)";
 }
 else if(windowWidth>=800){
-     var height = width/2.2;
+     var height = 350;
      //cria svg
      var svg = d3.select("#corpo").append("svg")
          .attr("width", width)
@@ -387,8 +389,7 @@ function ready(error, br_states, mapa){
 
             setPercentValueData(dict[d.id], eixo, vrv);
 
-
-            $(window.parent.document).find(".state-title").first().html(d['properties']['name']);
+            setStateTitle(d['properties']['name']);
             
 		})
 		.style("cursor", "pointer");
@@ -428,7 +429,7 @@ function ready(error, br_states, mapa){
         .scale(color);
     
     
-/********* LEGENDA*********/
+/********* LEGENDA DO MAPA *********/
 
 
 var low_color = color(minValue);

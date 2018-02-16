@@ -98,8 +98,16 @@ function updateIframe(url){
     if($('iframe[id="view_box"]').length != 0) {
         if(url['var'] > 9){
             $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+            $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
         } else{
+            if( url['var'] == 3){
+                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
+            }else{
+                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
+            }
             $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+
+
         }
 
     }
@@ -111,7 +119,6 @@ function updateIframe(url){
             $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
         } else if  (url['var'] > 9){
             newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-            newUrl = newUrl.replace(/ano=[0-9]*/, "ano=");
             $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
             $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
             $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
@@ -959,10 +966,13 @@ $(document).ready(function(){
 		    controlFilter($(this).val(), $(this).attr('data-id'));
             /* controla relações entre filtros */
             updateIframe(url);            
+
+            /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-            /* altera gráfico */
+            
             if($(this).attr('data-id') == 'var'){
                 updateMenuSetor($(this).val())
+                $('.bread-select[data-id=uf]').val(0);
             }
         }
         else {
@@ -974,15 +984,22 @@ $(document).ready(function(){
         if($(this).attr("data-id") !== "eixo") {
             updateUrl();
             controlFilter($(this).val(), $(this).attr('data-id'));
+
             /* controla relações entre filtros */
-            updateIframe(url);
+            
+            /* muda o select das opções para o mesmo do bread */
+            $(".opt-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
+
+            //quando muda a variável, é preciso trocar a UF para 'Brasil'
             if($(this).attr('data-id') =='var'){
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
+                $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
                 updateMenuSetor($(this).val());
             }
-            if($(this).attr("data-id") == "uf") {
+            if($(this).attr("data-id") == "uf"){
+                document.getElementById('view_box').contentWindow.location.reload(true);
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
             }
             if($(this).attr("data-id") === "cad") {
@@ -991,10 +1008,8 @@ $(document).ready(function(){
             if($(this).attr("data-id") === "ocp") {
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
+            updateIframe(url);
 
-            $(".opt-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-
-            /* altera gráfico */
         }
         else {
             parent.window.location = "page.php#"+$(this).val();
@@ -1012,9 +1027,9 @@ $(document).ready(function(){
 		var downloadUrl = $(this).siblings('.url-input').val();
 		window.open(downloadUrl, '_blank');
 
-	});
+    });
 
-
+    
 	//////////////////// SCRIPT PARA O MENUDESKTOP /////////////////////
 	$(document).on('mouseenter', '.eixo-inativo', function() {
         expandMenu(this);

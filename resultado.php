@@ -81,7 +81,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                 <div class="desc-chart text-center">
 
                     <!--=== título variável ===-->
-                    <div class="title"><?php echo $text['title'];?></div>
+                    <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
 
                     <!--<div class="text text-justify" id="desc-var">
                         <?php
