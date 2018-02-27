@@ -49,7 +49,6 @@ else if($eixo == "comercio") {
     $text = $json_text['var'][3][$_GET["var"]-1]; /*== informações da variável ==*/
 }
 $select = $json_text['select'];			   /*== informação dos selects ==*/
-
 /*
     busca a view do gráfico,
     se esta não existir busca a
@@ -157,7 +156,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     </div>
                     <div class="bread-separator">/</div>
                     <div>
-                        <select class="bread-select" data-id="cad">
+                        <select class="bread-select" id="bread-select-cad" data-id="cad">
                             <?php
                             foreach ($json_text['select']['cad'] as $bread_cad) {
                                 echo "<option value='" . $bread_cad['value'] . "'>" . $bread_cad['name'] . "</option>";
@@ -202,12 +201,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             $view = 'mapa';
                         }
                     ?>
-                    <?php if(isset($text['mapa'])) { ?>
-                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
-                    <?php } else { ?>
-                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="display: none; border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
-                        Variável não possui este tipo de visualização
-                    <?php } ?>
+                    <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
                     <!--=== views gráfico ===-->
                     <div class="content-btn-mapa">
                     <?php foreach($text['type'] as $key => $value):?>
@@ -222,8 +216,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 <!--=============== DADOS! ================-->
 
-                <div class="col-md-4 col-xs-12" style="height: 320px;">
-                    <div class="view-title">
+                <div class="col-md-4 col-xs-12 iframe-dados" style="height: 320px; padding: 20px 35px;">
+                    <div class="view-title" style="margin-top: 5px" >
                         DADOS
                     </div>
                     <div class="state-title">
@@ -389,24 +383,14 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         SÉRIE HISTÓRICA
                         <i class="plus"></i>
                     </div>
-                    <?php if(isset($text['barras'])) { ?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
-                    <?php } else { ?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="display: none; border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
-                        Variável não possui este tipo de visualização
-                    <?php } ?>
+                    <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
                 </div>
                 <div class="col-md-4 col-xs-12" style="height: 330px;">
                     <div class="view-title">
                         <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
                         <i class="plus"></i>
                     </div>
-                    <?php if(isset($text['treemap_scc'])) { ?>
-                        <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 270px;" scrolling="no"></iframe>
-                    <?php } else { ?>
-                        <iframe id="view_box_scc" src="treemap_scc_box.php" style="display: none; border: none; width: 100%; height: 270px;" scrolling="no"></iframe>
-                        Variável não possui este tipo de visualização
-                    <?php } ?>
+                    <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 270px;" scrolling="no"></iframe>
                 </div>
                 <div id="descricao" class="col-md-4 col-xs-12" style="height: 199px; overflow: auto; top: -210px;">
                     <div class="view-title">
@@ -558,7 +542,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
 </script>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="js/d3/d3.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/main.js"></script>

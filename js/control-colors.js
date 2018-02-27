@@ -8,9 +8,9 @@ function controlColor() {
     newHash = window.location.hash.substring(1);
     head = $("head");
     switch(newHash) {
-        case "mercado":
-            head.append('<link rel="stylesheet" type="text/css" href="css/mercado.css">');
-            break;
+       // case "mercado":
+           // head.append('<link rel="stylesheet" type="text/css" href="css/mercado.css">');
+           // break;
         case "politicas":
             head.append('<link rel="stylesheet" type="text/css" href="css/politicas.css">');
             break;

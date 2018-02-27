@@ -160,8 +160,8 @@ else if($eixo == 1) {
                 else if($esc != 0) $treemap .= '{"name": "' . $item->EscolaridadeNome . '",';
                 else if($fax != 0) $treemap .= '{"name": "' . $item->IdadeNome . '",';
                 else if($sex != NULL) {
-                    if($item->Sexo == 0) $treemap .= '{"name": "Masculino",';
-                    if($item->Sexo == 1) $treemap .= '{"name": "Feminino",';
+                    if($item->Sexo == 1) $treemap .= '{"name": "Masculino",';
+                    if($item->Sexo == 0) $treemap .= '{"name": "Feminino",';
                 }
                 else $treemap .= '{"name": "' . $item->CadeiaNome . '",';
                 $treemap .= '"estado": "' . $item->UFNome . '",  
@@ -225,7 +225,7 @@ else if($eixo == 1) {
                              "taxa": "' . $item->Taxa . '", 
                              "desagreg": "' . ($index+1) . '", 
                              "size": "' . $item->Valor . '"}';
-                $treemap .= ($index == sizeof($tupla[0])-1) ? '' : ',';
+                $treemap .= ($index == sizeof($tupla)-1) ? '' : ',';
             }
             $treemap .= '   ]
                         }

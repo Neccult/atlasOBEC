@@ -125,13 +125,10 @@ else
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- TopoJSON -->
-<script src="https://d3js.org/topojson.v2.min.js"></script>
-
 <!-- D3 JS v4 -->
 <?php
 if($eixo == "mercado" && $deg != 0) {
-    echo '<script src="https://d3js.org/d3.v3.min.js"></script>';
+    echo '<script src="js/d3/d3.min.js"></script>';
     ?>
     <style type="text/css">
         svg {
@@ -160,7 +157,7 @@ if($eixo == "mercado" && $deg != 0) {
     <?php
 }
 else {
-    echo '<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>';
+    echo '<script src="js/d3/d3.min.js" charset="utf-8"></script>';
 }
 ?>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>

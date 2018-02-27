@@ -100,14 +100,14 @@
 		},
 		"5": {
 			"name": "Editorial",
-			"color": "#F6D5AB",
+			"color": "#E6C59B",
 			"gradient": {
-				"1": "#FFFFFE",
-				"2": "#FEFBF6",
-				"3": "#FDF8EE",
-				"4": "#FCF3E6",
-				"5": "#FBEEDC",
-				"6": "#FAEAD3"
+				"1": "#EFEFEE",
+				"2": "#EEEBE6",
+				"3": "#EDE8DE",
+				"4": "#ECE3D6",
+				"5": "#EBDECC",
+				"6": "#EADAC3"
 			}
 		},
 		"6": {

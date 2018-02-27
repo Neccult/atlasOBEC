@@ -338,41 +338,77 @@ function ready(error, br_states, mapa){
 			  
 		//mouseover
 		.on("mouseover", function(d){
-            if(vrv === 2) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatDecimalLimit(dict[d.id].valor, 2)+"%"],
-                ]);
+            if(eixo == 0) {
+                if(vrv === 2) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor, 2)+"%"],
+                    ]);
+                }
+                else if(vrv === 3) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
+                    ]);
+                }
+                else if(vrv === 9) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(100*dict[d.id].valor/100, 2)+"%"],
+                    ]);
+
+                }
+                else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                    ]);
+
+                }
+                else {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                        ["", formatDecimalLimit(dict[d.id].taxa, 2)],
+                    ]);
+                }
             }
-            else if(vrv === 3) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
-                ]);
-            }
-            else if(vrv === 9) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatDecimalLimit(100*dict[d.id].valor/100, 2)+"%"],
-                ]);
+
+            else if(eixo == 1) {
+                if(vrv === 2){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor*100, 2) + '%']
+                    ]);
+                }
+                else if(vrv === 8){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["R$ ", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
+
+                    ]);
+                }
+                else if(vrv === 9){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor*100, 2) + '%'],
+                        ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
+
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                        ["", formatDecimalLimit(dict[d.id].taxa, 2)],
+                    ]);
+                }
 
             }
-            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatDecimalLimit(dict[d.id].valor, 2)],
-                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                ]);
-
-			}
-            else {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatDecimalLimit(dict[d.id].valor, 2)],
-                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
-                ]);
-			}
 		})
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
@@ -384,7 +420,6 @@ function ready(error, br_states, mapa){
             $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
             $(window.parent.document).find("select[data-id='uf']").val(d.id);
             destacaPais(d.id);
-
             setIntegerValueData(dict[d.id], eixo, vrv);
 
             setPercentValueData(dict[d.id], eixo, vrv);
@@ -562,6 +597,7 @@ gradient = svg.append("defs")
             count++;
 		});
 	}*/
+
     if(url['uf'] != 0) {
     	destacaPais(url['uf']);
         setPercentValueData(dict[url['uf']], eixo, vrv);
@@ -572,7 +608,6 @@ gradient = svg.append("defs")
         setIntegerValueData(dict[url['uf']], eixo, vrv);
         setPercentValueData(dict[url['uf']], eixo, vrv);
 	}
-
     if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
     $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
     $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);

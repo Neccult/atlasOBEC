@@ -85,7 +85,11 @@ function changeChart(url){
 }
 
 function updateIframe(url){
-
+    /* var json;
+    $.get("./data/pt-br.json", function(data) {
+        json = data;
+    }).done(function(){ */
+            
     var newUrl = "",
         count = 0,
         size = Object.keys(url).length;
@@ -95,39 +99,113 @@ function updateIframe(url){
 
         if((++count)!=size) newUrl = newUrl+"&";
     });
+
+    var eixoAtual = getEixo(window.location.hash.substring(1));
+
     if($('iframe[id="view_box"]').length != 0) {
+
+
+    ///BOX DO MAPA
+    if(eixoAtual == 0){
         if(url['var'] > 9){
             $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
             $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
+            $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
         } else{
             if( url['var'] == 3){
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
-            }else{
+            } else{
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
             }
             $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-
-
+            $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
         }
+    } else if (eixoAtual == 1){
+            if(url['var'] > 11){
+                $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
+                $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
+            } else{
 
-    }
-    if($('iframe[id="view_box_barras"]').length != 0) {
-        $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-    }
-    if($('iframe[id="view_box_scc"]').length != 0) {
-        if(url['var'] == 3){
-            $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-        } else if  (url['var'] > 9){
-            newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-            $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-            $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
-            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
-        } else {
-            $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
+            }
         }
-
     }
 
+        /// BOX DO GRAFICO DE BARRAS E SCC (PQ ESTAO JUNTOS??)
+    if(eixoAtual == 0) {
+        if ($('iframe[id="view_box_barras"]').length != 0) {
+            $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        }
+        if ($('iframe[id="view_box_scc"]').length != 0) {
+            if (url['var'] == 3) {
+                $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
+            } else if (url['var'] > 9) {
+                newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+            } else {
+                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+            }
+        }
+    }
+    else if(eixoAtual == 1) {
+        if ($('iframe[id="view_box_barras"]').length != 0) {
+            $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        }
+        if ($('iframe[id="view_box_scc"]').length != 0) {
+            if (url['var'] > 11) {
+                if(url['slc'] == 0) {
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
+                    $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+                }
+                else {
+                    newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=2");
+                    $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES RELACIONADAS");
+                }
+            } else if(url['var'] == 11 || url['var'] == 10 || url['var'] == 9 || url['var'] == 8 || url['var'] == 5){
+                $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA")
+            } else {
+                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+            }
+        }
+    }
+        // else if(eixoAtual == 1) {
+        //     // var_data = json.var[eixoAtual][url['var']-1];
+        //     // view_box1 = var_data.type[0].id;  //view_box mapa
+        //     // view_box2 = var_data.type[1].id;  //view_box treemap
+        //     // view_box3 = var_data.type[2].id;  //view_box das barras
+        //     // view_box4 = var_data.type[3].id;  //view_box treemap_scc
+            
+        //     // for(var i = 0; i < 4; i++){
+        //     //     if(var_data.type[i].hasOwnProperty('param')){
+        //     //         if(url['slc'] == 0){
+        //     //             index = 0
+        //     //         } else index = 1;
+        //     //         paramet = var_data.type[i].param[index].split('=')[0]
+        //     //         newUrl = newUrl.replace('/'+paramet+'=[0-9]*/', var_data.type[i].param[index]);       
+        //     //     }
+        //     // }
+        //     // $('iframe[id="view_box"]').attr('src', view_box1+'_box.php?'+ newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        //     // $('iframe[id="view_box_barras"]').attr('src', view_box3+'_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        //     // $('iframe[id="view_box_scc"]').attr('src', view_box4+'_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+            
+        //     // $('iframe[id="view_box"]').parent().find(".view-title").html(var_data.type[0].name);
+        //     // $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+        //     // $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
+                        
+        // }
+    
 }
 
 /*-----------------------------------------------------------------------------
@@ -180,6 +258,8 @@ function controlFilter(selectvalue, selectid){
 	/* se for PORTE x ATUAÇÃO */
     if(selectid==='var') {
         defaultUrl();
+        controlAno($('.opt-select[data-id="ano"]'));
+        controlAno($('.bread-select[data-id="ano"]'));
     }
     if(window.location.hash === "#mercado") {
 		if(selectid==='deg' && selectvalue==='0') {
@@ -378,9 +458,13 @@ function controlAtc(select,isPrt){
 function controlAno(select){
 
     if(window.location.hash==="#empreendimentos"){
-        if(url['var'] > 3){
-            $(select).find('option[value="2015"]').remove();
+        if(url['var'] > 3 && url['var'] != 12 && url['var'] != 10){
             $(select).find('option[value="2016"]').remove();
+        }
+        else {
+            if($(select).find('option[value="2016"]').length == 0) {
+                $(select).prepend("<option value='2016'>2016</option>");
+            }
         }
 
     }
@@ -486,6 +570,12 @@ function loadResult(){
 
 
     if(window.location.hash.substring(1) == "mercado") {
+        if(url['var'] < 7) {
+            $('.select-deg').find('select').find('option[value="1"]').remove();
+            $('.select-deg').find('select').find('option[value="2"]').remove();
+            $('.select-deg').find('select').find('option[value="3"]').remove();
+            $('.select-deg').find('select').find('option[value="4"]').remove();
+        }
 		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
             $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
             $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
@@ -724,6 +814,25 @@ function changeDescVar() {
     });
 }
 
+function cleanDesagsUrl() {
+    url['slc'] = 0;
+    url['fax'] = 0;
+    url['ocp'] = 0;
+    url['sex'] = 0;
+    url['esc'] = 0;
+    url['frm'] = 0;
+    url['snd'] = 0;
+    url['cad'] = 0;
+    url['pfj'] = 0;
+    url['deg'] = 0;
+    url['mod'] = 0;
+    url['mec'] = 0;
+    url['prt'] = 0;
+    url['cor'] = 0;
+    url['prv'] = 0;
+    url['uos'] = 0;
+}
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function open_related_links() {
@@ -835,23 +944,29 @@ $(document).ready(function(){
 	/*=== selecionar variável ===*/
 
 	$(document).on('click', ".scc", function(){
-        if(url['var'] < 10){
-            var setor = $(this).attr('data-id');
-            var newSCCSrc = $("#view_box_scc").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
-            var change = newSCCSrc.match(/uf=([0-9]*)/);
-            var newBarrasSrc = $("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
-            var newSrc = $("#view_box").attr("src").replace(/cad=[0-9]*/, "cad="+setor);
-            newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
-            if(setor == 0) {
-                newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
-                newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
-                newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
-            }
-            $("#view_box").attr("src", newSrc);
-            $("#view_box_barras").attr("src", newBarrasSrc);
-            $("#view_box_scc").attr("src", newSCCSrc);
 
-            enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false);
+	    var eixoAtual = getEixo(window.location.hash.substring(1));
+
+        if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12)){
+            var setor = $(this).attr('data-id');
+            var newSCCSrc = $("#view_box_scc").attr("src");
+            var change = newSCCSrc.match(/uf=([0-9]*)/);
+            url['cad'] = setor;
+            url['uf'] = change[1];
+            if(setor == 0) {
+                url['prt'] = 0;
+                url['deg'] = 0;
+                url['sex'] = 0;
+                url['frm'] = 0;
+                url['snd'] = 0;
+                url['prv'] = 0;
+                url['fax'] = 0;
+                url['esc'] = 0;
+                url['cor'] = 0;
+            }
+            updateIframe(url);
+
+            enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false, url['slc']);
 
             d3.json('data/pt-br.json', function(error, data) {
                 if (error) throw error;
@@ -862,6 +977,9 @@ $(document).ready(function(){
             });
 
             $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+        }
+        else if(eixo == 0 && url['var'] < 12){
+
         }
     });
 
@@ -881,7 +999,7 @@ $(document).ready(function(){
         $("#view_box_barras").attr("src", newBarrasSrc);
         $("#view_box_scc").attr("src", newSCCSrc);
 
-        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], ocupacao, false);
+        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], ocupacao, false, url['slc']);
 
         d3.json('data/pt-br.json', function(error, data) {
             if (error) throw error;
@@ -899,7 +1017,7 @@ $(document).ready(function(){
 		controlVar($(this).attr('href'));
 
 	});
-    if(url['var'] === "") controlVarPage(1);
+    if(url['var'] === "" && window.location.pathname.match("page.php")) controlVarPage(1);
     if(url['var']) controlVar(url['var']);
 
     /* mobile! */
@@ -925,19 +1043,25 @@ $(document).ready(function(){
         else {
             updateUrl();
 		    if($(this).attr("id") === "setor") {
+		        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0);
                 switchToSetores();
 		        url['slc'] = 0;
                 url['deg'] = 0;
                 url['ocp'] = 0;
                 controlFilter('0', 'deg');
                 url['ocp'] = 0;
+                $(this).addClass("active");
+                $('#ocupacao').removeClass("active");
             }
 		    else {
+                enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1);
                 d3.json('data/pt-br.json', function(error, data) {
                     if (error) throw error;
 
                     textJSON = data;
                     $(".cad-title").first().html(textJSON.select.ocp[0].name);
+
+                    updateDataDesc();
 
                 });
 		        switchToOcupations();
@@ -948,6 +1072,8 @@ $(document).ready(function(){
                 controlFilter('0', 'deg');
                 url['cad'] = 0;
                 url['ocp'] = 1;
+                $(this).addClass("active");
+                $('#setor').removeClass("active");
             }
             updateIframe(url); /* altera gráfico */
         }
@@ -962,18 +1088,34 @@ $(document).ready(function(){
 	/* escolher novo filtro */
 	$(document).on('change', ".opt-select", function(){
 		if($(this).attr("data-id") !== "eixo") {
+            var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             updateUrl();
 		    controlFilter($(this).val(), $(this).attr('data-id'));
             /* controla relações entre filtros */
-            updateIframe(url);            
+
 
             /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
             
             if($(this).attr('data-id') == 'var'){
-                updateMenuSetor($(this).val())
+                cleanDesagsUrl();
+                switchToSetores();
+                enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0);
+                $('#setor').addClass("active");
+                $('#ocupacao').removeClass("active");
+                updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val())
                 $('.bread-select[data-id=uf]').val(0);
+                if(url['slc'] == 0) $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
+                else $(window.document).find(".cad-title").first().html($('.bread-select[data-id=ocp] option:selected').text());
+
+                if(eixo_atual == 1){
+                    updateOcupacoes($(this).val());
+                }
             }
+            if($(this).attr('data-id') == 'deg') {
+                $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
+            }
+            updateIframe(url);
         }
         else {
 		    parent.window.location = "page.php#"+$(this).val();
@@ -982,6 +1124,9 @@ $(document).ready(function(){
 
     $(document).on('change', ".bread-select", function(e){
         if($(this).attr("data-id") !== "eixo") {
+            var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
+
+            
             updateUrl();
             controlFilter($(this).val(), $(this).attr('data-id'));
 
@@ -992,20 +1137,33 @@ $(document).ready(function(){
 
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             if($(this).attr('data-id') =='var'){
+                switchToSetores();
+                $('#setor').addClass("active");
+                $('#ocupacao').removeClass("active");
+                cleanDesagsUrl();
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
+                $('.bread-select[data-id=ano]').val(2014);
+                $('.opt-select[data-id=ano]').val(2014);
+                enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0);
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
-                updateMenuSetor($(this).val());
+                updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
+                
+                if(eixo_atual == 1){
+                    updateOcupacoes($(this).val());
+                }
             }
             if($(this).attr("data-id") == "uf"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
             }
             if($(this).attr("data-id") === "cad") {
+                if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
             if($(this).attr("data-id") === "ocp") {
+                if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
             updateIframe(url);

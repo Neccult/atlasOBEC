@@ -370,12 +370,13 @@ class EixoDois {
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN UF AS uf ON uf.idUF = ex.idUF"
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte"
+					." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = 0"
 					." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ".$ocp
-					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade"
-					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia"
-					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade"
-					." WHERE ex.Numero = ".$var;
+					." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = 0"
+					." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
+					." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
+					." WHERE ex.Numero = ".$var
+                    ." AND ex.Sexo IS NULL";
 
 				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
 

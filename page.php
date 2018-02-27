@@ -161,7 +161,7 @@
 			var pageTitle = "<?php if(isset($text)) echo strip_tags($text['title'])?>";
 		</script>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/d3/d3.min.js"></script>
 		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>|
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>

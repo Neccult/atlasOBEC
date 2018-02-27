@@ -109,7 +109,7 @@
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 
 <!-- D3 JS v4 --> 
-<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="js/d3/d3.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script> 
 

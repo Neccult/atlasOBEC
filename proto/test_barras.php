@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>d3.js learning</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="js/d3/d3.min.js" charset="utf-8"></script>
     <style type="text/css">
         svg {
             font: 10px sans-serif;

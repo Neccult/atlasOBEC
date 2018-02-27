@@ -179,6 +179,55 @@ else if($eixo == 0 && $var > 9) {
 
         }
     }
+} else if($eixo == 1 && $var > 11) {
+    require_once("EixoDois.php");
+    for ($uos = 0; $uos <= 1; $uos++) {
+
+        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+            if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
+                $id = $tupla->Ano;
+
+                $barras[$id]['ano'] = (int)$tupla->Ano;
+                $barras[$id][getName($uos)] = (double)$tupla->Valor;
+
+                //$barras[$id]['uf'] = $tupla->UFNome;
+            }
+
+        }
+    }
+} else if($eixo == 1 && $var == 5) {
+    require_once("EixoDois.php");
+    for ($cad = 1; $cad <= 10; $cad++) {
+
+        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+
+            $id = $tupla->Ano;
+            // $barras[$tupla->Ano] = $tupla->Valor;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
+
+
+            //$barras[$id]['uf'] = $tupla->UFNome;
+
+        }
+    }
+}
+else if($eixo == 1 && ($var == 11 || $var == 10) || $var == 9 || $var == 8 ) {
+    require_once("EixoDois.php");
+    for ($cad = 1; $cad <= 10; $cad++) {
+
+        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+
+            $id = $tupla->Ano;
+            // $barras[$tupla->Ano] = $tupla->Valor;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
+
+
+            //$barras[$id]['uf'] = $tupla->UFNome;
+
+        }
+    }
 }
 
 echo json_encode($barras);
