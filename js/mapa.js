@@ -19,7 +19,7 @@ function destacaPais(ufId) {
                 $(this).attr("data-color", $(this).css("fill"));
                 $(this).css("fill", "#6DBFC9");
                 $(this).animate({"opacity": "1"}, "fast");
-            } 
+            }
         }
         else {
             $(this).attr("class", "");
@@ -31,18 +31,18 @@ function destacaPais(ufId) {
 
  /**** desktop! ****/
  if(windowWidth>=1700){
-  
+
 	/* cria svg */
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
 		.attr("height", height);
-   
+
 	/* configura projeção */
 	var projection = d3.geoMercator()
 		//.center([-50, -30])
-		.rotate([4.4, 0])               
+		.rotate([4.4, 0])
 		.scale(400)
-		.translate([width/2, height/1.2]);  
+		.translate([width/2, height/1.2]);
 
 	var legendTransform = "translate(565,350)";
 	var shapeWidth = 80;
@@ -107,12 +107,12 @@ else if(windowWidth>=1000){
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
 		.attr("height", height);
-   
+
 	//configura projeção
 	var projection = d3.geoMercator()
 		//.center([-40, -32])
-		.rotate([4.4, 0])               
-		.scale(400)                     
+		.rotate([4.4, 0])
+		.scale(400)
 		.translate([width / 2, height / 1.2]);
 
 	 var fonteTransform = "translate("+(width-360)+","+(height-80)+")";
@@ -148,12 +148,12 @@ else if(windowWidth>=700){
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
 		.attr("height", height);
-   
+
 	//configura projeção
 	var projection = d3.geoMercator()
 		//.center([-40, -28])
-		.rotate([4.4, 0])               
-		.scale(400)                     
+		.rotate([4.4, 0])
+		.scale(400)
 		.translate([width / 2, height / 1.2]);
 
      var fonteTransform = "translate("+(width-320)+","+(height-30)+")";
@@ -203,7 +203,7 @@ else if(windowWidth>=700){
      var legendTransform = "translate(500,110)";
  }
 /**** mobile! ****/
-else{  
+else{
 
 	var height = 350;
 	var shapeWidth = 20;
@@ -212,12 +212,12 @@ else{
 	var svg = d3.select("#corpo").append("svg")
 		.attr("width", width)
 		.attr("height", height);
-   
+
 	//configura projeção
 	var projection = d3.geoMercator()
-		//.center([-50, -28])             
-		.rotate([4.4, 0])               
-		.scale(250)                     
+		//.center([-50, -28])
+		.rotate([4.4, 0])
+		.scale(250)
 		.translate([width / 1.5, height / 1.2]);
 
 	var legendTransform = "translate(0,10)";
@@ -283,9 +283,9 @@ function ready(error, br_states, mapa){
 	var minValue = d3.min(info, function(d) {return d.valor; });
 	var maxValue = d3.max(info, function(d) {return d.valor; });
 
-	//distribuicao de frequencias    
+	//distribuicao de frequencias
 	var quant = 5;
-	var range = maxValue - minValue; 
+	var range = maxValue - minValue;
 	var amp = minValue < 1 && minValue > -1 ? range / quant : Math.round(range / quant);
 
 	//domino de valores para as cores do mapa
@@ -304,10 +304,10 @@ function ready(error, br_states, mapa){
 			dom[i] = dom[i] - (dom[i] % 5);
 			i++;
 		}
-	} 
-			
+	}
+
 	// creates cadeia's color range array from color.json file
-	var colorsRange = [];             
+	var colorsRange = [];
 	$.each(colorJSON.cadeias[cad].gradient, function(i, rgb){
 		if(i > 1)
 			colorsRange.push(rgb);
@@ -335,33 +335,33 @@ function ready(error, br_states, mapa){
 		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
 		.style('fill', function(d){return color(dict[d.id].valor);})
 		.attr("d", path)
-			  
+
 		//mouseover
 		.on("mouseover", function(d){
             if(eixo == 0) {
                 if(vrv === 2) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor, 2)+"%"],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
                     ]);
                 }
                 else if(vrv === 3) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(100*dict[d.id].valor, 2)+"%"],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                     ]);
                 }
                 else if(vrv === 9) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(100*dict[d.id].valor/100, 2)+"%"],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
                     ]);
 
                 }
                 else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                         ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                     ]);
 
@@ -369,7 +369,7 @@ function ready(error, br_states, mapa){
                 else {
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                         ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                         ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                     ]);
@@ -380,13 +380,13 @@ function ready(error, br_states, mapa){
                 if(vrv === 2){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor*100, 2) + '%']
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
                     ]);
                 }
                 else if(vrv === 8){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["R$ ", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                         ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
 
                     ]);
@@ -394,7 +394,7 @@ function ready(error, br_states, mapa){
                 else if(vrv === 9){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor*100, 2) + '%'],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                         ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
 
                     ]);
@@ -402,7 +402,7 @@ function ready(error, br_states, mapa){
                 else{
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatDecimalLimit(dict[d.id].valor, 2)],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                         ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                         ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                     ]);
@@ -425,7 +425,7 @@ function ready(error, br_states, mapa){
             setPercentValueData(dict[d.id], eixo, vrv);
 
             setStateTitle(d['properties']['name']);
-            
+
 		})
 		.style("cursor", "pointer");
 
@@ -462,8 +462,8 @@ function ready(error, br_states, mapa){
         .shapePadding(10)
         .orient('vertical')
         .scale(color);
-    
-    
+
+
 /********* LEGENDA DO MAPA *********/
 
 
@@ -513,7 +513,7 @@ gradient = svg.append("defs")
        .style("fill", "url(#grad)")
        .style("stroke-width", 1)
        .style("stroke", fontColor);
-    
+
     svg.selectAll("line")
        .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
        .enter()
@@ -526,9 +526,9 @@ gradient = svg.append("defs")
                         .attr("x", position)
                         .attr("y", y_barra+height_barra +12)
                         .attr("fill", fontColor);
-            
+
             formatBarTextMap(d, eixo, vrv, texto)
-                        
+
            return position;
         })
        .attr("x2", function(d,i){return x_barra+i*width_barra/2})

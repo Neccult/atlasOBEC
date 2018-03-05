@@ -85,7 +85,7 @@
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas de cada estado. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
-				"desc_var_mapa":"A variável participação das empresas culturais e criativas no total de empresas mostra a participação do total de empresas dos setores culturais e criativos no total de empresas instaladas no Brasil para cada ano. </br> Desagregações: por ano; por UF; por porte de empresa; por área de atuação; por SCC.",
+				"desc_var_mapa":"A variável participação das empresas culturais e criativas no total de empresas mostra a participação do total de empresas dos setores culturais e criativos no total de empresas instaladas no Brasil para cada ano.",
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
 				"desc_var_barras": "A porcentagem corresponde à participação das empresas <span data-id='setor'></span> no total de empresas formais <span data-id='uf'></span> ano a ano",
@@ -150,7 +150,7 @@
 				"title":"Receita Total Bruta",
 				"desc_int": "RECEITA",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc_percent": "DO TOTAL DE RECEITA DE EMPRESAS CRIATIVAS DO BRASIL",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"desc_var_mapa":"A variável receita total corresponde à receita proveniente das atividades primária e secundárias exercidas pelos empreendimentos, antes da dedução dos impostos e contribuições incidentes sobre estas vendas ou prestação de serviços (ICMS, IPI, ISS, PIS/Pasep, COFINS, Simples Nacional etc.), das vendas canceladas, abatimentos e descontos incondicionais.",
@@ -197,7 +197,7 @@
 				"desc_int": "RECEITA LÍQUIDA",
 				"desc_percent": "DO TOTAL DE RECEITA LíQUIDA DAS EMPRESAS CRIATIVAS DO BRASIL",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"desc_var_mapa":"A variável receita operacional líquida corresponde às receitas brutas provenientes da exploração das atividades primárias e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/PASEP, IPI, ISS, Simples Nacional, COFINS etc.), das vendas canceladas, abatimentos e descontos incondicionais.",
 				"desc_var_treemap_scc": "Os números absolutos indicam a Receita Operacional Líquida das Empresas dos Setores Culturais Criativos. A porcentagem representa a receita líquida gerada por cada setor em relação ao total em relação ao total <span data-id='uf'></span>. ",
@@ -243,7 +243,7 @@
 				"desc_int": "CUSTO",
 				"desc_percent": "DO TOTAL DE CUSTO DAS EMPRESAS CRIATIVAS DO BRASIL",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
 				"desc_var_mapa":"A variável custo leva em consideração o somatório de custos e despesas das empresas, incluindo: i) gastos de pessoal; ii) compras de materiais; iii) compras de mercadorias adquiridas para revenda; iv) estoques; v) custos diretos de produção; vi) demais custos e despesas.",
 				"desc_var_treemap_scc": "Os números absolutos indicam o Custo das Empresas dos Setores Culturais Criativos. A porcentagem representa o custo gerado por cada setor em relação ao total do custo dos Setores Culturais e Criativos <span data-id='uf'></span>. ",
@@ -289,7 +289,7 @@
 				"desc_int": "LUCRO",
 				"desc_percent": "DO TOTAL DE LUCRO DAS EMPRESAS CRIATIVAS DO BRASIL",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
 				"desc_var_mapa":"A variável lucro resulta da composição e definição da receita bruta e do custo total dos empreendimentos. A noção de lucro econômico, assim, decorre da diferença entre a receita total da empresa e todos os custos.",
 				"desc_var_treemap_scc": "Os números absolutos indicam o Lucro das Empresas dos Setores Culturais Criativos. A porcentagem representa o lucro gerado por cada setor em relação ao total do lucro dos Setores Culturais e Criativos <span data-id='uf'></span>. ",
@@ -335,7 +335,7 @@
 				"desc_int": "VALOR ADICIONADO",
 				"desc_percent": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS CRIATIVAS DO BRASIL",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
 				"desc_var_mapa":"A variável valor adicionado corresponde à contribuição adicional de um recurso, atividade ou processo para a fabricação de um produto ou prestação de um serviço. O valor adicionado reflete na economia como um todo, sendo o valor dos bens produzidos por uma economia, depois de deduzidos os custos dos insumos adquiridos de terceiros utilizados na produção.",
 				"desc_var_treemap_scc": "Os números absolutos indicam o Valor Adicionado das Empresas dos Setores Culturais Criativos. A porcentagem representa o Valor Adicionado de cada setor em relação ao total em relação ao total <span data-id='uf'></span>. ",
@@ -474,7 +474,7 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"desc_var_mapa":"A variável razão de concentração – C4 Valor Adicionado representa uma medida de concentração relacionada à distribuição do montante do valor adicionado pelas empresas culturais e criativas, diante da ótica regional e setorial. </br> Desagregações: por ano; por UF; por SCC." ,
+				"desc_var_mapa":"A variável razão de concentração – C4 Valor Adicionado representa uma medida de concentração relacionada à distribuição do montante do valor adicionado pelas empresas culturais e criativas, diante da ótica regional e setorial." ,
 
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
@@ -633,7 +633,7 @@
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -659,7 +659,7 @@
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -711,7 +711,7 @@
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -757,7 +757,7 @@
 				"desc_int": "VALOR ADICIONADO",
 				"sufixo_valor":"",
 				"desc_percent": "",
-				"prefixo_valor":"R$",
+				"prefixo_valor":"R$ ",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -910,6 +910,8 @@
 			{
 				"id":"1",
 				"title":"<span>Financiamento Público Total</span>",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -944,6 +946,8 @@
 			{
 				"id":"2",
 				"title":"<span>Financiamento do Vale-Cultura</span>",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -973,6 +977,8 @@
 			},
 			{
 				"id":"3",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"title":"<span>Financiamento do Fundo Cultural BNDES</span>",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
@@ -1006,6 +1012,8 @@
 			{
 				"id":"4",
 				"title":"<span>Valor total de incentivos privados</span>",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1031,6 +1039,8 @@
 			{
 				"id":"5",
 				"title":"<span>Valor total de incentivos via empresas públicas<span>",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1054,6 +1064,8 @@
 				"id":"6",
 				"title":"<span>Despesa FNC / Mecenato</span>",
 				"desc":"Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1084,6 +1096,8 @@
 				"id":"7",
 				"title":"<span>Recursos Privados / Incentivo Fiscal</span>",
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1105,6 +1119,8 @@
 			{
 				"id":"8",
 				"title":"<span>Financiamento Público no VA</span>",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1138,6 +1154,8 @@
 				"id":"9",
 				"title":"<span>Total Bruto na Massa Salarial</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1172,6 +1190,8 @@
 				"id":"10",
 				"title":"<span>Despesa em Cultura nas Contas Públicas</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				]
@@ -1207,6 +1227,8 @@
 				"id":"12",
 				"title":"<span>Total dos projetos aprovados</span>",
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1234,6 +1256,8 @@
 				"id":"13",
 				"title":"<span>Tempo médio de aprovação<span>",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1261,6 +1285,8 @@
 				"id":"14",
 				"title":"<span>Total Solicitado/ Efetivo Aprovado<span>",
 				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1271,8 +1297,10 @@
 			},
 			{
 				"id":"15",
-				"title":"<span>Índice Razão para Concentração Regional dos Incentivadores<span>",
-				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
+				"title":"<span>Fomento Público Estadual à Cultura<span>",
+				"desc":"",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1283,8 +1311,24 @@
 			},
 			{
 				"id":"16",
+				"title":"<span>Índice Razão para Concentração Regional dos Incentivadores<span>",
+				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				]
+			},
+			{
+				"id":"17",
 				"title":"<span>IHH para Concentração Regional dos Projetos Fomentados<span>",
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1299,6 +1343,8 @@
 				"id":"1",
 				"title":"Valor Absoluto",
 				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1333,6 +1379,8 @@
 				"id":"2",
 				"title":"<span>Participação no PIB</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1367,6 +1415,8 @@
 				"id":"3",
 				"title":"<span>Relação com o Comércio Global</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1401,6 +1451,8 @@
 				"id":"4",
 				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1435,6 +1487,8 @@
 				"id":"5",
 				"title":"<span>Relação com o VA da Cultura<span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1469,6 +1523,8 @@
 				"id":"6",
 				"title":"<span>Relação com a Massa Salarial</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com a massa salarial da cultura por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1503,6 +1559,8 @@
 				"id":"7",
 				"title":"<spna>Relação com Investimento Público em Cultura</span>",
 				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1537,6 +1595,8 @@
 				"id":"8",
 				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
 				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1571,6 +1631,8 @@
 				"id":"9",
 				"title":"<span>Razão de Concentração (C2) do Valor Absoluto</span>",
 				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1593,6 +1655,8 @@
 				"id":"11",
 				"title":"IHH do Valor Absoluto",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1649,7 +1713,7 @@
 			{"name":"Santa Catarina", "value":"42"},
 			{"name":"São Paulo","value":"35"},
 			{"name":"Sergipe","value":"28"},
-			{"name":"Tocantins","value":"17"}				
+			{"name":"Tocantins","value":"17"}
 		],
 		"ano":[
 			{"name":"2016", "value":"2016"},
@@ -1795,7 +1859,11 @@
 			{"name":"Porte médio","value":"11"},
 			{"name":"Porte grande","value":"12"},
 			{"name":"Por UF","value":"13"},
-			{"name":"Por setor","value":"14"}
+			{"name":"Por setor","value":"14"},
+			{"name":"Mecenato Estadual","value":"15"},
+			{"name":"Editais Estaduais","value":"16"},
+			{"name":"Crédito Especial","value":"17"}
+
 		]
 	}
 	

@@ -242,7 +242,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
         } else{
             if(url['uf'] == 0 && (url['cad'] == 0 && url['ocp'] == 0))
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            
+
             dados.valor = dados.value[url['ano']- first_year];
             setIntegerValueData(dados, eixo, vrv);
         }
@@ -279,6 +279,9 @@ function appendPorts(iframe){
         }
 	}
 }
+/*
+* Põe as desagregações no select das desagregações referentes aos setores do eixo 2.
+*/
 function appendSectorDesags(iframe){
     if(iframe) {
         if($(window.parent.document).find("select[data-id='deg']").find("option[value='1']").length == 0) {
@@ -377,6 +380,23 @@ function removeOcupationDesags(iframe){
         }
     }
 }
+function appendMecenatoDesags(iframe){
+    if(iframe) {
+        if($(window.parent.document).find("select[data-id='deg']").find("option[value='15']").length == 0) {
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='15'>MECENATO ESTADUAL</option>");
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='16'>EDITAIS ESTADUAIS</option>");
+            $(window.parent.document).find("select[data-id='deg']").append("<option value='17'>CRÉDITO ESPECIAL</option>");
+        }
+    }
+    else{
+        if($(window.parent.document).find("option[value='15']").length == 0) {
+            $(window.parent.document).append("<option value='15'>MECENATO ESTADUAL</option>");
+            $(window.parent.document).append("<option value='16'>EDITAIS ESTADUAIS</option>");
+            $(window.parent.document).append("<option value='17'>CRÉDITO ESPECIAL</option>");
+        }
+    }
+}
+
 function enableDesag(eixo, vrv, setor, iframe, slc){
 
 	if(eixo == 0){
@@ -420,9 +440,19 @@ function enableDesag(eixo, vrv, setor, iframe, slc){
 
             removeSectorDesags();
         }
+    }else if(eixo == 2) {
+	    switch(parseInt(vrv)){
+            case 14: appendMecenatoDesags(iframe); break;
+            default: break;
+        }
     }
 
 }
+
+/*
+* Função para atribuir o valor do dado inteiro para a variável em questão
+* Parâmetros: valores, eixo e variável
+ */
 function setIntegerValueData(value, eixo, vrv) {
 
 	$.get("./data/pt-br.json", function(description) {
@@ -442,73 +472,119 @@ function setIntegerValueData(value, eixo, vrv) {
 			        valor *= 100;
 		}
 
-		$(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+formatDecimalLimit(valor, 2)+sufixo).css("font-size", setIntegerValueFontSize(formatDecimalLimit(valor, 2).toString().length));
-			
+        $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+formatDecimalLimit(valor, 2)+sufixo);
+        var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
+
+        setMaxFontSize(doc);
 	});
 }
 
-function setIntegerValueFontSize(length){
-   
-    ww = (window.innerWidth- parseInt($(window.parent.document).find(".iframe-dados").css('padding-left').replace("px", "")))*0.475;
-   
-	one = ww/(length*(length-1)/length);
-    size = one;
-    if(size > 42)
-        size = 42
 
-	return size+"px";
+/*
+* Função ajusta o tamanho da fonte para a maior possível dentro de um Div.
+* Parâmetro: div que contém o texto.
+ */
+function setMaxFontSize(doc){
+
+    var tamanhoMaximo = 40;
+    var tamanho = tamanhoMaximo;
+
+    var tamanhoDiv = $(doc).width();
+    var texto = $(doc).html();
+    $(doc).css('font-size', tamanho+'px');
+
+    //var font = $(doc).css("font");
+    var font = $(doc).css("font-weight")+" "+$(doc).css("font-size")+" "+ $(doc).css("font-family");
+    console.log($(doc).css($(doc).css("font-size")+" "+ $(doc).css("font-family")))
+
+    var letterSpacing = parseFloat($(doc).css("letter-spacing").replace("px", ""));
+    var tamanhoString = getTextWidth(texto, font) + texto.length * letterSpacing;
+
+    $(doc).html("");
+
+    console.log(tamanhoDiv+" - "+tamanhoString)
+
+    while(tamanhoString > tamanhoDiv){
+
+        tamanho--;
+        $(doc).css('font-size', tamanho+'px');
+        font = $(doc).css("font-weight")+" "+$(doc).css("font-size")+" "+ $(doc).css("font-family");
+        tamanhoString  = getTextWidth(texto, font) + texto.length * letterSpacing;
+
+    }
+
+
+    $(doc).html(texto);
+
+    return;
+
 }
 
+function getTextWidth(text, font) {
+    var c = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+    var ctx = c.getContext("2d");
+
+    ctx.font = font;
+
+    console.log(ctx.font)
+
+
+
+    return ctx.measureText(text).width;
+}
+
+/*
+* Função para ajustar o nome do estado em questão
+* Parâmetros: String com o nome do estado
+ */
 function setStateTitle(stateTitle){
-	len = stateTitle.length
-	ww = window.innerWidth - parseInt($(window.parent.document).find(".iframe-dados").css('padding-left').replace("px", ""))*2;
-	size = Math.round(1.2*ww/len);
-	if(size > 30)
-		size = 30;
-	$(window.parent.document).find(".state-title").css('font-size', size).first().html(stateTitle);
+    setMaxFontSize($(window.parent.document).find(".state-title").html(stateTitle))
 }
 
+/*
+* Função para atribuir o valor certo para o dado percentual da variavel em questão
+*
+* Parâmetros: valores, eixo e variável
+ */
 function setPercentValueData(value, eixo, vrv) {
     if(eixo == 0){
         if(vrv == 2) {
             $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
-            return;
         }
-        if(vrv == 3) {
+       else if(vrv == 3) {
             $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
-            return;
         }
-        if(vrv < 9) {
+        else if(vrv < 9) {
             if(value.uf == null) {
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%").css("font-size", setIntegerValueFontSize("100%".toString().length));
-                return;
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            }else {
+                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
             }
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%").css("font-size", setIntegerValueFontSize("100%".toString().length));
-            return;
         }
-
-        if(vrv == 9){
+        else if(vrv == 9){
             $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
-            return;
+        }
+        else if(vrv >= 10 && vrv <= 13){
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
         }
 
-        if(vrv >= 10 && vrv <= 13){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.valor, 2)).toString().length));
-            return;
-        }
+        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        setMaxFontSize(doc);
     }
     else if(eixo == 1){
 
         if(vrv > 11 ){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2)).css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.valor, 2)).toString().length));
-            return;
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
         }
         else if(vrv == 2 || vrv == 11 || vrv == 10 ||  vrv == 9  || vrv == 4 || vrv == 5 || vrv == 6){
            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
         }
         else{
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%").css("font-size", setIntegerValueFontSize((formatDecimalLimit(value.percentual*100, 2)+"%").toString().length));
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
         }
+
+        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        setMaxFontSize(doc);
     }
 
 }
@@ -517,10 +593,10 @@ function setPercentValueData(value, eixo, vrv) {
 * Função que mexe no texto da barra de legenda do mapa.
 * Centraliza, muda o tamanho da fonte e formata o texto.
 */
-function formatBarTextMap(value, eixo, vrv, obj){	
+function formatBarTextMap(value, eixo, vrv, obj){
 	var font_size = 9
 	$.get("./data/pt-br.json", function(description) {
-		
+
 		sufixo = description.var[eixo][vrv-1].sufixo_valor;
 		prefixo = description.var[eixo][vrv-1].prefixo_valor;
 		valor = value;
@@ -529,7 +605,7 @@ function formatBarTextMap(value, eixo, vrv, obj){
 				if(vrv == 3) {
 					valor = valor*100;
 				}
-				break;					
+				break;
 			case 1:
 			    if(vrv == 2){
 			        valor *= 100;
@@ -538,7 +614,7 @@ function formatBarTextMap(value, eixo, vrv, obj){
 					valor *= 100;
 				}
 				break;
-					
+
 		}
 
 		if(sufixo == 'h')
@@ -549,7 +625,98 @@ function formatBarTextMap(value, eixo, vrv, obj){
 		width_text =  Math.floor((obj.text()).length*font_size*0.7);
 		obj.attr("x", obj.attr("x")-Math.floor(width_text/2));
 	});
-	
+}
+
+function formatTextVrv(value, eixo, vrv){
+    $.ajaxSetup({async: false});
+    var string;
+    $.get("./data/pt-br.json")
+        .done(function(d){
+            sufixo = d.var[eixo][vrv-1].sufixo_valor;
+            prefixo = d.var[eixo][vrv-1].prefixo_valor;
+            valor = value;
+            switch(eixo) {
+                case 0:
+                    if(vrv == 3) {
+                        valor = valor*100;
+                    }
+                    break;
+                case 1:
+                    if(vrv == 2){
+                        valor *= 100;
+                    }
+                    else if(vrv == 9){
+                        valor *= 100;
+                    }
+                    break;
+
+            }
+            string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+        });
+    $.ajaxSetup({async: true});
+    return string;
+}
+
+function formatTextTaxaVrv(value, eixo, vrv){
+    var string;
+    prefixo = "";
+    sufixo = "%";
+    valor = value*100;
+
+    /*switch(eixo) {
+        case 0:
+            if(vrv == 3) {
+                valor = valor*100;
+            }
+            break;
+        case 1:
+            if(vrv == 2){
+                valor *= 100;
+            }
+            else if(vrv == 9){
+                valor *= 100;
+            }
+            break;
+
+    }*/
+
+    string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+    return string;
+}
+
+
+/*
+* Formata uma string de valor de variável. Põe prefixo, sufixo e 2 casas decimais.
+*/
+function formatStringVrv(value, eixo, vrv){
+    $.ajaxSetup({async: false})
+    var string;
+    $.get("./data/pt-br.json", function(d) {
+        sufixo = d.var[eixo][vrv-1].sufixo_valor;
+        prefixo = d.var[eixo][vrv-1].prefixo_valor;
+        valor = value;
+        switch(eixo) {
+            case 0:
+                if(vrv == 3) {
+                    valor = valor*100;
+                }
+                break;
+            case 1:
+                if(vrv == 2){
+                    valor *= 100;
+                }
+                else if(vrv == 9){
+                    valor *= 100;
+                }
+                break;
+
+        }
+        string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+    });
+    $.ajaxSetup({async: true});
+
+    return string;
+    alert(string);
 }
 
 /*
@@ -570,7 +737,6 @@ function updateOcupacoes(vrv){
 /*
 * Essa função atualiza a descricao dos valores dados
 */
-
 function updateDataDesc(){
 	if($(window.parent.document).find(".integer-value").first().find(".description-number").html() != null){
         var desc_int = $(window.parent.document).find(".integer-value").first().find(".description-number").html().replace("POR UF", "POR ATIVIDADES RELACIONADAS");
@@ -619,7 +785,7 @@ function updateMenuSetor(eixo, vrv){
             }).style("display", "inline");
 		}
 	}
-	
+
 }
 
 /*
@@ -642,14 +808,14 @@ function formatGreatNumbers(value, prefix){
 		value = value / Math.pow(10, exp_bilhao);
 		return prefix+formatDecimalLimit(value, 2) + "B";
 	}
-	
+
 	return prefix+formatDecimalLimit(value, 2);
 }
 
 /*-----------------------------------------------------------------------------
 	Função: formatNumber
 		executa sequencialmente funções para formatar valor pra notação comum brasileira
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.123456
 		{int} decimalLimit | ex.: 2
 	Saída:
@@ -672,7 +838,7 @@ var formatNumber = function(value, decimalLimit){
 /*-----------------------------------------------------------------------------
 	Função: numberMagnitude
 		calcula magnitude da parte inteira do valor passado levando em consideração a variável {minimumIntDigitsNumberToCapDecValues}
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.12345
 	Saída:
 		{boolean} ex.: true || false
@@ -687,7 +853,7 @@ var formatNumber = function(value, decimalLimit){
 /*-----------------------------------------------------------------------------
 	Função: niceNumbers
 		transforma valor passado do padrão americano para o comum brasileiro com ponto (.) para separar magnitudes inteiras e vírgula (,) para separar decimais
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.12345
 	Saída:
 		{string} ex.: "200.300,123"
@@ -726,7 +892,7 @@ var formatNumber = function(value, decimalLimit){
 /*-----------------------------------------------------------------------------
 	Função: removeDecimalZeroes
 		remove zeros decimais inúteis
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.000
 	Saída:
 		{number} ex.: 200.300
@@ -739,7 +905,7 @@ var removeDecimalZeroes = function(value){
 /*-----------------------------------------------------------------------------
 	Função: countValidDecimalDigits
 		recursivamente conta quantidade de números decimais válidos após zeros iniciais
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.00026
 	Saída:
 		{number} ex.: 3
@@ -766,7 +932,7 @@ var countValidDecimalDigits = function(value, acum) {
 /*-----------------------------------------------------------------------------
 	Função: formatDecimalLimit
 		calcula quantidade de casas válidas após zeros iniciais e chama formatNumber com esses parâmetros
-	Entrada: 
+	Entrada:
 		{number} value | ex.: 200,300.00026
 		{int} decimalLimit | ex.: 2
 	Saída:
@@ -782,8 +948,8 @@ var formatDecimalLimit = function(value, limit){
 
 /*-----------------------------------------------------------------------------
 	Função: tooltip
-		função singleton (retorna sempre a mesma instância) do objeto tooltip 
-	Entrada: 
+		função singleton (retorna sempre a mesma instância) do objeto tooltip
+	Entrada:
 		N/A
 	Saída:
 		{object}
@@ -795,7 +961,7 @@ var tooltip = (function(){
 	/*-----------------------------------------------------------------------------
 		Função: create
 			cria elemento #tooltip no html
-		Entrada: 
+		Entrada:
 			N/A
 		Saída:
 			Renderiza objeto no DOM
@@ -809,13 +975,13 @@ var tooltip = (function(){
 			tp = d3.select('#corpo')
 				.append('div')
 				.attr('id', 'tooltip')
-				.attr('class', 'tooltip none');		
+				.attr('class', 'tooltip none');
 		}
 
 		/*-----------------------------------------------------------------------------
 			Função: returnTooltip
 				retorna instância
-			Entrada: 
+			Entrada:
 				N/A
 			Saída:
 				{object}
@@ -825,7 +991,7 @@ var tooltip = (function(){
 		/*-----------------------------------------------------------------------------
 			Função: createElements
 				cria elementos e dá append deles dentro da tooltip
-			Entrada: 
+			Entrada:
 				{object} d: objeto dado pelo D3 que contém dados
 				{array} arr: array com valores dos elementos a serem criados ex.: [ ["title", "Título teste"], ["Valor", 1234]]
 			Saída:
@@ -833,7 +999,7 @@ var tooltip = (function(){
 		-----------------------------------------------------------------------------*/
 		function createElements(d, arr) {
 			var valSeparator = "";
-			
+
 			arr.forEach(function(el, i){
 				var clss = el[0];
 				var val = el[1];
@@ -901,7 +1067,7 @@ var tooltip = (function(){
 		/*-----------------------------------------------------------------------------
 			Função: showTooltip
 				renderiza elementos dentro da tooltip e posiciona eles de acordo com a posição do mouse.event
-			Entrada: 
+			Entrada:
 				{object} d: objeto dado pelo D3 que contém dados
 				{array} arr: array com valores dos elementos a serem criados ex.: [ ["title", "Título teste"], ["Valor", 1234]]
 			Saída:
@@ -914,14 +1080,13 @@ var tooltip = (function(){
 			createElements(d, arr);
 
 			// graph position on screen
-			var chartOffset = $('.chart').offset(), 
+			var chartOffset = $('.chart').offset(),
 				leftOffset = chartOffset.left,
 				leftOffsetEnd = leftOffset+$('.chart').width(),
 				topOffset = chartOffset.top,
 				bottomOffset = topOffset + $('.chart').height();
 			// tooltip dimensions
 			var tooltipWidth = $('.tooltip').width();
-            console.log(leftOffset)
 			/*== posição do tooltip ==*/
 			var xPosition = d3.event.pageX-leftOffset+30;
 			var xPositionEnd = xPosition+tooltipWidth;
@@ -993,7 +1158,7 @@ var tooltip = (function(){
 		/*-----------------------------------------------------------------------------
 			Função: hideTooltip
 				esconde o element tooltip
-			Entrada: 
+			Entrada:
 				N/A
 			Saída:
 				N/A
@@ -1035,7 +1200,7 @@ function debug(value, match, args){
 /*-----------------------------------------------------------------------------
 	Função: formatTreemapText
 		função formata texto interno nos nódulos do treemap
-	Entrada: 
+	Entrada:
 		N/A
 	Saída:
 		manipula elementos na página/DOM
@@ -1046,14 +1211,14 @@ var formatTreemapText = function() {
 		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
 		var minMargin = { horizontal:1, vertical: 2, betweenText: 4 };
 
-		var that = d3.select(this);	
-		var box = that.select('rect').node();	
+		var that = d3.select(this);
+		var box = that.select('rect').node();
 		box = {
 			self: box,
 			width: box.getBBox().width,
 			height: box.getBBox().height
 		}
-	
+
 		var title = d3.select(this).select('text.title');
 		title = {
 			self: title,
@@ -1067,10 +1232,10 @@ var formatTreemapText = function() {
 			width: percentage.node().getBBox().width,
 			height: percentage.node().getBBox().height
 		}
-	
+
 		percentage.self
-			.attr("x", box.width - acceptableMargin.horizontal)	
-			.attr("y", box.height - acceptableMargin.vertical)	
+			.attr("x", box.width - acceptableMargin.horizontal)
+			.attr("y", box.height - acceptableMargin.vertical)
 			.attr("text-anchor", "end");
 
 		var calc = {
@@ -1112,11 +1277,11 @@ var formatTreemapText = function() {
 			doesTitleFit = calc.title.width > minMargin.horizontal*2 && calc.title.width > 0 && calc.title.height > minMargin.vertical*2 && calc.title.height > 0;
 			doesPercentageFit = calc.percentage.width > minMargin.horizontal*2 && calc.percentage.width > 0 && calc.percentage.height > minMargin.vertical*2 && calc.percentage.height > 0;
 			doBothFit = doesTitleFit && doesPercentageFit;
-		
+
 			// se title não couber
 			if (!doesTitleFit)
 				title.self.attr("display", "none");
-			
+
 			// se porcentagem não couber esconde title e porcentagem
 			if (!doesPercentageFit){
 				title.self.attr("display", "none");
@@ -1143,7 +1308,7 @@ var formatTreemapText = function() {
 
 			var doTitleHorizontalMarginExist = (box.width - title.width - percentage.width - minMargin.betweenText) / 2 >= minMargin.horizontal*2 + 2;
 			var doTitleVerticalMarginExist = (box.height - title.height - minMargin.vertical) / 2 >= acceptableMargin.vertical*2;
-			
+
 			// se espaço horizontal || vertical - tamanho horizontal || vertical do percentagem < margem vertical || horizontal
 			var isBoxSmallForPercentage = box.height - percentage.height < minMargin.vertical*2
 										|| box.width - percentage.width < (minMargin.horizontal+2)*2;

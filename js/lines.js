@@ -14,7 +14,6 @@ if((eixo == 0 && vrv != 3) || (eixo == 1 && vrv > 11)){
 
 
 
-console.log($(document).parent('iframe'))
 
 /*==== Barras JS ====*/
 var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
@@ -31,11 +30,11 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
         if (error) throw error;
         colorJSON = data;
 
-        
+
         // import pt-br.json file for get the title
         d3.json('data/pt-br.json', function (error, data) {
             if (error) throw error;
-            
+
             textJSON = data;
 
             var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
@@ -321,7 +320,7 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
 
                     Object.keys(dados).forEach(function (index) {
                         if(dados[index].ano == ano){
-                            variacao = (formatDecimalLimit(dados[index][scc], 2));
+                            variacao = formatTextVrv(dados[index][scc], eixo, vrv);
                         }
                     })
 
@@ -355,7 +354,7 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
 
                     tooltipInstance.showTooltipLines(d, [
                         ["title", scc],
-                        ["", variacao.toString()],
+                        ["", variacao],
                         ["", ano.toString()],
                     ], xAno, y1Ano, y2Ano)
                 }

@@ -2,7 +2,7 @@ var windowWidth = $(window).width(); /* dimensão da tela */
 
 /* cria svg */
 var svg = d3.select("#corpo").append("svg");
-/*=== dimensões do gráfico ===*/        
+/*=== dimensões do gráfico ===*/
 if(windowWidth>768){
 	$('#corpo').find('svg').attr('width',$('.chart').width());
 	$('#corpo').find('svg').attr('height',($('.chart').height()/1.5));
@@ -120,7 +120,7 @@ function appendTest(text){
 
 		placeholder.append('tspan')
 		.text(function(d) {
-			return text[i]; 
+			return text[i];
 		})
 		.attr('x', 0)
 		.attr('dx', textLeftPadding)
@@ -131,7 +131,7 @@ function appendTest(text){
 
 	var pNode = placeholder.node().parentNode;
 	var bbox = placeholder.node().getBBox();
-	
+
 	d3.select(pNode.parentNode).remove();
 
 	return bbox;
@@ -177,7 +177,7 @@ var color = function(colorId){
             return colorJSON.regioes[0].color;
         }
     }
-}   
+}
 
 /*==================*/
 /* ***  treemap *** */
@@ -247,16 +247,17 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             integerValue = d.data.size;
 							tooltipInstance.showTooltip(d, [
                                 ["title", d.data.name],
-                                ["", formatNumber(d.data.size, 3)+"%"]
+                                ["", formatTextVrv(d.data.size, eixo, vrv)]
                             ]);
                         }
                         else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                             if(cad !== 0) {
-                            	integerValue = d.data.size;
+
+                                integerValue = d.data.size;
                                 percentValue = d.data.size/root.value;
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    ["", formatNumber(d.data.size)],
+	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                 ]);
                             }
@@ -265,7 +266,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 percentValue = d.data.size/root.value;
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    ["", formatNumber(d.data.size)],
+	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                                 ]);
 							}
@@ -276,7 +277,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 percentValue = d.data.size/root.value;
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    ["", formatNumber(d.data.size)],
+	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                     ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
@@ -286,7 +287,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 percentValue = d.data.size/root.value;
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
-                                    ["", formatNumber(d.data.size)],
+	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                                     ["", formatDecimalLimit(d.data.taxa, 2)],
                                 ]);
@@ -331,7 +332,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		.attr("x", 10)
 		.attr("y", 19)
 		.attr("text-anchor", "start");
-			
+
 	var percentageTextElement = cell.append("text")
 		.attr("text-anchor", "start")
 		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
@@ -361,13 +362,13 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.range([8, 12, 16, 20]);
 
 			var fontSize = fontOrdinalSize(nodePercentage);
-			
-			return fontSize;	
+
+			return fontSize;
 		});
 
 	// aumenta o tamanho do gráfico pra caber o título
 	$('#corpo').find('svg').attr('height',$('#corpo').find('svg').height()+100);
-	
+
 	// new svg margin top value
 	var svgMarginTop = 35;
 	// cria título
@@ -386,7 +387,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 		// creates a top margin for title positioning
 		var transformValues = that.attr("transform").split("(")[1].replace(/\)/g, "").split(",");
 		var xVal = parseFloat(transformValues[0]),
-			yVal = parseFloat(transformValues[1]);	
+			yVal = parseFloat(transformValues[1]);
 
 		that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
 	});
@@ -451,15 +452,15 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			tWidth = (cont - 1) * (space + 5);
 
 		if (i>0) {
-			
+
 			if(mobileSubtitle && i>2) var translateY = 25;
 			else var translateY = 0;
-					
+
 			that.attr('transform', function(){
 				return "translate("+ tWidth +","+translateY+")";
-			});	
+			});
 		}
-		
+
 		cont ++;
 	});
 
@@ -469,7 +470,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	.data(root.leaves())
 	.attr("display", function(d){
 		var size = parseFloat(d.data.size);
-		var isSizeZero = size === 0 || size === null || size === undefined;		
+		var isSizeZero = size === 0 || size === null || size === undefined;
 		if (!isSizeZero && isValueZero)
 			isValueZero = false;
 	});

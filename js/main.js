@@ -121,9 +121,9 @@ function updateIframe(url){
             $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
         }
     } else if (eixoAtual == 1){
+            $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
             if(url['var'] > 11){
                 $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
             } else{
 
@@ -758,58 +758,7 @@ function changeDescVar() {
 
         textJSON = data;
 
-		if(url['cad'] === "0") {
-			if(url['var'] === "1" && url['view'] === "treemap_scc") $("span[data-id='setor']").html("de cada setor");
-			else $("span[data-id='setor']").html("dos Setores Culturais Criativos");
-		}
-		else {
-            $("span[data-id='setor']").html("do setor "+textJSON.select.cad[url['cad']].name);
-		}
-
-        if(url['view'] !== "mapa" && url['view'] !== "treemap_region") {
-			if(url['uf'] === "0") {
-                //$("span[data-id='uf']").html("no Brasil");
-            }
-            else {
-                $("span[data-id='uf']").html("na UF "+getUf(textJSON.select.uf));
-            }
-        }
-
-        if(url['var'] === "9") {
-            if(url['uf'] === "0") {
-                $("span[data-id='uf']").html("Brasil");
-            }
-            else {
-                $("span[data-id='uf']").html(getUf(textJSON.select.uf));
-            }
-		}
-
-        if(url['prt'] !== "0") {
-            $("span[data-id='porte']").html(textJSON.select.prt[url['prt']].name);
-		}
-
-        if(url['atc'] !== "0") {
-            $("span[data-id='atuacao']").html("de "+textJSON.select.atc[url['atc']].name);
-        }
-
-        if(url['view'] !== "barras") $("span[data-id='ano']").html("em "+url['ano']);
-
-		if(url['uos'] === "0") {
-            $("span[data-id='mode-view']").html("por estado");
-		}
-		else {
-            $("span[data-id='mode-view']").html("por setor");
-		}
-
-		if(url['var'] === "1") {
-			if(url['view'] === "barras") $("span[data-id='hide-barra']").html("");
-		}
-
-		if(url['view'] === "treemap_region" || url['view'] === "treemap_scc") $("span[data-id='hide-barra']").html("");
-
-        if(url['var'] === "9") {
-            if(url['view'] === "barras") $("span[data-id='show-barra']").css("display", "block");
-        }
+		$(".desc-var").html(textJSON.var[getEixo(window.location.hash.substring(1))][url['var']].desc_var_mapa);
 
     });
 }
@@ -1098,6 +1047,7 @@ $(document).ready(function(){
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
             
             if($(this).attr('data-id') == 'var'){
+                changeDescVar();
                 cleanDesagsUrl();
                 switchToSetores();
                 enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0);
@@ -1107,6 +1057,7 @@ $(document).ready(function(){
                 $('.bread-select[data-id=uf]').val(0);
                 if(url['slc'] == 0) $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 else $(window.document).find(".cad-title").first().html($('.bread-select[data-id=ocp] option:selected').text());
+                $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
 
                 if(eixo_atual == 1){
                     updateOcupacoes($(this).val());
@@ -1137,15 +1088,16 @@ $(document).ready(function(){
 
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             if($(this).attr('data-id') =='var'){
+                changeDescVar();
+                cleanDesagsUrl();
                 switchToSetores();
+                enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0);
                 $('#setor').addClass("active");
                 $('#ocupacao').removeClass("active");
-                cleanDesagsUrl();
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
                 $('.bread-select[data-id=ano]').val(2014);
                 $('.opt-select[data-id=ano]').val(2014);
-                enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0);
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());

@@ -301,7 +301,7 @@ class EixoUm {
 	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
 		self::connect();		
-			if($prt == 0 && $cad != 0) {
+			if($prt == 0 || $cad != 0) {
                 $query = "SELECT * FROM " . self::$table . " AS ex"
                     . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE '" . $regiao . "'"
                     . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc

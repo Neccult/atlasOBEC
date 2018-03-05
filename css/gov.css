@@ -383,9 +383,12 @@ div#wrapper-footer-brasil{
    	max-width: 100%;
    	width: 100%;
 }
+
 .footer-content,
 .footer-content-index{
 	border-left: 3px solid #6DBFC9;
+	margin: 0 auto;
+	width: 50%;
 }
 .footer-content ul,
 .footer-content-index ul{

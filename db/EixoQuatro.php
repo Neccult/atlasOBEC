@@ -19,12 +19,18 @@ class EixoQuatro {
 	public $Numero;
 	public $idCadeia;
 	public $idParceiro;
+    public $idUF;
 	public $idTipo;
 
 	public $Ano;
 	public $Valor;
 	public $Percentual;
 	public $Taxa;
+
+    //informações UF
+    public $UFNome;
+    public $UFRegiao;
+    public $UFSigla;
 
 	//informações Cadeia
 	public $CadeiaNome;
