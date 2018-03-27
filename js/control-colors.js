@@ -11,12 +11,12 @@ function controlColor() {
        // case "mercado":
            // head.append('<link rel="stylesheet" type="text/css" href="css/mercado.css">');
            // break;
-        case "politicas":
-            head.append('<link rel="stylesheet" type="text/css" href="css/politicas.css">');
-            break;
-        case "comercio":
-            head.append('<link rel="stylesheet" type="text/css" href="css/comercio.css">');
-            break;
+        //case "politicas":
+            //head.append('<link rel="stylesheet" type="text/css" href="css/politicas.css">');
+            //break;
+        // case "comercio":
+        //     head.append('<link rel="stylesheet" type="text/css" href="css/comercio.css">');
+        //     break;
         default:
             break;
     }

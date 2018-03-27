@@ -54,7 +54,15 @@
 		$ano = $_GET["ano"];
 	else
 		$ano = 2014;
-
+    if (!empty($_GET["mundo"]))
+        $mundo = $_GET["mundo"];
+    else
+        $mundo = 0;
+    
+    if (!empty($_GET["slc"]))
+        $slc = $_GET["slc"];
+    else
+        $slc = 0;
 ?>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -90,7 +98,7 @@
 
 <!--================== SVG! =================-->
 <?php
-    if($eixo == "comercio") {
+    if($eixo == "comercio" && $mundo == 0) {
         echo "<div id=\"corpo-mundi\" style=\"width: 100%; height: 400px\" class=\"mapa fadeIn\"></div>";
     }
     else {
@@ -111,7 +119,9 @@
     var pfj = <?php echo $pfj; ?>;
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
-	var ano = <?php echo $ano; ?>;
+    var ano = <?php echo $ano; ?>;
+    var slc = <?php echo $slc; ?>;
+    var mundo = <?php echo $mundo; ?>;
 	var eixo;
 	switch(window.location.hash.substring(1)) {
         case "empreendimentos":
@@ -133,7 +143,7 @@
 </script>
 
 <?php
-    if($eixo == "comercio") {
+    if($eixo == "comercio" && $mundo == 0) {
         echo "<script src=\"js/mapa_mundi.js\"></script>";
     }
     else {

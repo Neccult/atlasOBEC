@@ -37,10 +37,10 @@
 							<a href="page.php#mercado"><img class="img_icons" src="images/Icone_02.png"></a>
 						</div>
 						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-							<a href="#"><img class="img_icons" src="images/Icone_03.png"></a>
+							<a href="page.php#politicas"><img class="img_icons" src="images/Icone_03.png"></a>
 						</div>
 						<div class="icons-list col-lg-3 col-lg-offset-0 col-md-3 col-ms-offset-20 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-							<a href="#"><img class="img_icons" src="images/Icone_04.png"></a>
+							<a href="page.php#comercio"><img class="img_icons" src="images/Icone_04.png"></a>
 						</div>
 						<div class="text-atlas col-lg-11 col-md-12 col-sm-12 col-xs-12" id="background_2">
 							<div class="title-question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">

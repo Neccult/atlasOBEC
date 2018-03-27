@@ -83,7 +83,7 @@
     if (!empty($_GET["typ"]))
         $typ = $_GET["typ"];
     else
-        $typ = 0;
+        $typ = 1;
 
     if (!empty($_GET["prc"]))
         $prc = $_GET["prc"];

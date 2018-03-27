@@ -109,7 +109,12 @@
         $ano = $_GET["ano"];
     else
         $ano = NULL;
-
+    
+    if (!empty($_GET["mundo"]))
+        $mundo = $_GET["mundo"];
+    else
+        $mundo = 0;
+    
 
 ?>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -197,7 +202,8 @@
     var deg = <?php echo $deg; ?>;
     var slc = <?php echo $slc; ?>;
     var ano = <?php if($ano == NULL) echo "null"; else echo $ano; ?>;
-	var uf = <?php echo $uf; ?>;
+    var uf = <?php echo $uf; ?>;
+    var mundo = <?php echo $mundo; ?>;
     var eixo;
     switch(window.location.hash.substring(1)) {
         case "empreendimentos":

@@ -7,6 +7,7 @@ var legendaWidth = window.parent.outerWidth;
 
 var shapeWidth = 30;
 
+    corpo = '#corpo'
 
 var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
 var valoresTransform = "translate(10,"+(height-10)+")";
@@ -32,11 +33,12 @@ function destacaPais(ufId) {
  /**** desktop! ****/
  if(windowWidth>=1700){
 
-	/* cria svg */
-	var svg = d3.select("#corpo").append("svg")
-		.attr("width", width)
-		.attr("height", height);
+    /* cria svg */
 
+	var svg = d3.select(corpo).append("svg")
+	        	.attr("width", width)
+		        .attr("height", height);
+    // console.log(d3.select(corpo));
 	/* configura projeção */
 	var projection = d3.geoMercator()
 		//.center([-50, -30])
@@ -50,7 +52,7 @@ function destacaPais(ufId) {
 else if(windowWidth>=1550) {
     /* cria svg */
      var height = 350;
-    var svg = d3.select("#corpo").append("svg")
+    var svg = d3.select(corpo).append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -67,7 +69,7 @@ else if(windowWidth>=1550) {
 else if(windowWidth>=1280) {
     /* cria svg */
      var height = 350;
-    var svg = d3.select("#corpo").append("svg")
+    var svg = d3.select(corpo).append("svg")
         .attr("width", width)
         .attr("height", height*1.5);
 
@@ -84,7 +86,7 @@ else if(windowWidth>=1280) {
 }
  else if(windowWidth>=1200) {
      /* cria svg */
-     var svg = d3.select("#corpo").append("svg")
+     var svg = d3.select(corpo).append("svg")
          .attr("width", width)
          .attr("height", height*1.5);
 
@@ -104,7 +106,7 @@ else if(windowWidth>=1280) {
 else if(windowWidth>=1000){
      var height = 350;
 	//cria svg
-	var svg = d3.select("#corpo").append("svg")
+	var svg = d3.select(corpo).append("svg")
 		.attr("width", width)
 		.attr("height", height);
 
@@ -123,7 +125,7 @@ else if(windowWidth>=1000){
 else if(windowWidth>=800){
      var height = 350;
      //cria svg
-     var svg = d3.select("#corpo").append("svg")
+     var svg = d3.select(corpo).append("svg")
          .attr("width", width)
          .attr("height", height);
 
@@ -145,7 +147,7 @@ else if(windowWidth>=700){
      var height = 350;
 
 	//cria svg
-	var svg = d3.select("#corpo").append("svg")
+	var svg = d3.select(corpo).append("svg")
 		.attr("width", width)
 		.attr("height", height);
 
@@ -166,7 +168,7 @@ else if(windowWidth>=700){
      var height = 350;
 
      //cria svg
-     var svg = d3.select("#corpo").append("svg")
+     var svg = d3.select(corpo).append("svg")
          .attr("width", width)
          .attr("height", height);
 
@@ -187,7 +189,7 @@ else if(windowWidth>=700){
      var height = 350;
 
      //cria svg
-     var svg = d3.select("#corpo").append("svg")
+     var svg = d3.select(corpo).append("svg")
          .attr("width", width)
          .attr("height", height);
 
@@ -209,7 +211,7 @@ else{
 	var shapeWidth = 20;
 
 	//cria svg
-	var svg = d3.select("#corpo").append("svg")
+	var svg = d3.select(corpo).append("svg")
 		.attr("width", width)
 		.attr("height", height);
 
@@ -242,10 +244,10 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
 
 $.get("./db/json_mapa.php"+config, function(data) {
-
+     // console.log(data);
 });
 //pre-load arquivos
 d3.queue()
@@ -260,15 +262,15 @@ function ready(error, br_states, mapa){
 
 	//variaveis informacao
 	var dict = {};
-	var info = [];
-
+    var info = [];
+    
 	Object.keys(mapa).forEach(function(key) {
 
-		// console.log(key, mapa[key]);
-		info.push(mapa[key]);
+        info.push(mapa[key]);
 		return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
 
 	});
+
 
 	//carrega estados JSON
 	var states = topojson.feature(br_states, br_states.objects.states);
@@ -318,12 +320,17 @@ function ready(error, br_states, mapa){
 		.domain(dom)
 		.range(colorsRange);
 
-	var tooltipInstance = tooltip.getInstance();
+
+   // console.log(dict)
+
+
+    var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
     var title_content = textJSON.var[eixo][vrv-1].title;
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
+    
 	//concatena propriedades
 	svg.append("g")
 		.attr("class", "states")
@@ -338,77 +345,8 @@ function ready(error, br_states, mapa){
 
 		//mouseover
 		.on("mouseover", function(d){
-            if(eixo == 0) {
-                if(vrv === 2) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                    ]);
-                }
-                else if(vrv === 3) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                    ]);
-                }
-                else if(vrv === 9) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                    ]);
 
-                }
-                else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                    ]);
-
-                }
-                else {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                        ["", formatDecimalLimit(dict[d.id].taxa, 2)],
-                    ]);
-                }
-            }
-
-            else if(eixo == 1) {
-                if(vrv === 2){
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                    ]);
-                }
-                else if(vrv === 8){
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                        ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
-
-                    ]);
-                }
-                else if(vrv === 9){
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                        ["", formatDecimalLimit(dict[d.id].taxa, 2) + '%'],
-
-                    ]);
-                }
-                else{
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                        ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                        ["", formatDecimalLimit(dict[d.id].taxa, 2)],
-                    ]);
-                }
-
-            }
+		    loadTooltip(d, eixo, vrv)
 		})
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
@@ -420,8 +358,8 @@ function ready(error, br_states, mapa){
             $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
             $(window.parent.document).find("select[data-id='uf']").val(d.id);
             destacaPais(d.id);
-            setIntegerValueData(dict[d.id], eixo, vrv);
 
+            setIntegerValueData(dict[d.id], eixo, vrv);
             setPercentValueData(dict[d.id], eixo, vrv);
 
             setStateTitle(d['properties']['name']);
@@ -462,14 +400,16 @@ function ready(error, br_states, mapa){
         .shapePadding(10)
         .orient('vertical')
         .scale(color);
-
+    
 
 /********* LEGENDA DO MAPA *********/
 
 
 var low_color = color(minValue);
 var high_color = color(maxValue);
+
 var x_barra = svg.attr("width")*0.3;
+
 var y_barra = 350*0.85;
 var max_barra = maxValue;
 var min_barra = minValue;
@@ -481,7 +421,6 @@ var fontColor = "#aaa"
 if(y_barra + height_barra + $("svg").offset().top > 350){
     y_barra = 350 - 23 - $("svg").offset().top - height_barra;
 }
-
 
 
 gradient = svg.append("defs")
@@ -598,17 +537,140 @@ gradient = svg.append("defs")
 		});
 	}*/
 
+
     if(url['uf'] != 0) {
     	destacaPais(url['uf']);
         setPercentValueData(dict[url['uf']], eixo, vrv);
         setIntegerValueData(dict[url['uf']], eixo, vrv);
 	}
 
+
 	if(url['cad'] != 0 && url['uf'] != 0) {
         setIntegerValueData(dict[url['uf']], eixo, vrv);
         setPercentValueData(dict[url['uf']], eixo, vrv);
 	}
+
     if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
     $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
     $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+
+
+    function loadTooltip(d, eixo, vrv){
+
+        if(eixo == 0) {
+            if(vrv === 2) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
+                ]);
+            }
+            else if(vrv === 3) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                ]);
+            }
+            else if(vrv === 9) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
+                ]);
+
+            }
+            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                ]);
+
+            }
+            else {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
+                ]);
+            }
+        }
+        else if(eixo == 1){
+
+            //tooltips com os 3 valores na interface (valor, percentual e taxa)
+            if(vrv === 1  || vrv === 5 || vrv === 7 || vrv === 8){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
+
+                ]);
+            }
+            ///Tooltips com só o valor na interface
+            else if(vrv === 2 || vrv === 9){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
+                ]);
+            }
+            //tooltips com 2 valores na interface (valor e taxa)
+            else if(vrv === 6 || vrv === 4 ){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
+
+                ]);
+            }
+            else if(vrv === 10 || vrv === 11) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
+                ]);
+            }
+        }
+        else if(eixo == 2){
+
+            //tooltips com os 3 valores na interface (valor, percentual e taxa)
+            if(vrv === 1  || vrv === 2 || vrv === 3 || vrv === 4 ||  vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
+
+                ]);
+
+            }
+            else if(vrv === 14){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                ]);
+
+            }
+
+        }
+        else if(eixo == 3){
+            //tooltips com os 3 valores na interface (valor, percentual e taxa)
+            if(vrv === 1){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
+                ]);
+            }
+            else if(vrv === 99){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                ]);
+
+            }
+
+        }
+    }
+    
 };
+
+

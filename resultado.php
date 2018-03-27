@@ -30,7 +30,7 @@ $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==
 $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
 $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
 $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
-$typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
+$typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
 
 /* informações JSON */
 $json = file_get_contents('data/pt-br.json');
@@ -165,6 +165,23 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
 
+                    <!-- <?php if($eixo == 'politicas') {?>
+                        <div class="bread-separator">/</div>
+
+                        <div>
+                            <select class="bread-select" data-id="mec">
+                                <?php
+                                foreach ($json_text['select']['mec'] as $option) {
+                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                    <?php } ?> -->
+
+
+
 
 
 
@@ -220,9 +237,17 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     <div class="view-title" style="margin-top: 5px" >
                         DADOS
                     </div>
-                    <div class="state-title">
-                        BRASIL
-                    </div>
+
+                    <?php if($eixo == "comercio") { ?>
+                        <div class="state-title">
+                            MUNDO
+                        </div>
+                    <?php } else { ?>
+                        <div class="state-title">
+                            BRASIL
+                        </div>
+                    <?php  }?>
+
                     <div class="cad-title">
                         TODOS SETORES
                     </div>
@@ -316,6 +341,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             <?php
                                 } else {
                             ?>
+
+                                <?php if($eixo == "comercio") { ?>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button class="opt view active" id="bens">Bens</button>
+                                    </div>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button class="opt view " id="servicos">Serviços</button>
+                                    </div>
+                                <?php } ?>
+
                             <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
                             <select class="opt-select" data-id="var">
                                 <?php
@@ -335,24 +370,98 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     ?>
                                 </select>
                             </div>
-                            <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
-                                <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
-                                <select class="opt-select" data-id="deg">
-                                    <!-- opções! -->
-                                    <?php foreach ($select['deg'] as $option): ?>
-                                        <?php if($option['value'] == 0 || ($option['value'] >= 9 && $option['value'] <= 12)):?>
-                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
 
-                                        <?php endif; ?>
-                                        <?php if($var >= 10): ?>
-                                            <?php if($option['value'] == 13 || ($option['value'] == 14)):?>
+                            <?php if($eixo == 'politicas') {?>
+                                <div id="option-title-view" <?php echo "class='select-mec'"; ?>>
+                                    <span class="opt view active">Mecanismo :</span>
+                                    <select class="opt-select" data-id="mec">
+                                        <?php
+                                        foreach ($json_text['select']['mec'] as $option) {
+                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div id="option-title-view" <?php echo "class='select-mod' style='display: none'" ; ?>>
+                                    <span class="opt view active">Modalidade :</span>
+                                    <select class="opt-select" data-id="mod">
+                                        <?php
+                                        foreach ($json_text['select']['mod'] as $option) {
+                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div id="option-title-view" <?php echo "class='select-pfj' style='display: none'"; ?>>
+                                    <span class="opt view active">Tipo de Pessoa :</span>
+                                    <select class="opt-select" data-id="pfj">
+                                        <?php
+                                        foreach ($json_text['select']['pfj'] as $option) {
+                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            <?php } ?>
+
+                            <?php if($eixo == 'comercio') {?>
+                                <div id="option-title-viewss" <?php echo "class='select-typ'"; ?>>
+                                    <span class="opt view active">Tipo :</span>
+                                    <select class="opt-select" data-id="typ">
+                                        <?php
+                                        foreach ($json_text['select']['typ'] as $option) {
+                                            if($option['value'] == "1"){
+                                                echo "<option value='". $option['value'] ."' selected>" . $option['name'] . "</option>";
+                                            }
+                                            else {
+                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                            }
+
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div id="option-title-view" <?php echo "class='select-prc'" ; ?>>
+                                    <span class="opt view active">Parceiro :</span>
+                                    <select class="opt-select" data-id="prc">
+                                        <?php
+                                        foreach ($json_text['select']['prc'] as $option) {
+                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+
+                            <?php } ?>
+
+                            <?php if($eixo == 'empreendimentos') {?>
+
+                                <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
+                                    <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
+                                    <select class="opt-select" data-id="deg">
+                                        <!-- opções! -->
+                                        <?php foreach ($select['deg'] as $option): ?>
+                                            <?php if($option['value'] == 0 || ($option['value'] >= 9 && $option['value'] <= 12)):?>
                                                 <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+
                                             <?php endif; ?>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        <?php
+                                            <?php if($var >= 10): ?>
+                                                <?php if($option['value'] == 13 || ($option['value'] == 14)):?>
+                                                    <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            <?php } ?>
+
+
+
+                                <?php
                             }
                         ?>
                         </div>
@@ -385,7 +494,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     </div>
                     <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
                 </div>
-                <div class="col-md-4 col-xs-12" style="height: 330px;">
+                <div class="col-md-4 col-xs-12"  style="height: 330px;">
                     <div class="view-title">
                         <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
                         <i class="plus"></i>
@@ -551,4 +660,5 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
     $(document).ready(function() {
 
     });
+
 </script>

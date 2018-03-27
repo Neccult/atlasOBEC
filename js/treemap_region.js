@@ -279,7 +279,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                                    ["", formatDecimalLimit(d.data.taxa, 2)],
+                                    ["", formatDecimalLimit(d.data.taxa*100, 2)+ "%"],
                                 ]);
                             }
                             else {
@@ -289,7 +289,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
                                     ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                    ["", formatDecimalLimit(d.data.taxa, 2)],
+                                    ["", formatDecimalLimit(d.data.taxa*100, 2) + "%"],
                                 ]);
 							}
 						}
@@ -298,10 +298,13 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 					.on("click", function(d) {
 						var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-						var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
+                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+                        var newMAPASrc = $(window.parent.document).find("#view_box").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
+                        newMAPASrc = newMAPASrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
 						$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
 						$(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+						$(window.parent.document).find("#view_box").attr("src", newMAPASrc);
 						destacaPais(ufId(d.data.name));
                         setIntegerValueData({valor: integerValue}, eixo, vrv);
 						setPercentValueData({percentual: percentValue}, eixo, vrv);
@@ -340,18 +343,26 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 
 	percentageTextElement.append('tspan')
 		.text(function(d) {
-			if(cad && vrv != 2) {
-				return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
-            }
-            else if(vrv === 2) {
-				return formatDecimalLimit(d.data.size, 3) + '%';
-            }
-            else if(vrv == 9) {
-                return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
+			if(eixo == 0){
+                if(cad && vrv != 2) {
+                    return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
+                }
+                else if(vrv === 2) {
+                    return formatDecimalLimit(d.data.size, 3) + '%';
+                }
+                else if(vrv == 9) {
+                    return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
+                }
+                else {
+                    return formatDecimalLimit(d.data.percentual*100, 2) + '%';
+                }
 			}
-            else {
-				return formatDecimalLimit(d.data.percentual*100, 2) + '%';
-            }
+			else if(eixo == 2){
+                if(vrv === 7) {
+                    return formatDecimalLimit(d.data.size, 3);
+                }
+			}
+
 		})
 		.attr("font-size", function(d) {
 			var nWidth = nodeWidth(d);

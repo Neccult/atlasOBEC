@@ -34,7 +34,7 @@ if (!empty($_GET["var"])) {
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== visualizacao ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
-    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
+    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
 }
@@ -57,7 +57,7 @@ else{
     $slc = 0;
     $prv = 0;
     $snd = 0;
-    $typ = 0;
+    $typ = 1;
     $prc = 0;
 	$ano = 2014;
 	$eixo = 0;
@@ -239,7 +239,14 @@ else if($eixo == 1) {
 }
 else if($eixo == 2) {
     require_once("EixoTres.php");
-    for ($cad=1; $cad <= 10; $cad++) {
+
+    if($var == 2){
+        $array_cad = array(2,3,5,8,11);
+    }
+    else{
+        $array_cad = array(1,2,3,4,5,6,7,8,9,10);
+    }
+    foreach($array_cad as $cad) {
         $tupla = EixoTres::find($var, $uf, $cad, $mec, $pfj, $mod, $ano);
 
         $treemap .= '
@@ -261,18 +268,18 @@ else if($eixo == 2) {
 					}
 				';
 
-        $treemap .= ($cad != 10) ? ',' : '' ;
+        $treemap .= ($cad != $array_cad[count($array_cad)-1]) ? ',' : '' ;
 
     }
 }
 if($eixo == 3) {
     require_once("EixoQuatro.php");
-    for ($cad=1; $cad <= 10; $cad++) {
-        $tupla = EixoQuatro::find($var, $prc, $cad, $typ, $ano);
-
-        $treemap .= '
+    $result = EixoQuatro::find($var, $prc, $typ, $ano, $slc);
+    foreach($result as $tupla){
+        if($tupla->idCadeia != '0'){
+            $treemap .= '
 					{
-					  "colorId": "'.$cad.'", 
+					  "colorId": "'.$tupla->idCadeia.'", 
 					  "name": "'.$tupla->CadeiaNome.'",
 					  "children": [
 					    {
@@ -289,9 +296,11 @@ if($eixo == 3) {
 					}
 				';
 
-        $treemap .= ($cad != 10) ? ',' : '' ;
-
+        $treemap .= ($tupla->idCadeia != count($result)-1) ? ',' : '' ;
+    
+        }
     }
+    
 }
 
 $treemap .= '

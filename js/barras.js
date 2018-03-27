@@ -80,9 +80,8 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         // import pt-br.json file for get the title
         d3.json('data/pt-br.json', function (error, data) {
             if (error) throw error;
-
             textJSON = data;
-            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo;
 
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
@@ -101,11 +100,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     }
 
     function analyze(error, data) {
+        
+        // console.log(data);
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }
-
+        
         var dados = {key: [], value: [], percentual: [], taxa: []};
 
         Object.keys(data).forEach(function (key) {
@@ -113,10 +114,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             } else {
                 dados.key.push(data[key].ano);
             }
+
             if ((vrv === 2 || vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
             else dados.value.push(data[key].valor);
+
             if (vrv === 1 || vrv === 2 || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 9 || vrv === 8) dados.percentual.push(0);
             else dados.percentual.push(data[key].percentual);
+
             if (vrv === 2) dados.taxa.push(0);
             else dados.taxa.push(data[key].taxa);
         });
@@ -179,7 +183,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .rangeRound([0, width])
                 .padding(0.1);
         }
-        else if(eixo == 0 & (vrv == 3)) {
+        else if(eixo == 0 && (vrv == 3)) {
             var x = d3.scaleBand()
                 .domain(d3.range(dados.value.length - 2))
                 .rangeRound([0, width])
@@ -224,6 +228,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             var formatMillions = function (d) {
                 return removeDecimalZeroes(formatInit(d / 1e6)) + "M";
             };
+
+            var formatBillions = function (d) {
+                return removeDecimalZeroes(formatInit(d / 1e9)) + "B";
+            };
+
             var formatFraction = function (d) {
                 var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
                 var decimalDigits;
@@ -279,6 +288,8 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 return formatThousands;
             else if (preFormattedIntLength <= 9)
                 return formatMillions;
+            else if (preFormattedIntLength <= 12)
+                return formatBillions;
         }();
 
         // cria SVG
@@ -305,7 +316,26 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .tickSize(-width + 10)
                 .tickSizeOuter(0)
                 .tickFormat("")
-            )
+            );
+
+        /*
+        *  O trecho a seguir insere os anos contidos na visualização
+        *  no select dos anos a fim de não criar visualizações impossíveis.
+        */
+        $(window.parent.document).find('select[data-id=ano]').each(function(){
+            selectOp = this;
+            $(this.options).each(function(){
+                $(this).remove();
+            })
+            dummy = dados.key.slice(0);
+            dummy.reverse().forEach(function(d){
+                $(selectOp).append($('<option>', {
+                    value: d,
+                    text: d
+                }))
+            })
+            $(this).val(url['ano']);
+        });
 
         //Cria barras
         svg.selectAll("rect")
@@ -407,143 +437,9 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 var valorTooltip = formatTextVrv(dados.value[i], eixo, vrv);
                 var taxaTooltip = formatTextTaxaVrv(dados.taxa[i], eixo, vrv);
 
-                if(eixo == 0){
-                    if (vrv === 2){
-                        if(uf != 0) {
-                            tooltipInstance.showTooltip(d, [
-                                ["title", dados.key[i]],
-                                ["", formatTextVrv(dados.value[i]/100, eixo, vrv)]
-                            ]);
-                        }
-                        else {
-                            tooltipInstance.showTooltip(d, [
-                                ["title", dados.key[i]],
-                                ["", formatTextVrv(dados.value[i], eixo, vrv)]
-                            ]);
-                        }
-                    }
-                    else if (vrv === 3) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i]/100, eixo, vrv)],
-                            ["", formatDecimalLimit(dados.percentual[i] * 100, 2) + "%"],
-                            ["", formatDecimalLimit(dados.taxa[i], 2)],
-                        ]);
-                    }
-                    else if (vrv >= 4 && vrv <= 7) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", valorTooltip],
-                            ["", taxaTooltip]
-                        ]);
-                    }
-                    else if (vrv == 8){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", valorTooltip],
-                            ["", taxaTooltip],
-                        ]);
-                    }
-                    else if (vrv == 9 && url['uf'] == 0) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
-                            ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
-                        ]);
-                    }
-                    else {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
-                        ]);
-                    }
-                }
-                else if (eixo == 1){
-                    if (vrv == 1) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
 
-                    }
-                    else if (vrv == 2) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ]);
-
-                    }
-                    else if (vrv == 3) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-
-                    }
-                    else if (vrv == 4) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-
-                    }
-                    else if (vrv == 5) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-
-                    }
-                    else if (vrv == 6) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"h"],
-                        ]);
-
-                    }
-                    else if (vrv == 7) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-                    }
-                    else if (vrv == 8) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-                    }
-                    else if (vrv == 9) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2) +"%"],
-                        ]);
-                    }
-                    else if (vrv >  11) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.taxa[i], 2)],
-                        ]);
-
-                    }
-                    else {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatDecimalLimit(dados.percentual[i] * 100, 2) + "%"],
-                            ["", formatDecimalLimit(dados.taxa[i], 2)],
-                        ]);
-                    }
+                if (eixo === 0 || eixo === 1 || eixo === 2 || eixo === 3){
+                    loadTooltip(d, i, eixo, vrv)
                 }
 
             })
@@ -551,6 +447,8 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             .on("click", function(d, i, obj) {
                 var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
                 newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
+                newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
+
                 if(url['uos'] == 1) {
                     var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                     newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
@@ -721,13 +619,100 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         configInfoDataBoxBarras(eixo, vrv, dados);
 
+        
+
         $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
         $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
 
         if(url['slc'] == 1){
             updateDataDesc()
         }
-    };
+
+        function loadTooltip(d, i, eixo, vrv){
+            if(eixo === 0){
+                if(vrv === 1 || vrv === 3){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                    ]);
+                }
+                else if (vrv === 2){
+                    if(uf != 0) {
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i]/100, eixo, vrv)]
+                        ]);
+                    }
+                    else {
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i], eixo, vrv)]
+                        ]);
+                    }
+                }
+                else if (vrv >= 4 && vrv <= 8) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)]
+                    ]);
+                }
+                else if (vrv == 9 && url['uf'] == 0) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
+                        ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
+                    ]);
+                }
+                else {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                        ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
+                    ]);
+                }
+
+
+            }
+            else if(eixo === 1){
+                if (vrv === 2 || vrv === 9) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                    ]);
+                }
+                else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                    ]);
+                }
+            }
+            else if(eixo === 2){
+                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                    ]);
+                }
+            }
+            else if(eixo === 3){
+                if(vrv === 1){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                    ]);
+                }
+            }
+        }
+
+
+    }
+
+
 }
 //BARRA 2
 else {

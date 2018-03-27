@@ -85,7 +85,7 @@
         </div>
     </div>
 </div>
-<div id="loading"></div>
+<!--<div id="loading"></div>-->
 <!---/* url atual para o js */-->
 <script type="text/javascript">
     var url = {

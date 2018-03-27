@@ -6,7 +6,7 @@ define('DB_NOME', 'Atlas');
 define('DB_USUARIO', 'root');
 define('DB_SENHA', 'root');
 // define('DB_HOST', 'localhost');
-define('DB_HOST', '143.54.231.143');
+define('DB_HOST', '143.54.231.130');
 class EixoQuatro {
 
 ## Atributos ##
@@ -90,23 +90,33 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $parc, $cad, $tipo, $anos){
+	public static function find($var, $parc, $tipo, $anos, $slc){
 
 		self::connect();
 
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = 0"
+					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
 					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
 					." WHERE ex.Numero = ".$var
 					." AND ex.Ano = ".$anos;
 
-			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoQuatro');
+			
+			if($slc == 0)
+				$query .= " AND ex.Consumo = 1";
+			else{
+				$query .= " AND ex.Consumo = 0";
+			}
 
+			$result = mysqli_query(self::$conn, $query);
+			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
+				$allObjects[] = $obj;
+			}
 		self::disconnect();
 
-		return ($obj == false) ? NULL : $obj;
+		//return ($obj == false) ? NULL : $obj;
+			return $allObjects;
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -126,6 +136,7 @@ class EixoQuatro {
 						." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo"				
 						." ORDER BY id";
 
+        $query .= " AND ex.Consumo = 1";
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();
 
@@ -149,23 +160,39 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $tipo, $anos){
+	public static function getter_mapa($var, $cad, $tipo, $anos, $parceiro, $mundo, $slc){
 
 		self::connect();		
+		if($mundo == 0){
 			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var;
+				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
+				." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = 0"
+				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
+				." WHERE ex.Numero = ".$var;
 
-				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
+		} else{
+			$query = "SELECT * FROM ".self::$table." AS ex"
+				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parceiro
+				." JOIN UF AS uf ON uf.idUF = ex.idUF"
+				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
+				." WHERE ex.Numero = ".$var;
 
-			$result = mysqli_query(self::$conn, $query);
-			$allObjects = array();
+		}
 
-			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-				$allObjects[] = $obj;
-			}
+        if($slc == 0)
+			$query .= " AND ex.Consumo = 1";
+		else{
+			$query .= " AND ex.Consumo = 0";
+		}
+		$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
+		$result = mysqli_query(self::$conn, $query);
+		$allObjects = array();
+
+		while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
+			$allObjects[] = $obj;
+		}
 
 		self::disconnect();
 		
@@ -183,14 +210,30 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $parc, $cad, $tipo){
+	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc){
 
-		self::connect();		
+		self::connect();
+		if($mundo == 0){
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
 					." WHERE ex.Numero = ".$var;
+
+		}else{
+			$query = "SELECT * FROM ".self::$table." AS ex"
+					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
+					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF =".$uf
+					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
+					." WHERE ex.Numero = ".$var;
+		}
+
+		if($slc == 0)
+			$query .= " AND ex.Consumo = 1";
+		else{
+			$query .= " AND ex.Consumo = 0";
+		}
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();

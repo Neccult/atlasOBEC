@@ -20,9 +20,11 @@ if (!empty($_GET["var"])) {
     $mec = $_GET["mec"];
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
-    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
+    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
-	$eixo = $_GET['eixo'];
+    $eixo = $_GET['eixo'];
+    $mundo =    isset($_GET['mundo']) ?   $_GET['mundo']:   0;
+    $slc = isset($_GET['slc']) ?   $_GET['slc']:   0;
 }
 else{
 	$var = 1;
@@ -33,10 +35,12 @@ else{
 	$prt = 0;
 	$ocp = 0;
     $mec = 0;
-    $typ = 0;
+    $typ = 1;
     $prc = 0;
 	$ano = 2014;
-	$eixo = 0;
+    $eixo = 0;
+    $slc = 0;
+    $mundo = 0;
 }
 
 //Trata a pessoa fisica/juridica
@@ -96,6 +100,7 @@ else if($eixo == 1) {
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;
         $mapa[$id]['uf'] = $tupla->UFNome;
+        $mapa[$id]['ano'] = (double) $tupla->Ano;
         $mapa[$id]['valor'] = (double) $tupla->Valor;
         $mapa[$id]['percentual'] = (double) $tupla->Percentual;
         $mapa[$id]['taxa'] = (double) $tupla->Taxa;
@@ -107,29 +112,18 @@ else if($eixo == 2) {
     require_once("EixoTres.php");
     foreach (EixoTres::getter_mapa($var, $cad, $mec, $pfj, $ano) as $tupla) {
 
-        /*
-            $mapa[$tupla->idUF] = [
-
-                'id' => (int) $tupla->idUF,
-                'uf' => $tupla->UFNome,
-                'valor' => (double) $tupla->Valor
-            ];
-        */
-
-
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;
         $mapa[$id]['uf'] = $tupla->UFNome;
+        $mapa[$id]['ano'] = (double) $tupla->Ano;
         $mapa[$id]['valor'] = (double) $tupla->Valor;
         $mapa[$id]['percentual'] = (double) $tupla->Percentual;
         $mapa[$id]['taxa'] = (double) $tupla->Taxa;
-
-
     }
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
-    foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano) as $tupla) {
+    foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $mundo, $slc) as $tupla) {
 
         /*
             $mapa[$tupla->idUF] = [
@@ -139,21 +133,31 @@ else if($eixo == 3) {
                 'valor' => (double) $tupla->Valor
             ];
         */
-
-
-        $id = $tupla->idParceiro;
-        $mapa[$id]['id'] = (int) $tupla->idParceiro;
-        $mapa[$id]['prc'] = $tupla->ParceiroNome;
-        $mapa[$id]['valor'] = (double) $tupla->Valor;
-        $mapa[$id]['percentual'] = (double) $tupla->Percentual;
-        $mapa[$id]['taxa'] = (double) $tupla->Taxa;
-
+        if($mundo == 0){
+            $id = $tupla->idParceiro;
+            $mapa[$id]['id'] = (int) $tupla->idParceiro;
+            $mapa[$id]['prc'] = $tupla->ParceiroNome;
+            $mapa[$id]['valor'] = (double) $tupla->Valor;
+            $mapa[$id]['percentual'] = (double) $tupla->Percentual;
+            $mapa[$id]['taxa'] = (double) $tupla->Taxa;
+        }
+        else{
+            if($tupla->idUF != 99){
+                $id = $tupla->idUF;
+            $mapa[$id]['id'] = (int) $tupla->idUF;
+            $mapa[$id]['uf'] = $tupla->UFNome;
+            $mapa[$id]['ano'] = (double) $tupla->Ano;
+            $mapa[$id]['valor'] = (double) $tupla->Valor;
+            $mapa[$id]['percentual'] = (double) $tupla->Percentual;
+            $mapa[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            
+        }
+            
 
     }
 }
 
-//var_dump($mapa);
-// echo json_encode($mapa, JSON_UNESCAPED_UNICODE);
 echo json_encode($mapa);
 
 ?>

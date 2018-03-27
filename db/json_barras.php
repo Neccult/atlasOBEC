@@ -62,13 +62,13 @@ if (!empty($_GET["var"])) {
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
-
+    $mundo  =   isset($_GET['mundo']) ?   $_GET['mundo']:   0;
     $eixo = $_GET['eixo'];
 }
 else{
 	$var = 1;
 	$uf = 0;
-	
+	$mundo = 0;
 	$atc = 0;
 	$cad = 0;
 	$prt = 0;
@@ -210,44 +210,35 @@ else if($eixo == 1) {
 }
 else if($eixo == 2) {
     require_once("EixoTres.php");
-    foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+        foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
-        // $barras[$tupla->Ano] = $tupla->Valor;
-        if($var < 14) {
-            $id = $tupla->Ano;
-            $barras[$id]['uf'] = $tupla->UFNome;
-            $barras[$id]['ano'] = (int)$tupla->Ano;
-            $barras[$id]['valor'] = (double)$tupla->Valor;
-            $barras[$id]['percentual'] = (double)$tupla->Percentual;
-            $barras[$id]['taxa'] = (double)$tupla->Taxa;
-            $barras[$id]['uos'] = 2;
+            // $barras[$tupla->Ano] = $tupla->Valor;
+            if ($var < 15) {
+
+                $id = $tupla->Ano;
+                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['ano'] = (int)$tupla->Ano;
+                $barras[$id]['valor'] = (double)$tupla->Valor;
+                $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                $barras[$id]['uos'] = 2;
+            } else {
+                $id = $tupla->Ano;
+                $barras[$id]['ano'] = (int)$tupla->Ano;
+                $barras[$id]['valor'] = (double)$tupla->Valor;
+                $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                $barras[$id]['uos'] = (int)$uos;
+            }
         }
-        else if($uos == 0) {
-            $id = $tupla->UFSigla;
-            $barras[$id]['uf'] = $tupla->UFNome;
-            $barras[$id]['ano'] = (int)$tupla->Ano;
-            $barras[$id]['valor'] = (double)$tupla->Valor;
-            $barras[$id]['percentual'] = (double)$tupla->Percentual;
-            $barras[$id]['taxa'] = (double)$tupla->Taxa;
-            $barras[$id]['uos'] = (int)$uos;
-        }
-        else if($uos == 1) {
-            $id = sigla_cadeia($tupla->CadeiaNome);
-            $barras[$id]['uf'] = $tupla->UFNome;
-            $barras[$id]['ano'] = (int)$tupla->Ano;
-            $barras[$id]['valor'] = (double)$tupla->Valor;
-            $barras[$id]['percentual'] = (double)$tupla->Percentual;
-            $barras[$id]['taxa'] = (double)$tupla->Taxa;
-            $barras[$id]['uos'] = (int)$uos;
-        }
-    }
+
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
-    foreach (EixoQuatro::getter_barras($var, $prc, $cad, $typ) as $tupla) {
+    foreach (EixoQuatro::getter_barras($var, $prc, $cad, $typ, $uf, $mundo, $slc) as $tupla) {
 
         // $barras[$tupla->Ano] = $tupla->Valor;
-
+        
         $id = $tupla->Ano;
         $barras[$id]['uf'] = $tupla->UFNome;
         $barras[$id]['ano'] = (int) $tupla->Ano;

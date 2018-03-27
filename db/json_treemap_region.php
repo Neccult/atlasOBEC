@@ -432,23 +432,23 @@ else if($eixo == 2) {
                               "name": "' . $regiao . '",
                               "children": [
                 ';
-    foreach (EixoTres::getter_region($var, $cad, $mec, $pfj, $mod, $ano, $regiao) as $tupla) {
-        $treemap .= '{"name": "' . $tupla->UFSigla . '", 
-                                              "estado": "' . $tupla->UFNome . '",
-                                              "percentual": "' . $tupla->Percentual . '",
-                                              "taxa": "' . $tupla->Taxa . '", 
-                                              "size": "' . $tupla->Valor . '"},';
-    }
+        foreach (EixoTres::getter_region($var, $cad, $mec, $pfj, $mod, $ano, $regiao) as $tupla) {
+            $treemap .= '{"name": "' . $tupla->UFSigla . '", 
+                                                  "estado": "' . $tupla->UFNome . '",
+                                                  "percentual": "' . $tupla->Percentual . '",
+                                                  "taxa": "' . $tupla->Taxa . '", 
+                                                  "size": "' . $tupla->Valor . '"},';
+        }
 
-    $size = strlen($treemap);
-    $treemap = substr($treemap, 0, $size - 1);
+        $size = strlen($treemap);
+        $treemap = substr($treemap, 0, $size - 1);
 
-    $treemap .= '	        
+        $treemap .= '	        
+                                  ]
+                                } 
                               ]
-                            } 
-                          ]
-                        },
-                ';
+                            },
+                    ';
 
 
     $regiao = "Sudeste";

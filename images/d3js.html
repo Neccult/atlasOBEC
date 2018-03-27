@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)https://jsperf.com/reverse-foreach-vs-reversal-iteration -->
+<html lang="en" class="js" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+  
+      <title>reverse().forEach() vs. reversal iteration · jsPerf</title>
+  
+    <link rel="apple-touch-icon" href="https://jsperf.com/public/apple-touch-icon.png">
+    <link rel="shortcut icon" href="https://jsperf.com/public/favicon.ico">
+  
+  
+  
+      <link href="https://jsperf.com/reverse-foreach-vs-reversal-iteration.atom" rel="alternate" type="application/atom+xml" title="Atom feed for revisions of this test case">
+  
+    <link rel="stylesheet" href="./d3js_files/main.src.css">
+    <link rel="stylesheet" href="./d3js_files/default.min.css">
+  
+    <!--[if lt IE 9]>
+      <script src="/html5.js"></script>
+    <![endif]-->
+  
+      <script src="./d3js_files/ga.js"></script><script>document.documentElement.className='js'</script>
+  </head>
+  
+  <body cz-shortcut-listen="true" style="">
+    <article>
+
+  <hgroup>
+  <h1>reverse().forEach() vs. reversal iteration</h1>
+  <h2>JavaScript performance comparison</h2>
+</hgroup>
+
+<p class="meta">
+    Test case
+  created by 
+  <time datetime="2011-07-19T20:07:21.000Z" pubdate="">on 2011-7-19</time>
+
+
+</p>
+
+
+  <section id="prep-code">
+    <h2>Preparation code </h2>
+
+    <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
+  <span class="hljs-keyword">var</span> pole = [];
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">500</span>; i++) {
+    pole.push([i, i]);
+  }
+  <span class="hljs-built_in">Array</span>.prototype.each = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">callback, from, to</span>) </span>{
+    <span class="hljs-keyword">var</span> length = <span class="hljs-keyword">this</span>.length;
+    <span class="hljs-keyword">if</span>(callback <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span> === <span class="hljs-literal">false</span> ||
+       length === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">from</span> === <span class="hljs-literal">undefined</span>)
+       <span class="hljs-keyword">from</span>  = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(to === <span class="hljs-literal">undefined</span>)
+       to  = <span class="hljs-keyword">from</span> &lt; <span class="hljs-number">0</span> &amp;&amp; -<span class="hljs-keyword">from</span> &lt; length?<span class="hljs-number">0</span>:length - <span class="hljs-number">1</span>;
+    
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">from</span> &lt; <span class="hljs-number">0</span>)
+      <span class="hljs-keyword">from</span> = -<span class="hljs-keyword">from</span> &gt;= length?<span class="hljs-number">0</span>:length + <span class="hljs-keyword">from</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">from</span> &gt; length - <span class="hljs-number">1</span>)
+      <span class="hljs-keyword">from</span> = length - <span class="hljs-number">1</span>;
+  
+    <span class="hljs-keyword">if</span>(to &lt; <span class="hljs-number">0</span>)
+       to = -to &gt;= length?(<span class="hljs-keyword">from</span> &gt; <span class="hljs-number">0</span>?<span class="hljs-number">0</span>:length - <span class="hljs-number">1</span>):length + to;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(to &gt; length - <span class="hljs-number">1</span>)
+      to = length - <span class="hljs-number">1</span>;
+  
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">from</span> &gt; to) <span class="hljs-keyword">do</span> {
+      <span class="hljs-keyword">if</span>(callback.call(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>[<span class="hljs-keyword">from</span>], <span class="hljs-keyword">from</span>) === <span class="hljs-literal">false</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">while</span>(<span class="hljs-keyword">from</span>-- !== to) <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">from</span> &lt; to) <span class="hljs-keyword">do</span> {
+      <span class="hljs-keyword">if</span>(callback.call(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>[<span class="hljs-keyword">from</span>], <span class="hljs-keyword">from</span>) === <span class="hljs-literal">false</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    } <span class="hljs-keyword">while</span>(<span class="hljs-keyword">from</span>++ !== to) <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(callback.call(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>[<span class="hljs-keyword">from</span>], <span class="hljs-keyword">from</span>) === <span class="hljs-literal">false</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  };
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    </code></pre>
+  </section>
+
+
+<section id="runner">
+  <h2>Test runner</h2>
+  <p id="firebug"><strong>Warning! For accurate results, please disable Firebug before running the tests. <a href="https://jsperf.com/faq#firebug-warning">(Why?)</a></strong></p>
+  <p id="java"><strong>Java applet disabled.</strong></p>
+  <p id="status">Ready to run.</p>
+  <div id="controls" class="show"><button id="run" type="button">Run tests</button></div>
+  <table id="test-table">
+  <caption>Testing in Chrome 63.0.3239 / Linux 0.0.0</caption>
+    <thead>
+      <tr>
+        <th colspan="2">Test</th>
+        <th title="Operations per second (higher is better)">Ops/sec</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th scope="row" id="title-1" tabindex="0" title="Click to run this test again.">
+            <div>
+              .reverse().forEach()
+            </div>
+          </th>
+          <td class="code">
+            <pre><code><pre><code class="js">pole.reverse().forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">pole</span>) </span>{});</code></pre></code></pre>
+          </td>
+          <td id="results-1" class="results" title="">ready</td>
+        </tr>
+        <tr>
+          <th scope="row" id="title-2" tabindex="0" title="Click to run this test again.">
+            <div>
+              iteration
+            </div>
+          </th>
+          <td class="code">
+            <pre><code><pre><code class="js">pole.each(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">pole</span>) </span>{}, pole.length - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);</code></pre></code></pre>
+          </td>
+          <td id="results-2" class="results" title="">ready</td>
+        </tr>
+    </tbody>
+  </table>
+
+</section>
+
+  <section>
+    <h2 id="results">Compare results of other browsers</h2>
+    <p><span id="charts"><strong>Chart type:</strong> <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">bar</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">column</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">line</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">pie</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">table</a></span><br><span id="filters"><strong>Filter:</strong> <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">popular</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">all</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">desktop</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">family</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">major</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">minor</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">mobile</a>, <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration#">prerelease</a></span></p><iframe name="bs-chart-frame" id="bs-chart-frame" frameborder="0" scrolling="no" style="height: 2188px;" src="./d3js_files/saved_resource.html"></iframe>
+  </section>
+
+  <section id="revisions">
+    <h2>Revisions</h2>
+    <p>You can <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/edit" rel="nofollow">edit these tests or add even more tests to this page</a> by appending <code>/edit</code> to the URL.</p>
+    <ul>
+          <li class="current">
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration">Revision 1</a>: published 
+            <time datetime="2011-07-19T20:07:21.000Z" pubdate="">
+              on 2011-7-19
+            </time>
+          </li>
+          <li>
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/2">Revision 2</a>: published <a href="http://seacgroup.com/" rel="nofollow">Erich</a>
+            <time datetime="2013-09-05T06:26:57.000Z" pubdate="">
+              on 2013-9-5
+            </time>
+          </li>
+          <li>
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/3">Revision 3</a>: published 
+            <time datetime="2013-12-04T18:25:06.000Z" pubdate="">
+              on 2013-12-4
+            </time>
+          </li>
+          <li>
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/4">Revision 4</a>: published V. Klepov 
+            <time datetime="2014-09-13T13:43:23.000Z" pubdate="">
+              on 2014-9-13
+            </time>
+          </li>
+          <li>
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/5">Revision 5</a>: published 
+            <time datetime="2015-05-17T18:02:19.000Z" pubdate="">
+              on 2015-5-17
+            </time>
+          </li>
+          <li>
+            <a href="https://jsperf.com/reverse-foreach-vs-reversal-iteration/6">Revision 6</a>: published 
+            <time datetime="2016-01-07T23:06:45.000Z" pubdate="">
+              on 2016-1-7
+            </time>
+          </li>
+    </ul>
+  </section>
+
+<section id="comments">
+  <h1>0 Comments</h1>
+
+  <div id="comments-wrapper">
+  </div>
+
+      <a class="login" href="https://jsperf.com/auth/github"><i class="fa fa-github"></i> Login with GitHub to Edit Test Cases</a>
+</section>
+
+
+    </article>
+  
+    <footer>
+      <ul>
+        <li>
+          <h4>Sponsors</h4>
+          <p>Hosting generously provided by <a href="https://m.do.co/c/b426e15331e8">DigitalOcean</a> and <a href="https://zeit.co/">Zeit</a></p>
+  
+          <p><a href="https://jsperf.com/sponsor">Learn how to become a sponsor</a></p>
+        </li>
+  
+        <li>
+          <h4>Tests</h4>
+          <ul>
+            <li>
+              <a href="https://jsperf.com/">Add</a>
+            </li>
+  
+  
+            <li>
+              <a href="https://jsperf.com/browse">Latest</a>
+            </li>
+            <li>
+              <a href="https://jsperf.com/popular">Popular</a>
+            </li>
+          </ul>
+        </li>
+  
+        <li>
+          <h4>Info</h4>
+          <ul>
+            <li>
+              <a href="https://jsperf.com/faq">FAQ</a>
+            </li>
+            <li>
+              <a href="https://jsperf.com/testimonials">Testimonials</a>
+            </li>
+            <li>
+              <a href="https://jsperf.com/contributors">Contributors</a>
+            </li>
+            <li>
+              <a href="https://benchmarkjs.com/">Benchmark.js</a>
+            </li>
+          </ul>
+        </li>
+  
+        <li>
+          <h4>Contact</h4>
+          <ul>
+            <li>
+              <a href="https://twitter.com/jsperf">Twitter</a>
+            </li>
+            <li>
+              <a href="https://github.com/jsperf/jsperf.com">GitHub</a>
+            </li>
+            <li>
+              <a href="https://webchat.freenode.net/?channels=jsperf">IRC</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </footer>
+  
+      <script src="./d3js_files/test.js"></script>
+      <script>
+          ui.browserscope.key = 'agt1YS1wcm9maWxlcnINCxIEVGVzdBiZ_YoHDA'
+  
+          ui.add(
+            '.reverse().forEach()',
+            {
+              'defer': false,
+              'fn': 'pole.reverse().forEach(function(pole) {});'
+            }
+          );
+          ui.add(
+            'iteration',
+            {
+              'defer': false,
+              'fn': 'pole.each(function(pole) {}, pole.length - 1, 0);'
+            }
+          );
+  
+      </script>
+  
+      <script>
+    var pole = [];
+    for(var i = 0; i < 500; i++) {
+      pole.push([i, i]);
+    }
+    Array.prototype.each = function(callback, from, to) {
+      var length = this.length;
+      if(callback instanceof Function === false ||
+         length === 0) return this;
+    
+      if(from === undefined)
+         from  = 0;
+      if(to === undefined)
+         to  = from < 0 && -from < length?0:length - 1;
+      
+      if(from < 0)
+        from = -from >= length?0:length + from;
+      else if(from > length - 1)
+        from = length - 1;
+    
+      if(to < 0)
+         to = -to >= length?(from > 0?0:length - 1):length + to;
+      else if(to > length - 1)
+        to = length - 1;
+    
+      if(from > to) do {
+        if(callback.call(this, this[from], from) === false) return false;
+      } while(from-- !== to) else if(from < to) do {
+        if(callback.call(this, this[from], from) === false) return false;
+      } while(from++ !== to) else if(callback.call(this, this[from], from) === false)
+      return false; return this;
+    };
+  </script>
+  
+    <script>
+      window._gaq=[['_setAccount','UA-6065217-40'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src='https://ssl.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'))
+    </script>
+  
+
+</body></html>

@@ -11,15 +11,19 @@ svg {
 }
 
 .jvectormap-tip {
+    font-family:  Lato Regular;
     position: absolute;
-    display: none;
-    border: solid 1px #CDCDCD;
-    border-radius: 3px;
-    background: #292929;
-    color: white;
-    font-family: sans-serif, Verdana;
-    font-size: smaller;
-    padding: 3px;
+    text-align: center;
+    min-width: 60px;
+    padding: 8px 10px;
+    font: 12px sans-serif;
+    color: #fff !important;
+    background: #39393a;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 1;
+    line-height: 15px   ;
 }
 
 .jvectormap-zoomin, .jvectormap-zoomout, .jvectormap-goback {

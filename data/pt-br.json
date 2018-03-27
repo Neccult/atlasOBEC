@@ -492,10 +492,11 @@
 			{
 				"id":"1",
 				"title":"Total <span>de</span> Trabalhadores",
-				"desc_int":"Trabalhadores",
-				"desc_percent": "DO TOTAL DO BRASIL",
+				"desc_int":"Trabalhadores Culturais e Criativos",
+				"desc_percent": "Do total de trabalhadores Culturais e Criativos",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável total de trabalhadores retrata o total de indivíduos envolvidos com atividades produtivas ligadas aos Setores Culturais e Criativos ou às Ocupações Culturais e Criativas, permitindo que sejam avaliadas estatísticas do trabalho formal e informal e suas características principais. A quantidade de trabalhadores em atividades do campo cultural pode retratar o perfil da força de trabalho na cultura no Brasil.",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -538,11 +539,12 @@
 			{
 				"id":"2",
 				"title":"<span>Participação no Emprego</span>",
-				"desc_int":"DE PARTICIPAÇÃO",
+				"desc_int":"de participação dos trabalhadores culturais e criativos no total de trabalhadores do <span data-id='uf'>Brasil</span>",
 				"desc_percent": "",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"desc_var_mapa": "A variável participação no emprego retrata o peso do mercado de trabalho no campo cultural e criativo em relação ao nível geral de atividade no país. Estima-se a taxa de pessoas ocupadas em Setores Culturais e Criativos ou Ocupações Culturais e Criativas diante do mercado geral de trabalho no país.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -589,6 +591,7 @@
 				"sufixo_valor":"h",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
+				"desc_var_mapa": "A variável horas trabalhadas mostra o total de horas destinadas sob a forma de trabalho em atividades ligadas aos Setores Culturais e Criativos e nas Ocupações Culturais e Criativas. Aumentos nos níveis de tempo destinados a atividades produtivas representam reconfigurações dos aspectos da produção de bens e serviços culturais e criativos.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -630,11 +633,12 @@
 			{
 				"id":"4",
 				"title":"<span>Remuneração Média</span>",
-				"desc_int":"",
+				"desc_int":"de remuneração média",
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa": "A variável remuneração média retrata o valor médio das remunerações recebidas no mercado de trabalho. As flutuações destas estimativas podem representar aumentos da demanda por produtos culturais e criativos, arrefecimento do nível de produção e valorização do trabalho cultural e criativo.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -658,9 +662,10 @@
 				"title":"<span>Remuneração / Hora Trabalhada</span>",
 				"desc_int":"",
 				"desc_percent": "",
-				"sufixo_valor":"",
+				"sufixo_valor":"/h",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa": "A variável remuneração por hora trabalhada permite a avaliação da valorização do trabalho cultural e criativo, pela ótica da remuneração.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -681,12 +686,13 @@
 			},
 			{
 				"id":"6",
-				"title":"<span>Jornada de Trabalho</span>",
+				"title":"<span>Jornada de trabalho média</span>",
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"h",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
+				"desc_var_mapa": "A variável jornada de trabalho média detalha a dedicação média, em horas semanais, dos ocupados ligados às atividades na ótica dos Setores Culturais e Criativos e das Ocupações Culturais e Criativas.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -709,10 +715,11 @@
 				"id":"7",
 				"title":"Massa Salarial",
 				"desc_int":"",
-				"desc_percent": "",
+				"desc_percent": "da soma de remunerações pagas aos trabalhadores culturais e criativos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
+				"desc_var_mapa": "A variável massa salarial representa a soma de todas as remunerações pagas aos ocupados durante cada ano de análise. Estima-se a soma dos rendimentos de todos os ocupados em atividades culturais e para os trabalhadores ligados aos Setores Culturais e Criativos ou às Ocupações Culturais e Criativas, em que mudanças na massa salarial podem representar variações os níveis de atividade.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -759,6 +766,7 @@
 				"desc_percent": "",
 				"prefixo_valor":"R$ ",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
+				"desc_var_mapa": "A variável valor adicionado por trabalhador nos Setores Culturais e Criativos retrata a razão entre o valor adicionado (valor criado pelos agentes econômicos ao longo do processo produtivo) dos Setores Culturais e Criativos o total de trabalhadores formais envolvidos nestas atividades. Avalia-se o quanto cada trabalhador adiciona, em termos de valor, para os Setores Culturais e Criativos. ",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -782,6 +790,7 @@
 				"desc_percent": "",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável razão entre a massa salarial e o valor adicionado pelos Setores Culturais e Criativos permite a avaliação do quanto o total de salários mantém relação com o valor adicionado nos Setores Culturais e Criativos no país.",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -802,10 +811,11 @@
 			{
 				"id":"10",
 				"title":"Ocupação / VA",
-				"desc_int":"",
+				"desc_int":"de variação no nível de ocupados em atividades culturais e criativas",
 				"desc_percent": "",
-				"sufixo_valor":"",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável razão entre variação na ocupação e variação do valor adicionado pelos Setores Culturais e Criativos possibilita a averiguação do quanto o nível de ocupação em atividades culturais e criativas variou ao longo do tempo em contraposição às flutuações do nível de geração de valor adicionado pelos Setores Culturais e Criativos. Estima-se a razão entre a taxa de variação dos trabalhadores em atividades culturais pela taxa de variação do valor adicionado pela cultura. ",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -823,10 +833,11 @@
 			{
 				"id":"11",
 				"title":"Custo / Salários",
-				"desc_int":"Escrever essa descrição",
+				"desc_int":"de incidência dos salários sobre os custos dos empreendimentos",
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável razão entre custo total das empresas culturais e criativas e salários pagos destaca o quanto da remuneração destinada aos trabalhadores culturais e criativos incide sobre o custo total das empresas. Este indicador é analisado sob a ótica agregada, de forma que é possível avaliar indiretamente o desempenho dessas empresas em atividades culturais e criativas.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -847,6 +858,7 @@
 				"desc_int":"Concentração do Emprego por UF",
 				"desc_percent":"Concentração do Emprego por Setor",
 				"sufixo_valor":"",
+				"desc_var_mapa": "A variável razão de concentração do emprego cultural (C4) permite a avaliação de como os ocupados distribuem-se entre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas em cada ano de análise. Em suma, mensura-se o quão concentrado está o emprego por estratificação proposta.",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
@@ -864,6 +876,7 @@
 				"desc_percent": "Concentração de Massa Salarial por Setor",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável razão de concentração da massa salarial (C4) retrata a distribuição da Massa Salarial dentre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas. Representa a participação relativa dos quatro maiores valores em relação aos totais analisados.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -880,6 +893,7 @@
 				"desc_percent": "IHH DE NÚMERO DO TRABALHADORES POR SETOR",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"desc_var_mapa": "A variável índice Herfindal-Hirschman (IHH) de concentração de número de trabalhadores retrata a maneira como os trabalhadores estão distribuídos dentre o total de Setores Culturais e Criativos, Ocupações Culturais e Criativas e unidades federativas.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -891,11 +905,12 @@
 			},
 			{
 				"id":"15",
-				"title":"<span>IHH da Massa de Rendimentos</span>",
+				"title":"<span> IHH DA MASSA SALARIAL</span>",
 				"desc_int": "IHH DA MASSA DE RENDIMENTOS POR UF",
 				"desc_percent": "IHH DA MASSA DE RENDIMENTOS POR SETOR",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+                "desc_var_mapa": "A variável índice Herfindal-Hirschman (IHH) de concentração da massa salarial mostra a maneira como os rendimentos estão distribuídos dentre o total de Setores Culturais e Criativos, Ocupações Culturais e Criativas e unidades federativas.",
+                "prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -911,7 +926,7 @@
 				"id":"1",
 				"title":"<span>Financiamento Público Total</span>",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -947,7 +962,7 @@
 				"id":"2",
 				"title":"<span>Financiamento do Vale-Cultura</span>",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -978,7 +993,7 @@
 			{
 				"id":"3",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"title":"<span>Financiamento do Fundo Cultural BNDES</span>",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
@@ -1013,7 +1028,7 @@
 				"id":"4",
 				"title":"<span>Valor total de incentivos privados</span>",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1040,7 +1055,7 @@
 				"id":"5",
 				"title":"<span>Valor total de incentivos via empresas públicas<span>",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1188,7 +1203,7 @@
 			},
 			{
 				"id":"10",
-				"title":"<span>Despesa em Cultura nas Contas Públicas</span>",
+				"title":"<span>Participação do Financiamento Público nas Contas Públicas</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1200,6 +1215,8 @@
 				"id":"11",
 				"title":"<span>Total das propostas de projetos</span>",
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1254,7 +1271,7 @@
 			},
 			{
 				"id":"13",
-				"title":"<span>Tempo médio de aprovação<span>",
+				"title":"<span>Tempo Médio para Aprovação de Projetos - Mecenato<span>",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1283,7 +1300,7 @@
 			},
 			{
 				"id":"14",
-				"title":"<span>Total Solicitado/ Efetivo Aprovado<span>",
+				"title":"<span>Razão entre o valor solicitado pelos projetos e o aprovado - Mecenato<span>",
 				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1297,20 +1314,6 @@
 			},
 			{
 				"id":"15",
-				"title":"<span>Fomento Público Estadual à Cultura<span>",
-				"desc":"",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				]
-			},
-			{
-				"id":"16",
 				"title":"<span>Índice Razão para Concentração Regional dos Incentivadores<span>",
 				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
 				"sufixo_valor":"",
@@ -1324,9 +1327,23 @@
 				]
 			},
 			{
-				"id":"17",
+				"id":"16",
 				"title":"<span>IHH para Concentração Regional dos Projetos Fomentados<span>",
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				]
+			},
+			{
+				"id":"17",
+				"title":"<span>Fomento Público Estadual à Cultura<span>",
+				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1344,7 +1361,7 @@
 				"title":"Valor Absoluto",
 				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1377,8 +1394,8 @@
 			},
 			{
 				"id":"2",
-				"title":"<span>Participação no PIB</span>",
-				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
+				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1413,8 +1430,8 @@
 			},
 			{
 				"id":"3",
-				"title":"<span>Relação com o Comércio Global</span>",
-				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
+				"title":"<span>Relação com o VA da Cultura<span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1449,8 +1466,8 @@
 			},
 			{
 				"id":"4",
-				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
-				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
+				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
+				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1485,8 +1502,8 @@
 			},
 			{
 				"id":"5",
-				"title":"<span>Relação com o VA da Cultura<span>",
-				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
+				"title":"<span>C2 Valor Absoluto Parceiros</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1521,7 +1538,7 @@
 			},
 			{
 				"id":"6",
-				"title":"<span>Relação com a Massa Salarial</span>",
+				"title":"<span>C4 Valor Absoluto Setores</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com a massa salarial da cultura por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1557,7 +1574,7 @@
 			},
 			{
 				"id":"7",
-				"title":"<spna>Relação com Investimento Público em Cultura</span>",
+				"title":"<spna>C4 Valor Absoluto UFs</span>",
 				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1593,8 +1610,8 @@
 			},
 			{
 				"id":"8",
-				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
-				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
+				"title":"<span>IHH VALOR ABSOLUTO PARCEIROS</span>",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1629,7 +1646,7 @@
 			},
 			{
 				"id":"9",
-				"title":"<span>Razão de Concentração (C2) do Valor Absoluto</span>",
+				"title":"<span>IHH VALOR ABSOLUTO SETORES</span>",
 				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1642,7 +1659,7 @@
 			},
 			{
 				"id":"10",
-				"title":"<span>Razão de Concentração (C4) do Valor Absoluto</span>",
+				"title":"<span>IHH VALOR ABSOLUTO UFs</span>",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1653,7 +1670,7 @@
 			},
 			{
 				"id":"11",
-				"title":"IHH do Valor Absoluto",
+				"title":"ÍNDICE DE QUANTUM DO VALOR ABSOLUTO",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1666,7 +1683,53 @@
 			},
 			{
 				"id":"12",
-				"title":"IVCR do VA",
+				"title":"ÍNDICE DE PREÇOS DO VALOR ABSOLUTO",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"QUANTIDADE FÍSICA TRANSACIONADA",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"14",
+				"title":"ÍNDICE DE RENTABILIDADE DAS EXPORTAÇÕES",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"15",
+				"title":"ÍNDICE DE DEMANDA",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"16",
+				"title":"EMPRESAS EXPORTADORAS",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1675,6 +1738,7 @@
 					{"name":"Setor","id":"cad"}
 				]
 			}
+
 		]
 	],
 	"select":
@@ -1829,7 +1893,6 @@
 			{"name":"Setores","value":"1"}
 		],
 		"typ":[
-			{"name":"Todos","value":"0"},
 			{"name":"Exportação","value":"1"},
 			{"name":"Importação","value":"2"},
 			{"name":"Saldo Comercial","value":"3"},

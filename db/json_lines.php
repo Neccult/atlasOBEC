@@ -145,6 +145,15 @@ function getName($uos) {
     }
 }
 
+function getNameSLC($slc) {
+    switch ($slc) {
+        case 0:
+            return "Relacionadas";
+        case 1:
+            return "Culturais";
+    }
+}
+
 $linhas = array();
 if($eixo == 0 && $var == 3) {
     require_once("EixoUm.php");
@@ -181,20 +190,54 @@ else if($eixo == 0 && $var > 9) {
     }
 } else if($eixo == 1 && $var > 11) {
     require_once("EixoDois.php");
-    for ($uos = 0; $uos <= 1; $uos++) {
 
-        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
-            if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
-                $id = $tupla->Ano;
+    if($ocp == 0){
 
-                $barras[$id]['ano'] = (int)$tupla->Ano;
-                $barras[$id][getName($uos)] = (double)$tupla->Valor;
+        for ($uos = 0; $uos <= 1; $uos++) {
 
-                //$barras[$id]['uf'] = $tupla->UFNome;
+            foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+                if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
+                    $id = $tupla->Ano;
+
+                    $barras[$id]['ano'] = (int)$tupla->Ano;
+                    $barras[$id][getName($uos)] = (double)$tupla->Valor;
+
+                    //$barras[$id]['uf'] = $tupla->UFNome;
+                }
             }
-
         }
     }
+    else{
+        for ($i = 0; $i <= 1; $i++) {
+
+            foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+
+                $id = $tupla->Ano;
+                if($slc == 1) {
+                    if($id == 2011) {
+                        $id = 2010;
+                    }
+                    if($id == 2012) {
+                        $id = 2011;
+                    }
+                    if($id == 2013) {
+                        $id = 2012;
+                    }
+                    if($id == 2014) {
+                        $id = 2013;
+                    }
+                    if($id == 2015) {
+                        $id = 2014;
+                    }
+                }
+
+                $barras[$id]['ano'] = (int)$tupla->Ano;
+                $barras[$id][getNameSLC($i)] = (double)$tupla->Valor;
+
+            }
+        }
+    }
+
 } else if($eixo == 1 && $var == 5) {
     require_once("EixoDois.php");
     for ($cad = 1; $cad <= 10; $cad++) {
@@ -222,6 +265,23 @@ else if($eixo == 1 && ($var == 11 || $var == 10) || $var == 9 || $var == 8 ) {
             // $barras[$tupla->Ano] = $tupla->Valor;
             $barras[$id]['ano'] = (int)$tupla->Ano;
             $barras[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
+
+
+            //$barras[$id]['uf'] = $tupla->UFNome;
+
+        }
+    }
+}
+else if($eixo == 2 && $var > 14) {
+    require_once("EixoTres.php");
+    for ($uos = 0; $uos <= 1; $uos++) {
+
+        foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+
+            $id = $tupla->Ano;
+            // $barras[$tupla->Ano] = $tupla->Valor;
+            $barras[$id]['ano'] = (int)$tupla->Ano;
+            $barras[$id][getName($uos)] = (double)$tupla->Valor;
 
 
             //$barras[$id]['uf'] = $tupla->UFNome;

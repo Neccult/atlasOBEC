@@ -6,7 +6,7 @@ define('DB_NOME', 'Atlas');
 define('DB_USUARIO', 'root');
 define('DB_SENHA', 'root');
 // define('DB_HOST', 'localhost');
-define('DB_HOST', '143.54.231.143');
+define('DB_HOST', '143.54.231.130');
 class EixoDois {
 
 ## Atributos ##
@@ -378,7 +378,7 @@ class EixoDois {
 					." WHERE ex.Numero = ".$var
                     ." AND ex.Sexo IS NULL";
 
-				$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
+            $query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
 
 			$result = mysqli_query(self::$conn, $query);
 			$allObjects = array();

@@ -30,7 +30,23 @@ function unconvertCode(code) {
             return "OC";
     }
 }
-
+function destacaPrc(prcID) {
+    $("path").each(function() {
+        if($(this).attr("data-code") == prcID) {
+            if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
+                $(this).attr("class", "destacado jvectormap-region jvectormap-element");
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", "#6DBFC9");
+                $(this).animate({"opacity": "1"}, "fast");
+            }
+        }
+        else {
+            $(this).attr("class", "jvectormap-region jvectormap-element");
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+    });
+}
 // import colors.json file
 var colorJSON;
 d3.json('data/colors.json', function(error, data) {
@@ -39,17 +55,27 @@ d3.json('data/colors.json', function(error, data) {
     colorJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
 var gdpData;
+
 $.get("./db/json_mapa.php"+config, function(data) {
+    
     gdpData = JSON.parse(data);
     gdpAux = {};
-    gdpData.forEach(function(data) {
-        if(data.id != 0) gdpAux[unconvertCode(data.id)] = data.valor;
-    });
+    for(var data in gdpData){
+        if(gdpData[data].id != 0) gdpAux[unconvertCode(gdpData[data].id)] = gdpData[data].valor;
+    }
+
+
+
+    // gdpData.forEach(function(data) {
+    //     if(data.id != 0) gdpAux[unconvertCode(data.id)] = data.valor;
+    // });
+
     var maxValue = Math.max.apply(null, $.map(gdpAux, function(value, index) {
                         return [value];
                     }));
+
     var minValue = Math.min.apply(null, $.map(gdpAux, function(value, index) {
                         return [value];
                     }));
@@ -82,18 +108,16 @@ $.get("./db/json_mapa.php"+config, function(data) {
         }
     }
 
-    console.log(dom);
 
     var arrayColors;
     $(function(){
-        console.log(gdpAux);
         gdpAux["0"] = minValue;
         arrayColors = $.map(colorJSON["cadeias"][cad]["gradient"], function(value, index) {
             return [value];
         });
         $('#corpo-mundi').vectorMap({
             map: 'continents_mill',
-            backgroundColor:  "#FFFFFF",
+            backgroundColor:  "#f0f0f0",
             series: {
                 regions: [{
                     values: gdpAux,
@@ -102,18 +126,52 @@ $.get("./db/json_mapa.php"+config, function(data) {
                 }]
             },
             onRegionTipShow: function(e, el, code){
-                console.log(gdpData[convertCode(code)].valor);
-                el.html(el.html()+'<br>Valor: '+gdpData[convertCode(code)].valor+'');
-                el.html(el.html()+'<br>Taxa: '+gdpData[convertCode(code)].taxa+'');
-                el.html(el.html()+'<br>Percentual: '+gdpData[convertCode(code)].percentual+'');
+                el.html("")
+                el.html(el.html()+ '<strong>'+gdpData[convertCode(code)].prc+'</strong>')
+                // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
+                el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
+                //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
+                el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
+            },
+            onRegionClick: function(e, el, code){
+
+                var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
+                newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+                var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
+                newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+                $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+                $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+
+                // console.log(gdpData[convertCode(el)])
+                setIntegerValueData(gdpData[convertCode(el)], eixo, vrv);
+                if(cad == 0){
+                    setPercentValueData(gdpData[convertCode(el)], eixo, vrv);
+                }
+
+                setStateTitle(gdpData[convertCode(el)].prc)
+
+                $(window.parent.document).find("select[data-id='prc']").val(convertCode(el));
+                destacaPrc(el)
             }
-        });
+        })
+
+
+
         dom.forEach(function(dominio, i) {
-            console.log(arrayColors);
+            // console.log(arrayColors);
             if(i == 0) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
             else if(i == 8) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
             else $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");
             $("#corpo-mundi").children().first().css("margin-bottom", "35px");
         });
+
+        if(url['prc'] != 0 ){
+            destacaPrc(unconvertCode(parseInt(url['prc'])));
+        }
+
+
     });
+
+
 });
+
