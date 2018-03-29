@@ -68,7 +68,7 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg) {
         }
 
 
-        if(mundo === 0){
+        if(mundo == 0 || mundo == 1 && url['uf'] == 0){
             setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
         }
     }
@@ -119,9 +119,19 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, cad_data, ocp_data, url, deg_cad
         }
     }
     if(eixo == 3){
-        if(url['cad'] != 0 && url['mundo'] == 1){
+
+        var mundo = 0;
+        var mundoRegex = $(window.parent.document).find("#view_box").attr("src").match(/mundo=[0-9]*/);
+        if(mundoRegex != null)
+            mundo = mundoRegex[0].match(/[0-9]/)[0];
+
+        if(url['cad'] != 0 && mundo == 1 && url['uf'] == 0){
             setPercentValueData({percentual: cad_data, taxa: 0}, eixo, vrv);
         }
+        else if(url['cad'] != 0 && mundo == 0){
+            setPercentValueData({percentual: cad_data, taxa: 0}, eixo, vrv);
+        }
+
     }
 
 }
@@ -533,7 +543,7 @@ function updateMecanismo(url, vrv){
 
     $("select[data-id='mec']").parent().css('display', 'block')
 
-    if(vrv == 1 || vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
+    if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
         $("select[data-id='mec']").append("<option value='1'>FNC</option>");
         $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
     }
@@ -557,7 +567,7 @@ function updateMecanismo(url, vrv){
 function updateDefaultMec(vrv){
 
 
-    if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14) {
+    if(vrv == 11 || vrv == 7|| vrv == 12 || vrv == 13 || vrv == 14) {
         url['mec'] = 2;
 
 
@@ -824,7 +834,7 @@ function setPercentValueData(value, eixo, vrv) {
     else if(eixo == 2){
 
 
-        if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 13 || vrv == 14){
+        if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9|| vrv == 13 || vrv == 14){
             $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
         }
         else if(vrv == 15 || vrv == 16){

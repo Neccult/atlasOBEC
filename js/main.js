@@ -203,7 +203,14 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 2){
-
+            if (url['var'] ==  16) {
+                if(url['uos'] == 0) {
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+                }
+                else {
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
+                }
+            }
         }
 
     }
@@ -246,7 +253,12 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 2){
-            if(url['var'] == 7){
+            if(url['var'] == 6 || url['var'] == 7 || url['var'] == 8 || url['var'] == 9){
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').css('display', 'none');
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("");
+            }
+            else if(url['var'] == 7){
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_region_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - UF");
             }

@@ -388,12 +388,12 @@ function ready(error, br_states, mapa){
 
     var legendLinear1 = d3.legendColor()
         .title(function(d) {
-        	if(cad === 0) {
-        		return "Setores Culturais Criativos";
+            if(cad === 0) {
+                return "Setores Culturais Criativos";
             }
             else {
                 return textJSON.select.cad[cad].name;
-			}
+            }
         })
         .labelFormat(d3.format(".0f"))
         .shapeWidth(shapeWidth)
