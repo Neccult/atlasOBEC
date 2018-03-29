@@ -738,10 +738,18 @@ function loadResult(){
         if(window.location.hash.substring(1) == "mercado" && $(this).val() == 3){
             $(this).remove();
         }
-
-
     });
 
+    if(window.location.hash.substring(1) == "mercado"){
+        $(".opt-select[data-id=var]").find('option').each(function(){
+
+            if($(this).val() == 3){
+                $(this).remove();
+            }
+        });
+    
+    }
+    
 
 
 }

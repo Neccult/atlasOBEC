@@ -157,19 +157,31 @@ class EixoTres {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $mec, $pf, $anos){
+	public static function getter_mapa($var, $cad, $mec, $mod, $pf, $anos){
 
 		self::connect();
+		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 15, 16);
 
-		if($mec == 0 || ($cad != 0 && $mec != 0) || $var == 1 || $var ==3){
+		if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF = ex.idUF"
                 ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
                 ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
                 ." WHERE ex.Numero = ".$var;
-            if(!is_null($pf)) {
+			
+			if(!is_null($pf)) {
                 $query .= " AND ex.PessoaFisica = ".$pf;
-            }
+            } else{
+				$query .= " AND ex.PessoaFisica IS NULL";
+			}
+
+			if (!is_null($mod)) {
+				$query .= " AND ex.Modalidade = " . $mod;
+			}
+			else{
+				$query .= " AND ex.Modalidade IS NULL";
+			}
+			
             $query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
 
             $result = mysqli_query(self::$conn, $query);
@@ -230,9 +242,10 @@ class EixoTres {
 	    Um conjunto de instâncias da Classe EixoTres com seus devidos atributos
 	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
-
+		
+		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 15, 16);
 		self::connect();
-		    if($mec == 0 || ($cad != 0 && $mec != 0) ||  $var == 1 ||$var == 3 || $var == 8 || $var == 9 || $var == 15 || $var == 16 ){
+		    if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
                     if(is_null($ano) || $var < 15) {
                         $query = "SELECT * FROM " . self::$table . " AS ex"
                             . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
@@ -240,17 +253,13 @@ class EixoTres {
                             . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = " . $mec
                             . " WHERE ex.Numero = " . $var;
 
-                        if($var == 4){
-                            if (!is_null($pf)) {
-                                $query .= " AND ex.PessoaFisica = " . $pf;
-                            }
-                            else{
-                                $query .= " AND ex.PessoaFisica IS NULL";
-                            }
+						if (!is_null($pf)) {
+                            $query .= " AND ex.PessoaFisica = " . $pf;
                         }
-
-
-
+                        else{
+                            $query .= " AND ex.PessoaFisica IS NULL";
+						}
+						
                         if (!is_null($mod)) {
                             $query .= " AND ex.Modalidade = " . $mod;
 						}

@@ -17,6 +17,7 @@ if (!empty($_GET["var"])) {
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
     $ocp = $_GET["ocp"];
+    $mod =      isset($_GET['mod'])   ?   $_GET['mod']  :   0; 
     $mec = $_GET["mec"];
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
@@ -40,6 +41,7 @@ else{
 	$ano = 2014;
     $eixo = 0;
     $slc = 0;
+    $mod = 0;
     $mundo = 0;
 }
 
@@ -57,6 +59,21 @@ switch($pfj) {
     default:
         $pfj = NULL;
 }
+
+switch($mod) {
+    case "0":
+        $mod = NULL;
+        break;
+    case "1":
+        $mod = 1;
+        break;
+    case "2":
+        $mod = 0;
+        break;
+    default:
+        $mod = NULL;
+}
+
 $mapa = array();
 if($eixo == 0) {
     require_once("EixoUm.php");
@@ -110,7 +127,7 @@ else if($eixo == 1) {
 }
 else if($eixo == 2) {
     require_once("EixoTres.php");
-    foreach (EixoTres::getter_mapa($var, $cad, $mec, $pfj, $ano) as $tupla) {
+    foreach (EixoTres::getter_mapa($var, $cad, $mec, $mod, $pfj, $ano) as $tupla) {
 
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;

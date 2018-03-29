@@ -926,6 +926,9 @@
 				"id":"1",
 				"title":"<span>Financiamento Público Total</span>",
 				"sufixo_valor":"",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"prefixo_valor":"R$ ",
 				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
 				"type":[
@@ -962,6 +965,9 @@
 				"id":"2",
 				"title":"<span>Financiamento do Vale-Cultura</span>",
 				"sufixo_valor":"",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"type":[
@@ -994,7 +1000,10 @@
 				"id":"3",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
-				"title":"<span>Financiamento do Fundo Cultural BNDES</span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
+				"title":"<span>Financiamento BNDES</span>",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1027,6 +1036,9 @@
 			{
 				"id":"4",
 				"title":"<span>Valor total de incentivos privados</span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
@@ -1054,6 +1066,9 @@
 			{
 				"id":"5",
 				"title":"<span>Valor total de incentivos via empresas públicas<span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
@@ -1077,8 +1092,11 @@
 			},
 			{
 				"id":"6",
-				"title":"<span>Despesa FNC / Mecenato</span>",
+				"title":"<span>Despesa Mecenato / FNC</span>",
 				"desc":"Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1111,6 +1129,9 @@
 				"id":"7",
 				"title":"<span>Recursos Privados / Incentivo Fiscal</span>",
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1133,7 +1154,10 @@
 			},
 			{
 				"id":"8",
-				"title":"<span>Financiamento Público no VA</span>",
+				"title":"<span>FINANCIAMENTO PÚBLICO / VA</span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
@@ -1167,8 +1191,11 @@
 			},
 			{
 				"id":"9",
-				"title":"<span>Total Bruto na Massa Salarial</span>",
+				"title":"<span>FINANCIAMENTO PÚBLICO / MASSA SALARIAL</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1205,6 +1232,9 @@
 				"id":"10",
 				"title":"<span>Participação do Financiamento Público nas Contas Públicas</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1215,6 +1245,9 @@
 				"id":"11",
 				"title":"<span>Total das propostas de projetos</span>",
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1244,6 +1277,9 @@
 				"id":"12",
 				"title":"<span>Total dos projetos aprovados</span>",
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1273,6 +1309,9 @@
 				"id":"13",
 				"title":"<span>Tempo Médio para Aprovação de Projetos - Mecenato<span>",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1300,9 +1339,12 @@
 			},
 			{
 				"id":"14",
-				"title":"<span>Razão entre o valor solicitado pelos projetos e o aprovado - Mecenato<span>",
+				"title":"<span>RAZÃO ENTRE O VALOR SOLICITADO PELOS PROJETOS E O APROVADO - MECENATO<span>",
 				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
 				"sufixo_valor":"",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1314,8 +1356,11 @@
 			},
 			{
 				"id":"15",
-				"title":"<span>Índice Razão para Concentração Regional dos Incentivadores<span>",
+				"title":"<span>Concentração do financiamento<span>",
 				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
+				"desc_int":"Concentração do financiamento por UF",
+				"desc_percent": "Concentração do financiamento por setor" ,
+				"desc_var_mapa":"A variável razão de concentração do financiamento (C4) retrata a distribuição do valor financiado dentre os Setores Culturais e Criativos e dentre as unidades federativas, em três modalidades: mecenato, FNC e todos (soma de ambos os anteriores). Representa a participação relativa dos quatro maiores valores em relação aos totais analisados.Quanto mais alto o índice, mais concentrado é o financiamento.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1328,8 +1373,11 @@
 			},
 			{
 				"id":"16",
-				"title":"<span>IHH para Concentração Regional dos Projetos Fomentados<span>",
+				"title":"<span>IHH PARA CONCENTRAÇÃO REGIONAL DO FINANCIAMENTO<span>",
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
+				"desc_int":"Concentração do financiamento por UF",
+				"desc_percent": "Concentração do financiamento por setor" ,
+				"desc_var_mapa": "A variável índice Herfindal-Hirschman (IHH) de concentração do financiamento retrata a maneira como o financiamento está distribuído dentre o total de Setores Culturais e Criativos e dentre as unidades federativas, em três modalidades: mecenato, FNC e todos (soma de ambos os anteriores). Quanto mais alto o índice, mais concentrado é o financiamento",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1343,6 +1391,9 @@
 			{
 				"id":"17",
 				"title":"<span>Fomento Público Estadual à Cultura<span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "",
 				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1875,7 +1926,7 @@
 			{"name":"Todos","value":"0"},
 			{"name":"FNC","value":"1"},
 			{"name":"Mecenato","value":"2"},
-			{"name":"Fundo Cultura","value":"3"},
+			{"name":"Fundo Cultural","value":"3"},
 			{"name":"Outros","value":"4"}
 		],
 		"mod":[

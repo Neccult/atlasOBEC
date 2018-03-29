@@ -538,11 +538,11 @@ function updateMecanismo(url, vrv){
         $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
     }
 
-    else if(vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14){
+    else if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14){
         $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
     }
     else if(vrv == 3){
-        $("select[data-id='mec']").append("<option value='3'>Fundo Cultura</option>");
+        $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
         $("select[data-id='mec']").append("<option value='4'>Outros</option>");
     }
 
@@ -557,7 +557,7 @@ function updateMecanismo(url, vrv){
 function updateDefaultMec(vrv){
 
 
-    if(vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14) {
+    if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14) {
         url['mec'] = 2;
 
 

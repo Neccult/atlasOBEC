@@ -100,7 +100,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     }
 
     function analyze(error, data) {
-        
+
         // console.log(data);
         $('#loading').fadeOut('fast');
         if (error) {
