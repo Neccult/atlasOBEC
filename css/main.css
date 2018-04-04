@@ -909,8 +909,11 @@ article.results-article div.results-content{
 }
 
 .bread-select-var{
-	width: 20%;
+	width: 15%;
+}
 
+.bread-select-prc{
+	width: 10%;
 }
 
 .bread-separator{

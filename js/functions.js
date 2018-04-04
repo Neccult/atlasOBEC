@@ -26,6 +26,7 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg) {
         }
     }
     else if(eixo == 1) {
+
         if(vrv == 2 && url['uf'] == 0){
             //talvez tenha que mudar aqui pra ficar * 100 ou * 10
             setIntegerValueData({valor: d.data.size}, eixo, vrv);
@@ -45,14 +46,16 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg) {
             return
         }
 
-
-        if(deg == 0) {
+        if(url['uf'] == 0){
             setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
+        }
+
+        /*if(deg == 0 && url['uf'] == 0) {
         }
         else {
             setIntegerValueData({valor: d.data.size}, eixo, vrv);
             setPercentValueData({percentual: d.data.size / d.parent.value}, eixo, vrv);
-        }
+        }*/
     }
     else if(eixo === 2){
         if(uf === 0){
@@ -138,12 +141,8 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, cad_data, ocp_data, url, deg_cad
 
 function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root) {
     if(eixo == 1) {
-        if(deg == 0) {
+        if(url['uf'] == 0){
             setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
-        }
-        else {
-            setIntegerValueData({valor: d.data.size}, eixo, vrv);
-            setPercentValueData({percentual: d.data.size / d.parent.value}, eixo, vrv);
         }
     }
 }
@@ -211,7 +210,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i) {
     }
     else if(eixo == 2){
 
-        if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 || vrv == 5 || vrv == 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13){
+        if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 || vrv == 5 || vrv == 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14){
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
         }
@@ -220,6 +219,14 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i) {
             if(url["uos"] == 0){
                 setIntegerValueData(dados, eixo, vrv);
             } else if(url["uos"] == 1){
+                setPercentValueData({percentual: dados.value[i]}, eixo, vrv);
+            }
+        } 
+        else if(vrv === 10){
+            dados.valor = dados.value[i];
+            if(url["mec"] == 0){
+                setIntegerValueData(dados, eixo, vrv);
+            } else if(url["mec"] == 1){
                 setPercentValueData({percentual: dados.value[i]}, eixo, vrv);
             }
         }
@@ -291,6 +298,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
     }
     else if(eixo == 1){
         first_year = Number(dados.key[0]);
+
         if(vrv > 11){
             if(ano != null) {
                 dados.valor = dados.value[dados.key.indexOf(url['ano'])];
@@ -309,7 +317,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
             setPercentValueData(dados, eixo, vrv);
         }
         else{
-            if(url['uf'] == 0 && (url['cad'] == 0 && url['ocp'] == 0))
+            if(url['uf'] == 0 && url['cad'] == 0 && url['ocp'] == 0)
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
 
             dados.valor = dados.value[dados.key.indexOf(url['ano'])];
@@ -318,6 +326,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
         }
     }
     else if(eixo == 2){
+
         indexAno = dados.key.indexOf(url['ano'])
         if(vrv == 15 || vrv == 16){
             if(url['uos'] == 0){
@@ -327,13 +336,24 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
                 setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
             }
                 
-        }else{
-            if(url['uf'] == 0 && (url['cad'] == 0)){
-                setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
+        }
+        else if(vrv == 10){
+            if(url['mec'] == 0){
+                dados.valor = dados.value[indexAno]
+                setIntegerValueData(dados, eixo, vrv)
+            }else{
+                setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
+            }
+        }
+        else{
+            if(url['uf'] == 0){
 
                 dados.valor = dados.value[indexAno];
 
                 setIntegerValueData(dados, eixo, vrv);
+                if(url['cad'] == 0){
+                    setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
+                }
             }
         }
         
@@ -555,13 +575,24 @@ function updateMecanismo(url, vrv){
         $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
         $("select[data-id='mec']").append("<option value='4'>Outros</option>");
     }
-
     else {
         $("select[data-id='mec']").parent().css('display', 'none')
     }
 
     // alert(url['mec'])
     // $("select[data-id='mec']").val(url['mec'])
+}
+
+function updateBreadcrumbSetores(cads){
+
+    $(".bread-select[data-id='cad'] > option").each(function() {
+        $(this).remove();
+    });
+
+    for (var i = 0; i < cads.length; i++) {
+        $(".bread-select[data-id='cad']").append("<option value="+cads[i].id+">"+cads[i].nome+"</option>");
+    }
+
 }
 
 function updateDefaultMec(vrv){
@@ -622,6 +653,8 @@ function updatePfj(url, vrv){
     // $("select[data-id='pfj']").val(url['pfj'])
 
 }
+
+
 
 function enableDesag(eixo, vrv, setor, iframe, slc, url){
 
@@ -737,9 +770,9 @@ function setMaxFontSize(doc){
     if(texto == null){
         return
     }
-    else{
-        texto = texto.toUpperCase();
-    }
+    // else{
+    //     texto = texto.toUpperCase();
+    // }
 
     $(doc).css('font-size', tamanho+'px');
 
@@ -777,9 +810,17 @@ function getTextWidth(text, font) {
 }
 
 /*
+* Função para ajustar o nome do cad em questão
+* Parâmetros: String com o nome do estado
+ */
+
+
+/*
 * Função para ajustar o nome do estado em questão
 * Parâmetros: String com o nome do estado
  */
+
+
 function setStateTitle(stateTitle){
     docState = $(window.parent.document).find(".state-title").html(stateTitle);
     setMaxFontSize(docState)
@@ -840,6 +881,10 @@ function setPercentValueData(value, eixo, vrv) {
         else if(vrv == 15 || vrv == 16){
 
             $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2));
+
+        }
+        else if(vrv == 10){
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2)+'%');
 
         }
         else{
@@ -1056,7 +1101,8 @@ function updateMenuSetor(eixo, vrv){
                 sel.options[i].style.display = "block"
             }
 		}
-	} else if (eixo == 1){
+	}
+	else if (eixo == 1){
 		if(vrv > 11){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
@@ -1067,9 +1113,9 @@ function updateMenuSetor(eixo, vrv){
             }).style("display", "inline");
 		}
 	}
-	else if(eixo == 2){
+	else if (eixo == 2){
 
-	    if(vrv == 7){
+	    if(vrv == 15){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
             }).style("display", "none");

@@ -602,24 +602,14 @@ gradient = svg.append("defs")
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                     ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
-                    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
 
                 ]);
             }
             ///Tooltips com só o valor na interface
-            else if(vrv === 2 || vrv === 9){
+            else if(vrv === 2 || vrv === 9 || vrv === 6 || vrv === 4){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                ]);
-            }
-            //tooltips com 2 valores na interface (valor e taxa)
-            else if(vrv === 6 || vrv === 4 ){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
-
                 ]);
             }
             else if(vrv === 10 || vrv === 11) {
@@ -634,14 +624,12 @@ gradient = svg.append("defs")
 
             //tooltips com os 3 valores na interface (valor, percentual e taxa)
             if(vrv === 1  || vrv === 2 || vrv === 3 || vrv === 4 ||  vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13){
-                console.log(dict[d.id])
+                // console.log(dict[d.id])
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                     ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
-
                 ]);
-
             }
             else if(vrv === 14){
                 tooltipInstance.showTooltip(d, [

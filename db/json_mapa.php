@@ -21,6 +21,7 @@ if (!empty($_GET["var"])) {
     $mec = $_GET["mec"];
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $uf    =   isset($_GET["uf"])   ?   $_GET["uf"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
@@ -140,7 +141,7 @@ else if($eixo == 2) {
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
-    foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $mundo, $slc) as $tupla) {
+    foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $uf, $mundo, $slc) as $tupla) {
 
         /*
             $mapa[$tupla->idUF] = [
@@ -150,10 +151,12 @@ else if($eixo == 3) {
                 'valor' => (double) $tupla->Valor
             ];
         */
+
         if($mundo == 0){
             $id = $tupla->idParceiro;
             $mapa[$id]['id'] = (int) $tupla->idParceiro;
             $mapa[$id]['prc'] = $tupla->ParceiroNome;
+            $mapa[$id]['uf'] = $tupla->UFNome;
             $mapa[$id]['valor'] = (double) $tupla->Valor;
             $mapa[$id]['percentual'] = (double) $tupla->Percentual;
             $mapa[$id]['taxa'] = (double) $tupla->Taxa;
@@ -163,6 +166,7 @@ else if($eixo == 3) {
                 $id = $tupla->idUF;
             $mapa[$id]['id'] = (int) $tupla->idUF;
             $mapa[$id]['uf'] = $tupla->UFNome;
+            $mapa[$id]['prc'] = $tupla->ParceiroNome;
             $mapa[$id]['ano'] = (double) $tupla->Ano;
             $mapa[$id]['valor'] = (double) $tupla->Valor;
             $mapa[$id]['percentual'] = (double) $tupla->Percentual;

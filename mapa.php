@@ -50,6 +50,11 @@
     else
         $prc = 0;
 
+    if (!empty($_GET["uf"]))
+        $uf = $_GET["uf"];
+    else
+        $uf = 0;
+
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -120,6 +125,7 @@
     var typ = <?php echo $typ; ?>;
     var prc = <?php echo $prc; ?>;
     var ano = <?php echo $ano; ?>;
+    var uf = <?php echo $uf; ?>;
     var slc = <?php echo $slc; ?>;
     var mundo = <?php echo $mundo; ?>;
 	var eixo;

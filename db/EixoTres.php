@@ -160,7 +160,7 @@ class EixoTres {
 	public static function getter_mapa($var, $cad, $mec, $mod, $pf, $anos){
 
 		self::connect();
-		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 15, 16);
+		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 11, 13, 14, 15, 16);
 
 		if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $query = "SELECT * FROM ".self::$table." AS ex"
@@ -243,7 +243,7 @@ class EixoTres {
 	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
 		
-		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 15, 16);
+		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16);
 		self::connect();
 		    if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
                     if(is_null($ano) || $var < 15) {

@@ -46,11 +46,14 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
 
     });
 
-
+    $.get("./db/json_lines.php"+config, function(data) {
+        // console.log(data);
+    });
+    
 
 
         function analyze(error, data) {
-
+            
             if(eixo == 1 && vrv >= 12 && url['ocp'] == 1){
 
                 $('#loading').fadeOut('fast');
@@ -59,7 +62,7 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                 }
 
                 var dados = [];
-
+                console.log(data)
                 Object.keys(data).forEach(function (key) {
                     if(data[key].ano > 2010){
                         data[key].ano--;
@@ -80,7 +83,7 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                 /*==================*/
 
 
-                if (eixo == 0 || eixo == 1) {
+                if (eixo == 0 || eixo == 1 || eixo == 2) {
 
                     var formatAno = function (x) {
                         if(x * 1 >= 2010){
@@ -110,7 +113,8 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                                         colorReturn = cor.color;
                                     }
                                 })
-                            } else if (url['var'] > 9) {
+                            }
+                            else if (url['var'] > 9) {
                                 if (colorId == "UF") {
                                     colorReturn = "#071342";
                                 } else if (colorId == "Setor") {
@@ -144,6 +148,23 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                                 })
                             }
 
+                        }
+                        else if (eixo == 2) {
+
+                            if(url['var'] == 10){
+                                if (colorId == "UF") {
+                                    colorReturn = "#071342";
+                                } else if (colorId == "Setor") {
+                                    colorReturn = "rgb(109, 191, 201)";
+                                }
+                            }
+                            else{
+                                Object.values(colorJSON.cadeias).forEach(function (cor) {
+                                    if (cor.name == colorId) {
+                                        colorReturn = cor.color;
+                                    }
+                                })
+                            }
                         }
                         return colorReturn;
                     }
@@ -493,6 +514,13 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                                 if (colorId == "UF") {
                                     colorReturn = "#071342";
                                 } else if (colorId == "Setor") {
+                                    colorReturn = "rgb(109, 191, 201)";
+                                }
+                            }
+                            else if(url['var'] == 10){
+                                if (colorId == "Despesa Minc / Receita executivo") {
+                                    colorReturn = "#071342";
+                                } else if (colorId == "Financiamento Estatal / Receita executivo") {
                                     colorReturn = "rgb(109, 191, 201)";
                                 }
                             }

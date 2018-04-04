@@ -214,7 +214,6 @@ else if($eixo == 2) {
 
             // $barras[$tupla->Ano] = $tupla->Valor;
             if ($var < 15) {
-
                 $id = $tupla->Ano;
                 $barras[$id]['uf'] = $tupla->UFNome;
                 $barras[$id]['ano'] = (int)$tupla->Ano;
@@ -241,6 +240,7 @@ else if($eixo == 3) {
         
         $id = $tupla->Ano;
         $barras[$id]['uf'] = $tupla->UFNome;
+        $barras[$id]['prc'] = $tupla->ParceiroNome;
         $barras[$id]['ano'] = (int) $tupla->Ano;
         $barras[$id]['valor'] = (double) $tupla->Valor;
         $barras[$id]['percentual'] = (double) $tupla->Percentual;

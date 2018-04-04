@@ -55,11 +55,12 @@ d3.json('data/colors.json', function(error, data) {
     colorJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
+var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
 var gdpData;
 
 $.get("./db/json_mapa.php"+config, function(data) {
-    
+
+    console.log(data)
     gdpData = JSON.parse(data);
     gdpAux = {};
     for(var data in gdpData){

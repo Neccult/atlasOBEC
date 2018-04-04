@@ -134,7 +134,24 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             ?>
                         </select>
                     </div>
+
+                    <?php if($eixo == 'comercio') {?>
+                        <div class="bread-separator">/</div>
+
+                        <div>
+                            <select class="bread-select" id="bread-select-prc" data-id="prc">
+                                <?php
+                                foreach ($json_text['select']['prc'] as $option) {
+                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                    <?php } ?>
+
                     <div class="bread-separator">/</div>
+
                     <div>
                         <select class="bread-select bread-uf" data-id="uf">
                             <?php
@@ -165,20 +182,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
 
-                    <!-- <?php if($eixo == 'politicas') {?>
-                        <div class="bread-separator">/</div>
 
-                        <div>
-                            <select class="bread-select" data-id="mec">
-                                <?php
-                                foreach ($json_text['select']['mec'] as $option) {
-                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-
-                    <?php } ?> -->
 
 
 
@@ -262,7 +266,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </div>
                     </div>
                     <div class="value-info-title">
-                        *VALORES EM MILHARES DE REAIS
+
                     </div>
                     <div class="font-title">
                         FONTE(S): RAIS
@@ -404,6 +408,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                         ?>
                                     </select>
                                 </div>
+
                             <?php } ?>
 
                             <?php if($eixo == 'comercio') {?>

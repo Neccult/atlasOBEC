@@ -538,7 +538,7 @@
 			},
 			{
 				"id":"2",
-				"title":"<span>Participação no Emprego</span>",
+				"title":"<span>Participação da Cultura no Emprego</span>",
 				"desc_int":"de participação dos trabalhadores culturais e criativos no total de trabalhadores do <span data-id='uf'>Brasil</span>",
 				"desc_percent": "",
 				"sufixo_valor":"%",
@@ -659,7 +659,7 @@
 			},
 			{
 				"id":"5",
-				"title":"<span>Remuneração / Hora Trabalhada</span>",
+				"title":"<span>Jornada Média de Trabalho</span>",
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"/h",
@@ -713,7 +713,7 @@
 			},
 			{
 				"id":"7",
-				"title":"Massa Salarial",
+				"title":"VA por trabalhador",
 				"desc_int":"",
 				"desc_percent": "da soma de remunerações pagas aos trabalhadores culturais e criativos.",
 				"sufixo_valor":"",
@@ -785,7 +785,7 @@
 			},
 			{
 				"id":"9",
-				"title":"Massa Salarial / VA",
+				"title":"Razão entre variação na ocupação e variação do VA",
 				"desc_int":"",
 				"desc_percent": "",
 				"sufixo_valor":"%",
@@ -928,7 +928,7 @@
 				"sufixo_valor":"",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
 				"prefixo_valor":"R$ ",
 				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
 				"type":[
@@ -967,7 +967,7 @@
 				"sufixo_valor":"",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"type":[
@@ -1002,7 +1002,7 @@
 				"prefixo_valor":"R$ ",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"title":"<span>Financiamento BNDES</span>",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
@@ -1038,7 +1038,7 @@
 				"title":"<span>Valor total de incentivos privados</span>",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
@@ -1068,7 +1068,7 @@
 				"title":"<span>Valor total de incentivos via empresas públicas<span>",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
@@ -1096,7 +1096,7 @@
 				"desc":"Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1131,7 +1131,7 @@
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1157,7 +1157,7 @@
 				"title":"<span>FINANCIAMENTO PÚBLICO / VA</span>",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
@@ -1195,7 +1195,7 @@
 				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1234,8 +1234,8 @@
 				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
-				"sufixo_valor":"",
+				"desc_var_mapa": "Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1247,7 +1247,7 @@
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata a soma de todas propostas para LIC nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1279,7 +1279,7 @@
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1311,7 +1311,7 @@
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1344,7 +1344,7 @@
 				"sufixo_valor":"",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1377,7 +1377,7 @@
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
 				"desc_int":"Concentração do financiamento por UF",
 				"desc_percent": "Concentração do financiamento por setor" ,
-				"desc_var_mapa": "A variável índice Herfindal-Hirschman (IHH) de concentração do financiamento retrata a maneira como o financiamento está distribuído dentre o total de Setores Culturais e Criativos e dentre as unidades federativas, em três modalidades: mecenato, FNC e todos (soma de ambos os anteriores). Quanto mais alto o índice, mais concentrado é o financiamento",
+				"desc_var_mapa": "A variável índice Herfindal-Hirschman (IHH) de concentração do financiamento retrata a maneira como o financiamento está distribuído dentre o total de Setores Culturais e Criativos e dentre as unidades federativas, em três modalidades: mecenato, FNC e todos (soma de ambos os anteriores). Quanto mais alto o índice, mais concentrado é o financiamento.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1411,6 +1411,7 @@
 				"id":"1",
 				"title":"Valor Absoluto",
 				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
+				"desc_var_mapa": "A variável valor absoluto apresenta os valores absolutos, em termos monetários, para exportações, importações, saldo comercial e valor transacionado nos Setores Culturais e Criativos no Brasil.",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"type":[
@@ -1447,6 +1448,7 @@
 				"id":"2",
 				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
+				"desc_var_mapa": "A variável mostra a participação do valor absoluto dos Setores Culturais e Criativos no total do comércio internacional do país para cada ano.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1483,6 +1485,7 @@
 				"id":"3",
 				"title":"<span>Relação com o VA da Cultura<span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
+				"desc_var_mapa": "A variável relação com o VA da cultura apresenta a razão entre os valores absolutos relacionados ao comércio exterior dos Setores Culturais e Criativos brasileiros e o Valor Adicionado por esses setores na economia brasileira.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1519,6 +1522,7 @@
 				"id":"4",
 				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
 				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "Apresenta a razão entre os valores absolutos da cultura os valores totais do comércio exterior cultural brasileiro.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1555,6 +1559,7 @@
 				"id":"5",
 				"title":"<span>C2 Valor Absoluto Parceiros</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
+				"desc_var_mapa": "Essa razão demonstra o grau de concentração do Valor Absoluto por parceiros comerciais, apresentando o total da participação relativa dos dois maiores parceiros.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1591,6 +1596,7 @@
 				"id":"6",
 				"title":"<span>C4 Valor Absoluto Setores</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com a massa salarial da cultura por estratificação proposta.",
+				"desc_var_mapa": "Essa razão demonstra o grau de concentração do Valor Absoluto por setores, explicitando a participação relativa, no que tange comércio internacional, dos quatro maiores Setores Culturais e Criativos a cada ano.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1627,6 +1633,7 @@
 				"id":"7",
 				"title":"<spna>C4 Valor Absoluto UFs</span>",
 				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
+				"desc_var_mapa": "Essa razão demonstra o grau de concentração do Valor Absoluto por Unidades Federativas, explicitando a participação relativa dos quatro maiores estados no comércio internacional cultural.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1663,6 +1670,7 @@
 				"id":"8",
 				"title":"<span>IHH VALOR ABSOLUTO PARCEIROS</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
+				"desc_var_mapa": "O índice retrata a concentração da distribuição do comércio internacional dos Setores Culturais e Criativos em relação aos parceiros comerciais. Quanto maior próximo de 1 estiver o IHH, mais concentrado em poucos parceiros está o comércio.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1699,6 +1707,7 @@
 				"id":"9",
 				"title":"<span>IHH VALOR ABSOLUTO SETORES</span>",
 				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "O índice mostra o quão disperso ou concentrado está o comércio exterior total dos Setores Culturais e Criativos em relação à contribuição de cada um deles. Quanto maior próximo de 1 estiver o IHH, mais concentrado em poucos setores está o comércio.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1712,6 +1721,9 @@
 				"id":"10",
 				"title":"<span>IHH VALOR ABSOLUTO UFs</span>",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "O índice mostra a concentração do comércio exterior total dos Setores Culturais e Criativos em relação à contribuição de cada Unidade Federativa. Quanto maior próximo de 1 estiver o IHH, mais concentrado em poucas Unidades está o comércio.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1723,6 +1735,7 @@
 				"id":"11",
 				"title":"ÍNDICE DE QUANTUM DO VALOR ABSOLUTO",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "O índice retrata a evolução ao longo do tempo dos fluxos comerciais internacionais de cada um dos Setores Culturais e Criativos da economia brasileira.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1736,6 +1749,9 @@
 				"id":"12",
 				"title":"ÍNDICE DE PREÇOS DO VALOR ABSOLUTO",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "O índice demonstra o comportamento ao longo do tempo dos preços no comércio internacional para cada Setor Cultural e Criativo brasileiro.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1747,7 +1763,8 @@
 				"id":"13",
 				"title":"QUANTIDADE FÍSICA TRANSACIONADA",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"sufixo_valor":"",
+				"desc_var_mapa": "A variável demonstra a quantidade física, em kg, transacionada pelos Setores Culturais e Criativos no comércio internacional em cada ano.",
+				"sufixo_valor":" kg",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1760,6 +1777,9 @@
 				"id":"14",
 				"title":"ÍNDICE DE RENTABILIDADE DAS EXPORTAÇÕES",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "Essa variável retrata a relação do índice de preços das exportações, corrigido pela taxa de câmbio, com o índice de custos de produção, para se obter um índice anual da rentabilidade das exportações da cultura no Brasil.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1771,17 +1791,9 @@
 				"id":"15",
 				"title":"ÍNDICE DE DEMANDA",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
-				]
-			},
-			{
-				"id":"16",
-				"title":"EMPRESAS EXPORTADORAS",
-				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "O índice demonstra o comportamento, anualmente ao longo do tempo, da demanda pelos bens culturais brasileiros por cada um dos parceiros comerciais do país.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1950,7 +1962,7 @@
 			{"name":"Valor Transicionado","value":"4"}
 		],
 		"prc":[
-			{"name":"Todos","value":"0"},
+			{"name":"Mundo","value":"0"},
 			{"name":"África","value":"1"},
 			{"name":"América do Norte","value":"2"},
 			{"name":"América do Sul","value":"3"},

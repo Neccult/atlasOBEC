@@ -241,6 +241,9 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 // if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
                 decimalDigits = minFraction + higherZeroOcur;
 
+
+                if(decimalDigits >= 5)
+                    decimalDigits = 4;
                 var format = d3.format("." + decimalDigits + "f");
                 dadosCounter++;
                 return (format(d)).replace(".", ",");

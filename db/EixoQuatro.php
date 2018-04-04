@@ -90,13 +90,13 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $parc, $tipo, $anos, $slc){
+	public static function find($var, $parc, $uf, $tipo, $anos, $slc){
 
 		self::connect();
 
 			$query = "SELECT * FROM ".self::$table." AS ex"
 					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = 0"
+					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
 					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
 					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
 					." WHERE ex.Numero = ".$var
@@ -160,14 +160,14 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $tipo, $anos, $parceiro, $mundo, $slc){
+	public static function getter_mapa($var, $cad, $tipo, $anos, $parceiro, $uf, $mundo, $slc){
 
 		self::connect();		
 		if($mundo == 0){
 			$query = "SELECT * FROM ".self::$table." AS ex"
 				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
-				." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = 0"
-				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
+                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
 				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
 				." WHERE ex.Numero = ".$var;
 
@@ -213,21 +213,15 @@ class EixoQuatro {
 	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc){
 
 		self::connect();
-		if($mundo == 0){
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var;
 
-		}else{
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF =".$uf
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var;
-		}
+        $query = "SELECT * FROM ".self::$table." AS ex"
+                ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
+                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
+                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+                ." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
+                ." WHERE ex.Numero = ".$var;
+
+
 
 		if($slc == 0)
 			$query .= " AND ex.Consumo = 1";

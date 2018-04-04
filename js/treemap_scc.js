@@ -235,7 +235,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                                 ["title", d.data.name],
                                 ["", formatTextVrv(d.data.size, eixo, vrv)],
                                 ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                                ["", formatDecimalLimit(d.data.taxa, 2)],
+                                ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
                             ]);
                         }
                         else {
@@ -243,7 +243,8 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                                 ["title", d.data.name],
                                 ["", formatTextVrv(d.data.size, eixo, vrv)],
                                 ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                                ["", formatTextTaxaVrv(d.data.taxa, eixo, vrv)],
+                                ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+
                             ]);
 
                         }
@@ -288,6 +289,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		        .style("cursor", "pointer");
 
 	function loadTooltip(d, eixo, vrv){
+
         if(eixo === 2){
             if( ((vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4|| vrv === 5 || vrv === 11 || vrv === 12)&& url['uf'] != 0)  || vrv === 6 || vrv === 8 || vrv === 9   || vrv === 13){
                 tooltipInstance.showTooltip(d, [
@@ -310,7 +312,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
         else if(eixo === 3){
             if (vrv === 1){
-                tooltipInstance.showTooltip(d, [
+                    tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
                     ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
