@@ -5,7 +5,7 @@ function ajustaAnos(keys) {
 	return keys;
 }
 
-function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg) {
+function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percent) {
     if(eixo == 0) {
         if(vrv == 2 && url['uf'] == 0){
             setIntegerValueData({valor: d.data.size*100}, eixo, vrv);
@@ -71,8 +71,11 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg) {
         }
 
 
-        if(mundo == 0 || mundo == 1 && url['uf'] == 0){
-            setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
+        if(url['uf'] == 0){
+            setPercentValueData({percentual: valor}, eixo, vrv);
+        }
+        else{
+            setPercentValueData({percentual: percent}, eixo, vrv);
         }
     }
 }
@@ -128,13 +131,17 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, cad_data, ocp_data, url, deg_cad
         if(mundoRegex != null)
             mundo = mundoRegex[0].match(/[0-9]/)[0];
 
-        if(url['cad'] != 0 && mundo == 1 && url['uf'] == 0){
-            setPercentValueData({percentual: cad_data, taxa: 0}, eixo, vrv);
+        if(url['cad'] != 0){
+            if(url['uf'] == 0){
+                setPercentValueData({percentual: cad_data, taxa: 0}, eixo, vrv);
+            }
+            else{
+                setPercentValueData({percentual: ocp_data, taxa: 0}, eixo, vrv);
+            }
         }
-        else if(url['cad'] != 0 && mundo == 0){
-            setPercentValueData({percentual: cad_data, taxa: 0}, eixo, vrv);
+        else{
+            setPercentValueData({percentual: 1, taxa: 0}, eixo, vrv);
         }
-
     }
 
 }
@@ -147,7 +154,7 @@ function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root) {
     }
 }
 
-function configInfoDataBoxBarrasClick(eixo, vrv, dados, i) {
+function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
     if(eixo == 0) {
         if (vrv == 3) {
             dados.valor = dados.value[i] / 100;
@@ -235,8 +242,8 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i) {
     }
     else if(eixo == 3){
 
-        if(vrv === 1){
-            dados.valor = dados.value[i];
+        if(vrv === 1 || vrv === 2){
+            dados.valor = valor;
             setIntegerValueData(dados, eixo, vrv);
         }
         else if(vrv === 99){
@@ -251,7 +258,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i) {
     }
 }
 
-function configInfoDataBoxBarras(eixo, vrv, dados) {
+function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
     if(eixo == 0){
         if(url['uf'] == 0) {
             if(vrv == 1 && cad != 0) {
@@ -370,15 +377,17 @@ function configInfoDataBoxBarras(eixo, vrv, dados) {
             mundo = mundoRegex[0].match(/[0-9]/)[0];
 
 
-        if((mundo == 1 && url['uf'] == 0 && url['cad'] == 0) || (mundo == 0 && url['prc'] == 0 && url['cad'] == 0)){
+        if((mundo == 1 && url['uf'] == 0 && url['cad'] == 0)){
             setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
         }
         else if(mundo == 1 && url['uf'] == 0 && url['cad'] == 0){
             setPercentValueData({percentual: 1}, eixo, vrv);
         }
-        else if(mundo == 0 && url['cad'] == 0){
-            setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
+        else if(url['uf'] == 0 && url['prc'] == 0 && url['cad'] == 0){
+            setPercentValueData({percentual: 1}, eixo, vrv);
+
         }
+
 
         dados.valor = dados.value[indexAno];
 
@@ -740,16 +749,69 @@ function setIntegerValueData(value, eixo, vrv) {
 				break;
 			case 1:
 			    if(sufixo == '%')
-			        valor *= 100;
-		}
+                    valor *= 100;
+                break;
 
-        $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+formatDecimalLimit(valor, 2)+sufixo);
+        }
+        var literal = formatDecimalLimit(valor, 2);
+        if(eixo == 3)
+            literal = formatDecimalLimit(valor, 10);    
+        
+
+
+        //alert(literal)
+
+        $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
         var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
 
         setMaxFontSize(doc);
 	});
 }
 
+/*
+* Função para atualizar a descrição do percentual em função do estado selecionado
+*/
+function updateDescPercent(desc, nomeestado){
+    prepos = {
+        "ACRE":"DO",
+        "ALAGOAS":"DE",
+        "AMAPÁ":"DO",
+        "AMAZONAS":"DO",
+        "BAHIA":"DA",
+        "CEARÁ":"DO",
+        "DISTRITO FEDERAL":"DO",
+        "ESPÍRITO SANTO":"DO",
+        "GOIÁS":"DE",
+        "MARANHÃO":"DO",
+        "MATO GROSSO":"DE",
+        "MATO GROSSO DO SUL":"DE",
+        "MINAS GERAIS":"DE",
+        "PARÁ":"DO",
+        "PARAÍBA":"DA",
+        "PARANÁ":"DO",
+        "PERNAMBUCO":"DE",
+        "PIAUÍ":"DO",
+        "RIO DE JANEIRO":"DO",
+        "RIO GRANDE DO NORTE":"DO",
+        "RIO GRANDE DO SUL":"DO",
+        "RONDÔNIA":"DE",
+        "RORAIMA":"DE",
+        "SANTA CATARINA":"DE",
+        "SÃO PAULO":"DE",
+        "SERGIPE":"DE",
+        "TOCANTINS": "DO"
+    }
+    nomeestado = nomeestado.toUpperCase()
+    if(prepos[nomeestado]){
+        
+        nomeestado = prepos[nomeestado] + ' ' +nomeestado
+    }
+    else{
+        nomeestado = "DO BRASIL"
+    }
+    
+    return desc.replace("{}", nomeestado);
+}
 
 /*
 * Função ajusta o tamanho da fonte para a maior possível dentro de um Div.
@@ -780,7 +842,7 @@ function setMaxFontSize(doc){
 
     var letterSpacing = parseFloat($(doc).css("letter-spacing").replace("px", ""));
 
-    var tamanhoString = getTextWidth(texto, font) + (texto.length) * letterSpacing;
+    var tamanhoString = getTextWidth(texto.toUpperCase(), font) + (texto.length) * letterSpacing;
 
     $(doc).html("");
 
@@ -793,7 +855,7 @@ function setMaxFontSize(doc){
 
         font = $(doc).css("font-weight")+" "+$(doc).css("font-size")+" "+ $(doc).css("font-family");
 
-        tamanhoString  = getTextWidth(texto, font) + texto.length * letterSpacing;
+        tamanhoString  = getTextWidth(texto.toUpperCase(), font) + texto.length * letterSpacing;
 
     }
    // console.log("tamanhoString: "+tamanhoString+"/ tamanhoDiv: "+tamanhoDiv)
@@ -823,6 +885,11 @@ function getTextWidth(text, font) {
 
 function setStateTitle(stateTitle){
     docState = $(window.parent.document).find(".state-title").html(stateTitle);
+    setMaxFontSize(docState)
+}
+
+function setPrcTitle(prcTitle){
+    docState = $(window.parent.document).find(".prc-title").html(prcTitle);
     setMaxFontSize(docState)
 }
 
@@ -897,12 +964,12 @@ function setPercentValueData(value, eixo, vrv) {
     }
     else if(eixo == 3){
 
-
-        if(vrv == 1){
+        if(vrv == 1 || vrv == 2){
             $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+            setMaxFontSize(doc);
         }
-        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
-        setMaxFontSize(doc);
+
     }
 
 }
@@ -956,12 +1023,12 @@ function formatTextVrv(value, eixo, vrv){
             valor = value;
             switch(eixo) {
                 case 0:
-
+                    break;
                 case 1:
-                    if(vrv == 2){
+                    if(vrv === 2){
                         valor *= 100;
                     }
-                    else if(vrv == 9){
+                    else if(vrv === 9){
                         valor *= 100;
                     }
                     break;
@@ -980,11 +1047,11 @@ function formatTextTaxaVrv(value, eixo, vrv){
     valor = value*100;
 
     switch(eixo) {
-        /*case 0:
-            if(vrv == 3) {
-                valor = valor*100;
+        case 0:
+            if(vrv == 2) {
+                // valor = valor/100;
             }
-            break;*/
+            break;
         /*case 1:
             if(vrv == 9){
                 valor *= 100;
@@ -1115,7 +1182,7 @@ function updateMenuSetor(eixo, vrv){
 	}
 	else if (eixo == 2){
 
-	    if(vrv == 15){
+	    if(vrv == 15 || vrv == 10){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
             }).style("display", "none");
@@ -1141,7 +1208,7 @@ function formatGreatNumbers(value, prefix){
 
 	point = String(value).indexOf(".");
 
-	if(point > exp_milhao && point <= exp_bilhao || point == -1 && String(value).length > exp_milhao){
+	if(point > exp_milhao && point <= exp_bilhao || point == -1 && String(value).length > exp_milhao && String(value).length <= exp_bilhao){
 		value = value / Math.pow(10, exp_milhao);
 		return prefix+formatDecimalLimit(value, 2) + "M";
 	}
@@ -1163,7 +1230,7 @@ function formatGreatNumbers(value, prefix){
 		{string} ex.: "200.300,12"
 -----------------------------------------------------------------------------*/
 var formatNumber = function(value, decimalLimit){
-	var decimalLimit = decimalLimit || 8;
+	var decimalLimit = decimalLimit || 10;
 	var minimumIntDigitsNumberToCapDecValues = 3;
 
 	var intFormat = function(d){
@@ -1172,8 +1239,14 @@ var formatNumber = function(value, decimalLimit){
 	}
 
 	var fracFormat = function(d){
-		var tempFormat = d3.format("."+decimalLimit+"f");
-		return tempFormat(d);
+
+		var tempFormat = d3.format(",."+decimalLimit+"f");
+		if((tempFormat(d) > -0.0001 && tempFormat(d) < 0.0001) && tempFormat(d) !=  0){
+		    return parseFloat(tempFormat(d)).toExponential(3)
+		}
+		else{
+            return tempFormat(d);
+        }
 	}
 
 /*-----------------------------------------------------------------------------
@@ -1240,7 +1313,7 @@ var formatNumber = function(value, decimalLimit){
 -----------------------------------------------------------------------------*/
 var removeDecimalZeroes = function(value){
 	var decValue = value.split(".")[1];
-	return parseInt(decValue) === 0? value.split(".")[0] : value;
+	return parseInt(decValue) === 0 && decValue.indexOf('e') == -1? value.split(".")[0] : value;
 }
 
 /*-----------------------------------------------------------------------------

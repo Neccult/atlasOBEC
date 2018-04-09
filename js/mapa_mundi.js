@@ -60,7 +60,6 @@ var gdpData;
 
 $.get("./db/json_mapa.php"+config, function(data) {
 
-    console.log(data)
     gdpData = JSON.parse(data);
     gdpAux = {};
     for(var data in gdpData){
@@ -132,7 +131,7 @@ $.get("./db/json_mapa.php"+config, function(data) {
                 // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
                 el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
                 //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
-                el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
+                // el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
             },
             onRegionClick: function(e, el, code){
 
@@ -149,7 +148,7 @@ $.get("./db/json_mapa.php"+config, function(data) {
                     setPercentValueData(gdpData[convertCode(el)], eixo, vrv);
                 }
 
-                setStateTitle(gdpData[convertCode(el)].prc)
+                setPrcTitle(gdpData[convertCode(el)].prc)
 
                 $(window.parent.document).find("select[data-id='prc']").val(convertCode(el));
                 destacaPrc(el)

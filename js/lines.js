@@ -152,9 +152,9 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
                         else if (eixo == 2) {
 
                             if(url['var'] == 10){
-                                if (colorId == "UF") {
+                                if (colorId == "Despesa Minc / Receita executivo") {
                                     colorReturn = "#071342";
-                                } else if (colorId == "Setor") {
+                                } else if (colorId == "Financiamento Estatal / Receita executivo") {
                                     colorReturn = "rgb(109, 191, 201)";
                                 }
                             }

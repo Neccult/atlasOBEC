@@ -551,8 +551,12 @@ gradient = svg.append("defs")
 	}
 
     if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
-    $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
-    $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+    if(dict[url['uf']])
+        estadoAtual = dict[url['uf']].uf
+    else
+        estadoAtual = "BRASIL"
+    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, estadoAtual));
+    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, estadoAtual));
 
 
     function loadTooltip(d, eixo, vrv){
@@ -567,7 +571,7 @@ gradient = svg.append("defs")
             else if(vrv === 3) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)],
                 ]);
             }
             else if(vrv === 9) {
@@ -642,7 +646,7 @@ gradient = svg.append("defs")
         }
         else if(eixo == 3){
             //tooltips com os 3 valores na interface (valor, percentual e taxa)
-            if(vrv === 1){
+            if(vrv === 1 || vrv === 2){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],

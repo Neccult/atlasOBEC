@@ -169,12 +169,12 @@ function updateIframe(url){
             }
             if(url['mundo'] == null || url['mundo'] == 0){
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA MUNDI");
-                $(".state-title").html("MUNDO");
+                //$(".state-title").html("MUNDO");
 
             }
             else{
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
-                $(".state-title").html("BRASIL");
+                //$(".state-title").html("BRASIL");
 
             }
 
@@ -204,13 +204,20 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 2){
-            if (url['var'] ==  16) {
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+            if (url['var'] ==  16 || url ['var'] == 15) {
                 if(url['uos'] == 0) {
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
                 }
                 else {
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
                 }
+            }
+            else if(url['var'] == 10){
+                newUrl = newUrl.replace(/mec=[0-9]/, "mec=0");
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO TOTAL / RECEITA EXECUTIVO");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA DESPESA MINC / RECEITA EXECUTIVO");
             }
         }
 
@@ -271,7 +278,7 @@ function updateIframe(url){
             else if(url['var'] == 10){
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=1");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO TOTAL / RECEITA EXECUTIVO");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO");
             }
             else{
                 $('iframe[id="view_box_scc"]').css('display', 'block')
@@ -1292,7 +1299,8 @@ $(document).ready(function(){
 
             /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-            
+
+
             if($(this).attr('data-id') == 'var'){
                 changeDescVar();
                 cleanDesagsUrl();
@@ -1378,9 +1386,20 @@ $(document).ready(function(){
             }
             if($(this).attr("data-id") == "uf"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
+
+
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
 
+
+
                 updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
+            }
+            if($(this).attr("data-id") == "prc"){
+                document.getElementById('view_box').contentWindow.location.reload(true);
+
+                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
+
+                // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
             if($(this).attr("data-id") === "cad") {
                 if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
@@ -1436,15 +1455,3 @@ $(document).ready(function(){
     }
 
 });
-//
-//funcao chamada qdo carrega o primeiro iframe
-// $("#view_box_barras").on('load', function() {
-//     //var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
-//
-//     console.log($(window.parent.document).find(".integer-value").first().find(".number").first().html())
-//    // setTimeout(function(){ setMaxFontSize($(window.parent.document).find(".integer-value").first().find(".number").first()); }, 5);
-//
-//
-//
-//
-// });

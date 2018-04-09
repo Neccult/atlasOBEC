@@ -84,6 +84,11 @@
     else
         $mod = 0;
 
+    if (!empty($_GET["mundo"]))
+        $mundo = $_GET["mundo"];
+    else
+        $mundo = 1;
+
     if (!empty($_GET["pfj"]))
         $pfj = $_GET["pfj"];
     else
@@ -182,6 +187,7 @@
             var prv = <?php echo $prv; ?>;
             var snd = <?php echo $snd; ?>;
             var mec = <?php echo $mec; ?>;
+            var mundo = <?php echo $mundo; ?>;
             var mod = <?php echo $mod; ?>;
             var slc = <?php echo $slc; ?>;
             var pfj = <?php echo $pfj; ?>;
@@ -191,6 +197,7 @@
 			var view = '<?php echo $view; ?>';
 			var type = '<?php echo $type; ?>';
 			var eixo = '<?php echo $eixo; ?>';
+			var pageTitle = '<?php echo "teste";?>';
             switch(eixo) {
                 case "empreendimentos":
                     eixo = 0;
@@ -268,7 +275,8 @@
                     }
                 ?>
 				var svg = tmp.getElementsByTagName("svg")[0];
-				// Extract the data as SVG text string
+
+                // Extract the data as SVG text string
 				var svg_xml = (new XMLSerializer).serializeToString(svg);
 
 				// Submit the <FORM> to the server.
@@ -276,8 +284,9 @@
 				var form = document.getElementById("svgform");
 				form['output_format'].value = output_format;
 				form['data'].value = svg_xml ;
+
 				form.submit();
-			}
+            }
 
 			/*-----------------------------------------------------------------------------
 			Função: Ready (JQUERY)
@@ -292,17 +301,18 @@
 					setTimeout(function(){
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
+						console.log(type)
 						submit_download_form(type);
-					}, 500);
+					}, 5000);
 				}else{
 					setTimeout(function(){
 						submit_download_form(type);
-					}, 3000);
+					}, 10000);
 				}
 				setTimeout(function(){
 					window.close();
-					window.location = "http://localhost/atlasOBEC/";
-				}, 4000);
+					window.location = "http://localhost/Neccult/atlasOBEC/";
+				}, 80000);
 
 				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
 				// $("#save_as_png").click(function() { submit_download_form("png"); });

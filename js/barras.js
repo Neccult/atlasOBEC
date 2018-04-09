@@ -348,6 +348,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             .enter().append("rect")
             .attr("class", "bar")
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
+            .attr("data-value", function(d) {   return d; })
             .attr("x", function (d, i) {
                 return x(i);
             })
@@ -452,20 +453,41 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
                 newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
 
-                if(url['uos'] == 1) {
-                    var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                if(eixo == 2 && url['var'] == 10){
+                    if(url['mec'] == 1) {
+                        var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                        $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                    }
+                    else {
+                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                    }
                 }
-                else {
-                    var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                    $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                else{
+                    if(url['uos'] == 1) {
+                        var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                        $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                    }
+                    else {
+                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                    }
                 }
+
+
                 $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                 $(window.parent.document).find("select[data-id='ano']").val(dados.key[i]);
+
+
                 destacaBarra(dados.key[i]);
-                configInfoDataBoxBarrasClick(eixo, vrv, dados, i);
+                var valor = $('svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+
+                configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
+
             })
             .style("cursor", "pointer");
         // cria título do gráfico
@@ -620,62 +642,72 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         destacaBarra(url['ano']);
 
-        configInfoDataBoxBarras(eixo, vrv, dados);
+        var valor = $('svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
+        configInfoDataBoxBarras(eixo, vrv, dados, valor);
 
         
 
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+        
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
 
+        
         if(url['slc'] == 1){
             updateDataDesc()
         }
 
         function loadTooltip(d, i, eixo, vrv){
             if(eixo === 0){
-                if(vrv === 1 || vrv === 3){
-                    tooltipInstance.showTooltip(d, [
-                        ["title", dados.key[i]],
-                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                    ]);
-                }
-                else if (vrv === 2){
-                    if(uf != 0) {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i]/100, eixo, vrv)]
-                        ]);
-                    }
-                    else {
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)]
-                        ]);
-                    }
-                }
-                else if (vrv >= 4 && vrv <= 8) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", dados.key[i]],
-                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)]
-                    ]);
-                }
-                else if (vrv == 9 && url['uf'] == 0) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", dados.key[i]],
-                        ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
-                        ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
-                    ]);
-                }
-                else {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", dados.key[i]],
-                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ["", formatTextVrv(dados.taxa[i]*100, eixo, vrv)],
-                    ]);
-                }
 
 
+                if(vrv === 2){
+                    if(url['uf'] != 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i]/100, eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                    else if(url['uf'] == 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                }
+                if(vrv === 9){
+                    if(url['uf'] != 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                    else if(url['uf'] == 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                }
+                else{
+                    if(url['uf'] == 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                    else if(url['uf'] != 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        ]);
+                    }
+                }
             }
             else if(eixo === 1){
                 if (vrv === 2 || vrv === 9) {
@@ -693,7 +725,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
             else if(eixo === 2){
-                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16){
+                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv == 10 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
@@ -702,7 +734,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
             else if(eixo === 3){
-                if(vrv === 1){
+                if(vrv === 1 || vrv === 2){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
@@ -894,7 +926,7 @@ else {
             .ticks(10)
             .tickSize(-width, 0, 0)
             .tickFormat(function (d) {
-                return d
+                return formatGreatNumbers(d, '')
             });
 
         var xAxis_eixo1 = d3.svg.axis()
@@ -1025,8 +1057,9 @@ else {
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
+
 
     }
 
