@@ -313,6 +313,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                         ?>
                                     </select>
                                 </div>
+
                                 <div>
                                     <?php
                                         if($slc == 0) {
@@ -604,7 +605,6 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <div class="select-group hide" id="select-img">
                             <input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=png#'.$eixo?>" readonly/><button class="button-control-down"></button>
                         </div>
-
                     </div>
                 </span>
 			</div>

@@ -247,7 +247,7 @@ d3.json('data/pt-br.json', function(error, data) {
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
 
 $.get("./db/json_mapa.php"+config, function(data) {
-    
+    console.log(data);
 });
 //pre-load arquivos
 d3.queue()
@@ -259,6 +259,9 @@ d3.queue()
 function ready(error, br_states, mapa){
     $('#loading').fadeOut('fast');
 	if (error) return console.error(error);
+
+    //if(url['var'] != 17)
+
 
 	//variaveis informacao
 	var dict = {};
@@ -310,19 +313,24 @@ function ready(error, br_states, mapa){
 
 	// creates cadeia's color range array from color.json file
 	var colorsRange = [];
-	$.each(colorJSON.cadeias[cad].gradient, function(i, rgb){
-		if(i > 1)
-			colorsRange.push(rgb);
-	});
+
+	if(colorJSON.cadeias[cad] != undefined){
+        $.each(colorJSON.cadeias[cad].gradient, function(i, rgb){
+            if(i > 1)
+                colorsRange.push(rgb);
+        });
+    }
+
 
 	//coloração do mapa
 	var color = d3.scaleThreshold()
-		.domain(dom)
-		.range(colorsRange);
+        .domain(dom)
+        .range(colorsRange);
 
 
-   // console.log(dict)
 
+   console.log(colorJSON)
+    console.log(colorJSON.binario['0'].color)
 
     var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
@@ -340,7 +348,7 @@ function ready(error, br_states, mapa){
 		.append("path")
 		.attr("data-legend",function(d) { return d.id; })
 		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
-		.style('fill', function(d){return color(dict[d.id].valor);})
+		.style('fill', function(d){ if(url['var'] == 17) {console.log("dict[d.id].valor: "+dict[d.id].valor.toString()); return colorJSON.binario[dict[d.id].valor.toString()].color; } else return color(dict[d.id].valor);})
 		.attr("d", path)
 
 		//mouseover
@@ -400,81 +408,138 @@ function ready(error, br_states, mapa){
         .shapePadding(10)
         .orient('vertical')
         .scale(color);
-    
+
+    if(url['var'] != 17)
+        escalaMapa();
+    else
+        legendaBinario();
 
 /********* LEGENDA DO MAPA *********/
 
+function escalaMapa(){
+    var low_color = color(minValue);
+    var high_color = color(maxValue);
 
-var low_color = color(minValue);
-var high_color = color(maxValue);
+    var x_barra = svg.attr("width")*0.3;
 
-var x_barra = svg.attr("width")*0.3;
+    var y_barra = 350*0.85;
+    var max_barra = maxValue;
+    var min_barra = minValue;
+    var height_barra = 350*0.03;
+    var width_barra = width*0.4;
+    var prefix = ""
+    var fontColor = "#aaa"
 
-var y_barra = 350*0.85;
-var max_barra = maxValue;
-var min_barra = minValue;
-var height_barra = 350*0.03;
-var width_barra = width*0.4;
-var prefix = ""
-var fontColor = "#aaa"
-
-if(y_barra + height_barra + $("svg").offset().top > 350){
-    y_barra = 350 - 23 - $("svg").offset().top - height_barra;
-}
+    if(y_barra + height_barra + $("svg").offset().top > 350){
+        y_barra = 350 - 23 - $("svg").offset().top - height_barra;
+    }
 
 
-gradient = svg.append("defs")
-                    .append("linearGradient")
-                    .attr("id", "grad")
-                    .attr("x1", "0%")
-                    .attr("y1", "100%")
-                    .attr("x2", "90%")
-                    .attr("y2", "100%")
-
-    gradient.append("stop")
-            .attr("offset", "0%")
-            .style("stop-color", low_color)
-            .style("stop-opacity", 1);
+    gradient = svg.append("defs")
+        .append("linearGradient")
+        .attr("id", "grad")
+        .attr("x1", "0%")
+        .attr("y1", "100%")
+        .attr("x2", "90%")
+        .attr("y2", "100%")
 
     gradient.append("stop")
-            .attr("offset", "90%")
-            .style("stop-color", high_color)
-            .style("stop-opacity", 1);
+        .attr("offset", "0%")
+        .style("stop-color", low_color)
+        .style("stop-opacity", 1);
+
+    gradient.append("stop")
+        .attr("offset", "90%")
+        .style("stop-color", high_color)
+        .style("stop-opacity", 1);
 
     svg.append("g")
-       .append("rect")
-       .attr("x", x_barra)
-       .attr("y", y_barra)
-       .attr("height", height_barra)
-       .attr("width", width_barra)
-       .attr("rx", height/150)
-       .attr("ry", height/150)
-       .style("fill", "url(#grad)")
-       .style("stroke-width", 1)
-       .style("stroke", fontColor);
+        .append("rect")
+        .attr("x", x_barra)
+        .attr("y", y_barra)
+        .attr("height", height_barra)
+        .attr("width", width_barra)
+        .attr("rx", height/150)
+        .attr("ry", height/150)
+        .style("fill", "url(#grad)")
+        .style("stroke-width", 1)
+        .style("stroke", fontColor);
 
     svg.selectAll("line")
-       .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
-       .enter()
-       .append("line")
-       .attr("x1", function(d,i){
-           var position = x_barra+i*width_barra/2;
+        .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
+        .enter()
+        .append("line")
+        .attr("x1", function(d,i){
+            var position = x_barra+i*width_barra/2;
 
-           texto = svg.append("text")
-                        .attr("id", "legenda"+i)
-                        .attr("x", position)
-                        .attr("y", y_barra+height_barra +12)
-                        .attr("fill", fontColor);
+            texto = svg.append("text")
+                .attr("id", "legenda"+i)
+                .attr("x", position)
+                .attr("y", y_barra+height_barra +12)
+                .attr("fill", fontColor);
 
             formatBarTextMap(d, eixo, vrv, texto)
 
-           return position;
+            return position;
         })
-       .attr("x2", function(d,i){return x_barra+i*width_barra/2})
-       .attr("y1", y_barra-2)
-       .attr("y2", y_barra+height_barra+2)
-       .style("stroke", fontColor)
-       .style("stroke-width", 1)
+        .attr("x2", function(d,i){return x_barra+i*width_barra/2})
+        .attr("y1", y_barra-2)
+        .attr("y2", y_barra+height_barra+2)
+        .style("stroke", fontColor)
+        .style("stroke-width", 1)
+}
+
+function legendaBinario(){
+        var sim_color = colorJSON.binario['1'].color;
+        var nao_color = colorJSON.binario['0'].color;
+
+        var sim_barra = svg.attr("width")*0.8;
+        var nao_barra = svg.attr("width")*0.8;
+
+        var y_barra = 350*0.85;
+        var y_barra = 350*0.85;
+        var height_barra = 350*0.03;
+        var width_barra = width*0.1;
+        var prefix = ""
+        var fontColor = "#aaa"
+
+        if(y_barra + height_barra + $("svg").offset().top > 350){
+            y_barra = 350 - 23 - $("svg").offset().top - height_barra;
+        }
+
+        svg.append("g")
+            .append("rect")
+            .attr("x", sim_barra)
+            .attr("y", y_barra-height_barra*1.4)
+            .attr("height", height_barra)
+            .attr("width", width_barra)
+            .attr("rx", height/150)
+            .attr("ry", height/150)
+            .style("fill", sim_color)
+            .style("stroke-width", 1)
+            .style("stroke", fontColor);
+
+        svg.append("g")
+            .append("rect")
+            .attr("x", nao_barra)
+            .attr("y", y_barra)
+            .attr("height", height_barra)
+            .attr("width", width_barra)
+            .attr("rx", height/150)
+            .attr("ry", height/150)
+            .style("fill", nao_color)
+            .style("stroke-width", 1)
+            .style("stroke", fontColor)
+            .append("text")
+                    .attr("id", "legenda"+i)
+                    .attr("x", nao_barra+15)
+                    .attr("y", y_barra)
+                    .attr("fill", fontColor);
+
+
+    }
+
+
 /************************ */
 
 

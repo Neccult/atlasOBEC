@@ -1,3 +1,9 @@
+function changeDownloadURL(url){
+    newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
+    $('#select-pdf input').attr("value", newURL)
+    
+}
+
 function ajustaAnos(keys) {
 	for(var i = 0; i < keys.length; i++) {
 		keys[i] = keys[i+1];
@@ -92,6 +98,12 @@ function configInfoDataBoxBarrasStackedClick(eixo, vrv, d, soma, deg) {
 
 function configInfoDataBoxTreemapSCC(eixo, vrv, cad_data, ocp_data, url, deg_cad, deg_ocp, chg) {
 
+    if(eixo == 0){
+        if(url['cad'] != 0){
+            setPercentValueData({percentual: cad_data}, eixo, vrv);
+
+        }
+    }
     if(eixo == 2){
         if(url['cad'] != 0) {
             if(chg == 1) {
@@ -159,21 +171,25 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
         if (vrv == 3) {
             dados.valor = dados.value[i] / 100;
             setIntegerValueData(dados, eixo, vrv);
-        } else if (vrv == 1) {
+        }
+        else if (vrv == 1) {
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
 
         }
-        else if ((vrv == 2) && url['uf'] == 0) {
-            dados.valor = dados.value[i];
-            setIntegerValueData(dados, eixo, vrv);
+        else if (vrv == 2) {
+            if(url['uf'] == 0){
+                dados.valor = dados.value[i];
+                setIntegerValueData(dados, eixo, vrv);
+            }
+            else if(url['uf'] !== 0){
+                dados.valor = dados.value[i] / 100;
+                setIntegerValueData(dados, eixo, vrv);
+                setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
+            }
 
-        } else if ((vrv == 2) && url['uf'] !== 0) {
-            dados.valor = dados.value[i] / 100;
-            setIntegerValueData(dados, eixo, vrv);
-            setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
+
         }
-
         else if (vrv == 9) {
             if(url['uf'] != 0)
                 dados.valor = dados.value[i] / 100
@@ -190,7 +206,8 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
             dados.valor = dados.value[i];
             if(url["uos"] == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(url["uos"] == 1){
+            }
+            else if(url["uos"] == 1){
                 setPercentValueData(dados, eixo, vrv);
             }
         }
@@ -259,49 +276,17 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 }
 
 function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
+
     if(eixo == 0){
-        if(url['uf'] == 0) {
-            if(vrv == 1 && cad != 0) {
-                dados.valor = dados.value[url['ano']-2007];
-                setIntegerValueData(dados, eixo, vrv);
-            }
-            else if(vrv == 3) {
-                dados.valor = dados.value[url['ano']-2008]/100;
-                setIntegerValueData(dados, eixo, vrv);
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            }
-            else if((vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8) && url['cad'] == 0) {
-                dados.valor = dados.value[url['ano']-2007];
-                setIntegerValueData(dados, eixo, vrv);
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            }
-            else if((vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8) && url['cad'] !== 0) {
-                dados.valor = dados.value[url['ano']-2007];
-                setIntegerValueData(dados, eixo, vrv);
-            }
-            else if(vrv > 9){
-                if(ano != null) {
-                    dados.valor = dados.value[url['ano']-2007];
-                    if(url['uos'] == 0){
-                        setIntegerValueData(dados, eixo, vrv);
-                    } else if(url['uos'] == 1){
-                        setPercentValueData(dados, eixo, vrv);
-                    }
+        first_year = Number(dados.key[0]);
 
-                }
-            }
-            else if(url['cad'] == 0){
-                dados.valor = dados.value[url['ano']-2007];
-                setIntegerValueData(dados, eixo, vrv);
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+        if(url['uf'] == 0 && url['cad'] == 0)
+            setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
 
-            }
-            else {
-                dados.valor = dados.value[url['ano']-2007];
-                setIntegerValueData(dados, eixo, vrv);
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            }
-        }
+        dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+
+        setIntegerValueData(dados, eixo, vrv);
+
     }
     else if(eixo == 1){
         first_year = Number(dados.key[0]);
@@ -565,28 +550,43 @@ function removeMecenatoDesags(iframe){
 
 function updateMecanismo(url, vrv){
     $("select[data-id='mec'] > option").each(function() {
-            $(this).remove();
+        $(this).remove();
     });
 
-    $("select[data-id='mec']").append("<option value='0'>Todos</option>");
+    $("select[data-id='cad'] > option").each(function() {
+        $(this).remove();
+    });
 
-    $("select[data-id='mec']").parent().css('display', 'block')
+    if(url['var'] != 17){
+        $("select[data-id='mec']").append("<option value='0'>Todos</option>");
 
-    if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
-        $("select[data-id='mec']").append("<option value='1'>FNC</option>");
-        $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+        $("select[data-id='mec']").parent().css('display', 'block')
+
+        if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
+            $("select[data-id='mec']").append("<option value='1'>FNC</option>");
+            $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+        }
+
+        else if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14){
+            $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+        }
+        else if(vrv == 3){
+            $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
+            $("select[data-id='mec']").append("<option value='4'>Outros</option>");
+        }
+        else {
+            $("select[data-id='mec']").parent().css('display', 'none')
+        }
+
     }
 
-    else if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14){
-        $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+    else{
+
+        $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
+        $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
+        $("select[data-id='mec']").append("<option value='2'>Crédito Especial</option>");
     }
-    else if(vrv == 3){
-        $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
-        $("select[data-id='mec']").append("<option value='4'>Outros</option>");
-    }
-    else {
-        $("select[data-id='mec']").parent().css('display', 'none')
-    }
+
 
     // alert(url['mec'])
     // $("select[data-id='mec']").val(url['mec'])
@@ -753,9 +753,14 @@ function setIntegerValueData(value, eixo, vrv) {
                 break;
 
         }
+
         var literal = formatDecimalLimit(valor, 2);
-        if(eixo == 3)
-            literal = formatDecimalLimit(valor, 10);    
+
+		if(eixo == 1 && url['var'] == 2){
+            literal = formatDecimalLimit(valor, 4);
+        }
+        else if(eixo == 3)
+            literal = formatDecimalLimit(valor, 6);
         
 
 
@@ -771,7 +776,8 @@ function setIntegerValueData(value, eixo, vrv) {
 /*
 * Função para atualizar a descrição do percentual em função do estado selecionado
 */
-function updateDescPercent(desc, nomeestado){
+
+function descByUF(desc, nomeestado){
     prepos = {
         "ACRE":"DO",
         "ALAGOAS":"DE",
@@ -801,16 +807,139 @@ function updateDescPercent(desc, nomeestado){
         "SERGIPE":"DE",
         "TOCANTINS": "DO"
     }
+
     nomeestado = nomeestado.toUpperCase()
+
     if(prepos[nomeestado]){
-        
         nomeestado = prepos[nomeestado] + ' ' +nomeestado
     }
     else{
         nomeestado = "DO BRASIL"
     }
-    
-    return desc.replace("{}", nomeestado);
+
+    if(desc != undefined)
+        return desc.replace('{}', nomeestado);
+    else
+        return
+}
+
+function descByMEC(desc){
+    mecs = {
+        1: "FNC",
+        2: "MECENATO",
+        3: "FUNDO CULTURAL",
+        4: "DEMAIS LINHAS DE CRÉDITO",
+    }
+
+    str = "VIA "
+
+    if(mecs[url['mec']]){
+        if(desc.includes(str))
+            nome = mecs[url['mec']];
+        else
+            nome = str + mecs[url['mec']];
+    }
+    else {
+        if(url['var'] == 8 || url['var'] == 9){
+            nome = str + "PRONAC";
+        }
+        else
+            nome = "";
+    }
+
+
+    if(desc != undefined)
+        return desc.replace('[]', nome);
+    else
+        return
+}
+
+function descByPFJ(desc){
+    pessoas = {
+        1: "PESSOAS FÍSICAS PRIVADAS",
+        2: "PESSOAS JURÍDICAS PRIVADAS",
+    }
+
+    str = "DE "
+
+
+    if(pessoas[url['pfj']]){
+        if(desc.includes(str))
+            nome = pessoas[url['pfj']];
+        else
+            nome = str + pessoas[url['pfj']];
+    }
+    else {
+        nome = ""
+    }
+
+
+    if(desc != undefined){
+        if(url['var'] == 4){
+            if(nome == ""){
+                nome = "DA ESFERA PRIVADA";
+            }
+            return desc.replace('pfj DA ESFERA PRIVADA', nome);
+
+        }
+        else
+            return desc.replace('pfj', nome);
+    }
+
+
+    else
+        return
+}
+
+function descByMOD(desc){
+    mods = {
+        1: "MODALIDADE DIRETA",
+        2: "MODALIDADE INDIRETA",
+    }
+
+    str = "POR "
+
+
+    if(mods[url['mod']]) {
+        nome = str + mods[url['mod']];
+    }
+    else {
+        nome = ""
+    }
+
+    if(desc != undefined)
+        return desc.replace('()', nome);
+    else
+        return
+}
+
+function updateDescPercent(desc, nomeestado){
+
+    // {} - uf dinamica
+    // [] - mecacnismo dinamico
+    // () - modalidade dinamica
+    // 'pfj - pessoa
+
+    if(desc == undefined){
+        return ;
+    }
+
+    if(desc.includes('{}')){
+        desc =  descByUF(desc, nomeestado)
+    }
+    if(desc.includes('[]')){
+        desc =  descByMEC(desc)
+    }
+    if(desc.includes('()')){
+        desc =  descByMOD(desc)
+    }
+    if(desc.includes('pfj')){
+        desc =  descByPFJ(desc)
+    }
+
+
+    return desc;
+
 }
 
 /*
@@ -1034,7 +1163,11 @@ function formatTextVrv(value, eixo, vrv){
                     break;
 
             }
-            string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+            if(eixo == 1 && url['var'] == 2)
+                string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
+            else
+                string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+
         });
     $.ajaxSetup({async: true});
     return string;
@@ -1241,8 +1374,8 @@ var formatNumber = function(value, decimalLimit){
 	var fracFormat = function(d){
 
 		var tempFormat = d3.format(",."+decimalLimit+"f");
-		if((tempFormat(d) > -0.0001 && tempFormat(d) < 0.0001) && tempFormat(d) !=  0){
-		    return parseFloat(tempFormat(d)).toExponential(3)
+		if((Math.abs(tempFormat(d)) < 0.0001) && tempFormat(d) !=  0){
+		    return parseFloat(tempFormat(d)).toExponential(2)
 		}
 		else{
             return tempFormat(d);

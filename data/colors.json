@@ -238,5 +238,15 @@
 			"name": "Oceania",
 			"color": "#EFD1AE"
 		}
+	},
+	"binario": {
+		"0": {
+			"name": "Não",
+			"color": "#ff1616"
+		},
+		"1": {
+			"name": "Sim",
+			"color": "#33e822"
+		}
 	}
 }

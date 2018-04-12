@@ -355,6 +355,7 @@ else if($eixo == 3 && ($var >= 5 && $var <= 10)){
 
 }
 
+
 echo json_encode($barras);
 
 ?>

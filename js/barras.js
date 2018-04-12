@@ -219,6 +219,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             var minFraction = 3;
 
             var formatInit = d3.format(".2f");
+
             var formatDefault = function (d) {
                 return removeDecimalZeroes(formatInit(d));
             };
@@ -233,19 +234,44 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 return removeDecimalZeroes(formatInit(d / 1e9)) + "B";
             };
 
+            function formatNano(d) {
+                return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
+            };
+
+            function formatMicro(d) {
+                return removeDecimalZeroes(formatInit(d * 1e6)) + "µ";
+            };
+
+            function formatMili(d) {
+                return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
+            };
+
             var formatFraction = function (d) {
                 var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
                 var decimalDigits;
+
 
                 // test decimal number and sets decimal digits that will be visible
                 // if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
                 decimalDigits = minFraction + higherZeroOcur;
 
+                console.log("valor: "+Math.abs(d)+" - decimal digits: "+(decimalDigits))
 
-                if(decimalDigits >= 5)
-                    decimalDigits = 4;
+
                 var format = d3.format("." + decimalDigits + "f");
+                console.log(format(d))
                 dadosCounter++;
+
+
+                if(Math.abs(d) < 1/1e7){
+                    return formatNano(d).replace(".", ",");
+                }
+                else if(Math.abs(d) < 1/1e4){
+                    return formatMicro(d).replace(".", ",");
+                }
+                else if(Math.abs(d) < 1/1e1){
+                    return formatMili(d).replace(".", ",");
+                }
                 return (format(d)).replace(".", ",");
             };
 
@@ -734,7 +760,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
             else if(eixo === 3){
-                if(vrv === 1 || vrv === 2){
+                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 || vrv === 5){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],

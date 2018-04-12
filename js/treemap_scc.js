@@ -171,24 +171,46 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                     title = title.replace("</span>", "");
 
                     if(eixo === 1){
-                        if(deg !== 0) {
-                        	tooltipInstance.showTooltip(d, [
-                                ["title", d.data.name],
-                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                                ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-                            ]);
-                        }
-                        else {
-                            tooltipInstance.showTooltip(d, [
-                                ["title", d.data.name],
-                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                                ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
 
-                            ]);
+                        if(uf == 0){
+                            if(deg !== 0) {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
+                                    ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
 
+                                ]);
+
+                            }
                         }
+                        else{
+                            if(deg !== 0) {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
+                                    ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+                                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                                ]);
+                            }
+                            else {
+                                tooltipInstance.showTooltip(d, [
+                                    ["title", d.data.name],
+                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+
+                                ]);
+
+                            }
+                        }
+
 					}
 					else if(eixo === 0 || eixo === 2 || eixo === 3){
 					    loadTooltip(d, eixo , vrv);

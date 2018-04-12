@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl
 =pod
 This is a proof-of-concept demo for saving d3js graphics as PDF/PNG/SVG files.
 
@@ -34,7 +34,6 @@ In a proper application, you'll want to replace those with proper error handling
 
 # Limit the size of the POST'd data - might need to increase it for hudge d3js drawings.
 $CGI::POST_MAX = 1024 * 5000;
-
 ##
 ## Input validation
 ##
@@ -45,8 +44,10 @@ die "Invalid output_format value"
 		$output_format eq "pdf" ||
 		$output_format eq "png";
 
-my $data = param('data')
+my $data = param('data') 
 	or die "Missing 'data' parameter";
+my $data_barras = param('data_barras');
+my $data_scc = param('data_scc');
 
 my $name = param('name'); 
 # die "Invalid data value"
@@ -73,26 +74,28 @@ elsif ($output_format eq "pdf" || $output_format eq "png") {
 	# Create temporary files (will be used with 'rsvg-convert')
 	my (undef, $input_file) = tempfile("d3export.svg.XXXXXXX", OPEN=>0, TMPDIR=>1, UNLINK=>1);
 	my (undef, $output_file) = tempfile("d3export.out.XXXXXXX", OPEN=>0, TMPDIR=>1, UNLINK=>1);
-
+	my (undef, $barras_file) = tempfile("ea.svg.XXXXXXX", OPEN=>0, TMPDIR=>1, UNLINK=>1);
+	my (undef, $scc_file) = tempfile("d3export.svg.XXXXXXX", OPEN=>0, TMPDIR=>1, UNLINK=>1);
 	# Write  the SVG data to a temporary file
-	write_file( $input_file, $data );
-
+	write_file( $input_file, $data);
+	write_file( $barras_file, $data_barras);
+	write_file( $scc_file, $data_scc);
+	
 	my $zoom = ($output_format eq "png")?10:1;
 
 	# Run "rsvg-convert", create the PNG/PDF file.
-	system("rsvg-convert -o '$output_file' -z '$zoom' -f '$output_format' '$input_file'");
-
+	system("rsvg-convert -o '$output_file' -z '$zoom' -f '$output_format' '$input_file' '$barras_file' '$scc_file'");
+	
 	# Read the binary output (PDF/PNG) file.
 	my $pdf_data = read_file( $output_file, {binmode=>':raw'});
 
 	## All is fine, send the data back to the user
-	my $mime_type = ($output_format eq "pdf")?"application/x-pdf":"image/png";
+	my $mime_type = ($output_format eq "pdf")?"application/pdf":"image/png";
 
 	if ($name eq "mapa" ||
 		$name eq "treemap_scc" ||
 		$name eq "treemap_region" ||
 		$name eq "barras") {
-
 		my $name = $name . "Atlas";
 		print header(-type=>$mime_type,
 		     -attachment=>"$name.$output_format");
