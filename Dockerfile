@@ -13,6 +13,7 @@ RUN apt install -y librsvg2-bin
 RUN apt install -y git
 RUN perl -e'use CPAN; install "File::Slurp"'
 #RUN mysql -u root -p atlas < /var/www/app/data/sql/dump-Atlas.sql
+RUN docker-php-ext-install mysqli
 
 WORKDIR /var/www/
 EXPOSE 85
