@@ -691,12 +691,7 @@ function loadResult(){
 
 
     if(window.location.hash.substring(1) == "mercado") {
-        if(url['var'] < 7) {
-            $('.select-deg').find('select').find('option[value="1"]').remove();
-            $('.select-deg').find('select').find('option[value="2"]').remove();
-            $('.select-deg').find('select').find('option[value="3"]').remove();
-            $('.select-deg').find('select').find('option[value="4"]').remove();
-        }
+        
 		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
             $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
             $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */

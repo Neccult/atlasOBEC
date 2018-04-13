@@ -704,8 +704,7 @@ function enableDesag(eixo, vrv, setor, iframe, slc, url){
             }
         }
 
-        if(setor == 0) {
-
+        if(setor == 0 && vrv != 1) {
             removeSectorDesags();
         }
     }
