@@ -163,8 +163,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
                     
             } else if($idd != 0) {
@@ -196,8 +194,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
                 
             } else if($form != 0) {
@@ -229,8 +225,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else if($sind != 0) {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -261,8 +255,6 @@ class EixoDois {
                         $prev,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else if($prev != 0) {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -293,8 +285,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else if($etn != 0) {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -325,8 +315,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -358,8 +346,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             }
         } else {
@@ -395,8 +381,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else if($prt != 0) {
                 $query = "SELECT * FROM " . self::$table . " AS ex"
@@ -429,8 +413,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }               
             }
             else if($esc != 0) {
@@ -463,8 +445,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }               
                 
             } else if($idd != 0) {
@@ -497,8 +477,6 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }                
             } else {
                 $query = "SELECT * FROM " . self::$table . " AS ex"
@@ -531,13 +509,14 @@ class EixoDois {
                         $sind,
                         $anos
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }                
             }
         }
         
-		self::disconnect();
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);        
+
+        self::disconnect();
 
 		return $allObjects;
 	}
@@ -620,9 +599,9 @@ class EixoDois {
                     $var
                 );
             }
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
         }
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
         
 		self::disconnect();
 		
@@ -682,8 +661,6 @@ class EixoDois {
                             $sind,
                             $sexos
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                 } else {
                     if(!is_null($sexos)) {
@@ -716,8 +693,6 @@ class EixoDois {
                                 $prev,
                                 $sind
                             );
-                            $stmt->execute();
-                            $allObjects = self::fetch_results($stmt);
                         }
                         
                     } else if($prt != 0) {
@@ -749,10 +724,7 @@ class EixoDois {
                                 $prev,
                                 $sind
                             );
-                            $stmt->execute();
-                            $allObjects = self::fetch_results($stmt);
                         }
-
                         
                     } else if($esc != 0) {
                         $query = "SELECT * FROM ".self::$table." AS ex"
@@ -783,8 +755,6 @@ class EixoDois {
                                 $prev,
                                 $sind
                             );
-                            $stmt->execute();
-                            $allObjects = self::fetch_results($stmt);
                         }
                         
                     } else if($idd != 0) {
@@ -815,8 +785,6 @@ class EixoDois {
                                 $prev,
                                 $sind
                             );
-                            $stmt->execute();
-                            $allObjects = self::fetch_results($stmt);
                         }                        
                     } else {
                         $query = "SELECT * FROM ".self::$table." AS ex"
@@ -848,8 +816,6 @@ class EixoDois {
                                 $prev,
                                 $sind
                             );
-                            $stmt->execute();
-                            $allObjects = self::fetch_results($stmt);
                         }                        
                     }
                 }
@@ -881,8 +847,6 @@ class EixoDois {
                         $prev,
                         $sind
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             }
         } else {
@@ -914,8 +878,6 @@ class EixoDois {
                             $prev,
                             $sind
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else if($idd != 0) {
@@ -945,8 +907,6 @@ class EixoDois {
                             $prev,
                             $sind
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else if($form != 0) {
@@ -976,8 +936,6 @@ class EixoDois {
                             $prev,
                             $sind
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else if($sind != 0) {
@@ -1007,8 +965,6 @@ class EixoDois {
                             $form,
                             $prev
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else if($prev != 0) {
@@ -1038,8 +994,6 @@ class EixoDois {
                             $form,
                             $sind
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else if($etn != 0) {
@@ -1068,8 +1022,6 @@ class EixoDois {
                             $prev,
                             $sind
                         );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
                     }
                     
                 } else {
@@ -1086,24 +1038,22 @@ class EixoDois {
                            ." AND ex.Sindical = ?"
                            ." AND ex.Sexo IS NULL";
                 }
-
-                    if (mysqli_stmt_prepare($stmt, $query)) {
-                        $stmt->bind_param(
-                            'ssssssssss',
-                            $ufs,
-                            $prt,
-                            $ocp,
-                            $esc,
-                            $etn,
-                            $idd,
-                            $var,
-                            $form,
-                            $prev,
-                            $sind
-                        );
-                        $stmt->execute();
-                        $allObjects = self::fetch_results($stmt);
-                    }
+                
+                if (mysqli_stmt_prepare($stmt, $query)) {
+                    $stmt->bind_param(
+                        'ssssssssss',
+                        $ufs,
+                        $prt,
+                        $ocp,
+                        $esc,
+                        $etn,
+                        $idd,
+                        $var,
+                        $form,
+                        $prev,
+                        $sind
+                    );
+                }
             } else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
                        ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
@@ -1131,11 +1081,11 @@ class EixoDois {
                         $prev,
                         $sind
                     );
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             }
         }
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
         
 		self::disconnect();
 		
@@ -1215,8 +1165,6 @@ class EixoDois {
                             $sind
                         );
                     }
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -1267,8 +1215,6 @@ class EixoDois {
                             $sind
                         );
                     }
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             }
         } else {
@@ -1321,8 +1267,6 @@ class EixoDois {
                             $sexos
                         );
                     }
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             } else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -1375,11 +1319,11 @@ class EixoDois {
                             $sexos
                         );
                     }
-                    $stmt->execute();
-                    $allObjects = self::fetch_results($stmt);
                 }
             }
         }
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
         
         self::disconnect();
         
