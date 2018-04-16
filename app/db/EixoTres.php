@@ -73,7 +73,23 @@ class EixoTres {
 	public static function disconnect(){
 		mysqli_close(self::$conn);
 	}
-
+    
+    /**
+     * fetch_results - para funcionar com prepared statements
+     * @param mixed $stmt
+     * @return array
+     */
+    public static function fetch_results($stmt) {
+        $result_array = [];
+        $result_object = $stmt->get_result();
+        $keys = $result_object->fetch_fields();
+        
+        while ($row = $result_object->fetch_object()) {
+            $result_array[] = $row;
+        }
+        return $result_array;
+    }
+    
 	/*-----------------------------------------------------------------------------
 	Função: Find
 	    função para buscar um conjunto de tupla no banco de dados
@@ -91,24 +107,68 @@ class EixoTres {
 	public static function find($var, $ufs, $cad, $mec, $pf, $mod, $anos){
 
 		self::connect();
-
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-					." WHERE ex.Numero = ".$var;
-
-            if(!is_null($pf)) {
-			    $query .= " AND ex.PessoaFisica = ".$pf;
-            }
-            if(!is_null($mod)) {
-			    $query .= " AND ex.Modalidade = ".$mod;
-            }
-            $query .= " AND ex.Ano = ".$anos;
-
-			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoTres');
-
+        $stmt = mysqli_stmt_init(self::$conn);
+        
+        $query = "SELECT * FROM ".self::$table." AS ex"
+               ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+               ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+               ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
+               ." WHERE ex.Numero = ?"
+               ." AND ex.Ano = ?";
+            
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            if(!is_null($pf) && !is_null($mod)) {
+                $query .= " AND ex.PessoaFisica = ?";
+                $query .= " AND ex.Modalidade = ?";
+                    
+                $stmt->bind_param(
+                    'sssssss',
+                    $ufs,
+                    $cad,
+                    $mec,
+                    $var,
+                    $anos,
+                    $pf,
+                    $mod                        
+                );
+            } else if(is_null($pf) && !is_null($mod)) {
+                $query .= " AND ex.Modalidade = ?";
+                    
+                $stmt->bind_param(
+                    'ssssss',
+                    $ufs,
+                    $cad,
+                    $mec,
+                    $var,
+                    $anos,
+                    $mod                        
+                );
+            } else if(!is_null($pf) && is_null($mod)) {
+                $query .= " AND ex.PessoaFisica = ?";
+                    
+                $stmt->bind_param(
+                    'ssssss',
+                    $ufs,
+                    $cad,
+                    $mec,
+                    $var,
+                    $anos,
+                    $pf
+                );
+            } else {
+                $stmt->bind_param(
+                    'sssss',
+                    $ufs,
+                    $cad,
+                    $mec,
+                    $var,
+                    $anos
+                );
+            }                    
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
 		self::disconnect();
 
 		return ($obj == false) ? NULL : $obj;
@@ -157,73 +217,115 @@ class EixoTres {
 	public static function getter_mapa($var, $cad, $mec, $mod, $pf, $anos){
 
 		self::connect();
+        $stmt = mysqli_stmt_init(self::$conn);
+        
 		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16);
-
-
+        
 		if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $query = "SELECT * FROM ".self::$table." AS ex"
-                ." JOIN UF AS uf ON uf.idUF = ex.idUF"
-                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-                ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-                ." WHERE ex.Numero = ".$var;
-			
-			if(!is_null($pf)) {
-                $query .= " AND ex.PessoaFisica = ".$pf;
-            } else{
-				$query .= " AND ex.PessoaFisica IS NULL";
-			}
-
-			if (!is_null($mod)) {
-				$query .= " AND ex.Modalidade = " . $mod;
-			}
-			else{
-				$query .= " AND ex.Modalidade IS NULL";
-			}
-			
-            $query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
-
-            $result = mysqli_query(self::$conn, $query);
-            $allObjects = array();
-
-            while($obj = mysqli_fetch_object($result, 'EixoTres')){
-                $allObjects[] = $obj;
+                   ." JOIN UF AS uf ON uf.idUF = ex.idUF"
+                   ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+                   ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
+                   ." WHERE ex.Numero = ?"
+                   ." AND ex.Ano = ?";
+            
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                if(!is_null($pf) && !is_null($mod)) {
+                    $query .= " AND ex.PessoaFisica = ?";
+                    $query .= " AND ex.Modalidade = ?";
+                    
+                    $stmt->bind_param(
+                        'ssssss',
+                        $cad,
+                        $mec,
+                        $var,
+                        $anos,
+                        $pf,
+                        $mod
+                    );
+                } else if(is_null($pf) && !is_null($mod)) {
+                    $query .= " AND ex.PessoaFisica IS NULL";
+                    $query .= " AND ex.Modalidade = ?";
+                    
+                    $stmt->bind_param(
+                        'sssss',
+                        $cad,
+                        $mec,
+                        $var,
+                        $anos,
+                        $mod                     
+                    );
+                } else if(!is_null($pf) && is_null($mod)) {
+                    $query .= " AND ex.PessoaFisica = ?";
+                    $query .= " AND ex.Modalidade IS NULL";
+                    
+                    $stmt->bind_param(
+                        'sssss',
+                        $cad,
+                        $mec,
+                        $var,
+                        $anos,
+                        $pf
+                    );
+                } else {
+                    $query .= " AND ex.PessoaFisica IS NULL";
+                    $query .= " AND ex.Modalidade IS NULL";
+                    $stmt->bind_param(
+                        'ssss',
+                        $cad,
+                        $mec,
+                        $var,
+                        $anos
+                    );
+                }                    
             }
-        }
-
-        else{
-
-                $query = "SELECT * FROM " . self::$table . " AS ex"
-                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                    ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-                    . " WHERE ex.Numero = " . $var;
-
-                $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
-
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
-
-                while($obj = mysqli_fetch_object($result, 'EixoTres')){
-                    $allObjects[] = $obj;
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+            
+        } else {
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                   . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
+                   ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
+                   . " WHERE ex.Numero = ?";
+            
+                   $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                if ($anos > 0) {
+                    $stmt->bind_param(
+                        'sss',
+                        $mec,
+                        $var,
+                        $anos
+                    );
+                    
+                } else {
+                    $stmt->bind_param(
+                        'ss',
+                        $mec,
+                        $var
+                    );
                 }
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                    if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                    $value_aux[$data->idUF] += $data->Valor;
-                    $percent_aux[$data->idUF] += $data->Percentual;
-                    $result_aux[$data->idUF] = $data;
-                    $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                    $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-                }
-                $allObjects = $result_aux;
-
+            }
+            
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+            
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+                $value_aux[$data->idUF] += $data->Valor;
+                $percent_aux[$data->idUF] += $data->Percentual;
+                $result_aux[$data->idUF] = $data;
+                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
+            }
+            $allObjects = $result_aux;
         }
-
-
 		self::disconnect();
-		
+        
 		return $allObjects;
 	}
 
