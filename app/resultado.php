@@ -244,6 +244,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                     <?php if($eixo == "comercio") { ?>
                         <div class="state-title">
+                            BRASIl
+                        </div>
+
+                        <div class="prc-title">
                             MUNDO
                         </div>
                     <?php } else { ?>
@@ -309,6 +313,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                         ?>
                                     </select>
                                 </div>
+
                                 <div>
                                     <?php
                                         if($slc == 0) {
@@ -526,8 +531,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     }
                     setTimeout(result_mobile(), 500);
                 </script>
-                <span class="contexto">
-                    <!--<div class="row contexto">
+                <span class="col-md-4 col-xs-12 contexto">
+                    <div class="row contexto">
                         <div class="col-md-12 opt-title text-center">DOWNLOAD</div>
                         <div class="col-xs-4 col-btn"><button class="opt select" id="pdf">PDF</button></div>
                         <div class="col-xs-4 col-btn"><button class="opt select" id="csv">ODS</button></div>
@@ -600,8 +605,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <div class="select-group hide" id="select-img">
                             <input type="text" onClick="this.select();" class="input-control url-input" value="<?php echo $downloadUrl.'&type=png#'.$eixo?>" readonly/><button class="button-control-down"></button>
                         </div>
-
-                    </div>-->
+                    </div>
                 </span>
 			</div>
 		</div>

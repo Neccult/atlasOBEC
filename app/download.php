@@ -84,6 +84,11 @@
     else
         $mod = 0;
 
+    if (!empty($_GET["mundo"]))
+        $mundo = $_GET["mundo"];
+    else
+        $mundo = 1;
+
     if (!empty($_GET["pfj"]))
         $pfj = $_GET["pfj"];
     else
@@ -153,7 +158,7 @@
 
 		<img src="images/loading.gif" class="down-loading"/>
 
-		<div class="chart" style="width: 637px; height: 400px; opacity: 0">
+		<div class="chart" style="width: 500px; height: 330px; opacity: 0; ">
             <?php
             $class_aux = ($view === 'mapa') ? 'mapa' : '';
             if($eixo == "comercio"  && $view == "mapa") {
@@ -164,6 +169,11 @@
             }
             ?>
 		</div>
+		
+		<iframe id="view_box_barras" src="barras_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
+		</iframe>
+		<iframe id="view_box_scc" src="treemap_scc_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
+		</iframe>
 
 		<script type="text/javascript">
 
@@ -182,6 +192,7 @@
             var prv = <?php echo $prv; ?>;
             var snd = <?php echo $snd; ?>;
             var mec = <?php echo $mec; ?>;
+            var mundo = <?php echo $mundo; ?>;
             var mod = <?php echo $mod; ?>;
             var slc = <?php echo $slc; ?>;
             var pfj = <?php echo $pfj; ?>;
@@ -191,6 +202,7 @@
 			var view = '<?php echo $view; ?>';
 			var type = '<?php echo $type; ?>';
 			var eixo = '<?php echo $eixo; ?>';
+			var pageTitle = '<?php echo "teste;";?>';
             switch(eixo) {
                 case "empreendimentos":
                     eixo = 0;
@@ -225,8 +237,8 @@
                 echo "<script src=\"js/mapa_mundi.js\"></script>";
             }
             else {
-                echo "<script src=\"js/".$view.".js\"></script>";
-            }
+				echo "<script src=\"js/".$view.".js\"></script>";
+			}
         ?>
 
 		<!--<div class="container" style="margin-top: 100px;">
@@ -244,6 +256,8 @@
 		<form id="svgform" method="post" action="cgi/download.pl">
 			 <input type="hidden" id="output_format" name="output_format" value="">
 			 <input type="hidden" id="data" name="data" value="">
+			 <input type="hidden" id="data_barras" name = "data_barras" value="">
+			 <input type="hidden" id="data_scc" name = "data_scc" value="">
 			 <input type="hidden" id="name" name="name" value="<?php echo $view?>">
 		</form>
 
@@ -268,16 +282,22 @@
                     }
                 ?>
 				var svg = tmp.getElementsByTagName("svg")[0];
-				// Extract the data as SVG text string
+				var svg_barras = $('#view_box_barras').contents().find("svg")[0]
+				var svg_scc = $('#view_box_scc').contents().find("svg")[0]
+				
+                // Extract the data as SVG text string
 				var svg_xml = (new XMLSerializer).serializeToString(svg);
-
+				var svg_barras_xml = (new XMLSerializer).serializeToString(svg_barras);
+				var svg_scc_xml = (new XMLSerializer).serializeToString(svg_scc);
 				// Submit the <FORM> to the server.
 				// The result will be an attachment file to download.
 				var form = document.getElementById("svgform");
 				form['output_format'].value = output_format;
 				form['data'].value = svg_xml ;
+				form['data_barras'].value = svg_barras_xml;
+				form['data_scc'].value = svg_scc_xml;
 				form.submit();
-			}
+            }
 
 			/*-----------------------------------------------------------------------------
 			Função: Ready (JQUERY)
@@ -293,16 +313,16 @@
 						d3.select('.legendLinear')
 						.attr('transform', 'translate(400, 220)');
 						submit_download_form(type);
-					}, 500);
+					}, <?php if($eixo == "mercado") echo "15000"; else echo "4000";?>);
 				}else{
 					setTimeout(function(){
 						submit_download_form(type);
-					}, 3000);
+					}, <?php if($eixo == "mercado") echo "15000"; else echo "4000";?>);
 				}
 				setTimeout(function(){
 					window.close();
 					window.location = "http://localhost/atlasOBEC/";
-				}, 4000);
+				}, 20000);
 
 				// $("#save_as_pdf").click(function() { submit_download_form("pdf"); });
 				// $("#save_as_png").click(function() { submit_download_form("png"); });

@@ -145,8 +145,8 @@ function getName($uos) {
     }
 }
 
-function getName2($uos) {
-    switch ($uos) {
+function getName2($mec) {
+    switch ($mec) {
         case 0:
             return "Despesa Minc / Receita executivo";
         case 1:
@@ -309,13 +309,13 @@ else if($eixo == 2 && $var > 14) {
 }
 else if($eixo == 2 && $var == 10) {
     require_once("EixoTres.php");
-    for ($uos = 0; $uos <= 1; $uos++) {
+    for ($mec = 0; $mec <= 1; $mec++) {
 
         foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
             $id = $tupla->Ano;
             // $barras[$tupla->Ano] = $tupla->Valor;
             $barras[$id]['ano'] = (int)$tupla->Ano;
-            $barras[$id][getName2($uos)] = (double)$tupla->Valor;
+            $barras[$id][getName2($mec)] = (double)$tupla->Valor;
 
 
             //$barras[$id]['uf'] = $tupla->UFNome;
@@ -354,6 +354,7 @@ else if($eixo == 3 && ($var >= 5 && $var <= 10)){
     
 
 }
+
 
 echo json_encode($barras);
 

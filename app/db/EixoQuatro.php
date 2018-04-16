@@ -272,6 +272,26 @@ class EixoQuatro {
 		return $allObjects;
 	}
 
-}
+	public static function getter_donut($var, $cad, $ano, $cons, $uf, $parc){
+		$cons = $cons == 0 ? 1: 0;
+		self::connect();
+			$query = "SELECT ex.Valor, ex.idTipo FROM ".self::$table." AS ex"
+						." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
+						." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
+						." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
+						." WHERE ex.Numero = ".$var." AND (ex.idTipo = 2 OR ex.idTipo = 1) AND ex.Consumo = ".$cons;
 
-?>
+				$query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
+
+			$result = mysqli_query(self::$conn, $query);
+			$allObjects = array();
+
+			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
+				$allObjects[] = $obj;
+			}
+
+		self::disconnect();
+		return $allObjects;
+	}
+
+}

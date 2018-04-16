@@ -51,7 +51,7 @@ function defaultUrl(){
     url['deg'] = 0;
     url['pfj'] = 0;
     url['uos'] = 0;
-	url['ano'] = 2014;
+	url['ano'] = 2015;
 }
 
 /*-----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ function updateIframe(url){
     var eixoAtual = getEixo(window.location.hash.substring(1));
 
     ///BOX DO MAPA
-        if($('iframe[id="view_box"]').length != 0) {
+    if($('iframe[id="view_box"]').length != 0) {
         if(eixoAtual == 0){
             if(url['var'] > 9){
 
@@ -113,7 +113,7 @@ function updateIframe(url){
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
             } else{
-                if( url['var'] == 3){
+                if( url['var'] == 3 || url['var'] == 2){
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 } else{
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
@@ -139,7 +139,11 @@ function updateIframe(url){
         else if(eixoAtual == 2){
             $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
 
-            if (url['var'] > 14 || url['var'] == 10) {
+            if(url['var'] == 17){
+                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
+            }
+            else if (url['var'] > 14 || url['var'] == 10) {
                 //$('iframe[id="view_box"]').attr('src', '');
                 $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
@@ -158,7 +162,12 @@ function updateIframe(url){
             $('#treemap_region').html("BRASIL");
             //alert(url['view'])
 
-            if(url['var'] >= 5 && url['var'] < 13 || url['var'] == 14 ){
+            if(url['var'] == 5 ){
+                $('iframe[id="view_box"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                // $('iframe[id="view_box"]').attr('src', 'no-view.html');
+
+            }
+            else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
                //$('iframe[id="view_box"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                $('iframe[id="view_box"]').attr('src', 'no-view.html');
                
@@ -169,12 +178,12 @@ function updateIframe(url){
             }
             if(url['mundo'] == null || url['mundo'] == 0){
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA MUNDI");
-                $(".state-title").html("MUNDO");
+                //$(".state-title").html("MUNDO");
 
             }
             else{
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
-                $(".state-title").html("BRASIL");
+                //$(".state-title").html("BRASIL");
 
             }
 
@@ -204,13 +213,25 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 2){
-            if (url['var'] ==  16) {
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+
+            if(url['var'] ==  17){
+                $('iframe[id="view_box_barras"]').attr('src', 'no-view.html');
+
+            }
+            else if (url['var'] ==  16 || url ['var'] == 15) {
                 if(url['uos'] == 0) {
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
                 }
                 else {
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
                 }
+            }
+            else if(url['var'] == 10){
+                newUrl = newUrl.replace(/mec=[0-9]/, "mec=0");
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO TOTAL / RECEITA EXECUTIVO");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA DESPESA MINC / RECEITA EXECUTIVO");
             }
         }
 
@@ -259,6 +280,9 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
             }
+            else if(url['var'] ==  17){
+                $('iframe[id="view_box_scc"]').attr('src', 'no-view.html');
+            }
             // else if(url['var'] == 7){
             //     $('iframe[id="view_box_scc"]').attr('src', 'treemap_region_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
             //     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - UF");
@@ -271,7 +295,7 @@ function updateIframe(url){
             else if(url['var'] == 10){
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=1");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO TOTAL / RECEITA EXECUTIVO");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO");
             }
             else{
                 $('iframe[id="view_box_scc"]').css('display', 'block')
@@ -287,11 +311,19 @@ function updateIframe(url){
 
             if(url['var'] == 1){
                 $('iframe[id="view_box_scc"]').css('display', 'block')
-                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                $('iframe[id="view_box_scc"]').attr('src', 'donut.php?' + newUrl + '&eixo=' +  window.location.hash.substring(1) + window.location.hash)
+                /*$('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");*/
+            }
+            else if(url['var'] == 5){
+                newUrl = newUrl.replace(/slc=[0-9]*/, "slc=1");
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SERVIÇO");
+
             }
 
         }
+        changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash);
     }
 }
 
@@ -332,7 +364,7 @@ Saída:
 function controlFilter(selectvalue, selectid){
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
-    if(BarraSrc != undefined) var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
+    if(BarraSrc != undefined && BarraSrc != "no-view.html") var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
     else var setor = 0;
     if(SCCSrc != undefined && SCCSrc != 'no-view.html') {
         var ano = SCCSrc.match(/ano=([0-9]*)/)[1];
@@ -659,12 +691,7 @@ function loadResult(){
 
 
     if(window.location.hash.substring(1) == "mercado") {
-        if(url['var'] < 7) {
-            $('.select-deg').find('select').find('option[value="1"]').remove();
-            $('.select-deg').find('select').find('option[value="2"]').remove();
-            $('.select-deg').find('select').find('option[value="3"]').remove();
-            $('.select-deg').find('select').find('option[value="4"]').remove();
-        }
+        
 		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
             $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
             $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
@@ -1292,7 +1319,8 @@ $(document).ready(function(){
 
             /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-            
+
+
             if($(this).attr('data-id') == 'var'){
                 changeDescVar();
                 cleanDesagsUrl();
@@ -1362,8 +1390,8 @@ $(document).ready(function(){
                 $('#ocupacao').removeClass("active");
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
-                $('.bread-select[data-id=ano]').val(2014);
-                $('.opt-select[data-id=ano]').val(2014);
+                $('.bread-select[data-id=ano]').val(url['ano']);
+                $('.opt-select[data-id=ano]').val(url['ano']);
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
@@ -1378,9 +1406,20 @@ $(document).ready(function(){
             }
             if($(this).attr("data-id") == "uf"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
+
+
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
 
+
+
                 updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
+            }
+            if($(this).attr("data-id") == "prc"){
+                document.getElementById('view_box').contentWindow.location.reload(true);
+
+                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
+
+                // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
             if($(this).attr("data-id") === "cad") {
                 if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
@@ -1436,15 +1475,3 @@ $(document).ready(function(){
     }
 
 });
-//
-//funcao chamada qdo carrega o primeiro iframe
-// $("#view_box_barras").on('load', function() {
-//     //var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
-//
-//     console.log($(window.parent.document).find(".integer-value").first().find(".number").first().html())
-//    // setTimeout(function(){ setMaxFontSize($(window.parent.document).find(".integer-value").first().find(".number").first()); }, 5);
-//
-//
-//
-//
-// });
