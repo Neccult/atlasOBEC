@@ -182,6 +182,7 @@ class EixoUm {
 	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
 
 		self::connect();
+        $stmt = mysqli_stmt_init(self::$conn);
         if($prt == 0 || $cad != 0) {
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF" 
@@ -190,9 +191,8 @@ class EixoUm {
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    . " WHERE ex.Numero = ?";
             
-            $stmt = mysqli_stmt_init(self::$conn);
             $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            if (mysqli_stmt_prepare($stmt, $query)) {
+            if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
                         'sssss',
@@ -221,11 +221,10 @@ class EixoUm {
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
-                   . " WHERE ex.Numero = ";
+                   . " WHERE ex.Numero = ?";
             
-            $stmt = mysqli_stmt_init(self::$conn);
             $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            if (mysqli_stmt_prepare($stmt, $query)) {
+            if ($stmt->prepare($query)) {                
                 if ($anos > 0) {
                     $stmt->bind_param(
                         'ssss',
@@ -244,7 +243,7 @@ class EixoUm {
                     );
                 }
             }
-
+            
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
                     
@@ -294,7 +293,7 @@ class EixoUm {
                    ." WHERE ex.Numero = ?";
             
             $stmt = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt, $query)) {
+            if ($stmt->prepare($query)) {
                 $stmt->bind_param(
                     'ssss',
                     $ufs,
@@ -314,7 +313,7 @@ class EixoUm {
                    ." WHERE ex.Numero = ?";
 
             $stmt = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt, $query)) {
+            if ($stmt->prepare($query)) {
                 $stmt->bind_param(
                     'ssss',
                     $ufs,
@@ -374,8 +373,8 @@ class EixoUm {
 
             $stmt = mysqli_stmt_init(self::$conn);
             $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            
-            if (mysqli_stmt_prepare($stmt, $query)) {
+
+            if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
                         'ssssss',
@@ -412,8 +411,8 @@ class EixoUm {
                    . " WHERE ex.Numero = ?";
             
             $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            
-            if (mysqli_stmt_prepare($stmt, $query)) {
+
+            if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
                         'sssss',
