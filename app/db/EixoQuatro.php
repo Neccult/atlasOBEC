@@ -75,6 +75,22 @@ class EixoQuatro {
 		mysqli_close(self::$conn);
 	}
 
+    /**
+     * fetch_results - para funcionar com prepared statements
+     * @param mixed $stmt
+     * @return array
+     */
+    public static function fetch_results($stmt) {
+        $result_array = [];
+        $result_object = $stmt->get_result();
+        $keys = $result_object->fetch_fields();
+        
+        while ($row = $result_object->fetch_object()) {
+            $result_array[] = $row;
+        }
+        return $result_array;
+    }
+    
 	/*-----------------------------------------------------------------------------
 	Função: Find
 	    função para buscar um conjunto de tupla no banco de dados
@@ -90,30 +106,38 @@ class EixoQuatro {
 	public static function find($var, $parc, $uf, $tipo, $anos, $slc){
 
 		self::connect();
+        $stmt = mysqli_stmt_init(self::$conn);
+        
+        $query = "SELECT * FROM ".self::$table." AS ex"
+               ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ?"
+               ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+               ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
+               ." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
+               ." WHERE ex.Numero = ?"
+               ." AND ex.Ano = ?";
+        
+		
+        if($slc == 0)
+            $query .= " AND ex.Consumo = 1";
+        else{
+            $query .= " AND ex.Consumo = 0";
+        }
 
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-					." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
-					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var
-					." AND ex.Ano = ".$anos;
-
-			
-			if($slc == 0)
-				$query .= " AND ex.Consumo = 1";
-			else{
-				$query .= " AND ex.Consumo = 0";
-			}
-
-			$result = mysqli_query(self::$conn, $query);
-			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-				$allObjects[] = $obj;
-			}
-		self::disconnect();
-
-		//return ($obj == false) ? NULL : $obj;
-			return $allObjects;
+        if ($stmt->prepare($stmt, $query)) {
+            $stmt->bind_param(
+                'sssss',
+                $parc,
+                $uf,
+                $tipo,
+                $var,
+                $anos
+            );
+        }
+        
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
+        
+        return $allObjects;
 	}
 
 	/*-----------------------------------------------------------------------------
@@ -159,38 +183,69 @@ class EixoQuatro {
 	-----------------------------------------------------------------------------*/
 	public static function getter_mapa($var, $cad, $tipo, $anos, $parceiro, $uf, $mundo, $slc){
 
-		self::connect();		
+		self::connect();
+        $stmt = mysqli_stmt_init(self::$conn);
+        
 		if($mundo == 0){
 			$query = "SELECT * FROM ".self::$table." AS ex"
 				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
-                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
-                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-				." WHERE ex.Numero = ".$var;
-
-		} else{
+                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
+				." WHERE ex.Numero = ?";
+            
+            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "" ;
+            if ($slc == 0) {
+                $query .= " AND ex.Consumo = 1";
+            } else {
+                $query .= " AND ex.Consumo = 0";
+            }
+            
+            if ($anos > 0) {
+                if ($stmt->prepare($query)) {
+                    $stmt->bind_param(
+                        'sssss',
+                        $uf,
+                        $cad,
+                        $tipo,
+                        $var,
+                        $anos
+                    );
+                }
+            } else {
+                if ($stmt->prepare($query)) {
+                    $stmt->bind_param(
+                        'ssss',
+                        $uf,
+                        $cad,
+                        $tipo,
+                        $var
+                    );      
+                }
+            }            
+            
+		} else {
 			$query = "SELECT * FROM ".self::$table." AS ex"
-				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parceiro
+				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ?"
 				." JOIN UF AS uf ON uf.idUF = ex.idUF"
-				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
+				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
 				." WHERE ex.Numero = ".$var;
 
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $parceiro,
+                    $cad,
+                    $tipo,
+                    $var
+                );      
+            }                        
 		}
 
-        if($slc == 0)
-			$query .= " AND ex.Consumo = 1";
-		else{
-			$query .= " AND ex.Consumo = 0";
-		}
-		$query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
-		$result = mysqli_query(self::$conn, $query);
-		$allObjects = array();
-
-		while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-			$allObjects[] = $obj;
-		}
-
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
+        
 		self::disconnect();
 		
 		return $allObjects;
@@ -210,29 +265,35 @@ class EixoQuatro {
 	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc){
 
 		self::connect();
-
+        $stmt = mysqli_stmt_init(self::$conn);
+        
         $query = "SELECT * FROM ".self::$table." AS ex"
-                ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
-                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-                ." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-                ." WHERE ex.Numero = ".$var;
-
-
-
-		if($slc == 0)
+                ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ?"
+                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+                ." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
+               ." WHERE ex.Numero = ?";
+        
+        if($slc == 0) {
 			$query .= " AND ex.Consumo = 1";
-		else{
+        } else {
 			$query .= " AND ex.Consumo = 0";
 		}
 
-			$result = mysqli_query(self::$conn, $query);
-			$allObjects = array();
-
-			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-				$allObjects[] = $obj;
-			}
-
+        if ($stmt->prepare($query)) {
+            $stmt->bind_param(
+                'sssss',
+                $parc,
+                $uf,
+                $cad,
+                $tipo,
+                $var
+            );      
+        }                        
+        
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
+        
 		self::disconnect();
 		
 		return $allObjects;
@@ -253,21 +314,41 @@ class EixoQuatro {
 	public static function getter_region($var, $cad, $tipo, $anos, $parc){
 
 		self::connect();
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.ParceiroNome LIKE '".$parc."'"
-					." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ".$tipo
-					." WHERE ex.Numero = ".$var;
-
-				$query .= ($anos > 0) ? " AND Ano = ".$anos : "" ;
-
-			$result = mysqli_query(self::$conn, $query);
-			$allObjects = array();
-
-			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-				$allObjects[] = $obj;
-			}
-
+        $stmt = mysqli_stmt_init(self::$conn);
+        
+        $query = "SELECT * FROM ".self::$table." AS ex"
+               ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.ParceiroNome LIKE ?"
+               ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+               ." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
+               ." WHERE ex.Numero = ?";
+        
+        $query .= ($anos > 0) ? " AND ex.Ano = ?" : "" ;
+        
+        if ($anos > 0) {
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'sssss',
+                    $parc,
+                    $cad,
+                    $tipo,
+                    $var,
+                    $anos
+                );
+            }
+        } else {
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $parc,
+                    $cad,
+                    $tipo,
+                    $var
+                );      
+            }
+        }            
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
+        
 		self::disconnect();
 		return $allObjects;
 	}
@@ -275,21 +356,41 @@ class EixoQuatro {
 	public static function getter_donut($var, $cad, $ano, $cons, $uf, $parc){
 		$cons = $cons == 0 ? 1: 0;
 		self::connect();
-			$query = "SELECT ex.Valor, ex.idTipo FROM ".self::$table." AS ex"
-						." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ".$parc
-						." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ".$uf
-						." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
-						." WHERE ex.Numero = ".$var." AND (ex.idTipo = 2 OR ex.idTipo = 1) AND ex.Consumo = ".$cons;
+        $stmt = mysqli_stmt_init(self::$conn);
+        
+        $query = "SELECT ex.Valor, ex.idTipo FROM ".self::$table." AS ex"
+               ." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ?"
+               ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+               ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+               ." WHERE ex.Numero = ".$var." AND (ex.idTipo = 2 OR ex.idTipo = 1) AND ex.Consumo = ?";
 
-				$query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
-
-			$result = mysqli_query(self::$conn, $query);
-			$allObjects = array();
-
-			while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-				$allObjects[] = $obj;
-			}
-
+        $query .= ($anos > 0) ? " AND ex.Ano = ?" : "" ;
+        
+        if ($anos > 0) {
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'sssss',
+                    $parc,
+                    $uf,
+                    $cad,
+                    $cons,
+                    $anos
+                );
+            }
+        } else {
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $parc,
+                    $uf,
+                    $cad,
+                    $cons
+                );
+            }
+        }            
+        $stmt->execute();
+        $allObjects = self::fetch_results($stmt);
+        
 		self::disconnect();
 		return $allObjects;
 	}
