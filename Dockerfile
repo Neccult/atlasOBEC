@@ -14,7 +14,7 @@ RUN perl -e'use CPAN; install "File::Slurp"'
 RUN docker-php-ext-install mysqli
 
 WORKDIR /var/www/atlasOBEC
-EXPOSE 85
+EXPOSE 80
 EXPOSE 3306
 
 RUN chmod +x -R /tmp/src/
