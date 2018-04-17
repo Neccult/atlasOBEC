@@ -6,26 +6,6 @@
 	<body>
 
     <div id="fullpage">
-        <div class="section " id="section0">
-            <!--===== barra do governo =====-->
-            <?php include 'barra_gov.php'; ?>
-            <!-- logo -->
-            <div class="row">
-                <div>
-                    <a href="index.php">
-                        <div class="welcome text-center col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <p>Bem-vindo ao</p>
-                            <img class="img_atlas" src="images/Atlas.png">
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- bottom para explorar -->
-            <div class="explorar text-center col-lg-2 col-lg-offset-5 col-md-offset-5 col-sm-6 col-sm-offset-3 col-xs-offset-3">
-                <a id="explorar" href="index.php#2" >explore</a>
-            </div>
-        </div>
-
     </div>
     <div class="section " id="section1">
         <?php
@@ -97,7 +77,7 @@
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
-                                $("iframe").height("2000px");
+                                $("iframe").height("2100px");
                                 $("iframe").attr("scrolling", "no");
                             }
                         }
@@ -108,13 +88,6 @@
 		
 		<?php endif;?>
     </div>
-    <hr style="border-top: 3px solid #ddd; width: 70%;">
-		<!-- se existem informações desta variável -->
-		<?php if(!empty($text)):?>
-
-			<?php include 'footer.php'; ?>
-		<?php endif;?>
-
 		<!---/* url atual para o js */-->
 		<script type="text/javascript">
 			var url = {
@@ -162,7 +135,6 @@
 		</script>
 
     <script src="js/d3/d3.min.js"></script>
-		<script type="text/javascript" defer="defer" src="//barra.brasil.gov.br/barra.js"></script>|
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/contraste.js"></script>
@@ -217,7 +189,7 @@
                     'autoScrolling': false,
                     'fitToSection': false,
                 });
-
+		
                 $('html, body').animate({
                     scrollTop: $("#section1").offset().top
                 }, 1000);
