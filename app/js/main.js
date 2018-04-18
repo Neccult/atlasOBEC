@@ -820,19 +820,17 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadPage(){
-	newHash = window.location.hash.substring(1);
-	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<850)	menuView = 'menumobile.php?'+newHash+'=1';
-
-	if($("#menuvariaveis").length != 0) {
-	    $("#menuvariaveis").load(menuView, function(){
+    var newHash = window.location.hash.substring(1),
+	menuView = 'menudesktop.php?'+newHash+'=1';
+    
+    if($("#menuvariaveis").length != 0) {
+	$("#menuvariaveis").load(menuView, function(){
             if(url['var']!=='' && pageTitle!==''){
                 loadResult();
                 changeDescVar();
             }
         });
-    }
-    else {
+    } else {
         if(url['var']!=='' && pageTitle!==''){
             loadResult();
             changeDescVar();
