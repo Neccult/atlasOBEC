@@ -104,10 +104,14 @@
 <!--================== SVG! =================-->
 <?php
     if($eixo == "comercio" && $mundo == 0) {
-        echo "<div id=\"corpo-mundi\" style=\"width: 100%; height: 400px\" class=\"mapa fadeIn\"></div>";
+?>
+<div id="corpo-mundi" style="width: 100%; height: 400px" class="mapa"></div>
+<?php
     }
     else {
-        echo "<div id=\"corpo\" class=\"mapa fadeIn\"></div>";
+?>        
+<div id="corpo" class="mapa"></div>
+<?php
     }
 ?>
 

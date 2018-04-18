@@ -10,8 +10,9 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
-	newHash = window.location.hash;
-	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+    var newHash = window.location.hash;
+    $('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
+
     if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash);
@@ -19,7 +20,7 @@ function controlVar(clickVar){
 }
 
 function controlVarPage(clickVar){
-    newHash = window.location.hash;
+    var newHash = window.location.hash;
     window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
     /* variáveis com valores default */
 }
@@ -845,7 +846,7 @@ function controlPageWidth(){
 		windowWidth = newWidth;
 		var wait;
 		clearTimeout(wait);
-		wait = setTimeout(location.reload(), 100); /* reload pg! */
+		wait = setTimeout(location.reload(), 1); /* reload pg! */
 	}
 }
 
@@ -865,7 +866,7 @@ function smoothScroll(link){
         if (target.length) {
             $('html, body').animate({
                 scrollTop: target.offset().top
-            }, 1000);
+            }, 1);
             return false;
         }
     }
@@ -1034,14 +1035,6 @@ function switchToOcupations() {
 ======*/
 $(document).ready(function(){
     // TODO Verificar se ainda necessário (Novo design não vai ter a principio)
-    //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-	//$(".opt").mouseenter(function() {
-		//$("#desc-item").html($(this).attr("data-desc"));
-	//});
-
-    //$(".opt").mouseleave(function() {
-        //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-    //});
 	$(window).on('hashchange', function() {
         loadPage();
         window.location.href = window.location.pathname+window.location.hash;
@@ -1425,13 +1418,35 @@ $(document).ready(function(){
 
     });
 
+    var getLastYear = function() {
+	var lastYear = 2016;
+	return lastYear;
+    }
+    
     $(document).on('change', ".bread-eixo", function(){
-        parent.window.location = "page.php#"+$(this).val();
+	var current = $(this).val(),
+	    urlFragment = 'var=1&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=' + getLastYear() + '&eixo=';
+	    
+	switch (current) {
+	case 'empreendimentos':
+	    urlFragment += 'empreendimentos#empreendimentos';
+	    break;
+	case 'mercado':
+	    urlFragment += 'mercado#mercado';
+	    break;
+	case 'politicas':
+	    urlFragment += 'politicas#politicas';
+	    break;
+	case 'comercio':
+	    urlFragment += 'comercio#comercio';
+	    break;
+	}	
+	
+        parent.window.location = "page.php?"+ urlFragment;
     });
 
 	/* download doc */
 	$(document).on('click', '.button-control-down', function(){
-
 		var downloadUrl = $(this).siblings('.url-input').val();
 		window.open(downloadUrl, '_blank');
 

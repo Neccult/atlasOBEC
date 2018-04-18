@@ -130,7 +130,7 @@
 <script src="js/functions.js"></script>
 
 <!--================== SVG! =================-->
-<div id="corpo" class="fadeIn"></div>
+<div id="corpo"></div>
 
 <!--================ TOOLTIP! ===============-->
 <!-- <div id="tooltip" class="tooltip none">

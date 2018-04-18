@@ -55,17 +55,6 @@ body{
 	padding: 0;
 }
 
-.fadeIn{
-	opacity: 0;
-	transition: 1.5s all ease;
-}
-.fadeInPage{
-	opacity: 0;
-	transition: .5s all ease;
-}
-.fadeIn.done, .fadeInPage.done{
-	opacity: 1 !important;
-}
 .legendLinear{
 	position: absolute;
 }

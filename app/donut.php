@@ -110,7 +110,7 @@
 <div class="container-chart">
     <div class="content">
         <div class="chart">
-            <div id="corpo" class="fadeIn">
+            <div id="corpo">
             </div>        
         </div>
     </div>

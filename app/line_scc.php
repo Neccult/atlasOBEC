@@ -169,7 +169,7 @@ else {
 <!-- Utilidades -->
 <script src="js/functions.js"></script>
 
-<div id="corpo" class="fadeIn"></div>
+<div id="corpo"></div>
 
 <script type="text/javascript">
     //variaveis configuracao query

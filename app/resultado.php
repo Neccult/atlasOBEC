@@ -73,7 +73,7 @@ if(!isset($text[$view])) $view = $text['type'][0]['id'];
 $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 ?>
 <?php endif; ?>
-<article class="results-article fadeInPage">
+<article class="results-article">
 	<div class="results-content">
 		<div class="container">
             <div class="col-md-12 col-xs-12">
