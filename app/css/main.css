@@ -621,7 +621,7 @@ article.results-article{
 	height: 61vh;
 	width: 100%;
 	padding: 10px 0px;
-	background-color: #e7e7e7;
+	background-color: #fff;
 	color: #5b5b5f;
 	font-size: 14px;
 	font-weight: bold;
@@ -867,7 +867,7 @@ article.results-article div.results-content{
 	justify-content: center;
 	width: auto;
 	max-width: 1150px;
-	background-color: #e7e7e7;
+	background-color: #fff;
 	margin-left: auto;
 	margin-right: auto;
 
@@ -881,7 +881,7 @@ article.results-article div.results-content{
 	background-repeat: no-repeat;
 	padding: 2px 10px 2px 5px;
 	color: #737277;
-	border: 1px solid #e7e7e7;
+	border: 1px solid #fff;
 	outline: none;
 	width: auto;
 	font-size: 10px;
@@ -1239,7 +1239,7 @@ body.contraste{
 	left: 40%; 
 	width: 20%;
 	height: 12px; 
-	background-color: #e7e7e7; 
+	background-color: #fff; 
 	border-radius: 8px;
 }
 .eixo-barra{
