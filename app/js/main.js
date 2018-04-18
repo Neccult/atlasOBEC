@@ -822,20 +822,9 @@ Saída:
 function loadPage(){
     var newHash = window.location.hash.substring(1),
 	menuView = 'menudesktop.php?'+newHash+'=1';
-    
-    if($("#menuvariaveis").length != 0) {
-	$("#menuvariaveis").load(menuView, function(){
-            if(url['var']!=='' && pageTitle!==''){
-                loadResult();
-                changeDescVar();
-            }
-        });
-    } else {
-        if(url['var']!=='' && pageTitle!==''){
-            loadResult();
-            changeDescVar();
-        }
-    }
+
+    loadResult();
+    changeDescVar();
 }
 
 /*-----------------------------------------------------------------------------
@@ -876,7 +865,7 @@ function smoothScroll(link){
         if (target.length) {
             $('html, body').animate({
                 scrollTop: target.offset().top
-            }, 500);
+            }, 1000);
             return false;
         }
     }
