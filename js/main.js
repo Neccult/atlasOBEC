@@ -1103,7 +1103,7 @@ $(document).ready(function(){
             var newSCCSrc = $("#view_box_scc").attr("src");
             var change = newSCCSrc.match(/uf=([0-9]*)/);
             url['cad'] = setor;
-            console.log(setor);
+            
             url['uf'] = change[1];
             if(setor == 0) {
                 url['prt'] = 0;

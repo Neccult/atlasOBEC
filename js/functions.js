@@ -285,8 +285,6 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
                 setIntegerValueData(dados, eixo, vrv);
                 //setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
             }
-
-
         }
         else if (vrv == 9) {
             if(url['uf'] != 0)
@@ -299,6 +297,8 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
         else if (vrv >= 4 && vrv <= 8) {
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
+            if(url['cad'] == 0)
+                setPercentValueData({percentual: dados.percentual[i]}, eixo, vrv);
         }
         else if (vrv > 9) {
             dados.valor = dados.value[i];
@@ -405,15 +405,13 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
 
             }
         }
-        else if(vrv == 3){
+        else if(vrv == 3 ){
             dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
             setIntegerValueData(dados, eixo, vrv);
         }
         else{
-            
             dados.valor = dados.value[dados.key.indexOf(url['ano'])];
             setIntegerValueData(dados, eixo, vrv);
-            console.log(dados)
             if(url['cad'] == 0)
                 setPercentValueData({percentual: dados.percentual[index_ano]}, eixo, vrv)
         }
