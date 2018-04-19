@@ -707,14 +707,14 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                         //   ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                         ]);
                     }
                     else if(url['uf'] == 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                         ]);
                     }
                 }
@@ -737,7 +737,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                     ]);
                 }
             }
@@ -746,7 +746,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                     ]);
                 }
             }
@@ -755,7 +755,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                        // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                     ]);
                 }
             }

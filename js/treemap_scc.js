@@ -234,6 +234,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-value");
                         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
 
+
                         configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent);
                         if(deg  == 0) $(window.parent.document).find(".cad-title").first().html(d.data.name);
                         // else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
@@ -387,8 +388,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
     }
     else {
         cell.append("rect")
-            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-legend", function(d) {  return d.data.colorId; })
             .attr("data-value", function(d) { return d.data.percentual; })
+            .attr("data-percent", function(d) { return d.data.size/root.value; })
             .attr("id", function(d) { return d.data.id; })
             .attr("width", function(d) { return nodeWidth(d); })
             .attr("height", function(d) { return d.y1 - d.y0; })
@@ -630,8 +632,19 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
             }).on("mouseout", tooltipInstance.hideTooltip);
         }
 	}
+    else if(eixo === 0){
+        
+        configInfoDataBoxTreemapSCC(eixo,
+            vrv,
+            $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-value"),
+            $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent"),
+            url,
+            $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-deg"),
+            $('svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"),
+            chg);
+    }
 
-	if(eixo == 3){
+	else if(eixo == 3){
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
             $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-value"),

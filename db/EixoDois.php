@@ -788,7 +788,60 @@ class EixoDois {
 		self::disconnect();
 		
 		return $allObjects;
-	}
+    }
+    
+    public static function getter_linhas($var, $uf, $cad, $ocp, $desag){
+
+        self::connect();
+        $query = "SELECT * FROM ".self::$table." WHERE Numero =".$var." AND idUF = ".$uf;
+
+        if($ocp == 0){
+            $query .= " AND idOcupacao = 0 AND idCadeia =".$cad;
+        } else {
+            $query .= " AND idOcupacao =".$ocp;
+        }
+        if($desag == 2){
+            $query .= " AND Sexo IS NOT NULL";
+        } else {
+            $query .= " AND Sexo IS NULL";
+        }
+        switch($desag){
+            case 1:
+                $query .= " AND idPorte > 0";
+                break;
+            case 3:
+                $query .= " AND idIdade > 0"; 
+                break;
+            case 4: 
+                $query .= " AND idEscolaridade > 0";
+                break;
+            case 5:
+                $query .= " AND idEtinia > 0"; 
+                break;
+            case 6: 
+                $query .= " AND Formalidade > 0";
+                break;
+            case 7:
+                $query .= " AND Previdencia > 0"; 
+                break;
+            case 8:
+                $query .= " AND Sindical > 0"; 
+                break;
+        }
+
+        $result = mysqli_query(self::$conn, $query);
+        
+        $allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoDois')){
+            $allObjects[] = $obj;
+        }
+
+        self::disconnect();
+        
+        return $allObjects;
+        
+    }
 
 }
 

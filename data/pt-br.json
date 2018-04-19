@@ -810,10 +810,10 @@
 			},
 			{
 				"id":"10",
-				"title":"Ocupação / VA",
+				"title":"Razão entre variação da ocupação e o valor adicionado",
 				"desc_int":"de variação no nível de ocupados em atividades culturais e criativas",
 				"desc_percent": "",
-				"sufixo_valor":"%",
+				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc_var_mapa": "A variável razão entre variação na ocupação e variação do valor adicionado pelos Setores Culturais e Criativos possibilita a averiguação do quanto o nível de ocupação em atividades culturais e criativas variou ao longo do tempo em contraposição às flutuações do nível de geração de valor adicionado pelos Setores Culturais e Criativos. Estima-se a razão entre a taxa de variação dos trabalhadores em atividades culturais pela taxa de variação do valor adicionado pela cultura. ",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",

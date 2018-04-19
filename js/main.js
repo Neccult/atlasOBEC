@@ -286,14 +286,14 @@ function updateIframe(url){
             }
              else if(url['var'] == 4){
 
-                if(url['cad'] != 0 && url['deg'] != 0) {
+                //if(url['cad'] != 0 && url['deg'] != 0) {
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
-                }
-                else  {
+                //}
+               /* else  {
                     $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
-                }
+                }*/
 
             } else {
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
