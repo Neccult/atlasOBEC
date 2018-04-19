@@ -2,11 +2,7 @@
 
 ###	Classe que manipula as variáveis do Eixo I ###
 
-define('DB_NOME', 'Atlas');
-define('DB_USUARIO', 'root');
-define('DB_SENHA', 'root');
-// define('DB_HOST', 'localhost');
-define('DB_HOST', '143.54.231.130');
+require('config.db.php');
 
 class EixoUm {
 
@@ -80,6 +76,22 @@ class EixoUm {
 		mysqli_close(self::$conn);
 	}
 
+    /**
+     * fetch_results - para funcionar com prepared statements
+     * @param mixed $stmt
+     * @return array
+     */
+    public static function fetch_results($stmt) {
+        $result_array = [];
+        $result_object = $stmt->get_result();
+        $keys = $result_object->fetch_fields();
+        
+        while ($row = $result_object->fetch_object()) {
+            $result_array[] = $row;
+        }
+        return $result_array;
+    }
+    
 	/*-----------------------------------------------------------------------------
 	Função: Find
 	    função para buscar um conjunto de tupla no banco de dados
@@ -97,17 +109,29 @@ class EixoUm {
 
 		self::connect();
 
-			$query = "SELECT * FROM ".self::$table." AS ex"
-					." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
-					." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
-					." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
-					." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-					." WHERE ex.Numero = ".$var
-					." AND ex.Ano = ".$anos;
+        $query = "SELECT * FROM ".self::$table." AS ex"
+               ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
+               ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+               ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
+               ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+               ." WHERE ex.Numero = ?"
+               ." AND ex.Ano = ?";
 
-			$result = mysqli_query(self::$conn, $query);
-			$obj = mysqli_fetch_object($result, 'EixoUm');
-
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                'ssssss',
+                $ufs,
+                $atc,
+                $cad,
+                $prt,
+                $var,
+                $anos
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
 		self::disconnect();
 
         return ($obj == false) ? NULL : $obj;
@@ -158,54 +182,86 @@ class EixoUm {
 	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
 
 		self::connect();
-			if($prt == 0 || $cad != 0) {
-                $query = "SELECT * FROM " . self::$table . " AS ex"
-                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc
-                    . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = " . $cad
-                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = " . $prt
-                    . " WHERE ex.Numero = " . $var;
-
-                $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
-
-                $result = mysqli_query(self::$conn, $query);
-
-                $allObjects = array();
-
-                while($obj = mysqli_fetch_object($result, 'EixoUm')){
-                    $allObjects[] = $obj;
+        $stmt = mysqli_stmt_init(self::$conn);
+        if($prt == 0 || $cad != 0) {
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                   . " JOIN UF AS uf ON uf.idUF =  ex.idUF" 
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
+                   . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   . " WHERE ex.Numero = ?";
+            
+            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
+            if ($stmt->prepare($query)) {
+                if ($anos > 0) {
+                    $stmt->bind_param(
+                        'sssss',
+                        $atc,
+                        $cad,
+                        $prt,
+                        $var,
+                        $anos
+                    );
+                    
+                } else {
+                    $stmt->bind_param(
+                        'sssss',
+                        $atc,
+                        $cad,
+                        $prt,
+                        $var
+                    );
+                }
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
+            
+        } else {
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                   . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   . " WHERE ex.Numero = ?";
+            
+            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
+            if ($stmt->prepare($query)) {                
+                if ($anos > 0) {
+                    $stmt->bind_param(
+                        'ssss',
+                        $atc,
+                        $prt,
+                        $var,
+                        $anos
+                    );
+                    
+                } else {
+                    $stmt->bind_param(
+                        'sss',
+                        $atc,
+                        $prt,
+                        $var
+                    );
                 }
             }
-            else {
-                $query = "SELECT * FROM " . self::$table . " AS ex"
-                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc
-                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = " . $prt
-                    . " WHERE ex.Numero = " . $var;
-
-                $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
-
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
-
-                while($obj = mysqli_fetch_object($result, 'EixoUm')){
-                    $allObjects[] = $obj;
-                }
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                    if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                    $value_aux[$data->idUF] += $data->Valor;
-                    $percent_aux[$data->idUF] += $data->Percentual;
-                    $result_aux[$data->idUF] = $data;
-                    $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                    $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-                }
-                $allObjects = $result_aux;
+            
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+                    
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+                $value_aux[$data->idUF] += $data->Valor;
+                $percent_aux[$data->idUF] += $data->Percentual;
+                $result_aux[$data->idUF] = $data;
+                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
             }
-
+            $allObjects = $result_aux;
+        }
+        
 		self::disconnect();
 
         return $allObjects;
@@ -226,59 +282,64 @@ class EixoUm {
 	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
 
 		self::connect();
-            if($prt == 0 || $cad != 0) {
-                if($uos == 0) {
-                    $query = "SELECT * FROM ".self::$table." AS ex"
-                        ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
-                        ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
-                        ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$cad
-                        ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-                        ." WHERE ex.Numero = ".$var;
-                }
-                else if($uos == 1) {
-                    $query = "SELECT * FROM ".self::$table." AS ex"
-                        ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
-                        ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
-                        ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = 1"
-                        ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-                        ." WHERE ex.Numero = ".$var;
-
-                }
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
-
-                while($obj = mysqli_fetch_object($result, 'EixoUm')){
-                    $allObjects[] = $obj;
-                }
+        if($prt == 0 || $cad != 0) {
+            $idCadeia = ($uos == 0) ? $cad : 1;
+            
+            $query = "SELECT * FROM ".self::$table." AS ex"
+                   ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
+                   ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$idCadeia
+                   ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   ." WHERE ex.Numero = ?";
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $ufs,
+                    $atc,
+                    $prt,
+                    $var
+                );
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
             }
-            else {
-                $query = "SELECT * FROM ".self::$table." AS ex"
-                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
-                    ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ".$atc
-                    ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ".$prt
-                    ." WHERE ex.Numero = ".$var;
+        } else {
 
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
+            $query = "SELECT * FROM ".self::$table." AS ex"
+                   ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
+                   ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   ." WHERE ex.Numero = ?";
 
-                while($obj = mysqli_fetch_object($result, 'EixoUm')){
-                    $allObjects[] = $obj;
-                }
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
-                    if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
-                    $value_aux[$data->Ano] += $data->Valor;
-                    $percent_aux[$data->Ano] += $data->Percentual;
-                    $result_aux[$data->Ano] = $data;
-                    $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
-                    $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
-                }
-                $allObjects = $result_aux;
+            $stmt = mysqli_stmt_init(self::$conn);
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $ufs,
+                    $atc,
+                    $prt,
+                    $var
+                );
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
             }
-
+            
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
+                if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
+                $value_aux[$data->Ano] += $data->Valor;
+                $percent_aux[$data->Ano] += $data->Percentual;
+                $result_aux[$data->Ano] = $data;
+                $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
+                $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
+            }
+            $allObjects = $result_aux;
+        }
+        
 		self::disconnect();
 
         return $allObjects;
@@ -301,52 +362,113 @@ class EixoUm {
 	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
 		self::connect();		
-			if($prt == 0 || $cad != 0) {
-                $query = "SELECT * FROM " . self::$table . " AS ex"
-                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE '" . $regiao . "'"
-                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc
-                    . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = " . $cad
-                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = " . $prt
-                    . " WHERE ex.Numero = " . $var;
+        if($prt == 0 || $cad != 0) {
+                
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                   . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE ?"
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
+                   . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   . " WHERE ex.Numero = ?";
 
-                $query .= ($anos > 0) ? " AND Ano = " . $anos : "";
+            $stmt = mysqli_stmt_init(self::$conn);
+            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
 
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
-            }
-            else {
-                $query = "SELECT * FROM " . self::$table . " AS ex"
-                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE '" . $regiao . "'"
-                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc
-                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = " . $prt
-                    . " WHERE ex.Numero = " . $var;
-
-                $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
-
-                $result = mysqli_query(self::$conn, $query);
-                $allObjects = array();
-
-                while($obj = mysqli_fetch_object($result, 'EixoUm')){
-                    $allObjects[] = $obj;
+            if ($stmt->prepare($query)) {
+                if ($anos > 0) {
+                    $stmt->bind_param(
+                        'ssssss',
+                        $regiao,
+                        $atc,
+                        $cad,
+                        $prt,
+                        $var,
+                        $anos
+                    );
+                    
+                } else {
+                    $stmt->bind_param(
+                        'sssss',
+                        $regiao,
+                        $atc,
+                        $cad,
+                        $prt,
+                        $var
+                    );
                 }
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                    if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                    $value_aux[$data->idUF] += $data->Valor;
-                    $percent_aux[$data->idUF] += $data->Percentual;
-                    $result_aux[$data->idUF] = $data;
-                    $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                    $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-                }
-                $allObjects = $result_aux;
             }
 
-			while($obj = mysqli_fetch_object($result, 'EixoUm')){
-				$allObjects[] = $obj;
-			}
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+
+        } else {
+            $stmt = mysqli_stmt_init(self::$conn);
+
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                   . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE ?"
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                   . " WHERE ex.Numero = ?";
+            
+            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
+
+            if ($stmt->prepare($query)) {
+                if ($anos > 0) {
+                    $stmt->bind_param(
+                        'sssss',
+                        $regiao,
+                        $atc,
+                        $prt,
+                        $var,
+                        $anos
+                    );
+                    
+                } else {
+                    $stmt->bind_param(
+                        'ssss',
+                        $regiao,
+                        $atc,
+                        $prt,
+                        $var
+                    );
+                }
+            }
+
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+            
+           
+            
+            /***********************/
+            
+            // $query = "SELECT * FROM " . self::$table . " AS ex"
+            //        . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE '" . $regiao . "'"
+            //        . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = " . $atc
+            //        . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = " . $prt
+            //        . " WHERE ex.Numero = " . $var;
+
+            // $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
+
+            // $result = mysqli_query(self::$conn, $query);
+            // $allObjects = array();
+
+            // while($obj = mysqli_fetch_object($result, 'EixoUm')){
+            //     $allObjects[] = $obj;
+            // }
+            // $result_aux = array();
+            // $value_aux = array();
+            // $percent_aux = array();
+            // foreach ($allObjects as $data) {
+            //     if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+            //     if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+            //     $value_aux[$data->idUF] += $data->Valor;
+            //     $percent_aux[$data->idUF] += $data->Percentual;
+            //     $result_aux[$data->idUF] = $data;
+            //     $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+            //     $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
+            // }
+            // $allObjects = $result_aux;
+        }
 
 		self::disconnect();
 
