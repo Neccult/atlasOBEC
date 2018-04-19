@@ -92,6 +92,44 @@ class EixoDois {
 	-----------------------------------------------------------------------------*/
 	public static function disconnect(){
 		mysqli_close(self::$conn);
+    }
+    
+    /*-----------------------------------------------------------------------------
+	Função: getter_most_recent_year
+	    função para buscar o ano mais recente no banco de dados para todas as variáveis
+	Saída:
+	    Array com os resultados da busca
+	-----------------------------------------------------------------------------*/
+	public static function getter_most_recent_year(){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano, Numero, idOcupacao FROM `Eixo_2` WHERE `idUF` = 0 AND `idPorte` = 0 AND `idEscolaridade` = 0 AND `idEtinia` = 0 AND `idIdade` = 0 AND `Formalidade` = 0 AND `Previdencia` = 0 AND `Sindical` = 0 AND `Sexo` is NULL GROUP BY Numero, idOcupacao";
+        $result = mysqli_query(self::$conn, $query);
+        		
+		self::disconnect();
+
+        $allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoDois')){
+            $allObjects[] = $obj;
+        }
+
+		return $allObjects;
+    }
+    
+    public static function getAnoDefault($var){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_2` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$obj = mysqli_fetch_object($result, 'EixoDois');
+		
+		$ano = $obj->Ano;
+
+		return $ano;
 	}
 
 	/*-----------------------------------------------------------------------------

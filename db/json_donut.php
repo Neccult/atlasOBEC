@@ -58,16 +58,64 @@ function map_tipo($tipo){
         case 2: return "Importação";
     }
 }
-$tipos = array();
-require_once("EixoQuatro.php");
-foreach (EixoQuatro::getter_donut($var, $cad, $ano, $slc, $uf, $prc) as $tupla) {
 
-// $barras[$tupla->Ano] = $tupla->Valor;
-    $valor = array();
-    $valor['tipo'] = map_tipo($tupla->idTipo);
-    $valor['valor'] = (float) $tupla->Valor; 
-    array_push($tipos, $valor);
+function binario($tipo){
+    switch($tipo){
+        case 0: return "Não";
+        case 1: return "Sim";
+    }
 }
+$tipos = array();
+
+if($eixo == 2){
+
+    $aux = array();
+
+    require_once("EixoTres.php");
+
+    foreach (EixoTres::getter_donut($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+
+        // $barras[$tupla->Ano] = $tupla->Valor;
+        $valor = array();
+        $valor['tipo'] = binario($tupla->Valor);
+        $valor['valor'] = (float) $tupla->Valor;
+        array_push($aux, $valor);
+    }
+
+    $contSim = 0;
+    $contNao = 0;
+
+    foreach ($aux as $valor){
+        if($valor['tipo'] == 'Sim'){
+            $contSim++;
+        }
+        else if($valor['tipo'] == 'Não'){
+            $contNao++;
+        }
+    }
+
+    $valor = array();
+    $valor['tipo'] = 'Sim';
+    $valor['valor'] = $contSim;
+    array_push($tipos, $valor);
+    $valor['tipo'] = 'Não';
+    $valor['valor'] = $contNao;
+    array_push($tipos, $valor);
+
+
+}
+if($eixo == 3){
+    require_once("EixoQuatro.php");
+    foreach (EixoQuatro::getter_donut($var, $cad, $ano, $slc, $uf, $prc) as $tupla) {
+
+        // $barras[$tupla->Ano] = $tupla->Valor;
+        $valor = array();
+        $valor['tipo'] = map_tipo($tupla->idTipo);
+        $valor['valor'] = (float) $tupla->Valor;
+        array_push($tipos, $valor);
+    }
+}
+
 
 echo json_encode($tipos);
 ?>
