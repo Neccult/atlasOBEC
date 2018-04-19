@@ -7,15 +7,31 @@
 
 <?php
 /* GETS! */
+function getAnoDefault($eixo, $var){
+    switch($eixo){
+        case "empreendimentos":
+            require_once('db/EixoUm.php');
+            return EixoUm::getAnoDefault($var);
+        case "mercado":
+            require_once('db/EixoDois.php');
+            return EixoDois::getAnoDefault($var);
+        case "politicas":
+            require_once('db/EixoTres.php');
+            return EixoTres::getAnoDefault($var);
+        case "comercio":
+            require_once('db/EixoQuatro.php');
+            return EixoQuatro::getAnoDefault($var);            
+    }
+}
+
 $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
-$ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
 $prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;	   /*== porte ==*/
 $atc    =   isset($_GET["atc"])   ?   $_GET["atc"]  :   0;	   /*== atuacao ==*/
 $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
 $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   0;	   /*== variavel ==*/
 $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   1;	   /*== ocupacao ==*/
 $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
-$eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
+$eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimentos";	   /*== eixo ==*/
 $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
 $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
 $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
@@ -31,6 +47,7 @@ $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pesso
 $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
 $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
 $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
+$ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   getAnoDefault($eixo, $var);	   /*== ano ==*/
 
 /* informações JSON */
 $json = file_get_contents('data/pt-br.json');
@@ -108,7 +125,6 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
 
                 <div class="row breadcrumb">
-
                     <div>
                         <select class="bread-eixo" data-id="eixo">
                             <?php

@@ -91,6 +91,45 @@ class EixoTres {
     }
     
 	/*-----------------------------------------------------------------------------
+	Função: getter_most_recent_year
+	    função para buscar o ano mais recente no banco de dados para todas as variáveis
+	Saída:
+	    Array com os resultados da busca
+	-----------------------------------------------------------------------------*/
+	public static function getter_most_recent_year(){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND idCadeia = 0 AND PessoaFisica is NULL  GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoTres')){
+            $allObjects[] = $obj;
+        }
+
+		return $allObjects;
+
+	}
+
+	public static function getAnoDefault($var){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND Numero = ".$var." GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$obj = mysqli_fetch_object($result, 'EixoTres');
+		
+		$ano = $obj->Ano;
+
+		return $ano;
+	}
+
+	/*-----------------------------------------------------------------------------
 	Função: Find
 	    função para buscar um conjunto de tupla no banco de dados
 	Entrada: 
@@ -588,5 +627,41 @@ class EixoTres {
 		
 		return $allObjects;
 	}
+
+    public static function getter_donut($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
+        self::connect();
+        $query = "SELECT ex.Valor FROM ".self::$table." AS ex"
+            ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = 0"
+            ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
+            ." WHERE ex.Numero = ".$var;
+
+
+        $query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
+
+        $result = mysqli_query(self::$conn, $query);
+        $allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoTres')){
+            $allObjects[] = $obj;
+        }
+
+        $value_aux = array();
+
+        $contSim = 0;
+        $contNao = 0;
+
+        foreach ($allObjects as $data) {
+            if($data->Valor == 1){
+                $contSim++;
+            }
+            else if($data->Valor == 0){
+                $contNao++;
+            }
+        }
+
+
+        self::disconnect();
+        return $allObjects;
+    }
 
 }

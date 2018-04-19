@@ -63,6 +63,7 @@ function destacaBarra(barraId, stacked = false) {
 var tooltipInstance = tooltip.getInstance();
 if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
+
     //Variaveis/Objetos
     var dict = {};
 
@@ -118,12 +119,15 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             if ((vrv === 2 || vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
             else dados.value.push(data[key].valor);
 
-            if (vrv === 1 || vrv === 2 || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 9 || vrv === 8) dados.percentual.push(0);
+            if ( vrv === 2 || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 9 || vrv === 8) dados.percentual.push(0);
             else dados.percentual.push(data[key].percentual);
 
             if (vrv === 2) dados.taxa.push(0);
             else dados.taxa.push(data[key].taxa);
         });
+
+        // updateAnoDefault(dados.key[dados.key.length-1]);
+        //
         dados.key = d3.keys(data);
         if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
         //tamanho do grafico
@@ -255,11 +259,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 // if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
                 decimalDigits = minFraction + higherZeroOcur;
 
-                console.log("valor: "+Math.abs(d)+" - decimal digits: "+(decimalDigits))
+                // console.log("valor: "+Math.abs(d)+" - decimal digits: "+(decimalDigits))
 
 
                 var format = d3.format("." + decimalDigits + "f");
-                console.log(format(d))
+                // console.log(format(d))
                 dadosCounter++;
 
 
@@ -684,25 +688,21 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         function loadTooltip(d, i, eixo, vrv){
             if(eixo === 0){
-
-
                 if(vrv === 2){
                     if(url['uf'] != 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i]/100, eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                         ]);
                     }
                     else if(url['uf'] == 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                         ]);
                     }
                 }
-                if(vrv === 9){
+                else if(vrv === 9){
                     if(url['uf'] != 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
@@ -719,21 +719,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     }
                 }
                 else{
-                    if(url['uf'] == 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-                        ]);
-                    }
-                    else if(url['uf'] != 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                            ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-                        ]);
-                    }
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                    ]);
                 }
+
             }
             else if(eixo === 1){
                 if (vrv === 2 || vrv === 9) {
@@ -769,6 +760,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
         }
+
 
 
     }

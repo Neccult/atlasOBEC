@@ -218,6 +218,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				})
 				.on("mouseout", tooltipInstance.hideTooltip)
 				.on("click", function(d) {
+                    
 				    if(url['ocp'] == 0) {
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
@@ -227,18 +228,19 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
                         $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
-                        enableDesag(eixo, vrv, d.data.colorId, true, slc);
+                        enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
 
                         cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-value");
                         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
 
-
                         configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent);
                         if(deg  == 0) $(window.parent.document).find(".cad-title").first().html(d.data.name);
-                        else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
+                        // else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
+                        else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
 				    }
                     else {
+
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
                         var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
@@ -246,12 +248,13 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
                         $(window.parent.document).find("select[data-id='ocp']").val(d.data.colorId);
-                        enableDesag(eixo, vrv, d.data.colorId, true, slc);
+                        enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
+                        
                         configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg);
                         //console.log(d);
-                        if(d.parent.data.name.match("Atividades")) $(window.parent.document).find(".cad-title").first().html("Atividades Relacioandas - "+d.data.name);
-                        else if(d.parent.data.name.match("Cultura")) $(window.parent.document).find(".cad-title").first().html("Cultura - "+d.data.name);
+                        // if(d.parent.data.name.match("Atividades")) $(window.parent.document).find(".cad-title").first().html("Atividades Relacioandas - "+d.data.name);
+                        // else if(d.parent.data.name.match("Cultura")) $(window.parent.document).find(".cad-title").first().html("Cultura - "+d.data.name);
                     }
 				})
 		        .style("cursor", "pointer");

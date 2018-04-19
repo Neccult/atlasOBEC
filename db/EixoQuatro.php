@@ -92,6 +92,45 @@ class EixoQuatro {
     }
     
 	/*-----------------------------------------------------------------------------
+	Função: getter_most_recent_year
+	    função para buscar o ano mais recente no banco de dados para todas as variáveis
+	Saída:
+	    Array com os resultados da busca
+	-----------------------------------------------------------------------------*/
+
+	public static function getter_most_recent_year(){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 GROUP BY Numero, Consumo";
+        $result = mysqli_query(self::$conn, $query);
+        		
+		self::disconnect();
+
+        $allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
+            $allObjects[] = $obj;
+        }
+
+		return $allObjects;
+	}
+
+	public static function getAnoDefault($var){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_4` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$obj = mysqli_fetch_object($result, 'EixoQuatro');
+		
+		$ano = $obj->Ano;
+
+		return $ano;
+	}
+
+	/*-----------------------------------------------------------------------------
 	Função: Find
 	    função para buscar um conjunto de tupla no banco de dados
 	Entrada: 

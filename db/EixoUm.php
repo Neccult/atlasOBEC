@@ -91,6 +91,45 @@ class EixoUm {
         }
         return $result_array;
     }
+
+	/*-----------------------------------------------------------------------------
+	Função: getter_most_recent_year
+	    função para buscar o ano mais recente no banco de dados para todas as variáveis
+	Saída:
+	    Array com os resultados da busca
+	-----------------------------------------------------------------------------*/
+	public static function getter_most_recent_year(){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_1` WHERE `idUF` = 0  GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$allObjects = array();
+
+        while($obj = mysqli_fetch_object($result, 'EixoUm')){
+            $allObjects[] = $obj;
+        }
+
+		return $allObjects;
+
+	}
+
+	public static function getAnoDefault($var){
+		self::connect();
+
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_1` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
+		$result = mysqli_query(self::$conn, $query);
+		
+		self::disconnect();
+
+		$obj = mysqli_fetch_object($result, 'EixoUm');
+		
+		$ano = $obj->Ano;
+
+		return $ano;
+	}
     
 	/*-----------------------------------------------------------------------------
 	Função: Find
@@ -246,20 +285,22 @@ class EixoUm {
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
-                    
-            $result_aux = array();
-            $value_aux = array();
-            $percent_aux = array();
-            foreach ($allObjects as $data) {
-                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                $value_aux[$data->idUF] += $data->Valor;
-                $percent_aux[$data->idUF] += $data->Percentual;
-                $result_aux[$data->idUF] = $data;
-                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-            }
-            $allObjects = $result_aux;
+
+            if($var != 1){
+                $result_aux = array();
+                $value_aux = array();
+                $percent_aux = array();
+                foreach ($allObjects as $data) {
+                    if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+                    if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+                    $value_aux[$data->idUF] += $data->Valor;
+                    $percent_aux[$data->idUF] += $data->Percentual;
+                    $result_aux[$data->idUF] = $data;
+                    $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+                    $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
+                }	
+                $allObjects = $result_aux;
+            }            
         }
         
 		self::disconnect();
@@ -324,20 +365,22 @@ class EixoUm {
                 $stmt->execute();
                 $allObjects = self::fetch_results($stmt);
             }
-            
-            $result_aux = array();
-            $value_aux = array();
-            $percent_aux = array();
-            foreach ($allObjects as $data) {
-                if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
-                if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
-                $value_aux[$data->Ano] += $data->Valor;
-                $percent_aux[$data->Ano] += $data->Percentual;
-                $result_aux[$data->Ano] = $data;
-                $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
-                $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
+
+            if($var != 1){
+                $result_aux = array();
+                $value_aux = array();
+                $percent_aux = array();
+                foreach ($allObjects as $data) {
+                    if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
+                    if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
+                    $value_aux[$data->Ano] += $data->Valor;
+                    $percent_aux[$data->Ano] += $data->Percentual;
+                    $result_aux[$data->Ano] = $data;
+                    $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
+                    $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
+                }
+                $allObjects = $result_aux;
             }
-            $allObjects = $result_aux;
         }
         
 		self::disconnect();
@@ -476,5 +519,3 @@ class EixoUm {
 	}
 
 }
-
-?>

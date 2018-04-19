@@ -1,14 +1,93 @@
 function changeDownloadURL(url){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
     $('#select-pdf input').attr("value", newURL)
-    
+    vrv = parseInt(url.match(/var=[0-9]+/)[0].replace("var=", ''))
+    switch(vrv) {
+        case 1:
+            name_url = "total_empresas";
+            break;
+        case 2:
+            name_url = "peso_empresas";
+            break;
+        case 3:
+            name_url = "natalidade_e_mortalidade";
+            break;
+        case 4:
+            name_url = "receita_total";
+            break;
+        case 5:
+            name_url = "receita_liquida";
+            break;
+        case 6:
+            name_url = "custo";
+            break;
+        case 7:
+            name_url = "lucro";
+            break;
+        case 8:
+            name_url = "valor_adicionado";
+            break;
+        case 9:
+            name_url = "va_pib";
+            break;
+        case 10:
+            name_url = "ihh_empresas";
+            break;
+        case 11:
+            name_url = "ihh_valor_adicionado";
+            break;
+        case 12:
+            name_url = "C4_empresas";
+            break;
+        case 13:
+            name_url = "C4_valor_adicionado";
+            break;
+        default:
+            name_url = "total_empresas";
+    }
+    newURL = $('#select-csv input').attr("value").replace(/csv\/.*/, "csv/"+name_url)
+    $('#select-csv input').attr("value", newURL)
 }
 
 function ajustaAnos(keys) {
 	for(var i = 0; i < keys.length; i++) {
 		keys[i] = keys[i+1];
     }
+    keys.pop();
 	return keys;
+}
+
+function getNomeUF(idUF){
+    switch(idUF){
+        case 0: return "Brasil";
+        case 11: return "Rondônia";
+        case 12: return "Acre";
+        case 13: return "Amazonas";
+        case 14: return "Roraima";
+        case 15: return "Pará";
+        case 16: return "Amapá";
+        case 17: return "Tocantins";
+        case 21: return "Maranhão";
+        case 22: return "Piauí";
+        case 23: return "Ceará";
+        case 24: return "Rio Grande do Norte";
+        case 25: return "Paraíba";
+        case 26: return "Pernambuco";
+        case 27: return "Alagoas";
+        case 28: return "Sergipe";
+        case 29: return "Bahia";
+        case 31: return "Minas Gerais";
+        case 32: return "Espírito Santo";
+        case 33: return "Rio de Janeiro";
+        case 35: return "São Paulo";
+        case 41: return "Paraná";
+        case 42: return "Santa Catarina";
+        case 43: return "Rio Grande do Sul";
+        case 51: return "Mato Grosso do Sul"; 
+        case 52: return "Mato Grosso";
+        case 53: return "Goiás";
+        case 54: return "Distrito Federal";
+    }
 }
 
 function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percent) {
@@ -32,8 +111,10 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percen
         }
     }
     else if(eixo == 1) {
-
-        if(vrv == 2 && url['uf'] == 0){
+        if(vrv == 1){
+            setIntegerValueData({valor: d.data.size}, eixo, vrv);
+        }
+        else if(vrv == 2 && url['uf'] == 0){
             //talvez tenha que mudar aqui pra ficar * 100 ou * 10
             setIntegerValueData({valor: d.data.size}, eixo, vrv);
         }
@@ -53,8 +134,11 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percen
         }
 
         if(url['uf'] == 0){
-            setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
-        }
+            if(d.parent.value == d.data.size)
+                setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
+            else
+                setPercentValueData({percentual: d.data.size / d.parent.value}, eixo, vrv);
+        } 
 
         /*if(deg == 0 && url['uf'] == 0) {
         }
@@ -101,7 +185,11 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, cad_data, ocp_data, url, deg_cad
     if(eixo == 0){
         if(url['cad'] != 0){
             setPercentValueData({percentual: cad_data}, eixo, vrv);
-
+        }
+    }
+    if(eixo == 1){
+        if(url['cad'] != 0){
+            setPercentValueData({percentual: cad_data}, eixo, vrv);
         }
     }
     if(eixo == 2){
@@ -175,7 +263,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
         else if (vrv == 1) {
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
-
+            setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv)
         }
         else if (vrv == 2) {
             if(url['uf'] == 0){
@@ -279,14 +367,28 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
 
     if(eixo == 0){
         first_year = Number(dados.key[0]);
-
-        if(url['uf'] == 0 && url['cad'] == 0)
+        index_ano = dados.key.indexOf(url['ano'])
+        if(url['uf'] == 0 && url['cad'] == 0 && vrv < 10){
             setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+            setIntegerValueData(dados, eixo, vrv);
 
-        dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+        }
+        else if(vrv > 9){
+            if(ano != null) {
+                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
 
-        setIntegerValueData(dados, eixo, vrv);
+                if(url['uos'] == 0){
+                    setIntegerValueData(dados, eixo, vrv);
+                } else if(url['uos'] == 1){
+                    setPercentValueData(dados, eixo, vrv);
+                }
 
+            }
+        } else{
+            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+            setIntegerValueData(dados, eixo, vrv);
+        }
     }
     else if(eixo == 1){
         first_year = Number(dados.key[0]);
@@ -311,7 +413,6 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
         else{
             if(url['uf'] == 0 && url['cad'] == 0 && url['ocp'] == 0)
                 setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-
             dados.valor = dados.value[dados.key.indexOf(url['ano'])];
 
             setIntegerValueData(dados, eixo, vrv);
@@ -548,15 +649,49 @@ function removeMecenatoDesags(iframe){
     }
 }
 
+function updateBreadUF(eixo, vrv){
+    switch(eixo){
+        case 0: 
+            if(vrv > 9){
+                $('.bread-select[data-id=uf]').prop("disabled", true);
+            } else{
+                $('.bread-select[data-id=uf]').prop("disabled", false);
+            }
+            break;
+        case 1:
+            if(vrv > 12){
+                $('.bread-select[data-id=uf]').prop("disabled", true);
+            } else{
+                $('.bread-select[data-id=uf]').prop("disabled", false);
+            }
+            break;
+        case 2:
+            if(vrv == 15 || vrv == 16 || vrv == 10){
+                $('.bread-select[data-id=uf]').prop("disabled", true);
+            } else{
+                $('.bread-select[data-id=uf]').prop("disabled", false);
+            }
+            break;
+        case 3:
+            if(vrv >= 5 && vrv <= 10){
+                $('.bread-select[data-id=uf]').prop("disabled", true);
+                $('.bread-select[data-id=prc]').prop("disabled", true);
+            } else{
+                $('.bread-select[data-id=uf]').prop("disabled", false);
+                $('.bread-select[data-id=prc]').prop("disabled", false);
+            }
+            break;
+    }
+}
+
 function updateMecanismo(url, vrv){
     $("select[data-id='mec'] > option").each(function() {
         $(this).remove();
     });
-
+/*
     $("select[data-id='cad'] > option").each(function() {
         $(this).remove();
-    });
-
+    });*/
     if(url['var'] != 17){
         $("select[data-id='mec']").append("<option value='0'>Todos</option>");
 
@@ -578,8 +713,7 @@ function updateMecanismo(url, vrv){
             $("select[data-id='mec']").parent().css('display', 'none')
         }
 
-    }
-
+    } 
     else{
 
         $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
@@ -593,7 +727,6 @@ function updateMecanismo(url, vrv){
 }
 
 function updateBreadcrumbSetores(cads){
-
     $(".bread-select[data-id='cad'] > option").each(function() {
         $(this).remove();
     });
@@ -602,6 +735,7 @@ function updateBreadcrumbSetores(cads){
         $(".bread-select[data-id='cad']").append("<option value="+cads[i].id+">"+cads[i].nome+"</option>");
     }
 
+    console.log($(".bread-select[data-id='cad'] > option"))
 }
 
 function updateDefaultMec(vrv){
@@ -663,8 +797,6 @@ function updatePfj(url, vrv){
 
 }
 
-
-
 function enableDesag(eixo, vrv, setor, iframe, slc, url){
 
 	if(eixo == 0){
@@ -723,8 +855,6 @@ function enableDesag(eixo, vrv, setor, iframe, slc, url){
 
 }
 
-
-
 /*
 * Função para atribuir o valor do dado inteiro para a variável em questão
 * Parâmetros: valores, eixo e variável
@@ -761,9 +891,6 @@ function setIntegerValueData(value, eixo, vrv) {
         else if(eixo == 3)
             literal = formatDecimalLimit(valor, 6);
         
-
-
-        //alert(literal)
 
         $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
         var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
@@ -912,12 +1039,98 @@ function descByMOD(desc){
         return
 }
 
+function descByCAD(desc){
+    prepos = {
+        1: "DE",
+        2: "DE",
+        3: "",
+        4: "DE",
+        5: "",
+        6: "DE",
+        7: "DE",
+        8: "DE",
+        9: "DE",
+        10: "DE",
+    }
+
+
+    cads = {
+        1: "ARQUITETURA E DESIGN",
+        2: "ARTES CÊNICAS E ESPETÁCULOS",
+        3: "AUDIOVISUAL",
+        4: "CULTURA DIGITAL",
+        5: "EDITORIAL",
+        6: "EDUCAÇÃO E CRIAÇÃO EM ARTES",
+        7: "ENTRETERIMENTO",
+        8: "MÚSICA",
+        9: "PATRIMÔNIO",
+        10: "PUBLICIDADE",
+    }
+
+    str = "do setor"
+
+    if(cads[url['cad']]) {
+        nome = str + " " + prepos[url['cad']] + " " + cads[url['cad']];
+    }
+    else {
+        nome = "Culturais e Criativas"
+    }
+
+    if(desc != undefined)
+        return desc.replace('[cad]', nome);
+    else
+        return
+}
+
+function descByPRT(desc){
+    portes = {
+        1: "PORTE MICRO",
+        2: "PORTE PEQUENO",
+        3: "PORTE MÉDIO",
+        4: "PORTE GRANDE",
+    }
+
+    str = "DE"
+
+    if(portes[url['prt']]) {
+        nome = str + " " + portes[url['prt']];
+    }
+    else {
+        nome = ""
+    }
+
+    if(desc != undefined)
+        return desc.replace('[prt]', nome);
+    else
+        return
+}
+
+function descByANO(desc){
+
+    str = "do ano de "+(parseInt(url['ano'])-1)+" para "+url['ano']
+
+    if(url['ano']) {
+        nome = str;
+    }
+    else {
+        nome = ""
+    }
+
+    if(desc != undefined)
+        return desc.replace('[ano]', nome);
+    else
+        return
+}
+
 function updateDescPercent(desc, nomeestado){
 
     // {} - uf dinamica
     // [] - mecacnismo dinamico
     // () - modalidade dinamica
     // 'pfj - pessoa
+    // [cad] - cad
+    // [prt] - prt
+    // [ano] - ano
 
     if(desc == undefined){
         return ;
@@ -934,6 +1147,18 @@ function updateDescPercent(desc, nomeestado){
     }
     if(desc.includes('pfj')){
         desc =  descByPFJ(desc)
+    }
+
+    if(desc.includes('[cad]')){
+        desc =  descByCAD(desc)
+    }
+
+    if(desc.includes('[prt]')){
+        desc =  descByPRT(desc)
+    }
+
+    if(desc.includes('[ano]')){
+        desc =  descByANO(desc)
     }
 
 
@@ -1048,7 +1273,6 @@ function setPercentValueData(value, eixo, vrv) {
         else if(vrv >= 10 && vrv <= 13){
             $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
         }
-
         var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
@@ -1245,6 +1469,17 @@ function updateOcupacoes(vrv){
 	}
 }
 
+function updateServicos(vrv){
+    console.log($('#servicos'))
+    switch(vrv){
+		case '11':
+		case '12':
+		case '13':
+		case '14': $('#servicos').css('display', 'none'); break;
+		default: $('#servicos').css('display', 'inline');
+	}
+}
+
 
 function updateDataDesc(vrv, uos, valor){
 
@@ -1314,7 +1549,7 @@ function updateMenuSetor(eixo, vrv){
 	}
 	else if (eixo == 2){
 
-	    if(vrv == 15 || vrv == 10){
+	    if(vrv == 15 || vrv == 16 || vrv == 10){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
             }).style("display", "none");
@@ -1327,6 +1562,8 @@ function updateMenuSetor(eixo, vrv){
     }
 
 }
+
+
 
 /*
 * Função para retornar um valor na casa dos milhões ou bilhões num formato encurtado
@@ -1485,6 +1722,8 @@ var countValidDecimalDigits = function(value, acum) {
 		{string} ex.: "200.300,00026"
 -----------------------------------------------------------------------------*/
 var formatDecimalLimit = function(value, limit){
+    if(value == undefined)
+        return;
 	var limit = limit || 3;
 	var intValue = parseInt(value.toString().split(".")[0]);
 	var validDecimal = countValidDecimalDigits(value);
