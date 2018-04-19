@@ -9,6 +9,7 @@ function ready(json){
     $('#loading').fadeOut('fast');
     var data = JSON.parse(json);
     getPercent(data);
+    console.log(data)
     height = 220;
     width = $('#corpo').width() - 40;
 
@@ -40,7 +41,7 @@ function ready(json){
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .attr("dy", ".40em")
         .attr("dx", -radius/6)
-        .text(function(d) { return percentFormat(d.data.percent) })
+        .text(function(d) { if(d.data.percent != 0) return percentFormat(d.data.percent) })
         .style("font-family", "arial")
         .style("fill", "#fff")
         .style("font-size", radius/10)
@@ -60,6 +61,17 @@ function ready(json){
             d3.select(this).attr("transform", "scale(1)")
             tooltipInstance.hideTooltip()
         })
+        .on("click", function(d){
+            tipo = d.data.tipo
+            $(parent.document).find(".opt-select[data-id=typ]").first().val(indexTipos(tipo))
+           
+            srcMapa = $(parent.document).find("iframe#view_box").first().attr("src");
+            srcMapa = srcMapa.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
+            srcBarras = $(parent.document).find("iframe#view_box_barras").first().attr("src");
+            srcBarras = srcBarras.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
+            $(parent.document).find("iframe#view_box").first().attr("src", srcMapa)
+            $(parent.document).find("iframe#view_box_barras").first().attr("src", srcBarras)
+        })
 }
 
 
@@ -67,7 +79,9 @@ function ready(json){
 function color(tipo){
     colors = {
         "Exportação": "#071342",
-        "Importação": "rgb(109, 191, 201)"
+        "Importação": "rgb(109, 191, 201)",
+        "Sim": "#00ff00",
+        "Não": "#ff0000"
     }
     return colors[tipo];
 }
@@ -83,4 +97,11 @@ function getPercent(data){
 }
 function percentFormat(number){
     return (number*100).toFixed(2) + "%";
+}
+
+function indexTipos(tipo){
+    switch(tipo){
+        case "Exportação": return 1;
+        case "Importação": return 2;
+    }
 }
