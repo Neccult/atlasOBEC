@@ -92,7 +92,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     });
     // return matching color value
     var color = function (colorId) {
-
         if (colorJSON.cadeias[colorId]) {
             return colorJSON.cadeias[colorId].color;
         } else {
@@ -101,7 +100,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     }
 
     function analyze(error, data) {
-
         // console.log(data);
         $('#loading').fadeOut('fast');
         if (error) {
@@ -515,6 +513,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
                 destacaBarra(dados.key[i]);
                 var valor = $('svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+
                 configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
 
             })

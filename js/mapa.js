@@ -372,8 +372,10 @@ function ready(error, br_states, mapa){
             destacaPais(d.id);
 
             //setIntegerValueData(dict[d.id], eixo, vrv);
-            if(url['cad'] == 0)
-                setPercentValueData(dict[d.id], eixo, vrv);
+           // if(url['cad'] == 0)
+                //setPercentValueData(dict[d.id], eixo, vrv);
+
+            configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
 
             setStateTitle(d['properties']['name']);
 
@@ -617,10 +619,13 @@ function legendaBinario(){
 
     if(url['uf'] != 0){
         destacaPais(url['uf']);
-
     }
 
-    if(eixo == 0){
+
+    configInfoDataBoxMapa(eixo, vrv, dict[url['uf']]);
+
+
+    if(eixo == 0 || eixo == 2){
 
     }
     else{

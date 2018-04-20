@@ -32,7 +32,7 @@ d3.json('data/colors.json', function (error, data) {
 });
 
 $.get("./db/json_linhas.php"+config, function(data) {
-     console.log(data);
+     // console.log(data);
 });
 
 function analyze(error, data) {
@@ -234,7 +234,7 @@ function analyze(error, data) {
                 .attr("height", height)
                 .attr("width", width)
                 .style("fill", color(deg))
-                .style("stroke-width", 1)
+                .style("strok   e-width", 1)
                 .style("stroke", color(deg))
                 .attr("scc", deg);
 

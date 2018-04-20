@@ -402,7 +402,9 @@ function controlFilter(selectvalue, selectid){
     }
 	/* se for PORTE x ATUAÇÃO */
     if(selectid==='var') {
+        var save_ocp = url['ocp'];
         defaultUrl();
+        url['ocp'] = save_ocp;
         controlAno($('.opt-select[data-id="ano"]'));
         controlAno($('.bread-select[data-id="ano"]'));
     }
@@ -935,9 +937,9 @@ function changeDescVar() {
 }
 
 function cleanDesagsUrl() {
-    url['slc'] = 0;
+    //url['slc'] = 0;
     url['fax'] = 0;
-    url['ocp'] = 0;
+    //url['ocp'] = 0;
     url['sex'] = 0;
     url['esc'] = 0;
     url['frm'] = 0;
@@ -1302,7 +1304,6 @@ $(document).ready(function(){
                 url['deg'] = 0;
                 url['ocp'] = 0;
                 controlFilter('0', 'deg');
-                url['ocp'] = 0;
                 $(this).addClass("active");
                 $('#ocupacao').removeClass("active");
 
@@ -1349,40 +1350,45 @@ $(document).ready(function(){
         if($(this).attr("data-id") !== "eixo") {
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             updateUrl();
+                            
+            
 		    controlFilter($(this).val(), $(this).attr('data-id'));
             /* controla relações entre filtros */
-
-
+            
             /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
 
 
             if($(this).attr('data-id') == 'var'){
                 changeDescVar();
+
                 cleanDesagsUrl();
-
-                switchToSetores(); 
                 enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
-                
 
-                $('#setor').addClass("active");
-                $('#ocupacao').removeClass("active");
+                if(url['ocp'] == 0){
+                    switchToSetores(); 
+                    $('#setor').addClass("active");
+                    $('#ocupacao').removeClass("active");
+                }
+
                 $('#bens').addClass("active");
                 $('#servicos').removeClass("active");
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val())
                 $('.bread-select[data-id=uf]').val(0);
+
                 if(url['slc'] == 0) $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 else $(window.document).find(".cad-title").first().html($('.bread-select[data-id=ocp] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
                 updateBreadUF(eixo_atual, url['var']);
                 switch(eixo_atual){
-                    case 0: url['ano'] = anos_default[url['var']][url['ocp']]; break;
-                    case 1: url['ano'] = anos_default[url['var']][0]; break;
+                    case 0: url['ano'] = anos_default[url['var']][0]; break;
+                    case 1: url['ano'] = anos_default[url['var']][url['ocp']]; break;
                     case 2: url['ano'] = anos_default[url['var']][0]; break;
                     case 3:
                      index = url['slc'] == 0 ? 1 : 0
                      url['ano'] = anos_default[url['var']][index]; break;
                 }
+
                 if(eixo_atual == 1){
                     updateOcupacoes($(this).val());
                 }
@@ -1393,7 +1399,6 @@ $(document).ready(function(){
                 if(eixo_atual == 3){
                     updateServicos(url['var']);
                 }
-
             }
             if($(this).attr('data-id') == 'deg') {
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
@@ -1411,6 +1416,7 @@ $(document).ready(function(){
             if($(this).attr('data-id') == 'desag'){
                 url['mec'] = $('.opt-select[data-id=desag]').val()
             }
+
             updateIframe(url);
         }
         else {
