@@ -11,7 +11,6 @@ RUN apt install -y libapache2-mod-perl2
 RUN apt install -y librsvg2-bin
 RUN apt install -y git
 RUN perl -e'use CPAN; install "File::Slurp"'
-RUN docker-php-ext-install mysqli
 
 WORKDIR /var/www/atlasOBEC
 EXPOSE 80
