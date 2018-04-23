@@ -45,7 +45,13 @@
         $text = $json_text['var'][2][$_GET["var"]-1]; /*== informações da variável ==*/
     }
     else if($eixo == "comercio") {
-        $text = $json_text['var'][3][$_GET["var"]-1]; /*== informações da variável ==*/
+        foreach($json_text['var'][3] as $key=>$vrbs){
+            if($vrbs['id'] == $_GET["var"]){
+                $vrb = $key;
+                break;
+            }
+        }
+        $text = $json_text['var'][3][$key]; /*== informações da variável ==*/
     }
     $select = $json_text['select'];			   /*== informação dos selects ==*/
 

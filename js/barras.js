@@ -676,10 +676,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         
 
         
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
 
-        
+
+
         if(url['slc'] == 1){
             updateDataDesc()
         }
@@ -699,6 +700,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                             ["", formatTextVrv(dados.value[i], eixo, vrv)],
                         ]);
                     }
+                }
+                if(vrv === 3){
+                    console.log(dados)
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                    ]);
                 }
                 else if(vrv === 9){
                     if(url['uf'] != 0){
@@ -1073,8 +1081,9 @@ else {
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
+
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html("percent", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
 
 
     }

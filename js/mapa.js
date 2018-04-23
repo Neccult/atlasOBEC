@@ -348,7 +348,15 @@ function ready(error, br_states, mapa){
 		.append("path")
 		.attr("data-legend",function(d) { return d.id; })
 		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
-		.style('fill', function(d){ if(url['var'] == 17) {return colorJSON.binario[dict[d.id].valor.toString()].color; } else return color(dict[d.id].valor);})
+		.style('fill', function(d){
+		    if(url['var'] == 17) {
+		        return colorJSON.binario[dict[d.id].valor.toString()].color;
+		    }
+		    else {
+		        if(color(dict[d.id]) == undefined)
+		            return color(dict);
+		        else
+		            return color(dict[d.id].valor)}})
 		.attr("d", path)
 
 		//mouseover
@@ -625,7 +633,7 @@ function legendaBinario(){
     configInfoDataBoxMapa(eixo, vrv, dict[url['uf']]);
 
 
-    if(eixo == 0 || eixo == 2){
+    if(eixo == 0 || eixo == 1|| eixo == 2){
 
     }
     else{
@@ -649,9 +657,8 @@ function legendaBinario(){
     else
         estadoAtual = "BRASIL"
 
-    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, estadoAtual));
-    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, estadoAtual));
-
+    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", textJSON.var[eixo][vrv-1].desc_int, estadoAtual));
+    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", textJSON.var[eixo][vrv-1].desc_percent, estadoAtual));
 
     function loadTooltip(d, eixo, vrv){
 
@@ -699,7 +706,7 @@ function legendaBinario(){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                 ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
+                    // ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
 
                 ]);
             }
@@ -707,7 +714,7 @@ function legendaBinario(){
             else if(vrv === 2 || vrv === 9 || vrv === 6 || vrv === 4){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                   ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
                 ]);
             }
             else if(vrv === 10 || vrv === 11) {
