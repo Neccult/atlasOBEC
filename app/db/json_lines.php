@@ -210,7 +210,8 @@ else if($eixo == 0 && $var > 9) {
 
         }
     }
-} else if($eixo == 1 && $var > 11) {
+}
+else if($eixo == 1 && $var > 11) {
     require_once("EixoDois.php");
 
     if($ocp == 0){
@@ -260,7 +261,8 @@ else if($eixo == 0 && $var > 9) {
         }
     }
 
-} else if($eixo == 1 && $var == 5) {
+}
+else if($eixo == 1 && $var == 5) {
     require_once("EixoDois.php");
     for ($cad = 1; $cad <= 10; $cad++) {
 
@@ -351,8 +353,6 @@ else if($eixo == 3 && ($var >= 5 && $var <= 10)){
 
         }
     }
-    
-
 }
 
 

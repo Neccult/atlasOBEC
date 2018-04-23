@@ -3,10 +3,8 @@ var chartHeight = $('.chart').height();
 var chartWidth = $('.chart').width()+25;
 
 /*==== Linhas JS ====*/
-var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
-jQuery.get("./db/json_linhas.php"+config, function(data) {
-    // console.log(data);
-});
+var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+
 // var info = [];
 var dados = {key: [], value: []};
 
@@ -24,22 +22,22 @@ d3.json('data/colors.json', function (error, data) {
 
         textJSON = data;
 
-        var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+        var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
 
         d3.queue()
-            .defer(d3.json, "./db/json_lines.php" + config)
+            .defer(d3.json, "./db/json_linhas.php" + config)
             .await(analyze);
     });
 
 });
 
-
-
 $.get("./db/json_linhas.php"+config, function(data) {
-    //console.log(data);
+     // console.log(data);
 });
 
 function analyze(error, data) {
+
+    // console.log(data)
 
     //console.log(colorJSON)
 
@@ -165,7 +163,7 @@ function analyze(error, data) {
                 .data([data[i]])
                 .attr("class", "line")
                 .attr("scc", scc)
-                .style("stroke-width", function(){return 3;})
+                .style("stroke-width", function(){return 2;})
                 .style("stroke", color(scc))
                 .attr("d", valueline);
 
@@ -195,11 +193,15 @@ function analyze(error, data) {
 
         function mousemove(d, path) {
 
-            var scc = ($(path).attr("scc"));
+            if(!($(path).hasClass("domain")) ){
+                var scc = ($(path).attr("scc"));
 
-            tooltipInstance.showTooltip(d, [
-                ["title", scc]
-            ])
+                tooltipInstance.showTooltip(d, [
+                    ["title", scc]
+                ])
+            }
+
+
         }
 
 
@@ -232,7 +234,7 @@ function analyze(error, data) {
                 .attr("height", height)
                 .attr("width", width)
                 .style("fill", color(deg))
-                .style("stroke-width", 1)
+                .style("strok   e-width", 1)
                 .style("stroke", color(deg))
                 .attr("scc", deg);
 
@@ -244,7 +246,6 @@ function analyze(error, data) {
                 })
                 .on("mouseout", function () {
                     tooltipInstance.hideTooltip();
-                    d3.selectAll(".indicador").remove();
                 })
 
 
@@ -271,6 +272,15 @@ function analyze(error, data) {
             "Importação": "#8178AF",
             "Exportação": "#EC8A91",
             "SaldoComercial": "#E96B00",
+
+            "1": "#071342",
+            "2": "rgb(109, 191, 201)",
+            "3": "#071342",
+            "4": "rgb(109, 191, 201)",
+            "5": "#071342",
+            "6": "rgb(109, 191, 201)",
+            "7": "#8178AF",
+            "8": "#EC8A91",
 
         }
 
