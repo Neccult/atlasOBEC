@@ -239,7 +239,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					.on("mouseover", function(d){
-                        var title_content = textJSON.var[eixo][vrv-1].title;
+                        var title_content = getDataVar(textJSON, eixo, vrv).title;
                         var title = title_content.replace("<span>", "");
                         title = title.replace("<br>", "");
                         title = title.replace("</span>", "");

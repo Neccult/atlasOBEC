@@ -334,7 +334,7 @@ function ready(error, br_states, mapa){
 
     var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
-    var title_content = textJSON.var[eixo][vrv-1].title;
+    var title_content = getDataVar(textJSON, eixo, vrv).title;
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
@@ -567,8 +567,8 @@ function legendaBinario(){
 
 
 
-	$(window.parent.document).find('.value-info-title').html(textJSON.var[eixo][vrv-1].mapa_valores);
-    $(window.parent.document).find('.font-title').html("Fonte(s): "+textJSON.var[eixo][vrv-1].fontes);
+	$(window.parent.document).find('.value-info-title').html(getDataVar(textJSON, eixo, vrv).mapa_valores);
+    $(window.parent.document).find('.font-title').html("Fonte(s): "+getDataVar(textJSON, eixo, vrv).fontes);
 
     /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
@@ -657,8 +657,8 @@ function legendaBinario(){
     else
         estadoAtual = "BRASIL"
 
-    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", textJSON.var[eixo][vrv-1].desc_int, estadoAtual));
-    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", textJSON.var[eixo][vrv-1].desc_percent, estadoAtual));
+    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
+    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
 
     function loadTooltip(d, eixo, vrv){
 

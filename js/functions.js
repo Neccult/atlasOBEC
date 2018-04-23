@@ -1571,8 +1571,8 @@ function formatBarTextMap(value, eixo, vrv, obj){
 	var font_size = 9
 	$.get("./data/pt-br.json", function(description) {
 
-		sufixo = description.var[eixo][vrv-1].sufixo_valor;
-		prefixo = description.var[eixo][vrv-1].prefixo_valor;
+		sufixo = getDataVar(description, eixo, vrv).sufixo_valor;
+		prefixo = getDataVar(description, eixo, vrv).prefixo_valor;
 		valor = value;
 		switch(eixo) {
 			case 0:
@@ -1659,8 +1659,9 @@ function formatStringVrv(value, eixo, vrv){
     $.ajaxSetup({async: false})
     var string;
     $.get("./data/pt-br.json", function(d) {
-        sufixo = d.var[eixo][vrv-1].sufixo_valor;
-        prefixo = d.var[eixo][vrv-1].prefixo_valor;
+        getDataVar(d, eixo, vrv)
+        sufixo = getDataVar(d, eixo, vrv).sufixo_valor;
+        prefixo = getDataVar(d, eixo, vrv).prefixo_valor;
         valor = value;
         switch(eixo) {
             case 0:

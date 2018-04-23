@@ -175,7 +175,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 				//mouseover
 				.on("mouseover", function(d){
-                    var title_content = textJSON.var[eixo][vrv-1].title;
+                    var title_content = getDataVar(textJSON, eixo, vrv).title;
                     var title = title_content.replace("<span>", "");
                     title = title.replace("<br>", "");
                     title = title.replace("</span>", "");
