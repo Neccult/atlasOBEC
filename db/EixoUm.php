@@ -306,7 +306,6 @@ class EixoUm {
                 while($obj = mysqli_fetch_object($result, 'EixoUm')){
                     $allObjects[] = $obj;
 				}
-				if($var != 1){
 					$result_aux = array();
 					$value_aux = array();
 					$percent_aux = array();
@@ -320,8 +319,7 @@ class EixoUm {
 						$result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
 					}
 					$allObjects = $result_aux;
-				}
-                
+
             }
 
 		self::disconnect();

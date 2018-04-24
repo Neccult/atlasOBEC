@@ -202,6 +202,36 @@ class EixoTres {
 		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16);
 
 
+		if($var == 17){
+            $query = "SELECT * FROM " . self::$table . " AS ex"
+                . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
+                ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
+                . " WHERE ex.Numero = " . $var;
+
+            $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
+
+            $result = mysqli_query(self::$conn, $query);
+            $allObjects = array();
+
+            while($obj = mysqli_fetch_object($result, 'EixoTres')){
+                $allObjects[] = $obj;
+            }
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+                $value_aux[$data->idUF] += $data->Valor;
+                $percent_aux[$data->idUF] += $data->Percentual;
+                $result_aux[$data->idUF] = $data;
+                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
+            }
+            $allObjects = $result_aux;
+        }
+        else
+
 		if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF = ex.idUF"
@@ -286,7 +316,35 @@ class EixoTres {
 		
 		$vars_com_cad_0 = array( 1, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16);
 		self::connect();
-		    if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
+
+		    if($var == 17){
+                $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
+                    ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ".$mec
+                    ." WHERE ex.Numero = ".$var;
+
+                $result = mysqli_query(self::$conn, $query);
+                $allObjects = array();
+
+                while($obj = mysqli_fetch_object($result, 'EixoTres')){
+                    $allObjects[] = $obj;
+                }
+                $result_aux = array();
+                $value_aux = array();
+                $percent_aux = array();
+
+                foreach ($allObjects as $data) {
+                    if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
+                    if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
+                    $value_aux[$data->Ano] += $data->Valor;
+                    $percent_aux[$data->Ano] += $data->Percentual;
+                    $result_aux[$data->Ano] = $data;
+                    $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
+                    $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
+                }
+                $allObjects = $result_aux;
+            }
+		    else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
                     if(is_null($ano) || $var < 15) {
                         $query = "SELECT * FROM " . self::$table . " AS ex"
                             . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = " . $ufs
@@ -427,11 +485,11 @@ class EixoTres {
         $contNao = 0;
 
         foreach ($allObjects as $data) {
-            if($data->Valor == 1){
-                $contSim++;
-            }
-            else if($data->Valor == 0){
+            if($data->Valor == 0){
                 $contNao++;
+            }
+            else{
+                $contSim++;
             }
         }
 
