@@ -4,7 +4,7 @@ var anos_default;
 
 //$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
-    anos_default = JSON.parse(data); 
+    anos_default = JSON.parse(data);
 });
 
 //$.ajaxSetup({async: true});
@@ -29,6 +29,20 @@ function controlVarPage(clickVar){
     var newHash = window.location.hash;
     window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
     /* variáveis com valores default */
+}
+
+function getAnoDefault(eixo_atual){
+    switch(eixo_atual){
+        case 0: url['ano'] = anos_default[url['var']][0]; break;
+        case 1: url['ano'] = anos_default[url['var']][url['ocp']]; break;
+        case 2: url['ano'] = anos_default[url['var']][0]; break;
+        case 3:
+        if(url['var'] >= 11)
+            url['slc'] = 0
+        index = url['slc'] == 0 ? 1 : 0
+         
+         url['ano'] = anos_default[url['var']][index]; break;
+    }
 }
 
 /*-----------------------------------------------------------------------------
@@ -170,10 +184,14 @@ function updateIframe(url){
             $('#treemap_region').html("BRASIL");
             //alert(url['view'])
 
-            if(url['var'] == 5 ){
-                $('iframe[id="view_box"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+            if(url['var'] == 5 || url['var'] == 8){
+                newUrl = newUrl.replace(/cad=[0-9]*/, "cad=1");
+                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 // $('iframe[id="view_box"]').attr('src', 'no-view.html');
-
+                if(url['var'] == 8)
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR SETORES");
+                else(url['var'] == 5)
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR PARCEIROS");
 
             }
             else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
@@ -224,11 +242,7 @@ function updateIframe(url){
         else if(eixoAtual == 2){
             $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
 
-            if(url['var'] ==  17){
-                $('iframe[id="view_box_barras"]').attr('src', 'no-view.html');
-
-            }
-            else if (url['var'] ==  16 || url ['var'] == 15) {
+            if (url['var'] ==  16 || url ['var'] == 15) {
                 if(url['uos'] == 0) {
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
                 }
@@ -242,6 +256,17 @@ function updateIframe(url){
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO TOTAL / RECEITA EXECUTIVO");
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA DESPESA MINC / RECEITA EXECUTIVO");
             }
+        } else if( eixoAtual == 3){
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+            if(url['var'] == 5 || url['var'] == 8){
+                newUrl = newUrl.replace(/cad=[0-9]*/, "cad=0");
+                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                if(url['var'] == 8)
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR PARCEIROS");
+                else(url['var'] == 5)
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("C2 VALOR ABSOLUTO POR PARCEIROS");
+            }
+            
         }
 
     }
@@ -259,7 +284,6 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
                 } else if (url['var'] == 9 && url['uf'] != 0){
-                    console.log(url['uf'])
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
                 } else {
@@ -331,13 +355,19 @@ function updateIframe(url){
 
         }
         else if(eixoAtual == 3){
-            if(url['var'] >= 5 && url['var'] <= 10){
-                $('iframe[id="view_box_scc"]').attr('src', "no-view.html");
+            if(url['var'] == 5 || url['var'] == 8){
+                newUrl = newUrl.replace(/cad=[0-9]*/, "cad=2");
+                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                if(url['var'] == 8)
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR UF");
+                else(url['var'] == 5)
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR UF");
             }
 
-            if(url['var'] >= 1 && url['var'] <= 10 ){
+            if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 ){
                 $('iframe[id="view_box_scc"]').css('display', 'block')
                 $('iframe[id="view_box_scc"]').attr('src', 'donut.php?' + newUrl + '&eixo=' +  window.location.hash.substring(1) + window.location.hash)
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO");
                 /*$('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");*/
             }
@@ -1324,7 +1354,7 @@ $(document).ready(function(){
 	});
 
 	/* escolher novo filtro */
-	$(document).on('change', ".opt-select", function(){
+	$(document).on('change', ".opt-select", function(e){
 
         if($(this).attr("data-id") !== "eixo") {
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
@@ -1336,8 +1366,13 @@ $(document).ready(function(){
             
             /* muda o select do bread para o mesmo que o das opções*/
             $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
+            
+           
 
-
+            if($(this).attr("data-id") == "prc"){
+                document.getElementById('view_box').contentWindow.location.reload(true);
+                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
+            }
             if($(this).attr('data-id') == 'var'){
                 changeDescVar();
 
@@ -1359,25 +1394,30 @@ $(document).ready(function(){
                 else $(window.document).find(".cad-title").first().html($('.bread-select[data-id=ocp] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
                 updateBreadUF(eixo_atual, url['var']);
-                switch(eixo_atual){
-                    case 0: url['ano'] = anos_default[url['var']][0]; break;
-                    case 1: url['ano'] = anos_default[url['var']][url['ocp']]; break;
-                    case 2: url['ano'] = anos_default[url['var']][0]; break;
-                    case 3:
-                     index = url['slc'] == 0 ? 1 : 0
-                     url['ano'] = anos_default[url['var']][index]; break;
-                }
+                getAnoDefault(eixo_atual);
 
+                if(eixo_atual == 0){
+                    $('.opt-select[data-id=deg]').val(0);
+                }
                 if(eixo_atual == 1){
                     updateOcupacoes($(this).val());
                 }
                 if(eixo_atual == 2){
                     updateDefaultMec(url['var']);
+
                 }
 
                 if(eixo_atual == 3){
+                    
                     updateServicos(url['var']);
+                    updateTipo(url['var']);
+                    if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
+                        $(".opt-select[data-id='prc']").val(0)
+                        url['prc'] = 0
+                    }
+                    $(window.document).find(".prc-title").first().html($(".opt-select[data-id='prc'] option:selected").text());
                 }
+                
             }
             if($(this).attr('data-id') == 'deg') {
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
@@ -1404,10 +1444,9 @@ $(document).ready(function(){
 	});
 
     $(document).on('change', ".bread-select", function(e){
-
         if($(this).attr("data-id") !== "eixo") {
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
-
+            
             updateUrl();
             controlFilter($(this).val(), $(this).attr('data-id'));
 
@@ -1415,7 +1454,11 @@ $(document).ready(function(){
             
             /* muda o select das opções para o mesmo do bread */
             $(".opt-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-
+            if($(this).attr("data-id") == "prc"){
+                document.getElementById('view_box').contentWindow.location.reload(true);
+                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
+                // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
+            }
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             if($(this).attr('data-id') =='var'){
 
@@ -1441,6 +1484,9 @@ $(document).ready(function(){
                      index = url['slc'] == 0 ? 1 : 0
                      url['ano'] = anos_default[url['var']][index]; break;
                 }
+                if(eixo_atual == 0){
+                    $('.opt-select[data-id=deg]').val(0);
+                }
                 if(eixo_atual == 1){
                     updateOcupacoes($(this).val());
                 }
@@ -1451,26 +1497,24 @@ $(document).ready(function(){
 
                 if(eixo_atual == 3){
                     updateServicos(url['var']);
+                    updateTipo(url['var']);
+                    if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
+                        $('.bread-select[data-id=prc]').val(0);
+                        $(".opt-select[data-id='prc']").val(0)
+                        url['prc'] = 0
+                    }
+                    $(window.document).find(".prc-title").first().html($(".opt-select[data-id='prc'] option:selected").text());
                 }
                 
             }
             if($(this).attr("data-id") == "uf"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
 
-
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
-
-
-
                 updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
-            if($(this).attr("data-id") == "prc"){
-                document.getElementById('view_box').contentWindow.location.reload(true);
 
-                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
-
-                // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
-            }
+            
             if($(this).attr("data-id") === "cad") {
                 if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);

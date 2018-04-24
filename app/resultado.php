@@ -672,6 +672,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
     <?php if ($eixo == "comercio") {?>
     url['typ'] = "<?php echo $typ; ?>";
     url['prc'] = "<?php echo $prc; ?>";
+    url['slc'] = "<?php echo $slc; ?>";
     <?php } ?>
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
 </script>

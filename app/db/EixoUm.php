@@ -345,42 +345,20 @@ class EixoUm {
                 $stmt->execute();
                 $allObjects = self::fetch_results($stmt);
             }
-        } else {
 
-            $query = "SELECT * FROM ".self::$table." AS ex"
-                   ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
-                   ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
-                   ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
-                   ." WHERE ex.Numero = ?";
-
-            $stmt = mysqli_stmt_init(self::$conn);
-            if ($stmt->prepare($query)) {
-                $stmt->bind_param(
-                    'ssss',
-                    $ufs,
-                    $atc,
-                    $prt,
-                    $var
-                );
-                $stmt->execute();
-                $allObjects = self::fetch_results($stmt);
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
+                if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
+                $value_aux[$data->Ano] += $data->Valor;
+                $percent_aux[$data->Ano] += $data->Percentual;
+                $result_aux[$data->Ano] = $data;
+                $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
+                $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
             }
-
-            if($var != 1){
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
-                    if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
-                    $value_aux[$data->Ano] += $data->Valor;
-                    $percent_aux[$data->Ano] += $data->Percentual;
-                    $result_aux[$data->Ano] = $data;
-                    $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
-                    $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
-                }
-                $allObjects = $result_aux;
-            }
+            $allObjects = $result_aux;
         }
         
 		self::disconnect();

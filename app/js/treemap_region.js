@@ -239,7 +239,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					.on("mouseover", function(d){
-                        var title_content = textJSON.var[eixo][vrv-1].title;
+                        var title_content = getDataVar(textJSON, eixo, vrv).title;
                         var title = title_content.replace("<span>", "");
                         title = title.replace("<br>", "");
                         title = title.replace("</span>", "");
@@ -306,11 +306,13 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 						$(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
 						$(window.parent.document).find("#view_box").attr("src", newMAPASrc);
 						destacaPais(ufId(d.data.name));
-						setIntegerValueData({valor: integerValue}, eixo, vrv);
-						if(url['cad'] == 0)
-							setPercentValueData({percentual: percentValue}, eixo, vrv);
+						//setIntegerValueData({valor: integerValue}, eixo, vrv);
+						// if(url['cad'] == 0)
+						// 	setPercentValueData({percentual: percentValue}, eixo, vrv);
 						setStateTitle(d.data.estado);
-					})
+
+
+                    })
 					.style("cursor", "pointer");
 
 	cell.append("rect")
@@ -502,22 +504,9 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 			.attr("text-anchor", "middle");
 	}
 
-
-    if(url['uf'] != 0 && url['cad'] == 0) {
-        destacaPais(url['uf']);
-        setPercentValueData({percentual: $('svg').find('rect[data-legend="'+url['uf']+'"]').attr("data-percent")}, eixo, vrv);
-        setIntegerValueData({valor: $('svg').find('rect[data-legend="'+url['uf']+'"]').attr("data-integer")}, eixo, vrv);
-    }
-
-    if(url['cad'] != 0 && url['uf'] != 0) {
-		destacaPais(url['uf']);
-        //setPercentValueData({percentual: $('svg').find('rect[data-legend="'+url['uf']+'"]').attr("data-percent")}, eixo, vrv);
-        setIntegerValueData({valor: $('svg').find('rect[data-legend="'+url['uf']+'"]').attr("data-integer")}, eixo, vrv);
-    }
-
     if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
-    $(window.parent.document).find(".integer-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_int);
-    $(window.parent.document).find(".percent-value").first().find(".description-number").html(textJSON.var[eixo][vrv-1].desc_percent);
+
+	console.log(data)
 
 });
 
