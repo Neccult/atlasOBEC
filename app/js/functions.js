@@ -827,14 +827,49 @@ function updateBreadUF(eixo, vrv){
 function updateTipo(vrv){
     switch(vrv){
         case '3':
-            $("select[data-id='typ']").find("option[value='3']").remove();
+            if($("select[data-id=typ]").find("option[value='2']").length == 0)
+                $("select[data-id='typ']").append("<option value='2'>Importação</option>");
+            if($("select[data-id=typ]").find("option[value='3']").length != 0)
+                $("select[data-id='typ']").find("option[value='3']").remove();
+            if($("select[data-id=typ]").find("option[value='4']").length == 0)
+                $("select[data-id='typ']").append("<option value='4'>Saldo Comercial</option>");
+            break;
+        case '11':
+            if($("select[data-id=typ]").find("option[value='3']").length != 0)
+                $("select[data-id='typ']").find("option[value='3']").remove();
+            if($("select[data-id=typ]").find("option[value='4']").length != 0)
+                $("select[data-id='typ']").find("option[value='4']").remove();         
+            break;
+        case '12':
+            if($("select[data-id=typ]").find("option[value='2']").length == 0)
+                $("select[data-id='typ']").append("<option value='2'>Importação</option>");
+            if($("select[data-id=typ]").find("option[value='3']").length != 0)
+                $("select[data-id='typ']").find("option[value='3']").remove();
+            if($("select[data-id=typ]").find("option[value='4']").length != 0)
+                $("select[data-id='typ']").find("option[value='4']").remove();
+            break;
+        case '14':
+            if($("select[data-id=typ]").find("option[value='2']").length != 0)
+                $("select[data-id='typ']").find("option[value='2']").remove();
+            if($("select[data-id=typ]").find("option[value='3']").length != 0)
+                $("select[data-id='typ']").find("option[value='3']").remove();
+            if($("select[data-id=typ]").find("option[value='4']").length != 0)
+                $("select[data-id='typ']").find("option[value='4']").remove();
             break;
         default:
-            if($("select[data-id=typ]").find("option[value='3']").length == 0){
-                $("select[data-id='typ']").find("option[value='4']").remove()
-                $("select[data-id='typ']").append("<option value='3'>Saldo Comercial</option>");
-                $("select[data-id='typ']").append("<option value='4'>Valor Transicionado</option>");
+            if($("select[data-id=typ]").find("option[value='2']").length != 0){
+                $("select[data-id='typ']").find("option[value='2']").remove()
             }
+            if($("select[data-id=typ]").find("option[value='3']").length != 0){
+                $("select[data-id='typ']").find("option[value='3']").remove()
+            }
+            if($("select[data-id=typ]").find("option[value='4']").length != 0){
+                $("select[data-id='typ']").find("option[value='4']").remove()
+            }
+            $("select[data-id='typ']").append("<option value='2'>Importação</option>");
+            $("select[data-id='typ']").append("<option value='3'>Valor Transicionado</option>");
+            $("select[data-id='typ']").append("<option value='4'>Saldo Comercial</option>");         
+            
             break;
     }
 }
@@ -1562,13 +1597,7 @@ function setPercentValueData(value, eixo, vrv) {
         setMaxFontSize(doc);
     }
     else if(eixo == 3){
-
-        if(vrv == 1 || vrv == 2){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
-            var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
-            setMaxFontSize(doc);
-        }
-
+        $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
     }
 
 }
