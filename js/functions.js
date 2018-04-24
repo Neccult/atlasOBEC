@@ -824,52 +824,35 @@ function updateBreadUF(eixo, vrv){
     }
 }
 
+function updateSelectTipo(options){
+    names = {"1": "Exportação", "2": "Importação", "3": "Saldo Comercial", "4": "Valor Transicionado"};
+    for(var key in names){
+        if($("select[data-id=typ]").find("option[value='"+key+"']").length != 0)
+            $("select[data-id='typ']").find("option[value='"+key+"']").remove()
+    }
+    
+    options.forEach(function(d){
+        if($("select[data-id=typ]").find("option[value='"+d+"']").length == 0)
+                $("select[data-id='typ']").append("<option value='"+d+"'>"+names[d]+"</option>");
+    })
+}
+
 function updateTipo(vrv){
     switch(vrv){
         case '3':
-            if($("select[data-id=typ]").find("option[value='2']").length == 0)
-                $("select[data-id='typ']").append("<option value='2'>Importação</option>");
-            if($("select[data-id=typ]").find("option[value='3']").length != 0)
-                $("select[data-id='typ']").find("option[value='3']").remove();
-            if($("select[data-id=typ]").find("option[value='4']").length == 0)
-                $("select[data-id='typ']").append("<option value='4'>Saldo Comercial</option>");
+            updateSelectTipo(["1", "2", "4"])
             break;
         case '11':
-            if($("select[data-id=typ]").find("option[value='3']").length != 0)
-                $("select[data-id='typ']").find("option[value='3']").remove();
-            if($("select[data-id=typ]").find("option[value='4']").length != 0)
-                $("select[data-id='typ']").find("option[value='4']").remove();         
+            updateSelectTipo(["1", "2"])
             break;
         case '12':
-            if($("select[data-id=typ]").find("option[value='2']").length == 0)
-                $("select[data-id='typ']").append("<option value='2'>Importação</option>");
-            if($("select[data-id=typ]").find("option[value='3']").length != 0)
-                $("select[data-id='typ']").find("option[value='3']").remove();
-            if($("select[data-id=typ]").find("option[value='4']").length != 0)
-                $("select[data-id='typ']").find("option[value='4']").remove();
+            updateSelectTipo(["1", "2"])
             break;
         case '14':
-            if($("select[data-id=typ]").find("option[value='2']").length != 0)
-                $("select[data-id='typ']").find("option[value='2']").remove();
-            if($("select[data-id=typ]").find("option[value='3']").length != 0)
-                $("select[data-id='typ']").find("option[value='3']").remove();
-            if($("select[data-id=typ]").find("option[value='4']").length != 0)
-                $("select[data-id='typ']").find("option[value='4']").remove();
+            updateSelectTipo(["1"])
             break;
-        default:
-            if($("select[data-id=typ]").find("option[value='2']").length != 0){
-                $("select[data-id='typ']").find("option[value='2']").remove()
-            }
-            if($("select[data-id=typ]").find("option[value='3']").length != 0){
-                $("select[data-id='typ']").find("option[value='3']").remove()
-            }
-            if($("select[data-id=typ]").find("option[value='4']").length != 0){
-                $("select[data-id='typ']").find("option[value='4']").remove()
-            }
-            $("select[data-id='typ']").append("<option value='2'>Importação</option>");
-            $("select[data-id='typ']").append("<option value='3'>Valor Transicionado</option>");
-            $("select[data-id='typ']").append("<option value='4'>Saldo Comercial</option>");         
-            
+        default: 
+            updateSelectTipo(["1", "2", "3", "4"])
             break;
     }
 }
