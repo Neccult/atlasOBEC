@@ -30,9 +30,8 @@ body{
 	font-size: 10px;
 	transition: .5s all ease;
 }
-
-#resultado {
-	margin-top: 30px;
+#resultado{
+	margin-top: 0;
 }
 
 /* ADICIONADO */
@@ -441,9 +440,11 @@ button.opt:hover, button.opt.active{
 	background-size: cover;
 }
 
-#menuvariaveis {
-	margin-top:		50px;
-	margin-bottom:	20px;
+
+
+#menuvariaveis {  
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
 }
 
 .text-wrapper{
@@ -614,7 +615,9 @@ ul.var-list li{
 	stroke:	#555 !important;
 	stroke-width: 1px;
 }
-
+.container {
+	width: 100% !important;
+}
 /*=============  resultados =================*/
 article.results-article{
 	display: table;
@@ -919,6 +922,15 @@ select[disabled].opt-select{
 	color: #808080;
 }
 
+.desc-chart .title {
+    margin-bottom: 0;
+    margin-top: -12px;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    line-height: 40px;
+    text-align: center;
+}
 .opt-select-title{
 	background-color: #FFF;
 	background-image: url('../images/arrow.png');
