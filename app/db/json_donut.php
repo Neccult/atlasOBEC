@@ -60,10 +60,11 @@ function map_tipo($tipo){
 }
 
 function binario($tipo){
-    switch($tipo){
-        case 0: return "Não";
-        case 1: return "Sim";
-    }
+
+    if($tipo == 0)
+        return "Não";
+    else
+        return "Sim";
 }
 $tipos = array();
 

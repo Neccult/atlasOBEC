@@ -353,20 +353,24 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         *  O trecho a seguir insere os anos contidos na visualização
         *  no select dos anos a fim de não criar visualizações impossíveis.
         */
-        $(window.parent.document).find('select[data-id=ano]').each(function(){
-            selectOp = this;
-            $(this.options).each(function(){
-                $(this).remove();
-            })
-            dummy = dados.key.slice(0);
-            dummy.reverse().forEach(function(d){
-                $(selectOp).append($('<option>', {
-                    value: d,
-                    text: d
-                }))
-            })
-            $(this).val(url['ano']);
-        });
+
+        if(!(eixo == 2 && vrv == 17)){
+            $(window.parent.document).find('select[data-id=ano]').each(function(){
+                selectOp = this;
+                $(this.options).each(function(){
+                    $(this).remove();
+                })
+                dummy = dados.key.slice(0);
+                dummy.reverse().forEach(function(d){
+                    $(selectOp).append($('<option>', {
+                        value: d,
+                        text: d
+                    }))
+                })
+                $(this).val(url['ano']);
+            });
+        }
+
 
         //Cria barras
         svg.selectAll("rect")
@@ -676,10 +680,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         
 
         
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
 
-        
+
+
         if(url['slc'] == 1){
             updateDataDesc()
         }
@@ -699,6 +704,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                             ["", formatTextVrv(dados.value[i], eixo, vrv)],
                         ]);
                     }
+                }
+                if(vrv === 3){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
+                    ]);
                 }
                 else if(vrv === 9){
                     if(url['uf'] != 0){
@@ -745,6 +756,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
                         // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                    ]);
+                }
+                else if(vrv === 17){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
                     ]);
                 }
             }
@@ -1073,8 +1090,9 @@ else {
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(textJSON.var[eixo][vrv-1].desc_percent, data[dados.key[0]].uf));
+
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html("percent", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
 
 
     }

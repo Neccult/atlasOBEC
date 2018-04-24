@@ -35,7 +35,7 @@
 				"id":"1",
 				"title":"Total <span>de</span> Empresas",
 				"desc_int": "Empresas [cad] [prt]",
-				"desc_percent": "das empresas culturais e criativas do Brasil",
+				"desc_percent": "das empresas culturais e criativas [prt] {} ",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
@@ -195,7 +195,7 @@
 				"id":"5",
 				"title":"Receita Operacional Liquida",
 				"desc_int": "de receita operacional líquida das empresas [cad] ",
-				"desc_percent": "do total de receita operacional líquida das empresas culturais e criativas do Brasil",
+				"desc_percent": "do total de receita operacional líquida das empresas culturais e criativas {}",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
@@ -241,7 +241,7 @@
 				"id":"6",
 				"title":"Custo",
 				"desc_int": "de custo das Empresas [cad]",
-				"desc_percent": "do total de custo das empresas culturais e criativas do Brasil",
+				"desc_percent": "do total de custo das empresas culturais e criativas {}",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
@@ -287,7 +287,7 @@
 				"id":"7",
 				"title":"Lucro",
 				"desc_int": "de lucro das Empresas [cad]",
-				"desc_percent": "DO TOTAL DE LUCRO DAS EMPRESAS culturais e criativas DO BRASIL",
+				"desc_percent": "DO TOTAL DE LUCRO DAS EMPRESAS culturais e criativas {}",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
@@ -333,7 +333,7 @@
 				"id":"8",
 				"title":"<span>Valor Adicionado (VA)</span>",
 				"desc_int": "valor adicionado pelas Empresas [cad]",
-				"desc_percent": "do total de valor adicionado das empresas culturais e criativas do Brasil",
+				"desc_percent": "do total de valor adicionado das empresas culturais e criativas {}",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
@@ -378,7 +378,7 @@
 			{
 				"id":"9",
 				"title":"Valor Adicionado pelo PIB",
-				"desc_int": "de valor adicionado/PIB do estado {} pelas empresas [cad]",
+				"desc_int": "de valor adicionado/PIB {} pelas empresas [cad]",
 				"desc_percent": "",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
@@ -933,7 +933,7 @@
 				"id":"1",
 				"title":"<span>Financiamento Público Total</span>",
 				"sufixo_valor":"",
-				"desc_int":"FINANCIAMENTO À CULTURA []",
+				"desc_int":"FINANCIAMENTO À CULTURA  [] das empresas [cad] {}",
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA [] {}",
 				"desc_var_mapa": "A variável mostra o valor bruto total destinado ao fomento público da produção artística e cultural, por meio de políticas públicas e de seus mecanismos: mecenato, Fundo Nacional de Cultura (FNC) e total (soma dos dois anteriores). ",
 				"prefixo_valor":"R$ ",
@@ -973,8 +973,8 @@
 				"id":"2",
 				"title":"<span>Financiamento do Vale-Cultura</span>",
 				"sufixo_valor":"",
-				"desc_int":"CONSUMIDOS VIA VALE-CULTURA",
-				"desc_percent": "DO TOTAL CONSUMIDO VIA VALE-CULTURA",
+				"desc_int":"CONSUMIDOS VIA VALE-CULTURA por empresas [cad] {}",
+				"desc_percent": "DO TOTAL CONSUMIDO VIA VALE-CULTURA {}",
 				"desc_var_mapa": "A variável mostra o valor bruto total utilizado em compras de bens e serviços culturais por meio do Programa Vale Cultura.",
 				"prefixo_valor":"R$ ",
 				"fontes": "Portal Brasileiro de Dados Abertos",
@@ -1009,8 +1009,8 @@
 				"id":"3",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
-				"desc_int":"FINANCIAMENTO À CULTURA VIA [] BNDES ()",
-				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES ()",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA [] BNDES () {}",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES () {}",
 				"desc_var_mapa": "A variável apresenta o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
 				"fontes": "BNDES.",
 				"title":"<span>Financiamento BNDES</span>",
@@ -1046,8 +1046,8 @@
 			{
 				"id":"4",
 				"title":"<span>Valor total de incentivos privados</span>",
-				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA",
-				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA [cad] {} ",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA {}",
 				"desc_var_mapa": "A variável apresenta o valor bruto total do fomento cultural via mecenato, apoiado por: empresas privadas, pessoas físicas e total privado (soma dos dois anteriores).",
 				"sufixo_valor":"",
 				"fontes": "SALICnet. Atualizado para 2016.",
@@ -1077,8 +1077,8 @@
 			{
 				"id":"5",
 				"title":"<span>Valor total de incentivos via empresas públicas<span>",
-				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL",
-				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL [cad] {}",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL {}",
 				"desc_var_mapa": "A variável mostra o valor bruto total do apoio via mecenato que foi apoiado por empresas estatais.",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
@@ -1106,7 +1106,7 @@
 				"id":"6",
 				"title":"<span>Despesa Mecenato / FNC</span>",
 				"desc":"Razão entre a despesa por meio do FNC e mecenato nos estratos referidos.",
-				"desc_int":"RAZÃO ENTRE MECENATO E FNC",
+				"desc_int":"RAZÃO ENTRE MECENATO E FNC [cad] {}",
 				"desc_percent": "",
 				"desc_var_mapa": "A variável calcula a razão entre a despesa financiada pelo FNC e a despesa financiada pelo mecenato, nos estratos referidos.",
 				"fontes": "Elaborado pelo NECCULT com base no SALICnet. Atualizado para 2016.",
@@ -1142,7 +1142,7 @@
 				"id":"7",
 				"title":"<span>Recursos Privados / Incentivo Fiscal</span>",
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
-				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO.",
+				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO {}.",
 				"desc_percent": "",
 				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
 				"desc_var_mapa": "A variável calcula o percentual dos recursos financiados via mecenato advindos de apoio privado (empresas privadas e pessoas físicas). ",
@@ -1169,7 +1169,7 @@
 			{
 				"id":"8",
 				"title":"<span>FINANCIAMENTO PÚBLICO / VA</span>",
-				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [] E VALOR ADICIONADO PELA CULTURA",
+				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [] E VALOR ADICIONADO PELA CULTURA [cad] {}",
 				"desc_percent": "",
 				"desc_var_mapa": "A variável mostra a razão entre o fomento por meio de mecanismos de financiamento via incentivo (mecenato, FNC e total) e o valor adicionado pelos  SCC.",
 				"sufixo_valor":"",
@@ -1208,7 +1208,7 @@
 				"id":"9",
 				"title":"<span>FINANCIAMENTO PÚBLICO / MASSA SALARIAL</span>",
 				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
-				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [] E MASSA SALARIAL DOS TRABALHADORES CULTURAIS",
+				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [] E MASSA SALARIAL DOS TRABALHADORES CULTURAIS [cad] {}",
 				"desc_percent": "",
 				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
 				"desc_var_mapa": "A variável calcula a razão entre o fomento por meio de mecanismos de financiamento via incentivo (mecenato, FNC e total) e a massa salarial dos trabalhadores da cultura.",
@@ -1262,8 +1262,8 @@
 				"id":"11",
 				"title":"<span>Total das propostas de projetos</span>",
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
-				"desc_int":"PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO",
-				"desc_percent": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO",
+				"desc_int":"PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [cad] {} ",
+				"desc_percent": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO {}",
 				"desc_var_mapa": "A variável retrata a soma de todas propostas de projetos para captação via mecenato, segundo ano de proposição do projeto. ",
 				"sufixo_valor":"",
 				"fontes": "SALICnet. ",
@@ -1295,8 +1295,8 @@
 				"id":"12",
 				"title":"<span>Total dos projetos aprovados</span>",
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
-				"desc_int":"PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO",
-				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO",
+				"desc_int":"PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [cad] {}",
+				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO {}",
 				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, segundo ano de proposição do projeto. ",
 				"sufixo_valor":"",
 				"fontes": "SALICnet. ",
@@ -1328,7 +1328,7 @@
 				"id":"13",
 				"title":"<span>Tempo Médio para Aprovação de Projetos - Mecenato<span>",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
-				"desc_int":"DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO",
+				"desc_int":"DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [cad] {}",
 				"desc_percent": "",
 				"fontes": "SALICnet. ",
 				"desc_var_mapa": "A variável mostra o tempo médio entre a data de proposta do projeto e a data de efetiva aprovação para início de captação de recursos.",
@@ -1362,7 +1362,7 @@
 				"title":"<span>RAZÃO ENTRE O VALOR SOLICITADO PELOS PROJETOS E O APROVADO - MECENATO<span>",
 				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
 				"sufixo_valor":"",
-				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO",
+				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [cad] {}",
 				"desc_percent": "",
 				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
 				"desc_var_mapa": "A variável retrata o percentual médio obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, segundo ano de proposição do projeto.",
@@ -1419,7 +1419,7 @@
 				"desc_var_mapa": "",
 				"desc":"",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1478,7 +1478,7 @@
 				"desc_int": "",
 				"fontes": "Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"desc_percent":"",
-				"sufixo_valor":"",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1517,7 +1517,7 @@
 				"desc_var_mapa": "A variável mostra a relação entre o comércio exterior dos Setores Culturais e Criativos com o valor adicionado pelas empresas culturais e criativas.",
 				"desc_int": "",
 				"desc_percent":"",
-				"sufixo_valor":"",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"type":[
@@ -1548,45 +1548,6 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
-				}
-			},
-			{
-				"id":"4",
-				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
-				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "Apresenta a razão entre os valores absolutos da cultura os valores totais do comércio exterior cultural brasileiro.",
-				"desc_int": "",
-				"desc_percent":"",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 				}
 			},
 			{
@@ -1630,86 +1591,6 @@
 				}
 			},
 			{
-				"id":"6",
-				"title":"<span>C4 Valor Absoluto Setores</span>",
-				"desc":"Demonstra a relação do comércio exterior nacional cultural com a massa salarial da cultura por estratificação proposta.",
-				"desc_var_mapa": "A variável evidencia o grau de concentração do comércio exterior dos quatro maiores Setores Culturais e Criativos, em relação à participação de todos os Setores Culturais e Criativos na corrente de comércio, em cada ano.",
-				"desc_int": "",
-				"desc_percent":"",
-				"sufixo_valor":"",
-				"fontes":"MDIC.",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
-			},
-			{
-				"id":"7",
-				"title":"<spna>C4 Valor Absoluto UFs</span>",
-				"desc":"Demonstra a participação do comércio exterior nacional cultural na despesa total com Fomento por parte do governo federal",
-				"desc_var_mapa": "A variável mostra o grau de concentração do comércio internacional para os quatro maiores, em termos de participação relativa, estados brasileiros, em relação à participação de todos os estados na corrente de comércio de cada período.",
-				"fontes": "Elaboração do NECCULT/UFRGS com base no MDIC.",
-				"desc_int": "",
-				"desc_percent":"",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
-				}
-			},
-			{
 				"id":"8",
 				"title":"<span>IHH VALOR ABSOLUTO PARCEIROS</span>",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
@@ -1748,38 +1629,6 @@
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				}
-			},
-			{
-				"id":"9",
-				"title":"<span>IHH VALOR ABSOLUTO SETORES</span>",
-				"desc_int": "",
-				"desc_percent":"",
-				"desc":"Demonstra o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o grau de concentração da corrente de comércio dos Setores Culturais e Criativos em relação à contribuição de cada segmento dos Setores Culturais e Criativos.",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Tipo","id":"typ"}
-				]
-			},
-			{
-				"id":"10",
-				"title":"<span>IHH VALOR ABSOLUTO UFs</span>",
-				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o grau de concentração da corrente de comércio dos Setores Culturais e Criativos em relação à contribuição de cada unidade da federação.",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Tipo","id":"typ"}
-				]
 			},
 			{
 				"id":"11",
@@ -1840,23 +1689,6 @@
 				"desc_percent":"",
 				"desc_var_mapa": "A variável retrata a relação do índice de preços das exportações, corrigido pela taxa de câmbio, com o índice de custos estimado pela FUNCEX. ",
 				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC, FUNCEX e BIS.",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
-				]
-			},
-			{
-				"id":"15",
-				"title":"ÍNDICE DE DEMANDA",
-				"desc_int": "",
-				"desc_percent":"",
-				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o índice de demanda global por exportações dos Setores Culturais e Criativos brasileiros. ",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[

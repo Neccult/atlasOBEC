@@ -4,12 +4,15 @@ var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad
 var tooltipInstance = tooltip.getInstance();
 $.get("./db/json_donut.php"+config, ready);
 
+
+
+
 function ready(json){
     $('#corpo').attr("class", $('#corpo').attr("class")+ " done")
     $('#loading').fadeOut('fast');
     var data = JSON.parse(json);
     getPercent(data);
-    console.log(data)
+
     height = 220;
     width = $('#corpo').width() - 40;
 
@@ -34,6 +37,7 @@ function ready(json){
 
     g.append("path")
         .attr("d", arc)
+        .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
         .style("fill", function(d) { return color(d.data.tipo); })
         .style("stroke", "none");
 
@@ -41,7 +45,13 @@ function ready(json){
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .attr("dy", ".40em")
         .attr("dx", -radius/6)
-        .text(function(d) { if(d.data.percent != 0) return percentFormat(d.data.percent) })
+        .text(function(d) { 
+            if(vrv == 3 && eixo == 3){
+                return formatTextVrv(d.data.valor, 3, vrv);
+            }
+            if(d.data.percent != 0) 
+                return percentFormat(d.data.percent) 
+            })
         .style("font-family", "arial")
         .style("fill", "#fff")
         .style("font-size", radius/10)
@@ -50,11 +60,19 @@ function ready(json){
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
 
-            tooltipInstance.showTooltip(d.data, [
-                ["title", d.data.tipo],
-                ["", formatTextVrv(d.data.valor, 3, vrv)],
-                ["", percentFormat(d.data.percent)]
-            ]);
+            if(eixo == 2 && vrv == 17){
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo]
+                ]);
+            }
+            else{
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 3, vrv)],
+                    ["", percentFormat(d.data.percent)]
+                ]);
+            }
+
             
         })
         .on("mouseout", function(d){
@@ -80,8 +98,10 @@ function color(tipo){
     colors = {
         "Exportação": "#071342",
         "Importação": "rgb(109, 191, 201)",
-        "Sim": "#00ff00",
-        "Não": "#ff0000"
+        "Sim": "#071342",
+        "Não": "#aaa"
+
+
     }
     return colors[tipo];
 }
@@ -95,6 +115,18 @@ function getPercent(data){
         d.percent = d.valor/sum_values
     })
 }
+
+function getSoma(data, tipo){
+    sum_values = 0;
+    data.forEach(function(d){
+        // console.log(d)
+        sum_values += d.valor;
+    })
+    data.forEach(function(d){
+        d.percent = d.valor/sum_values
+    })
+}
+
 function percentFormat(number){
     return (number*100).toFixed(2) + "%";
 }

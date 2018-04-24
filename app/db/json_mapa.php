@@ -130,22 +130,15 @@ else if($eixo == 2) {
     require_once("EixoTres.php");
     foreach (EixoTres::getter_mapa($var, $cad, $mec, $mod, $pfj, $ano) as $tupla) {
 
-         if($var != 17) {
-             $id = $tupla->idUF;
-             $mapa[$id]['id'] = (int)$tupla->idUF;
-             $mapa[$id]['uf'] = $tupla->UFNome;
-             $mapa[$id]['ano'] = (double)$tupla->Ano;
-             $mapa[$id]['valor'] = (double)$tupla->Valor;
-             $mapa[$id]['percentual'] = (double)$tupla->Percentual;
-             $mapa[$id]['taxa'] = (double)$tupla->Taxa;
-         }
-         else{
-             $id = $tupla->idUF;
-             $mapa[$id]['id'] = (int)$tupla->idUF;
-             $mapa[$id]['uf'] = $tupla->UFNome;
-             $mapa[$id]['ano'] = (double)$tupla->Ano;
-             $mapa[$id]['valor'] = (int)$tupla->Valor;
-         }
+         $id = $tupla->idUF;
+         $mapa[$id]['id'] = (int)$tupla->idUF;
+         $mapa[$id]['uf'] = $tupla->UFNome;
+         $mapa[$id]['ano'] = (double)$tupla->Ano;
+         $mapa[$id]['valor'] = (double)$tupla->Valor;
+         $mapa[$id]['percentual'] = (double)$tupla->Percentual;
+         $mapa[$id]['taxa'] = (double)$tupla->Taxa;
+
+
     }
 }
 else if($eixo == 3) {
