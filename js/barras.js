@@ -353,20 +353,24 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         *  O trecho a seguir insere os anos contidos na visualização
         *  no select dos anos a fim de não criar visualizações impossíveis.
         */
-        $(window.parent.document).find('select[data-id=ano]').each(function(){
-            selectOp = this;
-            $(this.options).each(function(){
-                $(this).remove();
-            })
-            dummy = dados.key.slice(0);
-            dummy.reverse().forEach(function(d){
-                $(selectOp).append($('<option>', {
-                    value: d,
-                    text: d
-                }))
-            })
-            $(this).val(url['ano']);
-        });
+
+        if(!(eixo == 2 && vrv == 17)){
+            $(window.parent.document).find('select[data-id=ano]').each(function(){
+                selectOp = this;
+                $(this.options).each(function(){
+                    $(this).remove();
+                })
+                dummy = dados.key.slice(0);
+                dummy.reverse().forEach(function(d){
+                    $(selectOp).append($('<option>', {
+                        value: d,
+                        text: d
+                    }))
+                })
+                $(this).val(url['ano']);
+            });
+        }
+
 
         //Cria barras
         svg.selectAll("rect")
@@ -702,7 +706,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     }
                 }
                 if(vrv === 3){
-                    console.log(dados)
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
@@ -753,6 +756,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
                         // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                    ]);
+                }
+                else if(vrv === 17){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", dados.key[i]],
+                        ["", formatTextVrv(dados.value[i], eixo, vrv)],
                     ]);
                 }
             }
