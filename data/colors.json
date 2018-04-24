@@ -242,11 +242,11 @@
 	"binario": {
 		"0": {
 			"name": "Não",
-			"color": "#ff1616"
+			"color": "#aaa"
 		},
 		"1": {
 			"name": "Sim",
-			"color": "#33e822"
+			"color": "#071342"
 		}
 	}
 }

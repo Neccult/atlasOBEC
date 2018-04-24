@@ -1419,7 +1419,7 @@
 				"desc_var_mapa": "",
 				"desc":"",
 				"sufixo_valor":"",
-				"prefixo_valor":"",
+				"prefixo_valor":"R$ ",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1478,7 +1478,7 @@
 				"desc_int": "",
 				"fontes": "Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"desc_percent":"",
-				"sufixo_valor":"",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1517,7 +1517,7 @@
 				"desc_var_mapa": "A variável mostra a relação entre o comércio exterior dos Setores Culturais e Criativos com o valor adicionado pelas empresas culturais e criativas.",
 				"desc_int": "",
 				"desc_percent":"",
-				"sufixo_valor":"",
+				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"type":[
@@ -1548,45 +1548,6 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
-				}
-			},
-			{
-				"id":"4",
-				"title":"<span>Relação com o Comércio Exterior Cultural Brasileiro</span>",
-				"desc":"Demonstra a participação relativa de cada setor no comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "Apresenta a razão entre os valores absolutos da cultura os valores totais do comércio exterior cultural brasileiro.",
-				"desc_int": "",
-				"desc_percent":"",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
-					{"name":"Barras", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 				}
 			},
 			{
@@ -1728,23 +1689,6 @@
 				"desc_percent":"",
 				"desc_var_mapa": "A variável retrata a relação do índice de preços das exportações, corrigido pela taxa de câmbio, com o índice de custos estimado pela FUNCEX. ",
 				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC, FUNCEX e BIS.",
-				"sufixo_valor":"",
-				"prefixo_valor":"",
-				"type":[
-					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
-				]
-			},
-			{
-				"id":"15",
-				"title":"ÍNDICE DE DEMANDA",
-				"desc_int": "",
-				"desc_percent":"",
-				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o índice de demanda global por exportações dos Setores Culturais e Criativos brasileiros. ",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
