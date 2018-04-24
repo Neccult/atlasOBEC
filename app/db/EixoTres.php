@@ -451,8 +451,8 @@ class EixoTres {
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ?"
                    ." WHERE ex.Numero = ?";
-
-
+            
+            
             if ($stmt->prepare($query)) {
                 $stmt->bind_param(
                     'sss',
@@ -479,21 +479,22 @@ class EixoTres {
                 $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
             }
             $allObjects = $result_aux;
+            
         } else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
+            
             if(is_null($ano) || $var < 15) {
                 $cad = (is_null($cad)) ? 0 : $cad;
-                    if(is_null($ano) || $var < 15) {
-                        $query = "SELECT * FROM " . self::$table . " AS ex"
-                               . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
-                               . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
-                               . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
-                               . " WHERE ex.Numero = ?";
+                $query = "SELECT * FROM " . self::$table . " AS ex"
+                       . " JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
+                       . " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+                       . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
+                       . " WHERE ex.Numero = ?";
                 
                 
                 if(!is_null($pf) && !is_null($mod)) {
                     $query .= " AND ex.PessoaFisica = ?"
                            . " AND ex.Modalidade = ?";
-
+                    
                     if ($stmt->prepare($query)) {
                         $stmt->bind_param(
                             'ssssss',
@@ -522,7 +523,7 @@ class EixoTres {
                 } else if(!is_null($pf) && is_null($mod)) {
                     $query .= " AND ex.PessoaFisica = ?"
                            . " AND ex.Modalidade IS NULL";
-
+                    
                     if ($stmt->prepare($query)) {
                         $stmt->bind_param(
                             'sssss',
@@ -536,7 +537,7 @@ class EixoTres {
                 } else {
                     $query .= " AND ex.PessoaFisica IS NULL"
                            . " AND ex.Modalidade IS NULL";
-
+                    
                     if ($stmt->prepare($query)) {
                         $stmt->bind_param(
                             'ssss',
@@ -556,7 +557,7 @@ class EixoTres {
                        ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
                        . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
                        ." WHERE ex.Numero = ?";
-
+                
                 if ($stmt->prepare($query)) {
                     $stmt->bind_param(
                         'sss',
@@ -575,7 +576,7 @@ class EixoTres {
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ".$mec
                    ." WHERE ex.Numero = ".$var;
-
+            
             if ($stmt->prepare($query)) {            
                 $stmt->bind_param(
                     'sss',
@@ -590,24 +591,23 @@ class EixoTres {
             
             while($obj){
                 $allObjects[] = $obj;
-                }
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
-                    if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
-                    $value_aux[$data->Ano] += $data->Valor;
-                    $percent_aux[$data->Ano] += $data->Percentual;
-                    $result_aux[$data->Ano] = $data;
-                    $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
-                    $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
-                }
-                $allObjects = $result_aux;
             }
-
-
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->Ano])) $value_aux[$data->Ano] = 0;
+                if(!isset($percent_aux[$data->Ano])) $percent_aux[$data->Ano] = 0;
+                $value_aux[$data->Ano] += $data->Valor;
+                $percent_aux[$data->Ano] += $data->Percentual;
+                $result_aux[$data->Ano] = $data;
+                $result_aux[$data->Ano]->Valor = $value_aux[$data->Ano];
+                $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
+            }
+            $allObjects = $result_aux;
+        }
+        
 		self::disconnect();
 		
 		return $allObjects;
