@@ -178,8 +178,111 @@ function getNameSLC($slc) {
     }
 }
 
+function getNamePorte($id) {
+    switch ($id) {
+        case 1:
+            return "Micro";
+        case 2:
+            return "Pequeno";
+        case 3:
+            return "Médio";
+        case 4:
+            return "Grande";
+    }
+}
+
+function getNameSexo($id) {
+    switch ($id) {
+        case 0:
+            return "Masculino";
+        case 1:
+            return "Feminino";
+    }
+}
+
+function getNameIdade($id) {
+    switch ($id) {
+        case 1:
+            return "10 a 17";
+        case 2:
+            return "18 a 29";
+        case 3:
+            return "30 a 49";
+        case 4:
+            return "50 a 64";
+        case 5:
+            return "65 ou mais";
+        case 6:
+            return "Não classificado";
+    }
+}
+
+function getNameEscolaridade($id) {
+    switch ($id) {
+        case 1:
+            return "Sem instrução";
+        case 2:
+            return "Fundamental incompleto";
+        case 3:
+            return "Fundamental completo";
+        case 4:
+            return "Médio completo";
+        case 5:
+            return "Superior incompleto";
+        case 6:
+            return "Superior completo";
+        case 7:
+            return "Não determinado";
+    }
+}
+
+function getNameEtinia($id) {
+    switch ($id) {
+        case 1:
+            return "Indígena";
+        case 2:
+            return "Branca";
+        case 3:
+            return "Preta";
+        case 4:
+            return "Amarela";
+        case 5:
+            return "Parda";
+    }
+}
+
+function getNameFormalidade($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
+function getNamePrev($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
+function getNameSindical($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
 $linhas = array();
-if($eixo == 0 && ($var == 3 || ($var == 9 && $uf != 0))) {
+if($eixo == 0 && ($var == 3 || $var == 9)) {
     require_once("EixoUm.php");
     for ($cad = 1; $cad <= 10; $cad++) {
 
@@ -196,7 +299,7 @@ if($eixo == 0 && ($var == 3 || ($var == 9 && $uf != 0))) {
         }
     }
 }
-else if($eixo == 0 && $var > 9) {
+else if($eixo == 0 && $var > 9 ) {
     require_once("EixoUm.php");
     for ($uos = 0; $uos <= 1; $uos++) {
 
@@ -213,7 +316,7 @@ else if($eixo == 0 && $var > 9) {
         }
     }
 }
-else if($eixo == 1 && $var > 11) {
+else if($eixo == 1 && ($var > 11)) {
     require_once("EixoDois.php");
 
     if($ocp == 0){
@@ -264,34 +367,34 @@ else if($eixo == 1 && $var > 11) {
     }
 
 }
-else if($eixo == 1 && $var == 4 && $desag > 0) {
+else if($eixo == 1 && ($var == 4 || $var == 6) && $desag > 0) {
     require_once("EixoDois.php");
     $valor = 0;
     foreach(EixoDois::getter_linhas($var, $uf, $cad, $ocp, $desag) as $tupla){
         switch($desag){
             case 1:
-                $valor = $tupla->idPorte; 
+                $valor = getNamePorte($tupla->idPorte);
                 break;
             case 2: 
-                $valor = $tupla->Sexo;
+                $valor = getNameSexo($tupla->Sexo);
                 break;
             case 3: 
-                $valor = $tupla->idIdade;
+                $valor = getNameIdade($tupla->idIdade);
                 break;
             case 4: 
-                $valor = $tupla->idEscolaridade;
+                $valor = getNameEscolaridade($tupla->idEscolaridade);
                 break;
             case 5:
-                $valor = $tupla->idEtinia; 
+                $valor = getNameEtinia($tupla->idEtinia);
                 break;
             case 6:
-                $valor = $tupla->Formalidade;
+                $valor = getNameFormalidade($tupla->Formalidade);
                 break;
             case 7:
-                $valor = $tupla->Previdencia; 
+                $valor = getNamePrev($tupla->Previdencia);
                 break;
             case 8: 
-                $valor = $tupla->Sindical;
+                $valor = getNameSindical($tupla->Sindical);
                 break;
         }
 
@@ -319,7 +422,7 @@ else if($eixo == 1 && $var == 5) {
         }
     }
 }
-else if($eixo == 1 && ($var == 11 || $var == 10 || $var == 9 || $var == 8 || $var == 4) ) {
+else if($eixo == 1 && ($var == 11 || $var == 10 || $var == 9 || $var == 8 || $var == 4 || ($var == 6 && $desag == 0)) ) {
     require_once("EixoDois.php");
     for ($cad = 1; $cad <= 10; $cad++) {
 
@@ -365,7 +468,7 @@ else if($eixo == 2 && $var == 10) {
         }
     }
 }
-else if($eixo == 2 && $var < 14){
+else if($eixo == 2 && $var < 15){
     require_once("EixoTres.php");
     for ($cad = 1; $cad <= 10; $cad++) {
 
