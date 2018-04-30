@@ -247,7 +247,7 @@ d3.json('data/pt-br.json', function(error, data) {
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
 
 $.get("./db/json_mapa.php"+config, function(data) {
-     // console.log(data);
+     //console.log(data);
 });
 //pre-load arquivos
 d3.queue()
@@ -360,8 +360,6 @@ function ready(error, br_states, mapa){
         if(url['uf'] == 0)
             setIntegerValueData({valor: soma}, eixo, vrv);
 
-
-
     }
 
    // console.log(colorJSON)
@@ -414,11 +412,15 @@ function ready(error, br_states, mapa){
 		.on("click", function(d) {
 			var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
             newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+
+            url['uf'] = d.id;
             if(eixo == 0 && vrv == 9)
                 var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id)
                                                                                            .replace(/treemap_scc_box.php\?/, "linhas_box.php?");
             else
                 var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
+
+
             newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
 			$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
             $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
@@ -430,10 +432,25 @@ function ready(error, br_states, mapa){
                 //setPercentValueData(dict[d.id], eixo, vrv);
 
             configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
-
             setStateTitle(d['properties']['name']);
+            
 
-		})
+            updateIframe(url)
+            
+            //ESSE TRECHO DE CÓDIGO ATUALIZA O TÍTULO DO IFRAME DO SCC 
+            
+            src = $(window.parent.document).find('iframe[id="view_box_scc"]').attr("src").match(/treemap_scc_box/g);
+            if(src != null){
+                var title_scc = $(window.parent.document).find('iframe[id="view_box_scc"]')
+                                    .parent()
+                                    .find(".view-title").html().split(/DE | DO | DA/)[0]
+            
+                $(window.parent.document).find('iframe[id="view_box_scc"]')
+                                        .parent()
+                                        .find(".view-title")
+                                        .html(title_scc+" "+getPrepos(dict[d.id].uf.toUpperCase())+" "+dict[d.id].uf.toUpperCase());
+            }
+        })
 		.style("cursor", "pointer");
 
 	//legenda
@@ -695,36 +712,58 @@ function legendaBinario(){
     }
 
 
-    if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
+    if(url['uf'] == 0 && eixo != 3) $(window.parent.document).find(".state-title").first().html("Brasil");
 
     if(dict[url['uf']])
         estadoAtual = dict[url['uf']].uf
     else
         estadoAtual = "BRASIL"
-
-    $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
-    $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
-
+    if(eixo != 3 && eixo != 1){
+        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
+    }
     function loadTooltip(d, eixo, vrv){
 
         if(eixo == 0) {
-            if(vrv === 2) {
+            if(vrv === 1){
+
+
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
+                    //    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
+                ]);
+            }
+            else if(vrv === 2) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
                 ]);
             }
             else if(vrv === 3) {
+                console.log(dict[d.id].valor)
+
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)],
                 ]);
             }
             else if(vrv === 9) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                ]);
+
+                if(cad != 0 && uf != 0){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d['properties']['name']],
+                        ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
+                    ]);
+                }
+
+
 
             }
             else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {

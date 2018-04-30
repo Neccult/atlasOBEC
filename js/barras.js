@@ -70,6 +70,8 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     // var info = [];
     var dados = {key: [], value: []};
 
+
+
     // import colors.json file
     var colorJSON;
     var textJSON;
@@ -100,12 +102,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     }
 
     function analyze(error, data) {
-        // console.log(data);
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }
-        
+
         var dados = {key: [], value: [], percentual: [], taxa: []};
 
         Object.keys(data).forEach(function (key) {
@@ -114,7 +115,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 dados.key.push(data[key].ano);
             }
 
-            if ((vrv === 2 || vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
+            if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
             else dados.value.push(data[key].valor);
 
             if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
@@ -190,6 +191,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 .domain(d3.range(dados.value.length - 2))
                 .rangeRound([0, width])
                 .padding(0.1);
+
         }
         else {
             var x = d3.scaleBand()
@@ -209,11 +211,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         $.each(dados.value, function (i, d) {
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
+
         if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
         dados.value.pop();
 
-        if(vrv === 3) {
-            dados.value.remove(0);
+        if(vrv === 3 && eixo == 0) {
+            dados.value.splice(0,1);
+
         }
         var formatYAxis = function (d) {
             var higherZeroOcur = maxDecimalAxis;
@@ -221,14 +225,22 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             var minFraction = 3;
 
             var formatInit = d3.format(".2f");
+            var format3dc = d3.format(".3f");
 
             var formatDefault = function (d) {
                 return removeDecimalZeroes(formatInit(d));
             };
             var formatThousands = function (d) {
+                if(eixo == 0 && vrv == 8)
+                    return removeDecimalZeroes(formatInit(d / 1e3)) + "M";
+
+
                 return removeDecimalZeroes(formatInit(d / 1e3)) + "K";
             };
             var formatMillions = function (d) {
+                if(eixo == 0 && vrv == 8)
+                    return removeDecimalZeroes(formatInit(d / 1e6)) + "B";
+
                 return removeDecimalZeroes(formatInit(d / 1e6)) + "M";
             };
 
@@ -248,6 +260,20 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
             };
 
+            function formatPercent(d) {
+                if (eixo == 0 && vrv == 9) {
+                    if (uf == 0)
+                        return removeDecimalZeroes(formatInit(d * 1e2)) + "%";
+                    else{
+                        return format3dc(d*1e2) + "%";
+
+                    }
+
+                }
+            return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
+
+            };
+
             var formatFraction = function (d) {
                 var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
                 var decimalDigits;
@@ -265,15 +291,27 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 dadosCounter++;
 
 
+                if(eixo == 0 && vrv == 9){
+                    if(uf == 0){
+                        return formatPercent(d).replace(".", ",");
+                    }
+                    else if(cad != 0 && uf != 0){
+                        return formatPercent(d).replace(".", ",");
+
+                    }
+
+                }
+
                 if(Math.abs(d) < 1/1e7){
                     return formatNano(d).replace(".", ",");
                 }
                 else if(Math.abs(d) < 1/1e4){
                     return formatMicro(d).replace(".", ",");
                 }
-                else if(Math.abs(d) < 1/1e1){
-                    return formatMili(d).replace(".", ",");
-                }
+
+                // else if(Math.abs(d) < 1/1e1){
+                //     return formatMili(d).replace(".", ",");
+                // }
                 return (format(d)).replace(".", ",");
             };
 
@@ -465,7 +503,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             })
             //mouseover
             .on("mouseover", function (d, i, obj) {
-                var title_content = textJSON.var[eixo][vrv - 1].title;
+                var title_content = getDataVar(textJSON, eixo, vrv).title;
                 var title = title_content.replace("<span>", "");
                 title = title.replace("<br>", "");
                 title = title.replace("</span>", "");
@@ -475,6 +513,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
 
                 if (eixo === 0 || eixo === 1 || eixo === 2 || eixo === 3){
+
                     loadTooltip(d, i, eixo, vrv)
                 }
 
@@ -497,7 +536,16 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                         $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                     }
                 }
-                else{
+                else if(eixo == 3 && (url['var'] == 5 || url['var'] == 8)){
+                    var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                    newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                    newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                      
+                  
+                 }
+                else {//if(eixo == 1){
                     if(url['uos'] == 1) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
@@ -508,7 +556,8 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
                         $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                     }
-                }
+                } 
+
 
 
                 $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
@@ -676,13 +725,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         var valor = $('svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
         configInfoDataBoxBarras(eixo, vrv, dados, valor);
-
         
-
+        if(eixo == 1)
+            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, data[dados.key[0]].uf);
+        else
+            $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+            $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
         
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
-
 
 
         if(url['slc'] == 1){
@@ -691,34 +740,28 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
         function loadTooltip(d, i, eixo, vrv){
             if(eixo === 0){
-                if(vrv === 2){
-                    if(url['uf'] != 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i]/100, eixo, vrv)],
-                        ]);
-                    }
-                    else if(url['uf'] == 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                        ]);
-                    }
-                }
-                if(vrv === 3){
+                 if(vrv === 3){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
                     ]);
                 }
                 else if(vrv === 9){
-                    if(url['uf'] != 0){
+                    if(url['uf'] != 0 && url['cad'] != 0){
+                         tooltipInstance.showTooltip(d, [
+                             ["title", dados.key[i]],
+                             ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
+                             //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                         ]);
+                     }
+                    else if(url['uf'] != 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i], eixo, vrv)],
                          //   ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                         ]);
                     }
+
                     else if(url['uf'] == 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
@@ -766,14 +809,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
             else if(eixo === 3){
-                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 || vrv === 5){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
                         // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
                     ]);
-                }
             }
+
         }
 
 
@@ -832,6 +874,14 @@ else {
     }
 
     function desagregacao_names() {
+
+        if(eixo == 1 && (vrv == 6 || vrv == 4)){
+            var array_names = [];
+
+            array_names.push('Média');
+            return array_names;
+        }
+
         if(prt != 0) {
             var array_names = [];
             textJSON.select.prt.forEach(function(d, i) {
@@ -906,7 +956,27 @@ else {
             console.log(error);
         }
 
-        // Setup svg using Bostock's margin convention
+
+        if((vrv == 6 || vrv == 4) && eixo == 1){
+            aux = []
+
+            Object.keys(data).forEach(function (key) {
+
+                soma = 0;
+                cont = 0;
+
+                Object.keys(data[key]).forEach(function (chave) {
+                    if(chave != "year"){
+                        obj = {};
+                        obj[chave] = data[key][chave];
+                        soma = soma + obj[chave];
+                        cont++;
+                    }
+                });
+                aux.push({year: data[key].year, Média: soma/cont})
+            });
+            data = aux;
+        }
 
         setTimeout(function () {
         }, 500);
@@ -931,6 +1001,8 @@ else {
                 return {x: parse(d.year), y: +d[fruit]};
             });
         });
+
+
         // Transpose the data into layers
         var dataset = d3.layout.stack()(dados);
 
@@ -939,7 +1011,7 @@ else {
             .domain(dataset[0].map(function (d) {
                 return d.x;
             }))
-            .rangeRoundBands([10, width - 10], 0.02);
+            .rangeRoundBands([10, width - 10]);
 
         var y_eixo1 = d3.scale.linear()
             .domain([0, d3.max(dataset, function (d) {
@@ -977,6 +1049,7 @@ else {
             .call(xAxis_eixo1);
 
 
+
         // Create groups for each series, rects for each segment
         var groups = svg.selectAll("g.cost")
             .data(dataset)
@@ -1012,6 +1085,7 @@ else {
             })
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
+
                 if(d.x.getFullYear() != url['ano']) {
                     url['ano'] = d.x.getFullYear();
                     var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + d.x.getFullYear());
@@ -1025,6 +1099,8 @@ else {
                 }
                 if (slc == 0) $(window.parent.document).find(".cad-title").first().html(textJSON.select.cad[url['cad']].name + " - " + desagregacao_names()[obj]);
                 else $(window.parent.document).find(".cad-title").first().html(textJSON.select.ocp[url['ocp'] - 1].name + " - " + desagregacao_names()[obj]);
+                console.log(d)
+
                 configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
             })
             .style("cursor", "pointer");
@@ -1090,10 +1166,14 @@ else {
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
+        if(eixo == 1 && dados.key != undefined){
+            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, data[dados.key[0]].uf);
 
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html("percent", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
-
+        }
+        else if(eixo != 3 && dados.key != undefined){
+            $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+            $(window.parent.document).find(".percent-value").first().find(".description-number").html("percent", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
+        }
 
     }
 

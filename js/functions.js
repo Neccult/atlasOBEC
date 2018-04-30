@@ -10,7 +10,7 @@ function changeDownloadURL(url){
             name_url = "peso_empresas";
             break;
         case 3:
-            name_url = "natalidade_e_mortalidade";
+            name_url = "variacao_total_empresas";
             break;
         case 4:
             name_url = "receita_total";
@@ -45,7 +45,7 @@ function changeDownloadURL(url){
         default:
             name_url = "total_empresas";
     }
-    newURL = $('#select-csv input').attr("value").replace(/csv\/.*/, "csv/"+name_url)
+    newURL = $('#select-csv input').attr("value").replace(/csv\/.*/, "csv/"+name_url+".ods")
     $('#select-csv input').attr("value", newURL)
 }
 
@@ -58,6 +58,9 @@ function ajustaAnos(keys) {
 }
 
 function getNomeUF(idUF){
+
+    idUF = parseInt(idUF);
+
     switch(idUF){
         case 0: return "Brasil";
         case 11: return "Rondônia";
@@ -83,7 +86,7 @@ function getNomeUF(idUF){
         case 41: return "Paraná";
         case 42: return "Santa Catarina";
         case 43: return "Rio Grande do Sul";
-        case 51: return "Mato Grosso do Sul"; 
+        case 50: return "Mato Grosso do Sul";
         case 52: return "Mato Grosso";
         case 53: return "Goiás";
         case 54: return "Distrito Federal";
@@ -240,25 +243,6 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
 
 
     }
-    if(eixo == 3){
-
-        var mundo = 0;
-        var mundoRegex = $(window.parent.document).find("#view_box").attr("src").match(/mundo=[0-9]*/);
-        if(mundoRegex != null)
-            mundo = mundoRegex[0].match(/[0-9]/)[0];
-
-        if(url['cad'] != 0){
-            if(url['uf'] == 0){
-                setPercentValueData({percentual: percent_uf, taxa: 0}, eixo, vrv);
-            }
-            else{
-                setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
-            }
-        }
-        else{
-            setPercentValueData({percentual: 1, taxa: 0}, eixo, vrv);
-        }
-    }
 
 }
 
@@ -301,27 +285,11 @@ function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percen
         setIntegerValueData({valor: d.value}, eixo, vrv);
         setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
     }
-    else if(eixo === 3){
-
-        var mundo = 0;
-        var mundoRegex = $(window.parent.document).find("#view_box").attr("src").match(/mundo=[0-9]*/);
-        if(mundoRegex != null){
-            mundo = mundoRegex[0];
-        }
-
-        if(url['uf'] == 0){
-            setPercentValueData({percentual: valor}, eixo, vrv);
-        }
-        else{
-            setPercentValueData({percentual: percent}, eixo, vrv);
-        }
-    }
 }
 
 function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, percent, percent_uf) {
     if(eixo == 1) {
-
-        destacaSetor(parseInt(url['cad'])+1);
+        destacaSetor(d.data.colorId);
 
 
         if(url['deg'] == 0 || deg == 0){
@@ -341,17 +309,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
     if(eixo == 0){
         first_year = Number(dados.key[0]);
         index_ano = dados.key.indexOf(url['ano'])
-        if(url['var'] == 2){
-            setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            if(url['uf'] != 0){
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
-            }
-            else{
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
-            }
-            setIntegerValueData(dados, eixo, vrv);
-        }
-        else if(vrv == 3 || vrv == 9 ){
+         if(vrv == 3 || vrv == 9 ){
             if(url['uf'] != 0){
                 dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
             }
@@ -402,27 +360,28 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
     else if(eixo == 1){
         // first_year = Number(dados.key[0]);
         index_ano = dados.key.indexOf(url['ano'])
-        if(url['uf'] == 0 && url['cad'] == 0 && url['ocp'] == 0){
-
-            setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
-            setIntegerValueData(dados, eixo, vrv);
-        }
-        else if(vrv > 11){
+        if(vrv > 11){
             if(ano != null) {
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
-
+                dados.valor = dados.value[index_ano];
                 if(url['uos'] == 0){
                     setIntegerValueData(dados, eixo, vrv);
                 } else if(url['uos'] == 1){
+
                     setPercentValueData(dados, eixo, vrv);
                 }
 
             }
-        }
+        }else if(url['uf'] == 0 && url['cad'] == 0 && url['ocp'] == 0){ 
+            setPercentValueData({percentual:1 , taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+            setIntegerValueData(dados, eixo, vrv);
+        }       
         else {
             dados.valor = dados.value[dados.key.indexOf(url['ano'])];
             setIntegerValueData(dados, eixo, vrv);
+            if(vrv == 1 || vrv == 7)
+                setPercentValueData({percentual: dados.percentual[index_ano], taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+            
         }
     }
     else if(eixo == 2){
@@ -490,7 +449,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
         if(mundoRegex != null)
             mundo = mundoRegex[0].match(/[0-9]/)[0];
 
-
+        /*
         if((mundo == 1 && url['uf'] == 0 && url['cad'] == 0)){
             setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
         }
@@ -500,12 +459,25 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
         else if(url['uf'] == 0 && url['prc'] == 0 && url['cad'] == 0){
             setPercentValueData({percentual: 1}, eixo, vrv);
 
-        }
+        }*/
+        
+       if(url['var'] == 5 || url['var'] == 8){
+            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
 
+            if(url['cad'] == 0){
+                setIntegerValueData(dados, eixo, vrv);
+            } else if(url['cad'] == 2){
+                setPercentValueData(dados, eixo, vrv);
+            } 
+       }else{
+            dados.valor = dados.value[indexAno];
 
-        dados.valor = dados.value[indexAno];
+            setIntegerValueData(dados, eixo, vrv);
+            setPercentValueData({percentual : dados.percentual[indexAno]}, eixo, vrv);
 
-        setIntegerValueData(dados, eixo, vrv);
+       }
+
+       setTerceiroValueData(vrv, valor, url['cad']);            
 
     }
 }
@@ -529,7 +501,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
                 setIntegerValueData(dados, eixo, vrv);
             }
             else if(url['uf'] !== 0){
-                dados.valor = dados.value[i] / 100;
+                dados.valor = dados.value[i];
                 setIntegerValueData(dados, eixo, vrv);
                 //setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
             }
@@ -569,7 +541,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
             if(url["uos"] == 0){
                 setIntegerValueData(dados, eixo, vrv);
             } else if(url["uos"] == 1){
-                setPercentValueData({percentual: dados.value[i]}, eixo, vrv);
+                setPercentValueData({valor: dados.value[i]}, eixo, vrv);
             }
         }
         else{
@@ -607,13 +579,27 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
     }
     else if(eixo == 3){
-        dados.valor = valor;
-        setIntegerValueData(dados, eixo, vrv);
+        if(url['var'] == 5 || url['var'] == 8){
+            dados.valor = dados.value[i];
+
+            if(url['cad'] == 0){
+                setIntegerValueData(dados, eixo, vrv);
+            } else if(url['cad'] == 2){
+                setPercentValueData(dados, eixo, vrv);
+            }
+       }else{
+            dados.valor = dados.value[i];
+
+            setIntegerValueData(dados, eixo, vrv);
+            setPercentValueData({percentual : dados.percentual[i]}, eixo, vrv);
+
+       }
 
     }
 }
 
 function configInfoDataBoxBarrasStackedClick(eixo, vrv, d, soma, deg) {
+
     if(eixo == 1) {
         if(d.y == "NaN") {
             d.y = 0;
@@ -792,40 +778,69 @@ function removeMecenatoDesags(iframe){
 function updateBreadUF(eixo, vrv){
     switch(eixo){
         case 0: 
+            if(vrv >= 4){
+                $('.opt-select[data-id=deg]').prop("disabled", true);
+            } else {
+                $('.opt-select[data-id=deg]').prop("disabled", false);
+            }
             if(vrv > 9){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
+                $('.bread-select[data-id=cad]').prop("disabled", true);
             } else{
                 $('.bread-select[data-id=uf]').prop("disabled", false);
+                $('.bread-select[data-id=cad]').prop("disabled", false);
+
             }
             break;
         case 1:
             if(vrv > 12){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
-            } else{
+                $('.bread-select[data-id=cad]').prop("disabled", true);
+                $('.opt-select[data-id=deg]').prop("disabled", false);
+
+            } else if(vrv == 2){
+                $('.opt-select[data-id=deg]').prop("disabled", true);
+            }else{
                 $('.bread-select[data-id=uf]').prop("disabled", false);
+                $('.bread-select[data-id=cad]').prop("disabled", false);
+                $('.opt-select[data-id=deg]').prop("disabled", false);
             }
             break;
         case 2:
             if(vrv == 15 || vrv == 16 || vrv == 10){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
+                $('.bread-select[data-id=cad]').prop("disabled", true);
+
             } else{
                 $('.bread-select[data-id=uf]').prop("disabled", false);
+                $('.bread-select[data-id=cad]').prop("disabled", false);
+
             }
             break;
         case 3:
             if(vrv >= 5 && vrv <= 10){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
                 $('.bread-select[data-id=prc]').prop("disabled", true);
+                $('.bread-select[data-id=cad]').prop("disabled", true);
+                $('.opt-select[data-id=prc]').prop("disabled", true);
+
+            }else if(vrv == 11 || vrv == 12 || vrv == 14){
+                $('.bread-select[data-id=prc]').prop("disabled", true);
+                $('.opt-select[data-id=prc]').prop("disabled", true);
+                $('.opt-select[data-id=cad]').prop("disabled", true);
             } else{
                 $('.bread-select[data-id=uf]').prop("disabled", false);
                 $('.bread-select[data-id=prc]').prop("disabled", false);
+                $('.opt-select[data-id=prc]').prop("disabled", false);
+                $('.bread-select[data-id=cad]').prop("disabled", false);
+
             }
             break;
     }
 }
 
 function updateSelectTipo(options){
-    names = {"1": "Exportação", "2": "Importação", "3": "Saldo Comercial", "4": "Valor Transicionado"};
+    names = {"1": "Exportação", "2": "Importação", "3": "Saldo Comercial", "4": "Valor Transacionado"};
     for(var key in names){
         if($("select[data-id=typ]").find("option[value='"+key+"']").length != 0)
             $("select[data-id='typ']").find("option[value='"+key+"']").remove()
@@ -839,6 +854,9 @@ function updateSelectTipo(options){
 
 function updateTipo(vrv){
     switch(vrv){
+        case '2':
+            updateSelectTipo(["1", "2"])
+            break;
         case '3':
             updateSelectTipo(["1", "2", "4"])
             break;
@@ -855,6 +873,8 @@ function updateTipo(vrv){
             updateSelectTipo(["1", "2", "3", "4"])
             break;
     }
+
+
 }
 
 function updateMecanismo(url, vrv){
@@ -875,9 +895,6 @@ function updateMecanismo(url, vrv){
             $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
         }
 
-        else if(vrv == 7 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14){
-            $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
-        }
         else if(vrv == 3){
             $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
             $("select[data-id='mec']").append("<option value='4'>Outros</option>");
@@ -1032,6 +1049,362 @@ function getDataVar(json, eixo, vrv){
         return obj.id == vrv;
     })[0];
 }
+
+function getPrepos(uf){
+    prepos = {
+        "ACRE":"DO",
+        "ALAGOAS":"DE",
+        "AMAPÁ":"DO",
+        "AMAZONAS":"DO",
+        "BAHIA":"DA",
+        "CEARÁ":"DO",
+        "DISTRITO FEDERAL":"DO",
+        "ESPÍRITO SANTO":"DO",
+        "GOIÁS":"DE",
+        "MARANHÃO":"DO",
+        "MATO GROSSO":"DE",
+        "MATO GROSSO DO SUL":"DE",
+        "MINAS GERAIS":"DE",
+        "PARÁ":"DO",
+        "PARAÍBA":"DA",
+        "PARANÁ":"DO",
+        "PERNAMBUCO":"DE",
+        "PIAUÍ":"DO",
+        "RIO DE JANEIRO":"DO",
+        "RIO GRANDE DO NORTE":"DO",
+        "RIO GRANDE DO SUL":"DO",
+        "RONDÔNIA":"DE",
+        "RORAIMA":"DE",
+        "SANTA CATARINA":"DE",
+        "SÃO PAULO":"DE",
+        "SERGIPE":"DE",
+        "TOCANTINS": "DO",
+        "EUROPA": "DA",
+        "MUNDO": "DO",
+        "ÁFRICA": "DA",
+        "AMÉRICA DO SUL": "DA",
+        "AMÉRICA DO NORTE": "DA",
+        "OCEANIA": "DA",
+        "ÁSIA": "DA"   
+    }
+
+    return prepos[uf];
+}
+
+function updateDescPercentComercio(desc, vrv, nomeestado){
+    prepos = {
+        "ACRE":"DO",
+        "ALAGOAS":"DE",
+        "AMAPÁ":"DO",
+        "AMAZONAS":"DO",
+        "BAHIA":"DA",
+        "CEARÁ":"DO",
+        "DISTRITO FEDERAL":"DO",
+        "ESPÍRITO SANTO":"DO",
+        "GOIÁS":"DE",
+        "MARANHÃO":"DO",
+        "MATO GROSSO":"DE",
+        "MATO GROSSO DO SUL":"DE",
+        "MINAS GERAIS":"DE",
+        "PARÁ":"DO",
+        "PARAÍBA":"DA",
+        "PARANÁ":"DO",
+        "PERNAMBUCO":"DE",
+        "PIAUÍ":"DO",
+        "RIO DE JANEIRO":"DO",
+        "RIO GRANDE DO NORTE":"DO",
+        "RIO GRANDE DO SUL":"DO",
+        "RONDÔNIA":"DE",
+        "RORAIMA":"DE",
+        "SANTA CATARINA":"DE",
+        "SÃO PAULO":"DE",
+        "SERGIPE":"DE",
+        "TOCANTINS": "DO"        
+    }
+    nomeestado = nomeestado.toUpperCase()
+
+    typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
+    
+    if(vrv == 1){
+        switch(typ){
+            case 'Exportação': 
+                typ = "EXPORTADO";
+                if(prepos[nomeestado]){
+                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                }
+                else{
+                    nomeestado = "DO BRASIL"
+                }
+                nomeestado = nomeestado.replace("DE", "POR");
+                nomeestado = nomeestado.replace("DO", "PELO");
+                nomeestado = nomeestado.replace("DA", "PELA");
+                return desc.replace('{}', nomeestado).replace('<>', typ);
+            case 'Importação': 
+                typ = "IMPORTADO";
+                nomeestado = "PARA "+nomeestado;
+                return desc.replace('{}', nomeestado).replace('<>', typ);
+            case 'Saldo Comercial': 
+                return ''
+            case 'Valor Transacionado': 
+                prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
+                cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
+                typ = "TRANSACIONADO";
+                if(cad == "TODOS" || " TODOS"){
+                    cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
+                } else {
+                    cad = "PELO SETOR DE" + cad;
+                }
+                return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
+        }
+    } 
+    else if(vrv == 13){
+        switch(typ){
+            case 'Exportação': 
+                typ = "EXPORTADOS";
+                if(prepos[nomeestado]){
+                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                }
+                else{
+                    nomeestado = "DO BRASIL"
+                }
+                nomeestado = nomeestado.replace("DE", "POR");
+                nomeestado = nomeestado.replace("DO", "PELO");
+                nomeestado = nomeestado.replace("DA", "PELA");
+                return desc.replace('{}', nomeestado).replace('<>', typ);
+            case 'Importação': 
+                typ = "IMPORTADOS";
+                nomeestado = "PARA "+nomeestado;
+                return desc.replace('{}', nomeestado).replace('<>', typ);
+            case 'Saldo Comercial': 
+                return ''
+            case 'Valor Transacionado': 
+                prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
+                cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
+                typ = "TRANSACIONADO";
+                if(cad == "TODOS" || " TODOS"){
+                    cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
+                } else {
+                    cad = "PELO SETOR DE" + cad;
+                }
+                return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
+        }
+    }
+}
+
+function updateDescMercado(desc, vrv, nomeestado){
+    var deg = $(window.parent.document).find(".opt-select[data-id=deg]").val();
+    var cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
+    
+    if(cad.toUpperCase() == "TODOS" || cad.toUpperCase() == " TODOS"){
+       
+        if(vrv == 5 || vrv == 6)
+            cad = "";
+        else if(vrv == 11){
+            
+            cad = "CULTURAIS E CRIATIVOS"
+        }
+        else {
+            cad = "DOS SETORES CULTURAIS E CRIATIVOS";
+        }
+    } else {
+        if(vrv == 5 || vrv == 6)
+            cad = "NO SETOR "+cad;
+        else 
+            cad = "DO SETOR "+cad;
+    }
+
+    if(getPrepos(nomeestado)){
+        if(vrv == 7)
+            uf = getPrepos(nomeestado) + ' ' + nomeestado
+        else uf = getPrepos(nomeestado).replace("DE", "EM").replace("DO", "NO").replace("DA", "NA")+ ' '+nomeestado
+    } else{
+        uf = "NO BRASIL";
+    }
+
+
+    option_selected = '';
+    
+    if(deg != 0){
+        cad_e_deg = $(window.parent.document).find(".cad-title").first().text().split(" - ");
+
+        if(cad_e_deg.length > 1)
+        {
+            option_selected = cad_e_deg[1];
+            switch(deg){
+                case '1':
+                    if(vrv == 5)
+                        option_selected = "EM EMPRESAS DE PORTE "+option_selected; 
+                    else if(vrv == 6)
+                        option_selected = "NAS EMPRESAS DE PORTE "+option_selected;
+                    else
+                        option_selected = "DE EMPRESAS DE PORTE "+option_selected; 
+                    break;
+                case '2':
+                    if(vrv == 5)
+                        option_selected = "PARA O SEXO "+option_selected
+                    else if(vrv == 6)
+                        option_selected = "PARA TRABALHADORES DO "+option_selected
+                    else
+                        option_selected = "DO SEXO "+option_selected; 
+                    break;
+                case '3':
+                    if(vrv == 5 || vrv == 6)
+                        option_selected = "PARA TRABALHADORES COM IDADE ENTRE "+option_selected;
+                    else 
+                        option_selected = "COM IDADE ENTRE "+option_selected; 
+                    break;
+                case '4': 
+                    if(vrv == 5|| vrv == 6)
+                        option_selected = "PARA TRABALHADORES COM ENSINO"+option_selected;
+                    else 
+                        option_selected = "COM ENSINO "+option_selected;
+            }
+        }
+    } 
+    description = desc.replace("[cad]", cad).replace("[deg]", option_selected).replace("[uf]", uf);
+    $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
+    //$(window.parent.document).find(".percent-value").first().find(".description-number").first().html(description)
+            
+}
+
+function updateDescComercio(desc, vrv, nomeestado){
+    prepos = {
+        "ACRE":"DO",
+        "ALAGOAS":"DE",
+        "AMAPÁ":"DO",
+        "AMAZONAS":"DO",
+        "BAHIA":"DA",
+        "CEARÁ":"DO",
+        "DISTRITO FEDERAL":"DO",
+        "ESPÍRITO SANTO":"DO",
+        "GOIÁS":"DE",
+        "MARANHÃO":"DO",
+        "MATO GROSSO":"DE",
+        "MATO GROSSO DO SUL":"DE",
+        "MINAS GERAIS":"DE",
+        "PARÁ":"DO",
+        "PARAÍBA":"DA",
+        "PARANÁ":"DO",
+        "PERNAMBUCO":"DE",
+        "PIAUÍ":"DO",
+        "RIO DE JANEIRO":"DO",
+        "RIO GRANDE DO NORTE":"DO",
+        "RIO GRANDE DO SUL":"DO",
+        "RONDÔNIA":"DE",
+        "RORAIMA":"DE",
+        "SANTA CATARINA":"DE",
+        "SÃO PAULO":"DE",
+        "SERGIPE":"DE",
+        "TOCANTINS": "DO",
+        "EUROPA": "DA",
+        "MUNDO": "DO",
+        "ÁFRICA": "DA",
+        "AMÉRICA DO SUL": "DA",
+        "AMÉRICA DO NORTE": "DA",
+        "OCEANIA": "DA",
+        "ÁSIA": "DA"
+        
+    }
+    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
+    nomeestado = nomeestado.toUpperCase()
+    
+    if(prepos[nomeestado]){
+        nomeestado = prepos[nomeestado] + ' ' +nomeestado
+    }
+    else{
+        nomeestado = "DO BRASIL"
+    }
+    prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
+    typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
+    cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
+    
+    prc = prc.toUpperCase()
+
+    if(prepos[prc]){
+        prc = prepos[prc] + ' ' + prc
+    }
+    if(cad.toUpperCase() == "TODOS" || cad.toUpperCase() == " TODOS"){
+        if(vrv == 14)
+            cad = "DOS SETORES CULTURAIS E CRIATIVOS";
+        else
+            cad = "PELOS SETORES CULTURAIS E CRIATIVOS";
+    } else {
+        if(vrv != 14)
+            cad = "PELO SETOR DE "+ cad;
+        else
+            cad = "DO SETOR DE "+cad;
+    }
+    switch(typ){
+        case 'Exportação': 
+            if(vrv >= 1 && vrv <= 3)
+                typ = "VALOR EXPORTADO"
+            else if(vrv == 11 || vrv == 12 || vrv == 14){
+                typ = "DAS EXPORTAÇÕES"
+            } else if(vrv == 13){
+                typ = "EXPORTADOS"
+            }
+            $(window.parent.document).find(".state-title").first().text(nomeestado)
+            $(window.parent.document).find(".prc-title").first().text("PARA "+prc.split(" ")[1])
+            break;
+        case 'Importação': 
+            if(vrv >= 1 && vrv <= 3)
+                typ = "VALOR IMPORTADO"
+            else if(vrv == 11 || vrv == 12 || vrv == 14){
+                typ = "DAS IMPORTAÇÕES"
+            }else if(vrv == 13){
+                typ = "IMPORTADOS"
+            }
+
+            $(window.parent.document).find(".state-title").first().text(prc)
+            $(window.parent.document).find(".prc-title").first().text("PARA "+nomeestado.split(" ")[1])
+            break;
+        case 'Saldo Comercial': 
+            if(vrv >= 1 && vrv <= 3)
+                typ = "SALDO COMERCIAL"
+            else if(vrv == 13){
+                typ = "DE SALDO COMERCIAL"
+            }
+            $(window.parent.document).find(".state-title").first().text("ENTRE "+nomeestado.split(" ")[1])
+            $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
+            break;
+        case 'Valor Transacionado':
+            if(vrv >= 1 && vrv <= 3)
+                typ = "VALOR TRANSACIONADO" 
+            else if(vrv == 13){
+                typ = "DE VALOR TRANSACIONADO"
+            }
+            $(window.parent.document).find(".state-title").first().text("ENTRE "+ nomeestado.split(" ")[1])
+            $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
+            break;
+    }
+    if(vrv <= 3 || vrv >= 13)
+        $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "0.5vw")
+    else
+        $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "14px")
+    if(desc != undefined)
+        return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc.split(" ")[1]).replace('()', cad);
+    else
+        return
+}
+function setTerceiroValueData(vrv, value, cad){
+    if(vrv == 5 || vrv == 8){
+        if(cad == 1){
+            $(window.parent.document).find(".state-title").first().css("display", "none");
+            $(window.parent.document).find(".prc-title").first().css("display", "none");
+            $(window.parent.document).find(".prc-title").first().css("display", "none");
+            desc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().text();
+            $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value, 2));
+            $(window.parent.document).find(".setor-value").first().find(".description-number").first().text(desc.replace("UF", "SETOR"));
+            $(window.parent.document).find(".setor-value").first().css("display", "block");
+            doc = $(window.parent.document).find(".setor-value").first().find(".number").first();
+            setMaxFontSize(doc);
+        }
+    } else {
+        $(window.parent.document).find(".setor-value").first().css("display", "none");
+        $(window.parent.document).find(".state-title").first().css("display", "block");
+        $(window.parent.document).find(".prc-title").first().css("display", "block");
+    }
+}
 /*
 * Função para atribuir o valor do dado inteiro para a variável em questão
 * Parâmetros: valores, eixo e variável
@@ -1058,13 +1431,21 @@ function setIntegerValueData(value, eixo, vrv) {
 			    if(sufixo == '%')
                     valor *= 100;
                 break;
-
         }
 
         var literal = formatDecimalLimit(valor, 2);
 
         if(eixo == 0 && url['var'] == 3){
             literal = formatDecimalLimit(valor, 2);
+        }
+        if(eixo == 0 && url['var'] == 9){
+            if(uf != 0 && cad != 0)
+                valor = valor*100;
+
+            literal = formatDecimalLimit(valor, 2);
+        }
+        if(eixo == 0 && url['var'] > 9){
+            literal = formatDecimalLimit(valor, 5);
         }
 		if(eixo == 1 && url['var'] == 2){
             literal = formatDecimalLimit(valor, 4);
@@ -1074,6 +1455,17 @@ function setIntegerValueData(value, eixo, vrv) {
 
         // console.log(value)
 
+        estado = $(window.parent.document).find(".state-title").first().text()
+        if(eixo == 1){
+            if(vrv <= 11)
+                updateDescMercado(result.desc_int, vrv, estado);
+        }
+        if(eixo == 3){
+            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescComercio(result.desc_int, vrv, estado))
+            $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercentComercio(result.desc_percent, vrv, estado))
+            desc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().text()
+            $(window.parent.document).find(".setor-value").first().find(".description-number").first().text(desc.replace("VALOR ABSOLUTO POR UF", "VALOR ABSOLUTO POR SETOR"));
+        }
 
         $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
         var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
@@ -1087,7 +1479,7 @@ function setIntegerValueData(value, eixo, vrv) {
 * Função para atualizar a descrição do percentual em função do estado selecionado
 */
 
-function descByUF(eixo, tipo, desc, nomeestado){
+function descByUF(eixo, tipo, desc, nomeestado, tag){
     prepos = {
         "ACRE":"DO",
         "ALAGOAS":"DE",
@@ -1119,7 +1511,6 @@ function descByUF(eixo, tipo, desc, nomeestado){
     }
 
     nomeestado = nomeestado.toUpperCase()
-
     if(eixo == 0){
         if(url['var'] == 3 || url['var'] == 9){
             if(prepos[nomeestado]){
@@ -1149,24 +1540,51 @@ function descByUF(eixo, tipo, desc, nomeestado){
 
         }
         else{
-            if(prepos[nomeestado] && url['cad'] != 0){
+            if(url['var'] == 1 && url['prt'] == 0){
+                if(url['cad'] == 0)
+                    nomeestado = "DO BRASIL"
+                else
+                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+            }else if(prepos[nomeestado]){
                 nomeestado = prepos[nomeestado] + ' ' +nomeestado
             }
             else{
                 nomeestado = "DO BRASIL"
+            }
+
+        }
+    }else if(eixo == 1){
+        if(url['var'] == 7 || url['var'] == 1){
+            if(tipo == "percent" ){
+                if(prepos[nomeestado]){
+                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                }
+                else{
+                    nomeestado = "DO BRASIL"
+                }
             }
         }
     }
     if(eixo == 2){
-        if(url['var'] == 1) {
-            if(prepos[nomeestado] && url['cad'] != 0){
-                nomeestado = prepos[nomeestado] + ' ' +nomeestado
+        if(url['var'] == 8 || url['var'] == 9) {
+
+            if(prepos[nomeestado] && url['uf'] != 0){
+
+                if(tag == '{}')
+                    nomeestado = ""
+                else
+                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+
+
             }
             else{
-                nomeestado = "DO BRASIL"
+                if(tag == '{}')
+                    nomeestado = "NO BRASIL"
+                else
+                    nomeestado = "DO BRASIL"
             }
         }
-        if(url['var'] == 99 ) {
+        else if(url['var'] == 99 ) {
             if(prepos[nomeestado]){
                 nomeestado = prepos[nomeestado] + ' ' +nomeestado
             }
@@ -1203,11 +1621,8 @@ function descByUF(eixo, tipo, desc, nomeestado){
         }
     }
 
-
-
-
     if(desc != undefined)
-        return desc.replace('{}', nomeestado);
+        return desc.replace(tag, nomeestado);
     else
         return
 }
@@ -1302,7 +1717,7 @@ function descByMOD(eixo, desc){
         return
 }
 
-function descByCAD(eixo, desc){
+function descByCAD(eixo, desc, tag){
     prepos = {
         1: "DE",
         2: "DE",
@@ -1333,17 +1748,34 @@ function descByCAD(eixo, desc){
     str = "do setor"
 
     if(cads[url['cad']]) {
-        nome = str + " " + prepos[url['cad']] + " " + cads[url['cad']];
+        if(eixo == 2 && (url['var'] == 8 || url['var'] == 9)){
+            if(tag == '[CAD]')
+                nome = "PARA O SETOR" + prepos[url['cad']] + " " + cads[url['cad']];
+            else
+                nome = "PELO SETOR " + prepos[url['cad']] + " " + cads[url['cad']];
+        }
+        else if(eixo == 2 && (url['var'] == 4)){
+            nome = "PARA O SETOR " + prepos[url['cad']] + " " + cads[url['cad']];
+
+        }
+        else
+            nome = str + " " + prepos[url['cad']] + " " + cads[url['cad']];
+
     }
     else {
-        if(eixo == 2 && (url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14))
+        if(eixo == 2 && (url['var'] == 5 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14))
             nome = "";
+        else if(eixo == 2 && (url['var'] == 8 || url['var'] == 9))
+            if(tag == '[CAD]')
+                nome = ""
+            else
+                nome = "PELOS SETORES CULTURAIS E CRIATIVOS"
         else
             nome = "Culturais e Criativas";
     }
 
     if(desc != undefined)
-        return desc.replace('[cad]', nome);
+        return desc.replace(tag, nome);
     else
         return
 }
@@ -1403,7 +1835,10 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
     }
 
     if(desc.includes('{}')){
-        desc =  descByUF(eixo, tipo, desc, nomeestado)
+        desc =  descByUF(eixo, tipo, desc, nomeestado, '{}')
+    }
+    if(desc.includes('[uf]')){
+        desc =  descByUF(eixo, tipo, desc, nomeestado, '[uf]')
     }
     if(desc.includes('[]')){
         desc =  descByMEC(eixo, desc)
@@ -1416,7 +1851,10 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
     }
 
     if(desc.includes('[cad]')){
-        desc =  descByCAD(eixo, desc)
+        desc =  descByCAD(eixo, desc, '[cad]')
+    }
+    if(desc.includes('[CAD]')){
+        desc =  descByCAD(eixo, desc, '[CAD]')
     }
 
     if(desc.includes('[prt]')){
@@ -1441,8 +1879,8 @@ function setMaxFontSize(doc){
     if(doc == null){
         return
     }
-
     var tamanhoMaximo = 40;
+    
     var tamanho = tamanhoMaximo;
 
     var tamanhoDiv = $(doc).width();
@@ -1545,6 +1983,7 @@ function setPercentValueData(value, eixo, vrv) {
 
         if(vrv > 11 ){
             $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
+            
         }
         else if(vrv === 2 || vrv === 11 || vrv === 10 ||  vrv === 9  || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 8){
            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
@@ -1580,7 +2019,16 @@ function setPercentValueData(value, eixo, vrv) {
         setMaxFontSize(doc);
     }
     else if(eixo == 3){
-        $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+        if(vrv == 1 || vrv == 13)
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+        else if(vrv == 5 || vrv == 8){
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
+        } else{
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");           
+        }
+        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        
+        setMaxFontSize(doc);
     }
 
 }
@@ -1629,7 +2077,7 @@ function formatTextVrv(value, eixo, vrv){
             sufixo = variavel.sufixo_valor;
             prefixo = variavel.prefixo_valor;
             valor = value;
-            switch(eixo) {
+            /*switch(eixo) {
                 case 0:
                     break;
                 case 1:
@@ -1638,7 +2086,7 @@ function formatTextVrv(value, eixo, vrv){
                     }
                     break;
 
-            }
+            }*/
             if(eixo == 1 && url['var'] == 2)
                 string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
             else
@@ -1877,8 +2325,12 @@ var formatNumber = function(value, decimalLimit){
 	var fracFormat = function(d){
 
 		var tempFormat = d3.format(",."+decimalLimit+"f");
+
 		if((Math.abs(tempFormat(d)) < 0.0001) && tempFormat(d) !=  0){
-		    return parseFloat(tempFormat(d)).toExponential(2)
+		    if(eixo == 3)
+		        return parseFloat(tempFormat(d)).toExponential(2)
+            else
+                return tempFormat(d);
 		}
 		else{
             return tempFormat(d);
@@ -2060,7 +2512,6 @@ var tooltip = (function(){
 				var ifVal = undoValFormat.join('.');
 				ifVal = parseFloat(ifVal.replace(/[%-\+]/g, ''));
 
-				if (ifVal !== 0){
 
 					var elType = function(val){
 						if(clss.indexOf('#') === -1) {
@@ -2110,7 +2561,6 @@ var tooltip = (function(){
                                     return clss + valSeparator + val;
                                 }
                             });
-                    }
 
 				}
 			});
@@ -2126,6 +2576,7 @@ var tooltip = (function(){
 				Renderiza elementos dentro do elemento #tooltip
 		-----------------------------------------------------------------------------*/
 		function showTooltip(d, arr) {
+
 			// remove all elements inside tooltip
 			tp.text('');
 			// create all elements passed via array: arr

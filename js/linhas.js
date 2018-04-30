@@ -32,12 +32,24 @@ d3.json('data/colors.json', function (error, data) {
 });
 
 $.get("./db/json_linhas.php"+config, function(data) {
-     // console.log(data);
+
 });
-
+/*
+function getIdCadeia(nomecadeia){
+    switch(nomecadeia){
+        case "Editorial":
+        case "Cultura Digital":
+        case "Arquitetura e Design":
+        case "Artes Cênicas e Espetáculos":
+        case "Editorial":
+        case "Editorial":
+        case "Editorial":
+        case "Editorial":
+        case "Editorial":
+    }
+}
+*/
 function analyze(error, data) {
-
-    // console.log(data)
 
     //console.log(colorJSON)
 
@@ -48,17 +60,19 @@ function analyze(error, data) {
     }
 
     var dados = [];
+    var anos = [];
 
     Object.keys(data).forEach(function (key) {
         dados.push(data[key]);
+        anos.push(key);
+
     });
 
     var keys = [];
 
     Object.keys(dados[0]).forEach(function (key) {
-        if(key != "ano"){
-            keys.push(key)
-        }
+        if(key != "ano")
+            keys.push(key);
     });
 
 
@@ -133,7 +147,6 @@ function analyze(error, data) {
                 valores.push({'ano': dados[key]['ano'], 'deg': deg, 'valor': dados[key][deg]})
             });
 
-
             data.push(valores)
 
         });
@@ -152,6 +165,12 @@ function analyze(error, data) {
         var max = d3.max(valoresBrutos, function(d) {
             return Math.max(d); });
 
+        if(!(eixo == 0 && vrv > 9)){
+            if(min >= 0)
+                min = 0;
+        }
+
+
         y.domain([min, max]);
 
 
@@ -163,42 +182,130 @@ function analyze(error, data) {
                 .data([data[i]])
                 .attr("class", "line")
                 .attr("scc", scc)
-                .style("stroke-width", function(){return 2;})
+                .style("opacity",  function(d){
+                    if(url['cad'] != 0 ){
+                        if(getCadId(scc) == url['cad'])
+                            return 1;
+                        else return 0.2;
+                    }
+                    else
+                        return 1;})
+                .style("stroke-width", function(d){return 2;})
                 .style("stroke", color(scc))
                 .attr("d", valueline);
-
+           // d3.selectAll("path").style("opacity", function(d, i){if(deg == i+1 || deg == 0) return 1; else return 0.3})
         });
 
 
         // Add the X Axis
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x))
+            .attr("class", "x");
 
         // Add the Y Axis
         svg.append("g")
-            .call(d3.axisLeft(y));
+            .call(d3.axisLeft(y))
+            .attr("class", "y");
 
-        svg.selectAll("path")
+    svg.selectAll("path")
             .on("mouseover", function (dados) {
                 mousemove(dados, (this));
-                d3.selectAll("path").style("opacity", 0.3)
-                d3.select(this).style("opacity", 1)
+
+                if(url['cad'] == 0){
+                    //d3.selectAll("path").style("opacity",  0.3)
+                    d3.select(this).style("opacity", 1)
+                }
             })
             .on("mouseout", function () {
                 tooltipInstance.hideTooltip();
-                d3.selectAll("path").style("opacity", 1)
+
+                if(url['cad'] == 0){
+                    d3.selectAll("path").style("opacity", 1)
+                }
             })
 
+        var coordsAxisX = [];
+        var coordsAxisY = [];
+
+
+        d3.selectAll('.x g').each(function (d, index) {
+            transform = d3.select(this).attr('transform')
+            transform = transform.replace('translate(', '');
+
+            x = parseFloat(transform.split(',')[0]);
+            y = parseFloat(transform.split(',')[1].replace(')', ''));
+            coordsAxisX.push({'ano': anos[index], 'x': x, 'y': y})
+        })
+
+        d3.selectAll('.y g').each(function (d, index) {
+            transform = d3.select(this).attr('transform')
+            transform = transform.replace('translate(', '');
+
+            x = parseFloat(transform.split(',')[0]);
+            y = parseFloat(transform.split(',')[1].replace(')', ''));
+            coordsAxisY.push({'ano': anos[index], 'x': x, 'y': y})
+        })
 
         function mousemove(d, path) {
 
             if(!($(path).hasClass("domain")) ){
                 var scc = ($(path).attr("scc"));
 
-                tooltipInstance.showTooltip(d, [
-                    ["title", scc]
-                ])
+                var ano = 2007;
+
+                for (var i = 1; i < coordsAxisX.length; i++) {
+
+
+                     calc1 = (Number(coordsAxisX[i - 1].x) + Number(coordsAxisX[i].x)) / 2;
+                     if(i <= coordsAxisX.length - 2)
+                        calc2 = (Number(coordsAxisX[i].x) + Number(coordsAxisX[i + 1].x)) / 2;
+                     else
+                        calc2 = coordsAxisX[i].x;
+
+
+                    if (d3.mouse(d3.event.currentTarget)[0] >= calc1 && d3.mouse(d3.event.currentTarget)[0] <= calc2) {
+                        ano = anos[i];
+                        break;
+                    }
+
+                }
+
+                var valor = 2;
+
+
+                Object.keys(dados).forEach(function (key) {
+                    if(dados[key].ano.getFullYear() == ano)
+                        valor = dados[key][scc];
+                })
+
+
+
+                if(eixo == 0){
+                    if(vrv == 3){
+                        valor =  formatNumber(valor*100, 2).toString().replace(".", "");
+                        tooltipInstance.showTooltip(d, [
+                            ["title", scc],
+                            ["", valor+"%"]
+                        ])
+                    }
+                    else if(vrv == 9){
+                        valor =  formatNumber(valor*100, 6).toString().replace(".", "");
+                        tooltipInstance.showTooltip(d, [
+                            ["title", scc],
+                            ["", valor+"%"]
+                        ])
+                    }
+
+                }
+                else{
+                    valor =  formatNumber(valor, 2).toString().replace(".", "");
+                    tooltipInstance.showTooltip(d, [
+                        ["title", scc],
+                        ["", valor]
+                    ])
+                }
+
             }
 
 
@@ -282,15 +389,64 @@ function analyze(error, data) {
             "7": "#8178AF",
             "8": "#EC8A91",
 
+            "Sim": "#071342",
+            "Não": "rgb(109, 191, 201)",
+
+            "Branca": "#EC8A91",
+            "Parda": "rgb(109, 191, 201)",
+            "Preta": "black",
+            "Amarela": "yellow",
+            "Indígena": "green",
+
+            "Micro": "rgb(109, 191, 201)",
+            "Médio": "black",
+            "Grande": "yellow",
+            "Pequeno": "green",
+
+            "Sem instrução": "#071342",
+            "Fundamental incompleto": "#077DDD",
+            "Fundamental completo": "#8178AF",
+            "Médio completo": "#EC8A91",
+            "Superior incompleto": "#E96B00",
+            "Superior completo": "rgb(109, 191, 201)",
+            "Não determinado": "red",
+
+
+            "10 a 17": "#071342",
+            "18 a 29": "#077DDD",
+            "30 a 49": "#8178AF",
+            "50 a 64": "#EC8A91",
+            "65 ou mais": "rgb(109, 191, 201)",
+            "Não classificado": "red",
+
+            "Masculino": "#071342",
+            "Feminino": "#E96B00",
+
+
+
         }
 
 
         Object.keys(colorJSON.cadeias).forEach(function (i, key) {
             colors[colorJSON.cadeias[i].name] = colorJSON.cadeias[i].color;
         });
-
         return colors[deg];
 
+    }
+
+    function getCadId(cadName){
+        switch(cadName){
+            case "Arquitetura e Design": return 1;
+            case "Artes Cênicas e Espetáculos": return 2;
+            case "Audiovisual": return 3;
+            case "Cultura Digital": return 4;
+            case "Editorial": return 5;
+            case "Educação e Criação em Artes": return 6;
+            case "Entretenimento": return 7;
+            case "Música": return 8;
+            case "Patrimônio": return 9;
+            case "Publicidade":  return 10;
+        }
     }
 
 

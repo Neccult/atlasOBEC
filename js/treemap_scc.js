@@ -257,7 +257,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
 				    }
                     else {
-
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
                         var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
@@ -267,7 +266,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("select[data-id='ocp']").val(d.data.colorId);
                         enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
-
 
                         cad_valor = d.data.size;
 
@@ -450,7 +448,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	
 	// new svg margin top value
-	var svgMarginTop = 35;
+	var svgMarginTop = 15;
 	// cria título
 	svg.append("text").append("tspan")
 		.data(root.leaves())

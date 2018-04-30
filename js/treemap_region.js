@@ -271,15 +271,24 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 ]);
 							}
 						}
-                        else {
+						else if(vrv == 1){
+							//NECESSÁRIO DEVIDO AO TEMPO. OS VALORES TOTAIS ESTÃO NO ARRAY TOTAIS
+							totais = [88773, 91097, 93585, 97525, 102031, 104544, 107339, 108759, 107498, 104522];
+							ano_indice = ano-2007;
+							tooltipInstance.showTooltip(d, [
+								["title", d.data.name],
+								["", formatTextVrv(d.data.size, eixo, vrv)],
+								["", formatDecimalLimit(d.data.size/totais[ano_indice]*100, 2) + "%"]
+							]);
+						}
+                        else{
                             if(cad !== 0) {
                                 integerValue = d.data.size;
                                 percentValue = d.data.size/root.value;
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                                    ["", formatDecimalLimit(d.data.taxa*100, 2)+ "%"],
+                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"]
                                 ]);
                             }
                             else {
@@ -288,8 +297,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
-                                    ["", formatDecimalLimit(d.data.taxa*100, 2) + "%"],
+                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"]
                                 ]);
 							}
 						}
@@ -355,7 +363,13 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                 }
                 else if(vrv == 9) {
                     return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
-                }
+				}
+				else if(vrv == 1){
+					//NECESSÁRIO DEVIDO AO TEMPO. OS VALORES TOTAIS ESTÃO NO ARRAY TOTAIS
+					totais = [88773, 91097, 93585, 97525, 102031, 104544, 107339, 108759, 107498, 104522];
+					ano_indice = ano-2007;
+					return formatDecimalLimit((d.data.size/totais[ano_indice])*100, 2) + '%';
+				}
                 else {
                     return formatDecimalLimit(d.data.percentual*100, 2) + '%';
                 }
@@ -506,7 +520,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 
     if(url['uf'] == 0) $(window.parent.document).find(".state-title").first().html("Brasil");
 
-	console.log(data)
+	if(url['uf'] !== 0){
+        destacaPais(url['uf'])
+	}
+
 
 });
 

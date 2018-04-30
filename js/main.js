@@ -34,7 +34,15 @@ function controlVarPage(clickVar){
 function getAnoDefault(eixo_atual){
     switch(eixo_atual){
         case 0: url['ano'] = anos_default[url['var']][0]; break;
-        case 1: url['ano'] = anos_default[url['var']][url['ocp']]; break;
+        case 1:
+
+            if(url['var'] == 10 || url['var'] == 9 || url['var'] == 11){
+                url['slc'] = 0
+                url['ocp'] = 0
+            }
+
+            url['ano'] = anos_default[url['var']][url['ocp']]; break;
+
         case 2: url['ano'] = anos_default[url['var']][0]; break;
         case 3:
         if(url['var'] >= 11)
@@ -134,8 +142,19 @@ function updateIframe(url){
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 $('iframe[id="view_box"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
+
             else{
-                if( url['var'] == 3 || url['var'] == 2){
+
+                if(url['view'] == 'mapa'){
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
+
+                }
+                else if(url['view'] == 'treemap_region'){
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("TREEMAP UFs");
+
+                }
+
+                if( url['var'] == 3 || url['var'] == 2 || url['var'] == 9){
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 } else{
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
@@ -144,7 +163,6 @@ function updateIframe(url){
                     $('#treemap_region').removeClass("active");
                 }
                 $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
             }
         }
         else if(eixoAtual == 1) {
@@ -184,6 +202,16 @@ function updateIframe(url){
             $('#treemap_region').html("BRASIL");
             //alert(url['view'])
 
+            if(url['mundo'] == null || url['mundo'] == 0){
+                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA MUNDI");
+                //$(".state-title").html("MUNDO");
+
+            }
+            else{
+                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
+                //$(".state-title").html("BRASIL");
+
+            }
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=1");
                 $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -191,7 +219,7 @@ function updateIframe(url){
                 if(url['var'] == 8)
                     $('iframe[id="view_box"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR SETORES");
                 else(url['var'] == 5)
-                    $('iframe[id="view_box"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR PARCEIROS");
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR SETORES");
 
             }
             else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
@@ -201,16 +229,6 @@ function updateIframe(url){
             }
             else{
                 $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-
-            }
-            if(url['mundo'] == null || url['mundo'] == 0){
-                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA MUNDI");
-                //$(".state-title").html("MUNDO");
-
-            }
-            else{
-                $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
-                //$(".state-title").html("BRASIL");
 
             }
 
@@ -272,23 +290,33 @@ function updateIframe(url){
     }
 
     /// BOX DO GRAFICO SCC
+
     if ($('iframe[id="view_box_scc"]').length != 0) {
         $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
         if(eixoAtual == 0) {
+
                 if (url['var'] == 3) {
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
-                } else if (url['var'] > 9) {
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
+                }
+                else if (url['var'] > 9) {
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
                     $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
-                } else if (url['var'] == 9 && url['uf'] != 0){
+                }
+                else if (url['var'] == 9){
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
-                } else {
+                }
+                else {
                     $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+
+                    if(url['uf'] == 0)
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                    else
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS DE "+getNomeUF(url['uf']).toUpperCase());
+
                 }
         }
         else if(eixoAtual == 1) {
@@ -308,7 +336,7 @@ function updateIframe(url){
                 $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
             }
-             else if(url['var'] == 4){
+             else if(url['var'] == 4 || url['var'] == 6){
 
                 //if(url['cad'] != 0 && url['deg'] != 0) {
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
@@ -322,13 +350,16 @@ function updateIframe(url){
             } else {
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                if(url['uf'] == 0)
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                else
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS DE "+getNomeUF(url['uf']).toUpperCase());
             }
         }
         else if(eixoAtual == 2){
-
-            if(url['var'] == 6 || url['var'] == 8 || url['var'] == 9 || url['var'] == 7 || url['var'] == 13){
+            if(url['var'] == 6 || url['var'] == 8 || url['var'] == 9 || url['var'] == 7 || url['var'] == 13 || url['var'] == 14){
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE ÁREA EMPILHADA");
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
             else if(url['var'] ==  17){
                 $('iframe[id="view_box_scc"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -355,6 +386,7 @@ function updateIframe(url){
 
         }
         else if(eixoAtual == 3){
+            
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=2");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -364,12 +396,15 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR UF");
             }
 
-            if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 ){
+            if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12 ){
                 $('iframe[id="view_box_scc"]').css('display', 'block')
                 $('iframe[id="view_box_scc"]').attr('src', 'donut.php?' + newUrl + '&eixo=' +  window.location.hash.substring(1) + window.location.hash)
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO");
                 /*$('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");*/
+            }
+            if(url['var'] == 14){
+                $('iframe[id="view_box_scc"]').attr('src', 'no-view.html');
             }
             //else if(url['var'] == 5){
             //    newUrl = newUrl.replace(/slc=[0-9]*/, "slc=1");
@@ -728,18 +763,28 @@ function loadResult(){
         else {
             var setor = 0;
         }
+
         if(url['var'] > 3) {
             $(window.parent.document).find('.select-deg').find('select').find('option[value="9"]').remove();
             $(window.parent.document).find('.select-deg').find('select').find('option[value="10"]').remove();
             $(window.parent.document).find('.select-deg').find('select').find('option[value="11"]').remove();
             $(window.parent.document).find('.select-deg').find('select').find('option[value="12"]').remove();
+
+            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="9"]').remove();
+            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="10"]').remove();
+            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="11"]').remove();
+            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="12"]').remove();
         }
         else {
             if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
             if($(window.parent.document).find("select[data-id='deg']").find("option[value='10']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
             if($(window.parent.document).find("select[data-id='deg']").find("option[value='11']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
             if($(window.parent.document).find("select[data-id='deg']").find("option[value='12']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
+
+
         }
+
+
 		if(url['cad']==0 && url['view']!='treemap_scc'){
             $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
             $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
@@ -1127,15 +1172,13 @@ $(document).ready(function(){
 	/*=== selecionar variável ===*/
 
 	$(document).on('click', ".scc", function(){
-
 	    var eixoAtual = getEixo(window.location.hash.substring(1));
-
         if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12) ||  (eixoAtual == 3) ){
             var setor = $(this).attr('data-id');
             var newSCCSrc = $("#view_box_scc").attr("src");
             var change = newSCCSrc.match(/uf=([0-9]*)/);
-            url['cad'] = setor;
             
+            url['cad'] = setor;
             url['uf'] = change[1];
             if(setor == 0) {
                 url['prt'] = 0;
@@ -1148,6 +1191,7 @@ $(document).ready(function(){
                 url['esc'] = 0;
                 url['cor'] = 0;
             }
+
             updateIframe(url);
 
             enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false, url['slc'], url);
@@ -1419,6 +1463,7 @@ $(document).ready(function(){
 
                 if(eixo_atual == 0){
                     $('.opt-select[data-id=deg]').val(0);
+                    $('.bread-select[data-id=deg]').val(0);
                 }
                 if(eixo_atual == 1){
                     updateOcupacoes($(this).val());
@@ -1436,6 +1481,8 @@ $(document).ready(function(){
                         $(".opt-select[data-id='prc']").val(0)
                         url['prc'] = 0
                     }
+                    url['typ'] = 1;
+                    $(".opt-select[data-id='typ']").val(1)
                     $(window.document).find(".prc-title").first().html($(".opt-select[data-id='prc'] option:selected").text());
                 }
                 
@@ -1485,27 +1532,29 @@ $(document).ready(function(){
 
                 changeDescVar();
                 cleanDesagsUrl();
-                switchToSetores();
+                getAnoDefault(eixo_atual);
+
+                if(url['ocp'] == 0){
+                    switchToSetores(); 
+                    $('#setor').addClass("active");
+                    $('#ocupacao').removeClass("active");
+                }
                 enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
-                $('#setor').addClass("active");
-                $('#ocupacao').removeClass("active");
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
 
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
+
+
+
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
                 updateBreadUF(eixo_atual, url['var']);
-                switch(eixo_atual){
-                    case 0: url['ano'] = anos_default[url['var']][url['ocp']]; break;
-                    case 1: url['ano'] = anos_default[url['var']][0]; break;
-                    case 2: url['ano'] = anos_default[url['var']][0]; break;
-                    case 3:
-                     index = url['slc'] == 0 ? 1 : 0
-                     url['ano'] = anos_default[url['var']][index]; break;
-                }
+                
                 if(eixo_atual == 0){
+                    $('.bread-select[data-id=deg]').val(0);
+
                     $('.opt-select[data-id=deg]').val(0);
                 }
                 if(eixo_atual == 1){
@@ -1516,6 +1565,7 @@ $(document).ready(function(){
                     updateDefaultMec(url['var']);
                 }
 
+
                 if(eixo_atual == 3){
                     updateServicos(url['var']);
                     updateTipo(url['var']);
@@ -1523,6 +1573,8 @@ $(document).ready(function(){
                         $('.bread-select[data-id=prc]').val(0);
                         $(".opt-select[data-id='prc']").val(0)
                         url['prc'] = 0
+                        url['typ'] = 1;
+                        $(".opt-select[data-id='typ']").val(1)
                     }
                     $(window.document).find(".prc-title").first().html($(".opt-select[data-id='prc'] option:selected").text());
                 }
@@ -1582,6 +1634,7 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////
 
     updateIframe(url);
+
 
 
     if(typeof(setMaxFontSize) === typeof(Function)){
