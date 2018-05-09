@@ -2,10 +2,12 @@
 });*/
 var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo;
 var tooltipInstance = tooltip.getInstance();
+$.get("./db/json_donut.php"+config, function(data){
+    console.log(data)
+
+});
+
 $.get("./db/json_donut.php"+config, ready);
-
-
-
 
 function ready(json){
     $('#corpo').attr("class", $('#corpo').attr("class")+ " done")
@@ -13,8 +15,8 @@ function ready(json){
     var data = JSON.parse(json);
     getPercent(data);
 
-    height = 220;
-    width = $('#corpo').width() - 40;
+    height = $('#corpo').height();
+    width = $('#corpo').width();
 
     radius = Math.min(width, height) / 2;
     var arc = d3.arc()
@@ -23,6 +25,7 @@ function ready(json){
 
     var pie = d3.pie()
         .value(function(d) { return d.valor; })(data);
+
 
     var svg = d3.select("#corpo").append("svg")
         .attr("width", width)
@@ -46,9 +49,11 @@ function ready(json){
         .attr("dy", ".40em")
         .attr("dx", -radius/6)
         .text(function(d) { 
-            if(vrv == 3 && eixo == 3){
+            if(vrv == 3 && eixo == 3 && d.data.valor != 0){
                 return formatTextVrv(d.data.valor, 3, vrv);
             }
+            if(eixo == 2 && vrv >= 18)
+                return;
             if(d.data.percent != 0) 
                 return percentFormat(d.data.percent) 
             })
@@ -60,10 +65,30 @@ function ready(json){
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
 
+
             if(eixo == 2 && vrv == 17){
+                if(d.data.tipo == "Não"){
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", d.data.tipo]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", d.data.tipo],
+                        ["", formatTextVrv(d.data.total, 2, vrv)]
+                    ]);
+                }
+
+            }
+            if(eixo == 2 && vrv >= 18){
                 tooltipInstance.showTooltip(d.data, [
-                    ["title", d.data.tipo]
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 2, vrv)],
+                    ["", percentFormat(d.data.percent)]
+
+
                 ]);
+
             }
             else{
                 tooltipInstance.showTooltip(d.data, [
@@ -90,6 +115,29 @@ function ready(json){
             $(parent.document).find("iframe#view_box").first().attr("src", srcMapa)
             $(parent.document).find("iframe#view_box_barras").first().attr("src", srcBarras)
         })
+
+
+
+    if(eixo == 2 && (vrv == 18 || vrv == 19)){
+        var soma = 0;
+        var acumuladoSetor;
+
+        Object.keys(data).forEach(function (key) {
+            soma += data[key].valor;
+            if(cad == data[key].cad)
+                acumuladoSetor = data[key].valor;
+        })
+
+        if(cad == 0)
+            acumuladoSetor = soma;
+
+
+        setPercentValueData({valor: formatTextVrv(acumuladoSetor,eixo, vrv)} , eixo, vrv)
+
+    }
+
+
+
 }
 
 
@@ -98,11 +146,21 @@ function color(tipo){
     colors = {
         "Exportação": "#071342",
         "Importação": "rgb(109, 191, 201)",
-        "Sim": "#071342",
-        "Não": "#aaa"
+        "Sim": "#077DDD",
+        "Não": "rgb(217, 213, 222)",
+        "Arq e D": "#87A8CA",
+        "Artes":  "#077DDD",
+        "Audio": "#0F4B67",
+        "Cult. Dig.": "#8178AF",
+        "Edit.":  "#E6C59B",
+        "Edu. Art.":"#EC8A91",
+        "Entretenimento":  "#AD5468",
+        "Música": "#6A474D",
+        "Patrimônio": "#E96B00",
+        "Publ.":  "#B2510F",
+        "Outros": "#B2510F"
+        }
 
-
-    }
     return colors[tipo];
 }
 

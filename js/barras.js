@@ -1,6 +1,6 @@
 /* tamanho container */
 var chartWidth = $('.chart').width()+25;
-var chartHeight = 254;
+var chartHeight = $('.chart').height();
 var minBarHeight = 5;
 var withLabels = false;
 
@@ -61,8 +61,7 @@ function destacaBarra(barraId, stacked = false) {
 }
 
 var tooltipInstance = tooltip.getInstance();
-if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
-
+if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) {    /*==== Barras JS ====*/
 
     //Variaveis/Objetos
     var dict = {};
@@ -75,6 +74,11 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
     // import colors.json file
     var colorJSON;
     var textJSON;
+    var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo + "&deg=" +deg + "&ano=" +ano;
+
+    $.get('./db/json_barras.php' + config, function(dado){
+        // console.log(dado)
+    })
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
         colorJSON = data;
@@ -84,8 +88,6 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         d3.json('data/pt-br.json', function (error, data) {
             if (error) throw error;
             textJSON = data;
-            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo;
-
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze);
@@ -173,32 +175,30 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
             if (i > 1)
                 colorsRange.push(rgb);
         });
-
+        console.log(dados.percentual)
         /*==================*/
         /* *** gráfico! *** */
         /*==================*/
 
+
+        // console.log(dados)
+
         var minDisplayValue = minValue > 0 ? minValue - (minValue / 10) : 0;
 
         if(eixo == 0 & (vrv >= 10 && vrv <= 13)) {
-            var x = d3.scaleBand()
-                .domain(d3.range(dados.value.length - 2))
-                .rangeRound([0, width])
-                .padding(0.1);
+            var tamanho = dados.value.length - 1;
         }
         else if(eixo == 0 && (vrv == 3)) {
-            var x = d3.scaleBand()
-                .domain(d3.range(dados.value.length - 2))
-                .rangeRound([0, width])
-                .padding(0.1);
-
+            var tamanho = dados.value.length - 1;
         }
         else {
-            var x = d3.scaleBand()
-                .domain(d3.range(dados.value.length - 1))
-                .rangeRound([0, width])
-                .padding(0.1);
+            var tamanho = dados.value.length;
         }
+        var x = d3.scaleBand()
+            .domain(d3.range(tamanho - 1))
+            .rangeRound([0, width])
+            .padding(0.1);
+
         var y = d3.scaleLinear()
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
@@ -392,7 +392,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         *  no select dos anos a fim de não criar visualizações impossíveis.
         */
 
-        if(!(eixo == 2 && vrv == 17)){
+        if(!((eixo == 2 && (vrv == 17) ) || (eixo == 1 && vrv == 6 && uos == 1))){
             $(window.parent.document).find('select[data-id=ano]').each(function(){
                 selectOp = this;
                 $(this.options).each(function(){
@@ -450,9 +450,9 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 barHeight = Math.abs(height - barHeight);
 
                 // BARRA MUITO PEQUENA
-                if (barHeight <= 3)
+               // if (barHeight <= 3)
                 //return barHeight < 5? height - (5 - barHeight) : (barPosition - barHeight) - 1 ;
-                    return height - (minBarHeight - barHeight);
+                   // return height - (minBarHeight - barHeight);
 
                 // BARRA PEQUENA
                 if (barHeight <= minBarHeight)
@@ -498,8 +498,13 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
                 return barHeight;
             })
-            .attr("fill", function (d) {
-                return color(cad);
+            .attr("fill", function (d,i ) {
+                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
+                    return color(dados.key[i])
+                else if(eixo == 3 && (vrv == 5 || vrv == 8))
+                    return color(0);
+                else
+                    return color(cad);
             })
             //mouseover
             .on("mouseover", function (d, i, obj) {
@@ -524,17 +529,37 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
                 newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
 
-                if(eixo == 2 && url['var'] == 10){
-                    if(url['mec'] == 1) {
+                if((eixo == 1 && url['var'] > 11) ||
+                    (eixo == 0 && url['var'] > 9) ||
+                    eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
+                    if(url['uos'] == 0) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
                         $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
                     }
                     else {
-                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        var newSCCSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                        $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
                     }
+                }
+                else if(eixo == 2 && url['var'] == 10){
+                        if(url['mec'] == 0) {
+                            var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                        }
+                        else {
+                            var newSCCSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
+                        }
+                    }
+                else if(eixo == 2 && url['var'] == 17){
+                    var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src");
+                    newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+                    $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+
                 }
                 else if(eixo == 3 && (url['var'] == 5 || url['var'] == 8)){
                     var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
@@ -545,7 +570,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                       
                   
                  }
-                else {//if(eixo == 1){
+                else {
                     if(url['uos'] == 1) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
@@ -566,6 +591,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
                 destacaBarra(dados.key[i]);
                 var valor = $('svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+
 
                 configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
 
@@ -724,14 +750,21 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
         destacaBarra(url['ano']);
 
         var valor = $('svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
-        configInfoDataBoxBarras(eixo, vrv, dados, valor);
-        
+
+        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
+            configInfoDataBoxBarras(eixo, vrv, dados, valor);
+
         if(eixo == 1)
-            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, data[dados.key[0]].uf);
+            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
         else
             $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-            $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
+        if(vrv == 1){
+            
+            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_setorial, data[dados.key[0]].uf));
         
+        }
+            
 
 
         if(url['slc'] == 1){
@@ -747,28 +780,12 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                     ]);
                 }
                 else if(vrv === 9){
-                    if(url['uf'] != 0 && url['cad'] != 0){
-                         tooltipInstance.showTooltip(d, [
-                             ["title", dados.key[i]],
-                             ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
-                             //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-                         ]);
-                     }
-                    else if(url['uf'] != 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i], eixo, vrv)],
-                         //   ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-                        ]);
-                    }
 
-                    else if(url['uf'] == 0){
-                        tooltipInstance.showTooltip(d, [
-                            ["title", dados.key[i]],
-                            ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
-                        //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-                        ]);
-                    }
+                     tooltipInstance.showTooltip(d, [
+                         ["title", dados.key[i]],
+                         ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
+                         //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+                     ]);
                 }
                 else{
                     tooltipInstance.showTooltip(d, [
@@ -779,11 +796,26 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 
             }
             else if(eixo === 1){
-                if (vrv === 2 || vrv === 9) {
+                if (vrv === 9) {
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
                     ]);
+                }
+                else if(vrv === 2){
+                    if(url['ocp'] == 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i]*10000, eixo, vrv)],
+                        ]);
+                    }
+                    else{
+                        tooltipInstance.showTooltip(d, [
+                            ["title", dados.key[i]],
+                            ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
+                        ]);
+                    }
+
                 }
                 else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
                     tooltipInstance.showTooltip(d, [
@@ -794,7 +826,7 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
                 }
             }
             else if(eixo === 2){
-                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv == 10 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16){
+                if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv == 10 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16 || vrv === 18 || vrv === 19){
                     tooltipInstance.showTooltip(d, [
                         ["title", dados.key[i]],
                         ["", formatTextVrv(dados.value[i], eixo, vrv)],
@@ -826,21 +858,25 @@ if(eixo != 1 || deg == 0) {    /*==== Barras JS ====*/
 }
 //BARRA 2
 else {
+
     // import colors.json file
     var colorJSON;
     var textJSON;
+
+    var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&deg=" + deg + "&ano=" + ano;
+
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
         colorJSON = data;
-
 
         // import pt-br.json file for get the title
         d3.json('data/pt-br.json', function (error, data) {
             if (error) throw error;
 
             textJSON = data;
-            var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
-
+            $.get("./db/json_barras.php" + config, function(data){
+                  console.log(data)
+           })
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze_eixo1);
@@ -848,6 +884,12 @@ else {
 
     });
     // return matching color value
+
+
+    $.get('./db/json_barras.php' + config, function(dado){
+        // console.log(dado)
+    })
+
     function color_eixo1() {
         if(ocp == 0) {
             if (colorJSON.cadeias[cad]) {
@@ -875,20 +917,22 @@ else {
 
     function desagregacao_names() {
 
-        if(eixo == 1 && (vrv == 6 || vrv == 4)){
-            var array_names = [];
-
-            array_names.push('Média');
-            return array_names;
-        }
+        // if(eixo == 1 && (vrv == 6 || vrv == 4)){
+        //     var array_names = [];
+        //
+        //     array_names.push('Média');
+        //     return array_names;
+        // }
 
         if(prt != 0) {
+
             var array_names = [];
             textJSON.select.prt.forEach(function(d, i) {
                 if(i) {
                     array_names.push(d.name_bar);
                 }
             });
+
         }
         if(esc != 0) {
             var array_names = [];
@@ -897,6 +941,7 @@ else {
                     array_names.push(d.name);
                 }
             });
+
         }
 
         if(fax != 0) {
@@ -914,6 +959,8 @@ else {
                     array_names.push(d.name);
                 }
             });
+            // console.log(array_names)
+
         }
         if(frm != 0) {
             var array_names = [];
@@ -949,31 +996,40 @@ else {
         }
         return array_names;
     }
-
+    function selectDesag(){
+        switch(deg){
+            case 1: return prt;
+            case 2: return sex;
+            case 3: return fax;
+            case 4: return esc;
+            case 5: return cor;
+            case 6: return frm;
+            case 7: return prv;
+            case 8: return snd;
+        }
+    }
     function analyze_eixo1(error, data) {
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }
-
-
+        desag = selectDesag()
         if((vrv == 6 || vrv == 4) && eixo == 1){
             aux = []
-
+            selectDesag();
             Object.keys(data).forEach(function (key) {
-
                 soma = 0;
                 cont = 0;
-
                 Object.keys(data[key]).forEach(function (chave) {
-                    if(chave != "year"){
+
+                    if(chave != "year" && cont == desag){
                         obj = {};
-                        obj[chave] = data[key][chave];
-                        soma = soma + obj[chave];
-                        cont++;
+                        valor = data[key][chave];
+                        
                     }
+                    cont++;
                 });
-                aux.push({year: data[key].year, Média: soma/cont})
+                aux.push({year: data[key].year, Média: valor})
             });
             data = aux;
         }
@@ -1002,9 +1058,12 @@ else {
             });
         });
 
+        // console.log(data)
 
         // Transpose the data into layers
         var dataset = d3.layout.stack()(dados);
+
+        // console.log(dataset)
 
         // Set x, y and colors
         var x_eixo1 = d3.scale.ordinal()
@@ -1090,8 +1149,12 @@ else {
                     url['ano'] = d.x.getFullYear();
                     var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + d.x.getFullYear());
                     newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
+
                     var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + d.x.getFullYear());
-                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']+"&chg=1");
+                    newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']+"&chg=1").replace(/ocp=[0-9]/, "ocp="+ocp);
+
+
+
                     $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                     $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                     $(window.parent.document).find("select[data-id='ano']").val(d.x.getFullYear());
@@ -1099,12 +1162,22 @@ else {
                 }
                 if (slc == 0) $(window.parent.document).find(".cad-title").first().html(textJSON.select.cad[url['cad']].name + " - " + desagregacao_names()[obj]);
                 else $(window.parent.document).find(".cad-title").first().html(textJSON.select.ocp[url['ocp'] - 1].name + " - " + desagregacao_names()[obj]);
-                console.log(d)
-
+                $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(obj+1)+"]").prop('selected', true)//.val(obj+1)
                 configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
             })
             .style("cursor", "pointer");
-
+        if((vrv == 6 || vrv == 4) && eixo == 1)
+            desagregacao = 1
+        else
+            desagregacao = $(window.parent.document).find(".bread-select[data-id=deg]").val();
+        dado_anos = dataset[desagregacao-1]
+        dado = dado_anos.filter(function(obj){
+            return obj.x.getFullYear() == url['ano']
+        })[0]
+        
+        configInfoDataBoxBarrasStacked(eixo, vrv, dado, getSoma(dado.x), deg);
+        
+        
         $('corpo').find('svg').attr('height',$('.chart').height() + 350);
 
         // Draw legend
@@ -1167,7 +1240,7 @@ else {
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
         if(eixo == 1 && dados.key != undefined){
-            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, data[dados.key[0]].uf);
+            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
 
         }
         else if(eixo != 3 && dados.key != undefined){
