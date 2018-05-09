@@ -491,13 +491,14 @@
 		[
 			{
 				"id":"1",
-				"desc_int":"Trabalhadores [cad] [deg]",
-				"desc_percent": "Do total de trabalhadores [cad] [uf]",
+				"desc_int":"[ocp] [cad] [deg] [uf]",
+				"desc_percent": "Do total de [ocp] [cad] [uf]",
+				"desc_setorial": "do total de [ocp] [setores] do Brasil",
 				"title":"Total de Ocupados",
-				"sufixo_valor":"",
+				"sufixo_valor" :"",
 				"prefixo_valor":"",
 				"fontes":"RAIS e IBGE (PNAD Anual).",
-				"desc_var_mapa": "A variável apresenta o número total de indivíduos ocupados em atividades produtivas ligadas aos Setores ou às Ocupações Culturais.",
+				"desc_var_mapa": " A variável apresenta o número total de indivíduos ocupado(a)s em atividades produtivas ligadas aos setores ou às ocupações criativas e culturais, com possibilidade de desagregações.",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -539,14 +540,14 @@
 			},
 			{
 				"id":"2",
-				"desc_int":"DE PARTICIPAÇÃO DOS TRABALHADORES [cad] NO MERCADO DE TRABALHO",
-				"title":"Participação no Emprego",
+				"desc_int":"DE PARTICIPAÇÃO DOS [ocp] [cad] NO MERCADO DE TRABALHO",
+				"title":"Participação no Emprego Total",
 				"desc_percent": "",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS e no IBGE (PNAD Anual). ",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
 				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
-				"desc_var_mapa": "A variável calcula a participação do emprego relacionado aos Setores e às Ocupações Culturais e Criativos no mercado de trabalho do País.",
+				"desc_var_mapa": "A variável calcula a participação do emprego nos setores e ocupações culturais e criativas no emprego total do País, isto é, em todos os setores e ocupações.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -635,14 +636,14 @@
 			},
 			{
 				"id":"4",
-				"desc_int":"DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES [cad] [deg]",
+				"desc_int":"DE REMUNERAÇÃO MÉDIA DOS [ocp] [cad] [deg]",
 				"title":"Remuneração Média",
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-				"desc_var_mapa": "A variável retrata o valor médio das remunerações monetárias recebidas como compensação pelos trabalhadores empregados pelos Setores e Ocupações Culturais e Criativos.",
+				"desc_var_mapa": "A variável retrata o valor médio das remunerações monetárias, em R$, recebidas como compensação pelo(a)s trabalhadore(a)s empregado(a)s pelos setores e nas ocupações culturais e criativas.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -668,9 +669,9 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS E no IBGE (PNAD Anual).",
+				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
-				"desc_var_mapa": "A variável calcula o valor médio da remuneração monetária por hora trabalhada nos Setores e Ocupações Culturais e Criativos. ",
+				"desc_var_mapa": "A variável calcula o valor médio da remuneração monetária, em R$, por hora trabalhada nos setores e nas ocupações culturais e criativas. ",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -698,7 +699,7 @@
 				"prefixo_valor":"",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
-				"desc_var_mapa": "A variável detalha o número médio de horas semanais dos ocupados ligados às atividades dos Setores e das Ocupações Culturais e Criativos. ",
+				"desc_var_mapa": "A variável detalha o número médio de horas semanais trabalhadas nos setores e nas ocupações culturais e criativas.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
@@ -721,12 +722,12 @@
 				"id":"7",
 				"title":"Massa de Rendimentos do Trabalho",
 				"desc_int":"",
-				"desc_percent": "da soma de remunerações pagas aos trabalhadores culturais e criativos {}",
+				"desc_percent": "da soma de remunerações pagas aos [ocp] [cad] {}",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
-				"desc_var_mapa": "A variável detalha o número médio de horas semanais dos ocupados ligados às atividades dos Setores e das Ocupações Culturais e Criativos. ",
+				"desc_var_mapa": "A variável mostra a soma de todas as remunerações monetárias pagas, em R$, como compensação pelo trabalho nos setores e nas ocupações culturais e criativas para cada ano.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -768,12 +769,12 @@
 			{
 				"id":"9",
 				"desc_int":"DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO EM SETORES CULTURAIS E CRIATIVOS",
-				"title":"Razão entre a Massa de Rendimentos do Trabalho e Valor Adicionado pelos Setores Culturais e Criativos",
+				"title":"Razão entre a Massa de Rendimentos do Trabalho e o Valor Adicionado",
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS.",
-				"desc_var_mapa": "A variável mostra a relação entre o total de salários pagos e o valor adicionado nos Setores Culturais e Criativos no País. ",
+				"fontes":"Elaboração do NECCULT com base na RAIS.",
+				"desc_var_mapa": "A variável mostra a relação entre o total de rendimentos do trabalho pagos e o valor adicionado, que é a soma de todas rendas novas criadas pelos setores culturais e criativos no País.",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -792,37 +793,14 @@
 				}
 			},
 			{
-				"id":"10",
-				"desc_int":"RAZÃO DE VARIAÇÃO NO NÍVEL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS",
-				"title":"Razão entre variação na ocupação e variação do Valor Adicionado pelos Setores Culturais e Criativos",
-				"desc_percent": "",
-				"sufixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS.",
-				"prefixo_valor":"",
-				"desc_var_mapa": "A variável estima a relação entre as mudanças no nível de ocupação nos Setores Culturais e Criativos e as flutuações do nível valor adicionado pelos mesmos setores. ",
-				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Ano a Ano", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				]
-			},
-			{
 				"id":"11",
 				"desc_int":" DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS [cad] [uf]",
-				"title":"Razão entre Custo Total das Empresas Culturais e Criativas e Salários Pagos",
+				"title":"Razão entre os Salários Pagos e o Custo Total",
 				"desc_percent": "",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS E no IBGE (PNAD Anual).",
+				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"desc_var_mapa": "A variável calcula a participação da remuneração dos trabalhadores dos Setores e Ocupações Culturais e Criativos no custo total das empresas culturais e criativas. ",
+				"desc_var_mapa": "A variável calcula a participação da remuneração monetária do(a)s trabalhadore(a)s dos setores culturais e criativos no custo monetário total das empresas formais desses setores, considerando que os salários são um componente do custo total. ",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -839,12 +817,12 @@
 			},
 			{
 				"id":"12",
-				"title":"Razão de Concentração do emprego cultural (C4)",
+				"title":"Razão de Concentração do emprego cultural e criativo (C4)",
 				"desc_int":"Concentração do Emprego por UF",
 				"desc_percent":"Concentração do Emprego por Setor",
 				"sufixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS e no IBGE (PNAD Anual).",
-				"desc_var_mapa": "A variável mede a concentração dos ocupados entre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas para cada ano, considerando a participação da soma das quatro maiores medidas no total. ",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
+				"desc_var_mapa": "A variável mede o grau de concentração do emprego nos setores e ocupações culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, se a maior região detém 20% dos empregos culturais e criativos, a segunda maior possui 15%, a terceira maior possui 10% e a quarta maior tem 5%, então o C4 será igual a 50%, indicando elevada concentração dos empregos culturais e criativos em poucas regiões. O mesmo vale para os dez setores culturais e criativos.",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
@@ -861,9 +839,9 @@
 				"desc_int":"Concentração de Massa Salarial por UF",
 				"desc_percent": "Concentração de Massa Salarial por Setor",
 				"sufixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
 				"prefixo_valor":"",
-				"desc_var_mapa": "A variável mensura a concentração da Massa de Rendimentos do Trabalho entre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas para cada ano, considerando a participação da soma das quatro maiores medidas no total. ",
+				"desc_var_mapa": " A variável mede o grau de concentração da massa de rendimentos do trabalho nos setores e ocupações culturais e criativas e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores da soma das quatro maiores medidas na soma total. Por exemplo, se o maior segmento cultural e criativo representa 30% da massa de rendimentos do trabalho, o segundo maior possui 25%, a terceira maior possui 20% e a quarta maior tem 15%, então o C4 será igual a 90%, indicando concentração extrema da massa de rendimentos do trabalho em poucos setores culturais e criativos. O mesmo vale para as unidades da federação.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -875,13 +853,13 @@
 			},
 			{
 				"id":"14",
-				"title":"IHH (Índice Herfindal-Hirschman de concentração) de Número de Trabalhadores",
+				"title":"IHH (Índice Herfindahl-Hirschman de concentração) de Número de Trabalhadore(a)s",
 				"desc_int": "IHH DE NÚMERO DO TRABALHADORES POR UF",
 				"desc_percent": "IHH DE NÚMERO DO TRABALHADORES POR SETOR",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"desc_var_mapa": "A variável calcula a concentração do número de trabalhadores entre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas para cada ano. ",
+				"desc_var_mapa": "A variável mede o grau de concentração do número de trabalhadore(a)s, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos do número de trabalhadore(a)s, pois o mesmo é proporcional à participação no volume médio de emprego, ponderado pelo volume de emprego em cada setor, ocupação ou unidade da federação. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevado volume de emprego, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um dado setor cultural e criativo apresenta poucas empresas com elevado volume de emprego, o IHH desse setor será alto, acima de 0,25.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -893,12 +871,12 @@
 			},
 			{
 				"id":"15",
-				"title":"IHH (Índice Herfindal-Hirschman de concentração) da Massa de Rendimentos do Trabalho",
+				"title":"IHH (Índice Herfindahl-Hirschman de concentração) da Massa de Rendimentos do Trabalho",
 				"desc_int": "IHH DA MASSA DE RENDIMENTOS POR UF",
 				"desc_percent": "IHH DA MASSA DE RENDIMENTOS POR SETOR",
-				"fontes":"Elaboração do NECCULT/UFRGS com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
 				"sufixo_valor":"",
-                "desc_var_mapa": "A variável calcula a concentração dos rendimentos do trabalho entre os Setores Culturais e Criativos, as Ocupações Culturais e Criativas e as unidades federativas para cada ano.",
+                "desc_var_mapa": "A variável mede o grau de concentração da massa de rendimentos do trabalho, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos da massa de rendimentos, pois o mesmo é proporcional à participação na massa média de remuneração, ponderado pela massa de rendimento do trabalho em cada setor, ocupação ou unidade da federação. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevada participação na massa de rendimento total, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um dado setor cultural e criativo apresenta poucas empresas com elevada massa de rendimentos do trabalho frente ao total, o IHH desse setor será alto, acima de 0,25.",
                 "prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
@@ -915,9 +893,9 @@
 				"id":"1",
 				"title":"Financiamento público total",
 				"sufixo_valor":"",
-				"desc_int":"FINANCIAMENTO À CULTURA  [] das empresas [cad] {}",
+				"desc_int":"FINANCIAMENTO À CULTURA  [] [cad] {}",
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA [] {}",
-				"desc_var_mapa": "A variável mostra o valor bruto total destinado ao fomento público da produção artística e cultural, por meio de políticas públicas e de seus mecanismos: mecenato, Fundo Nacional de Cultura (FNC) e total (soma dos dois anteriores). ",
+				"desc_var_mapa": "Financiamento público total: A variável mostra o valor monetário bruto total, em R$, destinado ao financiamento público da produção artística e cultural no Brasil, por meio de políticas públicas e de seus mecanismos: mecenato, Fundo Nacional de Cultura (FNC) e total (soma dos dois anteriores). ",
 				"prefixo_valor":"R$ ",
 				"fontes": "SALICnet.",
 				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
@@ -952,40 +930,38 @@
 				}
 			},
 			{
-				"id":"2",
-				"title":"Financiamento do Vale-Cultura",
+				"id":"18",
+				"title":"<span>CONSUMO VIA VALE-CULTURA<span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "Valor do consumo realizado por meio do cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa recebedora onde o cartão foi utilizado.",
+				"desc":"",
 				"sufixo_valor":"",
-				"desc_int":"CONSUMIDOS VIA VALE-CULTURA por empresas [cad] {}",
-				"desc_percent": "DO TOTAL CONSUMIDO VIA VALE-CULTURA {}",
-				"desc_var_mapa": "A variável mostra o valor bruto total utilizado em compras de bens e serviços culturais por meio do Programa Vale Cultura.",
 				"prefixo_valor":"R$ ",
-				"fontes": "Portal Brasileiro de Dados Abertos",
-				"desc":"Demonstra o valor bruto total utilizado em compras de bens e serviços culturais por meio do financiamento do Programa Vale Cultura.",
 				"type":[
-					{"name":"Mapa", "id":"mapa"},
-					{"name":"Treemap", "id":"treemap_region"},
-					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"}
+				]
+			},
+			{
+				"id":"19",
+				"title":"<span>AGENTES DO VALE-CULTURA<span>",
+				"desc_int":"",
+				"desc_percent": "",
+				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
+				"desc":"",
+				"sufixo_valor":" ",
+				"prefixo_valor":"R$ ",
+				"type":[
+					{"name":"Barras", "id":"barras"}
 				],
 				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				]
 			},
 			{
 				"id":"3",
@@ -993,9 +969,9 @@
 				"prefixo_valor":"R$ ",
 				"desc_int":"FINANCIAMENTO À CULTURA VIA [] BNDES () {}",
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES () {}",
-				"desc_var_mapa": "A variável apresenta o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
+				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, destinado ao financiamento da produção artística e cultural no Brasil por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
 				"fontes": "BNDES.",
-				"title":"Financiamento do BNDES",
+				"title":"Financiamento pelo BNDES",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1027,12 +1003,12 @@
 			},
 			{
 				"id":"4",
-				"title":"Valor total de incentivos privados",
+				"title":"Valor total dos incentivos privados",
 				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA [cad] {} ",
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA {}",
-				"desc_var_mapa": "A variável apresenta o valor bruto total do fomento cultural via mecenato, apoiado por: empresas privadas, pessoas físicas e total privado (soma dos dois anteriores).",
+				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, do financiamento cultural via mecenato, desagregado, por empresas privadas e pessoas físicas, e agregado (soma dos dois anteriores).",
 				"sufixo_valor":"",
-				"fontes": "SALICnet. Atualizado para 2016.",
+				"fontes": "SALICnet.",
 				"prefixo_valor":"R$ ",
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
@@ -1058,10 +1034,10 @@
 			},
 			{
 				"id":"5",
-				"title":"Valor total de incentivos via empresas públicas",
+				"title":"Valor total dos incentivos das empresas estatais",
 				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO PARA EMPRESA ESTATAL [cad] {}",
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO PARA EMPRESA ESTATAL {}",
-				"desc_var_mapa": "A variável mostra o valor bruto total do financiamento via mecenato que foi realizado por empresas estatais.",
+				"desc_var_mapa": "A variável mostra o valor monetário bruto, em R$, do financiamento cultural, via mecenato, pelas empresas estatais. ",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"fontes": "SALICnet. ",
@@ -1090,8 +1066,8 @@
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO {}.",
 				"desc_percent": "",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
-				"desc_var_mapa": "A variável calcula o percentual dos recursos financiados via mecenato advindos de apoio privado (empresas privadas e pessoas físicas). ",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
+				"desc_var_mapa": "A variável calcula o percentual dos recursos financiados via mecenato, advindos de apoio privado (empresas privadas e pessoas físicas), no incentivo fiscal total.",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"type":[
@@ -1114,13 +1090,13 @@
 			},
 			{
 				"id":"8",
-				"title":"Participação do Financiamento público total no Valor Adicionado pelas Atividades Culturais",
+				"title":"Participação do financiamento público total no valor adicionado pelas atividades culturais",
 				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO {} [CAD] E VALOR ADICIONADO [cad] [uf]",
 				"desc_percent": "",
-				"desc_var_mapa": "A variável mostra a razão entre o fomento por meio de mecanismos de financiamento via incentivo (mecenato, FNC e total) e o valor adicionado pelos  SCC.",
+				"desc_var_mapa": "A variável mostra a razão entre o fomento às atividades culturais por meio de financiamento via incentivo fiscal, agregado e desagregado, e o valor adicionado pelos setores culturais e criativos. É um indicador da importância relativa dos recursos financeiros frente à geração de renda nova por esses setores.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
 				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1152,12 +1128,12 @@
 			},
 			{
 				"id":"9",
-				"title":"Participação do valor total bruto em fomento à cultura na massa salarial das atividades culturais",
+				"title":"Participação do financiamento público total na massa salarial das atividades culturais",
 				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
 				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO {} [CAD] E MASSA SALARIAL DOS TRABALHADORES CULTURAIS [cad] [uf]",
 				"desc_percent": "",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
-				"desc_var_mapa": "A variável calcula a razão entre o fomento por meio de mecanismos de financiamento via incentivo (mecenato, FNC e total) e a massa salarial dos trabalhadores da cultura.",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
+				"desc_var_mapa": "A variável calcula a razão entre o fomento por meio de financiamento via incentivo fiscal , agregado e desagregado, e a massa salarial do(a)s trabalhadore(a)s da cultura. É um indicador da importância relativa dos recursos financeiros frente aos custos trabalhistas do setor.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1192,12 +1168,12 @@
 			},
 			{
 				"id":"10",
-				"title":"Participação da Despesa em Cultura nas Contas Públicas Federais",
+				"title":"Participação da despesa com cultura nas contas públicas federais",
 				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
-				"desc_int":"",
-				"desc_percent": "",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no Ministério do Planejamento (dados de orçamento) e SALICnet (financiamento por mecenato e FNC). ",
-				"desc_var_mapa": "A variável mede a razão entre a despesa total em cultura (orçamento MinC) e a arrecadação federal total e a relação entre o total financiado de apoio à cultura (soma FNC e mecenato) e arrecadação federal total.",
+				"desc_int":"DE DESPESA DO MINISTÉRIO DA CULTURA EM RELAÇÃO AO TOTAL DE ARRECADAÇÃO FEDERAL",
+				"desc_percent": "DO TOTAL DE FINANCIAMENTO FEDERAL VIA FNC E MECENATO EM RELAÇÃO AO TOTAL DE ARREDACAÇÃO FEDERAL",
+				"fontes": "Elaborado pelo NECCULT com base no Ministério do Planejamento (dados de orçamento) e SALICnet (financiamento por mecenato e FNC).",
+				"desc_var_mapa": "A variável mede a razão entre a despesa total com cultura (orçamento MinC) e a arrecadação federal total, e também a relação entre o financiamento total do fomento à cultura (FNC e mecenato) e arrecadação federal total.",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"type":[
@@ -1206,11 +1182,11 @@
 			},
 			{
 				"id":"11",
-				"title":"<span>Total das propostas de projetos</span>",
+				"title":"Total das propostas de projetos de financiamento cultural",
 				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
 				"desc_int":"PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [cad] {} ",
 				"desc_percent": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO {}",
-				"desc_var_mapa": "A variável retrata a soma de todas propostas de projetos para captação via mecenato, segundo ano de proposição do projeto. ",
+				"desc_var_mapa": "A variável retrata a soma de todas propostas de projetos para captação via mecenato, de acordo com o ano de proposição do projeto. ",
 				"sufixo_valor":"",
 				"fontes": "SALICnet. ",
 				"prefixo_valor":"",
@@ -1239,13 +1215,13 @@
 			},
 			{
 				"id":"12",
-				"title":"<span>Total dos projetos fomentados</span>",
+				"title":"Total dos projetos de financiamento cultural efetivamente fomentados",
 				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
 				"desc_int":"PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [cad] {}",
 				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO {}",
-				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, segundo ano de proposição do projeto. ",
+				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, de acordo com o ano de proposição do projeto.",
 				"sufixo_valor":"",
-				"fontes": "SALICnet. ",
+				"fontes": "SALICnet. Atualizado para 2016. ",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1272,12 +1248,12 @@
 			},
 			{
 				"id":"13",
-				"title":"Tempo Médio de Aprovação",
+				"title":"Tempo médio de aprovação dos projetos de financiamento cultural",
 				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
 				"desc_int":"DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [cad] {}",
 				"desc_percent": "",
 				"fontes": "SALICnet. ",
-				"desc_var_mapa": "A variável mostra o tempo médio entre a data de proposta do projeto e a data de efetiva aprovação para início de captação de recursos.",
+				"desc_var_mapa": "A variável mostra o intervalo médio entre a data de proposta do projeto de financiamento e a data da aprovação efetiva para início de captação de recursos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1310,8 +1286,8 @@
 				"sufixo_valor":"",
 				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [cad] {}",
 				"desc_percent": "",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
-				"desc_var_mapa": "A variável retrata o percentual médio obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, segundo ano de proposição do projeto.",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
+				"desc_var_mapa": "A variável calcula o percentual médio financiado do projeto, obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto. ",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1323,14 +1299,14 @@
 			},
 			{
 				"id":"15",
-				"title":"Índice Razão para Concentração dos Incentivos Fiscais (C4): ",
+				"title":"Índice Razão para Concentração dos Incentivos Fiscais (C4) ",
 				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
 				"desc_int":"Concentração do financiamento [] por UF",
 				"desc_percent": "Concentração do financiamento [] por setor" ,
-				"desc_var_mapa":"A variável calcula o grau de concentração dos recursos fiscais destinados à cultura entre os SCC e as unidades federativas para cada ano, considerando a participação da soma das quatro maiores medidas no total.",
+				"desc_var_mapa":"A variável mede o grau de concentração dos recursos fiscais destinados à cultura nos setores culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, se o maior segmento cultural e criativo obtém 6% dos recursos fiscais, o segundo maior recebe 4%, o terceiro maior 2% e o quarto maior 1%, então o C4 será igual a 13%, indicando baixa concentração setorial dos recursos fiscais. O mesmo vale para as unidades da federação.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1345,9 +1321,9 @@
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
 				"desc_int":"Concentração do financiamento [] por UF",
 				"desc_percent": "Concentração do financiamento [] por setor" ,
-				"desc_var_mapa": "A variável estima o grau de concentração dos projetos fomentados entre os SCC e as unidades federativas para cada ano.",
+				"desc_var_mapa": "A variável mede o grau de concentração dos projetos fomentados entre os setores culturais e criativos e as unidades da federação, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, o setor em termos da distribuição dos projetos fomentados, pois o mesmo é proporcional à participação no volume médio de projetos fomentados, ponderado número de projetos fomentados em cada setor ou unidade da federação. Por exemplo, se no Brasil há poucos setores culturais com elevada participação no total de projetos fomentados, haverá concentração setorial, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil poucas unidades federativas apresentam elevado número de projetos fomentados frente ao total, o IHH regional será alto, acima de 0,25.",
 				"sufixo_valor":"",
-				"fontes": "Elaborado pelo NECCULT/UFRGS com base no SALICnet. ",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1362,7 +1338,7 @@
 				"title":"<span>Fomento Público Estadual à Cultura<span>",
 				"desc_int":"",
 				"desc_percent": "",
-				"desc_var_mapa": "",
+				"desc_var_mapa": "A variável demonstra os estados que possuem fomento a nível estadual em três perspectivas: Editais Estaduais, Mecenato Estadual e Crédito Especial. Dentro dessas perspectivas, a variável ainda demonstra o valor - conforme informado por cada Estado - para o ano selecionado.",
 				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
@@ -1374,13 +1350,14 @@
 					{"name":"Ano","id":"ano"}
 				]
 			}
+
 		],
 		[
 			{
 				"id":"1",
-				"title":"Valor Absoluto",
+				"title":"Corrente de Comércio",
 				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
-				"desc_var_mapa": "A variável mostra o valor absoluto transacionado, caracterizando quanto, em termos monetários, os Setores Culturais e Criativos contribuíram para o comércio internacional do Brasil. É possível visualizar este valor para exportações, importações, saldo comercial e valor transacionado.",
+				"desc_var_mapa": "A variável mostra o valor absoluto transacionado, caracterizando quanto, em termos monetários, os setores culturais e criativos contribuíram para o comércio internacional do Brasil.",
 				"desc_int": "DE <> {} PARA [] ()",
 				"fontes": "MDIC. ",
 				"desc_percent":"DO VALOR <> {}",
@@ -1418,11 +1395,11 @@
 			},
 			{
 				"id":"2",
-				"title":"<span>Relação com o Comércio Exterior Brasileiro</span>",
+				"title":"Participação no comércio exterior total",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a contribuição dos Setores Culturais e Criativos para o comércio internacional total do Brasil. ",
+				"desc_var_mapa": "A variável calcula a participação das trocas comerciais dos setores culturais e criativos no comércio internacional total do Brasil.",
 				"desc_int": "de participação no <> {} para [] ()",
-				"fontes": "Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"fontes": "Elaboração do NECCULT com base no MDIC.",
 				"desc_percent":"",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
@@ -1460,12 +1437,12 @@
 				"id":"3",
 				"title":"Relação com o Valor Adicionado da Cultura",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
-				"desc_var_mapa": "A variável mostra a relação entre o comércio exterior dos Setores Culturais e Criativos com o valor adicionado pelas empresas culturais e criativas.",
+				"desc_var_mapa": "A variável mede a relação entre o comércio exterior dos setores culturais e criativos e o valor adicionado pelas empresas culturais e criativas formais.",
 				"desc_int": " de participação do <> {} para [] () no valor adicionado",
 				"desc_percent":"",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1498,14 +1475,14 @@
 			},
 			{
 				"id":"5",
-				"title":"Razão de Concentração (C2) do Valor Absoluto dos Parceiros",
+				"title":"Razões de concentração (C2/C4) da corrente de comércio",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula o grau de concentração do comércio internacional dos Setores Culturais e Criativos com os dois maiores, em termos de participação relativa, parceiros comerciais em cada período.",
+				"desc_var_mapa": "A variável mede o grau de concentração do comércio internacional dos setores culturais e criativos com os dois maiores parceiros comerciais, dos quatro maiores setores, e das quatro maiores unidades da federação, todos em termos de participação relativa, em cada período. Por exemplo, se em um dado ano o maior parceiro comercial representa 50% da corrente de comércio dos setores culturais e criativos e o segundo maior recebe 30%, então o C2 será igual a 80%, indicando nesse exemplo elevada concentração geográfica do comércio cultural. Por sua vez, se o maior segmento cultural e criativo ou Unidade da Federação representa 8% da corrente de comércio de todos os setores ou Unidades da Federação, o segundo 5%, o terceiro maior 3% e o quarto maior 1%, então o C4 será igual a 17%, indicando nesse exemplo baixa concentração setorial ou regional do comércio exterior dos setores culturais e criativos.",
 				"desc_int": "C2 VALOR ABSOLUTO POR PARCEIROS",
 				"desc_percent":"C4 VALOR ABSOLUTO POR UF",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1538,10 +1515,10 @@
 			},
 			{
 				"id":"8",
-				"title":"<span>IHH VALOR ABSOLUTO</span>",
+				"title":"IHH (Índice Herfindahl-Hirschman) de concentração da corrente de comércio",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o grau de concentração da corrente de comércio dos Setores Culturais e Criativos em relação aos parceiros comerciais.",
-				"fontes": "Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"desc_var_mapa": "A variável calcula o grau de concentração da corrente de comércio dos setores culturais e criativos em relação aos parceiros comerciais, aos próprios setores culturais e às Unidades da Federação. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é a corrente de comércio em termos da distribuição geográfica, setorial ou regional das trocas, pois o mesmo é proporcional à participação no volume médio de comércio internacional, ponderado pelo comércio externo de cada parceiro, setor ou Unidade da Federação. Por exemplo, se há poucos parceiros comerciais, setores ou Unidades da Federação com elevada participação na corrente de comércio, haverá concentração geográfica, setorial ou regional e o IHH será alto, acima de 0,25.",
+				"fontes": "Elaboração do NECCULT com base no MDIC.",
 				"desc_int": "IHH VALOR ABSOLUTO POR PARCEIROS",
 				"desc_percent":"IHH VALOR ABSOLUTO POR UF",
 				"sufixo_valor":"",
@@ -1582,8 +1559,8 @@
 				"desc_int": "Índice de quantum do valor absoluto <>",
 				"desc_percent":"",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a corrente de comércio desagregada em termos de quantidades.",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"desc_var_mapa": "A variável mensura a corrente de comércio cultural desagregada em termos de quantidades",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1599,8 +1576,8 @@
 				"desc_int": "índice de preços do valor absoluto das <>",
 				"desc_percent":"",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a corrente de comércio desagregada em termos de preços. ",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC.",
+				"desc_var_mapa": "A variável calcula a corrente de comércio desagregada em termos de preços.",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1633,8 +1610,8 @@
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
 				"desc_int": "DE RENTABILIDADE <> ()",
 				"desc_percent":"",
-				"desc_var_mapa": "A variável retrata a relação do índice de preços das exportações, corrigido pela taxa de câmbio, com o índice de custos estimado pela FUNCEX. ",
-				"fontes":"Elaboração do NECCULT/UFRGS com base no MDIC, FUNCEX e BIS.",
+				"desc_var_mapa": "A variável estima a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX.",
+				"fontes":"Elaboração do NECCULT com base no MDIC, FUNCEX e BIS.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"type":[
@@ -1712,6 +1689,7 @@
 			{"name":"Outros","value":"11"}
 		],
 		"ocp":[
+			{"name":"Todos", "value":"3"},
 			{"name":"Atividades Relacionadas", "value":"1"},
 			{"name":"Cultura","value":"2"}
 		],
@@ -1816,10 +1794,10 @@
 		],
 		"deg":[
 			{"name":"Escolher","value":"0"},
-			{"name":"Por porte","value":"1"},
-			{"name":"Por sexo","value":"2"},
-			{"name":"Por idade","value":"3"},
-			{"name":"Por escolaridade","value":"4"},
+			{"name":"Por porte","value":"1", "desags": ["Micro", "Pequeno", "Médio", "Grande"]},
+			{"name":"Por sexo","value":"2", "desags": ["Masculino", "Feminino"]},
+			{"name":"Por idade","value":"3", "desags": ["10 - 17", "18 - 29", "30 - 49", "50 - 64", "65 ou mais"]},
+			{"name":"Por escolaridade","value":"4", "desags": ["Sem Instrução", "Fundamental Incompleto", "Fundamental Completo", "Médio completo", "Superior incompleto", "Superior completo"]},
 			{"name":"Por cor","value":"5"},
 			{"name":"Por formalidade","value":"6"},
 			{"name":"Por previdência","value":"7"},
