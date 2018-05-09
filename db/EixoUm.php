@@ -5,7 +5,7 @@
 define('DB_NOME', 'Atlas');
 define('DB_USUARIO', 'root');
 define('DB_SENHA', 'root');
-// define('DB_HOST', 'localhost');
+//define('DB_HOST', 'localhost');
 define('DB_HOST', '143.54.231.130');
 
 class EixoUm {
@@ -261,7 +261,7 @@ class EixoUm {
 	    $cad = id do SCC 
 	    $prt = id do porte
 	Saída:
-	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
+	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributosa
 	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
 
