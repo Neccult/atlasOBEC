@@ -122,11 +122,12 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
             <!--=== BREADCRUMBS ===-->
 
             <div class="bread-parent">
-
-
                 <div class="row breadcrumb">
-                    <div>
-                        <select class="bread-eixo" data-id="eixo">
+                    <div class="bread-caixas" style="margin: auto">
+                    <div class="bread-caixa" style="width: 15%">
+                        <span class="rotulo-bread opt view active">Eixo</span>
+
+                        <select class="bread-eixo bread-select-eixo" data-id="eixo">
                             <?php
                             foreach ($json_text['select']['eixo'] as $bread_eixo) {
 
@@ -141,7 +142,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
                     <div class="bread-separator">/</div>
-                    <div>
+                    <div class="bread-caixa" style="width: 15%">
+                        <span class="rotulo-bread opt view active">Variável</span>
+
                         <select class="bread-select bread-select-var" data-id="var">
                             <?php
                             foreach ($json_text['var'][$eixo_num] as $variavel) {
@@ -152,9 +155,11 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     </div>
 
                     <?php if($eixo == 'comercio') {?>
-                        <div class="bread-separator">/</div>
+                    <div class="bread-separator">/</div>
 
-                        <div>
+                        <div class="bread-caixa">
+                            <span class="rotulo-bread opt view active">Parceiro</span>
+
                             <select class="bread-select" id="bread-select-prc" data-id="prc">
                                 <?php
                                 foreach ($json_text['select']['prc'] as $option) {
@@ -168,7 +173,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                     <div class="bread-separator">/</div>
 
-                    <div>
+                    <div class="bread-caixa">
+                        <span class="rotulo-bread opt view active">UF</span>
+
                         <select class="bread-select bread-uf" data-id="uf">
                             <?php
                             foreach ($json_text['select']['uf'] as $bread_uf) {
@@ -178,7 +185,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
                     <div class="bread-separator">/</div>
-                    <div>
+                    <div class="bread-caixa">
+                        <span class="rotulo-bread opt view active">Ano</span>
+
                         <select class="bread-select" data-id="ano">
                             <?php
                             foreach ($json_text['select']['ano'] as $option) {
@@ -188,7 +197,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
                     <div class="bread-separator">/</div>
-                    <div>
+                    <div class="bread-caixa">
+                        <span class="rotulo-bread opt view active">Setor</span>
+
                         <select class="bread-select" id="bread-select-cad" data-id="cad">
                             <?php
                             foreach ($json_text['select']['cad'] as $bread_cad) {
@@ -198,10 +209,15 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </select>
                     </div>
 
-                    <?php if($eixo == 'empreendimentos') {?>
+
+
+
+                    <?php if($eixo == 'empreendimentos'){?>
+
                         <div class="bread-separator">/</div>
 
-                        <div>
+                        <div class="bread-caixa">
+                            <span class="rotulo-bread opt view active">Desagregação</span>
                             <select class="bread-select" id="bread-select-deg   " data-id="deg">
                                 <option value="0">Escolher</option>
 
@@ -216,20 +232,111 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                     <?php } ?>
 
+                    <?php if($eixo == 'mercado'){?>
+
+                        <div class="bread-separator">/</div>
+
+                        <div class="bread-caixa">
+                            <span class="rotulo-bread opt view active">Desagregação</span>
+                            <select class="bread-select" id="bread-select-deg" data-id="deg">
+                                <option value="0">Escolher</option>
+
+                                <?php foreach ($select['deg'] as $option): ?>
+                                    <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
+                                        <optgroup value="<?php echo $option['value'] ?>" label="<?php echo $option['name'] ?>">
+                                            <?php foreach ($option['desags'] as $key=>$desag): ?>
+                                                <option value="<?php echo $key+1 ?>"><?php echo $desag ?></option>
+                                            <?php endforeach; ?>
+                                        </optgroup>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                    <?php } ?>
+
+                    <?php if($eixo == 'politicas'){?>
+
+                        <div class="bread-separator">/</div>
+
+                        <div class="bread-caixa ">
+                            <span class="rotulo-bread opt view active ">Mecanismo</span>
+                            <select class="bread-select" id="bread-select-mec" data-id="mec">
+                                <option value="0">Todos</option>
+
+                                <?php foreach ($select['mec'] as $option): ?>
+
+                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="bread-separator">/</div>
+
+                        <div class="bread-caixa" style="display: none">
+                            <span class="rotulo-bread opt view active ">Modalidade</span>
+                            <select class="bread-select" id="bread-select-mod" data-id="mod">
+                                <option value="0">Todos</option>
+
+                                <?php foreach ($select['mod'] as $option): ?>
+
+                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="bread-separator">/</div>
 
 
+                        <div class="bread-caixa" style="display: none">
+                            <span class="rotulo-bread opt view active ">Pessoa</span>
+                            <select class="bread-select" id="bread-select-mec" data-id="pfj">
+                                <option value="0">Todos</option>
+
+                                <?php foreach ($select['pfj'] as $option): ?>
+
+                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                    <?php } ?>
+
+                    <?php if($eixo == 'comercio'){?>
 
 
+                        <div class="bread-separator">/</div>
 
+                        <div class="bread-caixa">
+                            <span class="rotulo-bread opt view active ">Tipo</span>
+                            <select class="bread-select" id="bread-select-typ" data-id="typ">
 
+                                <?php foreach ($select['typ'] as $option): ?>
+
+                                    <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
+                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                    <?php } ?>
+
+                    </div>
 
                 </div>
             </div>
 
             <!--==== jquery load menu ===-->
 			<div class="row" id="view-boxes">
-				<!-- gráfico -->
-				<div class="col-md-4 col-xs-12" style="height: 452px">
+				<!-- MAPA -->
+				<div class="col-md-5 col-xs-12" style="height: 452px">
                     <div class="view-title">
                         MAPA DO BRASIL
                         <i class="plus"></i>
@@ -268,44 +375,89 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     <?php endforeach;?>
                     </div>
 				</div>
-
                 <!--=============== DADOS! ================-->
-
-                <div class="col-md-4 col-xs-12 iframe-dados" style="height: 320px; padding: 20px 35px;">
+                <div class="col-md-5 col-xs-12 iframe-dados" style="height: 330px;">
                     <div class="view-title" style="margin-top: 5px" >
                         DADOS
                     </div>
-                    
-                    <?php if($eixo == "comercio") { ?>
-                        
-                        <div class="state-title">
-                            BRASIl
-                        </div>
 
-                        <div class="prc-title">
-                            MUNDO
-                        </div>
-                    <?php } else { ?>
-                        <div class="state-title">
+                    <div id="btn-opt" class="btn-opt" style="width: 48%; margin-top: 10px; margin-bottom: 10px;">
+                        <?php
+                        if($eixo == "mercado") {
+                            ?>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                            </div>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
+                            </div>
+                        <?php } ?>
+                        <?php
+                        if($eixo == "politicas") {
+                            ?>
+                            <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
+                                <button  class="opt view <?php if($mec == 0) echo 'active';?>" id="recebedora">Recebedor</button>
+                            </div>
+                            <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
+                                <button  class="opt view <?php if($mec == 1) echo 'active';?>" id="trabalhador">Trabalhador</button>
+                            </div>
+                        <?php } ?>
+                        <?php if($eixo == "comercio") { ?>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                <button class="opt view active" id="bens">Bens</button>
+                            </div>
+                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                <button class="opt view " id="servicos">Serviços</button>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <?php if($eixo != "comercio") { ?>
+                        <div class="state-title" style="display: none">
                             BRASIL
                         </div>
                     <?php  }?>
-                    <div class="cad-title">
+                    <div class="cad-title" style="display:none">
                         TODOS SETORES
                     </div>
-                    <div class="data-values">
-                        <div class="integer-value">
-                            <span class="number"></span>
-                            <span class="description-number"></span>
+                    <div class="data-values" style="display:flex">
+                        <div class="container-flex">
+                            <div class="integer-value" style="padding-left: 15px;">
+                                <span class="number"></span>
+                                <span class="description-number"></span>
+                            </div>
                         </div>
-                        <div class="percent-value">
-                            <span class="number"></span>
-                            <span class="description-number"></span>
-                        </div>
-                        <div class ="setor-value" style="display:none;">
-                            <span class="number"></span>
-                            <span class="description-number"></span>
-                        </div>
+                        <div class="container-flex">
+                            <div class="percent-value">
+
+                                <div class="box-dado">
+                                    <span class="number"></span>
+                                    <span class="description-number" ></span>
+                                </div>
+
+                                <div class="box-dado" style="display:none">
+                                    <span class="number">100%</span>
+                                    <span class="description-number" ></span>
+                                </div>
+
+                                <div class="box-dado" style="display:none">
+                                    <span class="number">100%</span>
+                                    <span class="description-number" ></span>
+                                </div>
+
+                                <div class ="setor-value" style="display:none;">
+                                    <span class="number"></span>
+                                    <span class="description-number"></span>
+                                </div>
+
+                            </div>
+                    </div>
+                        
+                        
                     </div>
                     <div class="value-info-title">
 
@@ -314,9 +466,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         FONTE(S): RAIS
                     </div>
                 </div>
-
                 <!--============= opções gráfico! ============-->
-				<div class="col-md-4 col-xs-12 opts-result" style="height: 320px;">
+				<div class="col-md-12 col-xs-12 opts-result" style="display: none; height: 330px; ">
                     <div id="menu-view">
                         <div class="view-title">
                             MENU
@@ -326,7 +477,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             if($eixo == "mercado") {
                             ?>
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                                    <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
                                 </div>
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
                                     <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
@@ -394,13 +545,13 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             ?>
 
                             <?php if($eixo == "comercio") { ?>
-                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                        <button class="opt view active" id="bens">Bens</button>
-                                    </div>
-                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                        <button class="opt view " id="servicos">Serviços</button>
-                                    </div>
-                                <?php } ?>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button class="opt view active" id="bens">Bens</button>
+                                </div>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button class="opt view " id="servicos">Serviços</button>
+                                </div>
+                            <?php } ?>
 
 
                             <div class = "omitir" id="option-title-view "  <?php echo $json_text['var_desc'] ?>>
@@ -543,21 +694,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </div>
                     <?php } ?>
 				</div>
-                <div class="col-md-4 col-xs-12" style="height: 330px;">
+                <!--=============== BARRAS! ================-->
+                <div class="col-md-5 col-xs-12" style="height: 330px;">
                     <div class="view-title">
                         SÉRIE HISTÓRICA
                         <i class="plus"></i>
                     </div>
                     <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
                 </div>
-                <div class="col-md-4 col-xs-12"  style="height: 330px;">
-                    <div class="view-title">
-                        <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
-                        <i class="plus"></i>
-                    </div>
-                    <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 270px;" scrolling="no"></iframe>
-                </div>
-                <div id="descricao" class="col-md-4 col-xs-12" style="height: 199px; overflow: auto; top: -210px;">
+                <!--=============== DESCRICAO! ================-->
+                <div id="descricao" class="col-md-5 col-xs-12" style="height: 210px; top: -220px; overflow: auto;">
                     <div class="view-title">
                         DESCRIÇÃO DAS VARIÁVEIS
                     </div>
@@ -565,6 +711,47 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         <?=$text['desc_var_mapa'];?>
                     </div>
                 </div>
+                <!--=============== TREEMAP! ================-->
+                <div class="col-md-10 col-xs-12"  style="height: 452px; top: -220px">
+                    <div class="view-title">
+                        <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
+                        <i class="plus"></i>
+                    </div>
+                    <?php if ($eixo != "comercio") {?>
+                        <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 80%; height: 90%; float: left;" scrolling="no"></iframe>
+                        <div id="menu-view" style="float: right; width: 20%">
+                    <?php } else {?>
+                        <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
+                        <div id="menu-view" style="float: right; width: 20%; display:none">
+                    <?php } ?>
+                        
+
+                        <div class="view-title-leg" data-id="scc&ocp">
+                            SETORES
+                        </div>
+                        <div id="title-view-leg-scc">
+                            <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
+                            <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
+                            <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
+                            <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
+                            <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
+                            <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
+                            <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
+                            <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
+                            <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
+                            <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
+                            <?php if($eixo != 'comercio') { ?>  <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
+                                <?php } ?>
+                        </div>
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
                 <script>
                     function result_mobile() {
                         if($(window).width() < 1200) {
@@ -577,8 +764,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     }
                     setTimeout(result_mobile(), 500);
                 </script>
-                <span class="col-md-4 col-xs-12 contexto">
-                    <div class="row contexto">
+                <span class="col-md-4 col-xs-12 contexto" style="top:-220px"></span>
+
+                <span class="col-md-4 col-xs-12 contexto" style="top:-220px">
+                    <div class="row">
                         <div class="col-md-12 opt-title text-center">DOWNLOAD</div>
                         <div class="col-xs-4 col-btn"><button class="opt select" id="pdf">PDF</button></div>
                         <div class="col-xs-4 col-btn"><button class="opt select" id="csv">ODS</button></div>
@@ -653,7 +842,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </div>
                     </div>
                 </span>
-			</div>
+                <span class="col-md-4 col-xs-12 contexto" style="top:-220px"></span>
+
+            </div>
 		</div>
 	</div>
 

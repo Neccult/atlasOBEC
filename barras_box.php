@@ -120,16 +120,25 @@
     url['cor'] = "<?php echo $cor; ?>";
     url['frm'] = "<?php echo $frm; ?>";
     url['prv'] = "<?php echo $prv; ?>";
+
     url['snd'] = "<?php echo $snd; ?>";
     <?php } ?>
 
     <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
     url['slc'] = "<?php echo $slc; ?>";
+    url['uos'] = "<?php echo $uos; ?>";
     url['deg'] = "<?php echo $deg; ?>";
     <?php } ?>
 
     <?php if ($eixo == "mercado" && $view == "barras") {?>
     url['slc'] = "<?php echo $slc; ?>";
+    url['uos'] = "<?php echo $uos; ?>";
+    url['deg'] = "<?php echo $deg; ?>";
+    <?php } ?>
+
+    <?php if ($eixo == "mercado" && $view == "mapa") {?>
+    url['slc'] = "<?php echo $slc; ?>";
+    url['uos'] = "<?php echo $uos; ?>";
     url['deg'] = "<?php echo $deg; ?>";
     <?php } ?>
 

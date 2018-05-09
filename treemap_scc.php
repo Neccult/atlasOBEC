@@ -78,7 +78,12 @@
     if (!empty($_GET["mod"]))
         $mod = $_GET["mod"];
     else
-        $mod = 0;
+        $mod = 99;
+
+    if (!empty($_GET["pfj"]))
+        $pfj = $_GET["pfj"];
+    else
+        $pfj = 99;
 
     if (!empty($_GET["typ"]))
         $typ = $_GET["typ"];
@@ -159,6 +164,7 @@
     var prc = <?php echo $prc; ?>;
 	var ano = <?php echo $ano; ?>;
     var deg = <?php echo $deg; ?>;
+    var pfj = <?php echo $pfj; ?>;
     var chg = <?php echo $chg; ?>;
 	var uf = <?php echo $uf; ?>;
 	var eixo;
