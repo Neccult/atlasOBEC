@@ -5,7 +5,7 @@
 define('DB_NOME', 'Atlas');
 define('DB_USUARIO', 'root');
 define('DB_SENHA', 'root');
-//sdefine('DB_HOST', 'localhost');
+//define('DB_HOST', 'localhost');
 define('DB_HOST', '143.54.231.130');
 class EixoTres {
 
@@ -140,7 +140,7 @@ class EixoTres {
 					." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
 					." WHERE ex.Numero = ".$var;
 
-            if(!is_null($pf)) {
+            if($pf != 99 && $pf != NULL) {
 			    $query .= " AND ex.PessoaFisica = ".$pf;
             }
             if(!is_null($mod)) {
@@ -150,6 +150,7 @@ class EixoTres {
 
 			$result = mysqli_query(self::$conn, $query);
 			$obj = mysqli_fetch_object($result, 'EixoTres');
+
 
 		self::disconnect();
 
@@ -199,13 +200,13 @@ class EixoTres {
 	public static function getter_mapa($var, $cad, $mec, $mod, $pf, $anos){
 
 		self::connect();
-		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16);
+		$vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16, 17);
 
 
-		if($var == 17){
+        if($var == 17 || $var == 18 || $var == 19){
             $query = "SELECT * FROM " . self::$table . " AS ex"
                 . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
+                . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
                 . " WHERE ex.Numero = " . $var;
 
             $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
@@ -216,23 +217,8 @@ class EixoTres {
             while($obj = mysqli_fetch_object($result, 'EixoTres')){
                 $allObjects[] = $obj;
             }
-            $result_aux = array();
-            $value_aux = array();
-            $percent_aux = array();
-            foreach ($allObjects as $data) {
-                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                $value_aux[$data->idUF] += $data->Valor;
-                $percent_aux[$data->idUF] += $data->Percentual;
-                $result_aux[$data->idUF] = $data;
-                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-            }
-            $allObjects = $result_aux;
         }
-        else
-
-		if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
+        else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF = ex.idUF"
                 ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad
@@ -260,6 +246,7 @@ class EixoTres {
             while($obj = mysqli_fetch_object($result, 'EixoTres')){
                 $allObjects[] = $obj;
             }
+
         }
 
         else{
@@ -317,7 +304,28 @@ class EixoTres {
 		$vars_com_cad_0 = array( 1, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16);
 		self::connect();
 
-		    if($var == 17){
+            if($var == 18 || $var == 19){
+                $query = "SELECT * FROM ".self::$table." AS ex"
+                    ." WHERE ex.Numero = ".$var . " AND idMecanismo = ".$mec . " AND idUF = ".$ufs;
+
+                if($uos == 0)
+                    $query .=  " AND Ano > 0" ;
+                else{
+                    $query .=  " AND Ano = 0" ;
+                    $query .=  " AND idCadeia > 0" ;
+
+                }
+
+
+                $result = mysqli_query(self::$conn, $query);
+                $allObjects = array();
+
+                while($obj = mysqli_fetch_object($result, 'EixoTres')){
+                    $allObjects[] = $obj;
+                }
+
+            }
+            else if($var == 17){
                 $query = "SELECT * FROM ".self::$table." AS ex"
                     ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
                     ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ".$mec
@@ -464,13 +472,21 @@ class EixoTres {
 
     public static function getter_donut($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
         self::connect();
-        $query = "SELECT ex.Valor FROM ".self::$table." AS ex"
-            ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = 0"
-            ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-            ." WHERE ex.Numero = ".$var;
+        $query = $query = "SELECT * FROM " . self::$table . " AS ex"
+            . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
+            . " WHERE ex.Numero = " . $var;;
 
 
-        $query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
+        if($var == 18 || $var == 19){
+         $query = $query = "SELECT * FROM " . self::$table . " AS ex"
+                . " WHERE ex.Numero = " . $var;
+                $query .=  " AND idMecanismo = ".$mec ;
+                $query .=  " AND Ano = 0" ;
+                $query .=  " AND idUF = ".$ufs ;
+                $query .=  " AND idCadeia > 0" ;
+        }
+        else
+            $query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
 
         $result = mysqli_query(self::$conn, $query);
         $allObjects = array();
@@ -478,21 +494,6 @@ class EixoTres {
         while($obj = mysqli_fetch_object($result, 'EixoTres')){
             $allObjects[] = $obj;
         }
-
-        $value_aux = array();
-
-        $contSim = 0;
-        $contNao = 0;
-
-        foreach ($allObjects as $data) {
-            if($data->Valor == 0){
-                $contNao++;
-            }
-            else{
-                $contSim++;
-            }
-        }
-
 
         self::disconnect();
         return $allObjects;
