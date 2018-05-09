@@ -10,6 +10,14 @@ Saída:
 
 header('charset=utf-8');
 
+function getNameOCP($slc) {
+    switch ($slc) {
+        case 1:
+            return "Relacionadas";
+        case 2:
+            return "Culturais";
+    }
+}
 
 function sigla_cadeia($cadeia) {
     switch($cadeia) {
@@ -37,9 +45,24 @@ function sigla_cadeia($cadeia) {
             return $cadeia;
     }
 }
+function getNameCadeia($id){
+    switch($id){
+        case 0: return "Todos";
+        case 1: return "Arquitetura e Design";
+        case 2: return "Artes Cênicas e Espetáculos";
+        case 3: return "Audiovisual";
+        case 4: return "Cultura Digital";
+        case 5: return "Editorial";
+        case 6: return "Educação e Criação em Artes";
+        case 7: return "Entretenimento";
+        case 8: return "Música";
+        case 9: return "Patrimônio";
+        case 10: return "Publicidade";
+        case 11: return "Outros";
+    }
+}
 
 if (!empty($_GET["var"])) {
-
 	$var = $_GET["var"];
 	$uf = $_GET["uf"];
 
@@ -47,7 +70,7 @@ if (!empty($_GET["var"])) {
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
     $ocp = $_GET["ocp"];
-    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
+    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   NULL;	   /*== sexo ==*/
     $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
     $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
     $cor    =   isset($_GET["cor"])   ?   $_GET["cor"]  :   0;	   /*== cor e raça ==*/
@@ -62,6 +85,8 @@ if (!empty($_GET["var"])) {
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
+    $desag    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
+
     $mundo  =   isset($_GET['mundo']) ?   $_GET['mundo']:   0;
     $eixo = $_GET['eixo'];
 }
@@ -90,6 +115,135 @@ else{
     $snd = 0;
 	$eixo = 0;
 }
+
+
+function getNameDesag($desag, $tupla) {
+    switch ($desag) {
+        case 1:
+            return getNamePorte($tupla->idPorte);
+        case 2:
+            return getNameSexo($tupla->Sexo);
+        case 3:
+            return getNameIdade($tupla->idIdade);
+        case 4:
+            return getNameEscolaridade($tupla->idEscolaridade);
+        case 5:
+            return getNameEtinia($tupla->idEtinia);
+        case 6:
+            return getNameFormalidade($tupla->Formalidade);
+        case 7:
+            return getNamePrev($tupla->Previdencia);
+        case 8:
+            return getNameSindical($tupla->Sindical);
+    }
+}
+
+function getNamePorte($id) {
+    switch ($id) {
+        case 1:
+            return "Micro";
+        case 2:
+            return "Pequena";
+        case 3:
+            return "Média";
+        case 4:
+            return "Grande";
+    }
+}
+
+function getNameSexo($id) {
+    switch ($id) {
+        case 0:
+            return "Feminino";
+        case 1:
+            return "Masculino";
+        case 2:
+            return "Feminino";
+    }
+}
+
+function getNameIdade($id) {
+    switch ($id) {
+        case 1:
+            return "10 a 17";
+        case 2:
+            return "18 a 29";
+        case 3:
+            return "30 a 49";
+        case 4:
+            return "50 a 64";
+        case 5:
+            return "65 ou mais";
+        case 6:
+            return "Não classificado";
+    }
+}
+
+function getNameEscolaridade($id) {
+    switch ($id) {
+        case 1:
+            return "Sem Instrução";
+        case 2:
+            return "Fundamental Incompleto";
+        case 3:
+            return "Fundamental Completo";
+        case 4:
+            return "Médio Completo";
+        case 5:
+            return "Superior Incompleto";
+        case 6:
+            return "Superior Completo";
+        case 7:
+            return "Não Determinado";
+    }
+}
+
+
+function getNameEtinia($id) {
+    switch ($id) {
+        case 1:
+            return "Indígena";
+        case 2:
+            return "Branca";
+        case 3:
+            return "Preta";
+        case 4:
+            return "Amarela";
+        case 5:
+            return "Parda";
+    }
+}
+
+function getNameFormalidade($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
+function getNamePrev($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
+function getNameSindical($id) {
+    switch ($id) {
+        case 2:
+            return "Sim";
+        case 1:
+            return "Não";
+
+    }
+}
+
 
 //Trata o sexo
 switch($sex) {
@@ -154,17 +308,49 @@ if($eixo == 0) {
 }
 else if($eixo == 1) {
     require_once("EixoDois.php");
-    foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc) as $tupla) {
+    foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag, $ano) as $tupla) {
         // $barras[$tupla->Ano] = $tupla->Valor;
-        if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
-            $id = $tupla->Ano;
-            $barras[$id]['uf'] = $tupla->UFNome;
-            $barras[$id]['ano'] = (int) $tupla->Ano;
-            $barras[$id]['valor'] = (double) $tupla->Valor;
-            $barras[$id]['percentual'] = (double) $tupla->Percentual;
-            $barras[$id]['taxa'] = (double) $tupla->Taxa;
+        if($desag == 0 && $sex == NULL || $var == 4 || $var == 5 || $var == 6) {
+
+            if($var == 6 && $uos == 1 && $desag == 0 && $ocp == 0){
+                $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
+                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else if($var == 6 && $uos == 1 && $desag == 0 && $ocp != 0){
+                $id = getNameOCP($tupla->idOcupacao);
+                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else if($var == 6 && $uos == 1 && $desag != 0){
+                $id = getNameDesag($desag, $tupla);
+                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else{
+
+                $id = $tupla->Ano;
+                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+
+
+
         }
-        else {
+        else if($ocp == 3 && $desag != 0) {
+
             $id = $tupla->Ano;
             if($slc == 1) {
                 if($id == 2011) {
@@ -183,28 +369,41 @@ else if($eixo == 1) {
                     $id = 2014;
                 }
             }
-            $idEsc = $tupla->idEscolaridade;
+
+            $nomeDesag = getNameDesag($desag, $tupla);
+
             $barras[intval($id-2007)]['year'] = $tupla->Ano;
-            if($prt != 0) $barras[intval($id-2007)][$tupla->PorteNome] = (double)$tupla->Valor;
-            else if($sex != NULL) {
-                if($tupla->Sexo) $barras[intval($id-2007)]["Masculino"] = (double)$tupla->Valor;
-                else $barras[intval($id-2007)]["Feminino"] = (double)$tupla->Valor;
+            if(!isset($barras[intval($id-2007)][$nomeDesag]))
+                $barras[intval($id-2007)][$nomeDesag] = 0;
+
+            $barras[intval($id-2007)][$nomeDesag] += (double)$tupla->Valor;
+        }
+        else{
+
+            $id = $tupla->Ano;
+            if($slc == 1) {
+                if($id == 2011) {
+                    $id = 2010;
+                }
+                if($id == 2012) {
+                    $id = 2011;
+                }
+                if($id == 2013) {
+                    $id = 2012;
+                }
+                if($id == 2014) {
+                    $id = 2013;
+                }
+                if($id == 2015) {
+                    $id = 2014;
+                }
             }
-            else if($fax != 0) $barras[intval($id-2007)][$tupla->IdadeNome] = (double)$tupla->Valor;
-            else if($esc != 0) $barras[intval($id-2007)][$tupla->EscolaridadeNome] = (double)$tupla->Valor;
-            else if($cor != 0) $barras[intval($id-2007)][$tupla->EtiniaNome] = (double)$tupla->Valor;
-            else if($frm != 0) {
-                if($tupla->Formalidade == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
-                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
-            }
-            else if($snd != 0) {
-                if($tupla->Sindical == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
-                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
-            }
-            else if($prv != 0) {
-                if($tupla->Previdencia == 1) $barras[intval($id-2007)]["Não"] = (double)$tupla->Valor;
-                else $barras[intval($id-2007)]["Sim"] = (double)$tupla->Valor;
-            }
+
+            $nomeDesag = getNameDesag($desag, $tupla);
+
+            $barras[intval($id-2007)]['year'] = $tupla->Ano;
+            $barras[intval($id-2007)][$nomeDesag] = (double)$tupla->Valor;
+
         }
     }
 }
@@ -221,14 +420,34 @@ else if($eixo == 2) {
                 $barras[$id]['percentual'] = (double)$tupla->Percentual;
                 $barras[$id]['taxa'] = (double)$tupla->Taxa;
                 $barras[$id]['uos'] = 2;
-            } else {
-                $id = $tupla->Ano;
-                $barras[$id]['ano'] = (int)$tupla->Ano;
-                $barras[$id]['valor'] = (double)$tupla->Valor;
-                $barras[$id]['percentual'] = (double)$tupla->Percentual;
-                $barras[$id]['taxa'] = (double)$tupla->Taxa;
-                $barras[$id]['uos'] = (int)$uos;
+            } else if(($var == 18 || $var == 19)) {
+                if($uos == 1){
+                    $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
+                    $barras[$id]['uf'] = $tupla->UFNome;
+                    $barras[$id]['ano'] = (int) $tupla->Ano;
+                    $barras[$id]['valor'] = (double) $tupla->Valor;
+                    $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                    $barras[$id]['taxa'] = (double) $tupla->Taxa;
+                }
+                else{
+                    $id = $tupla->Ano;
+                    $barras[$id]['ano'] = (int)$tupla->Ano;
+                    $barras[$id]['valor'] = (double)$tupla->Valor;
+                    $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                    $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                    $barras[$id]['uos'] = (int)$uos;
+                }
+
+
             }
+            else {
+                    $id = $tupla->Ano;
+                    $barras[$id]['ano'] = (int)$tupla->Ano;
+                    $barras[$id]['valor'] = (double)$tupla->Valor;
+                    $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                    $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                    $barras[$id]['uos'] = (int)$uos;
+                }
         }
 
 }
