@@ -1128,7 +1128,7 @@ function updateDescEmpreendimentos(desc, vrv){
 }
 
 function updateDescPercentComercio(desc, vrv, nomeestado){
-    
+    nomeestado = $(window.parent.document).find(".opt-select[data-id=uf] option:selected").text();
 
     typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
     
@@ -1357,15 +1357,15 @@ function updateDescComercio(desc, vrv, nomeestado){
     else{
         nomeestado = "DO BRASIL"
     }
-    prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
-    typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
+    prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
+    typ = $(window.parent.document).find(".bread-select[data-id=typ] option:selected").text();
     cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
     
     prc = prc.toUpperCase()
-
     if(prepos[prc]){
         prc = prepos[prc] + ' ' + prc
     }
+
     if(cad.toUpperCase() == "TODOS" || cad.toUpperCase() == " TODOS"){
         if(vrv == 14)
             cad = "DOS SETORES CULTURAIS E CRIATIVOS";
@@ -1377,6 +1377,7 @@ function updateDescComercio(desc, vrv, nomeestado){
         else
             cad = "DO SETOR DE "+cad;
     }
+
     switch(typ){
         case 'Exportação': 
             if(vrv >= 1 && vrv <= 3)
@@ -1386,8 +1387,8 @@ function updateDescComercio(desc, vrv, nomeestado){
             } else if(vrv == 13){
                 typ = "EXPORTADOS"
             }
-            $(window.parent.document).find(".state-title").first().text(nomeestado)
-            $(window.parent.document).find(".prc-title").first().text("PARA "+prc.split(" ")[1])
+            
+            prc = mapPronome(prc, ["DE", "DO", "DA"], ["PARA", "PARA O", "PARA A"])
             break;
         case 'Importação': 
             if(vrv >= 1 && vrv <= 3)
@@ -1397,9 +1398,8 @@ function updateDescComercio(desc, vrv, nomeestado){
             }else if(vrv == 13){
                 typ = "IMPORTADOS"
             }
-
-            $(window.parent.document).find(".state-title").first().text(prc)
-            $(window.parent.document).find(".prc-title").first().text("PARA "+nomeestado.split(" ")[1])
+            nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["PARA", "PARA O", "PARA A"])
+            desc =desc.replace('[]', nomeestado).replace('[uf]', prc)
             break;
         case 'Saldo Comercial': 
             if(vrv >= 1 && vrv <= 3)
@@ -1407,8 +1407,6 @@ function updateDescComercio(desc, vrv, nomeestado){
             else if(vrv == 13){
                 typ = "DE SALDO COMERCIAL"
             }
-            $(window.parent.document).find(".state-title").first().text("ENTRE "+nomeestado.split(" ")[1])
-            $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
             break;
         case 'Corrente de Comércio':
             if(vrv >= 1 && vrv <= 3)
@@ -1416,16 +1414,15 @@ function updateDescComercio(desc, vrv, nomeestado){
             else if(vrv == 13){
                 typ = "DE Corrente de Comércio"
             }
-            $(window.parent.document).find(".state-title").first().text("ENTRE "+ nomeestado.split(" ")[1])
-            $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
             break;
     }
     if(vrv <= 3 || vrv >= 13)
         $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "0.5vw")
     else
         $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "14px")
+
     if(desc != undefined)
-        return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc.split(" ")[1]).replace('()', cad);
+        return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
     else
         return
 }

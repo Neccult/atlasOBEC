@@ -44,7 +44,7 @@ function ready(json){
         .style("fill", function(d) { return color(d.data.tipo); })
         .style("stroke", "none");
 
-    g.append("text")
+    /*g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .attr("dy", ".40em")
         .attr("dx", -radius/6)
@@ -59,7 +59,7 @@ function ready(json){
             })
         .style("font-family", "arial")
         .style("fill", "#fff")
-        .style("font-size", radius/10)
+        .style("font-size", radius/10)*/
 
         d3.selectAll(".arc")
         .on("mouseover", function(d){
