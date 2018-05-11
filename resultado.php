@@ -696,7 +696,20 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         SÉRIE HISTÓRICA
                         <i class="plus"></i>
                     </div>
-                    <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+                    <?php if ($eixo != "comercio") {?>
+                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+                    <?php } else {?>
+                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></iframe>
+                        <div id="menu-view" style=" height: 90%; width: 30%; float: right;">
+                            <div class="view-title-leg" data-id="scc&ocp">
+                            </div>
+                            <div id="title-view-leg-scc" style="padding-top: 40%">
+                                <span data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)"></i> Exportação<br></span>
+                                <span data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color:  rgb(109, 191, 201)"></i> Importação<br></span>
+                            </div>
+                        </div>
+
+                    <?php } ?>
                 </div>
                 <!--=============== DESCRICAO! ================-->
                 <div id='containerDesc' id="descricao" class="col-md-5 col-xs-12" style="height: 210px; top: -220px; overflow: auto;">
@@ -716,31 +729,28 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     <?php if ($eixo != "comercio") {?>
                         <iframe id="view_box_scc" src="treemap_scc_box.php" scrolling="no"></iframe>
                         <div id="menu-view" >
+                            <div class="view-title-leg" data-id="scc&ocp">
+                                SETORES
+                            </div>
+                            <div id="title-view-leg-scc">
+                                <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
+                                <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
+                                <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
+                                <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
+                                <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
+                                <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
+                                <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
+                                <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
+                                <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
+                                <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
+                                <?php if($eixo != 'comercio') { ?>  <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
+                                <?php } ?>
+                            </div>
+                        </div>
                     <?php } else {?>
                         <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
-                        <div id="menu-view" style="float: right; width: 20%; display:none">
                     <?php } ?>
-                        
 
-                        <div class="view-title-leg" data-id="scc&ocp">
-                            SETORES
-                        </div>
-                        <div id="title-view-leg-scc">
-                            <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
-                            <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
-                            <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
-                            <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
-                            <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
-                            <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
-                            <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
-                            <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
-                            <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
-                            <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
-                            <?php if($eixo != 'comercio') { ?>  <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
-                                <?php } ?>
-                        </div>
-
-                        
                     </div>
                 </div>
 
