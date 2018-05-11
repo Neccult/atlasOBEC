@@ -4,13 +4,14 @@ var windowWidth = $(window).width();
 var svg = d3.select("#corpo").append("svg");
 
 svg.attr('width',$('.chart').width());
-svg.attr('height',230);
+svg.attr('height', $('.chart').height());
+
 
 svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 
-svg.attr('height','230');
+//svg.attr('height','230');
 
 var fonteTransform = "translate("+(width-120)+","+(height+140)+")";
 var valoresTransform = "translate(10,"+(height+140)+")";
@@ -74,6 +75,7 @@ d3.json('data/colors.json', function(error, data) {
 	colorJSON = data;
 });
 
+
 // import pt-br.json file for get the title
 var textJSON;
 d3.json('data/pt-br.json', function(error, data) {
@@ -114,8 +116,7 @@ var treemap = d3.treemap()
 	.round(true)
     .paddingInner(1);
 
-var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&ano="+ano+"&eixo="+eixo;
-
+var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&deg="+deg+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 
 $.get("./db/json_treemap_scc.php"+config, function(data) {
     // console.log(data);
@@ -162,7 +163,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	var colorsRange = d3.scaleOrdinal()
 	.domain(colors.domain)
-	.range(colors.range);
+    .range(colors.range);
 
 	/*==========================*/
 	/* *** nodes & tooltips *** */
@@ -180,51 +181,8 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                     title = title.replace("<br>", "");
                     title = title.replace("</span>", "");
 
-                    if(eixo === 1){
+					loadTooltip(d, eixo , vrv);
 
-                        if(uf == 0){
-                            if(deg !== 0) {
-                                tooltipInstance.showTooltip(d, [
-                                    ["title", d.data.name],
-                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                                ]);
-                            }
-                            else {
-                                tooltipInstance.showTooltip(d, [
-                                    ["title", d.data.name],
-                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-
-                                ]);
-
-                            }
-                        }
-                        else{
-                            if(deg !== 0) {
-                                tooltipInstance.showTooltip(d, [
-                                    ["title", d.data.name],
-                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-                                ]);
-                            }
-                            else {
-                                tooltipInstance.showTooltip(d, [
-                                    ["title", d.data.name],
-                                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-
-                                ]);
-
-                            }
-                        }
-
-					}
-					else if(eixo === 0 || eixo === 2 || eixo === 3){
-					    loadTooltip(d, eixo , vrv);
-                    }
 				})
 				.on("mouseout", tooltipInstance.hideTooltip)
 				.on("click", function(d) {
@@ -244,20 +202,21 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
                         cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-valor");
 
-                        if(url['deg'] == 0){
-                            cad_percent_uf = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf");
-                        }
-                        else{
-                            cad_percent_uf = getSoma(d.data.colorId);
-                        }
 
+                        cad_percent_uf = ($('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf"))
+
+                        // if(url['deg'] == 0){
+                        //     cad_percent_uf = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf");
+                        // }
+                        // else{
+                        //     cad_percent_uf = getSoma(d.data.colorId);
+                        // }
                         configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf);
                         if(deg  == 0) $(window.parent.document).find(".cad-title").first().html(d.data.name);
                         // else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
                         else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
 				    }
                     else {
-
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
                         var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
@@ -267,7 +226,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("select[data-id='ocp']").val(d.data.colorId);
                         enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
-
 
                         cad_valor = d.data.size;
 
@@ -288,6 +246,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 		        .style("cursor", "pointer");
 
 	function loadTooltip(d, eixo, vrv){
+
 
         if(eixo === 0) {
             if(vrv === 2 || vrv === 9){
@@ -326,6 +285,59 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
                         //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
                     ]);
+                }
+            }
+        }
+
+        else if(eixo === 1) {
+
+
+            if(vrv === 2){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d.data.name],
+                    ["", formatTextVrv(d.data.size*100, eixo, vrv)],
+                    ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+
+                ]);
+            }
+            else
+
+            if(uf == 0){
+                if(deg !== 0) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d.data.name],
+                        ["", formatTextVrv(d.data.size, eixo, vrv)],
+                        //["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+                    ]);
+                }
+                else {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d.data.name],
+                        ["", formatTextVrv(d.data.size, eixo, vrv)],
+                        ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+
+                    ]);
+
+                }
+            }
+            else{
+                if(deg !== 0) {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d.data.name],
+                        ["", formatTextVrv(d.data.size, eixo, vrv)],
+                        ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                    ]);
+                }
+                else {
+                    tooltipInstance.showTooltip(d, [
+                        ["title", d.data.name],
+                        ["", formatTextVrv(d.data.size, eixo, vrv)],
+                        ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+
+                    ]);
+
                 }
             }
         }
@@ -395,11 +407,12 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                 .attr("fill", function(d) { return color(d.data.colorId)[8-d.data.desagreg]; });
         }
         else {
+
             cell.append("rect")
                 .attr("data-legend", function(d) { return d.data.colorId; })
                 .attr("data-value", function(d) {  return (d.value); })
                 .attr("data-percent", function(d) { return (d.parent.value/root.value); })
-                .attr("data-percent-uf", function(d) { return (d.parent.value/root.value); })
+                .attr("data-percent-uf", function(d) { return (d.data.size/root.value); })
                 .attr("data-deg", function(d) { return (d.parent.value); })
                 .attr("id", function(d) { return d.data.id; })
                 .attr("width", function(d) { return nodeWidth(d); })
@@ -422,6 +435,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
         cell.append("rect")
             .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-valor", function(d) { return d.value; })
             .attr("data-valor", function(d) { return d.value; })
             .attr("data-percent-uf", function(d) { return d.data.percentual; })
             .attr("data-percent", function(d) { return d.data.size/root.value; })
@@ -450,7 +464,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
 	
 	// new svg margin top value
-	var svgMarginTop = 35;
+	var svgMarginTop = 15;
 	// cria título
 	svg.append("text").append("tspan")
 		.data(root.leaves())
@@ -490,7 +504,10 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                 }
             }
             else if(eixo == 1) {
-                if(deg !== 0) return formatDecimalLimit((d.data.size/d.parent.value)*100,2)+"%";
+
+
+
+                if(deg !== 0) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
                 else return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
 			}
             else if(eixo === 2){
@@ -711,7 +728,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
             vrv,
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-value"),
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-percent"),
-            data_percent_uf,
+            $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),

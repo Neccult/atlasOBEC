@@ -35,6 +35,18 @@
 				"5": "#AFC1E2",
 				"6": "#A0B5DB"
 			}
+		},
+		"3": {
+			"name": "Ocupacional - Todos",
+			"color": "#077DDD",
+			"gradient": {
+				"1": "#F6F8FC",
+				"2": "#EDF1F9",
+				"3": "#DEE5F4",
+				"4": "#C6D3EB",
+				"5": "#AFC1E2",
+				"6": "#A0B5DB"
+			}
 		}
 	},
 	"cadeias": {
@@ -181,7 +193,52 @@
 				"5": "#E1B89A",
 				"6": "#D39873"
 			}
+		},
+		"Arq e D": {
+			"name": "Arquitetura e Design",
+			"color": "#87A8CA"
+		},
+		"Artes": {
+			"name": "Artes Cênicas e Espetáculos",
+			"color": "#077DDD"
+		},
+		"Audio": {
+			"name": "Audiovisual",
+			"color": "#0F4B67"
+		},
+		"Cult. Dig.": {
+			"name": "Cultura Digital",
+			"color": "#8178AF"
+		},
+		"Edit.": {
+			"name": "Editorial",
+			"color": "#E6C59B"
+		},
+		"Edu. Art.": {
+			"name": "Educação e Criação em Artes",
+			"color": "#EC8A91"
+		},
+		"Entretenimento": {
+			"name": "Entret.",
+			"color": "#AD5468"
+		},
+		"Música": {
+			"name": "Música",
+			"color": "#6A474D"
+		},
+		"Patrimônio": {
+			"name": "Patrimônio",
+			"color": "#E96B00"
+		},
+		"Publ.": {
+			"name": "Publicidade",
+			"color": "#B2510F"
+		},
+		"Outros": {
+			"name": "Outros",
+			"color": "#B2510F"
 		}
+
 	},
 	"regioes": {
 		"0": {
@@ -242,11 +299,11 @@
 	"binario": {
 		"0": {
 			"name": "Não",
-			"color": "#aaa"
+			"color": "rgb(217, 213, 222)"
 		},
 		"1": {
 			"name": "Sim",
-			"color": "#071342"
+			"color": "#077DDD"
 		}
 	}
 }

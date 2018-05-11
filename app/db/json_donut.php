@@ -59,6 +59,49 @@ function map_tipo($tipo){
     }
 }
 
+function sigla_cadeia($cadeia) {
+    switch($cadeia) {
+        case "Arquitetura e Design":
+            return "Arq e D";
+        case "Publicidade":
+            return "Publ.";
+        case "Patrimônio":
+            return $cadeia;
+        case "Música":
+            return $cadeia;
+        case "Entretenimento":
+            return "Entret.";
+        case "Educação e Criação em Artes":
+            return "Edu. Art.";
+        case "Editorial":
+            return "Edit.";
+        case "Cultura Digital":
+            return "Cult. Dig.";
+        case "Audiovisual":
+            return "Audio";
+        case "Artes Cênicas e Espetáculos":
+            return "Artes";
+        case "Outros":
+            return $cadeia;
+    }
+}
+function getNameCadeia($id){
+    switch($id){
+        case 0: return "Todos";
+        case 1: return "Arquitetura e Design";
+        case 2: return "Artes Cênicas e Espetáculos";
+        case 3: return "Audiovisual";
+        case 4: return "Cultura Digital";
+        case 5: return "Editorial";
+        case 6: return "Educação e Criação em Artes";
+        case 7: return "Entretenimento";
+        case 8: return "Música";
+        case 9: return "Patrimônio";
+        case 10: return "Publicidade";
+        case 11: return "Outros";
+    }
+}
+
 function binario($tipo){
 
     if($tipo == 0)
@@ -68,7 +111,7 @@ function binario($tipo){
 }
 $tipos = array();
 
-if($eixo == 2){
+if($eixo == 2 && $var == 17){
 
     $aux = array();
 
@@ -76,28 +119,35 @@ if($eixo == 2){
 
     foreach (EixoTres::getter_donut($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
-        // $barras[$tupla->Ano] = $tupla->Valor;
+
         $valor = array();
-        $valor['tipo'] = binario($tupla->Valor);
+        $valor['tipo'] = binario($tupla->idCadeia);
         $valor['valor'] = (float) $tupla->Valor;
+        $valor['uf'] = (int) $tupla->idUF;
         array_push($aux, $valor);
     }
 
     $contSim = 0;
     $contNao = 0;
+    $total = 0;
 
     foreach ($aux as $valor){
         if($valor['tipo'] == 'Sim'){
-            $contSim++;
+            if($valor['uf'] == 0)
+                $total = $valor['valor'];
+        $contSim++;
         }
         else if($valor['tipo'] == 'Não'){
             $contNao++;
         }
     }
 
+    $contSim--;
+
     $valor = array();
     $valor['tipo'] = 'Sim';
     $valor['valor'] = $contSim;
+    $valor['total'] = $total;
     array_push($tipos, $valor);
     $valor['tipo'] = 'Não';
     $valor['valor'] = $contNao;
@@ -105,6 +155,26 @@ if($eixo == 2){
 
 
 }
+if($eixo == 2 && $var >= 18){
+
+    $aux = array();
+
+    require_once("EixoTres.php");
+
+    foreach (EixoTres::getter_donut($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+
+
+        $valor = array();
+        $valor['tipo'] = sigla_cadeia(getNameCadeia($tupla->idCadeia));
+        $valor['valor'] = (float) $tupla->Valor;
+        $valor['uf'] = (int) $tupla->idUF;
+        $valor['cad'] = (int) $tupla->idCadeia;
+        array_push($tipos, $valor);
+
+    }
+
+}
+
 if($eixo == 3){
     require_once("EixoQuatro.php");
     foreach (EixoQuatro::getter_donut($var, $cad, $ano, $slc, $uf, $prc) as $tupla) {
