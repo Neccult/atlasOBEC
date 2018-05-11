@@ -1,12 +1,8 @@
 /* tamanho container */
-var chartWidth = $('.chart').width()+25;
+var chartWidth = $('.chart').width();
 var chartHeight = $('.chart').height();
 var minBarHeight = 5;
 var withLabels = false;
-
-
-var fonteTransform = "translate(" + (chartWidth - 120) + "," + (chartHeight - 10) + ")";
-var valoresTransform = "translate(10," + (chartHeight - 10) + ")";
 
 function getSoma(barraId) {
     var soma = 0;
@@ -75,9 +71,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     var colorJSON;
     var textJSON;
     var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo + "&deg=" +deg + "&ano=" +ano;
-
-    $.get('./db/json_barras.php' + config, function(dado){
-        // console.log(dado)
+    var brasil_setor = []
+    $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
+        brasil_setor = JSON.parse(dado)
     })
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -109,9 +105,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             console.log(error);
         }
 
-        var dados = {key: [], value: [], percentual: [], taxa: []};
+        var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
         Object.keys(data).forEach(function (key) {
+            dados.percentual_setor.push(data[key].valor/brasil_setor[key])
             if ((vrv === 3) && data[key].ano === 2007) {
             } else {
                 dados.key.push(data[key].ano);
@@ -133,7 +130,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
         //tamanho do grafico
         // AQUI automatizar map center
-        var margin = {top: 20, right: 20, bottom: 30, left: 25},
+        var margin = {top: 20, right: 20, bottom: 30, left: 35},
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
@@ -175,7 +172,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             if (i > 1)
                 colorsRange.push(rgb);
         });
-        console.log(dados.percentual)
         /*==================*/
         /* *** gráfico! *** */
         /*==================*/
@@ -227,17 +223,24 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             var formatInit = d3.format(".2f");
             var format3dc = d3.format(".3f");
 
+
+
             var formatDefault = function (d) {
                 return removeDecimalZeroes(formatInit(d));
             };
             var formatThousands = function (d) {
+                if(d == 0)
+                    return 0;
+
                 if(eixo == 0 && vrv == 8)
                     return removeDecimalZeroes(formatInit(d / 1e3)) + "M";
-
 
                 return removeDecimalZeroes(formatInit(d / 1e3)) + "K";
             };
             var formatMillions = function (d) {
+                if(d == 0)
+                    return 0;
+
                 if(eixo == 0 && vrv == 8)
                     return removeDecimalZeroes(formatInit(d / 1e6)) + "B";
 
@@ -245,10 +248,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             };
 
             var formatBillions = function (d) {
+                if(d == 0)
+                    return 0;
                 return removeDecimalZeroes(formatInit(d / 1e9)) + "B";
             };
 
             function formatNano(d) {
+                
                 return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
             };
 
@@ -289,6 +295,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 var format = d3.format("." + decimalDigits + "f");
                 // console.log(format(d))
                 dadosCounter++;
+
+                if(d == 0)
+                    return d;
 
 
                 if(eixo == 0 && vrv == 9){
@@ -351,6 +360,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 return formatFraction;
 
             var preFormattedIntLength = Math.round(preFormatted).toString().length;
+
             if (preFormattedIntLength <= 3)
                 return formatDefault;
             else if (preFormattedIntLength <= 6)
@@ -525,6 +535,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             })
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
+
                 var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
                 newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
                 newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
@@ -570,6 +581,11 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                       
                   
                  }
+                else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
+                    var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                }
                 else {
                     if(url['uos'] == 1) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
@@ -753,16 +769,19 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
             configInfoDataBoxBarras(eixo, vrv, dados, valor);
-
-        if(eixo == 1)
+        if(eixo == 0){
+            updateDescEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_int, vrv)
+        }
+        else if(eixo == 1)
             updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
         else
             $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
         $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
-        if(vrv == 1){
-            
+        if(vrv == 1 && eixo == 1){
             $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_setorial, data[dados.key[0]].uf));
-        
+        } else if(eixo == 0){
+            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_setorial, data[dados.key[0]].uf));            
+
         }
             
 
@@ -874,9 +893,9 @@ else {
             if (error) throw error;
 
             textJSON = data;
-            $.get("./db/json_barras.php" + config, function(data){
+            /*$.get("./db/json_barras.php" + config, function(data){
                   console.log(data)
-           })
+           })*/
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze_eixo1);
@@ -884,11 +903,6 @@ else {
 
     });
     // return matching color value
-
-
-    $.get('./db/json_barras.php' + config, function(dado){
-        // console.log(dado)
-    })
 
     function color_eixo1() {
         if(ocp == 0) {
@@ -1239,7 +1253,10 @@ else {
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
 
-        if(eixo == 1 && dados.key != undefined){
+        if(eixo == 0 && dados.key != undefined){
+            updateDescEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_int, vrv)
+        }
+        else if(eixo == 1 && dados.key != undefined){
             updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
 
         }

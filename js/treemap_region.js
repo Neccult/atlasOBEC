@@ -196,6 +196,10 @@ else {
 	var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&typ="+typ+"&prc="+prc+"&ocp="+ocp+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
 }
 
+var totais = []
+$.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
+	totais = JSON.parse(dado)
+})
 
 d3.json("./db/json_treemap_region.php"+config, function(error, data) {
     $('#loading').fadeOut('fast');
@@ -272,13 +276,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 							}
 						}
 						else if(vrv == 1){
-							//NECESSÁRIO DEVIDO AO TEMPO. OS VALORES TOTAIS ESTÃO NO ARRAY TOTAIS
-							totais = [88773, 91097, 93585, 97525, 102031, 104544, 107339, 108759, 107498, 104522];
-							ano_indice = ano-2007;
 							tooltipInstance.showTooltip(d, [
 								["title", d.data.name],
 								["", formatTextVrv(d.data.size, eixo, vrv)],
-								["", formatDecimalLimit(d.data.size/totais[ano_indice]*100, 2) + "%"]
+								["", formatDecimalLimit(d.data.size/totais[ano]*100, 2) + "%"]
 							]);
 						}
                         else{
@@ -309,7 +310,9 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
                         newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
                         var newMAPASrc = $(window.parent.document).find("#view_box").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
-                        newMAPASrc = newMAPASrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+						newMAPASrc = newMAPASrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
+						$(window.parent.document).find('.bread-select[data-id=uf]').val(ufId(d.data.name))
+						
 						$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
 						$(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
 						$(window.parent.document).find("#view_box").attr("src", newMAPASrc);
@@ -365,10 +368,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                     return formatDecimalLimit((d.data.size/root.value)*100, 2)+"%";
 				}
 				else if(vrv == 1){
-					//NECESSÁRIO DEVIDO AO TEMPO. OS VALORES TOTAIS ESTÃO NO ARRAY TOTAIS
-					totais = [88773, 91097, 93585, 97525, 102031, 104544, 107339, 108759, 107498, 104522];
-					ano_indice = ano-2007;
-					return formatDecimalLimit((d.data.size/totais[ano_indice])*100, 2) + '%';
+					return formatDecimalLimit((d.data.size/totais[ano])*100, 2) + '%';
 				}
                 else {
                     return formatDecimalLimit(d.data.percentual*100, 2) + '%';

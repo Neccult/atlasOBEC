@@ -245,10 +245,10 @@ d3.json('data/pt-br.json', function(error, data) {
 });
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
-
+/*
 $.get("./db/json_mapa.php"+config, function(data) {
-     // console.log(data);
-});
+    console.log(data);
+});*/
 //pre-load arquivos
 d3.queue()
 	.defer(d3.json, "./data/br-min.json")
@@ -721,10 +721,14 @@ function legendaBinario(){
         estadoAtual = dict[url['uf']].uf
     else
         estadoAtual = "BRASIL"
-    if(eixo != 3 && eixo != 1){
+
+
+
+    if(eixo != 3 && eixo != 1 && eixo != 2){
         $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
         $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
     }
+
     function loadTooltip(d, eixo, vrv){
 
         if(eixo == 0) {
@@ -744,7 +748,6 @@ function legendaBinario(){
                 ]);
             }
             else if(vrv === 3) {
-                console.log(dict[d.id].valor)
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],

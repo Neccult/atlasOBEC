@@ -26,7 +26,6 @@ function changeDownloadURL(url, eixo){
     
     $.get('./data/csv_files.json', function(data){
         var name_url;
-        console.log(diretorio)
         if(diretorio != '')
             dados = data[eixo][diretorio]
         else
@@ -80,7 +79,7 @@ function getNomeUF(idUF){
         case 50: return "Mato Grosso do Sul";
         case 51: return "Mato Grosso";
         case 52: return "Goiás";
-        case 54: return "Distrito Federal";
+        case 53: return "Distrito Federal";
     }
 }
 
@@ -356,6 +355,8 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
                 setPercentValueData({percentual: dados.percentual[index_ano]}, eixo, vrv)
         }
 
+        setTerceiroValueData(eixo, vrv, dados.percentual_setor[index_ano], url['cad']);  
+
     }
     else if(eixo == 1){
         // first_year = Number(dados.key[0]);
@@ -540,6 +541,8 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
                 setPercentValueData(dados, eixo, vrv);
             }
         }
+
+        setTerceiroValueData(eixo, vrv, dados.percentual_setor[i], url['cad']);  
 
 
     }
@@ -830,7 +833,7 @@ function updateBreadUF(eixo, vrv){
 }
 
 function updateSelectTipo(options){
-    names = {"1": "Exportação", "2": "Importação", "3": "Saldo Comercial", "4": "Valor Transacionado"};
+    names = {"1": "Exportação", "2": "Importação", "3": "Saldo Comercial", "4": "Corrente de Comércio"};
     for(var key in names){
         if($("select[data-id=typ]").find("option[value='"+key+"']").length != 0)
             $("select[data-id='typ']").find("option[value='"+key+"']").remove()
@@ -1085,37 +1088,46 @@ function getPrepos(uf){
     return prepos[uf];
 }
 
-function updateDescPercentComercio(desc, vrv, nomeestado){
-    prepos = {
-        "ACRE":"DO",
-        "ALAGOAS":"DE",
-        "AMAPÁ":"DO",
-        "AMAZONAS":"DO",
-        "BAHIA":"DA",
-        "CEARÁ":"DO",
-        "DISTRITO FEDERAL":"DO",
-        "ESPÍRITO SANTO":"DO",
-        "GOIÁS":"DE",
-        "MARANHÃO":"DO",
-        "MATO GROSSO":"DE",
-        "MATO GROSSO DO SUL":"DE",
-        "MINAS GERAIS":"DE",
-        "PARÁ":"DO",
-        "PARAÍBA":"DA",
-        "PARANÁ":"DO",
-        "PERNAMBUCO":"DE",
-        "PIAUÍ":"DO",
-        "RIO DE JANEIRO":"DO",
-        "RIO GRANDE DO NORTE":"DO",
-        "RIO GRANDE DO SUL":"DO",
-        "RONDÔNIA":"DE",
-        "RORAIMA":"DE",
-        "SANTA CATARINA":"DE",
-        "SÃO PAULO":"DE",
-        "SERGIPE":"DE",
-        "TOCANTINS": "DO"        
+function updateDescEmpreendimentos(desc, vrv){
+    var uf = $(window.parent.document).find(".bread-select[data-id=uf]").val()
+    var uf_text = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text()
+    var cad_text = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
+    var cad = $(window.parent.document).find(".bread-select[data-id=cad]").val();
+    var prt = $(window.parent.document).find(".bread-select[data-id=deg]").val();
+    var prt_text = $(window.parent.document).find(".bread-select[data-id=deg] option:selected").text();
+
+    array_variaveis = [1, 4, 5, 6, 7, 8]
+    if(array_variaveis.includes(parseInt(vrv))){
+        if(prt == 0){
+            if(uf == 0 && cad == 0){
+                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "").replace("[uf]", "")
+            } else if(cad == 0){
+                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "").replace("[uf]", "")
+            } else if(cad > 0){
+                uf_text = getPrepos(uf_text) +' '+ uf_text
+                uf_text = mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
+                description = desc.replace("[cad]", "DO SETOR "+cad_text).replace("[prt]", "").replace("[uf]", uf_text)
+            }
+        } else{
+            if(uf == 0 && cad == 0){
+                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "DE "+prt_text).replace("[uf]", "")
+            } else if(cad == 0){
+                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "DE "+prt_text).replace("[uf]", "")
+            } else if(cad > 0){
+                uf_text = getPrepos(uf_text) +' '+ uf_text
+                uf_text = mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
+                description = desc.replace("[cad]", "DO SETOR "+cad_text).replace("[prt]", "DE "+prt_text).replace("[uf]", uf_text)
+            }
+        }
+        
     }
-    nomeestado = nomeestado.toUpperCase()
+
+
+    $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
+}
+
+function updateDescPercentComercio(desc, vrv, nomeestado){
+    
 
     typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
     
@@ -1123,8 +1135,8 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
         switch(typ){
             case 'Exportação': 
                 typ = "EXPORTADO";
-                if(prepos[nomeestado]){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado)){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
@@ -1139,7 +1151,7 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 return desc.replace('{}', nomeestado).replace('<>', typ);
             case 'Saldo Comercial': 
                 return ''
-            case 'Valor Transacionado': 
+            case 'Corrente de Comércio': 
                 prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
                 cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
                 typ = "TRANSACIONADO";
@@ -1155,8 +1167,8 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
         switch(typ){
             case 'Exportação': 
                 typ = "EXPORTADOS";
-                if(prepos[nomeestado]){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado)){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
@@ -1171,7 +1183,7 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 return desc.replace('{}', nomeestado).replace('<>', typ);
             case 'Saldo Comercial': 
                 return ''
-            case 'Valor Transacionado': 
+            case 'Corrente de Comércio': 
                 prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
                 cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
                 typ = "TRANSACIONADO";
@@ -1184,8 +1196,8 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
         }
     }
 }
-function mapPronome(string, array_pron, array_new_pron){
 
+function mapPronome(string, array_pron, array_new_pron){
     array_pron.forEach(function(d, i){
         string = string.replace(array_pron[i], array_new_pron[i])
     })
@@ -1195,31 +1207,42 @@ function mapPronome(string, array_pron, array_new_pron){
 function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
     nome_uf = getNomeUF(uf)
     desc_uf = getPrepos(nome_uf)+" "+nome_uf;
+
+    vrv = parseInt($(window.parent.document).find("iframe").attr("src").match(/var=[0-9]+/)[0].replace("var=", ''))
+
     if(deg == 0)
         var deg_nome = "ESCOLHER"
     else
         var deg_nome = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").parent().text();
+
     var tipo_deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").text();
+
     if(ocp == 0)
         var cad_nome = $(window.parent.document).find(".bread-select[data-id=cad]").find("option:selected").text()
     else
         var cad_nome = $(window.parent.document).find(".bread-select[data-id=ocp]").find("option:selected").text()
+
     if(ocp == 0){
-        if(cad == 0)
-            desc = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
+        if(cad == 0){
+            desc_setores = "DOS SETORES CULTURAIS E CRIATIVOS"
+            desc = desc.replace("[cad]", desc_setores)
+        }
         desc = desc.replace("[ocp]", "TRABALHADORES")
-    } else {
+    }
+    else {
         desc = desc.replace("[cad]","[name_ocp]")
         if(ocp == 3)
             desc = desc.replace("[name_ocp]", "EM ATIVIDADES CULTURAIS E CRIATIVAS")
         desc = desc.replace("[ocp]", "OCUPADOS")
     }
+
     if(cad == 0 || ocp == 3){
         return desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
                     .replace("[name_ocp]", "NA OCUPAÇÃO "+cad_nome)
                     .replace("[uf]", desc_uf)
                     .replace("[deg]", "")
-    } else {
+    }
+    else {
         if(deg != 0){
             desc_uf = mapPronome(desc_uf, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
             switch(deg){
@@ -1317,8 +1340,8 @@ function updateDescComercio(desc, vrv, nomeestado){
     nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
     nomeestado = nomeestado.toUpperCase()
     
-    if(prepos[nomeestado]){
-        nomeestado = prepos[nomeestado] + ' ' +nomeestado
+    if(getPrepos(nomeestado)){
+        nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
     }
     else{
         nomeestado = "DO BRASIL"
@@ -1376,11 +1399,11 @@ function updateDescComercio(desc, vrv, nomeestado){
             $(window.parent.document).find(".state-title").first().text("ENTRE "+nomeestado.split(" ")[1])
             $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
             break;
-        case 'Valor Transacionado':
+        case 'Corrente de Comércio':
             if(vrv >= 1 && vrv <= 3)
-                typ = "VALOR TRANSACIONADO" 
+                typ = "Corrente de Comércio" 
             else if(vrv == 13){
-                typ = "DE VALOR TRANSACIONADO"
+                typ = "DE Corrente de Comércio"
             }
             $(window.parent.document).find(".state-title").first().text("ENTRE "+ nomeestado.split(" ")[1])
             $(window.parent.document).find(".prc-title").first().text("E "+prc.split(" ")[1])
@@ -1396,8 +1419,23 @@ function updateDescComercio(desc, vrv, nomeestado){
         return
 }
 function setTerceiroValueData(eixo, vrv, value, cad){
+
+    uf = $(window.parent.document).find(".bread-select[data-id=uf]").val();
+    if(eixo == 0){
+        prt =  $(window.parent.document).find(".bread-select[data-id=deg]").val()
+        array_variaveis = [1, 4, 5, 6, 7, 8]
+        if(array_variaveis.includes(parseInt(vrv)) && uf > 0 && ( prt > 0 ||cad > 0)){
+            $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
+            $(window.parent.document).find(".setor-value").first().css("display", "flex");
+
+            doc = $(window.parent.document).find(".setor-value").first().find(".number").first();
+            setMaxFontSize(doc);
+        }
+        else{
+            $(window.parent.document).find(".setor-value").first().css("display", "none");
+        }
+    }
     if(eixo == 1){
-        uf = $(window.parent.document).find(".bread-select[data-id=uf]").val();
         ocp = $(window.parent.document).find(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(window.parent.document).find(".bread-select[data-id=ocp]").val()
         if(vrv == 1 && (cad > 0 || ocp != 0 && ocp != 3) && uf > 0){
            $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
@@ -1541,15 +1579,13 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
         "SERGIPE":"DE",
         "TOCANTINS": "DO"
     }
-    nomeestado = getNomeUF($(window.parent.document).find(".bread-select[data-id=uf]").val())
-    console.log(nomeestado)
-    if(nomeestado != undefined)
-        nomeestado = nomeestado.toUpperCase()
+
+     nomeestado = $(window.parent.document).find('.bread-select[data-id=uf]').find("option:selected").text().toUpperCase()
 
     if(eixo == 0){
         if(url['var'] == 3 || url['var'] == 9){
-            if(prepos[nomeestado]){
-                nomeestado = prepos[nomeestado] + ' ' +nomeestado
+            if(getPrepos(nomeestado)){
+                nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
             }
             else{
                 nomeestado = "DO BRASIL"
@@ -1557,16 +1593,16 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
         }
         else if(url['var'] == 4){
             if(tipo == "integer"){
-                if(prepos[nomeestado]){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado)){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
                 }
             }
             else if(tipo == "percent" ){
-                if(prepos[nomeestado] && url['cad'] != 0){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado) && url['cad'] != 0){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
@@ -1579,9 +1615,9 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
                 if(url['cad'] == 0)
                     nomeestado = "DO BRASIL"
                 else
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
-            }else if(prepos[nomeestado]){
-                nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
+            }else if(getPrepos(nomeestado)){
+                nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
             }
             else{
                 nomeestado = "DO BRASIL"
@@ -1592,8 +1628,8 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
     else if(eixo == 1){
         if(url['var'] == 7){
             if(tipo == "percent" ){
-                if(prepos[nomeestado]){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado)){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
@@ -1602,10 +1638,9 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
         }
         else if(url['var'] == 1){
             if(tipo == "percent" ){
-                console.log(prepos[nomeestado])
-                if(prepos[nomeestado] != undefined && url['cad'] != 0){
+                if(getPrepos(nomeestado) != undefined && url['cad'] != 0){
 
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
 
                 }
                 else{
@@ -1617,12 +1652,12 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
     if(eixo == 2){
         if(url['var'] == 8 || url['var'] == 9) {
 
-            if(prepos[nomeestado] && url['uf'] != 0){
+            if(getPrepos(nomeestado) && url['uf'] != 0){
 
                 if(tag == '{}')
                     nomeestado = ""
                 else
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
 
 
             }
@@ -1634,25 +1669,25 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
             }
         }
         else if(url['var'] == 99 ) {
-            if(prepos[nomeestado]){
-                nomeestado = prepos[nomeestado] + ' ' +nomeestado
+            if(getPrepos(nomeestado)){
+                nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
             }
             else{
                 nomeestado = "DO BRASIL"
             }
         }
-        else if(url['var'] == 3 || url['var'] == 2){
+        else if(url['var'] == 3 || url['var'] == 2 || url['var'] == 1){
             if(tipo == "integer"){
-                if(prepos[nomeestado]){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado)){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
                 }
             }
             else if(tipo == "percent" ){
-                if(prepos[nomeestado] && url['cad'] != 0){
-                    nomeestado = prepos[nomeestado] + ' ' +nomeestado
+                if(getPrepos(nomeestado) && url['cad'] != 0){
+                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
                 }
                 else{
                     nomeestado = "DO BRASIL"
@@ -1660,9 +1695,43 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
             }
 
         }
+        else if(url['var'] == 18){
+
+            string = "";
+
+            if(url['mec'] == 0 && tipo == "integer")
+                string = "em lojas ";
+            if(url['mec'] == 1 && tipo == "integer")
+                string = "por trabalhadores cadastrados "
+
+            if(prepos[nomeestado])
+                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
+            else
+                nomeestado = string + "DO BRASIL"
+
+        }
+        else if(url['var'] == 19){
+
+            string = "";
+
+            if(url['mec'] == 0 && tipo == "integer")
+                string = "Empresas cadastradas ";
+            else if(url['mec'] == 0 && tipo == "percent")
+                string = "Empresas cadastradas desde o início do programa (2013-2017) ";
+            else if(url['mec'] == 1 && tipo == "integer")
+                string = "Trabalhadores cadastrados ";
+            else if(url['mec'] == 1 && tipo == "percent")
+                string = "Trabalhadores cadastrados desde o início do programa (2013-2017) ";
+
+            if(prepos[nomeestado])
+                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
+            else
+                nomeestado = string + "NO BRASIL"
+
+        }
         else{
-            if(prepos[nomeestado]){
-                nomeestado = prepos[nomeestado] + ' ' +nomeestado
+            if(getPrepos(nomeestado)){
+                nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
             }
             else{
                 nomeestado = "DO BRASIL"
@@ -1788,7 +1857,7 @@ function descByCAD(eixo, desc, tag){
         4: "CULTURA DIGITAL",
         5: "EDITORIAL",
         6: "EDUCAÇÃO E CRIAÇÃO EM ARTES",
-        7: "ENTRETERIMENTO",
+        7: "ENTRETENIMENTO",
         8: "MÚSICA",
         9: "PATRIMÔNIO",
         10: "PUBLICIDADE",
@@ -1803,6 +1872,23 @@ function descByCAD(eixo, desc, tag){
             else
                 nome = "PELO SETOR " + prepos[url['cad']] + " " + cads[url['cad']];
         }
+        else if(url['var'] == 18){
+
+            string = "no setor ";
+
+            if(url['mec'] == 1 && tipo == "integer")
+                string = "em lojas do setor "
+
+            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+
+        }
+        else if(url['var'] == 19){
+
+            string = "no setor ";
+
+            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+
+        }
         else if(eixo == 2 && (url['var'] == 4)){
             nome = "PARA O SETOR " + prepos[url['cad']] + " " + cads[url['cad']];
 
@@ -1812,7 +1898,7 @@ function descByCAD(eixo, desc, tag){
 
     }
     else {
-        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14))
+        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14 || url['var'] ==18 || url['var'] ==19 ))
             nome = "";
         else if(eixo == 2 && (url['var'] == 8 || url['var'] == 9))
             if(tag == '[CAD]')
@@ -1831,16 +1917,17 @@ function descByCAD(eixo, desc, tag){
 
 function descByPRT(eixo, desc){
     portes = {
-        1: "PORTE MICRO",
-        2: "PORTE PEQUENO",
-        3: "PORTE MÉDIO",
-        4: "PORTE GRANDE",
+        9: "PORTE MICRO",
+        10: "PORTE PEQUENO",
+        11: "PORTE MÉDIO",
+        12: "PORTE GRANDE",
     }
 
     str = "DE"
-
-    if(portes[url['prt']] && url['uf'] != 0) {
-        nome = str + " " + portes[url['prt']];
+    prt = $(window.parent.document).find(".bread-select[data-id=deg]").val()
+    uf =   $(window.parent.document).find(".bread-select[data-id=uf]").val()
+    if(portes[prt] && uf != 0) {
+        nome = str + " " + portes[prt];
     }
     else {
         nome = ""
@@ -2342,10 +2429,12 @@ function updateMenuSetor(eixo, vrv){
     }
     else if (eixo == 3){
 
+
+
 	    if(vrv >= 1 && vrv <= 8 || vrv == 12){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
-            }).style("display", "none");
+            }).style("display", "block");
             d3.select("#view_box_scc").style("width", "100%");
         }
         else{

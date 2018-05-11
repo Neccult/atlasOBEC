@@ -2,10 +2,10 @@
 });*/
 var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo;
 var tooltipInstance = tooltip.getInstance();
-$.get("./db/json_donut.php"+config, function(data){
-    console.log(data)
+/*$.get("./db/json_donut.php"+config, function(data){
+//    console.log(data)
 
-});
+});*/
 
 $.get("./db/json_donut.php"+config, ready);
 
@@ -107,13 +107,24 @@ function ready(json){
         .on("click", function(d){
             tipo = d.data.tipo
             $(parent.document).find(".opt-select[data-id=typ]").first().val(indexTipos(tipo))
-           
+
             srcMapa = $(parent.document).find("iframe#view_box").first().attr("src");
             srcMapa = srcMapa.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
-            srcBarras = $(parent.document).find("iframe#view_box_barras").first().attr("src");
-            srcBarras = srcBarras.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
             $(parent.document).find("iframe#view_box").first().attr("src", srcMapa)
-            $(parent.document).find("iframe#view_box_barras").first().attr("src", srcBarras)
+
+             if(eixo == 3 && (vrv >= 1 && vrv != 5 && vrv != 8 && vrv <= 10 || vrv == 12)){
+                 srcBarras = $(parent.document).find("iframe#view_box_scc").first().attr("src");
+                 srcBarras = srcBarras.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
+                 $(parent.document).find("iframe#view_box_scc").first().attr("src", srcBarras)
+             }
+             else{
+                 srcBarras = $(parent.document).find("iframe#view_box_barras").first().attr("src");
+                 srcBarras = srcBarras.replace(/typ=[0-9]/, "typ="+indexTipos(tipo));
+                 $(parent.document).find("iframe#view_box_barras").first().attr("src", srcBarras)
+            }
+
+
+
         })
 
 
