@@ -116,16 +116,52 @@ class EixoUm {
 
 	}
 
+	public static function getMaxValueSetor($var, $cad, $prt){
+		self::connect();
+
+		$query = "SELECT MAX(Valor) as Valor, Ano FROM ".self::$table
+						." WHERE Numero = ?"
+						." AND idCadeia = ?"
+						." AND idPorte = ?"
+						." AND idUF = 0 GROUP BY Ano";
+
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                'sss',
+                $var,
+                $cad,
+                $prf
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
+		self::disconnect();
+		while($obj = mysqli_fetch_object($result, 'EixoUm')){
+            $allObjects[] = $obj;
+		}
+		
+		return $allObjects;
+	}
+    
 	public static function getAnoDefault($var){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_1` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
-		$result = mysqli_query(self::$conn, $query);
-		
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_1` WHERE `idUF` = 0 AND Numero = ? GROUP BY Numero";
+        
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                's',
+                $var
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
 		self::disconnect();
 
-		$obj = mysqli_fetch_object($result, 'EixoUm');
-		
 		$ano = $obj->Ano;
 
 		return $ano;
@@ -222,7 +258,8 @@ class EixoUm {
 
 		self::connect();
         $stmt = mysqli_stmt_init(self::$conn);
-        if($prt == 0 || $cad != 0) {
+        if($prt == 0 || $cad != 0 || $var == 1 || $var == 3 || $var == 2) { 
+            
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF" 
                    . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
@@ -286,21 +323,19 @@ class EixoUm {
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
 
-            if($var != 1){
-                $result_aux = array();
-                $value_aux = array();
-                $percent_aux = array();
-                foreach ($allObjects as $data) {
-                    if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
-                    if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
-                    $value_aux[$data->idUF] += $data->Valor;
-                    $percent_aux[$data->idUF] += $data->Percentual;
-                    $result_aux[$data->idUF] = $data;
-                    $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
-                    $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
-                }	
-                $allObjects = $result_aux;
-            }            
+            $result_aux = array();
+            $value_aux = array();
+            $percent_aux = array();
+            foreach ($allObjects as $data) {
+                if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
+                if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
+                $value_aux[$data->idUF] += $data->Valor;
+                $percent_aux[$data->idUF] += $data->Percentual;
+                $result_aux[$data->idUF] = $data;
+                $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
+                $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
+            }	
+            $allObjects = $result_aux;
         }
         
 		self::disconnect();
@@ -323,7 +358,7 @@ class EixoUm {
 	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
 
 		self::connect();
-        if($prt == 0 || $cad != 0) {
+        if(($prt == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {         
             $idCadeia = ($uos == 0) ? $cad : 1;
             
             $query = "SELECT * FROM ".self::$table." AS ex"
@@ -382,8 +417,8 @@ class EixoUm {
 	-----------------------------------------------------------------------------*/
 	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
 
-		self::connect();		
-        if($prt == 0 || $cad != 0) {
+		self::connect();
+        if($prt == 0 || $cad != 0 || $var == 1 || $var == 3|| $var == 2) { 
                 
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE ?"
