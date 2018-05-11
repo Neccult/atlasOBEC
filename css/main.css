@@ -998,6 +998,13 @@ select[disabled].opt-select{
 	color: #808080;
 }
 
+select[disabled].bread-select{
+	background-image: url('../images/arrow_pb.png');
+	background-color: #d4d4d4;
+	border-color: #d4d4d4;
+	color: #808080;
+}
+
 .opt-select-title{
 	background-color: #FFF;
 	background-image: url('../images/arrow.png');

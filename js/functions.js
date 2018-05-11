@@ -1129,7 +1129,7 @@ function updateDescEmpreendimentos(desc, vrv){
 
 function updateDescPercentComercio(desc, vrv, nomeestado){
     nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
-
+    prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
     typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
     if(getPrepos(nomeestado)){
         nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
@@ -1137,19 +1137,20 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
     else{
         nomeestado = "DO BRASIL"
     }
+
+    if(getPrepos(prc)){
+        prc = getPrepos(prc) + ' ' +prc
+    }
     
-    if(vrv == 1){
+    if(vrv == 1 || vrv == 13){
         switch(typ){
             case 'Exportação': 
                 typ = "EXPORTADO";
-                nomeestado = nomeestado.replace("DE", "POR");
-                nomeestado = nomeestado.replace("DO", "PELO");
-                nomeestado = nomeestado.replace("DA", "PELA");
-                return desc.replace('[uf]', nomeestado).replace('<>', typ);
+                prc = mapPronome(prc, ["DE", "DA", "DO"], ["PARA", "PARA A", "PARA O"]);
+                return desc.replace('[uf]', "DO BRASIL").replace('<>', typ).replace('[]', prc);
             case 'Importação': 
                 typ = "IMPORTADO";
-                nomeestado = "PARA "+nomeestado;
-                return desc.replace('[uf]', nomeestado).replace('<>', typ);
+                return desc.replace('[uf]', prc).replace('[]', "PARA O BRASIL").replace('<>', typ);
             case 'Saldo Comercial': 
                 return ''
             case 'Corrente de Comércio': 
@@ -1164,38 +1165,6 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
         }
     } 
-    else if(vrv == 13){
-        switch(typ){
-            case 'Exportação': 
-                typ = "EXPORTADOS";
-                if(getPrepos(nomeestado)){
-                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
-                }
-                else{
-                    nomeestado = "DO BRASIL"
-                }
-                nomeestado = nomeestado.replace("DE", "POR");
-                nomeestado = nomeestado.replace("DO", "PELO");
-                nomeestado = nomeestado.replace("DA", "PELA");
-                return desc.replace('[uf]', nomeestado).replace('<>', typ);
-            case 'Importação': 
-                typ = "IMPORTADOS";
-                nomeestado = "PARA "+nomeestado;
-                return desc.replace('[uf]', nomeestado).replace('<>', typ);
-            case 'Saldo Comercial': 
-                return ''
-            case 'Corrente de Comércio': 
-                prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
-                cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-                typ = "TRANSACIONADO";
-                if(cad == "TODOS" || " TODOS"){
-                    cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
-                } else {
-                    cad = "PELO SETOR DE" + cad;
-                }
-                return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
-        }
-    }
 }
 
 function mapPronome(string, array_pron, array_new_pron){
