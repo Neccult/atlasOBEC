@@ -1670,6 +1670,14 @@ $(document).ready(function(){
 
             updateUrl();
 
+            
+            if($(this).attr("data-id") === "typ") {
+                if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
+                    $(window.document).find(".percent-value").find(".box-dado").first().css("display", "none")
+                else
+                    $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
+            }
+
             if($(this).attr("data-id") == "deg" && eixo_atual == 1){
                 if($(this).find('option:selected').parent().attr("value") != undefined)
                     deg_value =  $(this).find('option:selected').parent().attr("value")
@@ -1738,9 +1746,12 @@ $(document).ready(function(){
                 }
 
                 if(eixo_atual == 3){
+                    if(url['var'] == 1 || url['var'] == 13 || url['var'] == 5 || url['var'] == 8)
+                        $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
                     updateServicos(url['var']);
                     updateTipo(url['var']);
                     url['typ'] = 1;
+
                     $(".opt-select[data-id='typ']").val(1);
                     $('.bread-select[data-id=typ]').val(1);
                     if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){

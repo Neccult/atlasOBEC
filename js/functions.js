@@ -794,7 +794,7 @@ function updateBreadUF(eixo, vrv){
                 $('.bread-select[data-id=uf]').prop("disabled", false);
                 $('.bread-select[data-id=cad]').prop("disabled", false);
                 $('.bread-select[data-id=deg]').prop("disabled", false);
-            if(vrv > 12){
+            if(vrv >= 12){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
                 $('.bread-select[data-id=cad]').prop("disabled", true);
 
@@ -1128,20 +1128,20 @@ function updateDescEmpreendimentos(desc, vrv){
 }
 
 function updateDescPercentComercio(desc, vrv, nomeestado){
-    nomeestado = $(window.parent.document).find(".opt-select[data-id=uf] option:selected").text();
+    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
 
     typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
+    if(getPrepos(nomeestado)){
+        nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
+    }
+    else{
+        nomeestado = "DO BRASIL"
+    }
     
     if(vrv == 1){
         switch(typ){
             case 'Exportação': 
                 typ = "EXPORTADO";
-                if(getPrepos(nomeestado)){
-                    nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
-                }
-                else{
-                    nomeestado = "DO BRASIL"
-                }
                 nomeestado = nomeestado.replace("DE", "POR");
                 nomeestado = nomeestado.replace("DO", "PELO");
                 nomeestado = nomeestado.replace("DA", "PELA");
@@ -1153,9 +1153,9 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
             case 'Saldo Comercial': 
                 return ''
             case 'Corrente de Comércio': 
-                prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
+                prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
                 cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-                typ = "TRANSACIONADO";
+                desc = desc.replace("DO VALOR <>", "DA CORRENTE DE COMÉRCIO")
                 if(cad == "TODOS" || " TODOS"){
                     cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
                 } else {
@@ -1185,7 +1185,7 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
             case 'Saldo Comercial': 
                 return ''
             case 'Corrente de Comércio': 
-                prc = $(window.parent.document).find(".opt-select[data-id=prc] option:selected").text();
+                prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
                 cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
                 typ = "TRANSACIONADO";
                 if(cad == "TODOS" || " TODOS"){
@@ -1399,7 +1399,7 @@ function updateDescComercio(desc, vrv, nomeestado){
                 typ = "IMPORTADOS"
             }
             nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["PARA", "PARA O", "PARA A"])
-            desc =desc.replace('[]', nomeestado).replace('[uf]', prc)
+            desc = desc.replace('[]', nomeestado).replace('[uf]', prc)
             break;
         case 'Saldo Comercial': 
             if(vrv >= 1 && vrv <= 3)
@@ -1407,6 +1407,8 @@ function updateDescComercio(desc, vrv, nomeestado){
             else if(vrv == 13){
                 typ = "DE SALDO COMERCIAL"
             }
+            nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["ENTRE", "ENTRE O", "ENTRE A"])
+            prc = mapPronome(prc, ["DE", "DO", "DA"], ["E ", "E O", "E A"])
             break;
         case 'Corrente de Comércio':
             if(vrv >= 1 && vrv <= 3)
@@ -1414,6 +1416,8 @@ function updateDescComercio(desc, vrv, nomeestado){
             else if(vrv == 13){
                 typ = "DE Corrente de Comércio"
             }
+            nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["ENTRE", "ENTRE O", "ENTRE A"])
+            prc = mapPronome(prc, ["DE", "DO", "DA"], ["E ", "E O", "E A"])
             break;
     }
     if(vrv <= 3 || vrv >= 13)
