@@ -26,8 +26,8 @@
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
-    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
-    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
+    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   99;	   /*== Modalidade ==*/
+    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   99;	   /*== Tipo de pessoa ==*/
     $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
@@ -36,14 +36,21 @@
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
 
+    foreach($json_text['var'][3] as $key=>$vrbs){
+        if($vrbs['id'] == $_GET["var"]){
+            $vrb = $key;
+            break;
+        }
+    }
+
     if($eixo == "empreendimentos") {
-        $text = $json_text['var'][0][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][0][$key]; /*== informações da variável ==*/
     }
     else if($eixo == "mercado") {
-        $text = $json_text['var'][1][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][1][$key]; /*== informações da variável ==*/
     }
     else if($eixo == "politicas") {
-        $text = $json_text['var'][2][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][2][$key]; /*== informações da variável ==*/
     }
     else if($eixo == "comercio") {
         foreach($json_text['var'][3] as $key=>$vrbs){

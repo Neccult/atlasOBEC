@@ -127,38 +127,7 @@ else
 
 <!-- D3 JS v4 -->
 <?php
-if($eixo == "mercado" && $deg != 0) {
-    echo '<script src="js/d3/d3.min.js"></script>';
-    ?>
-    <style type="text/css">
-        svg {
-            font: 10px sans-serif !important;
-            shape-rendering: crispEdges !important;
-        }
-
-        .axis path,
-        .axis line {
-            fill: none !important;
-            stroke: #000 !important;
-        }
-
-        .x path.domain {
-            stroke: none !important;
-        }
-
-        .y path.domain {
-            stroke: #ddd !important;
-        }
-
-        .y .tick line {
-            stroke: #ddd !important;
-        }
-    </style>
-    <?php
-}
-else {
     echo '<script src="js/d3/d3.min.js" charset="utf-8"></script>';
-}
 ?>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>

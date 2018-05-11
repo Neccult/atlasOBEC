@@ -2,8 +2,16 @@
 
 ###	Classe que manipula as variáveis do Eixo 2 ###
 
+<<<<<<< HEAD
 require('config.db.php');
 
+=======
+define('DB_NOME', 'Atlas');
+define('DB_USUARIO', 'root');
+define('DB_SENHA', 'root');
+//define('DB_HOST', 'localhost');
+define('DB_HOST', '143.54.231.130');
+>>>>>>> neccult_master
 class EixoQuatro {
 
 ## Atributos ##

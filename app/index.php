@@ -26,7 +26,7 @@
 			<div class="section " id="section1">
 				<div class="content">
 					<div class="desc-title text-center">
-						<p>O Atlas é uma ferramenta de pesquisa e visualização de dados da<br/>cultura na economia brasileira. Ela permite que você:</p>
+						<p>O Atlas é uma ferramenta de pesquisa, disponibilização e visualização de dados da <br/>cultura na economia brasileira.  Ela permite que você:</p>
 					</div>
 					<div class="separator_2"></div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
@@ -48,14 +48,14 @@
 							</div>
 							<div class="separator_3 col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
 							<div class="question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
-								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding: 0 10px 0 0;">O Atlas Econômico da Cultura Brasileira insere-se em uma proposta estratégica no que tange ao mapeamento e sistematização de um vasto conjunto de informações relacionadas ao panorama econômico e produtivo da cultura no Brasil. Com o objetivo de retratar a produção acadêmica e, atrelado a isto, apresentar e discutir dados, indicadores e estatísticas culturais, o Atlas consolida uma ampla capacidade de impulsionar o debate sobre o papel da cultura na economia brasileira, seus impactos e sua capacidade em mobilizar recursos e a geração de produto nacional.</p>
+								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding: 0 10px 0 0;">Para mapear e sistematizar um vasto conjunto de informações relacionadas ao panorama econômico e produtivo da cultura no Brasil. Combinando acessibilidade e fundamentação acadêmica, o Atlas Econômico da Cultura Brasileira apresenta e discute dados, indicadores e estatísticas culturais, impulsionando o debate sobre o papel da cultura na economia brasileira.</p>
 							</div>
 							<div class="title-question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
-								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12"  style="padding: 0;">Por que dividir o Atlas em quatro eixos de análise?</p>
+								<p class="col-lg-5 col-md-5 col-sm-12 col-xs-12"  style="padding: 0;">Por que dividir o Atlas em quatro eixos?</p>
 							</div>
 							<div class="separator_3 col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
 							<div class="question col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
-								<p class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">Para analisar todo o processo da economia criativa e da economia da cultura no território brasileiro, é importante que sejam estudados diversas dimensões e eixos de indicadores. Ao se identificar os gargalos em cada um dos âmbitos, é possível realizar políticas públicas mais consistentes e adequadas às necessidades do país, além de atingir de forma mais satisfatória as metas do Plano Nacional de Cultura.</p>
+								<p class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">Porque o processo da economia criativa e da cultura no território brasileiro deve ser estudado a partir de diversas dimensões e eixos de indicadores. A organização em torno de eixos busca facilitar a identificação de gargalos e potenciais tendo em vista a formulação de políticas públicas mais consistentes e adequadas às necessidades do país.</p>
 							</div>
 						</div>
 						<div class="logo_fim text-center col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">

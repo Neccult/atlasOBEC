@@ -34,15 +34,20 @@
     /* informações JSON */
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
-
+    foreach($json_text['var'][3] as $key=>$vrbs){
+        if($vrbs['id'] == $_GET["var"]){
+            $vrb = $key;
+            break;
+        }
+    }
     if($eixo == "empreendimentos") {
-        $text = $json_text['var'][0][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][0][$key]; /*== informações da variável ==*/
     }
     else if($eixo == "mercado") {
-        $text = $json_text['var'][1][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][1][$key]; /*== informações da variável ==*/
     }
     else if($eixo == "politicas") {
-        $text = $json_text['var'][2][$_GET["var"]-1]; /*== informações da variável ==*/
+        $text = $json_text['var'][2][$key   ]; /*== informações da variável ==*/
     }
     else if($eixo == "comercio") {
         foreach($json_text['var'][3] as $key=>$vrbs){
