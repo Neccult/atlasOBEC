@@ -546,6 +546,12 @@ class EixoDois {
         return $allObjects;
     }
 
+    public static function getter_value_max($var, $ocp, $ano){
+        self::connect();
+        $query = "SELECT MAX(Valor) FROM ".self::$table."  WHERE Numero = ".$var." AND idOcupacao = ".$ocp." Group by Ano";
+        
+    }
+
     public static function getter_linhas($var, $uf, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $uos, $slc, $desag){
 
         self::connect();
@@ -597,6 +603,8 @@ class EixoDois {
         return $allObjects;
 
     }
+
+
 
     private static function concatDeg($deg, $idDeg, $texto){
         if($deg == $idDeg){

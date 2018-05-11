@@ -103,6 +103,24 @@ class EixoUm {
 
 	}
 
+	public static function getMaxValueSetor($var, $cad, $prt){
+		self::connect();
+
+		$query = "SELECT MAX(Valor) as Valor, Ano FROM ".self::$table
+						." WHERE Numero = ".$var
+						." AND idCadeia =".$cad
+						." AND idPorte =".$prt
+						." AND idUF = 0 GROUP BY Ano";
+		$result = mysqli_query(self::$conn, $query);
+
+		self::disconnect();
+		while($obj = mysqli_fetch_object($result, 'EixoUm')){
+            $allObjects[] = $obj;
+		}
+		
+		return $allObjects;
+	}
+
 	public static function getAnoDefault($var){
 		self::connect();
 
