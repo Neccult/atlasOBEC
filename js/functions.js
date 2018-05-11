@@ -815,17 +815,18 @@ function updateBreadUF(eixo, vrv){
         case 3:
             $('.bread-select[data-id=uf]').prop("disabled", false);
             $('.bread-select[data-id=prc]').prop("disabled", false);
-            $('.bread-select[data-id=prc]').prop("disabled", false);
             $('.bread-select[data-id=cad]').prop("disabled", false);
             if(vrv >= 5 && vrv <= 10){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
-                $('.bread-select[data-id=prc]').prop("disabled", true);
                 $('.bread-select[data-id=cad]').prop("disabled", true);
                 $('.bread-select[data-id=prc]').prop("disabled", true);
 
-            }else if(vrv == 11 || vrv == 12 || vrv == 14){
+            }else if(vrv == 11|| vrv == 12){
                 $('.bread-select[data-id=prc]').prop("disabled", true);
+                $('.bread-select[data-id=uf]').prop("disabled", true);
+            }else if(vrv == 14){
                 $('.bread-select[data-id=prc]').prop("disabled", true);
+                $('.bread-select[data-id=uf]').prop("disabled", true);
                 $('.bread-select[data-id=cad]').prop("disabled", true);
             }
             break;
@@ -1144,11 +1145,11 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 nomeestado = nomeestado.replace("DE", "POR");
                 nomeestado = nomeestado.replace("DO", "PELO");
                 nomeestado = nomeestado.replace("DA", "PELA");
-                return desc.replace('{}', nomeestado).replace('<>', typ);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ);
             case 'Importação': 
                 typ = "IMPORTADO";
                 nomeestado = "PARA "+nomeestado;
-                return desc.replace('{}', nomeestado).replace('<>', typ);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ);
             case 'Saldo Comercial': 
                 return ''
             case 'Corrente de Comércio': 
@@ -1160,7 +1161,7 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 } else {
                     cad = "PELO SETOR DE" + cad;
                 }
-                return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
         }
     } 
     else if(vrv == 13){
@@ -1176,11 +1177,11 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 nomeestado = nomeestado.replace("DE", "POR");
                 nomeestado = nomeestado.replace("DO", "PELO");
                 nomeestado = nomeestado.replace("DA", "PELA");
-                return desc.replace('{}', nomeestado).replace('<>', typ);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ);
             case 'Importação': 
                 typ = "IMPORTADOS";
                 nomeestado = "PARA "+nomeestado;
-                return desc.replace('{}', nomeestado).replace('<>', typ);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ);
             case 'Saldo Comercial': 
                 return ''
             case 'Corrente de Comércio': 
@@ -1192,7 +1193,7 @@ function updateDescPercentComercio(desc, vrv, nomeestado){
                 } else {
                     cad = "PELO SETOR DE" + cad;
                 }
-                return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
+                return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
         }
     }
 }
@@ -1222,9 +1223,16 @@ function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
     else
         var cad_nome = $(window.parent.document).find(".bread-select[data-id=ocp]").find("option:selected").text()
 
+
+    if(ocp == 1){
+        cad_nome = "EM "+cad_nome+" À CULTURA";
+    } else if(ocp == 2){
+        cad_nome = "EM OCUPAÇÕES CULTURAIS"
+    }
+
     if(ocp == 0){
         if(cad == 0){
-            desc_setores = "DOS SETORES CULTURAIS E CRIATIVOS"
+            desc_setores = "NOS SETORES CULTURAIS E CRIATIVOS"
             desc = desc.replace("[cad]", desc_setores)
         }
         desc = desc.replace("[ocp]", "TRABALHADORES")
@@ -1237,8 +1245,8 @@ function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
     }
 
     if(cad == 0 || ocp == 3){
-        return desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
-                    .replace("[name_ocp]", "NA OCUPAÇÃO "+cad_nome)
+        return desc.replace("[cad]", "NOS SETORES CULTURAIS E CRIATIVOS")
+                    .replace("[name_ocp]", cad_nome)
                     .replace("[uf]", desc_uf)
                     .replace("[deg]", "")
     }
@@ -1251,9 +1259,12 @@ function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
                 case '2':
                     desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
                 case '3':
-                    desc = desc.replace("[deg]", "DE IDADE ENTRE "+tipo_deg); break;
+                    desc = desc.replace("[deg]", "COM IDADE ENTRE "+tipo_deg); break;
                 case '4':
-                    desc = desc.replace("[deg]", "DE ESCOLARIDADE "+tipo_deg); break;
+                    if(tipo_deg == "Sem Instrução")
+                        desc = desc.replace("[deg]", "E QUE NÃO POSSUEM INSTRUÇÃO")
+                    else
+                        desc = desc.replace("[deg]", "E QUE POSSUEM ESCOLARIDADE DE NÍVEL "+tipo_deg); break;
                 case '5': 
                     desc = desc.replace("[deg]", "DE ETINIA "+tipo_deg); break; 
                 case '6': 
@@ -1266,14 +1277,14 @@ function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
                     tipo_deg = mapPronome(tipo_deg, ["Sim", "Não"], ["COM", "SEM"] )
                     desc = desc.replace("[deg]", tipo_deg+" SINDICATO"); break;
             }
-            return desc.replace("[cad]", "DO SETOR "+cad_nome)
-                       .replace("[name_ocp]", "NA OCUPAÇÃO "+cad_nome)
+            return desc.replace("[cad]", "NO SETOR "+cad_nome)
+                       .replace("[name_ocp]", cad_nome)
                        .replace("[uf]", desc_uf)
         } else {
             desc_uf = mapPronome(desc_uf, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
             desc = desc.replace("[deg]", "")
-            return desc.replace("[name_ocp]", "NA OCUPAÇÃO "+cad_nome)
-                       .replace("[cad]", "DO SETOR "+cad_nome)
+            return desc.replace("[name_ocp]", cad_nome)
+                       .replace("[cad]", "NO SETOR "+cad_nome)
                        .replace("[uf]", desc_uf)
         }
     }
@@ -1414,7 +1425,7 @@ function updateDescComercio(desc, vrv, nomeestado){
     else
         $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "14px")
     if(desc != undefined)
-        return desc.replace('{}', nomeestado).replace('<>', typ).replace('[]', prc.split(" ")[1]).replace('()', cad);
+        return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc.split(" ")[1]).replace('()', cad);
     else
         return
 }
@@ -2429,13 +2440,18 @@ function updateMenuSetor(eixo, vrv){
     }
     else if (eixo == 3){
 
-
-
-	    if(vrv >= 1 && vrv <= 8 || vrv == 12){
+	    if(vrv == 5 || vrv == 8 || vrv == 11 || vrv == 13 || vrv == 14 ){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;
-            }).style("display", "block");
-            d3.select("#view_box_scc").style("width", "100%");
+            }).style("display", "none");
+            d3.select("#view_box_barras").style("width", "100%");
+        }
+	    else if(vrv >= 1 && vrv <= 8 || vrv == 12){
+            d3.selectAll('#menu-view').filter(function(d, i){
+                return i;
+            }).style("display", "inline-block");
+            d3.select("#view_box_barras").style("width", "65%");
+
         }
         else{
             d3.select("#view_box_scc").style("width", "80%");

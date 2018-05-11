@@ -1125,9 +1125,13 @@ function updateUrl() {
 }
 
 function switchToSetores() {
+
+
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
     $("#title-view-leg-scc").empty();
     //console.log(getEixo(window.location.hash.substring(1)));
+
+    var cads = [];
     if(getEixo(window.location.hash.substring(1)) == 2 && url['var'] == 2){
         $("#title-view-leg-scc").append("<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
 
@@ -1188,7 +1192,42 @@ function switchToSetores() {
         updateBreadcrumbSetores(cads);
 
     }
+    else if(getEixo(window.location.hash.substring(1)) == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
+        $(".view-title-leg[data-id='scc&ocp']").html("");
+        
+        cads = 
+            [
+                {id: 0, nome: " Todos"},
+                {id: 1, nome: " Arquitetura e Design"},
+                {id: 2, nome: " Artes Cênicas e Espetáculos"},
+                {id: 3, nome: " Audiovisual"},
+                {id: 4, nome: " Cultura Digital"},
+                {id: 5, nome: " Editorial"},
+                {id: 6, nome: " Educação e Criação em Artes"},
+                {id: 7, nome: " Entretenimento"},
+                {id: 8, nome: " Música"},
+                {id: 9, nome: " Patrimônio"}
+            ];
+        $("#title-view-leg-scc").append("" +
+        "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Exportação<br></span>\n" +
+        "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Importação<br></span>");
+
+
+    }
     else{
+        cads = 
+            [
+                {id: 0, nome: " Todos"},
+                {id: 1, nome: " Arquitetura e Design"},
+                {id: 2, nome: " Artes Cênicas e Espetáculos"},
+                {id: 3, nome: " Audiovisual"},
+                {id: 4, nome: " Cultura Digital"},
+                {id: 5, nome: " Editorial"},
+                {id: 6, nome: " Educação e Criação em Artes"},
+                {id: 7, nome: " Entretenimento"},
+                {id: 8, nome: " Música"},
+                {id: 9, nome: " Patrimônio"}
+            ]
         stringSetores = "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
             "                                <span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
             "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
@@ -1200,9 +1239,10 @@ function switchToSetores() {
             "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
             "                                <span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n";
         //eixo 4 não tem publicidade
-        if(getEixo(window.location.hash.substring(1)) != 3)
+        if(getEixo(window.location.hash.substring(1)) != 3){
             stringSetores +=  "                                <span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>";
-        
+            cads.push({id: 10, nome: "Publicidade"})
+        }
         $("#title-view-leg-scc").append(stringSetores);
     }
 
@@ -1210,12 +1250,11 @@ function switchToSetores() {
     $(".bread-select[data-id='ocp']").empty();
     $(".bread-select[data-id='ocp']").append("<option value=\"0\">Todos</option><option value=\"1\">Arquitetura e Design</option><option value=\"2\">Artes Cênicas e Espetáculos</option><option value=\"3\">Audiovisual</option><option value=\"4\">Cultura Digital</option><option value=\"5\">Editorial</option><option value=\"6\">Educação e Criação em Artes</option><option value=\"7\">Entretenimento</option><option value=\"8\">Música</option><option value=\"9\">Patrimônio</option><option value=\"10\">Publicidade</option>");
     $(".bread-select[data-id='ocp']").attr("data-id", "cad");
-    
-    var cads = [];
+    /*
     $("#title-view-leg-scc").find(".scc").each(function(){
         cad = {id: $(this).attr("data-id"), nome: $(this).text()}
         cads.push(cad)
-    })
+    })*/
     updateBreadcrumbSetores(cads);
 }
 
