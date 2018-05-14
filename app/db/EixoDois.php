@@ -242,7 +242,7 @@ class EixoDois {
 
         $paramsStr = '';
         foreach ($params as $param) {
-            $paramsStr += 's';
+            $paramsStr .= 's';
         }
         $params = array_unshift($params, $paramsStr);
         
@@ -464,7 +464,7 @@ class EixoDois {
 
         $paramsStr = '';
         foreach ($params as $param) {
-            $paramsStr += 's';
+            $paramsStr .= 's';
         }
         $params = array_unshift($params, $paramsStr);
         
@@ -645,7 +645,7 @@ class EixoDois {
 
         $paramsStr = '';
         foreach ($params as $param) {
-            $paramsStr += 's';
+            $paramsStr .= 's';
         }
         $params = array_unshift($params, $paramsStr);
 
@@ -711,7 +711,7 @@ class EixoDois {
 
         $paramsStr = '';
         foreach ($params as $param) {
-            $paramsStr += 's';
+            $paramsStr .= 's';
         }
         $params = array_unshift($params, $paramsStr);
         
