@@ -202,8 +202,12 @@ class EixoDois {
     public static function find($var, $uf, $ocp, $desag, $anos){
 
         self::connect();
+        $params = [];
         $query = "SELECT * FROM ".self::$table." WHERE Numero =? AND idUF = ?";
-        
+
+        $params[] = $var;
+        $params[] = $uf;
+
         $stmt = mysqli_stmt_init(self::$conn);
 
         if($ocp == 0){
@@ -230,8 +234,13 @@ class EixoDois {
         } else {
             $query .= " ORDER BY `Eixo_2`.`idOcupacao` ASC";
         }
+
+        if ($anos > 0) {
+            $query = " AND ex.Ano = ?";
+            $params[] = $anos;
+        }
+
         
-        $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
         if (mysqli_stmt_prepare($stmt, $query)) {
             if ($anos > 0) {
                 $stmt->bind_param(
@@ -638,7 +647,13 @@ class EixoDois {
             $query .= " AND Ano = ?";
             $params[] = $anos;
         }            
-        
+
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr += 's';
+        }
+        $params = array_unshift($params, $paramsStr);
+
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
@@ -699,6 +714,12 @@ class EixoDois {
         $query .= self::concatDeg($desag, 7, "Previdencia");
         $query .= self::concatDeg($desag, 8, "Sindical");
 
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr += 's';
+        }
+        $params = array_unshift($params, $paramsStr);
+        
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
