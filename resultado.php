@@ -91,7 +91,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 	<div class="results-content">
 		<div class="container">
 
-            <div id="menuvariaveis"></div>
+            <div id="menuvariaveis" ></div>
 
 
             <div class="col-md-12 col-xs-12">
@@ -425,14 +425,14 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         TODOS SETORES
                     </div>
                     <div class="data-values" style="display:flex">
-                        <div class="container-flex">
+                        <div class="container-flex integer-flex">
                             <div class="integer-value" style="padding-left: 15px;">
                                 <span class="number"></span>
                                 <span class="description-number"></span>
                             </div>
                         </div>
                         <div class ="container-flex">
-                            <div class="percent-value">
+                            <div class="percent-value percent-flex">
 
                                 <div class="box-dado">
                                     <span class="number">100%</span>
@@ -696,20 +696,31 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         SÉRIE HISTÓRICA
                         <i class="plus"></i>
                     </div>
-                    <?php if ($eixo != "comercio") {?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
-                    <?php } else {?>
+                    <?php if ($eixo == "comercio") {?>
                         <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></iframe>
                         <div id="menu-view" style=" height: 90%; width: 30%; float: right;">
                             <div class="view-title-leg" data-id="scc&ocp">
                             </div>
-                            <div id="title-view-leg-scc" style="padding-top: 40%">
+                            <div id="title-view-leg-scc" style="">
                                 <span data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)"></i> Exportação<br></span>
                                 <span data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color:  rgb(109, 191, 201)"></i> Importação<br></span>
                             </div>
                         </div>
+                    <?php } else if ($eixo == "politicas"){?>
+                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+
+                        <div id="menu-view-donut" style=" height: 80%; padding-top: 5%; width: 30%; float: right; display: none;">
+                            <div class="view-title-leg-donut" data-id="scc&ocp">
+                            </div>
+                            <div id="title-view-leg-scc-donut" style="">
+                            </div>
+                        </div>
+
+                    <?php } else { ?>
+                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
 
                     <?php } ?>
+
                 </div>
                 <!--=============== DESCRICAO! ================-->
                 <div id='containerDesc' id="descricao" class="col-md-5 col-xs-12" style="height: 210px; top: -220px; overflow: auto;">

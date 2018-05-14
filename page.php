@@ -100,7 +100,7 @@
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
-                                $("iframe").height("2050px");
+                                $("iframe").height("2350px");
                                 $("iframe").attr("scrolling", "no");
                             }
                         }
