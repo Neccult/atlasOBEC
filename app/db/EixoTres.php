@@ -148,6 +148,7 @@ class EixoTres {
 		self::connect();
         
         $stmt = mysqli_stmt_init(self::$conn);
+        $params = [];
         
         $query = "SELECT * FROM ".self::$table." AS ex"
                ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.idUF = ?"
@@ -156,62 +157,39 @@ class EixoTres {
                ." WHERE ex.Numero = ?"
                ." AND ex.Ano = ?";
 
+        $params[] = $ufs;
+        $params[] = $cad;
+        $params[] = $mec;
+        $params[] = $var;
+        $params[] = $anos;
+        
         if($pf != 99 && $pf != NULL) {
             $query .= " AND ex.PessoaFisica = ?";
 
-            if ($stmt->prepare($stmt, $query)) {
-                $stmt->bind_param(
-                    'ssssss',
-                    $ufs,
-                    $cad,
-                    $mec,
-                    $var,
-                    $anos,
-                    $pf
-                );
-            }
+            $params[] = $pf;
+            
         } else if(is_null($pf) && !is_null($mod)) {
             $query .= " AND ex.Modalidade = ?";
-
-            if ($stmt->prepare($query)) {
-                $stmt->bind_param(
-                    'ssssss',
-                    $ufs,
-                    $cad,
-                    $mec,
-                    $var,
-                    $anos,
-                    $mod                        
-                );
-            }
+            $params[] = $mod;
+            
         } else if(!is_null($pf) && is_null($mod)) {
             $query .= " AND ex.PessoaFisica = ?";
-
-            if ($stmt->prepare($stmt, $query)) {
-                $stmt->bind_param(
-                    'ssssss',
-                    $ufs,
-                    $cad,
-                    $mec,
-                    $var,
-                    $anos,
-                    $pf
-                );
-            }
-        } else {
-            if ($stmt->prepare($query)) {
-                $stmt->bind_param(
-                    'sssss',
-                    $ufs,
-                    $cad,
-                    $mec,
-                    $var,
-                    $anos
-                );                
-            }                    
+            $params[] = $pf;
         }
-        $stmt->execute();
-        $obj = self::fetch_results($stmt)[0];
+
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr .= 's';
+        }
+        $allObjects = [];
+        
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param($paramsStr, ...$params);
+            
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
         
 		self::disconnect();
 
