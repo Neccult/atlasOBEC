@@ -273,6 +273,9 @@ class EixoDois {
                 ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
                 ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
                 ." WHERE ex.Numero = ".$var
+                ." AND Sindical = 0"
+                ." AND Previdencia = 0"
+                ." AND Formalidade = 0"
                 ." AND ex.Sexo IS NULL";
         }
         else{
@@ -285,11 +288,14 @@ class EixoDois {
                 ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
                 ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
                 ." WHERE ex.Numero = ".$var
+                ." AND Sindical = 0"
+                ." AND Previdencia = 0"
+                ." AND Formalidade = 0"
                 ." AND ex.Sexo IS NULL";
         };
 
         $query .= ($anos > 0) ? " AND ex.Ano = ".$anos : "" ;
-
+        
         $result = mysqli_query(self::$conn, $query);
         $allObjects = array();
 
@@ -298,6 +304,23 @@ class EixoDois {
         }
 
         if($ocp == 3){
+
+            $query_max_ocp1 = "SELECT MAX(Valor) as Valor FROM ".self::$table
+                    ." WHERE idOcupacao=1"
+                    ." AND Numero =".$var
+                    ." AND Ano=".$anos
+                    ." AND idUF = 0"
+                    ." GROUP BY Ano";
+            $query_max_ocp2 = "SELECT MAX(Valor) as Valor FROM ".self::$table
+                    ." WHERE idOcupacao=2"
+                    ." AND Numero =".$var
+                    ." AND Ano=".$anos
+                    ." AND idUF = 0"
+                    ." GROUP BY Ano";
+
+            $brasil_total = mysqli_fetch_object(mysqli_query(self::$conn, $query_max_ocp1))->Valor
+                            +  mysqli_fetch_object(mysqli_query(self::$conn, $query_max_ocp2))->Valor;
+
             $result_aux = array();
             $value_aux = array();
             $percent_aux = array();
@@ -305,7 +328,7 @@ class EixoDois {
                 if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
                 if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
                 $value_aux[$data->idUF] += $data->Valor;
-                $percent_aux[$data->idUF] += $data->Percentual;
+                $percent_aux[$data->idUF] += $data->Valor/$brasil_total;
                 $result_aux[$data->idUF] = $data;
                 $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
                 $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
@@ -346,7 +369,7 @@ class EixoDois {
         if($ocp == 0){
             if($var > 11)
                 $query .= " AND idCadeia = ".$uos;
-            else if($desag != 0 && $cad == 0)
+            else if($desag != 0 && $cad == 0 && $uos == 1)
                 $query .= " AND idCadeia != 0";
             else
                 if($uos == 1 && $var == 6 && $desag == 0)
@@ -418,8 +441,7 @@ class EixoDois {
         while($obj = mysqli_fetch_object($result, 'EixoDois')){
             $allObjects[] = $obj;
         }
-
-        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5|| $var) && $uos == 1)
+        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5||$var) && $uos == 1)
             || ($ocp == 0 && $desag == 0 && $cad == 0 && $uos != 1)
             || (($var == 4 || $var == 5) && $ocp == 3 && $desag != 0)){
 

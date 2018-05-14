@@ -143,10 +143,19 @@ class EixoTres {
             if($pf != 99 && $pf != NULL) {
 			    $query .= " AND ex.PessoaFisica = ".$pf;
             }
+            else{
+                $query .= " AND ex.PessoaFisica IS NULL";
+
+            }
             if(!is_null($mod)) {
 			    $query .= " AND ex.Modalidade = ".$mod;
             }
+            else{
+                $query .= " AND ex.Modalidade IS NULL";
+
+            }
             $query .= " AND ex.Ano = ".$anos;
+
 
 			$result = mysqli_query(self::$conn, $query);
 			$obj = mysqli_fetch_object($result, 'EixoTres');
@@ -206,10 +215,16 @@ class EixoTres {
         if($var == 17 || $var == 18 || $var == 19){
             $query = "SELECT * FROM " . self::$table . " AS ex"
                 . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec
-                . " WHERE ex.Numero = " . $var;
+                . " JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ".$mec;
+
+            if($var != 17)
+                $query .= " JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ".$cad;
+
+
+            $query .=   " WHERE ex.Numero = " . $var;
 
             $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
+
 
             $result = mysqli_query(self::$conn, $query);
             $allObjects = array();
@@ -280,6 +295,8 @@ class EixoTres {
 
         }
 
+//        echo $query;
+
 
 		self::disconnect();
 		
@@ -308,13 +325,9 @@ class EixoTres {
                 $query = "SELECT * FROM ".self::$table." AS ex"
                     ." WHERE ex.Numero = ".$var . " AND idMecanismo = ".$mec . " AND idUF = ".$ufs;
 
-                if($uos == 0)
                     $query .=  " AND Ano > 0" ;
-                else{
-                    $query .=  " AND Ano = 0" ;
-                    $query .=  " AND idCadeia > 0" ;
+                    $query .=  " AND idCadeia = ".$cad ;
 
-                }
 
 
                 $result = mysqli_query(self::$conn, $query);
@@ -483,13 +496,15 @@ class EixoTres {
                 $query .=  " AND idMecanismo = ".$mec ;
                 $query .=  " AND Ano = 0" ;
                 $query .=  " AND idUF = ".$ufs ;
-                $query .=  " AND idCadeia > 0" ;
+                if(!($var == 19 && $mec == 1))
+                    $query .=  " AND idCadeia > 0" ;
         }
         else
             $query .= ($ano > 0) ? " AND Ano = ".$ano : "" ;
 
         $result = mysqli_query(self::$conn, $query);
         $allObjects = array();
+
 
         while($obj = mysqli_fetch_object($result, 'EixoTres')){
             $allObjects[] = $obj;

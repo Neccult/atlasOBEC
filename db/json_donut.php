@@ -63,6 +63,8 @@ function sigla_cadeia($cadeia) {
     switch($cadeia) {
         case "Arquitetura e Design":
             return "Arq e D";
+        case "Todos":
+            return "Todos";
         case "Publicidade":
             return "Publ.";
         case "Patrimônio":
@@ -118,7 +120,6 @@ if($eixo == 2 && $var == 17){
     require_once("EixoTres.php");
 
     foreach (EixoTres::getter_donut($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
-
 
         $valor = array();
         $valor['tipo'] = binario($tupla->idCadeia);

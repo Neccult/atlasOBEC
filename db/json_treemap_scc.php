@@ -509,6 +509,7 @@ else if($eixo == 2) {
     else{
         $array_cad = array(1,2,3,4,5,6,7,8,9,10);
     }
+
     foreach($array_cad as $cad) {
         $tupla = EixoTres::find($var, $uf, $cad, $mec, $pfj, $mod, $ano);
 
