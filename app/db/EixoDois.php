@@ -2,6 +2,8 @@
 
 ###	Classe que manipula as variáveis do Eixo 2 ###
 
+require('config.db.php');
+
 class EixoDois {
 
 ## Atributos ##
