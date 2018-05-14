@@ -648,7 +648,7 @@ class EixoDois {
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
-            $stmt->bind_param($paramsStr, $params);
+            $stmt->bind_param($paramsStr, ...$params);
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
@@ -710,7 +710,7 @@ class EixoDois {
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
-            $stmt->bind_param($paramsStr, $params);
+            $stmt->bind_param($paramsStr, ...$params);
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
