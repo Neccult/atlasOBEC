@@ -698,8 +698,8 @@ function legendaBinario(){
         destacaPais(url['uf']);
     }
 
-    if(url['deg'] == 0)
-     configInfoDataBoxMapa(eixo, vrv, dict[url['uf']]);
+
+    configInfoDataBoxMapa(eixo, vrv, dict[url['uf']]);
 
 
     if(eixo == 0 || eixo == 1|| eixo == 2){

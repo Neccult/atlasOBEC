@@ -1545,15 +1545,15 @@ function switchToSetores() {
 
 function switchToOcupations() {
 
-
-
     $(".view-title-leg[data-id='scc&ocp']").html("OCUPAÇÕES");
     $("#title-view-leg-scc").empty();
     $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Atividades Relacionadas<br></span>");
     $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Cultura<br></span>");
     $(".bread-select[data-id='cad']").empty();
-    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6))
+    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
         $(".bread-select[data-id='cad']").append("<option value='3'>Todos</option>");
+
+    }
     $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
     $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
     $(".bread-select[data-id='cad']").attr("data-id", "ocp");
@@ -2004,6 +2004,9 @@ $(document).ready(function(){
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             
             if($(this).attr('data-id') =='var'){
+
+                console.log($('.percent-value').find(".box-dado").find('.number').first())
+                $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
