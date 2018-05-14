@@ -138,9 +138,7 @@ class EixoUm {
         }
         
 		self::disconnect();
-		while($obj = mysqli_fetch_object($result, 'EixoUm')){
-            $allObjects[] = $obj;
-		}
+        $allObjects = self::fetch_results($stmt)[0];
 		
 		return $allObjects;
 	}
