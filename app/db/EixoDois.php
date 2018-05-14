@@ -249,7 +249,7 @@ class EixoDois {
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
-                $stmt>bind_param,
+                $stmt->bind_param,
                 $params
             );
             
@@ -258,7 +258,7 @@ class EixoDois {
         }
         
         self::disconnect();
-
+        
         return $allObjects;
     }
 
@@ -466,12 +466,13 @@ class EixoDois {
         foreach ($params as $param) {
             $paramsStr .= 's';
         }
+        
         $params = array_unshift($params, $paramsStr);
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
-                $stmt>bind_param,
+                $stmt->bind_param,
                 $params
             );
             
@@ -652,7 +653,7 @@ class EixoDois {
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
-                $stmt>bind_param,
+                $stmt->bind_param,
                 $params
             );
             
@@ -718,7 +719,7 @@ class EixoDois {
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
-                $stmt>bind_param,
+                $stmt->bind_param,
                 $params
             );
             
