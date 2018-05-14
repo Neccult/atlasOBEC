@@ -207,7 +207,7 @@ class EixoDois {
         
         $stmt = mysqli_stmt_init(self::$conn);
         if ($anos > 0) {
-            $query .= " AND ex.Ano = ?" : "";
+            $query .= " AND ex.Ano = ?";
             $params[] = $anos;
         }
 
