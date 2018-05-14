@@ -107,13 +107,9 @@ class EixoUm {
 		self::disconnect();
 
 		$allObjects = array();
-
-        while($obj = mysqli_fetch_object($result, 'EixoUm')){
-            $allObjects[] = $obj;
-        }
+        $allObjects = self::fetch_results($stmt);
 
 		return $allObjects;
-
 	}
 
 	public static function getMaxValueSetor($var, $cad, $prt){
@@ -138,7 +134,7 @@ class EixoUm {
         }
         
 		self::disconnect();
-        $allObjects = self::fetch_results($stmt)[0];
+                    $allObjects = self::fetch_results($stmt);
 		
 		return $allObjects;
 	}
