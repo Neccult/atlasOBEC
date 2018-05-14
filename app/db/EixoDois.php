@@ -245,7 +245,7 @@ class EixoDois {
             $paramsStr .= 's';
         }
         array_unshift($params, $paramsStr);
-        try {
+        
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
@@ -258,8 +258,6 @@ class EixoDois {
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
-        } else {
-
         }
         
         self::disconnect();
