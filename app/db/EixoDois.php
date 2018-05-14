@@ -236,7 +236,7 @@ class EixoDois {
         }
 
         if ($anos > 0) {
-            $query = " AND ex.Ano = ?";
+            $query .= " AND ex.Ano = ?";
             $params[] = $anos;
         }
 
@@ -727,7 +727,7 @@ class EixoDois {
             $paramsStr .= 's';
         }
         array_unshift($params, $paramsStr);
-        
+        print_r($params);
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             call_user_func_array(
