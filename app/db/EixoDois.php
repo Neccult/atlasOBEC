@@ -229,21 +229,22 @@ class EixoDois {
         $query .= self::concatDeg($desag, 7, "Previdencia");
         $query .= self::concatDeg($desag, 8, "Sindical");
 
+        if ($anos > 0) {
+            $query .= " AND Ano = ?";
+            $params[] = $anos;
+        }
+        
         if($ocp == 0) {
             $query .= " ORDER BY `Eixo_2`.`idCadeia` ASC";
         } else {
             $query .= " ORDER BY `Eixo_2`.`idOcupacao` ASC";
         }
 
-        if ($anos > 0) {
-            $query .= " AND Ano = ?";
-            $params[] = $anos;
-        }
-
         $paramsStr = '';
         foreach ($params as $param) {
             $paramsStr .= 's';
         }
+        $allObjects = [];
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -251,6 +252,8 @@ class EixoDois {
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
+        } else {
+            
         }
         
         self::disconnect();
