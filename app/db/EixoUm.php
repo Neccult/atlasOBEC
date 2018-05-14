@@ -104,9 +104,10 @@ class EixoUm {
 		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_1` WHERE `idUF` = 0  GROUP BY Numero";
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        
+        $stmt->execute();
         
 		self::disconnect();
-
+        
 		$allObjects = array();
         $allObjects = self::fetch_results($stmt);
 
