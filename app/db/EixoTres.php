@@ -263,6 +263,9 @@ class EixoTres {
 		self::connect();
         
         $vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16, 17);
+        $params = [];
+        $allObjects = [];
+        
         $stmt = mysqli_stmt_init(self::$conn);
         
         if($var == 17 || $var == 18 || $var == 19){
@@ -270,31 +273,28 @@ class EixoTres {
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
                    . " WHERE ex.Numero = ?";
-            
-            $query .= ($anos > 0) ? " AND ex.Ano = " . $anos : "";
 
+            $params[] = $mec;
+            $params[] = $var;
             if ($anos > 0) {
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'sss',
-                        $mec,
-                        $var,
-                        $anos
-                    );
-                }
-            } else {
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'ss',
-                        $mec,
-                        $var
-                    );
-                }                
+                $query .= " AND ex.Ano = ?";
+                $params[] = $anos;
+            }
+
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            $allObjects = [];
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
             }
             
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
-
             $result_aux = array();
             $value_aux = array();
             $percent_aux = array();
@@ -319,66 +319,49 @@ class EixoTres {
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
                    ." WHERE ex.Numero = ?"
                    ." AND ex.Ano = ?";
+
+            $params[] = $cad;
+            $params[] = $mec;
+            $params[] = $var;
+            $params[] = $anos;
             
             if(!is_null($pf) && !is_null($mod)) {
                 $query .= " AND ex.PessoaFisica = ?";
                 $query .= " AND ex.Modalidade = ?";
+                
+                $params[] = $pf;
+                $params[] = $mod;
 
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'ssssss',
-                        $cad,
-                        $mec,
-                        $var,
-                        $anos,
-                        $pf,
-                        $mod
-                    );
-                }
             } else if(is_null($pf) && !is_null($mod)) {
                 $query .= " AND ex.Modalidade = ?"
                        . " AND ex.PessoaFisica IS NULL";
+
+                $params[] = $mod;
                 
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'sssss', 
-                        $cad,
-                        $mec,
-                        $var,
-                        $anos,
-                        $mod
-                    );
-                }
             } else if(!is_null($pf) && is_null($mod)) {
                 $query .= " AND ex.PessoaFisica = ?";
                 $query .= " AND ex.Modalidade IS NULL";
 
-                if ($stmt->prepare($query)) {    
-                    $stmt->bind_param(
-                        'sssss',
-                        $cad,
-                        $mec,
-                        $var,
-                        $anos,
-                        $pf
-                    );
-                }
+                $params[] = $pf;
+                
             } else {
                 $query .= " AND ex.PessoaFisica IS NULL";
                 $query .= " AND ex.Modalidade IS NULL";
-
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'ssss',
-                        $cad,
-                        $mec,
-                        $var,
-                        $anos
-                    );
-                }                    
             }
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
+
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            $allObjects = [];
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
             
         } else {
             $query = "SELECT * FROM " . self::$table . " AS ex"
@@ -386,27 +369,26 @@ class EixoTres {
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo = ex.idMecanismo AND mec.idMecanismo = ?"
                    . " WHERE ex.Numero = ?";
             
-            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            if ($stmt->prepare($query)) {            
-                if ($anos > 0) {
-                    $stmt->bind_param(
-                        'sss',
-                        $mec,
-                        $var,
-                        $anos
-                    );
-                    
-                } else {
-                    $stmt->bind_param(
-                        'ss',
-                        $mec,
-                        $var
-                    );
-                }
+            $params[] = $mec;
+            $params[] = $var;
+            
+            if ($anos > 0) {
+                $params[] = $anos;
+                $query .= " AND ex.Ano = ?";
             }
             
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
             
             $result_aux = array();
             $value_aux = array();

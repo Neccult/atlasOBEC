@@ -252,8 +252,6 @@ class EixoDois {
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
-        } else {
-            
         }
         
         self::disconnect();
