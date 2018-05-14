@@ -77,11 +77,11 @@
 			<?php if(!empty($text)):?>
 				<section id="resultado">
                     <div id="menuvariaveis"></div>
-					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 830px;" scrolling="no"></iframe>
+					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 1650px;" scrolling="no"></iframe>
                     <script>
                         function result_mobile() {
-                            if($(window).width() < 700) {
-                                $("iframe").height("1930px");
+                            if($(window).width() < 1200) {
+                                $("iframe").height("2350px");
                                 $("iframe").attr("scrolling", "no");
                             }
                         }
