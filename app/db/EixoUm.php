@@ -131,10 +131,9 @@ class EixoUm {
                 $prf
             );
             $stmt->execute();
-            $obj = self::fetch_results($stmt)[0];
-        }
-        
-        $allObjects = self::fetch_results($stmt);
+            $allObjects = self::fetch_results($stmt);
+        }        
+
 		self::disconnect();
 		
 		return $allObjects;
