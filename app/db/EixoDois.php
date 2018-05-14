@@ -240,27 +240,22 @@ class EixoDois {
             $params[] = $anos;
         }
 
-        
-        if (mysqli_stmt_prepare($stmt, $query)) {
-            if ($anos > 0) {
-                $stmt->bind_param(
-                    'sss',
-                    $var,
-                    $uf,
-                    $anos
-                );
-                
-            } else {
-                $stmt->bind_param(
-                    'ss',
-                    $var,
-                    $uf
-                );
-            }
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr += 's';
         }
-
-        $stmt->execute();
-        $allObjects = self::fetch_results($stmt);
+        $params = array_unshift($params, $paramsStr);
+        
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            call_user_func_array(
+                $stmt>bind_param,
+                $params
+            );
+            
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+        }
         
         self::disconnect();
 
