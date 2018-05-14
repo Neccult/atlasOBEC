@@ -75,6 +75,11 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
         brasil_setor = JSON.parse(dado)
     })
+
+    // $.get('./db/json_barras.php' + config, function(dado){
+    //     console.log(dado)
+    // })
+   
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
         colorJSON = data;
@@ -419,6 +424,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             });
         }
 
+        // console.log(dados)
 
         //Cria barras
         svg.selectAll("rect")
@@ -509,8 +515,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 return barHeight;
             })
             .attr("fill", function (d,i ) {
-                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
-                    return color(dados.key[i])
+                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+                    if(deg == 0)
+                        return color(dados.key[i])
+                    else
+                        return color(cad)
+                }
                 else if(eixo == 3 && (vrv == 5 || vrv == 8))
                     return color(0);
                 else
@@ -536,26 +546,30 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
 
-                var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
-                newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
-                newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
+                if(window.parent.innerWidth <= 1199)
+                    return;
+
+                if(eixo == 1 && vrv == 6 && uos == 1)
+                    return
+
+
+
 
                 if((eixo == 1 && url['var'] > 11) ||
                     (eixo == 0 && url['var'] > 9) ||
                     eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
-                    if(url['uos'] == 0) {
-                        var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                        $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                    if(eixo == 1 && url['slc'] == 1){
+                        if(url['ocp'] == 1) {
+                            var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                        }
+                        else {
+                            var newSCCSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
+                        }
                     }
                     else {
-                        var newSCCSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                        $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
-                    }
-                }
-                else if(eixo == 2 && url['var'] == 10){
-                        if(url['mec'] == 0) {
+                        if(url['uos'] == 0) {
                             var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                             newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
                             $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
@@ -566,38 +580,65 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                             $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
                         }
                     }
-                else if(eixo == 2 && url['var'] == 17){
-                    var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src");
-                    newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-                    $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-
-                }
-                else if(eixo == 3 && (url['var'] == 5 || url['var'] == 8)){
-                    var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
-                    newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
-                    newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                      
-                  
-                 }
-                else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
-                    var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                    $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
                 }
                 else {
-                    if(url['uos'] == 1) {
+
+                    var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano="+dados.key[i]);
+                    newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
+                    newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
+
+                    if (eixo == 2 && url['var'] == 10) {
+                        if (url['mec'] == 0) {
+                            var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                        }
+                        else {
+                            var newSCCSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
+                        }
+                    }
+                    else if (eixo == 2 && url['var'] == 17) {
+                        var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src");
+                        newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
+                        $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
+
+                    }
+                    else if (eixo == 2 && (url['var'] == 18 || url['var'] == 19)) {
+                        var newDonutSrc = $(window.parent.document).find("#view_box_barras").attr("src");
+                        newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
+                        $(window.parent.document).find("#view_box_barras").attr("src", newDonutSrc);
+
+                    }
+                    else if (eixo == 3 && (url['var'] == 5 || url['var'] == 8)) {
+                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                        newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                        $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                        newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+
+
+                    }
+                    else if (eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                        newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
                     }
                     else {
-                        var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
-                        newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
-                        $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                        if (url['uos'] == 1) {
+                            var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
+                        }
+                        else {
+                            var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
+                            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
+                            $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                        }
                     }
-                } 
+                }
+
 
 
 
@@ -775,12 +816,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         else if(eixo == 1)
             updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
         else
-            $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
+            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
         if(vrv == 1 && eixo == 1){
-            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_setorial, data[dados.key[0]].uf));
+            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercentMercado(getDataVar(textJSON, eixo, vrv).desc_setorial, vrv, "setorial", ocp));
         } else if(eixo == 0){
-            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_setorial, data[dados.key[0]].uf));            
+            updateDescPercentEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_setorial, vrv, "setorial");            
 
         }
             
@@ -1048,6 +1089,7 @@ else {
             data = aux;
         }
 
+
         setTimeout(function () {
         }, 500);
 
@@ -1159,6 +1201,9 @@ else {
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
 
+                if(window.parent.innerWidth <= 800)
+                    return;
+
                 if(d.x.getFullYear() != url['ano']) {
                     url['ano'] = d.x.getFullYear();
                     var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ano=[0-9]*/, "ano=" + d.x.getFullYear());
@@ -1252,13 +1297,15 @@ else {
             else destacaBarra(dataset[0][url['ano']-2008].x, true);
         }
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
-
+        // console.log(eixo)
+        // console.log(dados)
         if(eixo == 0 && dados.key != undefined){
             updateDescEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_int, vrv)
         }
-        else if(eixo == 1 && dados.key != undefined){
+        else if(eixo == 1){
+            nomeestado = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').text()
             updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
-
+            $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent",getDataVar(textJSON, eixo, vrv).desc_percent, nomeestado));
         }
         else if(eixo != 3 && dados.key != undefined){
             $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));

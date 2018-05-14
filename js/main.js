@@ -140,6 +140,9 @@ function updateIframe(url){
         if(eixoAtual == 0){
             if(url['var'] > 9){
 
+                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
+
+
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
                 $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
@@ -169,9 +172,18 @@ function updateIframe(url){
         else if(eixoAtual == 1) {
             $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
             if (url['var'] > 11) {
-                newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+                if(url['slc'] == 0) {
+
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
+                    $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
+                }
+                else{
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
+                    newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=1");
+                    $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES RELACIONADAS");
+                }
             } else {
                 $('iframe[id="view_box"]').attr('src', url['view'] + '_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
@@ -183,6 +195,18 @@ function updateIframe(url){
             if(url['var'] == 17 || url['var'] == 18 ||  url['var'] == 19){
                 $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
+            }
+            else if(url['var'] == 16){
+                newUrl = newUrl.replace(/uos=[0-9]/, "uos=0");
+                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE ÍNDICE HERFINDAHL-HIRSCHMAN PARA CONCENTRAÇÃO DOS PROJETOS FOMENTADOS POR UF");
+
+            }
+            else if(url['var'] == 15){
+                newUrl = newUrl.replace(/uos=[0-9]/, "uos=0");
+                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO POR UF");
+
             }
             else if (url['var'] > 14 || url['var'] == 10) {
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=0");
@@ -221,13 +245,13 @@ function updateIframe(url){
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 if(url['var'] == 8)
                     $('iframe[id="view_box"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR SETORES");
-                else(url['var'] == 5)
+                else if(url['var'] == 5)
                     $('iframe[id="view_box"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR SETORES");
 
             }
             else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
-
-                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
+     
+                $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                //$('iframe[id="view_box"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                $('iframe[id="view_box"]').attr('src', 'no-view.html');
                
@@ -261,21 +285,27 @@ function updateIframe(url){
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
                 }
                 else {
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
                     newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=2");
-                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES RELACIONADAS");
+                    $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
                 }
             }
         }
         else if(eixoAtual == 2){
             $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
 
-            if (url['var'] ==  16 || url ['var'] == 15) {
-                if(url['uos'] == 0) {
-                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
-                }
-                else {
-                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
-                }
+            if (url ['var'] == 15) {
+                newUrl = newUrl.replace(/uos=[0-9]/, "uos=1");
+                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO POR SETOR");
+
+            }
+            else if(url['var'] == 16){
+                newUrl = newUrl.replace(/uos=[0-9]/, "uos=1");
+                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE ÍNDICE HERFINDAHL-HIRSCHMAN PARA CONCENTRAÇÃO DOS PROJETOS FOMENTADOS POR SETOR");
+
             }
             else if(url['var'] == 17){
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO SIM-NÃO");
@@ -306,7 +336,7 @@ function updateIframe(url){
                 $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 if(url['var'] == 8)
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR PARCEIROS");
-                else(url['var'] == 5)
+                else if(url['var'] == 5)
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("C2 VALOR ABSOLUTO POR PARCEIROS");
             }
             
@@ -353,14 +383,17 @@ function updateIframe(url){
             if (url['var'] > 11) {
                 if(url['slc'] == 0) {
 
+                    newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=0");
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
 
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
                 else {
-                    newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=2");
-                    $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
+                    newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
+                    newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=3");
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
             } else if(url['var'] == 11 ||  url['var'] == 10 || url['var'] == 9 || url['var'] == 8){
                 $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
@@ -426,10 +459,12 @@ function updateIframe(url){
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=2");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                if(url['var'] == 8)
+                if(url['var'] == 8){
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR UF");
-                else(url['var'] == 5)
+                }
+                else if(url['var'] == 5){
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("C4 VALOR ABSOLUTO POR UF");
+                }
             }
 
             else if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12 ){
@@ -515,7 +550,7 @@ function controlFilter(selectvalue, selectid, valueDesag){
     if(selectid==='cad') {
         var save_deg = url['deg'];
         var save_uf = url['uf'];
-        defaultUrl();
+        //defaultUrl();
         url['deg'] = save_deg;
         url['uf'] = save_uf;
     }
@@ -1119,82 +1154,333 @@ function expandMenuVariaveis(a) {
 }
 
 function updateUrl() {
+    var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
     $('.bread-select').each(function() {
-        url[$(this).attr('data-id')] = $(this).val();
+        if($(this).attr('data-id') == "deg" && eixo_atual == 1)
+            url[$(this).attr('data-id')] = $(this).find("option:selected").parent().val();
+        else
+            url[$(this).attr('data-id')] = $(this).val();
     });
+}
+
+function updateLegendByDeg(deg){
+    if(deg == 0){
+        if(url['ocp'] == 0){
+            $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
+            $("#title-view-leg-scc").html("" +
+                "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+                "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
+                "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+                "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+                "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
+                "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+                "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
+                "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
+                "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+                "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
+                "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>"
+            )
+
+            var cads = [];
+            $("#title-view-leg-scc").find(".scc").each(function(){
+                cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+                cads.push(cad)
+            })
+
+            updateBreadcrumbSetores(cads);
+        }
+
+    }
+    else if(deg == 1){
+        $(".view-title-leg[data-id='scc&ocp']").html("PORTE");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Micro<br></span>\n" +
+            "<span data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Pequeno<br></span>\n" +
+            "<span data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Médio<br></span>\n" +
+            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Grande<br></span>"
+        )
+    }
+    else if(deg == 2){
+        $(".view-title-leg[data-id='scc&ocp']").html("SEXO");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Masculino<br></span>\n" +
+            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(233, 107, 0)\"></i> Feminino<br></span>"
+        )
+    }
+    else if(deg == 3){
+        $(".view-title-leg[data-id='scc&ocp']").html("IDADE");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> 10 a 17<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> 18 a 29<br></span>"+
+            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> 30 a 49<br></span>"+
+            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> 50 a 64<br></span>"+
+            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> 65 ou mais<br></span>"+
+            "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não classificado<br></span>"
+    )
+    }
+    else if(deg == 4){
+        $(".view-title-leg[data-id='scc&ocp']").html("ESCOLARIDADE");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Sem instruição <br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Fundamental incompleto<br></span>"+
+        "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Fundamental completo<br></span>"+
+        "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Médio completo<br></span>"+
+        "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Superior incompleto<br></span>"+
+        "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Superior completo<br></span>" +
+        "<span data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não determinado<br></span>"
+    )
+    }
+    else if(deg == 5){
+        $(".view-title-leg[data-id='scc&ocp']").html("COR");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Indígena<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Branca<br></span>"+
+            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Preta<br></span>"+
+            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Amarela<br></span>"+
+            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Parda<br></span>"
+    )
+    }
+    else if(deg == 6){
+        $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+        )
+    }
+    else if(deg == 7){
+        $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+        )
+    }
+    else if(deg == 8){
+        $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO");
+        $("#title-view-leg-scc").html("" +
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+        )
+    }
+
+}
+
+function getCadsByMenuDonut(){
+    var cads = [];
+    $("#title-view-leg-scc-donut").find(".scc").each(function(){
+        cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+        cads.push(cad)
+    });
+
+    return cads;
 }
 
 function switchToSetores() {
 
 
+
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
     $("#title-view-leg-scc").empty();
-    //console.log(getEixo(window.location.hash.substring(1)));
+
+    var eixo = getEixo(window.location.hash.substring(1));
 
     var cads = [];
-    if(getEixo(window.location.hash.substring(1)) == 2 && url['var'] == 2){
-        $("#title-view-leg-scc").append("<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
 
-            "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
-
-
-        var cads = [];
-        $("#title-view-leg-scc").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
-
-        updateBreadcrumbSetores(cads);
-
-    }
-    else if(getEixo(window.location.hash.substring(1)) == 2 && url['var'] == 18){
-        $("#title-view-leg-scc").append("<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-
-            "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
-
-
-        var cads = [];
-        $("#title-view-leg-scc").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
-
-        updateBreadcrumbSetores(cads);
-
-    }
-    else if(getEixo(window.location.hash.substring(1)) == 2 && url['var'] == 19){
-        $("#title-view-leg-scc").append("<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-
-            "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
-
-
-        var cads = [];
-        $("#title-view-leg-scc").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
-
-        updateBreadcrumbSetores(cads);
-
-    }
-    else if(getEixo(window.location.hash.substring(1)) == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
+    if(eixo == 0 && url['var'] > 9){
         $(".view-title-leg[data-id='scc&ocp']").html("");
-        
+        cads = [
+                {id: 0, nome: " Todos"}
+        ]
+
+        $("#title-view-leg-scc").html("" +
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+
+
+
+
+    }
+    else if(eixo == 1 && (url['var'] == 3 || url['var'] == 4)){
+
+            $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
+            $("#title-view-leg-scc").append("" +
+                "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+                "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
+                "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+                "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+                "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
+                "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+                "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
+                "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
+                "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+                "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
+                "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>"
+            )
+
+            var cads = [];
+            $("#title-view-leg-scc").find(".scc").each(function(){
+                cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+                cads.push(cad)
+            })
+
+            updateBreadcrumbSetores(cads);
+
+
+
+    }
+    else if(eixo == 1 && url['var'] > 11){
+        cads = [
+                {id: 0, nome: " Todos"}
+        ]
+        $(".view-title-leg[data-id='scc&ocp']").html("");
+
+
+        $("#title-view-leg-scc").html("" +
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+
+
+
+
+    }
+    else if(eixo == 2 && url['var'] == 2){
+        $("#title-view-leg-scc").append("" +
+            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
+
+
+        var cads = [];
+        $("#title-view-leg-scc").find(".scc").each(function(){
+            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+            cads.push(cad)
+        })
+
+        updateBreadcrumbSetores(cads);
+
+    }
+
+    else if(eixo == 2 && url['var'] == 18){
+
+        $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
+
+        $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
+            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+            "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
+            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+            "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
+            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+            "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
+            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
+
+        var cads = [];
+        $("#title-view-leg-scc-donut").find(".scc").each(function(){
+            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+            cads.push(cad)
+        })
+
+        updateBreadcrumbSetores(cads);
+
+    }
+    else if(eixo == 2 && url['var'] == 19){
+        $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
+
+        $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
+            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
+
+        var cads = [];
+        $("#title-view-leg-scc-donut").find(".scc").each(function(){
+            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+            cads.push(cad)
+        })
+
+        updateBreadcrumbSetores(cads);
+
+    }
+    else if(eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
+        cads = 
+            [
+                {id: 0, nome: " Todos"},
+                {id: 1, nome: " Arquitetura e Design"},
+                {id: 2, nome: " Artes Cênicas e Espetáculos"},
+                {id: 3, nome: " Audiovisual"},
+                {id: 4, nome: " Cultura Digital"},
+                {id: 5, nome: " Editorial"},
+                {id: 6, nome: " Educação e Criação em Artes"},
+                {id: 7, nome: " Entretenimento"},
+                {id: 8, nome: " Música"},
+                {id: 9, nome: " Patrimônio"},
+                {id: 10, nome: " Publicidade"}
+            ]
+        $(".view-title-leg[data-id='scc&ocp']").html("");
+
+        $("#title-view-leg-scc").html("" +
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+
+
+
+    }
+    else if(eixo == 2 && (url['var'] == 10)){
+        cads = 
+            [
+                {id: 0, nome: " Todos"},
+                {id: 1, nome: " Arquitetura e Design"},
+                {id: 2, nome: " Artes Cênicas e Espetáculos"},
+                {id: 3, nome: " Audiovisual"},
+                {id: 4, nome: " Cultura Digital"},
+                {id: 5, nome: " Editorial"},
+                {id: 6, nome: " Educação e Criação em Artes"},
+                {id: 7, nome: " Entretenimento"},
+                {id: 8, nome: " Música"},
+                {id: 9, nome: " Patrimônio"},
+                {id: 10, nome: " Publicidade"}
+            ]
+
+        $(".view-title-leg[data-id='scc&ocp']").html("");
+
+        $("#title-view-leg-scc").html("" +
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
+
+
+
+    }
+    else if(eixo == 2 && (url['var'] == 17)){
+        cads = 
+            [
+                {id: 0, nome: " Todos"},
+                {id: 1, nome: " Arquitetura e Design"},
+                {id: 2, nome: " Artes Cênicas e Espetáculos"},
+                {id: 3, nome: " Audiovisual"},
+                {id: 4, nome: " Cultura Digital"},
+                {id: 5, nome: " Editorial"},
+                {id: 6, nome: " Educação e Criação em Artes"},
+                {id: 7, nome: " Entretenimento"},
+                {id: 8, nome: " Música"},
+                {id: 9, nome: " Patrimônio"},
+                {id: 10, nome: " Publicidade"}
+            ]
+        $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
+
+        $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Sim <br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não <br></span>");
+
+
+
+
+    }
+    else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
         cads = 
             [
                 {id: 0, nome: " Todos"},
@@ -1207,7 +1493,10 @@ function switchToSetores() {
                 {id: 7, nome: " Entretenimento"},
                 {id: 8, nome: " Música"},
                 {id: 9, nome: " Patrimônio"}
-            ];
+            ]
+        $(".view-title-leg[data-id='scc&ocp']").html("");
+
+
         $("#title-view-leg-scc").append("" +
         "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Exportação<br></span>\n" +
         "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Importação<br></span>");
@@ -1229,18 +1518,18 @@ function switchToSetores() {
                 {id: 9, nome: " Patrimônio"}
             ]
         stringSetores = "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "                                <span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n";
+            "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
+            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
+            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
+            "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
+            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
+            "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
+            "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
+            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
+            "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n";
         //eixo 4 não tem publicidade
-        if(getEixo(window.location.hash.substring(1)) != 3){
-            stringSetores +=  "                                <span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>";
+        if(eixo != 3){
+            stringSetores +=  "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>";
             cads.push({id: 10, nome: "Publicidade"})
         }
         $("#title-view-leg-scc").append(stringSetores);
@@ -1250,11 +1539,7 @@ function switchToSetores() {
     $(".bread-select[data-id='ocp']").empty();
     $(".bread-select[data-id='ocp']").append("<option value=\"0\">Todos</option><option value=\"1\">Arquitetura e Design</option><option value=\"2\">Artes Cênicas e Espetáculos</option><option value=\"3\">Audiovisual</option><option value=\"4\">Cultura Digital</option><option value=\"5\">Editorial</option><option value=\"6\">Educação e Criação em Artes</option><option value=\"7\">Entretenimento</option><option value=\"8\">Música</option><option value=\"9\">Patrimônio</option><option value=\"10\">Publicidade</option>");
     $(".bread-select[data-id='ocp']").attr("data-id", "cad");
-    /*
-    $("#title-view-leg-scc").find(".scc").each(function(){
-        cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-        cads.push(cad)
-    })*/
+
     updateBreadcrumbSetores(cads);
 }
 
@@ -1300,9 +1585,10 @@ $(document).ready(function(){
 	/*=== selecionar variável ===*/
 
 	$(document).on('click', ".scc", function(){
+
 	    var eixoAtual = getEixo(window.location.hash.substring(1));
 
-        if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12) ||  (eixoAtual == 3) ){
+        if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12) || (eixoAtual == 2 && url['var'] >= 18) || eixoAtual == 3 ){
             var setor = $(this).attr('data-id');
 
 
@@ -1503,6 +1789,12 @@ $(document).ready(function(){
 
             if($(this).attr("id") === "recebedora") {
                 if(url['mec'] != 0){
+                    if(url['var'] == 19){
+                        var cads = getCadsByMenuDonut();
+
+                        updateBreadcrumbSetores(cads)
+                    }
+
                     updateUrl();
                     url['mec'] = 0;
                     $(this).addClass("active");
@@ -1513,6 +1805,9 @@ $(document).ready(function(){
             }
             else {
                 if(url['mec'] != 1){
+                    if(url['var'] == 19)
+                        updateBreadcrumbSetores([{id: 0, nome: "Todos"}])
+
                     updateUrl();
                     url['mec'] = 1;
                     $(this).addClass("active");
@@ -1535,6 +1830,8 @@ $(document).ready(function(){
                 $('#ocupacao').removeClass("active");
 
                 url['ano'] = anos_default[url['var']][0];
+
+                $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
             }
 		    else {
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
@@ -1560,6 +1857,8 @@ $(document).ready(function(){
                 $('#setor').removeClass("active");
                 
                 url['ano'] = anos_default[url['var']][1];
+                //troca o nome do select de setor
+                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
             }
             updateIframe(url); /* altera gráfico */
         }
@@ -1667,9 +1966,7 @@ $(document).ready(function(){
         if($(this).attr("data-id") !== "eixo") {
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
 
-
             updateUrl();
-
             
             if($(this).attr("data-id") === "typ") {
                 if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
@@ -1684,11 +1981,17 @@ $(document).ready(function(){
                 else
                     deg_value = $(this).val()
                 controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
+
+                if(url['var'] == 4 || url['var'] == 5)
+                    updateLegendByDeg(url['deg'])
             }
             else{
                 controlFilter($(this).val(), $(this).attr('data-id'), 1);
             }
-           
+            if( $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value") != undefined)
+                url['deg'] =  $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value")
+            else
+                url['deg'] = $(".bread-select[data-id=deg]").val()
             /* controla relações entre filtros */
             
             /* muda o select das opções para o mesmo do bread */
@@ -1781,7 +2084,7 @@ $(document).ready(function(){
 
                 //if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
-
+                
                 url['cad'] = ($(this).val())
 
             }
@@ -1789,7 +2092,6 @@ $(document).ready(function(){
                 if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
-
             updateIframe(url);
 
         }
