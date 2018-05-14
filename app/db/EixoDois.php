@@ -392,6 +392,9 @@ class EixoDois {
         $query = "SELECT * FROM ".self::$table." WHERE Numero =? AND idUF = ?";
 
         $params = [];
+        $params[] = $var;
+        $params[] = $uf;
+        
         if($ocp == 0){
             if($var > 11) {
                 $query .= " AND idCadeia = ?";
@@ -537,7 +540,7 @@ class EixoDois {
                     ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ?"
                     ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = ?"
                     ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = ?"
-                    ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = "
+                    ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = ?"
                     ." WHERE ex.Numero = ?"
                     ." AND ex.Formalidade = ?"
                     ." AND ex.Previdencia = ?"
