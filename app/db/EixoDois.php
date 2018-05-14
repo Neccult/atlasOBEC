@@ -1030,39 +1030,6 @@ class EixoDois {
     }
 
     /*-----------------------------------------------------------------------------
-    Função: All
-        função para buscar todas tupla no banco de dados
-    Entrada:
-        void
-    Saída:
-        Todas instancia da Classe EixoDois com seus devidos atributos
-    -----------------------------------------------------------------------------*/
-    public static function all(){
-        self::connect();
-        // $query = "SELECT * FROM ".self::$table." ORDER BY id";
-        $query = "SELECT * FROM ".self::$table." AS ex"
-            ." JOIN UF AS uf ON uf.idUF = ex.idUF"
-            ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia"
-            ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte"
-            ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao"
-            ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade"
-            ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia"
-            ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade"
-            ." ORDER BY id";
-
-        $result = mysqli_query(self::$conn, $query);
-        $allObjects = array();
-
-        while($obj = mysqli_fetch_object($result, 'EixoDois')){
-            $allObjects[] = $obj;
-        }
-
-        self::disconnect();
-
-        return $allObjects;
-    }
-
-    /*-----------------------------------------------------------------------------
     Função: Getter Mapa
         função para obter um conjunto de tuplas para o mapa
     Entrada:
