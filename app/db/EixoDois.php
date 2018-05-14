@@ -177,57 +177,6 @@ class EixoDois {
 	}
 
 	/*-----------------------------------------------------------------------------
-	Função: Getter Mapa
-	    função para obter um conjunto de tuplas para o mapa
-	Entrada: 
-	    $var = número da váriavel 
-	    $cad = id do SCC 
-	    $ocp = id da ocupação
-	    $anos = ano
-	Saída:
-	    Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
-	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $cad, $ocp, $anos){
-        $params = [];
-		self::connect();		
-        $query = "SELECT * FROM ".self::$table." AS ex"
-               ." JOIN UF AS uf ON uf.idUF = ex.idUF"
-               ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
-               ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = 0"
-               ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ?"
-               ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = 0"
-               ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
-               ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
-               ." WHERE ex.Numero = ?"
-               ." AND ex.Sexo IS NULL";
-
-        $params[] = $cad;
-        $params[] = $ocp;
-        $params[] = $var;        
-        
-        $stmt = mysqli_stmt_init(self::$conn);
-        if ($anos > 0) {
-            $query .= " AND ex.Ano = ?";
-            $params[] = $anos;
-        }
-
-        $stmt = mysqli_stmt_init(self::$conn);
-        if (mysqli_stmt_prepare($stmt, $query)) {
-            call_user_func_array(
-                $stmt>bind_param,
-                $params
-            );
-            
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
-        }
-        
-		self::disconnect();
-		
-		return $allObjects;
-	}
-
-	/*-----------------------------------------------------------------------------
 	Função: Getter Barras
 	    função para obter um conjunto de tuplas para o barras
 	Entrada: 
