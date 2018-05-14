@@ -128,7 +128,7 @@ class EixoUm {
                 'sss',
                 $var,
                 $cad,
-                $prf
+                $prt
             );
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
