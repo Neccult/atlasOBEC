@@ -384,10 +384,10 @@
 			{
 				"id":"9",
 				"title":"Valor Adicionado / Produto Interno Bruto (PIB)",
-				"desc_int": "de valor adicionado/PIB pelas empresas [cad] [prt] [uf]",
+				"desc_int": "de valor adicionado/PIB {uf} pelas empresas [cad] [uf]",
 				"desc_percent": "",
 				"sufixo_valor":"%",
-				"prefixo_valor":"",
+				"prefixo_valor"	:"",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
 				"desc_var_mapa":"A variável calcula a participação do valor adicionado pelas empresas culturais e criativas formais no valor adicionado total ou PIB da economia brasileira (em nível nacional ou regional).",
 				"desc_var_treemap_scc": "",
@@ -420,7 +420,7 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"desc_var_mapa":"A variável mede o grau de concentração das empresas culturais e criativas formais no País, por região e por setor. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região ou o setor em termos do número de empresas, pois o mesmo é proporcional à participação de mercado média, ponderada pela participação das empresas em cada setor ou UF. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevada participação de mercado para cada uma, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um setor cultural apresenta poucas empresas com elevada participação de mercado, o IHH desse setor será alto, acima de 0,25.",
+				"desc_var_mapa":"A variável mede o grau de concentração das empresas culturais e criativas formais, por Unidade da Federação e por setores culturais e criativos para o País inteiro, para cada ano. Isto é, o índice permite averiguar se as empresas culturais e criativas formais estão concentradas ou não em alguns setores e em algumas Unidades da Federação mais do que em outras. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região ou o setor em termos do número de empresas culturais e criativas. Um índice acima de 0,25 mostra concentração setorial (poucos setores com muitas empresas) ou regional (poucas UFs com muitas empresas). Por exemplo, se no Brasil houver muitas empresas distribuídas em alguns poucos setores culturais e criativos, haverá concentração, e o IHH setorial será alto. Da mesma forma, se as empresas culturais e criativas estiverem bem distribuídas entre as Unidades da Federação, o IHH por região será baixo. ",
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
 				"desc_var_barras": "O índice IHH demonstra a concentração de empresas por UF ou setor (selecionar no box ao lado). Se o IHH Empresas for próximo a 1, isso significa que poucos UFs ou setores concentram a maior parte das empresas existentes nos Setores Culturais e Criativos.",
@@ -434,13 +434,13 @@
 			},
 			{
 				"id":"11",
-				"title":"Índice de Concentração de Herfindahl-Hirschman (IHH – Valor Adicionado)",
+				"title":"Índice de Concentração de Herfindahl-Hirschman (IHH - Valor Adicionado)",
 				"desc_int": "IHH DO VALOR ADICIONADO POR UF",
 				"desc_percent": "IHH DO VALOR ADICIONADO POR SETOR",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"desc_var_mapa":"A variável mede o grau de concentração do valor adicionado pelas empresas culturais e criativas formais no País, por região e por setor. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região ou o setor em termos do valor adicionado pelas empresas, pois o mesmo é proporcional à participação no valor adicionado médio, ponderado pela participação do valor adicionado em cada setor ou UF. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevada participação no valor adicionado, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um setor cultural apresenta poucas empresas com elevada participação no valor adicionado, o IHH desse setor será alto, acima de 0,25.",
+				"desc_var_mapa":" A variável mede o grau de concentração do valor adicionado pelas empresas culturais e criativas formais, por Unidade da Federação e por setores culturais e criativos para o País inteiro, para cada ano. Isto é, o índice permite averiguar se a produção de valor adicionado cultural está concentrada ou não em alguns setores e em algumas Unidades da Federação mais do que em outras. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região ou o setor em termos do valor adicionado gerado. Um índice acima de 0,25 mostra concentração setorial (poucos setores com muita produção de valor adicionado) ou regional (poucas UFs com muita produção de valor adicionado). Por exemplo, se no Brasil a produção de valor adicionado se distribuir em apenas poucos setores culturais e criativos, haverá concentração, e o IHH setorial será alto. Da mesma forma, se a produção de valor adicionado estiver bem distribuída entre as Unidades da Federação, o IHH por região será baixo.",
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
 				"desc_var_barras": "O índice IHH demonstra a concentração do VA de empresas criativas e culturais por UF ou setor (selecionar no box ao lado). Se o IHH Valor Adicionado for próximo a 1, isso significa que poucos UFs ou setores concentram a maior parte do Valor Adicionado pelos Setores Culturais e Criativos.",
@@ -450,7 +450,7 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
-				"fontes": "Elaboração própria a partir do IBGE (PAS, PIA e PAC)."
+				"fontes": "Elaboração própria a partir da RAIS."
 			},
 			{
 				"id":"12",
@@ -460,7 +460,7 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"desc_var_mapa":"A variável mede o grau de concentração das empresas culturais e criativas formais no País, em cada região ou setor, considerando a participação da soma das quatro maiores medidas no total. Por exemplo, se a maior região detém 20% das empresas culturais e criativas formais, a segunda maior possui 15%, a terceira maior possui 10% e a quarta maior tem 5%, então o C4 será igual a 50%, indicando elevada concentração das empresas em poucas regiões. O mesmo vale para os dez setores culturais e criativos. ",
+				"desc_var_mapa":"A variável mede, de uma forma alternativa ao IHH, o grau de concentração das empresas culturais e criativas formais, por Unidade da Federação e por setores culturais e criativos para o País inteiro, para cada ano. A razão de concentração é a soma da participação dos quatro maiores setores, ou das quatro maiores Unidades da Federação, no número total de empresas culturais e criativas formais do País. Por exemplo, em 2016 o C4 setorial foi igual a 0,744 ou 74,4%, porque o maior setor, editorial, tinha 0,324 ou 32,4% de todas as empresas culturais e criativas, o segundo maior, Arquitetura e Design, tinha 0,1601 ou 16,01%, o terceiro maior, Educação e Criação em Artes, tinha 0,143 ou 14,3%, e o quarto maior, Publicidade, tinha 0,1168 ou 11,68%. Em 2016 portanto houve forte concentração setorial das empresas culturais e criativas. Para o C4 regional de 2016, a maior UF, SP, tinha 29,83%, a segunda maior, MG, tinha 10,92%, a terceira maior, RJ, tinha 9,26%, e a quarta maior, RS, tinha 8,13%, com um C4 de 0,5814 ou 58,14%. Portanto, as empresas culturais e criativas formais estavam fortemente concentradas regionalmente no Brasil no ano de 2016.",
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
 				"desc_var_barras": "O índice C4 demonstra a concentração de empresas considerando os 4 UFs ou setores (selecionar no box ao lado) com maior número de empresas. Se o C4 for próximo a 1, isso significa que o número de empresas é mais concentrado.",
@@ -480,7 +480,7 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
-				"desc_var_mapa":"A variável mede o grau de concentração do valor adicionado pelas empresas culturais e criativas formais no País, em cada região ou setor, considerando a participação da soma das quatro maiores participações no valor adicionado total. Por exemplo, se o maior setor é o audiovisual, e ele responde por 10% do valor adicionado pelos SCC, o segundo maior é o patrimônio, respondendo por 8%, o terceiro maior é o editorial, com 6%, e o quarto maior é o de cultura digital, com 5%, o C4 para o valor adicionado setorial será igual a 29%." ,
+				"desc_var_mapa":"A variável mede, de uma forma alternativa ao IHH, o grau de concentração do valor adicionado pelas empresas culturais e criativas formais, por Unidade da Federação e por setores culturais e criativos para o País inteiro, para cada ano. A razão de concentração é a soma da participação dos quatro maiores setores, ou das quatro maiores Unidades da Federação, no valor adicionado total das empresas culturais e criativas formais do País. Por exemplo, em 2016 o C4 setorial foi igual a 0,8507 ou 85,07%, porque o maior setor, audiovisual, representava 0,35924 ou 35,92% do valor adicionado cultural, o segundo maior, Editorial, representava 0,2364 ou 23,64%, o terceiro maior, Publicidade, 0,1771 ou 17,71%, e o quarto maior, Arquitetura e Design, 0,078 ou 7,8%. Em 2016 portanto houve forte concentração setorial do valor adicionado cultural. Para o C4 regional de 2016, a maior UF, SP, representava 46,72% do valor adicionado do País, a segunda maior, RJ, representava 17,2%, a terceira maior, MG, 5,01%, e a quarta maior, PR, tinha 4,90%, com um C4 de 0,7383 ou 73,83%. Portanto, o valor adicionado cultural estava muito concentrado regionalmente no Brasil no ano de 2016. ",
 
 				"desc_var_treemap_scc": "",
 				"desc_var_treemap_region": "",
@@ -491,7 +491,7 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
-				"fontes": "Elaboração própria com base no IBGE (PAS, PIA e PAC)."
+				"fontes": "Elaboração própria com base na RAIS."
 			}
 		],
 		[
@@ -499,7 +499,7 @@
 				"id":"1",
 				"desc_int":"[ocp] [cad] [deg] [uf]",
 				"desc_percent": "Do total de [ocp] [cad] [uf]",
-				"desc_setorial": "do total de [ocp] [setores] do Brasil",
+				"desc_setorial": "do total de [ocp] [cad] [uf]",
 				"title":"Total de Ocupados",
 				"sufixo_valor" :"",
 				"prefixo_valor":"",
@@ -827,8 +827,8 @@
 				"desc_int":"Concentração do Emprego por UF",
 				"desc_percent":"Concentração do Emprego por Setor",
 				"sufixo_valor":"",
-				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
-				"desc_var_mapa": "A variável mede o grau de concentração do emprego nos setores e ocupações culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, se a maior região detém 20% dos empregos culturais e criativos, a segunda maior possui 15%, a terceira maior possui 10% e a quarta maior tem 5%, então o C4 será igual a 50%, indicando elevada concentração dos empregos culturais e criativos em poucas regiões. O mesmo vale para os dez setores culturais e criativos.",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
+				"desc_var_mapa": "A variável mede o grau de concentração do emprego nos setores e ocupações culturais e criativos e nas unidades da federação do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, em 2016 o C4 setorial foi de 0,723 ou 72%. O setor Editorial representou 29,2% dos empregos, o Audiovisual 18%, Educação e Criação em Artes 12,9% e Publicidade 12,2%. No mesmo ano o C4 regional foi de 0,634 ou 63%, com SP absorvendo 36,4% do emprego cultural no País, RJ 11,9%, MG 8,3% e RS 6,8%. Portanto, o emprego cultural e criativo se encontrava concentrado setorial e regionalmente naquele ano.",
 				"prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
@@ -845,9 +845,9 @@
 				"desc_int":"Concentração de Massa Salarial por UF",
 				"desc_percent": "Concentração de Massa Salarial por Setor",
 				"sufixo_valor":"",
-				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
 				"prefixo_valor":"",
-				"desc_var_mapa": " A variável mede o grau de concentração da massa de rendimentos do trabalho nos setores e ocupações culturais e criativas e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores da soma das quatro maiores medidas na soma total. Por exemplo, se o maior segmento cultural e criativo representa 30% da massa de rendimentos do trabalho, o segundo maior possui 25%, a terceira maior possui 20% e a quarta maior tem 15%, então o C4 será igual a 90%, indicando concentração extrema da massa de rendimentos do trabalho em poucos setores culturais e criativos. O mesmo vale para as unidades da federação.",
+				"desc_var_mapa": " A variável mede o grau de concentração da massa de rendimentos do trabalho cultural e criativo nos setores e ocupações e nas unidades da federação do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, em 2016 o C4 setorial para a massa de rendimentos foi de 0,756 ou 75%. O setor do Audiovisual respondeu por 27,9% da massa de rendimentos do trabalho naquele ano. Editorial por 25,8%. Publicidade por 13,6%. E Educação e Criação em Artes por 8,3%. O C4 regional foi de 0,727 ou 73% no mesmo ano. SP representava 45,4% da massa de rendimentos do País, RJ 16,3%, PR e MG tinham 5,5% cada. ",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -862,10 +862,10 @@
 				"title":"IHH (Índice Herfindahl-Hirschman de concentração) de Número de Trabalhadore(a)s",
 				"desc_int": "IHH DE NÚMERO DO TRABALHADORES POR UF",
 				"desc_percent": "IHH DE NÚMERO DO TRABALHADORES POR SETOR",
-				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"desc_var_mapa": "A variável mede o grau de concentração do número de trabalhadore(a)s, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos do número de trabalhadore(a)s, pois o mesmo é proporcional à participação no volume médio de emprego, ponderado pelo volume de emprego em cada setor, ocupação ou unidade da federação. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevado volume de emprego, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um dado setor cultural e criativo apresenta poucas empresas com elevado volume de emprego, o IHH desse setor será alto, acima de 0,25.",
+				"desc_var_mapa": "A variável mede o grau de concentração do número de trabalhadore(a)s, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos do número de trabalhadore(a)s empregado(a)s. Por exemplo, se no Brasil há poucos setores ou ocupações culturais com elevado volume de emprego, haverá concentração setorial e ocupacional, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil há poucas regiões com elevada participação no volume total de emprego cultural, o IHH desse setor será alto.",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
@@ -880,9 +880,9 @@
 				"title":"IHH (Índice Herfindahl-Hirschman de concentração) da Massa de Rendimentos do Trabalho",
 				"desc_int": "IHH DA MASSA DE RENDIMENTOS POR UF",
 				"desc_percent": "IHH DA MASSA DE RENDIMENTOS POR SETOR",
-				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
 				"sufixo_valor":"",
-                "desc_var_mapa": "A variável mede o grau de concentração da massa de rendimentos do trabalho, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos da massa de rendimentos, pois o mesmo é proporcional à participação na massa média de remuneração, ponderado pela massa de rendimento do trabalho em cada setor, ocupação ou unidade da federação. Por exemplo, se no Brasil há poucas empresas de um setor cultural em uma região, com elevada participação na massa de rendimento total, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil um dado setor cultural e criativo apresenta poucas empresas com elevada massa de rendimentos do trabalho frente ao total, o IHH desse setor será alto, acima de 0,25.",
+                "desc_var_mapa": "A variável mede o grau de concentração da massa de rendimentos do trabalho, por setor, ocupação e região, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, a ocupação ou o setor em termos da massa de rendimentos. Por exemplo, se no Brasil há poucos setores ou ocupações culturais com elevada participação na massa de rendimento total, haverá concentração, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil uma grande proporção da massa total de rendimentos do trabalho está distribuídas em poucas unidades da federação, o IHH regional será alto.",
                 "prefixo_valor":"",
 				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
 				"type":[
@@ -1310,10 +1310,10 @@
 				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
 				"desc_int":"Concentração do financiamento [] por UF",
 				"desc_percent": "Concentração do financiamento [] por setor" ,
-				"desc_var_mapa":"A variável mede o grau de concentração dos recursos fiscais destinados à cultura nos setores culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, se o maior segmento cultural e criativo obtém 6% dos recursos fiscais, o segundo maior recebe 4%, o terceiro maior 2% e o quarto maior 1%, então o C4 será igual a 13%, indicando baixa concentração setorial dos recursos fiscais. O mesmo vale para as unidades da federação.",
+				"desc_var_mapa":"A variável mede o grau de concentração dos recursos fiscais destinados à cultura nos setores culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total. Por exemplo, para 2016 o C4 setorial, para o total do fomento, foi de xx ou xx.*",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
-				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
+				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1328,9 +1328,9 @@
 				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
 				"desc_int":"Concentração do financiamento [] por UF",
 				"desc_percent": "Concentração do financiamento [] por setor" ,
-				"desc_var_mapa": "A variável mede o grau de concentração dos projetos fomentados entre os setores culturais e criativos e as unidades da federação, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a região, o setor em termos da distribuição dos projetos fomentados, pois o mesmo é proporcional à participação no volume médio de projetos fomentados, ponderado número de projetos fomentados em cada setor ou unidade da federação. Por exemplo, se no Brasil há poucos setores culturais com elevada participação no total de projetos fomentados, haverá concentração setorial, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil poucas unidades federativas apresentam elevado número de projetos fomentados frente ao total, o IHH regional será alto, acima de 0,25.",
+				"desc_var_mapa": "A variável mede o grau de concentração dos projetos fomentados entre os setores culturais e criativos e entre as unidades da federação, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a distribuição regional ou setorial dos projetos fomentados. Por exemplo, se no Brasil houver poucos setores culturais com elevada participação no total de projetos fomentados, haverá concentração setorial, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil poucas unidades federativas apresentam elevado número de projetos fomentados frente ao total, o IHH regional será alto.",
 				"sufixo_valor":"",
-				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
+				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1364,10 +1364,10 @@
 				"id":"1",
 				"title":"Comércio Externo",
 				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
-				"desc_var_mapa": "A variável mostra o valor absoluto transacionado, caracterizando quanto, em termos monetários, os setores culturais e criativos contribuíram para o comércio internacional do Brasil.",
+				"desc_var_mapa": "A variável mostra o valor transacionado com o resto do mundo, caracterizando quanto, em termos monetários, os setores culturais e criativos contribuíram para o comércio internacional do Brasil. Desagregação para bens e serviços.",
 				"desc_int": "DE <> [uf] [] ()",
 				"fontes": "MDIC. ",
-				"desc_percent":"DO VALOR <> [uf] []",
+				"desc_percent":"DO VALOR <> [uf] [] [cad]",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"type":[
@@ -1404,9 +1404,9 @@
 				"id":"2",
 				"title":"Participação no comércio exterior total",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a participação das trocas comerciais dos setores culturais e criativos no comércio internacional total do Brasil.",
+				"desc_var_mapa": "A variável calcula a participação das trocas comerciais dos setores culturais e criativos no comércio internacional total do Brasil. Desagregação para bens e serviços. ",
 				"desc_int": "de participação no <> [uf] [] ()",
-				"fontes": "Elaboração do NECCULT com base no MDIC.",
+				"fontes": "Elaboração do NECCULT com base no MDIC. ",
 				"desc_percent":"",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
@@ -1442,9 +1442,9 @@
 			},
 			{
 				"id":"3",
-				"title":"Relação com o Valor Adicionado da Cultura",
+				"title":"Relação com o valor adicionado pela cultura",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
-				"desc_var_mapa": "A variável mede a relação entre o comércio exterior dos setores culturais e criativos e o valor adicionado pelas empresas culturais e criativas formais.",
+				"desc_var_mapa": "A variável mede a relação entre o comércio exterior dos setores culturais e criativos e o valor adicionado pelas empresas culturais e criativas formais. Desagregação para bens e serviços.",
 				"desc_int": " de participação do <> [uf] [] () no valor adicionado",
 				"desc_percent":"",
 				"sufixo_valor":"%",
@@ -1482,9 +1482,9 @@
 			},
 			{
 				"id":"5",
-				"title":"Razões de concentração (C2/C4) da corrente de comércio",
+				"title":"Razões de concentração (C2/C4) do comércio externo",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
-				"desc_var_mapa": "A variável mede o grau de concentração do comércio internacional dos setores culturais e criativos com os dois maiores parceiros comerciais, dos quatro maiores setores, e das quatro maiores unidades da federação, todos em termos de participação relativa, em cada período. Por exemplo, se em um dado ano o maior parceiro comercial representa 50% da corrente de comércio dos setores culturais e criativos e o segundo maior recebe 30%, então o C2 será igual a 80%, indicando nesse exemplo elevada concentração geográfica do comércio cultural. Por sua vez, se o maior segmento cultural e criativo ou Unidade da Federação representa 8% da corrente de comércio de todos os setores ou Unidades da Federação, o segundo 5%, o terceiro maior 3% e o quarto maior 1%, então o C4 será igual a 17%, indicando nesse exemplo baixa concentração setorial ou regional do comércio exterior dos setores culturais e criativos.",
+				"desc_var_mapa": "A variável mede o grau de concentração do comércio externo cultural com os dois maiores parceiros comerciais, dos quatro maiores setores culturais e criativos, e das quatro maiores unidades da federação, definidos em termos de participação relativa nas trocas internacionais, em cada período. Por exemplo, para 2017 o C2 das exportações de bens para os dois maiores parceiros foi de 0,77 ou 77%, com a América do Norte participando com cerca de 0,53 ou 53% e a Europa com cerca de 0,23 ou 23%. Em 2016 o C4 das importações de serviços dos quatro maiores setores foi de 0,966 ou 97%, Audiovisual participando com 61,8%, Cultura Digital com 26%, Arquitetura e Design com 6,2% e Editorial com 2,6%. Finalmente, em 2017 o C4 das importações de bens para as quatro maiores Unidades da Federação foi de 0,894 ou 89%. SP participou com 65%, SC com 15%, AM com 6,2% e ES com 3,2%. Houve portanto forte concentração internacional, setorial e regional. Desagregação para bens e serviços e por variável de comércio externo.",
 				"desc_int": "C2 VALOR ABSOLUTO POR PARCEIROS",
 				"desc_percent":"C4 VALOR ABSOLUTO POR UF",
 				"sufixo_valor":"",
@@ -1522,10 +1522,10 @@
 			},
 			{
 				"id":"8",
-				"title":"IHH (Índice Herfindahl-Hirschman) de concentração da corrente de comércio",
+				"title":"IHH (Índice Herfindahl-Hirschman) de concentração do comércio externo",
 				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula o grau de concentração da corrente de comércio dos setores culturais e criativos em relação aos parceiros comerciais, aos próprios setores culturais e às Unidades da Federação. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é a corrente de comércio em termos da distribuição geográfica, setorial ou regional das trocas, pois o mesmo é proporcional à participação no volume médio de comércio internacional, ponderado pelo comércio externo de cada parceiro, setor ou Unidade da Federação. Por exemplo, se há poucos parceiros comerciais, setores ou Unidades da Federação com elevada participação na corrente de comércio, haverá concentração geográfica, setorial ou regional e o IHH será alto, acima de 0,25.",
-				"fontes": "Elaboração do NECCULT com base no MDIC.",
+				"desc_var_mapa": "A variável calcula o grau de concentração do comércio externo cultural em relação aos parceiros comerciais, aos setores culturais e criativos como um todo e às Unidades da Federação. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentradas são as transações internacionais em termos da distribuição geográfica, setorial ou regional das trocas. Por exemplo, se houver poucos parceiros comerciais, setores culturais e criativos ou Unidades da Federação com elevada participação nas transações culturais externas do País, haverá concentração geográfica, setorial ou regional, e o IHH será alto. Desagregação para bens e serviços.",
+				"fontes": "Elaboração NECCULT, com base nos dados do MDIC.",
 				"desc_int": "IHH VALOR ABSOLUTO POR PARCEIROS",
 				"desc_percent":"IHH VALOR ABSOLUTO POR UF",
 				"sufixo_valor":"",
@@ -1562,11 +1562,11 @@
 			},
 			{
 				"id":"11",
-				"title":"Índice Quantum da Corrente de Comércio",
+				"title":"Índice de quantum do comércio externo",
 				"desc_int": "Índice de quantum do valor absoluto <>",
 				"desc_percent":"",
 				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável mensura a corrente de comércio cultural desagregada em termos de quantidades",
+				"desc_var_mapa": "A variável mensura o comércio cultural externo desagregado em termos de quantidades. Variável apresentada apenas para bens. ",
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1579,11 +1579,11 @@
 			},
 			{
 				"id":"12",
-				"title":"Índice de Preços da Corrente de Comércio",
+				"title":"Índice de preços do comércio externo",
 				"desc_int": "índice de preços do valor absoluto das <>",
 				"desc_percent":"",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a corrente de comércio desagregada em termos de preços.",
+				"desc_var_mapa": "A variável mostra a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX. Variável apresentada apenas para bens, sendo 2009 o ano base (índice = 100).",
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
@@ -1600,7 +1600,7 @@
 				"desc_int": "<> [uf] [] ()",
 				"desc_percent":"dos kg <> [uf] []",
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
-				"desc_var_mapa": "A variável calcula a quantidade física, em kg, transacionada pelos Setores Culturais e Criativos.",
+				"desc_var_mapa": "A variável calcula a quantidade física, em kg, transacionada pelos setores culturais e criativos. Variável apresentada apenas para bens.",
 				"fontes":"MDIC.",
 				"sufixo_valor":" kg",
 				"prefixo_valor":"",
@@ -1617,7 +1617,7 @@
 				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
 				"desc_int": "DE RENTABILIDADE <> ()",
 				"desc_percent":"",
-				"desc_var_mapa": "A variável estima a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX.",
+				"desc_var_mapa": "A variável estima a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX. Variável apresentada apenas para bens.",
 				"fontes":"Elaboração do NECCULT com base no MDIC, FUNCEX e BIS.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
