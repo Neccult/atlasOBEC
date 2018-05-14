@@ -244,7 +244,7 @@ class EixoDois {
         foreach ($params as $param) {
             $paramsStr .= 's';
         }
-        $params = array_unshift($params, $paramsStr);
+        array_unshift($params, $paramsStr);
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -473,7 +473,7 @@ class EixoDois {
             $paramsStr .= 's';
         }
         
-        $params = array_unshift($params, $paramsStr);
+        array_unshift($params, $paramsStr);
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -657,7 +657,7 @@ class EixoDois {
         foreach ($params as $param) {
             $paramsStr .= 's';
         }
-        $params = array_unshift($params, $paramsStr);
+        array_unshift($params, $paramsStr);
 
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -726,7 +726,7 @@ class EixoDois {
         foreach ($params as $param) {
             $paramsStr .= 's';
         }
-        $params = array_unshift($params, $paramsStr);
+        array_unshift($params, $paramsStr);
         
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
