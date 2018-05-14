@@ -1,4 +1,4 @@
-?php
+<?php
 
 ###	Classe que manipula as variáveis do Eixo 2 ###
 
