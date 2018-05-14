@@ -475,17 +475,9 @@ class EixoDois {
             $paramsStr .= 's';
         }
         
-        array_unshift($params, $paramsStr);
-        
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
-            call_user_func_array(
-                [
-                    $stmt,
-                    'bind_param'
-                ],
-                $params
-            );
+            $stmt->bind_param($paramStr, ...$params);
             
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
