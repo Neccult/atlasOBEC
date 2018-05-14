@@ -115,21 +115,28 @@ class EixoUm {
 
 	public static function getMaxValueSetor($var, $cad, $prt){
 		self::connect();
-
+        $params = [];
+        
 		$query = "SELECT MAX(Valor) as Valor, Ano FROM ".self::$table
 						." WHERE Numero = ?"
 						." AND idCadeia = ?"
 						." AND idPorte = ?"
 						." AND idUF = 0 GROUP BY Ano";
 
+        $params[] = $var;
+        $params[] = $cad;
+        $params[] = $cad;
+
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr .= 's';
+        }
+        $allObjects = [];
+        
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
-            $stmt->bind_param(
-                'sss',
-                $var,
-                $cad,
-                $prt
-            );
+
+            $stmt->bind_param($paramsStr, ...$params);
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
         }
