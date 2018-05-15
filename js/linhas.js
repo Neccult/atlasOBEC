@@ -486,7 +486,7 @@ function analyze(error, data) {
 
         if(!($(path).hasClass("domain")) ) {
 
-            if(eixo == 1 && vrv == 4 && deg != 0){
+            if(eixo == 1 && (vrv == 4 || vrv == 5) && deg != 0){
                 desagId = (getDesagId(deg, $(path).attr("scc")));
                 desagName = updateUrlDesag(deg, desagId)
 

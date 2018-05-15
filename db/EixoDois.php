@@ -367,15 +367,20 @@ class EixoDois {
 
 
         if($ocp == 0){
-            if($var > 11)
+            if($var > 11){
                 $query .= " AND idCadeia = ".$uos;
-            else if($desag != 0 && $cad == 0 && $uos == 1)
+            }
+            else if($desag != 0 && $cad == 0){
                 $query .= " AND idCadeia != 0";
-            else
-                if($uos == 1 && $var == 6 && $desag == 0)
+            }
+            else{
+                if($uos == 1 && $var == 6 && $desag == 0){
                     $query .= " AND idCadeia != 0";
-                else
+                }
+                else{
                     $query .= " AND idCadeia = ".$cad;
+                }
+            }
 
             $query .= " AND idOcupacao = 0";
         }
@@ -430,7 +435,7 @@ class EixoDois {
         }
 
 //        if($uos == 1)
-//            echo $query;
+        //echo $query;
 
         //$query .= " ORDER BY `Eixo_2`.`Ano` ASC";
 
@@ -441,7 +446,7 @@ class EixoDois {
         while($obj = mysqli_fetch_object($result, 'EixoDois')){
             $allObjects[] = $obj;
         }
-        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5||$var) && $uos == 1)
+        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5) && $uos == 1)
             || ($ocp == 0 && $desag == 0 && $cad == 0 && $uos != 1)
             || (($var == 4 || $var == 5) && $ocp == 3 && $desag != 0)){
 
@@ -458,7 +463,7 @@ class EixoDois {
                 $result_aux[$data->Ano]->Percentual = $percent_aux[$data->Ano];
             }
             $allObjects = $result_aux;
-        }
+        } 
 
 
 

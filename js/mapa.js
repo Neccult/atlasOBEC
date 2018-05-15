@@ -708,6 +708,7 @@ function legendaBinario(){
     else{
         if(url['uf'] != 0) {
             if(url['deg'] == 0){
+                console.log(setPercentValueData(dict[url['uf']]))
                 setPercentValueData(dict[url['uf']], eixo, vrv);
                 setIntegerValueData(dict[url['uf']], eixo, vrv);
             }

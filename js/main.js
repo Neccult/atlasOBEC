@@ -1594,6 +1594,10 @@ $(document).ready(function(){
 
             if(setor != url['cad']) {
 
+
+                if(eixoAtual == 2 && url['var'] == 19 && url['mec'] == 1)
+                    return;
+
                 var newSCCSrc = $("#view_box_scc").attr("src");
                 var change = newSCCSrc.match(/uf=([0-9]*)/);
 
