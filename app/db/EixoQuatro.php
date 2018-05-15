@@ -224,7 +224,7 @@ class EixoQuatro {
 
 		self::connect();
         $stmt = mysqli_stmt_init(self::$conn);
-        
+        $params = [];
 		if($mundo == 0){
 			$query = "SELECT * FROM ".self::$table." AS ex"
 				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro"
@@ -232,36 +232,36 @@ class EixoQuatro {
                 ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
 				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
 				." WHERE ex.Numero = ?";
+
+            $params[] = $uf;
+            $params[] = $cad;
+            $params[] = $tipo;
+            $params[] = $var;
+
+            if ($anos > 0) {
+                $query .= " AND ex.Ano = ?";
+                $params[] = $anos;
+            }
             
-            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "" ;
             if ($slc == 0) {
                 $query .= " AND ex.Consumo = 1";
             } else {
                 $query .= " AND ex.Consumo = 0";
             }
             
-            if ($anos > 0) {
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'sssss',
-                        $uf,
-                        $cad,
-                        $tipo,
-                        $var,
-                        $anos
-                    );
-                }
-            } else {
-                if ($stmt->prepare($query)) {
-                    $stmt->bind_param(
-                        'ssss',
-                        $uf,
-                        $cad,
-                        $tipo,
-                        $var
-                    );      
-                }
-            }            
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            $allObjects = [];
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
             
 		} else {
 			$query = "SELECT * FROM ".self::$table." AS ex"
@@ -269,17 +269,26 @@ class EixoQuatro {
 				." JOIN UF AS uf ON uf.idUF = ex.idUF"
 				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
 				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
-				." WHERE ex.Numero = ".$var;
+				." WHERE ex.Numero = ?";
 
-            if ($stmt->prepare($query)) {
-                $stmt->bind_param(
-                    'ssss',
-                    $parceiro,
-                    $cad,
-                    $tipo,
-                    $var
-                );      
-            }                        
+            $params[] = $parceiro;
+            $params[] = $cad;
+            $params[] = $tipo;
+            $params[] = $var;
+
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            $allObjects = [];
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
 		}
 
         $stmt->execute();
