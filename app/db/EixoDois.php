@@ -231,7 +231,7 @@ class EixoDois {
 
         if ($anos > 0) {
             $query .= " AND Ano = ?";
-            $params[] = $anos;
+
         }
         
         if($ocp == 0) {
@@ -274,6 +274,7 @@ class EixoDois {
 
         self::connect();
         $stmt = mysqli_stmt_init(self::$conn);
+        $params = [];
         
         if($ocp == 3){
             $query = "SELECT * FROM ".self::$table." AS ex"
@@ -285,25 +286,17 @@ class EixoDois {
                 ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
                 ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
                 ." WHERE ex.Numero = ?"
+                ." AND Sindical = 0"
+                ." AND Previdencia = 0"
+                ." AND Formalidade = 0"
                 ." AND ex.Sexo IS NULL";
 
-            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            if (mysqli_stmt_prepare($stmt, $query)) {
-                if ($anos > 0) {
-                    $stmt->bind_param(
-                        'sss',
-                        $cad,
-                        $var,
-                        $anos
-                    );
-                    
-                } else {
-                    $stmt->bind_param(
-                        'ss',
-                        $cad,
-                        $var
-                    );
-                }
+            $params[] = $cad;
+            $params[] = $var;
+
+            if ($anos > 0) {
+                $query .= " AND ex.Ano = ?";
+                $params[] = $anos;
             }
             
         } else {
@@ -315,35 +308,81 @@ class EixoDois {
                 ." JOIN Escolaridade AS esc ON esc.idEscolaridade = ex.idEscolaridade AND esc.idEscolaridade = 0"
                 ." JOIN Etinia AS etn ON etn.idEtinia = ex.idEtinia AND etn.idEtinia = 0"
                 ." JOIN Idade AS idd ON idd.idIdade = ex.idIdade AND idd.idIdade = 0"
+
+                   
                 ." WHERE ex.Numero = ?"
+                ." AND Sindical = 0"
+                ." AND Previdencia = 0"
+                ." AND Formalidade = 0"
                 ." AND ex.Sexo IS NULL";
-
-            $query .= ($anos > 0) ? " AND ex.Ano = ?" : "";
-            if (mysqli_stmt_prepare($stmt, $query)) {
-                if ($anos > 0) {
-                    $stmt->bind_param(
-                        'ssss',
-                        $cad,
-                        $ocp,
-                        $var,
-                        $anos
-                    );
-                    
-                } else {
-                    $stmt->bind_param(
-                        'sss',
-                        $cad,
-                        $ocp,
-                        $var
-                    );
-                }
-            }           
         };
-
-        $stmt->execute();
-        $allObjects = self::fetch_results($stmt);
-                
+        
+        $params[] = $cad;
+        $params[] = $ocp;
+        $params[] = $var;
+        
+        if ($anos > 0) {
+            $query .= " AND ex.Ano = ?";
+            $params[] = $anos;
+        }
+            
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr .= 's';
+        }
+        $allObjects = [];
+        
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param($paramsStr, ...$params);
+            
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
         if($ocp == 3){
+            $params = [];
+            $query_max_ocp1 = "SELECT MAX(Valor) as Valor FROM ".self::$table
+                            ." WHERE idOcupacao=1"
+                            ." AND Numero =?"
+                            ." AND Ano=?"
+                            ." AND idUF = 0"
+                            ." GROUP BY Ano";
+           
+            $params[] = $var;
+            $params[] = $anos;
+
+            $paramsStr = '';
+            foreach ($params as $param) {
+                $paramsStr .= 's';
+            }
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $obj1 = self::fetch_results($stmt)[0];
+            }
+
+            
+            $query_max_ocp2 = "SELECT MAX(Valor) as Valor FROM ".self::$table
+                            ." WHERE idOcupacao=2"
+                            ." AND Numero =?"
+                            ." AND Ano=?"
+                            ." AND idUF = 0"
+                            ." GROUP BY Ano";
+
+            
+            $stmt = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                $stmt->bind_param($paramsStr, ...$params);
+                
+                $stmt->execute();
+                $obj2 = self::fetch_results($stmt)[0];
+            }            
+            $brasil_total = $obj1->Valor - $obj2->Valor;
+            
             $result_aux = array();
             $value_aux = array();
             $percent_aux = array();
@@ -351,7 +390,7 @@ class EixoDois {
                 if(!isset($value_aux[$data->idUF])) $value_aux[$data->idUF] = 0;
                 if(!isset($percent_aux[$data->idUF])) $percent_aux[$data->idUF] = 0;
                 $value_aux[$data->idUF] += $data->Valor;
-                $percent_aux[$data->idUF] += $data->Percentual;
+                $percent_aux[$data->idUF] += $data->Valor/$brasil_total;
                 $result_aux[$data->idUF] = $data;
                 $result_aux[$data->idUF]->Valor = $value_aux[$data->idUF];
                 $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
@@ -475,7 +514,7 @@ class EixoDois {
             $allObjects = self::fetch_results($stmt);
         }
         
-        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5|| $var) && $uos == 1)
+        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5) && $uos == 1)
             || ($ocp == 0 && $desag == 0 && $cad == 0 && $uos != 1)
             || (($var == 4 || $var == 5) && $ocp == 3 && $desag != 0)){
 

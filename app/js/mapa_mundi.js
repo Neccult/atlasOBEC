@@ -49,11 +49,16 @@ function destacaPrc(prcID) {
 }
 // import colors.json file
 var colorJSON;
+
+$.ajaxSetup({async: false});
 d3.json('data/colors.json', function(error, data) {
     if(error) throw error;
 
     colorJSON = data;
 });
+
+$.ajaxSetup({async: true});
+
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
 var gdpData;
@@ -115,6 +120,8 @@ $.get("./db/json_mapa.php"+config, function(data) {
         arrayColors = $.map(colorJSON["cadeias"][cad]["gradient"], function(value, index) {
             return [value];
         });
+        console.log(maxValue)
+
         $('#corpo-mundi').vectorMap({
             map: 'continents_mill',
             backgroundColor:  "#f0f0f0",
@@ -122,7 +129,6 @@ $.get("./db/json_mapa.php"+config, function(data) {
                 regions: [{
                     values: gdpAux,
                     scale: arrayColors,
-                    normalizeFunction: 'polynomial'
                 }]
             },
             onRegionTipShow: function(e, el, code){
@@ -135,17 +141,30 @@ $.get("./db/json_mapa.php"+config, function(data) {
             },
             onRegionClick: function(e, el, code){
 
-                var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-                var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']);
-                $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-                $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+                if(window.parent.innerWidth <= 1199)
+                    return;
 
-                // console.log(gdpData[convertCode(el)])
+                var newBarraSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
+                newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+                var newDonutSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
+                newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+                $(window.parent.document).find("#view_box_scc").attr("src", newBarraSrc);
+                $(window.parent.document).find("#view_box_barras").attr("src", newDonutSrc);
+
                 setIntegerValueData(gdpData[convertCode(el)], eixo, vrv);
+
                 if(cad == 0){
                     setPercentValueData(gdpData[convertCode(el)], eixo, vrv);
+                }
+
+                if(url['var'] == 1  || url['var'] == 13){
+
+                    if(gdpData[0].valor == 0)
+                        valor = 0
+                    else
+                        valor = gdpData[convertCode(el)].valor/gdpData[0].valor;
+
+                    setPercentValueData({percentual: valor}, eixo, vrv);
                 }
 
                 setPrcTitle(gdpData[convertCode(el)].prc)
@@ -158,16 +177,27 @@ $.get("./db/json_mapa.php"+config, function(data) {
 
 
         dom.forEach(function(dominio, i) {
-            // console.log(arrayColors);
+            console.log(arrayColors[i]);
             if(i == 0) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
             else if(i == 8) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
             else $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");
             $("#corpo-mundi").children().first().css("margin-bottom", "35px");
         });
+        
+        //setPercentValueData({percentual: 1}, eixo, vrv);
+        //if(url['prc'] != 0 ){
+        destacaPrc(unconvertCode(parseInt(url['prc'])));
 
-        if(url['prc'] != 0 ){
-            destacaPrc(unconvertCode(parseInt(url['prc'])));
-        }
+
+        if(gdpData[0].valor == 0)
+            valor = 0
+        else
+            valor = gdpData[url['prc']].valor/gdpData[0].valor;
+
+        setPercentValueData({percentual: valor}, eixo, vrv);
+
+        //}
+
 
 
     });

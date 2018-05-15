@@ -69,11 +69,8 @@ function nodeHeight(d){ return d.y1 - d.y0; }
 /*==================*/
 
 /* importa arquivo de cores */
-var colorJSON;
-d3.json('data/colors.json', function(error, data) {
-	if(error) throw error;
-	colorJSON = data;
-});
+
+
 
 
 // import pt-br.json file for get the title
@@ -84,6 +81,16 @@ d3.json('data/pt-br.json', function(error, data) {
     textJSON = data;
 
 });
+
+$.ajaxSetup({async: false});
+
+
+var colorJSON;
+d3.json('data/colors.json', function(error, data) {
+    if(error) throw error;
+    colorJSON = data;
+});
+$.ajaxSetup({async: true});
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	format = d3.format(",d");
@@ -117,10 +124,10 @@ var treemap = d3.treemap()
     .paddingInner(1);
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&deg="+deg+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
-
+/*
 $.get("./db/json_treemap_scc.php"+config, function(data) {
-    // console.log(data);
-});
+     console.log(data);
+});*/
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
     $('#loading').fadeOut('fast');
@@ -187,6 +194,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 				.on("mouseout", tooltipInstance.hideTooltip)
 				.on("click", function(d) {
 
+                    if(window.parent.innerWidth <= 1199)
+                        return;
+
 				    if(url['ocp'] == 0) {
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
@@ -195,26 +205,34 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
                         $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-                        $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
-                        enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
+                        // $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
+                        // enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
 
                         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
-                        cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-valor");
-
-
+                        cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-value");
                         cad_percent_uf = ($('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf"))
+                        percent_deg = 0
 
-                        // if(url['deg'] == 0){
-                        //     cad_percent_uf = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf");
-                        // }
-                        // else{
-                        //     cad_percent_uf = getSoma(d.data.colorId);
-                        // }
-                        configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf);
-                        if(deg  == 0) $(window.parent.document).find(".cad-title").first().html(d.data.name);
+
+                        if(deg !=0){
+                            // cad_percent_uf = (d.data.size/d.parent.parent.parent.value)
+                            console.log(d)
+                            cad_percent_uf = (d.data.size/d.parent.parent.value)
+                            percent_deg = (d.data.size/d.parent.parent.parent.value)
+                            $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+                        }
+                        else{
+                            $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+                        }
+
+                        configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf, percent_deg);
+                        if(deg  == 0)
+                            $(window.parent.document).find(".cad-title").first().html(d.data.name);
                         // else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
-                        else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
+                        else
+                            $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
+
 				    }
                     else {
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
@@ -234,6 +252,8 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                             cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent")
                         }
                         else{
+                            $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+
                             cad_percent = d.data.percentual;
                             cad_percent_uf = getSoma(d.data.colorId);
                         }
@@ -414,6 +434,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                 .attr("data-percent", function(d) { return (d.parent.value/root.value); })
                 .attr("data-percent-uf", function(d) { return (d.data.size/root.value); })
                 .attr("data-deg", function(d) { return (d.parent.value); })
+                .attr("id-subdeg", function(d) { return d.data.desagreg})
                 .attr("id", function(d) { return d.data.id; })
                 .attr("width", function(d) { return nodeWidth(d); })
                 .attr("height", function(d) { return d.y1 - d.y0; })
@@ -719,10 +740,15 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
         var cad = 0;
 
+
+
         if(url['ocp'] == 0)
             cad = url['cad'];
         else
-            cad = parseInt(url['cad'])+1;
+        if(url['var'] == 1)
+            cad = parseInt(url['ocp']);
+        else
+            cad = parseInt(url['cad']);
 
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
@@ -730,7 +756,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-percent"),
             $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
-            $('svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),
+            $('svg').find('rect[data-legend="'+url['cad']+'"][id-subdeg="'+$(window.parent.document).find(".bread-select[data-id=deg]").val()+'"]').attr("data-percent-uf"),
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),
             chg);
     }

@@ -231,11 +231,13 @@ var path = d3.geoPath()
 
 // import colors.json file
 var colorJSON;
+$.ajaxSetup({async: false});
 d3.json('data/colors.json', function(error, data) {
   if(error) throw error;
 
   colorJSON = data;
 });
+$.ajaxSetup({async: true});
 
 // import pt-br.json file for get the title
 var textJSON;
@@ -245,10 +247,9 @@ d3.json('data/pt-br.json', function(error, data) {
 });
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
-/*
-$.get("./db/json_mapa.php"+config, function(data) {
-    console.log(data);
-});*/
+$.get('./db/json_mapa.php' + config, function(dado){
+    // console.log(dado)
+})
 //pre-load arquivos
 d3.queue()
 	.defer(d3.json, "./data/br-min.json")
@@ -413,6 +414,9 @@ function ready(error, br_states, mapa){
 		})
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
+
+            if(window.parent.innerWidth <= 1199)
+                return;
             
 			var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
             newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
@@ -433,8 +437,8 @@ function ready(error, br_states, mapa){
             //setIntegerValueData(dict[d.id], eixo, vrv);
            // if(url['cad'] == 0)
                 //setPercentValueData(dict[d.id], eixo, vrv);
-
-            configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
+            if(url['deg'] == 0)
+                configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
             setStateTitle(d['properties']['name']);
             
             updateIframe(url)
@@ -703,14 +707,21 @@ function legendaBinario(){
     }
     else{
         if(url['uf'] != 0) {
-            setPercentValueData(dict[url['uf']], eixo, vrv);
-            setIntegerValueData(dict[url['uf']], eixo, vrv);
+            if(url['deg'] == 0){
+                console.log(setPercentValueData(dict[url['uf']]))
+                setPercentValueData(dict[url['uf']], eixo, vrv);
+                setIntegerValueData(dict[url['uf']], eixo, vrv);
+            }
         }
 
 
         if(url['cad'] != 0 && url['uf'] != 0) {
-            setIntegerValueData(dict[url['uf']], eixo, vrv);
-            setPercentValueData(dict[url['uf']], eixo, vrv);
+
+            if(url['deg'] == 0){
+                setIntegerValueData(dict[url['uf']], eixo, vrv);
+                setPercentValueData(dict[url['uf']], eixo, vrv);
+            }
+                
         }
     }
 
@@ -724,10 +735,10 @@ function legendaBinario(){
 
 
 
-    if(eixo != 3 && eixo != 1 && eixo != 2){
-        $(window.parent.document).find(".integer-value").first().find(".description-number").html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
-    }
+    /*if(eixo != 3 && eixo != 1 && eixo != 2){
+        $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
+        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
+    }*/
 
     function loadTooltip(d, eixo, vrv){
 

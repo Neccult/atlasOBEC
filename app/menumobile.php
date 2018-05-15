@@ -245,15 +245,19 @@ switch($eixo) {
 
         </div>
 
-        <div class="row" id="barra-menu">
-            <div class="col-md-12">
-                 <button class="w3-button w3-white w3-xxlarge" onclick="hamburguer_click()">&#9776; </button><span class="menu-title">Menu</span>
-            </div>
+
+
+        <div class="header" id="barra-menu">
+             <button class="w3-button w3-white w3-xxlarge" onclick="hamburguer_click()">&#9776; </button><span class="menu-title">Menu</span>
         </div>
 
-
-
+        <div id="menu-mob-eixo" style="display: none">
+            <div class="eixo-mob" id="empreendimentos"><img id="empreendimentos" src="./images/empreendimentos-icon.png"></div>
+            <div class="eixo-mob" id="mercado"><img id="mercado" src="./images/mercado-icon.png"></div>
+            <div class="eixo-mob" id="politicas"><img id="politicas" src="./images/politicas-icon.png"></div>
+            <div class="eixo-mob" id="comercio"><img id="comercio" src="./images/comercio-icon.png"></div>
         </div>
+
         <script>
 
             $(function() {
@@ -262,11 +266,15 @@ switch($eixo) {
 
             $('#containerDesc').css("height", "auto");
             $('#containerDesc').css("top", "0");
+            $('#containerDados').css("height", "500px");
+            $('#containerTree').css("height", "500px");
             $('#containerTree').css("top", "0");
-             $('#containerDownload').css("display", "none");
+            $('#containerDownload').css("display", "block");
+            $('#containerDownload').css("top", "0");
+            $('#containerDownload').find("row").css("padding-left", "0");
 
             div1 = $('#containerMapa');
-            div2 = $('#containerDados');
+            div2 = $('#containerDesc');
 
             tdiv1 = div1.clone();
             tdiv2 = div2.clone();
@@ -279,7 +287,7 @@ switch($eixo) {
             }
 
             div1 = $('#containerBarra');
-            div2 = $('#containerDesc');
+            div2 = $('#containerMapa');
 
             tdiv1 = div1.clone();
             tdiv2 = div2.clone();
@@ -321,46 +329,27 @@ switch($eixo) {
 
             }
 
+            window.parent.onscroll = function() {myFunction()};
 
 
 
-                // var docViewTop = $(window).scrollTop();
-                // var docViewBottom = docViewTop + $(window).height();
-                //
-                // var elemTop = $("#barra-menu").offset().top;
-                // var elemBottom = elemTop + $("#barra-menu").height();
-                //
-                // return ((elemTop <= docViewBottom) && (elemTop >= docViewTop));
+            var menu = document.getElementById("barra-menu");
+            var sticky = menu.offsetTop;
 
-            function Utils() {
+            function myFunction() {
 
-            }
-
-            Utils.prototype = {
-                constructor: Utils,
-                isElementInView: function (element, fullyInView) {
-                    var pageTop = $(window).scrollTop();
-                    var pageBottom = pageTop + $(window).height();
-                    var elementTop = $(element).offset().top;
-                    var elementBottom = elementTop + $(element).height();
-
-                    if (fullyInView === true) {
-                        return ((pageTop < elementTop) && (pageBottom > elementBottom));
-                    } else {
-                        return ((elementTop <= pageBottom) && (elementBottom >= pageTop));
-                    }
+                // console.log(window.parent.pageYOffset)
+                if (window.parent.pageYOffset  >= window.parent.document.getElementById("section0").offsetHeight) {
+                    // $("#barra-menu").css("top", window.parent.pageYOffset - $(window.parent).height())
+                   // menu.classList.add("sticky");
+                } else {
+                    //menu.classList.remove("sticky");
                 }
-            };
-
-            var Utils = new Utils();
-
-            var isElementInView = Utils.isElementInView($('#barra-menu'), false);
-
-            if (isElementInView) {
-                console.log('in view');
-            } else {
-                console.log('out of view');
             }
+
+            $(document).on('click', ".eixo-mob", function(e){
+                parent.window.location = "page.php#"+$(this).attr("id");
+            });
 
 
 

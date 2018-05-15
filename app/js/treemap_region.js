@@ -305,6 +305,10 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 					})
 					.on("mouseout", tooltipInstance.hideTooltip)
 					.on("click", function(d) {
+
+                        if(window.parent.innerWidth <= 800)
+                            return;
+
 						var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
                         var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
