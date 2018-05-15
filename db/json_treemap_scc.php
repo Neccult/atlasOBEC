@@ -137,9 +137,9 @@ function getNamePorte($id) {
 
 function getNameSexo($id) {
     switch ($id) {
-        case 0:
-            return "Masculino";
         case 1:
+            return "Masculino";
+        case 0:
             return "Feminino";
     }
 }
@@ -229,7 +229,7 @@ function getNameSindical($id) {
 
 //Trata o sexo
 switch($sex) {
-    case "0":
+    case 0:
         $sex = NULL;
         break;
     case "1":
@@ -241,6 +241,7 @@ switch($sex) {
     default:
         $sex = NULL;
 }
+
 
 //Trata a modalidade
 switch($mod) {
@@ -338,7 +339,7 @@ else if($eixo == 1) {
                         $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                         $index = $tupla->idIdade;
                     }
-                    else if($sex != NULL) {
+                    else if($sex !== NULL) {
                         if($tupla->Sexo == 1) {
                             $treemap .= '{"name": "Masculino",';
                             $index = 1;
@@ -347,7 +348,6 @@ else if($eixo == 1) {
                             $treemap .= '{"name": "Feminino",';
                             $index = 2;
                         }
-                        
                     }
                     else $treemap .= '{"name": "' . getNameCadeia($tupla->idCadeia) . '",'; 
                     $treemap .= '"estado": "' . getNameUF($tupla->idUF) . '",  
@@ -369,7 +369,7 @@ else if($eixo == 1) {
                     $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                     $index = $tupla->idIdade;
                 }
-                else if($sex != NULL) {
+                else if($sex !== NULL) {
                     if($tupla->Sexo == 1) {
                         $treemap .= '{"name": "Masculino",';
                         $index = 1;
@@ -380,6 +380,7 @@ else if($eixo == 1) {
                     }
                 }
                 else $treemap .= '{"name": "' . getNameCadeia($tupla->idCadeia) . '",'; 
+                
                 $treemap .= '"estado": "' . getNameUF($tupla->idUF) . '",  
                 "percentual": "' . $tupla->Percentual . '",
                 "taxa": "' . $tupla->Taxa . '", 

@@ -124,10 +124,10 @@ var treemap = d3.treemap()
     .paddingInner(1);
 
 var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&deg="+deg+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
-
+/*
 $.get("./db/json_treemap_scc.php"+config, function(data) {
-     //console.log(data);
-});
+     console.log(data);
+});*/
 
 d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
     $('#loading').fadeOut('fast');
