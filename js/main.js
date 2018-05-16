@@ -1012,7 +1012,7 @@ Saída:
 function loadPage(){
 	newHash = window.location.hash.substring(1);
 	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<850)	menuView = 'menumobile.php?'+newHash+'=1';
+	if(windowWidth<1199)	menuView = 'menumobile.php?'+newHash+'=1';
 
 	if($("#menuvariaveis").length != 0) {
 	    $("#menuvariaveis").load(menuView, function(){
@@ -2072,6 +2072,9 @@ $(document).ready(function(){
                     $('.opt-select[data-id=deg]').val(0);
                 }
                 if(eixo_atual == 1){
+                    if(url['ocp'] > 0){
+                        updateDefaultOcupation()
+                    }
                     updateOcupacoes($(this).val());
                 }
 
