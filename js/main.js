@@ -308,7 +308,7 @@ function updateIframe(url){
 
             }
             else if(url['var'] == 17){
-                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO SIM-NÃO");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO DE ESTADOS QUE POSSUEM MECENATO ESTADUAL");
                 $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
             }
             else if (url['var'] ==  18 || url ['var'] == 19) {
@@ -519,6 +519,7 @@ Saída:
 function controlFilter(selectvalue, selectid, valueDesag){
 
 
+
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
     if(BarraSrc != undefined && BarraSrc != "no-view.html") var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
@@ -532,6 +533,7 @@ function controlFilter(selectvalue, selectid, valueDesag){
         var uf = 0;
     }
     /* se for PORTE x ATUAÇÃO */
+
 
     if(eixo == 2)
         return;
@@ -1156,6 +1158,10 @@ function expandMenuVariaveis(a) {
 function updateUrl() {
     var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
     $('.bread-select').each(function() {
+
+        if(eixo_atual == 2 && url['var'] == 18 && $(this).attr('data-id') == 'mec')
+            return;
+
         if($(this).attr('data-id') == "deg" && eixo_atual == 1)
             url[$(this).attr('data-id')] = $(this).find("option:selected").parent().val();
         else
@@ -1473,8 +1479,8 @@ function switchToSetores() {
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Sim <br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não <br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Possui <br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não Possui <br></span>");
 
 
 
@@ -1968,10 +1974,13 @@ $(document).ready(function(){
 
     $(document).on('change', ".bread-select", function(e){
         if($(this).attr("data-id") !== "eixo") {
+
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
 
             updateUrl();
-            
+
+
+
             if($(this).attr("data-id") === "typ") {
                 if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "none")
@@ -2008,8 +2017,13 @@ $(document).ready(function(){
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             
             if($(this).attr('data-id') =='var'){
-
-                console.log($('.percent-value').find(".box-dado").find('.number').first())
+                if(eixo_atual == 2 && url['var'] == 17){
+                    $(".font-title").css("display", "none")
+                    $(".value-info-title").css("display", "block")
+                } else {
+                    $(".font-title").css("display", "block")
+                    $(".value-info-title").css("display", "none")
+                }
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();

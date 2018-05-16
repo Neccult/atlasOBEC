@@ -1861,34 +1861,55 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
 
             string = "";
 
-            if(url['mec'] == 0 && tipo == "integer")
-                string = "em lojas ";
-            if(url['mec'] == 1 && tipo == "integer")
-                string = "por trabalhadores cadastrados "
+            if(url['mec'] == 1){
+                if(tipo == "integer"){
+                    string = " ";
+                }
+            }
 
-            if(prepos[nomeestado])
-                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
-            else
-                nomeestado = string + "DO BRASIL"
+            if(prepos[nomeestado]){
+                nomeestado = string + mapPronome(prepos[nomeestado], ['DA', 'DO', 'DE'], ['NA', 'NO', 'EM']) + ' ' +nomeestado;
+                if(tipo == "percent"){
+                    nomeestado = " DESDE O INÍCIO DO PROGRAMA (2013-2017) " +nomeestado;
+                }
+
+
+            }
+            else{
+                if(tipo == "percent"){
+                    nomeestado = string + "DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL "
+                }
+                else{
+                    nomeestado = string + "NO BRASIL"
+                }
+
+            }
 
         }
         else if(url['var'] == 19){
 
-            string = "";
 
-            if(url['mec'] == 0 && tipo == "integer")
-                string = "Empresas cadastradas ";
-            else if(url['mec'] == 0 && tipo == "percent")
-                string = "Empresas cadastradas desde o início do programa (2013-2017) ";
-            else if(url['mec'] == 1 && tipo == "integer")
-                string = "Trabalhadores cadastrados ";
-            else if(url['mec'] == 1 && tipo == "percent")
-                string = "Trabalhadores cadastrados desde o início do programa (2013-2017) ";
+            if(url['mec'] == 0){
+                if(tipo == "integer"){
+                    string =  "";
+                }
+                else if (tipo == "percent"){
+                    string =  "";
+                }
+            }
+            else{
+                if(tipo == "integer"){
+                    string =  "";
+                }
+                else if (tipo == "percent"){
+                    string =  "";
+                }
+            }
 
             if(prepos[nomeestado])
-                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
+                nomeestado = string + mapPronome(prepos[nomeestado], ['DA', 'DE', 'DO'], ['NA', 'EM', 'NO']) + ' ' +nomeestado
             else
-                nomeestado = string + "NO BRASIL"
+                nomeestado = "NO BRASIL"
 
         }
         else{
@@ -1900,7 +1921,7 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
             }
         }
 
-        nomeestado = mapPronome(nomeestado, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
+        nomeestado = mapPronome(nomeestado, [/^DE/, /^DA/, /^DO/], ["EM", "NA", "NO"])
        
     }
 
@@ -2000,7 +2021,8 @@ function descByMOD(eixo, desc){
         return
 }
 
-function descByCAD(eixo, desc, tag){
+function descByCAD(eixo, desc, tag, tipo){
+
 
 
     prepos = {
@@ -2040,19 +2062,47 @@ function descByCAD(eixo, desc, tag){
         }
         else if(url['var'] == 18){
 
-            string = "no setor ";
+            if(url['mec'] == 0){        //RECEBEDORA
+                if(tipo == "integer"){ //INTEIRO
+                    nome =  " EM LOJAS DO SETOR " +  prepos[url['cad']] +  " " + cads[url['cad']] + " "+ " CADASTRADAS";
+                }
+                else{ //ACUMULADO
+                    nome = " EM LOJAS DO SETOR " +  prepos[url['cad']] + " " + cads[url['cad']] + " CADASTRADAS";
 
-            if(url['mec'] == 1 && tipo == "integer")
-                string = "em lojas do setor "
+                }
+            }
+            if(url['mec'] == 1){        //TRABALHADOR
+                if(tipo == "integer"){
+                    string = " "
+                    nome =  "EM LOJAS DO SETOR " + cads[url['cad']] + " "+ "POR TRABALHADORES CADASTRADOS ";
+                }
+                else{
 
-            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+                }
+            }
+
 
         }
         else if(url['var'] == 19){
 
-            string = "no setor ";
+            console.log(cads[url['cad']])
 
-            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+            if(url['mec'] == 0){
+                if(tipo == "integer"){
+                    nome =  "EMPRESAS DO SETOR " +  cads[url['cad']] + " CADASTRADAS NO PROGRAMA VALE-CULTURA ";
+                }
+                else if (tipo == "percent"){
+                    nome =  "EMPRESAS DO SETOR "+ cads[url['cad']] + " CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                }
+            }
+            else{
+                if(tipo == "integer"){
+                    nome =  "";
+                }
+                else if (tipo == "percent"){
+                    nome =  "";
+                }
+            }
 
         }
         else if(eixo == 2 && (url['var'] == 4)){
@@ -2068,7 +2118,7 @@ function descByCAD(eixo, desc, tag){
 
     }
     else {
-        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14 || url['var'] ==18 || url['var'] ==19 ))
+        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14))
             nome = "";
         else if(eixo == 2 && (url['var'] == 8 || url['var'] == 9))
             if(tag == '[CAD]')
@@ -2081,6 +2131,47 @@ function descByCAD(eixo, desc, tag){
             } 
             else 
                 nome = "DO SETOR " + cads[url['cad']];
+
+        }
+        else if(eixo == 2){
+
+            if(url['var'] == 18){
+
+                if(url['mec'] == 0){        //RECEBEDORA
+                    if(tipo == "integer"){  //INTEIRO
+                        nome =  "em lojas cadastradas ";
+                    }
+                    else{ //ACUMULADO
+                        nome = "";
+                    }
+                }
+                else if(url['mec'] == 1){        //TRABALHADOR
+                    if(tipo == "integer"){
+                        nome = "  ";
+                    }
+                    else{
+                        nome = " ";
+                    }
+                }
+            }
+            else if(url['var'] == 19){
+                if(url['mec'] == 0){
+                    if(tipo == "integer"){
+                        nome =  "EMPRESAS CADASTRADAS NO PROGRAMA VALE-CULTURA ";
+                    }
+                    else if (tipo == "percent"){
+                        nome =  "EMPRESAS CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                    }
+                }
+                else{
+                    if(tipo == "integer"){
+                        nome =  "TRABALHADORES CADASTRADOS NO PROGRAMA VALE-CULTURA ";
+                    }
+                    else if (tipo == "percent"){
+                        nome =  "TRABALHADORES CADASTRADOS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                    }
+                }
+            }
         }
         else
             nome = "Culturais e Criativos";
@@ -2143,6 +2234,7 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
     // [prt] - prt
     // [ano] - ano
 
+
     ocp = $(window.parent.document).find("iframe#view_box_barras").attr("src").match(/ocp=[0-9]/)[0].split("=")[1]
 
     if(desc == undefined){
@@ -2173,23 +2265,25 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
         desc =  descByPFJ(eixo, desc)
     }
     if(desc.includes('[cad]')){
-        if(ocp == 0 && url['prt'] > 0)
-            desc =  descByCAD(eixo, desc, '[cad]')
+
+        if(ocp == 0 && url['prt'] > 0 || (eixo == 2 && url['var'] >= 18))
+            desc =  descByCAD(eixo, desc, '[cad]', tipo)
         else{
-            if(ocp == 0){ 
+            if(ocp == 0){
+
                 desc = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
             }
             if(ocp == 1){
                 desc = desc.replace("[cad]", "EM ATIVIDADES RELACIONADAS À CULTURA")
-        
+
             }
             if(ocp == 2){
                 desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS")
-        
+
             }
             if(ocp == 3){
                 desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS E CRIATIVAS")
-        
+
             }
         }
             

@@ -69,12 +69,12 @@ function ready(json){
             if(eixo == 2 && vrv == 17){
                 if(d.data.tipo == "Não"){
                     tooltipInstance.showTooltip(d.data, [
-                        ["title", d.data.tipo]
+                        ["title", "Não Possui"]
                     ]);
                 }
                 else{
                     tooltipInstance.showTooltip(d.data, [
-                        ["title", d.data.tipo],
+                        ["title", "Possui"],
                         ["", formatTextVrv(d.data.total, 2, vrv)]
                     ]);
                 }

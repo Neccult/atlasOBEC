@@ -77,7 +77,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     })
 
      $.get('./db/json_barras.php' + config, function(dado){
-         console.log(dado)
+         // console.log(dado)
      })
    
     d3.json('data/colors.json', function (error, data) {
