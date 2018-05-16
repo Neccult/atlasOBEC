@@ -1125,6 +1125,11 @@ body.contraste{
 	color: #FFF;
 }
 
+button.opt.active{
+	pointer-events: none;
+  	cursor: default;
+}
+
 
 /*==== responsivo ====*/
 @media (max-width: 1499px){
