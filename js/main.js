@@ -311,9 +311,20 @@ function updateIframe(url){
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO DE ESTADOS QUE POSSUEM MECENATO ESTADUAL");
                 $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
             }
-            else if (url['var'] ==  18 || url ['var'] == 19) {
+            else if (url['var'] ==  18) {
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADO POR SETOR");
                 $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+            }
+            else if (url['var'] ==  19) {
+                if(url['mec'] == 0){
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADO POR SETOR");
+                    $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                }
+                else if(url['mec'] == 1){
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("");
+                    $('iframe[id="view_box_barras"]').attr('src', 'no-view.html');
+                }
+
             }
             else if(url['var'] == 10){
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=1");
@@ -1799,9 +1810,11 @@ $(document).ready(function(){
 
             if($(this).attr("id") === "recebedora") {
                 if(url['mec'] != 0){
-                    if(url['var'] == 19){
-                        var cads = getCadsByMenuDonut();
 
+                    if(url['var'] == 19){
+                        $("#menu-view-donut").css("display", "block")
+
+                        var cads = getCadsByMenuDonut();
                         updateBreadcrumbSetores(cads)
                     }
 
@@ -1815,8 +1828,11 @@ $(document).ready(function(){
             }
             else {
                 if(url['mec'] != 1){
-                    if(url['var'] == 19)
+
+                    if(url['var'] == 19){
+                        $("#menu-view-donut").css("display", "none")
                         updateBreadcrumbSetores([{id: 0, nome: "Todos"}])
+                    }
 
                     updateUrl();
                     url['mec'] = 1;
