@@ -329,6 +329,9 @@ switch($eixo) {
 
             }
 
+            if(window.parent.innerWidth <= 1199)
+                $("#barra-menu").css("display", "none");
+
             window.parent.onscroll = function() {myFunction()};
 
 
