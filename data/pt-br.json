@@ -108,7 +108,7 @@
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
-				"mapa_valores": "Valores em pecentual.",
+				"mapa_valores": "Valores em percentual.",
 				"treemap_scc_valores": "Valores em pecentual.",
 				"barras_valores": "Valores em pecentual."
 			},
@@ -938,8 +938,8 @@
 			{
 				"id":"18",
 				"title":"<span>CONSUMO VIA VALE-CULTURA<span>",
-				"desc_int":"consumidos via cartão Vale-Cultura [uf] [cad]",
-				"desc_percent": "Total consumido desde o início do programa (2013-2017) [uf] [cad]",
+				"desc_int":"consumidos via cartão Vale-Cultura [cad] [uf] ",
+				"desc_percent": "Total consumido [cad] [uf] ",
 				"desc_var_mapa": "Valor do consumo realizado por meio do cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa recebedora onde o cartão foi utilizado.",
 				"desc":"",
 				"sufixo_valor":"",
@@ -955,8 +955,8 @@
 			{
 				"id":"19",
 				"title":"<span>AGENTES DO VALE-CULTURA<span>",
-				"desc_int":"[uf] [cad]",
-				"desc_percent": "[uf] [cad]",
+				"desc_int":"[cad] [uf]",
+				"desc_percent": "[cad] [uf]",
 				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
 				"desc":"",
 				"fontes":"COORDENAÇÃO GERAL DO PROGRAMA CULTURA DO TRABALHADOR (SEFIC-MINC)",
@@ -1343,9 +1343,9 @@
 			{
 				"id":"17",
 				"title":"<span>Fomento Público Estadual à Cultura<span>",
-				"desc_int":"",
+				"desc_int":"FINANCIADOS POR MEIO DE MECANISMOS DE MECENATO ESTADUAL [uf]",
 				"desc_percent": "",
-				"desc_var_mapa": "A variável demonstra os estados que possuem fomento a nível estadual em três perspectivas: Editais Estaduais, Mecenato Estadual e Crédito Especial. Dentro dessas perspectivas, a variável ainda demonstra o valor - conforme informado por cada Estado - para o ano selecionado.",
+				"desc_var_mapa": "A variável demonstra os estados que possuem fomento em nível estadual em duas perspectivas: Editais Estaduais e Mecenato Estadual. Dentro dessas perspectivas, a variável ainda demonstra o valor - conforme informado por cada Estado - para o ano selecionado e a soma dos valores das Unidades Federativas disponíveis para cada ano.",
 				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
@@ -1355,7 +1355,9 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+				"fontes": "",
+				"mapa_valores": "Observação: Valor total referente à soma dos valores enviados pelas Unidades Federativas brasileiras. Algumas Unidades Federativas que possuem esse mecanismo de financiamento não enviaram dados."
 			}
 
 		],
