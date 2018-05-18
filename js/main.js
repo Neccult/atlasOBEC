@@ -7,6 +7,11 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
     anos_default = JSON.parse(data);
 });
 
+//TEMPORARIO enquanto não está funcionando
+if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 3)
+    $('.bread-select[data-id=var]').find("option[value=5]").prop("disabled", true)
+else if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 2)
+    $('.bread-select[data-id=var]').find("option[value=15]").prop("disabled", true)
 //$.ajaxSetup({async: true});
 /*-----------------------------------------------------------------------------
 Função: controlVar
@@ -47,7 +52,12 @@ function getAnoDefault(eixo_atual){
                 index_ocp = url['ocp']
             url['ano'] = anos_default[url['var']][index_ocp]; break;
 
-        case 2: url['ano'] = anos_default[url['var']][0]; break;
+        case 2: 
+            if(url['var'] != 17) 
+                url['ano'] = anos_default[url['var']][0]; 
+            else
+                url['ano'] = 2017
+            break;
         case 3:
         if(url['var'] >= 11)
             url['slc'] = 0
@@ -163,8 +173,6 @@ function updateIframe(url){
                 } else{
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
 
-                    $('#mapa').addClass("active");
-                    $('#treemap_region').removeClass("active");
                 }
                 $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
             }
@@ -205,7 +213,7 @@ function updateIframe(url){
             else if(url['var'] == 15){
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=0");
                 $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO POR UF");
+                $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
 
             }
             else if (url['var'] > 14 || url['var'] == 10) {
@@ -271,6 +279,7 @@ function updateIframe(url){
         $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
         if(eixoAtual == 0) {
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             if (url['var'] > 9) {
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
                 $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -278,6 +287,7 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 1) {
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             if (url['var'] > 11) {
                 if(url['slc'] == 0) {
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
@@ -293,12 +303,12 @@ function updateIframe(url){
             }
         }
         else if(eixoAtual == 2){
-            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
 
             if (url ['var'] == 15) {
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=1");
                 $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO POR SETOR");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
 
             }
             else if(url['var'] == 16){
@@ -312,12 +322,12 @@ function updateIframe(url){
                 $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
             }
             else if (url['var'] ==  18) {
-                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADO POR SETOR");
+                $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADA POR SETOR");
                 $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
             }
             else if (url['var'] ==  19) {
                 if(url['mec'] == 0){
-                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADO POR SETOR");
+                    $('iframe[id="view_box_barras"]').parent().find(".view-title").html("PROPORÇÃO ACUMULADA POR SETOR");
                     $('iframe[id="view_box_barras"]').attr('src', 'donut.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 }
                 else if(url['mec'] == 1){
@@ -334,7 +344,7 @@ function updateIframe(url){
             }
         }
         else if( eixoAtual == 3){
-            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+            $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
 
             if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12){
                 $('iframe[id="view_box_barras"]').css('display', 'block')
@@ -383,9 +393,9 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
                     if(url['uf'] == 0)
-                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
                     else
-                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS DE "+getNomeUF(url['uf']).toUpperCase());
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
 
                 }
         }
@@ -428,11 +438,11 @@ function updateIframe(url){
             }
             else {
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
                 if(url['uf'] == 0)
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
                 else
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS DE "+getNomeUF(url['uf']));
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
             }
         }
         else if(eixoAtual == 2){
@@ -442,7 +452,7 @@ function updateIframe(url){
             }
             else if(url['var'] ==  17){
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             }
 
             else if (url['var'] == 15 || url['var'] == 16 ) {
@@ -452,7 +462,7 @@ function updateIframe(url){
             else if (url['var'] == 18 || url['var'] == 19 ) {
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             }
             else if(url['var'] == 10){
                 $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -461,7 +471,7 @@ function updateIframe(url){
             else{
                 $('iframe[id="view_box_scc"]').css('display', 'block')
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
             }
 
         }
@@ -479,7 +489,7 @@ function updateIframe(url){
             }
 
             else if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12 ){
-                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA");
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
 
@@ -490,6 +500,8 @@ function updateIframe(url){
 
         }
         changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
+
+        updateTitleBox();
     }
 }
 
@@ -546,14 +558,14 @@ function controlFilter(selectvalue, selectid, valueDesag){
     /* se for PORTE x ATUAÇÃO */
 
 
-    if(eixo == 2)
-        return;
-
+        
 
     if(selectid==='var') {
 
         var save_ocp = url['ocp'];
+        var save_mec = url['mec'];
         defaultUrl();
+        url['mec'] = save_mec;
         url['ocp'] = save_ocp;
         controlAno($('.opt-select[data-id="ano"]'));
         controlAno($('.bread-select[data-id="ano"]'));
@@ -567,6 +579,8 @@ function controlFilter(selectvalue, selectid, valueDesag){
         url['deg'] = save_deg;
         url['uf'] = save_uf;
     }
+
+
 
     if(window.location.hash === "#mercado" && selectid === 'deg') {
 		if(selectvalue==='0') {
@@ -1000,6 +1014,59 @@ function loadResult(){
 
 
 }
+/*-----------------------------------------------------------------------------
+Função: loadMobile
+    arruma as ordens das visualizações para mobile (1199px);
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+
+function loadMobile(){
+
+    $(function() {
+        $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
+    });
+
+    $('#containerDesc').css("height", "auto");
+    $('#containerDesc').css("top", "0");
+    $('#containerDados').css("height", "500px");
+    $('#containerTree').css("height", "500px");
+    $('#containerTree').css("top", "0");
+    $('#containerDownload').css("display", "block");
+    $('#containerDownload').css("top", "0");
+    $('#containerDownload').find("row").css("padding-left", "0");
+
+
+    div1 = $('#containerMapa');
+    div2 = $('#containerDesc');
+
+    tdiv1 = div1.clone();
+    tdiv2 = div2.clone();
+
+    if(!div2.is(':empty')){
+        div1.replaceWith(tdiv2);
+        div2.replaceWith(tdiv1);
+
+        tdiv1.addClass("replaced");
+    }
+
+    div1 = $('#containerBarra');
+    div2 = $('#containerMapa');
+
+    tdiv1 = div1.clone();
+    tdiv2 = div2.clone();
+
+    if(!div2.is(':empty')){
+        div1.replaceWith(tdiv2);
+        div2.replaceWith(tdiv1);
+
+        tdiv1.addClass("replaced");
+    }
+
+
+}
 
 /*-----------------------------------------------------------------------------
 Função: loadPage
@@ -1012,9 +1079,17 @@ Saída:
 function loadPage(){
 	newHash = window.location.hash.substring(1);
 	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<1199)	menuView = 'menumobile.php?'+newHash+'=1';
+	if(windowWidth<1199){
+        menuView = 'menumobile.php?'+newHash+'=1';
+        $('#section0').css("display", "none")
 
-	if($("#menuvariaveis").length != 0) {
+        loadMobile();
+
+
+    }
+
+
+    if($("#menuvariaveis").length != 0) {
 	    $("#menuvariaveis").load(menuView, function(){
             if(url['var']!=='' && pageTitle!==''){
                 loadResult();
@@ -1579,16 +1654,14 @@ function switchToOcupations() {
 /*====== 
 	documento pronto
 ======*/
-$(document).ready(function(){
-    // TODO Verificar se ainda necessário (Novo design não vai ter a principio)
-    //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-	//$(".opt").mouseenter(function() {
-		//$("#desc-item").html($(this).attr("data-desc"));
-	//});
 
-    //$(".opt").mouseleave(function() {
-        //$("#desc-item").html("Passe o mouse por cima de algum filtro para obter informações.");
-    //});
+
+$(document).ready(function(){
+
+   // if($(this).find("#resultado_view")[0]){
+   //      console.log(url)
+   //  }
+
 	$(window).on('hashchange', function() {
         loadPage();
         window.location.href = window.location.pathname+window.location.hash;
@@ -1599,7 +1672,8 @@ $(document).ready(function(){
 		//controlPageWidth();
 	});
 
-	/*=== selecionar variável ===*/
+
+        /*=== selecionar variável ===*/
 
 	$(document).on('click', ".scc", function(){
 
@@ -1631,8 +1705,9 @@ $(document).ready(function(){
                     url['esc'] = 0;
                     url['cor'] = 0;
                 }
-
+                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
+
 
                 //enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false, url['slc'], url);
 
@@ -1643,7 +1718,7 @@ $(document).ready(function(){
                     $(".cad-title").first().html(textJSON.select.cad[setor].name);
 
                 });
-                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+
             }
         }
         else if(eixo == 2 && url['var'] < 15){
@@ -1657,6 +1732,7 @@ $(document).ready(function(){
                 url['cad'] = setor;
                 url['uf'] = changeUF[1];
 
+                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
 
                 d3.json('data/pt-br.json', function (error, data) {
@@ -1667,12 +1743,12 @@ $(document).ready(function(){
 
                 });
 
-                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
             }
         }
         else if(eixo == 0 && url['var'] < 12){
 
         }
+
     });
 
     $(document).on('click', ".ocp", function(){
@@ -1809,6 +1885,7 @@ $(document).ready(function(){
         else if($(this).attr("id") == "recebedora" || $(this).attr("id") == "trabalhador"){
 
             if($(this).attr("id") === "recebedora") {
+
                 if(url['mec'] != 0){
 
                     if(url['var'] == 19){
@@ -1929,6 +2006,9 @@ $(document).ready(function(){
 
                 $('#bens').addClass("active");
                 $('#servicos').removeClass("active");
+
+
+
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val())
                 $('.bread-select[data-id=uf]').val(0);
 
@@ -1989,6 +2069,7 @@ $(document).ready(function(){
 	});
 
     $(document).on('change', ".bread-select", function(e){
+
         if($(this).attr("data-id") !== "eixo") {
 
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
@@ -2045,6 +2126,9 @@ $(document).ready(function(){
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
 
+                $('#recebedora').addClass("active");
+                $('#trabalhador').removeClass("active");
+
                 if(url['ocp'] == 0){
                     switchToSetores(); 
                     $('#setor').addClass("active");
@@ -2067,6 +2151,8 @@ $(document).ready(function(){
                 updateBreadUF(eixo_atual, url['var']);
                 
                 if(eixo_atual == 0){
+                    $('#mapa').addClass("active");
+                    $('#treemap_region').removeClass("active");
                     $('.bread-select[data-id=deg]').val(0);
 
                     $('.opt-select[data-id=deg]').val(0);
@@ -2085,6 +2171,7 @@ $(document).ready(function(){
                         $("#btn-opt").find(".col-btn").css("display", "block")
                     else
                         $("#btn-opt").find(".col-btn").css("display", "none")
+
 
                 }
 
@@ -2126,6 +2213,9 @@ $(document).ready(function(){
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
                 
                 url['cad'] = ($(this).val())
+                /*if(eixo_atual == 2 && (vrv == 18 || vrv == 19)){
+                    updateTitleBox(SETORES)
+                }*/
 
             }
             if($(this).attr("data-id") === "ocp") {
@@ -2133,12 +2223,12 @@ $(document).ready(function(){
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
             updateIframe(url);
-
         }
         else {
             parent.window.location = "page.php#"+$(this).val();
         }
     });
+
 
     $(document).on('change', ".bread-eixo", function(){
         parent.window.location = "page.php#"+$(this).val();
@@ -2171,10 +2261,6 @@ $(document).ready(function(){
     updateIframe(url);
 
 
-
-    if(typeof(setMaxFontSize) === typeof(Function)){
-        setMaxFontSize($(window.parent.document).find(".integer-value").first().find(".number").first())
-
-    }
-
 });
+
+

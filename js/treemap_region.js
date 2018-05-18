@@ -307,7 +307,9 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 					.on("click", function(d) {
 
                         if(window.parent.innerWidth <= 800)
-                            return;
+							return;
+						
+						updateTitleClickMapa(d.data.estado)
 
 						var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+ufId(d.data.name));
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);

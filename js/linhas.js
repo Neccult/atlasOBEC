@@ -33,25 +33,10 @@ d3.json('data/colors.json', function (error, data) {
 $.get("./db/json_linhas.php"+config, function(data) {
     // console.log(data)
 });
-/*
-function getIdCadeia(nomecadeia){
-    switch(nomecadeia){
-        case "Editorial":
-        case "Cultura Digital":
-        case "Arquitetura e Design":
-        case "Artes Cênicas e Espetáculos":
-        case "Editorial":
-        case "Editorial":
-        case "Editorial":
-        case "Editorial":
-        case "Editorial":
-    }
-}
-*/
+
 
 function getRegexDesag(desag){
 
-    // console.log(desag)
 
     switch (desag){
         case 1:
@@ -525,60 +510,6 @@ function analyze(error, data) {
     }
 
 
-
-    ///LEGENDA
-
-
-    // var fontColor = "#000"
-    //
-    // $.each( keys, function( i, deg ) {
-    //
-    //     tamanhoVetor = keys.length;
-    //
-    //     var height = 10;
-    //     var width = 10;
-    //
-    //     var widthTexto = 20;
-    //
-    //     var OffsetX = 90;
-    //
-    //     var tamanhoX = width + widthTexto;
-    //
-    //     var posX = chartWidth - OffsetX - tamanhoX*i;
-    //     var posY =  chartHeight*0.88;
-    //
-    //     svg.append("g")
-    //         .append("rect")
-    //         .attr("x", posX)
-    //         .attr("y", posY)
-    //         .attr("height", height)
-    //         .attr("width", width)
-    //         .style("fill", color(deg))
-    //         .style("strok   e-width", 1)
-    //         .style("stroke", color(deg))
-    //         .attr("scc", deg);
-    //
-    //     svg.selectAll("rect")
-    //         .on("mouseover", function (dados) {
-    //             tooltipInstance.showTooltip(dados, [
-    //                 ["title", $(this).attr("scc")]
-    //             ])
-    //         })
-    //         .on("mouseout", function () {
-    //             tooltipInstance.hideTooltip();
-    //         })
-    //
-    //
-    //     svg.append("text")
-    //         .attr("x", posX + widthTexto)
-    //         .attr("y", posY + 8)
-    //         .attr("fill", fontColor)
-    //         //.text(deg);
-    //
-    // });
-
-
-
     function color(deg){
         colors = {
             "Setor": "#071342",
@@ -671,9 +602,6 @@ function analyze(error, data) {
                 $( this ).css("opacity", "0.2")
         });
     }
-
-
-
 
 }
 
