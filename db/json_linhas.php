@@ -362,7 +362,7 @@ else if($eixo == 1 && ($var > 11)) {
         }
     }
     else{
-        for ($i = 0; $i <= 1; $i++) {
+        for ($ocp = 1; $ocp <= 2; $ocp++) {
 
             foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag, $ano) as $tupla) {
 
@@ -386,7 +386,7 @@ else if($eixo == 1 && ($var > 11)) {
                 }
 
                 $linhas[$id]['ano'] = (int)$tupla->Ano;
-                $linhas[$id][getNameSLC($i)] = (double)$tupla->Valor;
+                $linhas[$id][getNameSLC($ocp-1)] = (double)$tupla->Valor;
 
             }
         }

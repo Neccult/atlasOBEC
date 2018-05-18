@@ -394,7 +394,7 @@ class EixoDois {
             $query .= " AND idOcupacao = 2";
         }
         else if($ocp == 3){
-            $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
+            $query .= " AND (idOcupacao = 3)";
         }
 
         $var_single_deg = array(4, 5);
@@ -435,7 +435,7 @@ class EixoDois {
         }
 
 //        if($uos == 1)
-        //echo $query;
+//        echo $query;
 
         //$query .= " ORDER BY `Eixo_2`.`Ano` ASC";
 
@@ -446,9 +446,7 @@ class EixoDois {
         while($obj = mysqli_fetch_object($result, 'EixoDois')){
             $allObjects[] = $obj;
         }
-        if($ocp == 3 && $desag == 0 && !(($var == 4 || $var == 5) && $uos == 1)
-            || ($ocp == 0 && $desag == 0 && $cad == 0 && $uos != 1)
-            || (($var == 4 || $var == 5) && $ocp == 3 && $desag != 0)){
+        if(($ocp == 0 && $desag == 0 && $cad == 0 && $uos != 1)){
 
             $result_aux = array();
             $value_aux = array();
