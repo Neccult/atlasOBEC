@@ -330,7 +330,7 @@ button.opt:hover, button.opt.active{
 .number {
 	display: flex;
 	width: 100%;
-	font-size: 12px;
+	font-size: 10px;
 	margin-top: 15px;
 	color: #6DBFC9;
 	margin-bottom: 20px;
@@ -483,10 +483,20 @@ button.opt:hover, button.opt.active{
 
 #menuvariaveis {
 	margin-bottom:	20px;
+
 }
 
 .text-wrapper{
 	position: absolute;
+}
+
+#teste-menu-mob{
+	width: 100%;
+	height: 50px;
+	background-color: #2b542c;
+	position: fixed;
+	top: 0;
+	z-index: 999;
 }
 
 /* video bg */
@@ -1047,6 +1057,10 @@ select[disabled].bread-select{
 	-webkit-appearance:none; /* Safari and Chrome */
 	margin: 15px 0px;
 }
+.bread-select option[disabled]{
+	color: #bbb;
+}
+
 select[disabled].opt-select-title{
 	background-image: url('../images/arrow_pb.png');
 	background-color: #d4d4d4;
@@ -1140,6 +1154,25 @@ button.opt.active{
 
 /*==== responsivo ====*/
 @media (max-width: 1499px){
+	.menu-content{
+		font-size: 12px;
+		letter-spacing: 1px;
+	}
+	.menu-item .menu-content .square-icon, 
+	.menu-content .square-icon{
+		height: 55px;
+		width: 25px;
+	}
+	.menu-content .text{
+		margin: 10px 0px;
+	}
+
+	.description-number {
+		text-transform: uppercase;
+		font-size: 1vw;
+	}
+}
+@media (max-width: 1371px){
 	.menu-content{
 		font-size: 12px;
 		letter-spacing: 1px;
@@ -1410,7 +1443,7 @@ button.opt.active{
 		padding-left: 0px;
 	}
 
-	.results-content .container{
+	.results-content{
 		padding: 0;
 	}
 
@@ -1440,6 +1473,7 @@ button.opt.active{
 	.w3-sidebar{
 		height:auto;
 		top: 50px;
+		left: 0px;
 		min-height: 200px;
 		width:100%;
 		background-color:#fff;
@@ -1495,13 +1529,15 @@ button.opt.active{
 	.w3-btn,.w3-button{
 		border:none;
 		display:inline-block;
-		padding:8px 16px;
+		padding: 0 16px;
 		vertical-align:middle;
 		overflow:hidden;
 		text-decoration:none;
 		color:#f0f0f0;
 		background-color:inherit;
 		cursor:pointer;
+		font-size: 30px;
+		height: 100%;
 		white-space:nowrap
 	}
 
@@ -1512,14 +1548,10 @@ button.opt.active{
 		top:0;
 		width: 100%;
 		text-align: right;
+		height: 50px;
 
 	}
-	.w3-button:hover{color:#000!important;}
 
-	.w3-tiny{font-size:10px!important}.w3-small{font-size:12px!important}.w3-medium{font-size:15px!important}.w3-large{font-size:18px!important}
-
-
-	.w3-xlarge{font-size:24px!important}.w3-xxlarge{font-size:36px!important}.w3-xxxlarge{font-size:48px!important}.w3-jumbo{font-size:64px!important}
 
 	.menu-title{
 		float: right;
@@ -1531,29 +1563,35 @@ button.opt.active{
 	}
 
 	#barra-menu{
-
+		position: fixed;
+		width: 100%;
+		left: 0;
+		top: 0;
 	}
+
+	#resultado_view{
+	}
+
 
 	.header{
 		color: #f1f1f1;
 		height: 50px;
-		background-color: #616161	;
+		background-color: #616161;
 		padding-top: 2%;
 		top: 0;
 		width: 100%;
+		position: fixed;
+		z-index: 999;
 
 	}
 
-	.sticky {
-		float: none;
-
-		position: fixed !important;
-		top: 0px;
-		left: 0px;
-		z-index: 999;
-		width: 100%;
+	.sticky{
+		top: 0;
 		height: 50px;
-		background-color: red;
+		left: 0;
+		position: fixed;
+		right: 0;
+		z-index: 100;
 	}
 
 
@@ -1742,6 +1780,10 @@ button.opt.active{
 		padding-left: 10%;
 	}
 
+	.container{
+		padding-top: 40px;
+	}
+
 
 	#view-boxes{
 		padding-left: 5%;
@@ -1821,8 +1863,9 @@ button.opt.active{
 @media (max-width: 499px) {
 
 
-	.description-number{
+	.integer-value .description-number{
 		font-size: 4vw;
+		line-height: 20px;
 	}
 
 	.percent-value .description-number{
