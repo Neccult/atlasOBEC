@@ -13,7 +13,7 @@ function getSoma(barraId) {
     });
     return soma;
 }
-
+updateTitleClickSCC()
 function destacaBarra(barraId, stacked = false) {
     i = 0;
     $("rect").each(function() {
@@ -77,7 +77,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     })
 
      $.get('./db/json_barras.php' + config, function(dado){
-         console.log(dado)
+         // console.log(dado)
      })
    
     d3.json('data/colors.json', function (error, data) {
@@ -140,10 +140,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             height = chartHeight - margin.top - margin.bottom;
 
         dados.value.push(0);
-        if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
+        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
         //valores maximos e minimos
         var minValue = d3.min(dados.value);
         var maxValue = d3.max(dados.value);
+        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
+
+        console.log(maxValue)
 
         //distribuicao de frequencias
         var quant = 9;
@@ -187,7 +190,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         var minDisplayValue = minValue > 0 ? minValue - (minValue / 10) : 0;
 
         if(eixo == 0 & (vrv >= 10 && vrv <= 13)) {
-            var tamanho = dados.value.length - 1;
+            var tamanho = dados.value.length;
         }
         else if(eixo == 0 && (vrv == 3)) {
             var tamanho = dados.value.length - 1;
@@ -213,7 +216,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
 
-        if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
+        // if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
         dados.value.pop();
 
         if(vrv === 3 && eixo == 0) {
@@ -829,6 +832,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         if(url['slc'] == 1){
             updateDataDesc()
+        }
+
+        if(vrv >= 11 && eixo == 1){
+            updateDataDescUoS(ocp);
         }
 
         function loadTooltip(d, i, eixo, vrv){

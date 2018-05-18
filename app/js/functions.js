@@ -1,8 +1,73 @@
 var data_desag;
+const SETORES = 1;
+const UFS = 2;
 
 $.get("./data/select-deg.json", function(data){
     data_desag = data;
 })
+
+
+function updateTitleClickSCC(){
+    scc_click = $(window.parent.document).find('.bread-select[data-id=cad] option:selected').text()
+
+    if(scc_click.match(/Todos/) != null){
+        scc_click = "NOS SETORES CULTURAIS E CRIATIVOS"
+    } else {
+        scc_click = "NO SETOR "+scc_click.toUpperCase()
+    }
+    title = $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title").text()
+    $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title")
+                            .text(title.replace(/NO SETOR .+|NOS SETORES CULTURAIS E CRIATIVOS/, scc_click))
+
+}
+
+function updateTitleClickMapa(uf_click){
+
+    uf_anterior = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').text()
+    
+    replace_uf = getPrepos(uf_anterior) + ' ' + uf_anterior.toUpperCase()
+    title = $(window.parent.document).find("iframe[id=view_box_scc]").parent().find(".view-title").text()
+    $(window.parent.document).find("iframe[id=view_box_scc]").parent().find(".view-title")
+                             .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
+
+    title = $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title").text()
+    $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title")
+                            .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
+
+}
+
+function updateTitleBox(){
+    
+    title_scc = $('iframe[id="view_box_scc"]')
+                    .parent()
+                    .find(".view-title")
+                    .text();
+    title_barras = $('iframe[id="view_box_barras"]')
+                .parent()
+                .find(".view-title")
+                .text();
+    cad = $('.bread-select[data-id=cad] option:selected').text()
+
+    if(cad == ''){
+        cad = $('.bread-select[data-id=ocp] option:selected').text()  
+        cad = ""
+    } else {
+        if(cad.match(/Todos/) != null){
+            cad = "NOS SETORES CULTURAIS E CRIATIVOS"
+        } else {
+            cad = "NO SETOR "+cad.toUpperCase();
+        }
+    }
+    uf = $('.bread-select[data-id=uf] option:selected').text()
+
+    if(title_scc != undefined)
+        $('iframe[id="view_box_scc"]').parent().find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+    
+    if(title_barras != undefined)
+        $('iframe[id="view_box_barras"]').parent().find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+}
+
+
 function changeDownloadURL(url, eixo){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
     $('#select-pdf input').attr("value", newURL)
@@ -24,7 +89,7 @@ function changeDownloadURL(url, eixo){
             case '0': diretorio = 'setorial/'; break;
             case '1': diretorio = 'atividades_relacionadas/'; break;
             case '2': diretorio = 'cultura/'; break;
-            case '3': diretorio = "atividades_relacionadas/"; break;
+            case '3': diretorio = "todos/"; break;
         }
     
     }
@@ -191,10 +256,11 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
             }
         }
         else{
-            if(url['deg'] == 0 || deg == 0){
-                if(url['ocp'] != 3)
-                    setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
 
+            if(url['deg'] == 0 || deg == 0){
+                if(url['ocp'] != 3){
+                    setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
+                }
             }
         }
 
@@ -435,6 +501,22 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
                 
         }
         else if(vrv == 17){
+
+        }
+        else if(vrv == 19 && url['mec'] == 1){
+
+            var soma = 0;
+
+            for(var key in dados.value){
+                if(key != "remove")
+                    soma += dados.value[key];
+            }
+
+            dados.valor = dados.value[indexAno]
+
+            setIntegerValueData(dados, eixo, vrv)
+            setPercentValueData({valor: formatTextVrv(soma, eixo, vrv)}, eixo, vrv)
+
 
         }
         else if(vrv == 10){
@@ -800,6 +882,7 @@ function updateBreadUF(eixo, vrv){
             $('.bread-select[data-id=uf]').prop("disabled", false);
             $('.bread-select[data-id=cad]').prop("disabled", false);
             $('.bread-select[data-id=deg]').prop("disabled", false);
+            
 
             if(vrv >= 4){
                 $('.bread-select[data-id=deg]').prop("disabled", true);
@@ -813,12 +896,14 @@ function updateBreadUF(eixo, vrv){
                 $('.bread-select[data-id=uf]').prop("disabled", false);
                 $('.bread-select[data-id=cad]').prop("disabled", false);
                 $('.bread-select[data-id=deg]').prop("disabled", false);
+                $('.bread-select[data-id=ocp]').prop("disabled", false);
             if(vrv == 9 || vrv == 11){
                 $('.bread-select[data-id=deg]').prop("disabled", true);
             }
             else if(vrv >= 12){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
                 $('.bread-select[data-id=cad]').prop("disabled", true);
+                $('.bread-select[data-id=ocp]').prop("disabled", true);
                 $('.bread-select[data-id=deg]').prop("disabled", true);
             } else if(vrv == 2){
                 //$('.bread-select[data-id=deg]').prop("disabled", true);
@@ -932,8 +1017,6 @@ function updateMecanismo(url, vrv){
     }
 
 
-    // alert(url['mec'])
-    // $("select[data-id='mec']").val(url['mec'])
 }
 
 function updateBreadcrumbSetores(cads){
@@ -945,6 +1028,26 @@ function updateBreadcrumbSetores(cads){
         $(".bread-select[data-id='cad']").append("<option value="+cads[i].id+">"+cads[i].nome+"</option>");
     }
 
+}
+
+function updateDefaultOcupation(){
+    $("select[data-id='ocp'] > option").each(function () {
+        $(this).remove();
+    });
+    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
+        $(".bread-select[data-id='ocp']").append("<option value='3'>Todos</option>");
+        $(".bread-select[data-id='ocp']").append("<option value='1'>Atividades Relacionadas</option>");
+        $(".bread-select[data-id='ocp']").append("<option value='2'>Cultura</option>");
+        $(".bread-select[data-id='ocp']").val(3)
+        url['ocp'] = 3
+
+    } else {
+        url['ocp'] = 1
+
+        $(".bread-select[data-id='ocp']").append("<option value='1'>Atividades Relacionadas</option>");
+        $(".bread-select[data-id='ocp']").append("<option value='2'>Cultura</option>");
+        $(".bread-select[data-id='ocp']").val(1)
+    }
 }
 
 function updateDefaultMec(vrv){
@@ -1399,6 +1502,10 @@ function updateDescPercentEmpreendimentos(desc, vrv, tipo){
     cad_val = $(window.parent.document).find(".bread-select[data-id=cad]").val();
     deg = $(window.parent.document).find(".bread-select[data-id=deg]").val();
 
+    if(desc == null){
+        return
+    }
+
     if(tipo == "setorial"){
         if(cad_val == 0)
             description = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
@@ -1663,7 +1770,7 @@ function setIntegerValueData(value, eixo, vrv) {
             literal = formatDecimalLimit(valor, 2);
         }
         if(eixo == 0 && url['var'] > 9){
-            literal = formatDecimalLimit(valor, 5);
+            literal = formatDecimalLimit(valor, 2);
         }
         if(eixo == 1 && url['var'] == 2){
             literal = formatDecimalLimit(valor, 4);
@@ -1683,6 +1790,7 @@ function setIntegerValueData(value, eixo, vrv) {
             }
             if(vrv <= 11)
                 updateDescMercado(result.desc_int, vrv, url['ocp']);
+           
         }
         if(eixo == 3){
             $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescComercio(result.desc_int, vrv, estado))
@@ -1745,7 +1853,7 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
                 nomeestado = "DO BRASIL"
             }
         }
-        else if(url['var'] == 4){
+        else if(url['var'] >= 4 && url['var'] <= 8){
             if(tipo == "integer"){
                 if(getPrepos(nomeestado)){
                     nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
@@ -1814,7 +1922,9 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
     else if(eixo == 2){
         if(url['var'] == 8 || url['var'] == 9) {
 
+
             if(getPrepos(nomeestado) && url['uf'] != 0){
+
 
                 if(tag == '{}')
                     nomeestado = ""
@@ -1861,34 +1971,55 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
 
             string = "";
 
-            if(url['mec'] == 0 && tipo == "integer")
-                string = "em lojas ";
-            if(url['mec'] == 1 && tipo == "integer")
-                string = "por trabalhadores cadastrados "
+            if(url['mec'] == 1){
+                if(tipo == "integer"){
+                    string = " ";
+                }
+            }
 
-            if(prepos[nomeestado])
-                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
-            else
-                nomeestado = string + "DO BRASIL"
+            if(prepos[nomeestado]){
+                nomeestado = string + mapPronome(prepos[nomeestado], ['DA', 'DO', 'DE'], ['NA', 'NO', 'EM']) + ' ' +nomeestado;
+                if(tipo == "percent"){
+                    nomeestado = " DESDE O INÍCIO DO PROGRAMA (2013-2017) " +nomeestado;
+                }
+
+
+            }
+            else{
+                if(tipo == "percent"){
+                    nomeestado = string + "DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL "
+                }
+                else{
+                    nomeestado = string + "NO BRASIL"
+                }
+
+            }
 
         }
         else if(url['var'] == 19){
 
-            string = "";
 
-            if(url['mec'] == 0 && tipo == "integer")
-                string = "Empresas cadastradas ";
-            else if(url['mec'] == 0 && tipo == "percent")
-                string = "Empresas cadastradas desde o início do programa (2013-2017) ";
-            else if(url['mec'] == 1 && tipo == "integer")
-                string = "Trabalhadores cadastrados ";
-            else if(url['mec'] == 1 && tipo == "percent")
-                string = "Trabalhadores cadastrados desde o início do programa (2013-2017) ";
+            if(url['mec'] == 0){
+                if(tipo == "integer"){
+                    string =  "";
+                }
+                else if (tipo == "percent"){
+                    string =  "";
+                }
+            }
+            else{
+                if(tipo == "integer"){
+                    string =  "";
+                }
+                else if (tipo == "percent"){
+                    string =  "";
+                }
+            }
 
             if(prepos[nomeestado])
-                nomeestado = string + prepos[nomeestado] + ' ' +nomeestado
+                nomeestado = string + mapPronome(prepos[nomeestado], ['DA', 'DE', 'DO'], ['NA', 'EM', 'NO']) + ' ' +nomeestado
             else
-                nomeestado = string + "NO BRASIL"
+                nomeestado = "NO BRASIL"
 
         }
         else{
@@ -1900,7 +2031,7 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
             }
         }
 
-        nomeestado = mapPronome(nomeestado, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
+        nomeestado = mapPronome(nomeestado, [/^DE/, /^DA/, /^DO/], ["EM", "NA", "NO"])
        
     }
 
@@ -2000,7 +2131,8 @@ function descByMOD(eixo, desc){
         return
 }
 
-function descByCAD(eixo, desc, tag){
+function descByCAD(eixo, desc, tag, tipo){
+
 
 
     prepos = {
@@ -2040,19 +2172,46 @@ function descByCAD(eixo, desc, tag){
         }
         else if(url['var'] == 18){
 
-            string = "no setor ";
+            if(url['mec'] == 0){        //RECEBEDORA
+                if(tipo == "integer"){ //INTEIRO
+                    nome =  " EM LOJAS DO SETOR " +  prepos[url['cad']] +  " " + cads[url['cad']] + " "+ " CADASTRADAS";
+                }
+                else{ //ACUMULADO
+                    nome = " EM LOJAS DO SETOR " +  prepos[url['cad']] + " " + cads[url['cad']] + " CADASTRADAS";
 
-            if(url['mec'] == 1 && tipo == "integer")
-                string = "em lojas do setor "
+                }
+            }
+            if(url['mec'] == 1){        //TRABALHADOR
+                if(tipo == "integer"){
+                    string = " "
+                    nome =  "EM LOJAS DO SETOR " + cads[url['cad']] + " "+ "POR TRABALHADORES CADASTRADOS ";
+                }
+                else{
 
-            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+                }
+            }
+
 
         }
         else if(url['var'] == 19){
 
-            string = "no setor ";
 
-            nome =  string + prepos[url['cad']] + " " + cads[url['cad']];
+            if(url['mec'] == 0){
+                if(tipo == "integer"){
+                    nome =  "EMPRESAS DO SETOR " +  cads[url['cad']] + " CADASTRADAS NO PROGRAMA VALE-CULTURA ";
+                }
+                else if (tipo == "percent"){
+                    nome =  "EMPRESAS DO SETOR "+ cads[url['cad']] + " CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                }
+            }
+            else{
+                if(tipo == "integer"){
+                    nome =  "";
+                }
+                else if (tipo == "percent"){
+                    nome =  "";
+                }
+            }
 
         }
         else if(eixo == 2 && (url['var'] == 4)){
@@ -2068,7 +2227,7 @@ function descByCAD(eixo, desc, tag){
 
     }
     else {
-        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14 || url['var'] ==18 || url['var'] ==19 ))
+        if(eixo == 2 && (url['var'] == 5 || url['var'] == 1 ||  url['var'] == 4 ||  url['var'] == 9 || url['var'] == 11 || url['var'] == 12 || url['var'] == 13 || url['var'] == 14))
             nome = "";
         else if(eixo == 2 && (url['var'] == 8 || url['var'] == 9))
             if(tag == '[CAD]')
@@ -2081,6 +2240,47 @@ function descByCAD(eixo, desc, tag){
             } 
             else 
                 nome = "DO SETOR " + cads[url['cad']];
+
+        }
+        else if(eixo == 2){
+
+            if(url['var'] == 18){
+
+                if(url['mec'] == 0){        //RECEBEDORA
+                    if(tipo == "integer"){  //INTEIRO
+                        nome =  "em lojas cadastradas ";
+                    }
+                    else{ //ACUMULADO
+                        nome = "";
+                    }
+                }
+                else if(url['mec'] == 1){        //TRABALHADOR
+                    if(tipo == "integer"){
+                        nome = "  ";
+                    }
+                    else{
+                        nome = " ";
+                    }
+                }
+            }
+            else if(url['var'] == 19){
+                if(url['mec'] == 0){
+                    if(tipo == "integer"){
+                        nome =  "EMPRESAS CADASTRADAS NO PROGRAMA VALE-CULTURA ";
+                    }
+                    else if (tipo == "percent"){
+                        nome =  "EMPRESAS CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                    }
+                }
+                else{
+                    if(tipo == "integer"){
+                        nome =  "TRABALHADORES CADASTRADOS NO PROGRAMA VALE-CULTURA ";
+                    }
+                    else if (tipo == "percent"){
+                        nome =  "TRABALHADORES CADASTRADOS DESDE O INÍCIO DO PROGRAMA (2013-2017) ";
+                    }
+                }
+            }
         }
         else
             nome = "Culturais e Criativos";
@@ -2143,11 +2343,15 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
     // [prt] - prt
     // [ano] - ano
 
-    ocp = $(window.parent.document).find("iframe#view_box_barras").attr("src").match(/ocp=[0-9]/)[0].split("=")[1]
+
+    if(eixo == 1){
+        ocp = $(window.parent.document).find("iframe#view_box_scc").attr("src").match(/ocp=[0-9]/)[0].split("=")[1]
+    }
 
     if(desc == undefined){
         return ;
     }
+
     if(desc.includes('[setores]')){
         if(ocp == 0)
             desc = desc.replace("[setores]", "DOS SETORES CULTURAIS E CRIATIVOS")
@@ -2173,24 +2377,25 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
         desc =  descByPFJ(eixo, desc)
     }
     if(desc.includes('[cad]')){
-        if(ocp == 0 && url['prt'] > 0)
-            desc =  descByCAD(eixo, desc, '[cad]')
+
+        if(ocp == 0 && url['deg'] > 0 ||  eixo == 2)
+            desc =  descByCAD(eixo, desc, '[cad]', tipo)
         else{
-            if(ocp == 0){ 
-                desc = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
+            if(eixo == 1){
+                if(ocp == 0 ){
+                    desc = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
+                }
+                if(ocp == 1){
+                    desc = desc.replace("[cad]", "EM ATIVIDADES RELACIONADAS À CULTURA")
+                }
+                if(ocp == 2){
+                    desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS")
+                }
+                if(ocp == 3){
+                    desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS E CRIATIVAS")
+                }
             }
-            if(ocp == 1){
-                desc = desc.replace("[cad]", "EM ATIVIDADES RELACIONADAS À CULTURA")
-        
-            }
-            if(ocp == 2){
-                desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS")
-        
-            }
-            if(ocp == 3){
-                desc = desc.replace("[cad]", "EM ATIVIDADES CULTURAIS E CRIATIVAS")
-        
-            }
+
         }
             
     }
@@ -2226,6 +2431,7 @@ function updateDescPercent(eixo, tipo, desc, nomeestado){
  */
 function setMaxFontSize(doc){
 
+
     if(doc == null){
         return
     }
@@ -2238,12 +2444,11 @@ function setMaxFontSize(doc){
     var tamanhoDiv = $(doc).width();
     var texto = $(doc).html();
 
+    // console.log(texto)
+
     if(texto == null){
         return
     }
-    // else{
-    //     texto = texto.toUpperCase();
-    // }
 
     $(doc).css('font-size', tamanho+'px');
 
@@ -2264,10 +2469,10 @@ function setMaxFontSize(doc){
 
         font = $(doc).css("font-weight")+" "+$(doc).css("font-size")+" "+ $(doc).css("font-family");
 
-        tamanhoString  = getTextWidth(texto.toUpperCase(), font) + texto.length * letterSpacing;
+        tamanhoString  = getTextWidth(texto.toUpperCase(), font) + texto.length  * letterSpacing;
 
     }
-   // console.log("tamanhoString: "+tamanhoString+"/ tamanhoDiv: "+tamanhoDiv)
+    // console.log("tamanhoString: "+tamanhoString+"/ tamanhoDiv: "+tamanhoDiv)
     $(doc).html(texto);
     return;
 
@@ -2325,7 +2530,7 @@ function setPercentValueData(value, eixo, vrv) {
             }
         }
         else if(vrv >= 10 && vrv <= 13){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 4));
+            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
         }
 
         var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
@@ -2449,7 +2654,7 @@ function formatTextVrv(value, eixo, vrv){
             else if(eixo == 1 && url['var'] == 9)
                 string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
             else if(eixo == 0 && url['var'] > 9)
-                string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
+                string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
             else
                 string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
 
@@ -2515,7 +2720,6 @@ function formatStringVrv(value, eixo, vrv){
     $.ajaxSetup({async: true});
 
     return string;
-    //alert(string);
 }
 
 /*
@@ -2560,15 +2764,15 @@ function updateDataDesc(vrv, uos, valor){
 /*
 * Essa função atualiza a descricao dos valores dados
 */
-function updateDataDescUoS(){
-
-	if($(window.parent.document).find(".integer-value").first().find(".description-number").html() != null){
-        var desc_int = $(window.parent.document).find(".integer-value").first().find(".description-number").html().replace("POR UF", "POR ATIVIDADES RELACIONADAS");
-        var desc_perc = $(window.parent.document).find(".percent-value").first().find(".description-number").html().replace("POR SETOR", "POR ATIVIDADES CULTURAIS");
-
-        $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(desc_int);
-        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(desc_perc);
-	}
+function updateDataDescUoS(ocp){
+    if(ocp > 0){
+        if($(window.parent.document).find(".integer-value").first().find(".description-number").html() != null){
+            var desc_int = $(window.parent.document).find(".integer-value").first().find(".description-number").first().html().toUpperCase().replace("POR UF", "POR ATIVIDADES RELACIONADAS");
+            var desc_perc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().html().toUpperCase().replace("POR SETOR", "POR ATIVIDADES CULTURAIS");
+            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(desc_int);
+            $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(desc_perc);
+        }
+    }
 
 }
 

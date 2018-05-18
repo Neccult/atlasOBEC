@@ -6,6 +6,10 @@ var svg = d3.select("#corpo").append("svg");
 svg.attr('width',$('.chart').width());
 svg.attr('height', $('.chart').height());
 
+if(window.parent.innerWidth >= 1199 && window.parent.innerWidth <= 1600){
+    svg.attr('height', 324);
+}
+
 
 svg = d3.select("svg"),
 	width = +svg.attr("width"),
@@ -196,8 +200,8 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
                     if(window.parent.innerWidth <= 1199)
                         return;
-
-				    if(url['ocp'] == 0) {
+                    
+                    if(url['ocp'] == 0) {
                         var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
                         newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
@@ -207,6 +211,7 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
                         // $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
                         // enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
+                        
                         destacaSetor(d.data.colorId);
 
                         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
@@ -217,7 +222,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 
                         if(deg !=0){
                             // cad_percent_uf = (d.data.size/d.parent.parent.parent.value)
-                            console.log(d)
                             cad_percent_uf = (d.data.size/d.parent.parent.value)
                             percent_deg = (d.data.size/d.parent.parent.parent.value)
                             $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
@@ -745,10 +749,11 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
         if(url['ocp'] == 0)
             cad = url['cad'];
         else
-        if(url['var'] == 1)
+        if(url['var'] == 1 || url['var'] == 7)
             cad = parseInt(url['ocp']);
         else
             cad = parseInt(url['cad']);
+
 
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
@@ -761,7 +766,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
             chg);
     }
     else if(eixo == 2){
-
 
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
