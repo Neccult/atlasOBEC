@@ -693,7 +693,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                 <!--=============== BARRAS! ================-->
                 <div id='containerBarra' class="col-md-5 col-sm-12" style="height: 330px;">
                     <div class="view-title">
-                        SÉRIE HISTÓRICA
+                        SÉRIE HISTÓRICA [uf] [cad]
                         <i class="plus"></i>
                     </div>
                     <?php if ($eixo == "comercio") {?>
@@ -725,7 +725,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                 <!--=============== DESCRICAO! ================-->
                 <div id='containerDesc' id="descricao" class="col-md-5 col-s-12" style="height: 210px; top: -220px; overflow: auto;">
                     <div class="view-title">
-                        DESCRIÇÃO DAS VARIÁVEIS
+                        DESCRIÇÃO DA VARIÁVEL
                     </div>
                     <div class="desc-var">
                         <?=$text['desc_var_mapa'];?>
@@ -905,13 +905,17 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
     url['slc'] = "<?php echo $slc; ?>";
     <?php } ?>
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
+
+
 </script>
 
 <script src="js/d3/d3.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/descricoes.js"></script>
 <script type="text/javascript" src="js/contraste.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+
 <script>
     $(document).ready(function() {
     });

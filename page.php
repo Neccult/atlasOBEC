@@ -96,6 +96,9 @@
 			<!-- se existem informações desta variável -->
 			<?php if(!empty($text)):?>
 				<section id="resultado">
+
+<!--                    <div id="menuvariaveis" ></div>-->
+
 					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 1650px;" scrolling="no"></iframe>
                     <script>
                         function result_mobile() {
@@ -208,8 +211,6 @@
                 });
             });
 
-
-
             $(document).ready(function() {
                 $('#fullpage').fullpage({
                     'verticalCentered': false,
@@ -225,6 +226,68 @@
                     scrollTop: $("#section1").offset().top
                 }, 1000);
             });
+
+            /// MENU MOBILE!
+
+            function hamburguer_click() {
+
+                var iframe = document.getElementById('resultado_view');
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+
+
+                if($(innerDoc).find("#mySidebar").attr("aberto") == 1){
+                    w3_close();
+                }
+                else{
+                    w3_open();
+                }
+            }
+
+            window.parent.onscroll = function() {
+                myFunction()
+            };
+
+
+            function myFunction() {
+                var iframe = document.getElementById('resultado_view');
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+                if($(innerDoc).find("#mySidebar").attr("aberto") == 1){
+                    w3_close();
+                    // window.document.addEventListener('touchmove', function(e){ e.preventDefault(); });
+                    // $(window.document).bind('touchmove', function(e){e.preventDefault()})
+                    // $(innerDoc).find("#mySidebar").css("top", window.parent.pageYOffset+50);
+                }
+            }
+
+            $("#view-boxes").on('click', function(){
+
+                var iframe = document.getElementById('resultado_view');
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+                if($(innerDoc).find("#mySidebar").attr("aberto", 1)){
+                    w3_close();
+                }
+            });
+
+            function w3_open() {
+
+                var iframe = document.getElementById('resultado_view');
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+                $(innerDoc).find("#mySidebar").css("display", "block");
+                $(innerDoc).find("#mySidebar").css("top", window.parent.pageYOffset+50);
+                $(innerDoc).find("#mySidebar").attr("aberto", 1);
+
+            }
+            function w3_close() {
+                var iframe = document.getElementById('resultado_view');
+                var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+                $(innerDoc).find("#mySidebar").css("display", "none");
+                $(innerDoc).find("#mySidebar").attr("aberto", 0);
+
+            }
 
 
         </script>
