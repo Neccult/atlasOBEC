@@ -1,0 +1,1570 @@
+{
+
+	"var":
+	[	
+		[
+			{
+				"id":"1",
+				"primeira":[
+					{"": "EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": "EMPRESAS CULTURAIS E CRIATIVAS [deg]"},
+					{"us": "EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": "EMPRESAS CULTURAIS E CRIATIVAS [deg] [uf]"},
+					{"sd": "EMPRESAS DO SETOR [cad] [deg] NO BRASIL"},
+					{"usd": "EMPRESAS DO SETOR [cad] [deg] [uf]"}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+					{"u": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+					{"s": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+					{"d": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+					{"us": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+					{"ud": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+					{"sd": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+					{"usd": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [uf]"}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [deg] [uf]"},
+					{"sd": ""},
+					{"usd": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [uf]"}
+				]
+			},
+			{
+				"id":"2",
+				"primeira":[
+					{"": "DO TOTAL DE EMPRESAS DO BRASIL"},
+					{"u": "DO TOTAL DE EMPRESAS [uf]"},
+					{"s": "DO TOTAL DE EMPRESAS DO BRASIL"},
+					{"d": "DO TOTAL DE EMPRESAS [deg] DO BRASIL"},
+					{"us": "DO TOTAL DE EMPRESAS [uf]"},
+					{"ud": "DO TOTAL DE EMPRESAS [deg] [uf]"},
+					{"sd": "DO TOTAL DE EMPRESAS [deg] DO BRASIL"},
+					{"usd": "DO TOTAL DE EMPRESAS [deg] [uf]"}
+				]
+			},
+			{
+				"id":"3",
+				"primeira":[
+					{"": "DE VARIAÇÃO NO TOTAL DE EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL [ano]"},
+					{"u": "DE VARIAÇÃO NO TOTAL DE EMPRESAS CULTURAIS E CRIATIVAS [uf] [ano]"},
+					{"s": "DE VARIAÇÃO NO TOTAL DE EMPRESAS DO SETOR [cad] DO BRASIL [ano]"},
+					{"d": "DE VARIAÇÃO NO TOTAL DE EMPRESAS CULTURAIS E CRIATIVAS [deg] DO BRASIL [ano]"},
+					{"us": "DE VARIAÇÃO NO TOTAL DE EMPRESAS DO SETOR [cad] [uf] [ano]"},
+					{"ud": "DE VARIAÇÃO NO TOTAL DE EMPRESAS CULTURAIS E CRIATIVAS [deg] [uf] [ano]"},
+					{"sd": "DE VARIAÇÃO NO TOTAL DE EMPRESAS DO SETOR [cad] [deg] DO BRASIL [ano]"},
+					{"usd": "DE VARIAÇÃO NO TOTAL DE EMPRESAS DO SETOR [cad] [deg] [uf] [ano]"}
+				]
+			},
+			{
+				"id":"4",
+				"primeira":[
+					{"": "DE RECEITA TOTAL BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "DE RECEITA TOTAL BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "DE RECEITA TOTAL BRUTA DAS EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": ""},
+					{"us": "DE RECEITA TOTAL BRUTA DAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE RECEITA BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DO TOTAL DE RECEITA BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"s": "DO TOTAL DE RECEITA BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"d": ""},
+					{"us": "DO TOTAL DE RECEITA BRUTA DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE RECEITA BRUTA DAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"5",
+				"primeira":[
+					{"": "DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": ""},
+					{"us": "DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DO TOTAL DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"s": "DO TOTAL DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"d": ""},
+					{"us": "DO TOTAL DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE RECEITA OPERACIONAL LÍQUIDA DAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"6",
+				"primeira":[
+					{"": "DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "DE CUSTO DAS EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": ""},
+					{"us": "DE CUSTO DAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DO TOTAL DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"s": "DO TOTAL DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"d": ""},
+					{"us": "DO TOTAL DE CUSTO DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE CUSTO DAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"7",
+				"primeira":[
+					{"": "DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "DE LUCRO DAS EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": ""},
+					{"us": "DE LUCRO DAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DO TOTAL DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"s": "DO TOTAL DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"d": ""},
+					{"us": "DO TOTAL DE LUCRO DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE LUCRO DAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"8",
+				"primeira":[
+					{"": "VALOR ADICIONADO PELAS EMPRESAS CULTURAIS E CRIATIVAS NO BRASIL"},
+					{"u": "VALOR ADICIONADO PELAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "VALOR ADICIONADO PELAS EMPRESAS DO SETOR [cad] NO BRASIL"},
+					{"d": ""},
+					{"us": "VALOR ADICIONADO PELAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"s": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"d": ""},
+					{"us": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"terceira":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": "DO TOTAL DE VALOR ADICIONADO DAS EMPRESAS DO SETOR [cad] DO BRASIL"}
+				]
+			},
+			{
+				"id":"9",
+				"primeira":[
+					{"": "DE VALOR ADICIONADO/PIB DO BRASIL PELAS EMPRESAS CULTURAIS E CRIATIVAS DO BRASIL"},
+					{"u": "DE VALOR ADICIONADO/PIB {uf} PELAS EMPRESAS CULTURAIS E CRIATIVAS [uf]"},
+					{"s": "DE VALOR ADICIONADO/PIB DO BRASIL PELAS EMPRESAS DO SETOR [cad] DO BRASIL"},
+					{"d": ""},
+					{"us": "DE VALOR ADICIONADO/PIB {uf} PELAS EMPRESAS DO SETOR [cad] [uf]"},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": ""},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"10",
+				"primeira":[
+					{"": "IHH DO TOTAL DE EMPRESAS POR UF"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "IHH DO TOTAL DE EMPRESAS POR SETOR"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"11",
+				"primeira":[
+					{"": "IHH DO VALOR ADICIONADO POR UF"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "IHH DO VALOR ADICIONADO POR SETOR"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"12",
+				"primeira":[
+					{"": "C4 DE CONCENTRAÇÃO DO TOTAL DE EMPRESAS POR UF"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "C4 DE CONCENTRAÇÃO DO TOTAL DE EMPRESAS POR SETOR"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			},
+			{
+				"id":"13",
+				"primeira":[
+					{"": "C4 DE CONCENTRAÇÃO DO VALOR ADICIONADO POR UF"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				],
+				"segunda":[
+					{"": "C4 DE CONCENTRAÇÃO DO VALOR ADICIONADO POR SETOR"},
+					{"u": ""},
+					{"s": ""},
+					{"d": ""},
+					{"us": ""},
+					{"ud": ""},
+					{"sd": ""},
+					{"usd": ""}
+				]
+			}
+		],
+		[
+			{
+				"id":"1",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "TRABALHADORES NOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "TRABALHADORES NOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "TRABALHADORES NO SETOR [cad] NO BRASIL"},
+							{"d": "TRABALHADORES NOS SETORES CULTURAIS E CRIATIVOS [deg] DO BRASIL"},
+							{"us": "TRABALHADORES NO SETOR [cad] [uf]"},
+							{"ud": "TRABALHADORES NOS SETORES CULTURAIS E CRIATIVOS [deg] [uf]"},
+							{"sd": "TRABALHADORES NO SETOR [cad] [deg] NO BRASIL"},
+							{"usd": "TRABALHADORES NO SETOR [cad] [deg] [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"s": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS NO BRASIL"},
+							{"d": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"us": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"ud": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"sd": "DO TOTAL DE TRABALHADORES DO SETOR [cad] DO BRASIL"},
+							{"usd": "DO TOTAL DE TRABALHADORES DO SETOR [cad] [uf]"}
+						],
+						"terceira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"ud": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"sd": ""},
+							{"usd": "DO TOTAL DE TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"}
+						]
+					},
+					{
+						"primeira":[
+							{"": "OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"u": "OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS [uf]"},
+							{"s": "OCUPADOS [cad] NO BRASIL"},
+							{"d": "OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS [deg] DO BRASIL"},
+							{"us": "OCUPADOS [cad] [uf]"},
+							{"ud": "OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS [deg] DO BRASIL"},
+							{"sd": "OCUPADOS [cad] [deg] NO BRASIL"},
+							{"usd": "OCUPADOS [cad] [deg] [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"u": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"s": "DO TOTAL DE OCUPADOS [cad] NO BRASIL"},
+							{"d": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"us": "DO TOTAL DE OCUPADOS [cad] NO BRASIL"},
+							{"ud": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"sd": "DO TOTAL DE OCUPADOS [cad] NO BRASIL"},
+							{"usd": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS [uf]"}
+						],
+						"terceira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": "DO TOTAL DE OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"}
+						]
+					}
+
+				]
+			},
+			{
+				"id":"2",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "DE PARTICIPAÇÃO DO EMPREGO NOS SETORES CULTURAIS E CRIATIVOS NO EMPREGO TOTAL"},
+							{"u": "DE PARTICIPAÇÃO DO EMPREGO NOS SETORES CULTURAIS E CRIATIVOS NO EMPREGO TOTAL"},
+							{"s": "DE PARTICIPAÇÃO DO EMPREGO NO SETOR [cad] NO EMPREGO TOTAL"},
+							{"d": "DE PARTICIPAÇÃO DO EMPREGO NOS SETORES CULTURAIS E CRIATIVOS NO EMPREGO TOTAL"},
+							{"us": "DE PARTICIPAÇÃO DO EMPREGO NO SETOR [cad] NO EMPREGO TOTAL"},
+							{"ud": "DE PARTICIPAÇÃO DO EMPREGO NOS SETORES CULTURAIS E CRIATIVOS NO EMPREGO TOTAL"},
+							{"sd": "DE PARTICIPAÇÃO DO EMPREGO NO SETOR [cad] NO EMPREGO TOTAL"},
+							{"usd": "DE PARTICIPAÇÃO DO EMPREGO NO SETOR [cad] NO EMPREGO TOTAL"}
+						],
+						"segunda":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"terceira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": "DE PARTICIPAÇÃO DOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS NO EMPREGO TOTAL"},
+							{"u": "DE PARTICIPAÇÃO DOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS NO EMPREGO TOTAL"},
+							{"s": "DE PARTICIPAÇÃO DOS OCUPADOS [cad] NO EMPREGO TOTAL"},
+							{"d": "DE PARTICIPAÇÃO DOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS NO EMPREGO TOTAL"},
+							{"us": "DE PARTICIPAÇÃO DOS OCUPADOS [cad] NO EMPREGO TOTAL"},
+							{"ud": "DE PARTICIPAÇÃO DOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS NO EMPREGO TOTAL"},
+							{"sd": "DE PARTICIPAÇÃO DOS OCUPADOS [cad] NO EMPREGO TOTAL"},
+							{"usd": "DE PARTICIPAÇÃO DOS OCUPADOS [cad] NO EMPREGO TOTAL"}
+						],
+						"segunda":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+			},
+			{
+				"id":"4",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES DOS SETOR ARTES CÊNICAS E ESPETÁCULOS NO BRASIL"},
+							{"d": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES [deg] DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"us": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES DOS SETOR [cad] [uf]"},
+							{"ud": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES [deg] DOS SETORES CULTURAIS E CRIATIVOS DE EMPRESAS [uf]"},
+							{"sd": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES [deg] DO SETOR [cad] NO BRASIL"},
+							{"usd": "DE REMUNERAÇÃO MÉDIA DOS TRABALHADORES [deg] DO SETOR [cad] [uf]"}
+						],
+						"segunda":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": ""},
+							{"u": ""},
+							{"s": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [cad] NO BRASIL"},
+							{"d": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [deg] [cad]  NO BRASIL"},
+							{"us": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [cad] [uf]"},
+							{"ud": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [deg] [cad] NO BRASIL"},
+							{"sd": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [deg] [cad] NO BRASIL"},
+							{"usd": "DE REMUNERAÇÃO MÉDIA DOS OCUPADOS [deg] [cad] [uf]"}
+						],
+						"segunda":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"terceira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"5",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "POR HORA TRABALHADA NOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "POR HORA TRABALHADA NOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "POR HORA TRABALHADA NO SETOR [cad] NO BRASIL"},
+							{"d": "POR HORA TRABALHADA NOS SETORES CULTURAIS E CRIATIVOS [deg] DO BRASIL"},
+							{"us": "POR HORA TRABALHADA NO SETOR [cad] [uf]"},
+							{"ud": "POR HORA TRABALHADA NOS SETORES CULTURAIS E CRIATIVOS [deg] [uf]"},
+							{"sd": "POR HORA TRABALHADA NO SETOR [cad] [deg] NO BRASIL"},
+							{"usd": "POR HORA TRABALHADA NO SETOR [cad] [deg] [uf]"}
+						]
+					},
+					{
+						"primeira":[
+							{"": ""},
+							{"u": ""},
+							{"s": "POR HORA TRABALHADA [cad] NO BRASIL"},
+							{"d": ""},
+							{"us": "POR HORA TRABALHADA [cad] [uf]"},
+							{"ud": "POR HORA TRABALHADA [cad] [deg] NO BRASIL"},
+							{"sd": ""},
+							{"usd": "POR HORA TRABALHADA [cad] [deg] [uf]"}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"6",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "HORAS SEMANAIS MÉDIAS DE TRABALHO NOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "HORAS SEMANAIS MÉDIAS DE TRABALHO NOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "HORAS SEMANAIS MÉDIAS DE TRABALHO NO SETOR [cad] NO BRASIL"},
+							{"d": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] NOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"us": "HORAS SEMANAIS MÉDIAS DE TRABALHO NO SETOR [cad] [uf]"},
+							{"ud": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] NOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"sd": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] [cad] NO BRASIL"},
+							{"usd": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] [cad] [uf]"}
+						]
+					},
+					{
+						"primeira":[
+							{"": ""},
+							{"u": ""},
+							{"s": "HORAS SEMANAIS MÉDIAS DE TRABALHO [cad] NO BRASIL"},
+							{"d": ""},
+							{"us": "HORAS SEMANAIS MÉDIAS DE TRABALHO [cad] [uf]"},
+							{"ud": ""},
+							{"sd": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] [cad] NO BRASIL"},
+							{"usd": "HORAS SEMANAIS MÉDIAS DE TRABALHO [deg] [cad] [uf]"}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"7",
+				"ocp": [
+					{
+						"primeira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"s": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"d": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"us": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"ud": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"sd": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"usd": "DA SOMA DE REMUNERAÇÕES PAGAS AOS TRABALHADORES DOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"}
+						]
+					},
+					{
+						"primeira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"u": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"s": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS [cad] DO BRASIL"},
+							{"d": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS DO BRASIL"},
+							{"us": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS [cad] [uf]"},
+							{"ud": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS EM ATIVIDADES CULTURAIS E CRIATIVAS [uf]"},
+							{"sd": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS [cad] DO BRASIL"},
+							{"usd": "DA SOMA DE REMUNERAÇÕES PAGAS AOS OCUPADOS [cad] [uf]"}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"9",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO EM SETORES CULTURAIS E CRIATIVOS"},
+							{"u": "DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO EM SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO NO SETOR [cad]"},
+							{"d": ""},
+							{"us": "DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO NO SETOR [cad] [uf]"},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+				]
+
+			},
+			{
+				"id":"11",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS NOS SETORES CULTURAIS E CRIATIVOS DO BRASIL"},
+							{"u": "DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS NOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS NO SETOR [cad] NO BRASIL"},
+							{"d": ""},
+							{"us": "DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS NO SETOR [cad] [uf]"},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"terceira":[
+							{"": ""},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+				]
+
+			},
+			{
+				"id":"12",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "CONCENTRAÇÃO DO EMPREGO POR UF"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "CONCENTRAÇÃO DO EMPREGO POR SETOR"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": "CONCENTRAÇÃO DO EMPREGO POR ATIVIDADES RELACIONADAS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "CONCENTRAÇÃO DO EMPREGO POR ATIVIDADES CULTURAIS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"13",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "CONCENTRAÇÃO DE MASSA SALARIAL POR UF"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "CONCENTRAÇÃO DE MASSA SALARIAL POR SETOR"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": "CONCENTRAÇÃO DE MASSA SALARIAL POR ATIVIDADES RELACIONADAS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "CONCENTRAÇÃO DE MASSA SALARIAL POR ATIVIDADES CULTURAIS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"14",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "IHH DE NÚMERO DO TRABALHADORES POR UF"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "IHH DE NÚMERO DO TRABALHADORES POR SETOR"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": "IHH DE NÚMERO DO TRABALHADORES POR ATIVIDADES RELACIONADAS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "IHH DE NÚMERO DO TRABALHADORES POR ATIVIDADES CULTURAIS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"15",
+				"ocp": [
+					{
+						"primeira":[
+							{"": "IHH DA MASSA DE RENDIMENTOS POR UF"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "IHH DA MASSA DE RENDIMENTOS POR SETOR"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					},
+					{
+						"primeira":[
+							{"": "IHH DA MASSA DE RENDIMENTOS POR ATIVIDADES RELACIONADAS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						],
+						"segunda":[
+							{"": "IHH DA MASSA DE RENDIMENTOS POR ATIVIDADES CULTURAIS"},
+							{"u": ""},
+							{"s": ""},
+							{"d": ""},
+							{"us": ""},
+							{"ud": ""},
+							{"sd": ""},
+							{"usd": ""}
+						]
+					}
+
+				]
+
+			}
+		],
+		[
+			{
+				"id":"1",
+				"slc": [
+					{
+						"primeira":[
+							{"": "FINANCIAMENTO À CULTURA NO BRASIL"},
+							{"u": "FINANCIAMENTO À CULTURA [uf]"},
+							{"s": "FINANCIAMENTO À CULTURA PARA O SETOR [cad] NO BRASIL"},
+							{"m": "FINANCIAMENTO À CULTURA [mec] NO BRASIL"},
+							{"us": "FINANCIAMENTO À CULTURA PARA O SETOR [cad] [uf]"},
+							{"um": "FINANCIAMENTO À CULTURA [mec] [uf]"},
+							{"sm": "FINANCIAMENTO À CULTURA [mec] PARA O SETOR [cad] NO BRASIL"},
+							{"usm": "FINANCIAMENTO À CULTURA [mec] PARA O SETOR [cad] [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA NO BRASIL"},
+							{"u": "DO TOTAL DO FINANCIAMENTO À CULTURA NO BRASIL"},
+							{"s": "DO TOTAL DO FINANCIAMENTO À CULTURA NO BRASIL"},
+							{"m": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec] NO BRASIL"},
+							{"us": "DO TOTAL DO FINANCIAMENTO À CULTURA [uf]"},
+							{"um": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec]s NO BRASIL"},
+							{"sm": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec] NO BRASIL"},
+							{"usm": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec] [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"18",
+				"slc": [
+					{
+						"primeira":[
+							{"": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS CADASTRADAS NO BRASIL"},
+							{"u": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS CADASTRADAS [uf]"},
+							{"s": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS DO SETOR [cad] CADASTRADAS NO BRASIL"},
+							{"us": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS DO SETOR [cad] CADASTRADAS [uf]"}
+						],
+						"segunda":[
+							{"": "TOTAL CONSUMIDO DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"u": "TOTAL CONSUMIDO DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"},
+							{"s": "TOTAL CONSUMIDO EM LOJAS DO SETOR [cad] CADASTRADAS EMSDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"us": "TOTAL CONSUMIDO EM LOJAS DO SETOR [cad] CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"}
+						]
+					},
+					{
+						"primeira":[
+							{"": "CONSUMIDOS VIA CARTÃO VALE-CULTURA NO BRASIL"},
+							{"u": "CONSUMIDOS VIA CARTÃO VALE-CULTURA [uf]"},
+							{"s": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS DO SETOR [cad] POR TRABALHADORES CADASTRADOS NO BRASIL"},
+							{"us": "CONSUMIDOS VIA CARTÃO VALE-CULTURA EM LOJAS DO SETOR [cad] POR TRABALHADORES CADASTRADOS [uf]"}
+						],
+						"segunda":[
+							{"": "TOTAL CONSUMIDO DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"u": "TOTAL CONSUMIDO DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"},
+							{"s": "TOTAL CONSUMIDO EM LOJAS DO SETOR [cad] POR TRABALHADORES CADASTRADOS EMSDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"us": "TOTAL CONSUMIDO EM LOJAS DO SETOR [cad] POR TRABALHADORES CADASTRADOS DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"}
+						]
+					}
+
+				]
+
+			},
+			{
+				"id":"19",
+				"slc": [
+					{
+						"primeira":[
+							{"": "EMPRESAS CADASTRADAS NO PROGRAMA VALE-CULTURA NO BRASIL"},
+							{"u": "EMPRESAS CADASTRADAS NO PROGRAMA VALE-CULTURA [uf]"},
+							{"s": "EMPRESAS DO SETOR [cad] CADASTRADAS NO PROGRAMA VALE-CULTURA NO BRASIL"},
+							{"us": "EMPRESAS DO SETOR [cad] CADASTRADAS NO PROGRAMA VALE-CULTURA [uf]"}
+						],
+						"segunda":[
+							{"": "EMPRESAS CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"u": "EMPRESAS CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"},
+							{"s": "EMPRESAS DO SETOR [cad] CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"us": "EMPRESAS DO SETOR [cad] CADASTRADAS DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"}
+						]
+					},
+					{
+						"primeira":[
+							{"": "TRABALHADORES CADASTRADOS NO PROGRAMA VALE-CULTURA NO BRASIL"},
+							{"u": "TRABALHADORES CADASTRADOS NO PROGRAMA VALE-CULTURA [uf]"},
+							{"s": ""},
+							{"us": ""}
+						],
+						"segunda":[
+							{"": "TRABALHADORES CADASTRADOS DESDE O INÍCIO DO PROGRAMA (2013-2017) NO BRASIL"},
+							{"u": "TRABALHADORES CADASTRADOS DESDE O INÍCIO DO PROGRAMA (2013-2017) [uf]"},
+							{"s": ""},
+							{"us": ""}
+						]
+					}
+
+				]
+			},
+			{
+				"id":"3",
+				"slc": [
+					{
+						"primeira":[
+							{"": "FINANCIAMENTO À CULTURA VIA BNDES NO BRASIL"},
+							{"u": "FINANCIAMENTO À CULTURA VIA BNDES [uf]"},
+							{"s": "FINANCIAMENTO AO SETOR [cad] VIA BNDES NO BRASIL"},
+							{"m": "FINANCIAMENTO À CULTURA [mec] BNDES NO BRASIL"},
+							{"n": "FINANCIAMENTO À CULTURA VIA BNDES POR MODALIDADE [mod] NO BRASIL"},
+							{"us": "FINANCIAMENTO AO SETOR [cad] VIA BNDES [uf]"},
+							{"um": "FINANCIAMENTO À CULTURA VIA FUNDO CULTURAL BNDES [uf]"},
+							{"un": "FINANCIAMENTO À CULTURA VIA BNDES POR MODALIDADE [mod] [uf]"},
+							{"sm": "FINANCIAMENTO AO SETOR [cad] [mec] BNDES NO BRASIL"},
+							{"sn": "FINANCIAMENTO AO SETOR [cad] VIA BNDES [mod] NO BRASIL"},
+							{"usm": "FINANCIAMENTO AO SETOR [cad] [mec] BNDES [uf]"},
+							{"usn": "FINANCIAMENTO À CULTURA VIA BNDES POR MODALIDADE [mod] [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA BNDES NO BRASIL"},
+							{"u": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA BNDES NO BRASIL"},
+							{"s": "DO TOTAL DO FINANCIAMENTO  AO SETOR [cad] VIA BNDES NO BRASIL"},
+							{"m": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec] BNDES NO BRASIL"},
+							{"n": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA BNDES POR MODADALIDADE [mod] NO BRASIL"},
+							{"us": "DO TOTAL DO FINANCIAMENTO AO SETOR [cad] VIA BNDES [uf]"},
+							{"um": "DO TOTAL DO FINANCIAMENTO À CULTURA [mec] BNDES NO BRASIL"},
+							{"un": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA BNDES POR MODALIDADE [mod] [uf]"},
+							{"sm": "DO TOTAL DO FINANCIAMENTO AO SETOR [cad] [mec] BNDES NO BRASIL"},
+							{"sn": "DO TOTAL DO FINANCIAMENTO AO SETOR [cad] VIA BNDES POR MODALIDADE [mod] NO BRASIL"},
+							{"usm": "DO TOTAL DO FINANCIAMENTO AO SETOR [cad] [mec] BNDES [uf]"},
+							{"usn": "DO TOTAL DO FINANCIAMENTO AO SETOR [cad] VIA BNDES POR MODALIDADE [mod] [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"4",
+				"slc": [
+					{
+						"primeira":[
+							{"": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
+							{"u": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA [uf]"},
+							{"s": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA PARA O SETOR [cad] NO BRASIL"},
+							{"p": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] NO BRASIL"},
+							{"us": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA PARA O SETOR [cad] [uf]"},
+							{"up": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] [uf]"},
+							{"usp": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] PARA O SETOR [cad] [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
+							{"u": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
+							{"s": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA [uf]"},
+							{"p": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] NO BRASIL"},
+							{"us": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA [uf]"},
+							{"up": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] [uf]"},
+							{"usp": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"5",
+				"slc": [
+					{
+						"primeira":[
+							{"": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL NO BRASIL"},
+							{"u": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE EMPRESA ESTATAL [uf]"},
+							{"s": "FINANCIAMENTO AO SETOR [cad] VIA MECENATO ADVINDO DE EMPRESA ESTATAL NO BRASIL"},
+							{"us": "FINANCIAMENTO AO SETOR [cad] VIA MECENATO ADVINDO DE EMPRESA ESTATAL [uf]"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO DE PARA EMPRESA ESTATAL NO BRASIL"},
+							{"u": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO DE PARA EMPRESA ESTATAL NO BRASIL"},
+							{"s": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO DE PARA EMPRESA ESTATAL [uf]"},
+							{"us": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO DE PARA EMPRESA ESTATAL [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"7",
+				"slc": [
+					{
+						"primeira":[
+							{"m": "DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO NO BRASIL."},
+							{"um": "DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO [uf]"},
+							{"sm": "DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO NO BRASIL."},
+							{"usm": "DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"8",
+				"slc": [
+					{
+						"primeira":[
+							{"": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL E VALOR ADICIONADO PELOS SETORES CULTURAIS E CRIATIVOS NO BRASIL"},
+							{"u": "RAZÃO ENTRE TOTAL FINANCIADO {uf} E VALOR ADICIONADO PELOS SETORES CULTURAIS E CRIATIVOS [uf]"},
+							{"s": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL PARA O SETOR  {cad} E VALOR ADICIONADO PELO SETOR [cad] NO BRASIL"},
+							{"m": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL E VALOR ADICIONADO PELOS SETORES CULTURAIS E CRIATIVOS NO BRASIL [mec]"},
+							{"us": "RAZÃO ENTRE TOTAL FINANCIADO {uf} PARA O SETOR {cad} E VALOR ADICIONADO PELO SETOR [cad] [uf]"},
+							{"um": "RAZÃO ENTRE TOTAL FINANCIADO {uf} E VALOR ADICIONADO PELOS SETORES CULTURAIS E CRIATIVOS [uf] [mec]"},
+							{"usm": "RAZÃO ENTRE TOTAL FINANCIADO {uf} PARA O SETOR {cad} E VALOR ADICIONADO PELO SETOR [cad] [uf] [mec]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"9",
+				"slc": [
+					{
+						"primeira":[
+							{"": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL E MASSA SALARIAL DOS TRABALHADORES CULTURAIS NO BRASIL"},
+							{"u": "RAZÃO ENTRE TOTAL FINANCIADO {uf} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS [uf]"},
+							{"s": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL PARA O SETOR {cad} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS PELO SETOR [cad] NO BRASIL"},
+							{"m": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL E MASSA SALARIAL DOS TRABALHADORES CULTURAIS NO BRASIL [mec]"},
+							{"us": "RAZÃO ENTRE TOTAL FINANCIADO {uf} PARA O SETOR {cad} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS PELO SETOR [cad] [uf]"},
+							{"um": "RAZÃO ENTRE TOTAL FINANCIADO {uf} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS [cad]"},
+							{"sm": "RAZÃO ENTRE TOTAL FINANCIADO NO BRASIL PARA O SETOR {cad} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS PELO SETOR [cad] NO BRASIL [mec]"},
+							{"usm": "RAZÃO ENTRE TOTAL FINANCIADO {uf} PARA O SETOR {cad} E MASSA SALARIAL DOS TRABALHADORES CULTURAIS PELO SETOR [cad] [uf] [mec]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"10",
+				"slc": [
+					{
+						"primeira":[
+							{"": "DE DESPESA DO MINISTÉRIO DA CULTURA EM RELAÇÃO AO TOTAL DE ARRECADAÇÃO FEDERAL"}
+						],
+						"segunda":[
+							{"": "DO TOTAL DE FINANCIAMENTO FEDERAL VIA FNC E MECENATO EM RELAÇÃO AO TOTAL DE ARREDACAÇÃO FEDERAL"}
+						]
+					}
+				]
+			},
+			{
+				"id":"11",
+				"slc": [
+					{
+						"primeira":[
+							{"m": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
+							{"um": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"usm": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+						],
+						"segunda":[
+							{"m": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
+							{"um": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"usm": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"12",
+				"slc": [
+					{
+						"primeira":[
+							{"m": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
+							{"um": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"sm": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"usm": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+						],
+						"segunda":[
+							{"m": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
+							{"um": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"sm": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"usm": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"13",
+				"slc": [
+					{
+						"primeira":[
+							{"m": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO NO BRASIL"},
+							{"um": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [uf]"},
+							{"sm": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO NO BRASIL"},
+							{"usm": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"14",
+				"slc": [
+					{
+						"primeira":[
+							{"m": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO NO BRASIL"},
+							{"um": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [uf]"},
+							{"sm": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO NO BRASIL"},
+							{"usm": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [uf]"}
+						]
+					}
+				]
+			},
+			{
+				"id":"15",
+				"slc": [
+					{
+						"primeira":[
+							{"": "CONCENTRAÇÃO DO FINANCIAMENTO POR UF"},
+							{"m": "CONCENTRAÇÃO DO FINANCIAMENTO [mec] POR UF"}
+						],
+						"segunda":[
+							{"": "CONCENTRAÇÃO DO FINANCIAMENTO POR SETOR"},
+							{"m": "CONCENTRAÇÃO DO FINANCIAMENTO [mec] POR SETOR"}
+						]
+					}
+				]
+			},
+			{
+				"id":"16",
+				"slc": [
+					{
+						"primeira":[
+							{"": "IHH DOS PROJETOS FOMENTADOS POR UF"},
+							{"s": ""},
+							{"m": ""},
+							{"sm": ""}
+						],
+						"segunda":[
+							{"": "IHH DOS PROJETOS FOMENTADOS POR SETOR"},
+							{"s": ""},
+							{"m": ""},
+							{"sm": ""}
+						]
+					}
+					
+				]
+			},
+			{
+				"id":"17",
+				"slc": [
+					{
+						"primeira":[
+							{"": "FINANCIADOS POR MEIO DE MECENATO ESTADUAL NO BRASIL"},
+							{"u": "FINANCIADOS POR MEIO DE MECENATO ESTADUAL [uf]"},
+							{"s": "FINANCIADOS POR MEIO DE MECENATO ESTADUAL NO BRASIL"},
+							{"um": "FINANCIADOS POR MEIO DE EDITAIS ESTADUAIS [uf]"},
+							{"m": "FINANCIADOS POR MEIO DE EDITAIS ESTADUAIS NO BRASIL"},
+							{"sm": "FINANCIADOS POR MEIO DE EDITAIS ESTADUAIS NO BRASIL"},
+							{"us": "FINANCIADOS POR MEIO DE MECENATO ESTADUAL [uf]"},
+							{"usm": "FINANCIADOS POR MEIO DE EDITAIS ESTADUAIS [uf]"}
+						]
+					}
+				]
+			}
+
+		],
+		[
+			{
+				"id":"1",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "de valor exportado [uf] para [prc] [cad]"},
+									{"i": "de valor importado [prc] para [uf] [cad]"},
+									{"s": "de saldo comercial entre [uf] e [prc]"},
+									{"c": "de corrente de comércio entre [uf] e [prc]"}
+								],
+								"segunda":[
+									{"e": "do valor exportado [uf]"},
+									{"i": "do valor importado para [uf]"},
+									{"s": ""},
+									{"c": "da corrente de comércio entre [uf] e [prc]"}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "de valor exportado do Brasil para [prc] [cad]"},
+									{"i": "de valor importado [prc] para o Brasil [cad]"},
+									{"s": "de saldo comercial entre [uf] e [prc]"},
+									{"c": "de corrente de comércio [uf] e [prc]"}
+								],
+								"segunda":[
+									{"e": "do valor exportado pelo Brasil para [prc]"},
+									{"i": "do valor importado pelo Brasil [prc]"},
+									{"s": ""},
+									{"c": "da corrente de comércio entre [uf] e [prc]"}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"2",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "de participação no valor exportado [uf] para [prc] [cad]"},
+									{"i": "de participação no valor importado [prc] para [uf] [cad]"},
+									{"c": "de participação na corrente de comércio entre [uf] e [prc] [cad]"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""},
+									{"c": ""}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "de participação no valor exportado [uf] para [prc] [cad]"},
+									{"i": "de participação no valor importado[prc] para [uf] [cad]"},
+									{"c": "de participação na corrente de comércio entre [uf] e [prc] [cad]"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""},
+									{"c": ""}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"3",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "de participação do valor exportado [prc] para [uf] [cad] no valor adicionado"},
+									{"i": "de participação do valor importado [prc] para [uf] [cad] no valor adicionado"},
+									{"c": "da corrente de comércio entre [uf] e [prc] [cad] no valor adicionado"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""},
+									{"c": ""}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "de participação do valor exportado [prc] para [uf] [cad] no valor adicionado"},
+									{"i": "de participação do valor importado [prc] para [uf] [cad] no valor adicionado"},
+									{"c": "da corrente de comércio entre [uf] e [prc] [cad] no valor adicionado"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""},
+									{"c": ""}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"5",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "C2 VALOR ABSOLUTO POR PARCEIROS"},
+									{"i": "C2 VALOR ABSOLUTO POR PARCEIROS"},
+									{"s": "C2 VALOR ABSOLUTO POR PARCEIROS"},
+									{"c": "C2 VALOR ABSOLUTO POR PARCEIROS"}
+								],
+								"segunda":[
+									{"e": "C4 VALOR ABSOLUTO POR UF"},
+									{"i": "C4 VALOR ABSOLUTO POR UF"},
+									{"s": "C4 VALOR ABSOLUTO POR UF"},
+									{"c": "C4 VALOR ABSOLUTO POR UF"}
+								],
+								"terceira":[
+									{"e": "C4 VALOR ABSOLUTO POR SETORES"},
+									{"i": "C4 VALOR ABSOLUTO POR SETORES"},
+									{"s": "C4 VALOR ABSOLUTO POR SETORES"},
+									{"c": "C4 VALOR ABSOLUTO POR SETORES"}
+								]
+							},
+							{
+								"primeira":[
+									{"e": ""},
+									{"i": ""},
+									{"s": ""},
+									{"c": ""}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""},
+									{"s": ""},
+									{"c": ""}
+								],
+								"terceira":[
+									{"e": ""},
+									{"i": ""},
+									{"s": ""},
+									{"c": ""}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"8",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"i": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"s": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"c": "IHH VALOR ABSOLUTO POR PARCEIROS"}
+								],
+								"segunda":[
+									{"e": "IHH VALOR ABSOLUTO POR UF"},
+									{"i": "IHH VALOR ABSOLUTO POR UF"},
+									{"s": "IHH VALOR ABSOLUTO POR UF"},
+									{"c": "IHH VALOR ABSOLUTO POR UF"}
+								],
+								"terceira":[
+									{"e": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"i": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"s": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"c": "IHH VALOR ABSOLUTO POR SETOR"}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"i": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"s": "IHH VALOR ABSOLUTO POR PARCEIROS"},
+									{"c": "IHH VALOR ABSOLUTO POR PARCEIROS"}
+								],
+								"segunda":[
+									{"e": "IHH VALOR ABSOLUTO POR UF"},
+									{"i": "IHH VALOR ABSOLUTO POR UF"},
+									{"s": "IHH VALOR ABSOLUTO POR UF"},
+									{"c": "IHH VALOR ABSOLUTO POR UF"}
+								],
+								"terceira":[
+									{"e": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"i": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"s": "IHH VALOR ABSOLUTO POR SETOR"},
+									{"c": "IHH VALOR ABSOLUTO POR SETOR"}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"11",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "índice de quantum do valor absoluto das exportações"},
+									{"i": "índice de quantum do valor absoluto das importações"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "índice de quantum do valor absoluto das exportações"},
+									{"i": "índice de quantum do valor absoluto das importações"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"12",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "índice de preços do valor absoluto das exportações"},
+									{"i": "índice de preços do valor absoluto das importações"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "índice de preços do valor absoluto das exportações"},
+									{"i": "índice de preços do valor absoluto das importações"}
+								],
+								"segunda":[
+									{"e": ""},
+									{"i": ""}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"13",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "exportados [uf] para [prc] [cad]"},
+									{"i": "importados [prc] para [uf] [cad]"},
+									{"s": "de saldo comercial entre [uf] e [prc] [cad]"},
+									{"c": "do [uf] e [prc] [cad]"}
+								],
+								"segunda":[
+									{"e": "dos kg exportados [uf]"},
+									{"i": "dos kg importados para [uf]"},
+									{"s": ""},
+									{"c": "dos kg transacionados entre [uf] e [prc] [cad]"}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "exportados do Brasil para [prc] [cad]"},
+									{"i": "importados [prc] para o Brasil [cad]"},
+									{"s": "de saldo comercial entre [uf] e [prc] [cad]"},
+									{"c": " [uf] com [prc] [cad]"}
+								],
+								"segunda":[
+									{"e": "dos kg exportados [uf]"},
+									{"i": "dos kg importados para [uf]"},
+									{"s": ""},
+									{"c": "dos kg transacionados entre [uf] e [prc] [cad]"}
+								]
+							}
+
+						]
+
+			},
+			{
+				"id":"14",
+				"slc": [
+							{
+								"primeira":[
+									{"e": "DE RENTABILIDADE DAS EXPORTAÇÕES [cad]"}
+								],
+								"segunda":[
+									{"e": ""}
+								]
+							},
+							{
+								"primeira":[
+									{"e": "DE RENTABILIDADE DAS EXPORTAÇÕES [cad]"}
+								],
+								"segunda":[
+									{"e": ""}
+								]
+							}
+
+						]
+
+			}
+		]
+	]
+
+}

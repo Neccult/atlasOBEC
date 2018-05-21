@@ -418,6 +418,7 @@ function ready(error, br_states, mapa){
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
 
+
             if(window.parent.innerWidth <= 1199)
                 return;
             
@@ -443,13 +444,16 @@ function ready(error, br_states, mapa){
             //setIntegerValueData(dict[d.id], eixo, vrv);
            // if(url['cad'] == 0)
                 //setPercentValueData(dict[d.id], eixo, vrv);
+
+            if(eixo == 2 && url['var'] == 17)
+                configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
+
             if(url['deg'] == 0)
                 configInfoDataBoxMapaClick(eixo, vrv, dict[d.id]);
+
             setStateTitle(d['properties']['name']);
             
             updateIframe(url)
-            
-            //ESSE TRECHO DE CÓDIGO ATUALIZA O TÍTULO DO IFRAME DO SCC 
             
         })
 		.style("cursor", "pointer");

@@ -136,14 +136,26 @@ function getDesagId(deg, nome){
             break;
 
         case 6:
-
+            switch (nome) {
+                case "Formal":
+                    return 2;
+                case "Informal":
+                    return 1;
+            }
+            break;
         case 7:
-
+            switch (nome) {
+                case "Contribuinte":
+                    return 2;
+                case "Não contribuinte":
+                    return 1;
+            }
+            break;
         case 8:
             switch (nome) {
-                case "Sim":
+                case "Membro":
                     return 2;
-                case "Não":
+                case "Não membro":
                     return 1;
             }
             break;
@@ -213,7 +225,7 @@ function analyze(error, data) {
 
     //tamanho do grafico
     // AQUI automatizar map center
-    var margin = {top: 20, right: 20, bottom: 40, left: 25},
+    var margin = {top: 20, right: 25, bottom: 40, left: 45},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -514,8 +526,8 @@ function analyze(error, data) {
         colors = {
             "Setor": "#071342",
             "UF": "rgb(109, 191, 201)",
-            "Relacionadas": "#071342",
-            "Culturais": "rgb(109, 191, 201)",
+            "Relacionadas": "#87A8CA",
+            "Culturais": "#077DDD",
             "Despesa Minc / Receita executivo": "#071342",
             "Financiamento Estatal / Receita executivo": "rgb(109, 191, 201)",
 
@@ -535,6 +547,15 @@ function analyze(error, data) {
 
             "Sim": "#071342",
             "Não": "rgb(109, 191, 201)",
+
+            "Membro": "#071342",
+            "Não membro": "rgb(109, 191, 201)",
+
+            "Formal": "#071342",
+            "Informal": "rgb(109, 191, 201)",
+
+            "Contribuinte": "#071342",
+            "Não contribuinte": "rgb(109, 191, 201)",
 
             "Branca": "#EC8A91",
             "Parda": "rgb(109, 191, 201)",
