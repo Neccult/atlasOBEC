@@ -1,7 +1,3 @@
-<script src="js/main.js"></script>
-<script src="js/functions.js"></script>
-
-
 <?php
 
 $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/

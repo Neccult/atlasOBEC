@@ -125,213 +125,214 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
             <div class="bread-parent">
                 <div class="row breadcrumb">
                     <div class="bread-caixas">
-                    <div class="bread-caixa" style="width: 15%">
-                        <span class="rotulo-bread opt view active">Eixo</span>
+                        <div class="bread-caixa" style="width: 15%">
+                            <span class="rotulo-bread opt view active">Eixo</span>
 
-                        <select class="bread-eixo bread-select-eixo" data-id="eixo">
-                            <?php
-                            foreach ($json_text['select']['eixo'] as $bread_eixo) {
-                                if($bread_eixo['value'] === $eixo){
-                                    echo "<option value='". $bread_eixo['value'] ."' selected>" . $bread_eixo['name'] . "</option>";
-                                }
-                                else{
-                                    echo "<option value='" . $bread_eixo['value'] . "'>" . $bread_eixo['name'] . "</option>";
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="bread-separator">/</div>
-                    <div class="bread-caixa" style="width: 15%">
-                        <span class="rotulo-bread opt view active">Variável</span>
-
-                        <select class="bread-select bread-select-var" data-id="var">
-                            <?php
-                            foreach ($json_text['var'][$eixo_num] as $variavel) {
-                                echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-                    <?php if($eixo == 'comercio') {?>
-                    <div class="bread-separator">/</div>
-
-                        <div class="bread-caixa">
-                            <span class="rotulo-bread opt view active">Parceiro</span>
-
-                            <select class="bread-select" id="bread-select-prc" data-id="prc">
+                            <select class="bread-eixo bread-select-eixo" data-id="eixo">
                                 <?php
-                                foreach ($json_text['select']['prc'] as $option) {
-                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                foreach ($json_text['select']['eixo'] as $bread_eixo) {
+                                    if($bread_eixo['value'] === $eixo){
+                                        echo "<option value='". $bread_eixo['value'] ."' selected>" . $bread_eixo['name'] . "</option>";
+                                    }
+                                    else{
+                                        echo "<option value='" . $bread_eixo['value'] . "'>" . $bread_eixo['name'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="bread-separator">/</div>
+                        <div class="bread-caixa" style="width: 15%">
+                            <span class="rotulo-bread opt view active">Variável</span>
+
+                            <select class="bread-select bread-select-var" data-id="var">
+                                <?php
+                                foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                    echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
 
-                    <?php } ?>
+                        <?php if($eixo == 'comercio') {?>
+                            <div class="bread-separator">/</div>
 
-                    <div class="bread-separator">/</div>
+                            <div class="bread-caixa">
+                                <span class="rotulo-bread opt view active">Parceiro</span>
 
-                    <div class="bread-caixa">
-                        <span class="rotulo-bread opt view active">UF</span>
+                                <select class="bread-select" id="bread-select-prc" data-id="prc">
+                                    <?php
+                                    foreach ($json_text['select']['prc'] as $option) {
+                                        echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
-                        <select class="bread-select bread-uf" data-id="uf">
-                            <?php
-                            foreach ($json_text['select']['uf'] as $bread_uf) {
-                                echo "<option value='" . $bread_uf['value'] . "'>" . $bread_uf['name'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="bread-separator">/</div>
-                    <div class="bread-caixa">
-                        <span class="rotulo-bread opt view active">Ano</span>
-
-                        <select class="bread-select" data-id="ano">
-                            <?php
-                            foreach ($json_text['select']['ano'] as $option) {
-                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="bread-separator">/</div>
-                    <div class="bread-caixa">
-                        <span class="rotulo-bread opt view active">Setor</span>
-
-                        <select class="bread-select" id="bread-select-cad" data-id="cad">
-                            <?php
-                            foreach ($json_text['select']['cad'] as $bread_cad) {
-                                echo "<option value='" . $bread_cad['value'] . "'>" . $bread_cad['name'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-
-
-
-
-                    <?php if($eixo == 'empreendimentos'){?>
+                        <?php } ?>
 
                         <div class="bread-separator">/</div>
 
                         <div class="bread-caixa">
-                            <span class="rotulo-bread opt view active">Desagregação</span>
-                            <select class="bread-select" id="bread-select-deg   " data-id="deg">
-                                <option value="0">Escolher</option>
+                            <span class="rotulo-bread opt view active">UF</span>
 
-                                <?php foreach ($select['deg'] as $option): ?>
-
-                                    <?php if($option['value'] >= 9 && $option['value'] <= 12):?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                            <select class="bread-select bread-uf" data-id="uf">
+                                <?php
+                                foreach ($json_text['select']['uf'] as $bread_uf) {
+                                    echo "<option value='" . $bread_uf['value'] . "'>" . $bread_uf['name'] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
-
-                    <?php } ?>
-
-                    <?php if($eixo == 'mercado'){?>
-
                         <div class="bread-separator">/</div>
-
                         <div class="bread-caixa">
-                            <span class="rotulo-bread opt view active">Desagregação</span>
-                            <select class="bread-select" id="bread-select-deg" data-id="deg">
-                                <option value="0">Escolher</option>
+                            <span class="rotulo-bread opt view active">Ano</span>
 
-                                <?php foreach ($select['deg'] as $option): ?>
-                                    <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
-                                        <optgroup value="<?php echo $option['value'] ?>" label="<?php echo $option['name'] ?>">
-                                            <?php foreach ($option['desags'] as $key=>$desag): ?>
-                                                <option value="<?php echo $key+1 ?>"><?php echo $desag ?></option>
-                                            <?php endforeach; ?>
-                                        </optgroup>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                            <select class="bread-select" data-id="ano">
+                                <?php
+                                foreach ($json_text['select']['ano'] as $option) {
+                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
-
-                    <?php } ?>
-
-                    <?php if($eixo == 'politicas'){?>
-
                         <div class="bread-separator">/</div>
-
-                        <div class="bread-caixa ">
-                            <span class="rotulo-bread opt view active ">Mecanismo</span>
-                            <select class="bread-select" id="bread-select-mec" data-id="mec">
-                                <option value="0">Todos</option>
-
-                                <?php foreach ($select['mec'] as $option): ?>
-
-                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-
-                        <div class="bread-separator">/</div>
-
-                        <div class="bread-caixa" style="display: none">
-                            <span class="rotulo-bread opt view active ">Modalidade</span>
-                            <select class="bread-select" id="bread-select-mod" data-id="mod">
-                                <option value="0">Todos</option>
-
-                                <?php foreach ($select['mod'] as $option): ?>
-
-                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-
-                        <div class="bread-separator">/</div>
-
-
-                        <div class="bread-caixa" style="display: none">
-                            <span class="rotulo-bread opt view active ">Pessoa</span>
-                            <select class="bread-select" id="bread-select-mec" data-id="pfj">
-                                <option value="0">Todos</option>
-
-                                <?php foreach ($select['pfj'] as $option): ?>
-
-                                    <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-
-                    <?php } ?>
-
-                    <?php if($eixo == 'comercio'){?>
-
-
-                        <div class="bread-separator">/</div>
-
                         <div class="bread-caixa">
-                            <span class="rotulo-bread opt view active ">Tipo</span>
-                            <select class="bread-select" id="bread-select-typ" data-id="typ">
+                            <span class="rotulo-bread opt view active">Setor</span>
 
-                                <?php foreach ($select['typ'] as $option): ?>
-
-                                    <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                            <select class="bread-select" id="bread-select-cad" data-id="cad">
+                                <?php
+                                foreach ($json_text['select']['cad'] as $bread_cad) {
+                                    echo "<option value='" . $bread_cad['value'] . "'>" . $bread_cad['name'] . "</option>";
+                                }
+                                ?>
                             </select>
                         </div>
 
-                    <?php } ?>
+
+
+
+                        <?php if($eixo == 'empreendimentos'){?>
+
+                            <div class="bread-separator">/</div>
+
+                            <div class="bread-caixa">
+                                <span class="rotulo-bread opt view active">Desagregação</span>
+                                <select class="bread-select" id="bread-select-deg   " data-id="deg">
+                                    <option value="0">Escolher</option>
+
+                                    <?php foreach ($select['deg'] as $option): ?>
+
+                                        <?php if($option['value'] >= 9 && $option['value'] <= 12):?>
+                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        <?php } ?>
+
+                        <?php if($eixo == 'mercado'){?>
+
+                            <div class="bread-separator">/</div>
+
+                            <div class="bread-caixa">
+                                <span class="rotulo-bread opt view active">Desagregação</span>
+                                <select class="bread-select" id="bread-select-deg" data-id="deg">
+                                    <option value="0">Escolher</option>
+
+                                    <?php foreach ($select['deg'] as $option): ?>
+                                        <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
+                                            <optgroup value="<?php echo $option['value'] ?>" label="<?php echo $option['name'] ?>">
+                                                <?php foreach ($option['desags'] as $key=>$desag): ?>
+                                                    <option value="<?php echo $key+1 ?>"><?php echo $desag ?></option>
+                                                <?php endforeach; ?>
+                                            </optgroup>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        <?php } ?>
+
+                        <?php if($eixo == 'politicas'){?>
+
+                            <div class="bread-separator">/</div>
+
+                            <div class="bread-caixa ">
+                                <span class="rotulo-bread opt view active ">Mecanismo</span>
+                                <select class="bread-select" id="bread-select-mec" data-id="mec">
+                                    <option value="0">Todos</option>
+
+                                    <?php foreach ($select['mec'] as $option): ?>
+
+                                        <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="bread-separator">/</div>
+
+                            <div class="bread-caixa" style="display: none">
+                                <span class="rotulo-bread opt view active ">Modalidade</span>
+                                <select class="bread-select" id="bread-select-mod" data-id="mod">
+                                    <option value="0">Todos</option>
+
+                                    <?php foreach ($select['mod'] as $option): ?>
+
+                                        <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div class="bread-separator">/</div>
+
+
+                            <div class="bread-caixa" style="display: none">
+                                <span class="rotulo-bread opt view active ">Pessoa</span>
+                                <select class="bread-select" id="bread-select-mec" data-id="pfj">
+                                    <option value="0">Todos</option>
+
+                                    <?php foreach ($select['pfj'] as $option): ?>
+
+                                        <?php if($option['value'] >= 1 && $option['value'] <= 2):?>
+                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        <?php } ?>
+
+                        <?php if($eixo == 'comercio'){?>
+
+
+                            <div class="bread-separator">/</div>
+
+                            <div class="bread-caixa">
+                                <span class="rotulo-bread opt view active ">Tipo</span>
+                                <select class="bread-select" id="bread-select-typ" data-id="typ">
+
+                                    <?php foreach ($select['typ'] as $option): ?>
+
+                                        <?php if($option['value'] >= 1 && $option['value'] <= 4):?>
+                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        <?php } ?>
 
                     </div>
 
                 </div>
             </div>
+
 
             <!--==== jquery load menu ===-->
 			<div class="row" id="view-boxes">
@@ -717,7 +718,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </div>
 
                     <?php } else { ?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 265px;" scrolling="no"></iframe>
 
                     <?php } ?>
 

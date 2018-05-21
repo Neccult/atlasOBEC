@@ -70,6 +70,7 @@
 
 <script>
     if(window.parent.innerWidth >= 1200 && window.parent.innerWidth <= 1599){
+
         $('#containerDesc').css("top", "-210");
         $('#containerDownload').css("top", "-200");
         $('#containerTree').css("top", "-210");
