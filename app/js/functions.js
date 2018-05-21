@@ -46,11 +46,13 @@ function updateTitleBox(){
                 .parent()
                 .find(".view-title")
                 .text();
+
+
     cad = $('.bread-select[data-id=cad] option:selected').text()
 
     if(cad == ''){
         cad = $('.bread-select[data-id=ocp] option:selected').text()  
-        cad = ""
+        cad = "";
     } else {
         if(cad.match(/Todos/) != null){
             cad = "NOS SETORES CULTURAIS E CRIATIVOS"
@@ -58,7 +60,8 @@ function updateTitleBox(){
             cad = "NO SETOR "+cad.toUpperCase();
         }
     }
-    uf = $('.bread-select[data-id=uf] option:selected').text()
+
+    uf = getNomeUF(url['uf'])
 
     if(title_scc != undefined)
         $('iframe[id="view_box_scc"]').parent().find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
@@ -67,6 +70,262 @@ function updateTitleBox(){
         $('iframe[id="view_box_barras"]').parent().find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
 }
 
+function updateDescription(descricoes, eixo, vrv, slc){
+    desc_var = getDataVar(descricoes, eixo, vrv)
+
+    key = ''
+    cad = $(window.parent.document).find('.bread-select[data-id=cad]').first().val()
+    cad_text = $(window.parent.document).find('.bread-select[data-id=cad] option:selected').first().text()
+
+    ocp = $(window.parent.document).find('.bread-select[data-id=ocp]').first().val()
+    ocp_text = $(window.parent.document).find('.bread-select[data-id=ocp] option:selected').first().text()
+
+
+
+    uf = $(window.parent.document).find('.bread-select[data-id=uf]').first().val()
+    uf_text = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').first().text()
+
+    desag = $(window.parent.document).find('.bread-select[data-id=deg]').first().val()
+    desag_text = $(window.parent.document).find('.bread-select[data-id=deg] option:selected').first().text()
+
+    mec = $(window.parent.document).find('.bread-select[data-id=mec]').first().val()
+    mec_text = $(window.parent.document).find('.bread-select[data-id=mec] option:selected').first().text()
+
+    pfj = $(window.parent.document).find('.bread-select[data-id=pfj]').first().val()
+    pfj_text = $(window.parent.document).find('.bread-select[data-id=pfj] option:selected').first().text()
+
+    mod = $(window.parent.document).find('.bread-select[data-id=mod]').first().val()
+    mod_text = $(window.parent.document).find('.bread-select[data-id=mod] option:selected').first().text()
+
+    typ = $(window.parent.document).find('.bread-select[data-id=typ]').first().val()    
+    if(eixo != 3){
+
+        if(uf > 0){
+            key += 'u'
+        }
+        if(cad > 0){
+            key += 's'
+        } else if( ocp > 0 && ocp != 3){
+            key += 's'
+        }
+
+        if(desag > 0){
+            key += 'd'
+        } else if(mec > 0){
+            key += 'm'
+        } else if(mod > 0){
+            key += 'n'
+        } else if(pfj > 0){
+            key += 'p'
+        }
+
+    } else {
+        switch(typ){
+            case '1': key = 'e'; break;
+            case '2': key = 'i'; break;
+            case '3': key = 's'; break;
+            case '4': key = 'c'; break;
+        }
+    }
+
+    switch(eixo){
+        case 0:
+            var desc_int = ''
+            var desc_perc = ''
+            var desc_terc = ''
+
+            nomeestado = getPrepos(uf_text)+' '+uf_text
+            nomeporte = "DE "+desag_text;
+            nomeano = $(window.parent.document).find('.bread-select[data-id=ano]').first().val()
+            anoanterior = parseInt(nomeano)-1
+            anoanterior = anoanterior.toString()
+            if("primeira" in desc_var){
+                desc_var.primeira.forEach(function(d){
+                    if(key in d){
+                        desc_int = d[key]; return;
+                    }
+                }) 
+            }
+            if("segunda" in desc_var){
+                desc_var.segunda.forEach(function(d){
+                    if(key in d){
+                        desc_perc = d[key]; return;
+                    }
+                }) 
+            }
+            if("terceira" in desc_var){
+                desc_var.terceira.forEach(function(d){
+                    if(key in d){
+                        desc_terc = d[key]; return;
+                    }
+                }) 
+            }
+            mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
+            desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+                               .replace('[deg]', nomeporte).replace('[ano]', "DO ANO "+anoanterior+' AO '+nomeano).replace('{uf}', nomeestado);
+            desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text).replace('[deg]', nomeporte).replace('{uf}', nomeestado);
+            desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', cad_text).replace('[deg]', nomeporte).replace('{uf}', nomeestado);
+
+            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
+            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
+            
+            break;
+        case 1:
+            var desc_int = ''
+            var desc_perc = ''
+            var desc_terc = ''
+            if(slc > 0){
+                slc = 1;
+                if(ocp == 1){
+                   cad_text = "EM ATIVIDADES RELACIONADAS À CULTURA"
+                } else if(ocp == 2) {
+                   cad_text = "EM ATIVIDADES CULTURAIS"
+                }
+            }
+            nomeestado = getPrepos(uf_text)+' '+uf_text
+            var deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").parent().attr("value");
+
+            if("primeira" in desc_var.ocp[slc]){
+                desc_var.ocp[slc].primeira.forEach(function(d){
+                    if(key in d){
+                        desc_int = d[key]; return;
+                    }
+                }) 
+            }
+            if("segunda" in desc_var.ocp[slc]){
+                desc_var.ocp[slc].segunda.forEach(function(d){
+                    if(key in d){
+                        desc_perc = d[key]; return;
+                    }
+                }) 
+            }
+            if("terceira" in desc_var.ocp[slc]){
+                desc_var.ocp[slc].terceira.forEach(function(d){
+                    if(key in d){
+                        desc_terc = d[key]; return;
+                    }
+                }) 
+            }
+
+            desc_int = descDesag(desc_int, deg)
+            desc_perc = descDesag(desc_perc, deg)
+            desc_terc = descDesag(desc_terc, deg)
+            desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+            desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+            desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+
+            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
+            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc) 
+            break;
+        case 2: 
+            var desc_int = ''
+            var desc_perc = ''
+            var desc_terc = ''
+
+            nomeestado = mapPronome(getPrepos(uf_text), ["DE", "DO", "DA"], ["EM", "NO", "NA"])+' '+uf_text
+            if("primeira" in desc_var.slc[slc]){
+                desc_var.slc[slc].primeira.forEach(function(d){
+                    if(key in d){
+                        desc_int = d[key]; return;
+                    }
+                }) 
+            }
+            if("segunda" in desc_var.slc[slc]){
+                desc_var.slc[slc].segunda.forEach(function(d){
+                    if(key in d){
+                        desc_perc = d[key]; return;
+                    }
+                }) 
+            }
+            if("terceira" in desc_var.slc[slc]){
+                desc_var.slc[slc].terceira.forEach(function(d){
+                    if(key in d){
+                        desc_terc = d[key]; return;
+                    }
+                }) 
+            }
+            
+            desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+                               .replace('[pfj]', pfj_text).replace('[mod]', mod_text)
+                               .replace('{uf}', nomeestado).replace('[mec]', "VIA "+mec_text).replace("{cad}", cad_text)
+            desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
+                                .replace('[uf]', nomeestado).replace('[cad]', cad_text)
+                                .replace('[pfj]', pfj_text).replace('[mod]', mod_text)
+                                .replace('{uf}', nomeestado).replace('[mec]', "VIA "+mec_text).replace("{cad}", cad_text)
+            
+            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
+            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc) 
+            break;
+        case 3:
+            var desc_int = ''
+            var desc_perc = ''
+            var desc_terc = ''
+            
+            prc_text = $(window.parent.document).find('.bread-select[data-id=prc] option:selected').first().text()
+            if(key == 'i'){
+                nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
+                nomeprc = getPrepos(prc_text)+' '+prc_text;
+            }
+            if(key == 'e'){
+                nomeestado = getPrepos(uf_text)+' '+uf_text;
+                nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
+            }
+            if(key == 'c'){
+                if(vrv != 13)
+                    nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
+                else
+                    nomeestado = getPrepos(uf_text) + ' '+uf_text;
+                nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
+            }
+            if(key == 's'){
+                nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
+                nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
+            }
+            if(cad > 0){
+                if(key == 'e')
+                    nomecad = "PELO SETOR "+cad_text;
+                else 
+                    nomecad = "NO SETOR "+cad_text;
+            } else {
+                if(key == 'e')
+                    nomecad = "PELOS SETORES CULTURAIS E CRIATIVOS";
+                else 
+                    nomecad = "NOS SETORES CULTURAIS E CRIATIVOS";
+            }
+            if("primeira" in desc_var.slc[slc]){
+                desc_var.slc[slc].primeira.forEach(function(d){
+                    if(key in d){
+                        desc_int = d[key]; return;
+                    }
+                }) 
+            }
+            if("segunda" in desc_var.slc[slc]){
+                desc_var.slc[slc].segunda.forEach(function(d){
+                    if(key in d){
+                        desc_perc = d[key]; return;
+                    }
+                }) 
+            }
+            if("terceira" in desc_var.slc[slc]){
+                desc_var.slc[slc].terceira.forEach(function(d){
+                    if(key in d){
+                        desc_terc = d[key]; return;
+                    }
+                }) 
+            }
+            desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
+            desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
+            desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
+
+            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
+            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc) 
+            break;
+    }
+}
 
 function changeDownloadURL(url, eixo){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
@@ -153,7 +412,6 @@ function getNomeUF(idUF){
     }
 }
 
-
 function configInfoDataBoxMapa(eixo, vrv, dadosUF) {
 
     deg = $(window.parent.document).find('.bread-select[data-id=deg]').first().val()
@@ -173,8 +431,9 @@ function configInfoDataBoxMapa(eixo, vrv, dadosUF) {
     }
     else if(eixo == 2){
 
-        if(vrv == 17){
-            setPercentValueData ({percentual: 1}, eixo, vrv);
+        if(vrv == 17 && url['uf'] > 0){
+            setIntegerValueData({valor: dadosUF.valor}, eixo, vrv);
+            return
         }
 
 
@@ -208,6 +467,7 @@ function configInfoDataBoxMapaClick(eixo, vrv, dados) {
 
     }
     else if(eixo == 2){
+
 
         setIntegerValueData(dados, eixo, vrv);
         if(url['cad'] == 0 && (vrv < 18)){
@@ -747,7 +1007,6 @@ function configInfoDataBoxBarrasStackedClick(eixo, vrv, d, soma, deg) {
     }
 }
 
-
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
     while (L && this.length) {
@@ -758,7 +1017,6 @@ Array.prototype.remove = function() {
     }
     return this;
 };
-
 
 function appendPorts(iframe){
 	if(iframe) {
@@ -803,6 +1061,7 @@ function appendDesags(iframe, ocp){
                 
         })
 }
+
 function removePorts(iframe){
 	if(iframe) {
 		if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length != 0) {
@@ -821,6 +1080,7 @@ function removePorts(iframe){
         }
 	}
 }
+
 function removeDesags(iframe, ocp){
         if(ocp == true)
             desag_groups = data_desag.control.mercado.ocupacional;
@@ -843,36 +1103,6 @@ function removeDesags(iframe, ocp){
                 
             }
         })
-}
-function appendMecenatoDesags(iframe){
-    if(iframe) {
-        if($(window.parent.document).find("select[data-id='deg']").find("option[value='15']").length == 0) {
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='15'>MECENATO ESTADUAL</option>");
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='16'>EDITAIS ESTADUAIS</option>");
-        }
-    }
-    else{
-        if($(window.parent.document).find("option[value='15']").length == 0) {
-            $("select[data-id='deg']").append("<option value='15'>MECENATO ESTADUAL</option>");
-            $("select[data-id='deg']").append("<option value='16'>EDITAIS ESTADUAIS</option>");
-        }
-    }
-}
-function removeMecenatoDesags(iframe){
-    if(iframe) {
-        if($(window.parent.document).find("select[data-id='deg']").find("option[value='15']").length == 0) {
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='15']").remove();
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='16']").remove();
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='17']").remove();
-        }
-    }
-    else{
-        if($(window.parent.document).find("option[value='15']").length == 0) {
-            $("select[data-id='deg']").find("option[value='15']").remove();
-            $("select[data-id='deg']").find("option[value='16']").remove();
-            $("select[data-id='deg']").find("option[value='17']").remove();
-        }
-    }
 }
 
 function updateBreadUF(eixo, vrv){
@@ -1011,7 +1241,7 @@ function updateMecanismo(url, vrv){
 
     } 
     else{
-
+        $("select[data-id='mec']").parent().css('display', 'block')
         $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
         $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
     }
@@ -1076,8 +1306,8 @@ function updateModalidade(url, vrv){
     if(vrv == 3){
         $("select[data-id='mod']").parent().css('display', 'block')
 
-        $("select[data-id='mod']").append("<option value='1'>Direto</option>");
-        $("select[data-id='mod']").append("<option value='2'>Indireto</option>");
+        $("select[data-id='mod']").append("<option value='1'>Direta</option>");
+        $("select[data-id='mod']").append("<option value='2'>Indireta</option>");
     }
     else{
         $("select[data-id='mod']").parent().css('display', 'none')
@@ -1285,7 +1515,7 @@ function updateDescEmpreendimentos(desc, vrv){
         }
     }
 
-    $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
+    //$(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
 
 
 }
@@ -1385,7 +1615,7 @@ function descDesag(desc, deg){
         case '2':
             desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
         case '3':
-            desc = desc.replace("[deg]", "COM IDADE ENTRE "+tipo_deg); break;
+            desc = desc.replace("[deg]", "COM IDADE ENTRE "+tipo_deg+" ANOS"); break;
         case '4':
             if(tipo_deg == "Sem Instrução")
                 desc = desc.replace("[deg]", "E QUE NÃO POSSUEM INSTRUÇÃO")
@@ -1406,14 +1636,25 @@ function descDesag(desc, deg){
             }
             desc = desc.replace("[deg]", tipo_deg); break; 
         case '6': 
-            tipo_deg = mapPronome(tipo_deg, ["Sim", "Não"], ["COM", "SEM"] )
-            desc = desc.replace("[deg]", tipo_deg+" FORMALIDADE"); break;
+            if(tipo_deg == "Formal"){
+                desc = desc.replace("[deg]", "COM FORMALIDADE"); break;
+            } else {
+                desc = desc.replace("[deg]", "SEM FORMALIDADE"); break;
+            }
         case '7': 
-            tipo_deg = mapPronome(tipo_deg, ["Sim", "Não"], ["COM", "SEM"] )
-            desc = desc.replace("[deg]", tipo_deg+" PREVIDÊNCIA"); break;
+            if(tipo_deg == "Contribuinte"){
+                desc = desc.replace("[deg]", "COM PREVIDÊNCIA"); break;
+            }
+            else{
+                desc = desc.replace("[deg]", "SEM PREVIDÊNCIA");
+            }
         case '8': 
-            tipo_deg = mapPronome(tipo_deg, ["Sim", "Não"], ["COM", "SEM"] )
-            desc = desc.replace("[deg]", tipo_deg+" SINDICATO"); break;
+            if(tipo_deg == "Membro"){
+                desc = desc.replace("[deg]", "COM SINDICATO"); break;
+            }
+            else{
+                desc = desc.replace("[deg]", "SEM SINDICADO");
+            }
         default:
             desc = desc.replace("[deg]", "")
     }
@@ -1784,20 +2025,7 @@ function setIntegerValueData(value, eixo, vrv) {
         // console.log(value)
 
         estado = $(window.parent.document).find(".state-title").first().text()
-        if(eixo == 1){
-            if(vrv == 1){
-                $(window.parent.document).find(".setor-value").first().find(".description-number").first().text()
-            }
-            if(vrv <= 11)
-                updateDescMercado(result.desc_int, vrv, url['ocp']);
-           
-        }
-        if(eixo == 3){
-            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescComercio(result.desc_int, vrv, estado))
-            $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercentComercio(result.desc_percent, vrv, estado))
-            desc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().text()
-            $(window.parent.document).find(".setor-value").first().find(".description-number").first().text(desc.replace("VALOR ABSOLUTO POR UF", "VALOR ABSOLUTO POR SETOR"));
-        }
+        
 
         $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
         var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
@@ -2031,7 +2259,8 @@ function descByUF(eixo, tipo, desc, nomeestado, tag){
             }
         }
 
-        nomeestado = mapPronome(nomeestado, [/^DE/, /^DA/, /^DO/], ["EM", "NA", "NO"])
+        if(!(url['var'] == 18 || url['var'] == 19))
+            nomeestado = mapPronome(nomeestado, [/^DE/, /^DA/, /^DO/], ["EM", "NA", "NO"])
        
     }
 
@@ -2731,8 +2960,9 @@ function updateOcupacoes(vrv){
 		case '8':
 		case '9':
 		case '10':
-		case '11': $('#ocupacao').css('display', 'none'); break;
-		default: $('#ocupacao').css('display', 'inline');
+		case '11': $('#ocupacao').css('display', 'none')
+                   $('#setor').css('display', 'none'); break;
+		default: $('#ocupacao').css('display', 'inline'); $('#setor').css('display', 'inline');
 	}
 }
 

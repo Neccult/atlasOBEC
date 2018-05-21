@@ -225,6 +225,8 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                             cad_percent_uf = (d.data.size/d.parent.parent.value)
                             percent_deg = (d.data.size/d.parent.parent.parent.value)
                             $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+                            $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+
                         }
                         else{
                             $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)

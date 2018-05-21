@@ -3,7 +3,10 @@ var chartWidth = $('.chart').width();
 var chartHeight = $('.chart').height();
 var minBarHeight = 5;
 var withLabels = false;
-
+d3.json('./data/descricoes.json', function (error, desc){
+    if (error) throw error;
+    descricoes = desc;
+})
 function getSoma(barraId) {
     var soma = 0;
     $("rect").each(function() {
@@ -55,10 +58,12 @@ function destacaBarra(barraId, stacked = false) {
         }
     });
 }
+var descricoes = []
+
 
 var tooltipInstance = tooltip.getInstance();
 if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) {    /*==== Barras JS ====*/
-
+    
     //Variaveis/Objetos
     var dict = {};
 
@@ -72,13 +77,14 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     var textJSON;
     var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo + "&deg=" +deg + "&ano=" +ano;
     var brasil_setor = []
+    
     $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
         brasil_setor = JSON.parse(dado)
     })
-
+    /*
      $.get('./db/json_barras.php' + config, function(dado){
          // console.log(dado)
-     })
+     })*/
    
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -146,7 +152,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         var maxValue = d3.max(dados.value);
         // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
 
-        console.log(maxValue)
+        // console.log(maxValue)
 
         //distribuicao de frequencias
         var quant = 9;
@@ -810,29 +816,24 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         destacaBarra(url['ano']);
 
         var valor = $('svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
+        
+
 
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
-            configInfoDataBoxBarras(eixo, vrv, dados, valor);
-        if(eixo == 0){
-            updateDescEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_int, vrv)
-        }
-        else if(eixo == 1)
-            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
+            configInfoDataBoxBarras(eixo, vrv, dados, valor);         
+
+        if(eixo == 2 && (vrv == 18 || vrv == 19))
+            updateDescription(descricoes, eixo, vrv, mec);
+        else if(eixo == 3)
+            updateDescription(descricoes, eixo, vrv, mundo);
         else
-            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
-        if(vrv == 1 && eixo == 1){
-            $(window.parent.document).find(".setor-value").first().find(".description-number").html(updateDescPercentMercado(getDataVar(textJSON, eixo, vrv).desc_setorial, vrv, "setorial", ocp));
-        } else if(eixo == 0){
-            updateDescPercentEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_setorial, vrv, "setorial");            
-
-        }
-            
-
+            updateDescription(descricoes, eixo, vrv, ocp);
 
         if(url['slc'] == 1){
             updateDataDesc()
         }
+
+
 
         if(vrv >= 11 && eixo == 1){
             updateDataDescUoS(ocp);
@@ -941,9 +942,9 @@ else {
             if (error) throw error;
 
             textJSON = data;
-            /*$.get("./db/json_barras.php" + config, function(data){
-                  console.log(data)
-           })*/
+            // $.get("./db/json_barras.php" + config, function(data){
+            //       console.log(data)
+           // })
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
                 .await(analyze_eixo1);
@@ -951,7 +952,7 @@ else {
 
     });
     // return matching color value
-
+    
     function color_eixo1() {
         if(ocp == 0) {
             if (colorJSON.cadeias[cad]) {
@@ -979,13 +980,6 @@ else {
 
     function desagregacao_names() {
 
-        // if(eixo == 1 && (vrv == 6 || vrv == 4)){
-        //     var array_names = [];
-        //
-        //     array_names.push('Média');
-        //     return array_names;
-        // }
-
         if(prt != 0) {
 
             var array_names = [];
@@ -1005,7 +999,6 @@ else {
             });
 
         }
-
         if(fax != 0) {
             var array_names = [];
             textJSON.select.fax.forEach(function(d, i) {
@@ -1058,6 +1051,7 @@ else {
         }
         return array_names;
     }
+
     function selectDesag(){
         switch(deg){
             case 1: return prt;
@@ -1070,11 +1064,13 @@ else {
             case 8: return snd;
         }
     }
+
     function analyze_eixo1(error, data) {
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
         }
+
         desag = selectDesag()
         if((vrv == 6 || vrv == 4) && eixo == 1){
             aux = []
@@ -1100,7 +1096,7 @@ else {
         setTimeout(function () {
         }, 500);
 
-        var margin = {top: 20, right: 20, bottom: 30, left: 25},
+        var margin = {top: 20, right: 20, bottom: 30, left: 35},
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
@@ -1121,12 +1117,10 @@ else {
             });
         });
 
-        // console.log(data)
-
         // Transpose the data into layers
         var dataset = d3.layout.stack()(dados);
 
-        // console.log(dataset)
+        
 
         // Set x, y and colors
         var x_eixo1 = d3.scale.ordinal()
@@ -1306,18 +1300,13 @@ else {
         if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
         // console.log(eixo)
         // console.log(dados)
-        if(eixo == 0 && dados.key != undefined){
-            updateDescEmpreendimentos(getDataVar(textJSON, eixo, vrv).desc_int, vrv)
-        }
-        else if(eixo == 1){
-            nomeestado = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').text()
-            updateDescMercado(getDataVar(textJSON, eixo, vrv).desc_int, vrv, ocp);
-            $(window.parent.document).find(".percent-value").first().find(".description-number").html(updateDescPercent(eixo, "percent",getDataVar(textJSON, eixo, vrv).desc_percent, nomeestado));
-        }
-        else if(eixo != 3 && dados.key != undefined){
-            $(window.parent.document).find(".integer-value").first().find(".description-number").html("integer", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_int, data[dados.key[0]].uf));
-            $(window.parent.document).find(".percent-value").first().find(".description-number").html("percent", updateDescPercent(eixo, getDataVar(textJSON, eixo, vrv).desc_percent, data[dados.key[0]].uf));
-        }
+        if(eixo == 2 && (vrv == 18 || vrv == 19))
+            updateDescription(descricoes, eixo, vrv, mec);
+        else if(eixo == 3)
+            updateDescription(descricoes, eixo, vrv, mundo);
+        else
+            updateDescription(descricoes, eixo, vrv, ocp);
+        // console.log(dataset)
 
     }
 

@@ -8,10 +8,10 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
 });
 
 //TEMPORARIO enquanto não está funcionando
-if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 3)
-    $('.bread-select[data-id=var]').find("option[value=5]").prop("disabled", true)
-else if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 2)
-    $('.bread-select[data-id=var]').find("option[value=15]").prop("disabled", true)
+// if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 3)
+//     $('.bread-select[data-id=var]').find("option[value=5]").prop("disabled", true)
+// else if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 2)
+//     $('.bread-select[data-id=var]').find("option[value=15]").prop("disabled", true)
 //$.ajaxSetup({async: true});
 /*-----------------------------------------------------------------------------
 Função: controlVar
@@ -416,7 +416,8 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
-            } else if(url['var'] == 11 ||  url['var'] == 10 || url['var'] == 9 || url['var'] == 8){
+            }
+            else if(url['var'] == 11 ||  url['var'] == 10 || url['var'] == 9 || url['var'] == 8){
                 $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
             }
@@ -439,10 +440,23 @@ function updateIframe(url){
             else {
                 $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
-                if(url['uf'] == 0)
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
-                else
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
+                if(url['uf'] == 0){
+                    if(url['ocp'] == 0){
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
+                    }
+                    else{
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - OCUPAÇÕES CULTURAIS E CRIATIVAS  [uf] ");
+                    }
+
+                }
+                else{
+                    if(url['ocp'] == 0){
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
+                    }
+                    else{
+                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - OCUPAÇÕES CULTURAIS E CRIATIVAS  [uf] ");
+                    }
+                }
             }
         }
         else if(eixoAtual == 2){
@@ -1029,6 +1043,8 @@ function loadMobile(){
         $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
     });
 
+    $( ".bread-parent" ).remove();
+
     $('#containerDesc').css("height", "auto");
     $('#containerDesc').css("top", "0");
     $('#containerDados').css("height", "500px");
@@ -1064,6 +1080,8 @@ function loadMobile(){
 
         tdiv1.addClass("replaced");
     }
+
+    $('.bread-eixo[data-id=eixo]').val(window.location.hash.substring(1))
 
 
 }
@@ -1242,7 +1260,8 @@ function expandMenuVariaveis(a) {
 }
 
 function updateUrl() {
-    var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
+    var eixo_atual = getEixo(window.location.hash.substring(1))
+
     $('.bread-select').each(function() {
 
         if(eixo_atual == 2 && url['var'] == 18 && $(this).attr('data-id') == 'mec')
@@ -1280,6 +1299,9 @@ function updateLegendByDeg(deg){
             })
 
             updateBreadcrumbSetores(cads);
+        }
+        else{
+            switchToOcupations();
         }
 
     }
@@ -1335,22 +1357,22 @@ function updateLegendByDeg(deg){
     else if(deg == 6){
         $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE");
         $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Formal<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Informal<br></span>"
         )
     }
     else if(deg == 7){
         $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA");
         $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Contribuinte<br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não contribuinte<br></span>"
         )
     }
     else if(deg == 8){
         $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO");
         $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Sim<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não<br></span>"
+            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Membro <br></span>\n" +
+            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não membro<br></span>"
         )
     }
 
@@ -1974,6 +1996,8 @@ $(document).ready(function(){
 
         if($(this).attr("data-id") !== "eixo") {
             var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
+            var eixo_atual = getEixo(window.location.hash.substring(1));
+
             // updateUrl();
                             
 
@@ -2065,13 +2089,13 @@ $(document).ready(function(){
 
     $(document).on('change', ".bread-select", function(e){
 
+
         if($(this).attr("data-id") !== "eixo") {
 
-            var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
+            // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
+            var eixo_atual = getEixo(window.location.hash.substring(1));
 
             updateUrl();
-
-
 
             if($(this).attr("data-id") === "typ") {
                 if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
@@ -2080,11 +2104,17 @@ $(document).ready(function(){
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
             }
 
+
+
             if($(this).attr("data-id") == "deg" && eixo_atual == 1){
-                if($(this).find('option:selected').parent().attr("value") != undefined)
+                if($(this).find('option:selected').parent().attr("value") != undefined){
                     deg_value =  $(this).find('option:selected').parent().attr("value")
-                else
+
+                }
+                else{
                     deg_value = $(this).val()
+
+                }
                 controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
 
                 if(url['var'] == 4 || url['var'] == 5)
@@ -2099,8 +2129,6 @@ $(document).ready(function(){
                 url['deg'] = $(".bread-select[data-id=deg]").val()
             /* controla relações entre filtros */
             
-            /* muda o select das opções para o mesmo do bread */
-            $(".opt-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
             if($(this).attr("data-id") == "prc"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
                 $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
@@ -2109,13 +2137,7 @@ $(document).ready(function(){
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             
             if($(this).attr('data-id') =='var'){
-                if(eixo_atual == 2 && url['var'] == 17){
-                    $(".font-title").css("display", "none")
-                    $(".value-info-title").css("display", "block")
-                } else {
-                    $(".font-title").css("display", "block")
-                    $(".value-info-title").css("display", "none")
-                }
+
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
@@ -2161,6 +2183,7 @@ $(document).ready(function(){
 
                 if(eixo_atual == 2){
                     updateDefaultMec(url['var']);
+
 
                     if(url['var'] == 18 || url['var'] == 19)
                         $("#btn-opt").find(".col-btn").css("display", "block")
@@ -2214,7 +2237,6 @@ $(document).ready(function(){
 
             }
             if($(this).attr("data-id") === "ocp") {
-                if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
             updateIframe(url);
