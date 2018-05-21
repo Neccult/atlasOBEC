@@ -217,9 +217,9 @@ function getNameEtinia($id) {
 function getNameFormalidade($id) {
     switch ($id) {
         case 2:
-            return "Sim";
+            return "Formal";
         case 1:
-            return "Não";
+            return "Informal";
 
     }
 }
@@ -227,9 +227,9 @@ function getNameFormalidade($id) {
 function getNamePrev($id) {
     switch ($id) {
         case 2:
-            return "Sim";
+            return "Contribuinte";
         case 1:
-            return "Não";
+            return "Não contribuinte";
 
     }
 }
@@ -237,9 +237,9 @@ function getNamePrev($id) {
 function getNameSindical($id) {
     switch ($id) {
         case 2:
-            return "Sim";
+            return "Membro";
         case 1:
-            return "Não";
+            return "Não membro";
 
     }
 }
@@ -399,10 +399,25 @@ else if($eixo == 1) {
                 }
             }
 
-            $nomeDesag = getNameDesag($desag, $tupla);
+            if($cad == 0 && $ocp == 0){
+                $nomeDesag = getNameDesag($desag, $tupla);
 
-            $barras[intval($id-2007)]['year'] = $tupla->Ano;
-            $barras[intval($id-2007)][$nomeDesag] = (double)$tupla->Valor;
+                $barras[intval($id-2007)]['year'] = $tupla->Ano;
+                if(!isset($barras[intval($id-2007)][$nomeDesag])) {
+                    $barras[intval($id - 2007)][$nomeDesag] = 0;
+                }
+                else{
+                    $barras[intval($id-2007)][$nomeDesag] += (double)$tupla->Valor;
+                }
+            }
+            else{
+                $nomeDesag = getNameDesag($desag, $tupla);
+
+                $barras[intval($id-2007)]['year'] = $tupla->Ano;
+                $barras[intval($id - 2007)][$nomeDesag] = 0;
+                $barras[intval($id-2007)][$nomeDesag] = (double)$tupla->Valor;
+            }
+
 
         }
     }
