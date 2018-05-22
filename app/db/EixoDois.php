@@ -365,7 +365,7 @@ class EixoDois {
             }
             
             $stmt3 = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt3, $query)) {
+            if (mysqli_stmt_prepare($stmt3, $query_max_ocp1)) {
                 $stmt3->bind_param($paramsStr, ...$params);
                 
                 $stmt3->execute();
@@ -382,7 +382,7 @@ class EixoDois {
 
             
             $stmt4 = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt4, $query)) {
+            if (mysqli_stmt_prepare($stmt4, $query_max_ocp2)) {
                 $stmt4->bind_param($paramsStr, ...$params);
                 
                 $stmt4->execute();
