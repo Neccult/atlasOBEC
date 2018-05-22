@@ -153,6 +153,7 @@ class EixoQuatro {
 	public static function find($var, $parc, $uf, $tipo, $anos, $slc){
 
 		self::connect();
+        $params = [];
         $stmt = mysqli_stmt_init(self::$conn);
         
         $query = "SELECT * FROM ".self::$table." AS ex"
@@ -163,26 +164,31 @@ class EixoQuatro {
                ." WHERE ex.Numero = ?"
                ." AND ex.Ano = ?";
         
-		
+		$params[] = $parc;
+        $params[] = $uf;
+        $params[] = $tipo;
+        $params[] = $var;
+        $params[] = $anos;
+        
         if($slc == 0)
             $query .= " AND ex.Consumo = 1";
         else{
             $query .= " AND ex.Consumo = 0";
         }
-
-        if ($stmt->prepare($stmt, $query)) {
-            $stmt->bind_param(
-                'sssss',
-                $parc,
-                $uf,
-                $tipo,
-                $var,
-                $anos
-            );
-        }
         
-        $stmt->execute();
-        $allObjects = self::fetch_results($stmt);
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr .= 's';
+        }
+        $allObjects = [];
+        
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param($paramsStr, ...$params);
+            
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+        }
         
         return $allObjects;
 	}
