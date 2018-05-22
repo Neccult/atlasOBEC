@@ -102,16 +102,15 @@ class EixoQuatro {
 		self::connect();
 
 		$query = "SELECT MAX(Ano) AS Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 GROUP BY Numero, Consumo";
-        $result = mysqli_query(self::$conn, $query);
-        		
-		self::disconnect();
 
+        $stmt = mysqli_stmt_init(self::$conn);
+        mysqli_stmt_prepare($stmt, $query);        
+        $stmt->execute();
+        
         $allObjects = array();
-
-        while($obj = mysqli_fetch_object($result, 'EixoQuatro')){
-            $allObjects[] = $obj;
-        }
-
+        $allObjects = self::fetch_results($stmt);
+		self::disconnect();
+        
 		return $allObjects;
 	}
 

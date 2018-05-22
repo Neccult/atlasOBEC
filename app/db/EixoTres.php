@@ -100,15 +100,14 @@ class EixoTres {
 		self::connect();
 
 		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND idCadeia = 0 AND PessoaFisica is NULL  GROUP BY Numero";
-		$result = mysqli_query(self::$conn, $query);
-		
+
+        $stmt = mysqli_stmt_init(self::$conn);
+        mysqli_stmt_prepare($stmt, $query);        
+        $stmt->execute();
+        
+        $allObjects = array();
+        $allObjects = self::fetch_results($stmt);
 		self::disconnect();
-
-		$allObjects = array();
-
-        while($obj = mysqli_fetch_object($result, 'EixoTres')){
-            $allObjects[] = $obj;
-        }
 
 		return $allObjects;
 
