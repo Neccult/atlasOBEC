@@ -1282,7 +1282,7 @@
 							},
 							{
 								"primeira":[
-									{"e": "de valor exportado do Brasil para [prc] [cad]"},
+									{"e": "de valor exportado [uf] para [prc] [cad]"},
 									{"i": "de valor importado [prc] para o Brasil [cad]"},
 									{"s": "de saldo comercial entre [uf] e [prc]"},
 									{"c": "de corrente de comércio [uf] e [prc]"}
@@ -1316,7 +1316,7 @@
 							{
 								"primeira":[
 									{"e": "de participação no valor exportado [uf] para [prc] [cad]"},
-									{"i": "de participação no valor importado[prc] para [uf] [cad]"},
+									{"i": "de participação no valor importado [prc] para [uf] [cad]"},
 									{"c": "de participação na corrente de comércio entre [uf] e [prc] [cad]"}
 								],
 								"segunda":[
@@ -1527,8 +1527,8 @@
 							},
 							{
 								"primeira":[
-									{"e": "exportados do Brasil para [prc] [cad]"},
-									{"i": "importados [prc] para o Brasil [cad]"},
+									{"e": "exportados [uf] para [prc] [cad]"},
+									{"i": "importados [prc] para [uf] [cad]"},
 									{"s": "de saldo comercial entre [uf] e [prc] [cad]"},
 									{"c": "do [uf] com [prc] [cad]"}
 								],
