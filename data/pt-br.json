@@ -932,7 +932,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				},
+                "mapa_valores": ""
 			},
 			{
 				"id":"18",
@@ -949,7 +950,8 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+               "mapa_valores": ""
 			},
 			{
 				"id":"19",
@@ -967,7 +969,8 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"3",
@@ -1005,7 +1008,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
-				}
+				},
+                "mapa_valores": ""
 			},
 			{
 				"id":"4",
@@ -1036,7 +1040,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
-				}
+				},
+                "mapa_valores": ""
 			},
 			{
 				"id":"5",
@@ -1064,7 +1069,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+               "mapa_valores": ""
 			},
 			{
 				"id":"7",
@@ -1092,7 +1098,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
-				}
+				},
+                "mapa_valores": ""
 			},
 			{
 				"id":"8",
@@ -1130,7 +1137,8 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+               "mapa_valores": ""
 			},
 			{
 				"id":"9",
@@ -1170,7 +1178,8 @@
 				],
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				},
+                "mapa_valores": ""
 			},
 			{
 				"id":"10",
@@ -1184,7 +1193,8 @@
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"11",
@@ -1217,7 +1227,8 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"12",
@@ -1250,7 +1261,8 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"13",
@@ -1283,7 +1295,8 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"14",
@@ -1301,7 +1314,8 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"15",
@@ -1319,7 +1333,8 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"16",
@@ -1337,7 +1352,8 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
-				]
+				],
+                "mapa_valores": ""
 			},
 			{
 				"id":"17",

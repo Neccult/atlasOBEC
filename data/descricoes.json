@@ -811,7 +811,7 @@
 				"ocp": [
 					{
 						"primeira":[
-							{"": "IHH DE NÚMERO DO TRABALHADORES POR UF"},
+							{"": "IHH DE NÚMERO DOS TRABALHADORES POR UF"},
 							{"u": ""},
 							{"s": ""},
 							{"d": ""},
@@ -821,7 +821,7 @@
 							{"usd": ""}
 						],
 						"segunda":[
-							{"": "IHH DE NÚMERO DO TRABALHADORES POR SETOR"},
+							{"": "IHH DE NÚMERO DOS TRABALHADORES POR SETOR"},
 							{"u": ""},
 							{"s": ""},
 							{"d": ""},
@@ -833,7 +833,7 @@
 					},
 					{
 						"primeira":[
-							{"": "IHH DE NÚMERO DO TRABALHADORES POR ATIVIDADES RELACIONADAS"},
+							{"": "IHH DE NÚMERO DOS TRABALHADORES POR ATIVIDADES RELACIONADAS"},
 							{"u": ""},
 							{"s": ""},
 							{"d": ""},
@@ -843,7 +843,7 @@
 							{"usd": ""}
 						],
 						"segunda":[
-							{"": "IHH DE NÚMERO DO TRABALHADORES POR ATIVIDADES CULTURAIS"},
+							{"": "IHH DE NÚMERO DOS TRABALHADORES POR ATIVIDADES CULTURAIS"},
 							{"u": ""},
 							{"s": ""},
 							{"d": ""},
@@ -917,12 +917,12 @@
 						"primeira":[
 							{"": "FINANCIAMENTO À CULTURA NO BRASIL"},
 							{"u": "FINANCIAMENTO À CULTURA [uf]"},
-							{"s": "FINANCIAMENTO À CULTURA PARA O SETOR [cad] NO BRASIL"},
+							{"s": "FINANCIAMENTO À CULTURA AO SETOR [cad] NO BRASIL"},
 							{"m": "FINANCIAMENTO À CULTURA [mec] NO BRASIL"},
-							{"us": "FINANCIAMENTO À CULTURA PARA O SETOR [cad] [uf]"},
+							{"us": "FINANCIAMENTO À CULTURA AO SETOR [cad] [uf]"},
 							{"um": "FINANCIAMENTO À CULTURA [mec] [uf]"},
-							{"sm": "FINANCIAMENTO À CULTURA [mec] PARA O SETOR [cad] NO BRASIL"},
-							{"usm": "FINANCIAMENTO À CULTURA [mec] PARA O SETOR [cad] [uf]"}
+							{"sm": "FINANCIAMENTO À CULTURA [mec] AO SETOR [cad] NO BRASIL"},
+							{"usm": "FINANCIAMENTO À CULTURA [mec] AO SETOR [cad] [uf]"}
 						],
 						"segunda":[
 							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA NO BRASIL"},
@@ -1048,11 +1048,11 @@
 						"primeira":[
 							{"": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
 							{"u": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA [uf]"},
-							{"s": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA PARA O SETOR [cad] NO BRASIL"},
+							{"s": "FINANCIAMENTO AO SETOR [cad] VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
 							{"p": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] NO BRASIL"},
-							{"us": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA PARA O SETOR [cad] [uf]"},
+							{"us": "FINANCIAMENTO AO SETOR [cad] VIA MECENATO ADVINDO DA ESFERA PRIVADA [uf]"},
 							{"up": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] [uf]"},
-							{"usp": "FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DE [pfj] PARA O SETOR [cad] [uf]"}
+							{"usp": "FINANCIAMENTO AO SETOR [cad] VIA MECENATO ADVINDO DE [pfj] [uf]"}
 						],
 						"segunda":[
 							{"": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO DA ESFERA PRIVADA NO BRASIL"},
@@ -1150,12 +1150,14 @@
 					{
 						"primeira":[
 							{"m": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
+							{"sm": "PROJETOS PROPOSTOS PARA CAPTAÇÃO DO SETOR [cad] VIA MECENATO [uf]"},
 							{"um": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
-							{"usm": "PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+							{"usm": "PROJETOS PROPOSTOS PARA CAPTAÇÃO DO SETOR [cad] VIA MECENATO [uf]"}
 						],
 						"segunda":[
 							{"m": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
-							{"um": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"sm": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO DO SETOR [cad] VIA MECENATO [uf]"},
+							{"um": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
 							{"usm": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
 						]
 					}
@@ -1168,12 +1170,12 @@
 						"primeira":[
 							{"m": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
 							{"um": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
-							{"sm": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
-							{"usm": "PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
+							{"sm": "PROJETOS APROVADOS PARA CAPTAÇÃO DO SETOR [cad] VIA MECENATO [uf]"},
+							{"usm": "PROJETOS APROVADOS PARA CAPTAÇÃO DO SETOR [cad] VIA MECENATO [uf]"}
 						],
 						"segunda":[
 							{"m": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
-							{"um": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
+							{"um": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO NO BRASIL"},
 							{"sm": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"},
 							{"usm": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]"}
 						]
@@ -1187,8 +1189,8 @@
 						"primeira":[
 							{"m": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO NO BRASIL"},
 							{"um": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [uf]"},
-							{"sm": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO NO BRASIL"},
-							{"usm": "DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [uf]"}
+							{"sm": "DIAS PARA APROVAÇÃO DE PROJETOS DO SETOR [cad] VIA MECENATO NO BRASIL"},
+							{"usm": "DIAS PARA APROVAÇÃO DE PROJETOS DO SETOR [cad] VIA MECENATO [uf]"}
 						]
 					}
 				]
@@ -1198,10 +1200,10 @@
 				"slc": [
 					{
 						"primeira":[
-							{"m": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO NO BRASIL"},
-							{"um": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [uf]"},
-							{"sm": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO NO BRASIL"},
-							{"usm": "RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [uf]"}
+							{"m": "RAZÃO ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO NO BRASIL"},
+							{"um": "RAZÃO ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [uf]"},
+							{"sm": "RAZÃO ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS DO SETOR [cad] VIA MECENATO NO BRASIL"},
+							{"usm": "RAZÃO ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS DO SETOR [cad] VIA MECENATO [uf]"}
 						]
 					}
 				]
@@ -1275,7 +1277,7 @@
 									{"e": "do valor exportado [uf]"},
 									{"i": "do valor importado para [uf]"},
 									{"s": ""},
-									{"c": "da corrente de comércio entre [uf] e [prc]"}
+									{"c": "da corrente de comércio do Brasil"}
 								]
 							},
 							{
@@ -1289,7 +1291,7 @@
 									{"e": "do valor exportado pelo Brasil para [prc]"},
 									{"i": "do valor importado pelo Brasil [prc]"},
 									{"s": ""},
-									{"c": "da corrente de comércio entre [uf] e [prc]"}
+									{"c": "da corrente de comércio entre Brasil e [prc]"}
 								]
 							}
 
@@ -1520,7 +1522,7 @@
 									{"e": "dos kg exportados [uf]"},
 									{"i": "dos kg importados para [uf]"},
 									{"s": ""},
-									{"c": "dos kg transacionados entre [uf] e [prc] [cad]"}
+									{"c": "dos kg transacionados entre [uf] e o Mundo"}
 								]
 							},
 							{
@@ -1528,13 +1530,13 @@
 									{"e": "exportados do Brasil para [prc] [cad]"},
 									{"i": "importados [prc] para o Brasil [cad]"},
 									{"s": "de saldo comercial entre [uf] e [prc] [cad]"},
-									{"c": " [uf] com [prc] [cad]"}
+									{"c": "do [uf] com [prc] [cad]"}
 								],
 								"segunda":[
-									{"e": "dos kg exportados [uf]"},
-									{"i": "dos kg importados para [uf]"},
+									{"e": "dos kg exportados pelo Brasil para [prc]"},
+									{"i": "dos kg importados pelo Brasil [prc]"},
 									{"s": ""},
-									{"c": "dos kg transacionados entre [uf] e [prc] [cad]"}
+									{"c": "dos kg transacionados entre Brasil e [prc] [cad]"}
 								]
 							}
 

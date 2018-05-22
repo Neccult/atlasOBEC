@@ -119,6 +119,8 @@ function updateDescription(descricoes, eixo, vrv, slc){
             key += 'p'
         }
 
+        console.log(key)
+
     } else {
         switch(typ){
             case '1': key = 'e'; break;
@@ -215,6 +217,8 @@ function updateDescription(descricoes, eixo, vrv, slc){
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
             desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
 
+
+
             $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
             $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
             $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc) 
@@ -274,26 +278,30 @@ function updateDescription(descricoes, eixo, vrv, slc){
                 nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
             }
             if(key == 'c'){
-                if(vrv != 13)
+                if(url['var'] == 13){
                     nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
-                else
-                    nomeestado = getPrepos(uf_text) + ' '+uf_text;
-                nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
-            }
-            if(key == 's'){
-                nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
+                }
+                else{
+                    nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
+                }
                 nomeprc = mapPronome(getPrepos(prc_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+prc_text
             }
             if(cad > 0){
-                if(key == 'e')
+                if(url['var'] == 13){
                     nomecad = "PELO SETOR "+cad_text;
-                else 
+                }
+                else{
                     nomecad = "NO SETOR "+cad_text;
+                }
+
             } else {
-                if(key == 'e')
-                    nomecad = "PELOS SETORES CULTURAIS E CRIATIVOS";
-                else 
-                    nomecad = "NOS SETORES CULTURAIS E CRIATIVOS";
+                if(url['var'] == 13){
+                    nomecad = "PELOS SETORES CULTURAIS E CRIATIVOS"
+                }
+                else{
+                    nomecad = "NOS SETORES CULTURAIS E CRIATIVOS"
+                }
+
             }
             if("primeira" in desc_var.slc[slc]){
                 desc_var.slc[slc].primeira.forEach(function(d){
@@ -316,6 +324,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
                     }
                 }) 
             }
+            
             desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
             desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
@@ -1613,7 +1622,13 @@ function descDesag(desc, deg){
         case '1':
             desc = desc.replace("[deg]", "DE EMPRESAS DE PORTE "+tipo_deg); break;
         case '2':
-            desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
+            if(url['var']==6){
+                desc = desc.replace("DE TRABALHO [deg]", "DOS TRABALHADORES DO SEXO "+tipo_deg); break;
+
+            }
+            else{
+                desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
+            }
         case '3':
             desc = desc.replace("[deg]", "COM IDADE ENTRE "+tipo_deg+" ANOS"); break;
         case '4':
