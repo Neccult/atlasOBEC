@@ -213,7 +213,7 @@ class EixoDois {
 
         $params[] = $var;
         $params[] = $uf;
-
+        
         $stmt = mysqli_stmt_init(self::$conn);
 
         if($ocp == 0){
@@ -237,7 +237,7 @@ class EixoDois {
 
         if ($anos > 0) {
             $query .= " AND Ano = ?";
-
+            $params[] = $anos;
         }
         
         if($ocp == 0) {
