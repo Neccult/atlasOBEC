@@ -1151,9 +1151,13 @@ function updateBreadUF(eixo, vrv){
         case 2:
             $('.bread-select[data-id=uf]').prop("disabled", false);
             $('.bread-select[data-id=cad]').prop("disabled", false);
-            
+
             if(vrv == 15 || vrv == 16 || vrv == 10){
                 $('.bread-select[data-id=uf]').prop("disabled", true);
+                $('.bread-select[data-id=cad]').prop("disabled", true);
+
+            }
+            if(vrv == 17){
                 $('.bread-select[data-id=cad]').prop("disabled", true);
 
             }

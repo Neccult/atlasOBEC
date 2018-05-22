@@ -2188,12 +2188,16 @@ $(document).ready(function(){
 
                 if(eixo_atual == 2){
                     updateDefaultMec(url['var']);
-
+                    if(url['var'] != 17){
+                        $(".value-info-title").text("")
+                    }
 
                     if(url['var'] == 18 || url['var'] == 19)
                         $("#btn-opt").find(".col-btn").css("display", "block")
                     else
                         $("#btn-opt").find(".col-btn").css("display", "none")
+
+                    
 
 
                 }
