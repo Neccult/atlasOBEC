@@ -126,7 +126,7 @@ class EixoUm {
 
         $params[] = $var;
         $params[] = $cad;
-        $params[] = $cad;
+        $params[] = $prt;
 
         $paramsStr = '';
         foreach ($params as $param) {
