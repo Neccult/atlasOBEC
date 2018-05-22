@@ -128,11 +128,7 @@ class EixoTres {
             $obj = self::fetch_results($stmt)[0];
         }
 
-		$result = mysqli_query(self::$conn, $query);
-		
-		self::disconnect();
-
-		$obj = mysqli_fetch_object($result, 'EixoTres');
+		$obj = mysqli_query(self::$conn, $query);
 		
 		$ano = $obj->Ano;
 
