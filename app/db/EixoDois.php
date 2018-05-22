@@ -451,8 +451,8 @@ class EixoDois {
                     $query .= " AND idCadeia = ?";
                     $params[] = $cad;
                 }
-                $query .= " AND idOcupacao = 0";
             }
+            $query .= " AND idOcupacao = 0";
         } else if($var == 6 && $ocp != 0) {
             $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
         } else if($ocp == 1){
@@ -468,7 +468,7 @@ class EixoDois {
         if(in_array($var, $var_single_deg) || ($var == 6 && $uos == 0)){
             if($desag == 2 && $sexos >= 0) {
                 $query .= " AND Sexo = ?";
-                $params[] = $sexo;
+                $params[] = $sexos;
             } else {
                 $query .= " AND Sexo is NULL";
             }
