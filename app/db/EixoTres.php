@@ -117,7 +117,18 @@ class EixoTres {
 	public static function getAnoDefault($var){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND Numero = ".$var." GROUP BY Numero";
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND Numero = ? GROUP BY Numero";
+
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                's',
+                $var
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+
 		$result = mysqli_query(self::$conn, $query);
 		
 		self::disconnect();

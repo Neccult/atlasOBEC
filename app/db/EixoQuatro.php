@@ -115,16 +115,25 @@ class EixoQuatro {
 		return $allObjects;
 	}
 
-	public static function getAnoDefault($var){
+        
+    public static function getAnoDefault($var){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_4` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_4` WHERE `idUF` = 0 AND Numero = ? GROUP BY Numero";
 		$result = mysqli_query(self::$conn, $query);
-		
-		self::disconnect();
 
-		$obj = mysqli_fetch_object($result, 'EixoQuatro');
-		
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                's',
+                $var
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+        
+		self::disconnect();
+        
 		$ano = $obj->Ano;
 
 		return $ano;

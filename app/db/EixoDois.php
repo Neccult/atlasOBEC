@@ -113,22 +113,29 @@ class EixoDois {
 
         return $allObjects;
     }
-    
-    public static function getAnoDefault($var){
+
+	public static function getAnoDefault($var){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_2` WHERE `idUF` = 0 AND Numero = ".$var." GROUP BY Numero";
-		$result = mysqli_query(self::$conn, $query);
-		
+		$query = "SELECT MAX(Ano) AS Ano FROM `Eixo_2` WHERE (idUF = 11 or idUF = 0) AND Numero = ? GROUP BY Numero";
+
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            $stmt->bind_param(
+                's',
+                $var
+            );
+            $stmt->execute();
+            $obj = self::fetch_results($stmt)[0];
+        }
+
 		self::disconnect();
 
-		$obj = mysqli_fetch_object($result, 'EixoDois');
-		
 		$ano = $obj->Ano;
 
 		return $ano;
 	}
-
+    
     /**
      * fetch_results - para funcionar com prepared statements
      * @param mixed $stmt
