@@ -343,7 +343,7 @@ class EixoDois {
             $stmt->bind_param($paramsStr, ...$params);
             
             $stmt->execute();
-            $obj = self::fetch_results($stmt)[0];
+            $allObjects = self::fetch_results($stmt);
         }
         
         if($ocp == 3){
