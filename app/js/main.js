@@ -22,7 +22,7 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
-    var newHash = window.location.hash;
+	newHash = window.location.hash;
 	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
@@ -31,7 +31,7 @@ function controlVar(clickVar){
 }
 
 function controlVarPage(clickVar){
-    var newHash = window.location.hash;
+    newHash = window.location.hash;
     window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
     /* variáveis com valores default */
 }
@@ -1095,15 +1095,15 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadPage(){
-    var newHash = window.location.hash.substring(1);
-    var menuView = 'menudesktop.php?'+newHash+'=1';
-    if(windowWidth<1199){
+	newHash = window.location.hash.substring(1);
+	var menuView = 'menudesktop.php?'+newHash+'=1';
+	if(windowWidth<1199){
         menuView = 'menumobile.php?'+newHash+'=1';
         $('#section0').css("display", "none")
-	
+
         loadMobile();
-	
-	
+
+
     }
 
 
@@ -1141,7 +1141,7 @@ function controlPageWidth(){
 		windowWidth = newWidth;
 		var wait;
 		clearTimeout(wait);
-		wait = setTimeout(location.reload(), 1); /* reload pg! */
+		wait = setTimeout(location.reload(), 100); /* reload pg! */
 	}
 }
 
@@ -1161,7 +1161,7 @@ function smoothScroll(link){
         if (target.length) {
             $('html, body').animate({
                 scrollTop: target.offset().top
-            }, 1);
+            }, 500);
             return false;
         }
     }
@@ -1679,6 +1679,11 @@ function switchToOcupations() {
 
 
 $(document).ready(function(){
+
+   // if($(this).find("#resultado_view")[0]){
+   //      console.log(url)
+   //  }
+
 	$(window).on('hashchange', function() {
         loadPage();
         window.location.href = window.location.pathname+window.location.hash;
@@ -2246,35 +2251,14 @@ $(document).ready(function(){
         }
     });
 
-    var getLastYear = function() {
-	var lastYear = 2016;
-	return lastYear;
-    }
-    
+
     $(document).on('change', ".bread-eixo", function(){
-	var current = $(this).val(),
-	    urlFragment = 'var=1&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=' + getLastYear() + '&eixo=';
-	    
-	switch (current) {
-	case 'empreendimentos':
-	    urlFragment += 'empreendimentos#empreendimentos';
-	    break;
-	case 'mercado':
-	    urlFragment += 'mercado#mercado';
-	    break;
-	case 'politicas':
-	    urlFragment += 'politicas#politicas';
-	    break;
-	case 'comercio':
-	    urlFragment += 'comercio#comercio';
-	    break;
-	}	
-	
-        parent.window.location = "page.php?"+ urlFragment;
+        parent.window.location = "page.php#"+$(this).val();
     });
 
 	/* download doc */
 	$(document).on('click', '.button-control-down', function(){
+
 		var downloadUrl = $(this).siblings('.url-input').val();
 		window.open(downloadUrl, '_blank');
 
