@@ -338,12 +338,12 @@ class EixoDois {
         }
         $allObjects = [];
         
-        $stmt = mysqli_stmt_init(self::$conn);
-        if (mysqli_stmt_prepare($stmt, $query)) {
-            $stmt->bind_param($paramsStr, ...$params);
+        $stmt2 = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt2, $query)) {
+            $stmt2->bind_param($paramsStr, ...$params);
             
-            $stmt->execute();
-            $allObjects = self::fetch_results($stmt);
+            $stmt2->execute();
+            $allObjects = self::fetch_results($stmt2);
         }
         
         if($ocp == 3){
@@ -363,12 +363,12 @@ class EixoDois {
                 $paramsStr .= 's';
             }
             
-            $stmt = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt, $query)) {
-                $stmt->bind_param($paramsStr, ...$params);
+            $stmt3 = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt3, $query)) {
+                $stmt3->bind_param($paramsStr, ...$params);
                 
-                $stmt->execute();
-                $obj1 = self::fetch_results($stmt)[0];
+                $stmt3->execute();
+                $obj1 = self::fetch_results($stmt3)[0];
             }
 
             
@@ -380,12 +380,12 @@ class EixoDois {
                             ." GROUP BY Ano";
 
             
-            $stmt = mysqli_stmt_init(self::$conn);
-            if (mysqli_stmt_prepare($stmt, $query)) {
-                $stmt->bind_param($paramsStr, ...$params);
+            $stmt4 = mysqli_stmt_init(self::$conn);
+            if (mysqli_stmt_prepare($stmt4, $query)) {
+                $stmt4->bind_param($paramsStr, ...$params);
                 
-                $stmt->execute();
-                $obj2 = self::fetch_results($stmt)[0];
+                $stmt4->execute();
+                $obj2 = self::fetch_results($stmt4)[0];
             }            
             $brasil_total = $obj1->Valor - $obj2->Valor;
             
