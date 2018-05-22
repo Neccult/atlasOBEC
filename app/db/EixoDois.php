@@ -322,7 +322,8 @@ class EixoDois {
                 ." AND Formalidade = 0"
                 ." AND ex.Sexo IS NULL";
         };
-        
+
+        $params = [];
         $params[] = $cad;
         $params[] = $ocp;
         $params[] = $var;
