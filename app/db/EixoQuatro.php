@@ -251,7 +251,7 @@ class EixoQuatro {
             $params[] = $cad;
             $params[] = $tipo;
             $params[] = $var;
-
+            
             if ($anos > 0) {
                 $query .= " AND ex.Ano = ?";
                 $params[] = $anos;
@@ -304,9 +304,6 @@ class EixoQuatro {
                 $allObjects = self::fetch_results($stmt);
             }
 		}
-
-        $stmt->execute();
-        $allObjects = self::fetch_results($stmt);
         
 		self::disconnect();
 		
@@ -338,7 +335,7 @@ class EixoQuatro {
                ." WHERE ex.Numero = ?";
 
         $params[] = $parc;
-        $params[] = $ufs;
+        $params[] = $uf;
         $params[] = $cad;
         $params[] = $tipo;
         $params[] = $var;
