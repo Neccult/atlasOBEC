@@ -1709,8 +1709,7 @@
 			{"name":"Entretenimento","value":"7"},
 			{"name":"Música","value":"8"},
 			{"name":"Patrimônio","value":"9"},
-			{"name":"Publicidade","value":"10"},
-			{"name":"Outros","value":"11"}
+			{"name":"Publicidade","value":"10"}
 		],
 		"ocp":[
 			{"name":"Todos", "value":"3"},
