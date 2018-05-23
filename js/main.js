@@ -2142,7 +2142,7 @@ $(document).ready(function(){
             //quando muda a variável, é preciso trocar a UF para 'Brasil'
             
             if($(this).attr('data-id') =='var'){
-
+               
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
@@ -2155,6 +2155,9 @@ $(document).ready(function(){
                     switchToSetores(); 
                     $('#setor').addClass("active");
                     $('#ocupacao').removeClass("active");
+                }
+                else{
+                    switchToOcupations();
                 }
                 if(url['ocp'] > 0)
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 1, url);
@@ -2219,7 +2222,6 @@ $(document).ready(function(){
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
                     
                 }
-                
             }
             if($(this).attr('data-id') == 'deg') {
 
@@ -2249,6 +2251,7 @@ $(document).ready(function(){
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
             updateIframe(url);
+
         }
         else {
             parent.window.location = "page.php#"+$(this).val();

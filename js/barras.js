@@ -1137,9 +1137,10 @@ else {
             })])
             .range([height, 0]);
 
-        var colors = color_eixo1();
-
-
+        var colors = d3.scale.linear()
+                    .domain([0, dados.length])
+                    .range([colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient['2']])
+                    
         // Define and draw axes
         var yAxis_eixo1 = d3.svg.axis()
             .scale(y_eixo1)
@@ -1172,7 +1173,8 @@ else {
             .enter().append("g")
             .attr("class", "cost")
             .style("fill", function (d, i) {
-                return colors[i];
+                console.log(colors(i))
+                return colors(i);
             });
 
         var rect = groups.selectAll("rect")

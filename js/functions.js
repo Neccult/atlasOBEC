@@ -1457,158 +1457,8 @@ function getPrepos(uf){
     return prepos[uf];
 }
 
-function updateDescEmpreendimentos(desc, vrv){
-    var uf = $(window.parent.document).find(".bread-select[data-id=uf]").val()
-    var uf_text = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text()
-    var cad_text = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-    var cad = $(window.parent.document).find(".bread-select[data-id=cad]").val();
-    var prt = $(window.parent.document).find(".bread-select[data-id=deg]").val();
-    var prt_text = $(window.parent.document).find(".bread-select[data-id=deg] option:selected").text();
-
-    array_variaveis = [1, 4, 5, 6, 7, 8]
-    if(array_variaveis.includes(parseInt(vrv))){
-        if(prt == 0){
-            if(uf == 0 && cad == 0){
-                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "").replace("[uf]", "NO BRASIL")
-            } else if(cad == 0){
-                uf_text = getPrepos(uf_text) +' '+ uf_text
-                uf_text = mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
-                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "").replace("[uf]", uf_text)
-            } else if(cad > 0){
-                uf_text = getPrepos(uf_text) +' '+ uf_text
-                uf_text = mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
-                description = desc.replace("[cad]", "DO SETOR "+cad_text).replace("[prt]", "").replace("[uf]", uf_text)
-            }
-        } else{
-            uf_text = getPrepos(uf_text) +' '+ uf_text
-            if(uf == 0 && cad == 0){
-                description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "DE "+prt_text).replace("[uf]", "")
-            } else if(cad == 0){
-                if(vrv >= 4 && vrv <= 7){
-                    description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "DE "+prt_text).replace("[uf]", uf_text)   
-                } else {
-                    description = desc.replace("[cad]", "CULTURAIS E CRIATIVAS").replace("[prt]", "DE "+prt_text).replace("[uf]", "")
-                }
-            } else if(cad > 0){
-                uf_text = mapPronome(uf_text, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
-                description = desc.replace("[cad]", "DO SETOR "+cad_text).replace("[prt]", "DE "+prt_text).replace("[uf]", uf_text)
-            }
-        }
-
-    }
-    else{
-        var vrv = url['var'];
-        if(vrv == 2 || vrv == 3){   
-            desc = descByANO(0, desc)
-            desc = descByPRT(0, desc)
-            if(cad == 0)
-                desc = desc.replace("[cad]", "CULTURAIS E CRIATIVAS")
-            else
-                desc = desc.replace("[cad]", "DO SETOR "+cad_text)
-            desc = descByPRT(0, desc)
-            uf_text = getPrepos(uf_text) +' '+ uf_text
-            description = desc.replace("[uf]", uf_text)
-        }
-        else if(vrv == 9){
-            if(cad == 0 && uf == 0){
-                uf_text = getPrepos(uf_text) +' '+ uf_text
-                description = desc.replace("[cad]", " CULTURAIS E CRIATIVAS").replace("[uf]", uf_text).replace("{uf}", uf_text)
-            }
-            else if(cad == 0 && uf != 0){
-                uf_text = getPrepos(uf_text) +' '+ uf_text
-                description = desc.replace("[cad]", " CULTURAIS E CRIATIVAS").replace("[uf]", uf_text).replace("{uf}", uf_text)
-            }
-            else{
-
-                uf_text = getPrepos(uf_text) +' '+ uf_text
-                description = desc.replace("[cad]", "DO SETOR " + cad_text).replace("[uf]", uf_text).replace("{uf}", uf_text)
-            }
-        } else {
-            description = desc
-        }
-    }
-
-    //$(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
-
-
-}
-
 function getViewMapa(){
     $(window.parent.document).find("#container_mapa").find("")
-}
-
-
-function updateDescPercentComercio(desc, vrv, nomeestado){
-    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
-    prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
-    typ = $(window.parent.document).find(".opt-select[data-id=typ] option:selected").text();
-    desc = desc.replace("()", '[cad]')
-    if(getPrepos(nomeestado)){
-        nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
-    }
-    else{
-        nomeestado = "DO BRASIL"
-    }
-
-    if(vrv == 1 || vrv == 13){
-
-        cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-
-        switch(typ){
-            case 'Exportação':
-                typ = "EXPORTADO";
-                prc = mapPronome(getPrepos(prc) + ' ' +prc, ["DE", "DA", "DO"], ["PARA", "PARA A", "PARA O"]);
-                if(url['cad'] == 0)
-                    return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('[cad]', "PELOS SETORES CULTURAIS E CRIATIVOS");
-                else
-                    return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('[cad]', "PELO SETOR DE "+ cad);
-
-            case 'Importação':
-
-                prc = mapPronome(getPrepos(nomeestado) + ' ' +nomeestado, ["DE", "DA", "DO"], ["PARA", "PARA A", "PARA O"]);
-                typ = "IMPORTADO";
-                if(url['cad'] == 0)
-                    return desc.replace('[uf]', prc).replace('[]', nomeestado).replace('<>', typ).replace('[cad]', "PELOS SETORES CULTURAIS");
-                else
-                    return desc.replace('[uf]', prc).replace('[]', nomeestado).replace('<>', typ).replace('[cad]', "PELO SETOR DE "+ cad);
-            case 'Saldo Comercial':
-                return ''
-            case 'Corrente de Comércio':
-
-                prc = mapPronome(getPrepos(prc) + ' ' +prc, ["DE", "DA", "DO"], ["COM", "COM A", "COM O"])
-                cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-                desc = desc.replace("DO VALOR <>", "DA CORRENTE DE COMÉRCIO")
-                if(cad == "TODOS" || " TODOS"){
-                    cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
-                } else {
-                    cad = "PELO SETOR DE" + cad;
-                }
-                return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('[cad]', cad);
-        }
-    }
-    /*else if(vrv == 13){
-        switch(typ){
-            case 'Exportação':
-                typ = "EXPORTADO";
-                prc = mapPronome(getPrepos(prc) + ' ' +prc, ["DE", "DA", "DO"], ["PARA", "PARA A", "PARA O"]);
-                return desc.replace('[uf]', "DO BRASIL").replace('<>', typ).replace('[]', prc);
-            case 'Importação':
-                typ = "IMPORTADO";
-                return desc.replace('[uf]', prc).replace('[]', "PARA O BRASIL").replace('<>', typ);
-            case 'Saldo Comercial':
-                return ''
-            case 'Corrente de Comércio':
-                cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-                desc = desc.replace("DO VALOR <>", "DA CORRENTE DE COMÉRCIO")
-                if(cad == "TODOS" || " TODOS"){
-                    cad = "PELOS SETORES CULTURAIS E CRIATIVOS"
-                } else {
-                    cad = "PELO SETOR DE" + cad;
-                }
-                prc = mapPronome(getPrepos(prc) + ' ' +prc, ["DE", "DA", "DO"], ["COM", "COM A", "COM O"])
-                return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('[cad]', cad);
-        }
-    }*/
 }
 
 function mapPronome(string, array_pron, array_new_pron){
@@ -1627,8 +1477,7 @@ function descDesag(desc, deg){
             desc = desc.replace("[deg]", "DE EMPRESAS DE PORTE "+tipo_deg); break;
         case '2':
             if(url['var']==6){
-                desc = desc.replace("DE TRABALHO [deg]", "DOS TRABALHADORES DO SEXO "+tipo_deg); break;
-
+                desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
             }
             else{
                 desc = desc.replace("[deg]", "DO SEXO "+tipo_deg); break;
@@ -1636,23 +1485,53 @@ function descDesag(desc, deg){
         case '3':
             desc = desc.replace("[deg]", "COM IDADE ENTRE "+tipo_deg+" ANOS"); break;
         case '4':
-            if(tipo_deg == "Sem Instrução")
-                desc = desc.replace("[deg]", "E QUE NÃO POSSUEM INSTRUÇÃO")
-            else
-                desc = desc.replace("[deg]", "E QUE POSSUEM ESCOLARIDADE DE NÍVEL "+tipo_deg); break;
-        case '5': 
-            switch(tipo_deg){
-                case "Indígena":
-                    tipo_deg = "DOS DECLARADOS INDÍGENAS"; break;
-                case "Branca":
-                    tipo_deg = "DOS DECLARADOS BRANCOS"; break;
-                case "Preta":
-                    tipo_deg = "DOS DECLARADOS PRETOS"; break;
-                case "Amarela":
-                    tipo_deg = "DOS DECLARADOS AMARELOS"; break;
-                case "Parda":
-                    tipo_deg = "DOS DECLARADOS PARDOS"; break;
+            if(url['var'] == 6){
+
+                if(tipo_deg == "Sem Instrução")
+                    desc = desc.replace("[deg]", "QUE NÃO POSSUEM INSTRUÇÃO")
+                else
+                    desc = desc.replace("[deg]", "QUE POSSUEM ESCOLARIDADE DE NÍVEL "+tipo_deg); break;
             }
+            else{
+                if(tipo_deg == "Sem Instrução")
+                    desc = desc.replace("[deg]", "E QUE NÃO POSSUEM INSTRUÇÃO")
+                else
+                    desc = desc.replace("[deg]", "E QUE POSSUEM ESCOLARIDADE DE NÍVEL "+tipo_deg); break;
+            }
+
+
+
+        case '5':
+
+            if(url['var'] == 6){
+                switch(tipo_deg){
+                    case "Indígena":
+                        tipo_deg = "DECLARADOS INDÍGENAS"; break;
+                    case "Branca":
+                        tipo_deg = "DECLARADOS BRANCOS"; break;
+                    case "Preta":
+                        tipo_deg = "DECLARADOS PRETOS"; break;
+                    case "Amarela":
+                        tipo_deg = "DECLARADOS AMARELOS"; break;
+                    case "Parda":
+                        tipo_deg = "DECLARADOS PARDOS"; break;
+                }
+            }
+            else{
+                switch(tipo_deg){
+                    case "Indígena":
+                        tipo_deg = "DOS DECLARADOS INDÍGENAS"; break;
+                    case "Branca":
+                        tipo_deg = "DOS DECLARADOS BRANCOS"; break;
+                    case "Preta":
+                        tipo_deg = "DOS DECLARADOS PRETOS"; break;
+                    case "Amarela":
+                        tipo_deg = "DOS DECLARADOS AMARELOS"; break;
+                    case "Parda":
+                        tipo_deg = "DOS DECLARADOS PARDOS"; break;
+                }
+            }
+
             desc = desc.replace("[deg]", tipo_deg); break; 
         case '6': 
             if(tipo_deg == "Formal"){
@@ -1680,264 +1559,6 @@ function descDesag(desc, deg){
     return desc;
 }
 
-function descIntBySelectedParameters(desc, ocp, uf, cad, deg){
-    nome_uf = getNomeUF(uf)
-    desc_uf = getPrepos(nome_uf)+" "+nome_uf;
-
-    vrv = parseInt($(window.parent.document).find("iframe").attr("src").match(/var=[0-9]+/)[0].replace("var=", ''))
-
-    if(deg == 0)
-        var deg_nome = "ESCOLHER"
-    else
-        var deg_nome = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").parent().text();
-
-    var tipo_deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").text();
-
-    if(ocp == 0)
-        var cad_nome = $(window.parent.document).find(".bread-select[data-id=cad]").find("option:selected").text()
-    else
-        var cad_nome = $(window.parent.document).find(".bread-select[data-id=ocp]").find("option:selected").text()
-
-
-    if(ocp == 1){
-        cad_nome = "EM "+cad_nome+" À CULTURA";
-    }
-    else if(ocp == 2){
-        cad_nome = "EM OCUPAÇÕES CULTURAIS"
-    }
-
-    if(ocp == 0){
-        if(cad == 0){
-            desc_setores = "NOS SETORES CULTURAIS E CRIATIVOS"
-            desc = desc.replace("[cad]", desc_setores)
-        }
-        desc = desc.replace("[ocp]", "TRABALHADORES")
-    }
-    else {
-        desc = desc.replace("[cad]","[name_ocp]")
-        if(ocp == 3)
-            desc = desc.replace("[name_ocp]", "EM ATIVIDADES CULTURAIS E CRIATIVAS")
-        desc = desc.replace("[ocp]", "OCUPADOS")
-    }
-
-    if(cad == 0 || ocp == 3){
-        desc = descDesag(desc, deg)
-        return desc.replace("[cad]", "NOS SETORES CULTURAIS E CRIATIVOS")
-                    .replace("[name_ocp]", cad_nome)
-                    .replace("[uf]", desc_uf)
-    }
-    else {
-            desc_uf = mapPronome(desc_uf, ["DE", "DA", "DO"], ["EM", "NA", "NO"])
-            desc = descDesag(desc, deg)
-            return desc.replace("[name_ocp]", cad_nome)
-                       .replace("[cad]", "NO SETOR "+cad_nome)
-                       .replace("[uf]", desc_uf)
-    }
-}
-
-function updateDescMercado(desc, vrv, ocp){
-    if(ocp == 0)
-        var cad = $(window.parent.document).find(".bread-select[data-id=cad]").val()
-    else
-        var cad = $(window.parent.document).find(".bread-select[data-id=ocp]").val()
-    if($(window.parent.document).find(".bread-select[data-id=deg]").first().val() == 0)
-        var deg = 0
-    else
-        var deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").parent().attr("value");
-    var uf = $(window.parent.document).find(".bread-select[data-id=uf]").val()
-    var cad_text = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-    
-    description = descIntBySelectedParameters(desc, ocp, uf, cad, deg)
-
-
-    $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(description)
-    //$(window.parent.document).find(".percent-value").first().find(".description-number").first().html(description)
-            
-}
-
-function updateDescPercentEmpreendimentos(desc, vrv, tipo){
-    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
-    cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-
-    cad_val = $(window.parent.document).find(".bread-select[data-id=cad]").val();
-    deg = $(window.parent.document).find(".bread-select[data-id=deg]").val();
-
-    if(desc == null){
-        return
-    }
-
-    if(tipo == "setorial"){
-        if(cad_val == 0)
-            description = desc.replace("[cad]", "DOS SETORES CULTURAIS E CRIATIVOS")
-        else
-            description = desc.replace("[cad]", "DO SETOR "+cad)
-        description = descByPRT(0, description)
-        $(window.parent.document).find(".setor-value").first().find(".description-number").text(description)
-
-    } else if( tipo == "percent"){
-
-    }
-}
-
-function updateDescPercentMercado(desc, vrv, tipo, ocp){
-    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
-    if(ocp == 0){
-        cad_nome = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-        cad_val = $(window.parent.document).find(".bread-select[data-id=cad]").val();
-    } 
-    deg = $(window.parent.document).find(".bread-select[data-id=deg]").val();
-    if(ocp == 0){
-        desc = desc.replace("[ocp]", "TRABALHADORES")
-        cad_nome = "DOS SETORES CULTURAIS E CRIATIVOS"
-        
-    }else{
-        desc = desc.replace("[ocp]", 'OCUPADOS')
-        if(ocp == 1){
-            cad_nome = "EM ATIVIDADES RELACIONADAS À CULTURA";
-        }
-        else if(ocp == 2){
-            cad_nome = "EM ATIVIDADES CULTURAIS"
-        } else if(ocp == 3){
-            cad_nome = "EM ATIVIDADES CULTURAIS E CRIATIVAS";
-        }
-    }
-    
-    if(tipo == "setorial"){
-        desc = descDesag(desc, deg)
-        description = desc.replace("[uf]", "DO BRASIL").replace("[cad]", cad_nome)
-        $(window.parent.document).find(".setor-value").first().find(".description-number").text(description)
-    } else if( tipo == "percent"){
-
-    }
-
-}
-
-function updateDescComercio(desc, vrv, nomeestado){
-    prepos = {
-        "ACRE":"DO",
-        "ALAGOAS":"DE",
-        "AMAPÁ":"DO",
-        "AMAZONAS":"DO",
-        "BAHIA":"DA",
-        "CEARÁ":"DO",
-        "DISTRITO FEDERAL":"DO",
-        "ESPÍRITO SANTO":"DO",
-        "GOIÁS":"DE",
-        "MARANHÃO":"DO",
-        "MATO GROSSO":"DE",
-        "MATO GROSSO DO SUL":"DE",
-        "MINAS GERAIS":"DE",
-        "PARÁ":"DO",
-        "PARAÍBA":"DA",
-        "PARANÁ":"DO",
-        "PERNAMBUCO":"DE",
-        "PIAUÍ":"DO",
-        "RIO DE JANEIRO":"DO",
-        "RIO GRANDE DO NORTE":"DO",
-        "RIO GRANDE DO SUL":"DO",
-        "RONDÔNIA":"DE",
-        "RORAIMA":"DE",
-        "SANTA CATARINA":"DE",
-        "SÃO PAULO":"DE",
-        "SERGIPE":"DE",
-        "TOCANTINS": "DO",
-        "EUROPA": "DA",
-        "MUNDO": "DO",
-        "ÁFRICA": "DA",
-        "AMÉRICA DO SUL": "DA",
-        "AMÉRICA DO NORTE": "DA",
-        "OCEANIA": "DA",
-        "ÁSIA": "DA"
-        
-    }
-
-    nomeestado = $(window.parent.document).find(".bread-select[data-id=uf] option:selected").text();
-    nomeestado = nomeestado.toUpperCase()
-    
-    if(getPrepos(nomeestado)){
-        nomeestado = getPrepos(nomeestado) + ' ' +nomeestado
-    }
-    else{
-        nomeestado = "DO BRASIL"
-    }
-    prc = $(window.parent.document).find(".bread-select[data-id=prc] option:selected").text();
-    typ = $(window.parent.document).find(".bread-select[data-id=typ] option:selected").text();
-    cad = $(window.parent.document).find(".bread-select[data-id=cad] option:selected").text();
-    
-    prc = prc.toUpperCase()
-    
-
-    if(cad.toUpperCase() == "TODOS" || cad.toUpperCase() == " TODOS"){
-        if(vrv == 14)
-            cad = "DOS SETORES CULTURAIS E CRIATIVOS";
-        else
-            cad = "PELOS SETORES CULTURAIS E CRIATIVOS";
-    } else {
-        if(vrv != 14)
-            cad = "PELO SETOR DE "+ cad;
-        else
-            cad = "DO SETOR DE "+cad;
-    }
-
-    switch(typ){
-        case 'Exportação': 
-            if(vrv >= 1 && vrv <= 3)
-                typ = "VALOR EXPORTADO"
-            else if(vrv == 11 || vrv == 12 || vrv == 14){
-                typ = "DAS EXPORTAÇÕES"
-            } else if(vrv == 13){
-                typ = "EXPORTADOS"
-            }
-            if(prepos[prc]){
-                prepos_prc = mapPronome(prepos[prc], ["DE", "DO", "DA"], ["PARA", "PARA O", "PARA A"])
-                prc = prepos_prc + ' ' + prc
-            }
-            break;
-        case 'Importação': 
-            if(vrv >= 1 && vrv <= 3)
-                typ = "VALOR IMPORTADO"
-            else if(vrv == 11 || vrv == 12 || vrv == 14){
-                typ = "DAS IMPORTAÇÕES"
-            }else if(vrv == 13){
-                typ = "IMPORTADOS"
-            }
-            nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["PARA", "PARA O", "PARA A"])
-            if(prepos[prc]){
-                prc = prepos[prc] + ' ' + prc
-            }
-            desc = desc.replace('[]', nomeestado).replace('[uf]', prc)
-            break;
-        case 'Saldo Comercial': 
-            if(vrv >= 1 && vrv <= 3)
-                typ = "SALDO COMERCIAL"
-            else if(vrv == 13){
-                typ = "DE SALDO COMERCIAL"
-            }
-            nomeestado = mapPronome(nomeestado, ["DE", "DO", "DA"], ["ENTRE", "ENTRE O", "ENTRE A"])
-            if(prepos[prc]){
-                prepos_prc = mapPronome(prepos[prc], ["DE", "DO", "DA"], ["E ", "E O", "E A"])
-                prc = prepos_prc + ' ' + prc
-            }
-            break;
-        case 'Corrente de Comércio':
-            if(vrv >= 1 && vrv <= 3)
-                typ = "Corrente de Comércio" 
-            else if(vrv == 13){
-                typ = "DE Corrente de Comércio"
-            }
-            if(prepos[prc]){
-                prepos_prc = mapPronome(prepos[prc], ["DE", "DO", "DA"], ["COM ", "COM O", "COM A"])
-                prc = prepos_prc + ' ' + prc
-            }
-            break;
-    }
-    $(window.parent.document).find(".integer-value").first().find(".description-number").first().css("font-size", "14px")
-
-    if(desc != undefined)
-        return desc.replace('[uf]', nomeestado).replace('<>', typ).replace('[]', prc).replace('()', cad);
-    else
-        return
-}
 
 function setTerceiroValueData(eixo, vrv, value, cad){
 
