@@ -774,6 +774,7 @@ article.results-article div.results-content{
 	color:	#aaa;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	text-align: justify;
     font-weight: 500;
 }
 
@@ -1200,7 +1201,7 @@ button.opt.active{
 	.desc-chart .title span{
 	}
 	#desc-var {
-		text-align: center;
+		text-align: justify;
 		margin-top: 10px;
 	}
 	#background_2 {
