@@ -1,0 +1,1841 @@
+{
+	"barras":"Essa visualização permite observar a evolução da variável de interesse ao longo dos anos que compõem a amostra.",
+	"mapa":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
+	"treemap_region":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
+	"treemap_scc":"Essa visualização permite observar a variável de interesse segmentada pelos Setores Culturais e Criativos.",
+
+	"var_desc": "Selecione aqui a variável que deseja visualizar.",
+	"uf":"Selecione aqui a Unidade da Federação que deseja visualizar.",
+	"prt":"Selecione aqui o porte de empresa que deseja visualizar. Este filtro só será habilitado quando você selecionar o setor.",
+	"atc":"Essa visualização permite observar a variável de interesse apenas para a atuação selecionada.",
+	"ano":"Essa visualização permite observar a variável de interesse apenas para o ano selecionado.",
+	"cad":"Selecione aqui o setor que deseja visualizar.",
+	"ocp":"Essa visualização apresenta a variável de interesse apenas para a ocupação cultural e criativa selecionada.",
+	"sex":"Essa visualização apresenta a variável de interesse apenas para o sexo selecionada.",
+	"fax":"Essa visualização apresenta a variável de interesse apenas para a faixa etária selecionada.",
+	"esc":"Essa visualização apresenta a variável de interesse apenas para a escolaridade selecionada.",
+	"cor":"Essa visualização apresenta a variável de interesse apenas para a cor e raça selecionada.",
+	"frm":"Essa visualização apresenta a variável de interesse apenas para a formalidade selecionada.",
+	"prv":"Essa visualização apresenta a variável de interesse apenas para a contribuição previdenciária selecionada.",
+	"snd":"Essa visualização apresenta a variável de interesse apenas para a contribuição sindical selecionada.",
+	"slc":"Essa visualização apresenta a variável de interesse apenas para a visualização selecionada.",
+	"mec":"Essa visualização apresenta a variável de interesse apenas para o mecanismo selecionado.",
+	"mod":"Essa visualização apresenta a variável de interesse apenas para a modalidade selecionado.",
+	"pfj":"Essa visualização apresenta a variável de interesse apenas para o tipo de pessoa selecionado.",
+	"uos":"Essa visualização apresenta a variável de interesse apenas para o tipo de barras selecionado.",
+	"typ":"Essa visualização apresenta a variável de interesse apenas para o tipo selecionado.",
+	"prc":"Essa visualização apresenta a variável de interesse apenas para o parceiro selecionado.",
+	"deg":"Essa visualização apresenta a variável de interesse para a desagregação desejada.",
+	"deg_setor":"Essa visualização apresenta a variável de interesse para os setores criativos e culturais.",
+	"deg_ocupacao":"Essa visualização apresenta a variável de interesse para as ocupações culturais.",
+
+	"var":[
+		[
+			{
+				"id":"1",
+				"title":"Número Total de Empresas",
+				"desc_int": "Empresas [cad] [prt] [uf]",
+				"desc_percent": "DO TOTAL DE EMPRESAS DOS SETORES CULTURAIS E CRIATIVOS [uf]",
+				"desc_setorial": "DO TOTAL DE EMPRESAS [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
+				"desc_var_mapa": "A variável mostra o número total de empresas formais dos Setores Culturais e Criativos em operação no Brasil para o ano selecionado.",
+				"desc_var_treemap_scc": "Na figura ao lado, os números absolutos correspondem à quantidade de empresas criativas e culturais em cada setor. A porcentagem indica a participação de cada setor no total de empresas culturais e criativas <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Na figura ao lado, os números absolutos correspondem à quantidade de empresas <span data-id='setor'></span> de cada UF. A porcentagem indica a participação de cada UF no total de empresas <span data-id='setor'></span> do país.",
+				"desc_var_barras": "O gráfico apresenta o total de empresas <span data-id='setor'></span><span data-id='uf'></span> ano a ano.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				},
+				"fontes": "RAIS",
+				"mapa_valores": "",
+				"treemap_scc_valores": "",
+				"barras_valores": "Valores em milhares."
+			},
+			{
+				"id":"2",
+				"title":"Participação das empresas culturais e criativas no total de empresas",
+				"desc_int": "do total de empresas [uf]",
+				"desc_percent": "",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas de cada estado. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"desc_var_mapa":"A variável mostra a participação do total de empresas formais dos Setores Culturais e Criativos no total de empresas formais em operação no Brasil para o ano selecionado.",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "A porcentagem corresponde à participação das empresas <span data-id='setor'></span> no total de empresas formais <span data-id='uf'></span> ano a ano",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				},
+				"fontes": "Elaboração do NECCULT com base na RAIS.",
+				"mapa_valores": "Valores em percentual.",
+				"treemap_scc_valores": "Valores em pecentual.",
+				"barras_valores": "Valores em pecentual."
+			},
+			{
+				"id":"3",
+				"title":"Variação no Total de Empresas",
+				"desc_int": "de variação no total de empresas [cad] [prt] [uf] [ano]",
+				"desc_percent": "",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
+				"desc_var_mapa":"Variação no Total de Empresas: A variável representa a variação percentual anual do total de empresas formais dos Setores Culturais e Criativos.",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "A porcentagem representa o crescimento (taxa positiva) ou a queda (taxa negativa) na quantidade de empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"}
+				],
+				"inativos":{
+					"mapa":["uf"],"barras":["ano"]
+				},
+				"fontes": "Elaboração do NECCULT com base na RAIS.",
+				"mapa_valores": "Valores em pecentual.",
+				"treemap_scc_valores": "Valores em pecentual.",
+				"barras_valores": "Valores em pecentual."
+			},
+			{
+				"id":"4",
+				"title":"Receita Total Bruta",
+				"desc_int": "de receita total bruta das empresas [cad] [prt] [uf]",
+				"desc_percent": "do total de receita bruta das empresas culturais e criativas [uf]",
+				"desc_setorial": "do total de receita bruta das empresas [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa":"A variável apresenta a receita monetária bruta gerada pelas atividades primárias e secundárias exercidas pelas empresas culturais e criativas formais – isto é, antes da dedução dos impostos e contribuições.",
+				"desc_var_treemap_scc": "Os números absolutos indicam a Receita Total das Empresas dos Setores Culturais Criativos. A porcentagem representa a receita gerada por cada setor em relação ao total de receita gerada pelos Setores Culturais e Criativos <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Na figura ao lado, os números absolutos correspondem à receita total das empresas <span data-id='setor'></span> em cada UF. A porcentagem representa a receita gerada pelas empresas <span data-id='setor'></span> em cada UF em relação à receita total das empresas dos setores culturais e criativos em todo país.",
+				"desc_var_barras": "Os números absolutos indicam a Receita Total das Empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				},
+				"fontes": "IBGE (PAS, PIA e PAC).",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
+			},
+			{
+				"id":"5",
+				"title":"Receita Operacional Liquida",
+				"desc_int": "de receita operacional líquida das empresas [cad] [prt] [uf] ",
+				"desc_percent": "do total de receita operacional líquida das empresas culturais e criativas [uf]",
+				"desc_setorial": "do total de receita operacional líquida das empresas [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa":"A variável representa as receitas monetárias liquidas provenientes da exploração das atividades principais exercidas pelas empresas culturais e criativas formais – isto é, depois das deduções dos impostos e contribuições.",
+				"desc_var_treemap_scc": "Os números absolutos indicam a Receita Operacional Líquida das Empresas dos Setores Culturais Criativos. A porcentagem representa a receita líquida gerada por cada setor em relação ao total em relação ao total <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Na figura ao lado, os números absolutos correspondem à Receita Operacional Líquida anual das empresas <span data-id='setor'></span> em cada UF. A porcentagem representa a receita líquida gerada pelas empresas <span data-id='setor'></span> em cada UF em relação ao total do país.",
+				"desc_var_barras": "Os números absolutos indicam a Receita Operacional Líquida das Empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+				"fontes": "IBGE (PAS, PIA e PAC).",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
+			},
+			{
+				"id":"6",
+				"title":"Custo",
+				"desc_int": "de custo das Empresas [cad] [prt] [uf]",
+				"desc_percent": "do total de custo das empresas culturais e criativas [uf]",
+				"desc_setorial": "do total de custo das empresas [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
+				"desc_var_mapa":"A variável mostra o total de dispêndios monetários que as empresas culturais e criativas formais incorrem em suas atividades.",
+				"desc_var_treemap_scc": "Os números absolutos indicam o Custo das Empresas dos Setores Culturais Criativos. A porcentagem representa o custo gerado por cada setor em relação ao total do custo dos Setores Culturais e Criativos <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Na figura ao lado, os números absolutos correspondem ao custo das empresas <span data-id='setor'></span> em cada UF. A porcentagem representa o custo das empresas <span data-id='setor'></span> em cada UF em relação ao custo das empresas dos setores culturais e criativos em todo país.",
+				"desc_var_barras": "Os números absolutos indicam o Custo das Empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+				"fontes": "IBGE (PAS, PIA e PAC).",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
+			},
+			{
+				"id":"7",
+				"title":"Lucro",
+				"desc_int": "de lucro das Empresas [cad] [prt] [uf]",
+				"desc_percent": "DO TOTAL DE LUCRO DAS EMPRESAS culturais e criativas [uf]",
+				"desc_setorial": "do total de LUCRO DAS EMPRESAS [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
+				"desc_var_mapa":"A variável mede a diferença entre a receita total bruta e o custo das empresas culturais e criativas formais.",
+				"desc_var_treemap_scc": "Os números absolutos indicam o Lucro das Empresas dos Setores Culturais Criativos. A porcentagem representa o lucro gerado por cada setor em relação ao total do lucro dos Setores Culturais e Criativos <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Na figura ao lado, os números absolutos correspondem ao lucro das empresas <span data-id='setor'></span> em cada UF. A porcentagem representa o lucro das empresas <span data-id='setor'></span> em cada UF em relação ao lucro das empresas dos setores culturais e criativos em todo país.",
+				"desc_var_barras": "Os números absolutos indicam o Lucro das Empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano","prt"]
+				},
+				"fontes": "IBGE (PAS, PIA e PAC).",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
+			},
+			{
+				"id":"8",
+				"title":"Valor Adicionado",
+				"desc_int": "valor adicionado pelas Empresas [cad] [prt] [uf]",
+				"desc_percent": "do total de valor adicionado das empresas culturais e criativas [uf]",
+				"desc_setorial": "do total de valor adicionado das empresas [cad] [prt] do Brasil",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc":"O Valor Adicionado retrata a contribuição das Empresas Culturais na formação de riquezas no país. A análise permite medir o valor criado por estes agentes econômicos, sendo o valor adicional que adquirem os bens e serviços ao serem transformados durante o processo produtivo.",
+				"desc_var_mapa":"A variável corresponde ao valor monetário novo criado pelas empresas culturais e criativas formais em suas atividades. ",
+				"desc_var_treemap_scc": "Os números absolutos indicam o Valor Adicionado das Empresas dos Setores Culturais Criativos. A porcentagem representa o Valor Adicionado de cada setor em relação ao total em relação ao total <span data-id='uf'></span>. ",
+				"desc_var_treemap_region": "Valor Adicionado corresponde à soma do valor gerado por cada empresa durante o processo de produção (é a soma da diferença entre o valor da produção e o custo dos insumos de cada empresa). Na figura ao lado, os números absolutos correspondem ao Valor Adicionado das empresas <span data-id='setor'></span> em cada UF. A porcentagem representa o Valor Adicionado <span data-id='setor'></span> em cada UF em relação ao total do país.",
+				"desc_var_barras": "Os números absolutos indicam o Valor Adicionado das Empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+				"fontes": "IBGE (PAS, PIA e PAC).",
+				"mapa_valores": "Valores em milhares de reais.",
+				"treemap_scc_valores": "Valores em milhares de reais.",
+				"barras_valores": "Valores em milhares de reais."
+			},
+			{
+				"id":"9",
+				"title":"Valor Adicionado / Produto Interno Bruto (PIB)",
+				"desc_int": "de valor adicionado/PIB {uf} pelas empresas [cad] [uf]",
+				"desc_percent": "",
+				"sufixo_valor":"%",
+				"prefixo_valor"	:"",
+				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
+				"desc_var_mapa":"A variável calcula a participação do valor adicionado pelas empresas culturais e criativas formais no valor adicionado total ou PIB da economia brasileira (em nível nacional ou regional).",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "Essa variável demonstra a contribuição direta <span data-id='setor'></span> na geração de riqueza em cada UF. Na figura ao lado, a porcentagem indica a razão entre o Valor Adicionado <span data-id='setor'></span> e o PIB de cada UF. ",
+				"desc_var_barras": "A porcentagem indica a razão entre o Valor Adicionado pelos Setores Culturais e Criativos e o PIB <span data-id='uf'></span> ano a ano. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Atuação","id":"atc"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+				"fontes": " Elaboração do NECCULT com base no IBGE (PAS, PIA e PAC)."
+			},
+			{
+				"id":"10",
+				"title":"Índice de Concentração de Herfindahl-Hirschman (IHH - Empresas)",
+				"desc_int": "IHH DO TOTAL DE EMPRESAS POR UF",
+				"desc_percent": "IHH DO TOTAL DE EMPRESAS POR SETOR",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var_mapa":"A variável IHH – Empresas mede o grau de concentração na distribuição das empresas culturais e criativas formais no Brasil, ano a ano.<br><br> Isto é, o índice permite averiguar se as empresas culturais e criativas formais estão ou não concentradas em poucos setores e em poucas Unidades da Federação.<br><br> Como o índice deve ser lido? O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é o setor ou a região em termos da distribuição do número de empresas culturais e criativas formais. <br><br> Em geral, um índice acima de 0,25 mostra concentração setorial (poucos SCCs concentrando uma grande quantidade de empresas) ou regional (poucas UFs concentrando uma grande quantidade de empresas).",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "O índice IHH demonstra a concentração de empresas por UF ou setor (selecionar no box ao lado). Se o IHH Empresas for próximo a 1, isso significa que poucos UFs ou setores concentram a maior parte das empresas existentes nos Setores Culturais e Criativos.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"}
+				],
+				"fontes": "Elaboração própria a partir da RAIS."
+			},
+			{
+				"id":"11",
+				"title":"Índice de Concentração de Herfindahl-Hirschman (IHH - Valor Adicionado)",
+				"desc_int": "IHH DO VALOR ADICIONADO POR UF",
+				"desc_percent": "IHH DO VALOR ADICIONADO POR SETOR",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var_mapa":" A variável IHH – Valor Adicionado (VA) mede o grau de concentração na distribuição do valor adicionado pelos SCC no Brasil, ano a ano.<br><br>Isto é, o índice permite averiguar se a produção de valor adicionado cultural está ou não concentrada em poucos setores e em poucas Unidades da Federação.<br><br>Como o índice deve ser lido? O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é o setor ou a região em termos da distribuição do valor adicionado gerado pelos SCCs.<br><br>Em geral, um índice acima de 0,25 mostra concentração setorial (poucos SCCs concentrando uma elevada produção de valor adicionado) ou regional (poucas UFs concentrando uma elevada produção de valor adicionado).",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "O índice IHH demonstra a concentração do VA de empresas criativas e culturais por UF ou setor (selecionar no box ao lado). Se o IHH Valor Adicionado for próximo a 1, isso significa que poucos UFs ou setores concentram a maior parte do Valor Adicionado pelos Setores Culturais e Criativos.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"}
+				],
+				"fontes": "Elaboração própria a partir da RAIS."
+			},
+			{
+				"id":"12",
+				"title":"Razão de Concentração – C4 Empresas",
+				"desc_int": "C4 DE CONCENTRAÇÃO DO TOTAL DE EMPRESAS POR UF",
+				"desc_percent": "C4 DE CONCENTRAÇÃO DO TOTAL DE EMPRESAS POR SETOR",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var_mapa":"A variável C4 – Empresas mede o grau de concentração na distribuição das empresas culturais e criativas formais no Brasil, ano a ano, assim como o IHH - Empresas.<br><br>A razão de concentração nada mais é que divisão da soma do número de empresas dos quatro maiores setores, ou das quatro maiores Unidades da Federação, sobre o número total de empresas culturais e criativas formais do País em cada ano.<br><br>Por exemplo, em 2016 o C4 – Empresas setorial foi igual a 0,744 ou 74,4%, porque:<br><br><li>O maior setor, editorial, tinha 0,324 ou 32,4% de todas as empresas culturais e criativas;<li>O segundo maior, Arquitetura e Design, respondia por 0,1601 ou 16,01%;<li>O terceiro maior, Educação e Criação em Artes, representava 0,143 ou 14,3%; e<li>O quarto maior, Publicidade, era responsável 0,1168 ou 11,68%.<br><br>Em 2016, portanto, houve forte concentração setorial das empresas culturais e criativas no Brasil.<br><br>Já o C4 – Empresas regional de 2016 foi de 0,5814 ou 58,14%, com a seguinte composição:<br><br><li>A maior UF, SP, tinha 29,83% do total de empresas culturais e criativas;<li>A segunda maior, MG, respondia por 10,92%;<li>A terceira maior, RJ, era responsável por 9,26%; e<li>A quarta maior, RS, representava 8,13%.<br><br>Assim, as empresas culturais e criativas formais estavam fortemente concentradas regionalmente no Brasil no ano de 2016.",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "O índice C4 demonstra a concentração de empresas considerando os 4 UFs ou setores (selecionar no box ao lado) com maior número de empresas. Se o C4 for próximo a 1, isso significa que o número de empresas é mais concentrado.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"}
+				],
+				"fontes": "Elaboração própria com base na RAIS."
+			},
+			{
+				"id":"13",
+				"title":"Razão de Concentração – C4 Valor Adicionado",
+				"desc_int": "C4 DE CONCENTRAÇÃO DO VALOR ADICIONADO POR UF",
+				"desc_percent": "C4 DE CONCENTRAÇÃO DO VALOR ADICIONADO POR SETOR",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"desc_var_mapa":"A variável C4 – Valor Adicionado (VA) mede o grau de concentração na distribuição do valor adicionado pelas empresas culturais e criativas formais no Brasil, ano a ano, assim como o IHH – Valor Adicionado.<br><br>A razão de concentração nada mais é que divisão da soma do valor adicionado pelos quatro maiores setores, ou das quatro maiores Unidades da Federação, sobre o valor adicionado total pelas empresas culturais e criativas formais do País em cada ano.<br><br>Por exemplo, em 2016 o C4 – VA setorial foi igual a 0,8507 ou 85,07%, porque:<br><br><li>O maior setor, audiovisual, representava 0,35924 ou 35,92% do valor adicionado cultural;<li>Osegundo maior, Editorial, representava 0,2364 ou 23,64%;<li>O terceiro maior, Publicidade, era responsável por 0,1771 ou 17,71%; e<li>O quarto maior, Arquitetura e Design, respondia por 0,078 ou 7,8%.<br><br>Em 2016, portanto, houve forte concentração setorial do valor adicionado cultural.<br><br>Já o C4 – VA regional de 2016 foi de 0,7383 ou 73,83%, com a seguinte composição:<br><br><li>A maior UF, SP, representava 46,72% do valor adicionado do País;<li>A segunda maior, RJ, representava 17,2%;<li>Aterceira maior, MG, respondia por 5,01%; e<li>A quarta maior, PR, era responsável por 4,90%.<br><br>Assim, o valor adicionado cultural estava muito concentrado regionalmente no Brasil no ano de 2016.",
+				"desc_var_treemap_scc": "",
+				"desc_var_treemap_region": "",
+				"desc_var_barras": "O índice C4 demonstra a concentração do Valor Adicionado considerando os 4 UFs ou setores (selecionar no box ao lado) com maior VA. Se o C4 for próximo a 1, isso significa que a distribuição do Valor Adicionado é mais concentrada.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"}
+				],
+				"fontes": "Elaboração própria com base na RAIS."
+			}
+		],
+		[
+			{
+				"id":"1",
+				"desc_int":"[ocp] [cad] [deg] [uf]",
+				"desc_percent": "Do total de [ocp] [cad] [uf]",
+				"desc_setorial": "do total de [ocp] dos Setores Culturais e criativos do Brasil",
+				"title":"Total de Ocupados",
+				"sufixo_valor" :"",
+				"prefixo_valor":"",
+				"fontes":"RAIS e IBGE (PNAD Anual).",
+				"desc_var_mapa": " A variável apresenta o número total de indivíduos ocupado(a)s em atividades produtivas ligadas aos setores ou às ocupações criativas e culturais, com possibilidade de desagregações.",
+				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"desc_int":"de participação do emprego [cad] no emprego total",
+				"title":"Participação no Emprego Total",
+				"desc_percent": "",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
+				"desc":"Esse indicador representa a participação das empresas culturais no total de empresas. Um aumento da participação indica uma mudança na composição dos bens e serviços ofertados em que os bens culturais possuem maior peso. Da mesma forma, é um indicativo de quantos bens e serviços culturais integram a economia do país.",
+				"desc_var_mapa": "A variável calcula a participação do emprego nos setores e ocupações culturais e criativas no emprego total do País, isto é, em todos os setores e ocupações.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"Horas trabalhadas",
+				"desc_int":"",
+				"desc_percent": "",
+				"sufixo_valor":"h",
+				"fontes":"RAIS e IBGE (PNAD Anual).",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
+				"desc_var_mapa": "A variável mostra o volume total de horas semanais trabalhadas nas atividades ligadas aos Setores e às Ocupações Culturais e Criativos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"4",
+				"desc_int":"DE REMUNERAÇÃO MÉDIA DOS [ocp] [cad] [deg] [uf]",
+				"title":"Remuneração Média",
+				"desc_percent": "",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"fontes":"RAIS E IBGE (PNAD Anual).",
+				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa": "A variável retrata o valor médio das remunerações monetárias, em R$, recebidas como compensação pelo(a)s trabalhadore(a)s empregado(a)s pelos setores e nas ocupações culturais e criativas.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				}
+			},
+			{
+				"id":"5",
+				"desc_int":"POR HORA TRABALHADA [cad] [deg] [uf]",
+				"title":"Remuneração por Hora Trabalhada",
+				"desc_percent": "",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
+				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
+				"desc_var_mapa": "A variável calcula o valor médio da remuneração monetária, em R$, por hora trabalhada nos setores e nas ocupações culturais e criativas. ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"6",
+				"desc_int":"horas semanais médias de trabalho [deg] [cad] [uf]",
+				"title":"Jornada de Trabalho Média",
+				"desc_percent": "",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"fontes":"RAIS E IBGE (PNAD Anual).",
+				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
+				"desc_var_mapa": "A variável detalha o número médio de horas semanais trabalhadas nos setores e nas ocupações culturais e criativas.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"7",
+				"title":"Massa de Rendimentos do Trabalho",
+				"desc_int":"",
+				"desc_percent": "da soma de remunerações pagas aos [ocp] [cad] [uf]",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"fontes":"RAIS E IBGE (PNAD Anual).",
+				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
+				"desc_var_mapa": "A variável mostra a soma de todas as remunerações monetárias pagas, em R$, como compensação pelo trabalho nos setores e nas ocupações culturais e criativas para cada ano.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Porte","id":"prt"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Sexo","id":"sex"},
+					{"name":"Faixa Etária","id":"fax"},
+					{"name":"Escolaridade","id":"esc"},
+					{"name":"Cor e Raça","id":"cor"},
+					{"name":"Formalidade","id":"frm"},
+					{"name":"Previdência","id":"prv"},
+					{"name":"Sindicato","id":"snd"}
+				],
+				"treemap_scc":[
+					{"name":"Visualização","id":"slc"},
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Ocupação","id":"ocp"},
+					{"name":"Desagregação","id":"deg"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"9",
+				"desc_int":"DE RAZÃO ENTRE MASSA SALARIAL E VALOR ADICIONADO [cad] [uf]",
+				"title":"Razão entre a Massa de Rendimentos do Trabalho e o Valor Adicionado",
+				"desc_percent": "",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"fontes":"Elaboração do NECCULT com base na RAIS.",
+				"desc_var_mapa": "A variável mostra a relação entre o total de rendimentos do trabalho pagos e o valor adicionado, que é a soma de todas rendas novas criadas pelos setores culturais e criativos no País.",
+				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"11",
+				"desc_int":" DE INCIDÊNCIA DOS SALÁRIOS SOBRE OS CUSTOS DOS EMPREENDIMENTOS [cad] [uf]",
+				"title":"Razão entre os Salários Pagos e o Custo Total",
+				"desc_percent": "",
+				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc_var_mapa": "A variável calcula a participação da remuneração monetária do(a)s trabalhadore(a)s dos setores culturais e criativos no custo monetário total das empresas formais desses setores, considerando que os salários são um componente do custo total. ",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório dos quadrados das participações relativas de cada categoria observada. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"Razão de Concentração do emprego cultural e criativo (C4)",
+				"desc_int":"Concentração do Emprego por UF",
+				"desc_percent":"Concentração do Emprego por Setor",
+				"sufixo_valor":"",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
+				"desc_var_mapa": "A variável C4 – Emprego mede o grau de concentração na distribuição dos empregos culturais e criativos formais no Brasil, ano a ano.<br><br>A razão de concentração nada mais é que divisão da soma do número de empregos cultural e criativo formais nos quatro maiores setores, ou nas quatro maiores Unidades da Federação, sobre o número total de empregos culturais e criativos formais do País em cada ano.<br><br>Por exemplo, em 2016 o C4 – Emprego setorial foi igual a 0,723 ou 72%, porque:<br><br><li>O maior setor, Editorial, era responsável por 0,292 ou 29,2% dos empregos culturais e criativos formais;<li>O segundo maior, Audiovisual, respondia por 0,18 ou 18%;<li>O terceiro maior, Educação e Criação em Artes, representava 0,129 ou 12,9%; e<li>O quarto maior, Publicidade, respondia por 0,122 ou 12,2%.<br><br>Em 2016, portanto, houve forte concentração setorial do emprego cultural e criativo no Brasil.<br><br>Já o C4 – Emprego regional de 2016 foi de 0,634 ou 63,4%, com a seguinte composição:<br><br><li>A maior UF, SP, respondia por 36,4% dos empregos culturais e criativos formais;<li>A segunda maior, RJ, por 11,9%;<li>A terceira maior, MG, era responsável por 8,3%; e<li>A quarta maior, RS, respondia por 6,8%.<br><br>Assim, o emprego cultural e criativo formal estava fortemente concentrado em termos regionais no Brasil no ano de 2016.",
+				"prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Total de Empresas a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ocupação","id":"ocp"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"Razão de Concentração da Massa Rendimentos do Trabalho (C4)",
+				"desc_int":"Concentração de Massa Salarial por UF",
+				"desc_percent": "Concentração de Massa Salarial por Setor",
+				"sufixo_valor":"",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
+				"prefixo_valor":"",
+				"desc_var_mapa": "A variável C4 – Massa de Rendimentos do Trabalho (MRT) mede o grau de concentração na distribuição da massa de rendimentos do trabalho cultural e criativo no Brasil, ano a ano.<br><br>A razão de concentração nada mais é que divisão da soma da massa de rendimentos do trabalho nos quatro maiores setores, ou nas quatro maiores Unidades da Federação, sobre a massa de rendimento total do trabalho cultural e criativo do País em cada ano.<br><br>Por exemplo, em 2016 o C4 – MRT setorial foi igual a 0,75 ou 75%, porque: <br><br><li>O maior setor, Audiovisual, era responsável por 0,279 ou 27,9% da massa de rendimentos do trabalho cultural e criativo no Brasil;<li>O segundo maior, Editorial, respondia por 0,258 ou 25,8%;<li>O terceiro maior, Publicidade, representava 0,136 ou 13,6%; e<li>O quarto maior, Educação e Criação em Artes, era responsável por 0,083 ou 8,3%.<br><br>Em 2016, portanto, houve forte concentração setorial da massa de rendimentos do trabalho cultural e criativo no Brasil.<br><br>Já o C4 – MRT regional de 2016 foi de 0,723 ou 72%, com a seguinte composição:<br><br><li>A maior UF, SP, respondia por 45,4% da massa de rendimentos do trabalho cultural e criativo no Brasil;<li>A segunda maior, RJ, representava 16,3%;<li>A terceira maior, MG, respondia por 5,5%; e<li>A quarta maior, PR, também representava 5,5%.<br><br>Assim, a massa de rendimentos do trabalho cultural e criativo formal estava fortemente concentrada em termos regionais no Brasil no ano de 2016.",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ocupação","id":"ocp"}
+				]
+			},
+			{
+				"id":"14",
+				"title":"IHH (Índice Herfindahl-Hirschman de concentração) de Número de Trabalhadore(a)s",
+				"desc_int": "IHH DE NÚMERO DO TRABALHADORES POR UF",
+				"desc_percent": "IHH DE NÚMERO DO TRABALHADORES POR SETOR",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"desc_var_mapa": "A variável IHH – Número de Trabalhadores mede o grau de concentração na distribuição do emprego cultural e criativo no Brasil, ano a ano, assim como o C4 – Empregos.<br><br>Isto é, o índice permite averiguar se os empregos culturais e criativos estão ou não concentrados em poucos setores, em poucas ocupações ou em poucas Unidades da Federação.<br><br>Como o índice deve ser lido? O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é o setor, a ocupação ou a região em termos da distribuição do número de empregos culturais e criativos.<br><br>Em geral, um índice acima de 0,25 mostra concentração setorial (poucos SCCs concentrando uma grande quantidade de empregos), ocupacional (poucas ocupações culturais e criativas concentrando uma grande quantidade de pessoas) ou regional (poucas UFs concentrando uma grande quantidade de empregos culturais e criativos).",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ocupação","id":"ocp"}
+				]
+			},
+			{
+				"id":"15",
+				"title":"IHH (Índice Herfindahl-Hirschman de concentração) da Massa de Rendimentos do Trabalho",
+				"desc_int": "IHH DA MASSA DE RENDIMENTOS POR UF",
+				"desc_percent": "IHH DA MASSA DE RENDIMENTOS POR SETOR",
+				"fontes":"ELABORAÇÃO DO NECCULT COM BASE NA RAIS E NO IBGE (PNAD ANUAL).",
+				"sufixo_valor":"",
+                "desc_var_mapa": "A variável IHH – Massa de Rendimentos do Trabalho (MRT) mede o grau de concentração na distribuição da massa de rendimentos do trabalho cultural e criativo no Brasil, ano a ano, assim como o C4 – Massa de Rendimentos do Trabalho.<br><br>Isto é, o índice permite averiguar se a massa de rendimentos do trabalho cultural e criativo está ou não concentrada em poucos setores, em poucas ocupações ou em poucas Unidades da Federação.<br><br>Como o índice deve ser lido? O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrado é o setor, a ocupação ou a região em termos da distribuição da massa de rendimentos do trabalho.<br><br>Em geral, um índice acima de 0,25 mostra concentração setorial (poucos SCCs concentrando uma grande parcela da massa de rendimentos do trabalho), ocupacional (poucas ocupações culturais e criativas concentrando uma elevada parcela da massa de rendimentos) ou regional (poucas UFs concentrando uma grande proporção da massa de rendimentos).",
+                "prefixo_valor":"",
+				"desc":"Esse indicador demonstra o quão concentrada é a distribuição do Valor Adicionado a partir do somatório das participações relativas das 4 maiores categorias observadas. Quanto mais próximo de um for o valor do índice mais concentrado é o item.",
+				"type":[
+					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ocupação","id":"ocp"}
+				]
+			}
+		],
+		[
+			{
+				"id":"1",
+				"title":"Financiamento público total",
+				"sufixo_valor":"",
+				"desc_int":"FINANCIAMENTO À CULTURA  [] [cad] [uf]",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA [] [uf]",
+				"desc_var_mapa": "Financiamento público total: A variável mostra o valor monetário bruto total, em R$, destinado ao financiamento público da produção artística e cultural no Brasil, por meio de políticas públicas e de seus mecanismos: mecenato, Fundo Nacional de Cultura (FNC) e total (soma dos dois anteriores). ",
+				"prefixo_valor":"R$ ",
+				"fontes": "SALICnet.",
+				"desc":"Retrata o valor bruto total destinado ao fomento da produção artística e cultura por meio de políticas e seus mecanismos nos estratos referidos.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				},
+                "mapa_valores": ""
+			},
+			{
+				"id":"18",
+				"title":"<span>CONSUMO VIA VALE-CULTURA<span>",
+				"desc_int":"consumidos via cartão Vale-Cultura [cad] [uf] ",
+				"desc_percent": "Total consumido [cad] [uf] ",
+				"desc_var_mapa": "Valor do consumo realizado por meio do cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa recebedora onde o cartão foi utilizado.",
+				"desc":"",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+               "mapa_valores": ""
+			},
+			{
+				"id":"19",
+				"title":"<span>AGENTES DO VALE-CULTURA<span>",
+				"desc_int":"[cad] [uf]",
+				"desc_percent": "[cad] [uf]",
+				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
+				"desc":"",
+				"fontes":"COORDENAÇÃO GERAL DO PROGRAMA CULTURA DO TRABALHADOR (SEFIC-MINC)",
+				"sufixo_valor":" ",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"3",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA [] BNDES () [uf]",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES () [uf]",
+				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, destinado ao financiamento da produção artística e cultural no Brasil por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
+				"fontes": "BNDES.",
+				"title":"Financiamento pelo BNDES",
+				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"},
+					{"name":"Modalidade","id":"mod"}
+				],
+				"treemap_scc":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"cad"},
+					{"name":"Modalidade","id":"mod"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				},
+                "mapa_valores": ""
+			},
+			{
+				"id":"4",
+				"title":"Valor total dos incentivos privados",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA [cad] [uf] ",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO pfj DA ESFERA PRIVADA [uf]",
+				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, do financiamento cultural via mecenato, desagregado, por empresas privadas e pessoas físicas, e agregado (soma dos dois anteriores).",
+				"sufixo_valor":"",
+				"fontes": "SALICnet.",
+				"prefixo_valor":"R$ ",
+				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Tipo de Pessoa","id":"pfj"}
+				],
+				"treemap_region":[
+					{"name":"Ano","id":"ano"},
+					{"name":"Tipo de Pessoa","id":"pfj"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Tipo de Pessoa","id":"pfj"}
+				],
+				"inativos":{
+					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				},
+                "mapa_valores": ""
+			},
+			{
+				"id":"5",
+				"title":"Valor total dos incentivos das empresas estatais",
+				"desc_int":"FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO PARA EMPRESA ESTATAL [cad] [uf]",
+				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA MECENATO ADVINDO PARA EMPRESA ESTATAL [uf]",
+				"desc_var_mapa": "A variável mostra o valor monetário bruto, em R$, do financiamento cultural, via mecenato, pelas empresas estatais. ",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"fontes": "SALICnet. ",
+				"desc":"Demonstra o valor bruto total na forma de incentivos provenientes de empresas públicas para o fomento da produção artística e cultural por estrato proposto.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+               "mapa_valores": ""
+			},
+			{
+				"id":"7",
+				"title":"Percentual dos recursos privados em contrapartida ao incentivo fiscal",
+				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
+				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO [uf].",
+				"desc_percent": "",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
+				"desc_var_mapa": "A variável calcula o percentual dos recursos financiados via mecenato, advindos de apoio privado (empresas privadas e pessoas físicas), no incentivo fiscal total.",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				},
+                "mapa_valores": ""
+			},
+			{
+				"id":"8",
+				"title":"Participação do financiamento público total no valor adicionado pelas atividades culturais",
+				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [uf] [CAD] E VALOR ADICIONADO [cad] {uf}",
+				"desc_percent": "",
+				"desc_var_mapa": "A variável mostra a razão entre o fomento às atividades culturais por meio de financiamento via incentivo fiscal, agregado e desagregado, e o valor adicionado pelos setores culturais e criativos. É um indicador da importância relativa dos recursos financeiros frente à geração de renda nova por esses setores.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
+				"desc":"Retrata a razão entre o total destinado na forma de fomento por meio de políticas e seus mecanismos e o valor adicionado pela cultura no PIB nacional.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+               "mapa_valores": ""
+			},
+			{
+				"id":"9",
+				"title":"Participação do financiamento público total na massa salarial das atividades culturais",
+				"desc":"Retrata a razão entre a despesa total em cultura e a arrecadação total nos estratos referidos.",
+				"desc_int":"RAZÃO ENTRE TOTAL FINANCIADO [uf] [CAD] E MASSA SALARIAL DOS TRABALHADORES CULTURAIS [cad] {uf}",
+				"desc_percent": "",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet.",
+				"desc_var_mapa": "A variável calcula a razão entre o fomento por meio de financiamento via incentivo fiscal , agregado e desagregado, e a massa salarial do(a)s trabalhadore(a)s da cultura. É um indicador da importância relativa dos recursos financeiros frente aos custos trabalhistas do setor.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Mecanismo","id":"mec"}
+				],
+				"inativos":{
+					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+                "mapa_valores": ""
+			},
+			{
+				"id":"10",
+				"title":"Participação da despesa com cultura nas contas públicas federais",
+				"desc":"Retrata a razão entre a despesa total em cultura e a massa salarial nos estratos referidos.",
+				"desc_int":"DE DESPESA DO MINISTÉRIO DA CULTURA EM RELAÇÃO AO TOTAL DE ARRECADAÇÃO FEDERAL",
+				"desc_percent": "DO TOTAL DE FINANCIAMENTO FEDERAL VIA FNC E MECENATO EM RELAÇÃO AO TOTAL DE ARREDACAÇÃO FEDERAL",
+				"fontes": "Elaborado pelo NECCULT com base no Ministério do Planejamento (dados de orçamento) e SALICnet (financiamento por mecenato e FNC).",
+				"desc_var_mapa": "A variável mede a razão entre a despesa total com cultura (orçamento MinC) e a arrecadação federal total, e também a relação entre o financiamento total do fomento à cultura (FNC e mecenato) e arrecadação federal total.",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"11",
+				"title":"Total das propostas de projetos de financiamento cultural",
+				"desc":"Retrata a soma de todas propostas para LIC nos estratos referidos.",
+				"desc_int":"PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [cad] [uf] ",
+				"desc_percent": "DO TOTAL DE PROJETOS PROPOSTOS PARA CAPTAÇÃO VIA MECENATO [uf]",
+				"desc_var_mapa": "A variável retrata a soma de todas propostas de projetos para captação via mecenato, de acordo com o ano de proposição do projeto. ",
+				"sufixo_valor":"",
+				"fontes": "SALICnet. ",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"12",
+				"title":"Total dos projetos de financiamento cultural efetivamente fomentados",
+				"desc":"Retrata todos os projetos propostos que foram fomentados pela LIC nos estratos referidos.",
+				"desc_int":"PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [cad] [uf]",
+				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]",
+				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, de acordo com o ano de proposição do projeto.",
+				"sufixo_valor":"",
+				"fontes": "SALICnet. Atualizado para 2016. ",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"13",
+				"title":"Tempo médio de aprovação dos projetos de financiamento cultural",
+				"desc":"Retrata o tempo médio entre a proposta de projeto e a efetiva aprovação do fomento.",
+				"desc_int":"DIAS PARA APROVAÇÃO DE PROJETOS VIA MECENATO [cad] [uf]",
+				"desc_percent": "",
+				"fontes": "SALICnet. ",
+				"desc_var_mapa": "A variável mostra o intervalo médio, em número de dias, entre a data de proposta do projeto de financiamento e a data da aprovação efetiva para início de captação de recursos.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"UF","id":"uf"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"UF","id":"uf"},
+					{"name":"Setor","id":"cad"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"14",
+				"title":"Razão entre total solicitado pelos projetos e o valor efetivo aprovado",
+				"desc":"Retrata o percentual relativo que relaciona o valor solicitados pelos projetos e o total efetivo do fomento.",
+				"sufixo_valor":"",
+				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [cad] [uf]",
+				"desc_percent": "",
+				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
+				"desc_var_mapa": "A variável calcula o percentual médio financiado do projeto, obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto. ",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"15",
+				"title":"Índice Razão para Concentração dos Incentivos Fiscais (C4) ",
+				"desc":"Retrata sobre o quão concentrado é os recursos apoiados nos estratos referidos.",
+				"desc_int":"Concentração do financiamento [] por UF",
+				"desc_percent": "Concentração do financiamento [] por setor" ,
+				"desc_var_mapa":"A variável mede o grau de concentração dos recursos fiscais destinados à cultura nos setores culturais e criativos e nas unidades federativas do País, para cada ano, considerando a participação da soma das quatro maiores medidas na soma total.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"16",
+				"title":"Índice Herfindahl-Hirschman para Concentração dos Projetos Fomentados",
+				"desc":"Retrata sobre o quão concentrado é o gasto em cultura pelos estratos referidos.",
+				"desc_int":"Concentração do financiamento [] por UF",
+				"desc_percent": "Concentração do financiamento [] por setor" ,
+				"desc_var_mapa": "A variável mede o grau de concentração dos projetos fomentados entre os setores culturais e criativos e entre as unidades da federação, para cada ano. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentrada é a distribuição regional ou setorial dos projetos fomentados. Por exemplo, se no Brasil houver poucos setores culturais com elevada participação no total de projetos fomentados, haverá concentração setorial, e o IHH será alto, acima de 0,25. Da mesma forma, se no Brasil poucas unidades federativas apresentam elevado número de projetos fomentados frente ao total, o IHH regional será alto.",
+				"sufixo_valor":"",
+				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+                "mapa_valores": ""
+			},
+			{
+				"id":"17",
+				"title":"<span>Fomento Público Estadual à Cultura<span>",
+				"desc_int":"FINANCIADOS POR MEIO DE MECANISMOS DE MECENATO ESTADUAL [uf]",
+				"desc_percent": "",
+				"desc_var_mapa": "A variável demonstra os estados que possuem fomento em nível estadual em duas perspectivas: Editais Estaduais e Mecenato Estadual. Dentro dessas perspectivas, a variável ainda demonstra o valor - conforme informado por cada Estado - para o ano selecionado e a soma dos valores das Unidades Federativas disponíveis para cada ano.",
+				"desc":"",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"UF ou Setores","id":"uos"},
+					{"name":"Ano","id":"ano"}
+				],
+				"fontes": "",
+				"mapa_valores": "Observação: Valor total referente à soma dos valores enviados pelas Unidades Federativas brasileiras. Algumas Unidades Federativas que possuem esse mecanismo de financiamento não enviaram dados."
+			}
+
+		],
+		[
+			{
+				"id":"1",
+				"title":"Comércio Externo",
+				"desc":"Demonstra o valor de absoluto dos setores culturais por estratificação proposta.",
+				"desc_var_mapa": "A variável mostra o valor transacionado com o resto do mundo, caracterizando quanto, em termos monetários, os setores culturais e criativos contribuíram para o comércio internacional do Brasil. Desagregação para bens e serviços.",
+				"desc_int": "DE <> [uf] [] ()",
+				"fontes": "MDIC. ",
+				"desc_percent":"DO VALOR <> [uf] [] [cad]",
+				"sufixo_valor":"",
+				"prefixo_valor":"R$ ",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"2",
+				"title":"Participação no comércio exterior total",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio exterior brasileiro por estratificação proposta.",
+				"desc_var_mapa": "A variável calcula a participação das trocas comerciais dos setores culturais e criativos no comércio internacional total do Brasil. Desagregação para bens e serviços. ",
+				"desc_int": "de participação no <> [uf] [] ()",
+				"fontes": "Elaboração do NECCULT com base no MDIC. ",
+				"desc_percent":"",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"3",
+				"title":"Relação com o valor adicionado pela cultura",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o valor adicionado pela cultura por estratificação proposta.",
+				"desc_var_mapa": "A variável mede a relação entre o comércio exterior dos setores culturais e criativos e o valor adicionado pelas empresas culturais e criativas formais. Desagregação para bens e serviços.",
+				"desc_int": " de participação do <> [uf] [] () no valor adicionado",
+				"desc_percent":"",
+				"sufixo_valor":"%",
+				"prefixo_valor":"",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"}
+				],
+				"inativos":{
+					"mapa":["prt","uf"],"barras":["ano"]
+				}
+			},
+			{
+				"id":"5",
+				"title":"Razões de concentração (C2/C4) do comércio externo",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o comércio global por estratificação proposta.",
+				"desc_var_mapa": "A variável mede o grau de concentração do comércio externo cultural com os dois maiores parceiros comerciais, dos quatro maiores setores culturais e criativos, e das quatro maiores unidades da federação, definidos em termos de participação relativa nas trocas internacionais, em cada período. Por exemplo, para 2017 o C2 das exportações de bens para os dois maiores parceiros foi de 0,77 ou 77%, com a América do Norte participando com cerca de 0,53 ou 53% e a Europa com cerca de 0,23 ou 23%. Em 2016 o C4 das importações de serviços dos quatro maiores setores foi de 0,966 ou 97%, Audiovisual participando com 61,8%, Cultura Digital com 26%, Arquitetura e Design com 6,2% e Editorial com 2,6%. Finalmente, em 2017 o C4 das importações de bens para as quatro maiores Unidades da Federação foi de 0,894 ou 89%. SP participou com 65%, SC com 15%, AM com 6,2% e ES com 3,2%. Houve portanto forte concentração internacional, setorial e regional. Desagregação para bens e serviços e por variável de comércio externo.",
+				"desc_int": "C2 VALOR ABSOLUTO POR PARCEIROS",
+				"desc_percent":"C4 VALOR ABSOLUTO POR UF",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"8",
+				"title":"IHH (Índice Herfindahl-Hirschman) de concentração do comércio externo",
+				"desc":"Demonstra a relação do comércio exterior nacional cultural com o produto interno bruto por estratificação proposta.",
+				"desc_var_mapa": "A variável calcula o grau de concentração do comércio externo cultural em relação aos parceiros comerciais, aos setores culturais e criativos como um todo e às Unidades da Federação. O índice varia entre 0 e 1 e, quanto mais próximo de 1, mais concentradas são as transações internacionais em termos da distribuição geográfica, setorial ou regional das trocas. Por exemplo, se houver poucos parceiros comerciais, setores culturais e criativos ou Unidades da Federação com elevada participação nas transações culturais externas do País, haverá concentração geográfica, setorial ou regional, e o IHH será alto. Desagregação para bens e serviços.",
+				"fontes": "Elaboração NECCULT, com base nos dados do MDIC.",
+				"desc_int": "IHH VALOR ABSOLUTO POR PARCEIROS",
+				"desc_percent":"IHH VALOR ABSOLUTO POR UF",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
+					{"name":"Treemap SCC", "id":"treemap_scc"},
+					{"name":"Barras", "id":"barras"}
+				],
+				"mapa":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo", "id": "typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_region":[
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"treemap_scc":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Tipo","id":"typ"},
+					{"name":"Ano","id":"ano"}
+				],
+				"barras":[
+					{"name":"Parceiro","id":"prc"},
+					{"name":"Setor","id":"cad"},
+					{"name":"Tipo","id":"typ"}
+				],
+				"inativos":{
+					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				}
+			},
+			{
+				"id":"11",
+				"title":"Índice de quantum do comércio externo",
+				"desc_int": "Índice de quantum do valor absoluto <>",
+				"desc_percent":"",
+				"desc":"Demonsta o quão concentrado é o comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "A variável mensura o comércio cultural externo desagregado em termos de quantidades. Variável apresentada apenas para bens. ",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Tipo","id":"typ"}
+				]
+			},
+			{
+				"id":"12",
+				"title":"Índice de preços do comércio externo",
+				"desc_int": "índice de preços do valor absoluto das <>",
+				"desc_percent":"",
+				"desc":"A variável calcula o comércio cultural externo desagregado em termos de preços. Variável apresentada apenas para bens. Ano de 2007 = 100.",
+				"desc_var_mapa": "A variável mostra a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX. Variável apresentada apenas para bens, sendo 2009 o ano base (índice = 100).",
+				"fontes":"Elaboração do NECCULT com base no MDIC.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"13",
+				"title":"Quantidade física transacionada",
+				"desc_int": "<> [uf] [] ()",
+				"desc_percent":"dos kg <> [uf] []",
+				"desc":"Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"desc_var_mapa": "A variável calcula a quantidade física, em kg, transacionada pelos setores culturais e criativos. Variável apresentada apenas para bens.",
+				"fontes":"MDIC.",
+				"sufixo_valor":" kg",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			},
+			{
+				"id":"14",
+				"title":"Índice de rentabilidade das exportações",
+				"desc":"A variável mostra a relação entre o índice de preços das exportações, corrigido pela taxa de câmbio, e uma aproximação do índice de custos das exportações setoriais estimado pela FUNCEX. Variável apresentada apenas para bens, sendo 2009 o ano base (índice = 100).",
+				"desc_int": "DE RENTABILIDADE <> ()",
+				"desc_percent":"",
+				"desc_var_mapa": "Demonstra se há ou não vantagem comparativa nas exportações do comércio exterior nacional cultural por estratificação proposta.",
+				"fontes":"Elaboração do NECCULT com base no MDIC, FUNCEX e BIS.",
+				"sufixo_valor":"",
+				"prefixo_valor":"",
+				"type":[
+					{"name":"Barras", "id":"barras"}
+				],
+				"barras":[
+					{"name":"Setor","id":"cad"}
+				]
+			}
+
+		]
+	],
+	"select":
+	{
+		"eixo":[
+			{"name": "Empreendimentos Culturais", "value": "empreendimentos"},
+			{"name": "Mercado de Trabalho", "value": "mercado"},
+			{"name": "Fomento Público", "value": "politicas"},
+			{"name": "Comércio Internacional", "value": "comercio"}
+		],
+		"uf":[
+			{"name":"Brasil", "value":"0"},
+			{"name":"Acre", "value":"12"},
+			{"name":"Alagoas", "value":"27"},
+			{"name":"Amapá", "value":"16"},
+			{"name":"Amazonas", "value":"13"},
+			{"name":"Bahia","value":"29"},
+			{"name":"Ceará","value":"23"},
+			{"name":"Distrito Federal", "value":"53"},
+			{"name":"Espírito Santo", "value":"32"},
+			{"name":"Goiás", "value":"52"},
+			{"name":"Maranhão", "value":"21"},
+			{"name":"Mato Grosso", "value":"51"},
+			{"name":"Mato Grosso do Sul","value":"50"},
+			{"name":"Minas Gerais", "value":"31"},
+			{"name":"Pará","value":"15"},
+			{"name":"Paraíba", "value":"25"},
+			{"name":"Paraná", "value":"41"},
+			{"name":"Pernambuco", "value":"26"},
+			{"name":"Piauí", "value":"22"},
+			{"name":"Rio de Janeiro", "value":"33"},
+			{"name":"Rio Grande do Norte", "value":"24"},
+			{"name":"Rio Grande do Sul", "value":"43"},
+			{"name":"Rondônia", "value":"11"},
+			{"name":"Roraima","value":"14"},
+			{"name":"Santa Catarina", "value":"42"},
+			{"name":"São Paulo","value":"35"},
+			{"name":"Sergipe","value":"28"},
+			{"name":"Tocantins","value":"17"}
+		],
+		"ano":[
+			{"name":"2016", "value":"2016"},
+			{"name":"2015", "value":"2015"},
+			{"name":"2014", "value":"2014"},
+			{"name":"2013", "value":"2013"},
+			{"name":"2012", "value":"2012"},
+			{"name":"2011", "value":"2011"},
+			{"name":"2010", "value":"2010"},
+			{"name":"2009", "value":"2009"},
+			{"name":"2008", "value":"2008"},
+			{"name":"2007", "value":"2007"}
+		],
+		"cad":[
+			{"name":"Todos","value":"0"},
+			{"name":"Arquitetura e Design", "value":"1"},
+			{"name":"Artes Cênicas e Espetáculos","value":"2"},
+			{"name":"Audiovisual", "value":"3"},
+			{"name":"Cultura Digital","value":"4"},
+			{"name":"Editorial","value":"5"},
+			{"name":"Educação e Criação em Artes","value":"6"},
+			{"name":"Entretenimento","value":"7"},
+			{"name":"Música","value":"8"},
+			{"name":"Patrimônio","value":"9"},
+			{"name":"Publicidade","value":"10"}
+		],
+		"ocp":[
+			{"name":"Todos", "value":"3"},
+			{"name":"Atividades Relacionadas", "value":"1"},
+			{"name":"Cultura","value":"2"}
+		],
+		"prt":[
+			{"name":"Todos","value":"0"},
+			{"name":"Micro","name_bar": "Micro","value":"1"},
+			{"name":"Pequenas","name_bar": "Pequena","value":"2"},
+			{"name":"Médias","name_bar": "Média","value":"3"},
+			{"name":"Grandes","name_bar": "Grande","value":"4"}
+		],
+		"atc":[
+			{"name":"Todos","value":"0"},
+			{"name":"Comércio","value":"1"},
+			{"name":"Serviços e Indústria","value":"2"}
+		],
+		"sex":[
+			{"name":"Todos","value":"0"},
+			{"name":"Masculino","value":"1"},
+			{"name":"Feminino","value":"2"}
+		],
+		"fax":[
+			{"name":"Todas","value":"0"},
+			{"name":"10 a 17","value":"1"},
+			{"name":"18 a 29","value":"2"},
+			{"name":"30 a 49","value":"3"},
+			{"name":"50 a 64","value":"4"},
+			{"name":"65 ou mais","value":"5"},
+			{"name":"Não classificado","value":"6"}
+		],
+		"esc":[
+			{"name":"Todos","value":"0"},
+			{"name":"Sem Instrução","value":"1"},
+			{"name":"Fundamental Incompleto","value":"2"},
+			{"name":"Fundamental Completo","value":"3"},
+			{"name":"Médio Completo","value":"4"},
+			{"name":"Superior Incompleto","value":"5"},
+			{"name":"Superior Completo","value":"6"},
+			{"name":"Não Determinado","value":"7"}
+		],
+		"cor":[
+			{"name":"Todas","value":"0"},
+			{"name":"Indígena","value":"1"},
+			{"name":"Branca","value":"2"},
+			{"name":"Preta","value":"3"},
+			{"name":"Amarela","value":"4"},
+			{"name":"Parda","value":"5"}
+		],
+		"frm":[
+			{"name":"Todos","value":"0"},
+			{"name":"Informal","value":"1"},
+			{"name":"Formal","value":"2"}
+		],
+		"prv":[
+			{"name":"Todos","value":"0"},
+			{"name":"Não contribuinte","value":"1"},
+			{"name":"Contribuinte","value":"2"}
+		],
+		"snd":[
+			{"name":"Todos","value":"0"},
+			{"name":"Não membro","value":"1"},
+			{"name":"Membro","value":"2"}
+		],
+		"slc":[
+			{"name":"Setor","value":"0"},
+			{"name":"Ocupação","value":"1"}
+		],
+		"mec":[
+			{"name":"Todos","value":"0"},
+			{"name":"FNC","value":"1"},
+			{"name":"Mecenato","value":"2"},
+			{"name":"Fundo Cultural","value":"3"},
+			{"name":"Outros","value":"4"}
+		],
+		"mod":[
+			{"name":"Todos","value":"0"},
+			{"name":"Direta","value":"1"},
+			{"name":"Indireta","value":"2"}
+		],
+		"pfj":[
+			{"name":"Todos","value":"0"},
+			{"name":"Pessoa Física","value":"1"},
+			{"name":"Pessoa Jurídica","value":"2"}
+		],
+		"uos":[
+			{"name":"UF","value":"0"},
+			{"name":"Setores","value":"1"}
+		],
+		"typ":[
+			{"name":"Exportação","value":"1"},
+			{"name":"Importação","value":"2"},
+			{"name":"Saldo Comercial","value":"3"},
+			{"name":"Corrente de Comércio","value":"4"}
+		],
+		"prc":[
+			{"name":"Mundo","value":"0"},
+			{"name":"África","value":"1"},
+			{"name":"América do Norte","value":"2"},
+			{"name":"América do Sul","value":"3"},
+			{"name":"Ásia","value":"4"},
+			{"name":"Europa","value":"5"},
+			{"name":"Oceania","value":"6"}
+		],
+		"deg":[
+			{"name":"Escolher","value":"0"},
+			{"name":"Por porte","value":"1", "desags": ["Micro", "Pequeno", "Médio", "Grande"]},
+			{"name":"Por sexo","value":"2", "desags": ["Masculino", "Feminino"]},
+			{"name":"Por idade","value":"3", "desags": ["10 - 17", "18 - 29", "30 - 49", "50 - 64", "65 ou mais"]},
+			{"name":"Por escolaridade","value":"4", "desags": ["Sem Instrução", "Fundamental Incompleto", "Fundamental Completo", "Médio completo", "Superior incompleto", "Superior completo"]},
+			{"name":"Por cor","value":"5"},
+			{"name":"Por formalidade","value":"6"},
+			{"name":"Por previdência","value":"7"},
+			{"name":"Por sindicato","value":"8"},
+			{"name":"Porte micro","value":"9"},
+			{"name":"Porte pequeno","value":"10"},
+			{"name":"Porte médio","value":"11"},
+			{"name":"Porte grande","value":"12"},
+			{"name":"Por UF","value":"13"},
+			{"name":"Por setor","value":"14"},
+			{"name":"Mecenato Estadual","value":"15"},
+			{"name":"Editais Estaduais","value":"16"},
+			{"name":"Crédito Especial","value":"17"}
+
+		]
+	}
+	
+}

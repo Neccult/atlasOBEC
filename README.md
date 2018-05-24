@@ -16,6 +16,48 @@ Atlas econômico da cultura brasileira (OBEC - UFRGS)
 
 ## Documentação para instalar o Atlas
 
+### Instalação via Docker
+
+#### Debian/Ubuntu
+
+Instale o docker:
+
+```
+apt install docker
+```
+
+#### CentOS/Fedora
+```
+yum install docker
+```
+
+### Instalação do docker-compose
+
+Instale o docker-compose a partir das instruções em: https://docs.docker.com/compose/install
+```
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+$ docker-compose --version
+docker-compose version 1.21.0, build 1719ceb
+```
+
+
+### Rode o docker-compose
+
+```
+$ docker-compose up --build
+```
+
+### Banco de dados
+
+O banco de dados não foi incluído na imagem; preferiu-se utilizar um banco externo. Assim, a configuração deve ser feita manualmente.
+
+app/data/sql/dump-Atlas.sql
+
+
+## Instalação sem Docker
+
+
 ### Dependências para instalação
 
  - Apache

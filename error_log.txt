@@ -1,9 +1,0 @@
-[06-Sep-2017 15:23:49 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Function name must be a string in /var/www/html/atlasOBEC/menudesktop.php:8
-Stack trace:
-#0 {main}
-  thrown in /var/www/html/atlasOBEC/menudesktop.php on line 8
-[06-Sep-2017 15:23:51 America/Sao_Paulo] PHP Fatal error:  Uncaught Error: Function name must be a string in /var/www/html/atlasOBEC/menudesktop.php:8
-Stack trace:
-#0 {main}
-  thrown in /var/www/html/atlasOBEC/menudesktop.php on line 8
-[06-Sep-2017 15:24:24 America/Sao_Paulo] PHP Notice:  Undefined index: empreendimentos in /var/www/html/atlasOBEC/menudesktop.php on line 8

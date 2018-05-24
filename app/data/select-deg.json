@@ -1,0 +1,98 @@
+{ 
+	"control":
+		{
+			"mercado":{	
+					"setorial": [1,2,3,4], 
+					"ocupacional": [3,4,5,6,7,8]
+				}
+		},
+	"data":
+		[
+			{"name":"Escolher","value":"0"},
+			{
+				"name":"Por porte",
+				"value":"1", 
+				"desags": [
+					{"name": "Micro", "value": "1"}, 
+					{"name": "Pequeno", "value": "2"}, 
+					{"name": "Médio", "value": "3"}, 
+					{"name": "Grande", "value": "4"}
+				]
+			},
+			{
+				"name":"Por sexo",
+				"value":"2", 
+				"desags": [
+					{"name": "Masculino", "value": "1"},
+					{"name": "Feminino", "value": "2"}
+				]
+			},
+			{
+				"name":"Por idade",
+				"value":"3", 
+				"desags": [
+					{"name": "10 - 17", "value": "1"}, 
+					{"name": "18 - 29", "value": "2"}, 
+					{"name": "30 - 49", "value": "3"},
+					{"name": "50 - 64", "value": "4"}, 
+					{"name": "65 ou mais", "value": "5"}
+				]
+			},
+			{
+				"name":"Por escolaridade",
+				"value":"4", 
+				"desags": [
+					{"name": "Sem Instrução", "value": "1"},
+					{"name": "Fundamental Incompleto", "value": "2"},
+					{"name": "Fundamental Completo", "value": "3"},
+					{"name": "Médio Completo", "value": "4"},
+					{"name": "Superior Incompleto", "value": "5"},
+					{"name": "Superior Completo", "value": "6"}
+				]
+			},
+			{
+				"name":"Por cor",
+				"value":"5",
+				"desags": [
+					{"name": "Indígena", "value": "1"},
+					{"name": "Branca", "value": "2"},
+					{"name": "Preta", "value": "3"},
+					{"name": "Amarela", "value": "4"},
+					{"name": "Parda", "value": "5"}
+				]
+			},
+			{
+				"name":"Por formalidade",
+				"value":"6",
+				"desags": [
+					{"name":"Informal","value":"1"},
+					{"name":"Formal","value":"2"}
+				]
+			},
+			{
+				"name":"Por previdência",
+				"value":"7",
+				"desags": [
+					{"name":"Não contribuinte","value":"1"},
+					{"name":"Contribuinte","value":"2"}
+				]
+			},
+			{
+				"name":"Por sindicato",
+				"value":"8",
+				"desags": [
+					{"name":"Não membro","value":"1"},
+					{"name":"Membro","value":"2"}
+				]
+			},
+			{"name":"Porte micro","value":"9"},
+			{"name":"Porte pequeno","value":"10"},
+			{"name":"Porte médio","value":"11"},
+			{"name":"Porte grande","value":"12"},
+			{"name":"Por UF","value":"13"},
+			{"name":"Por setor","value":"14"},
+			{"name":"Mecenato Estadual","value":"15"},
+			{"name":"Editais Estaduais","value":"16"},
+			{"name":"Crédito Especial","value":"17"}
+		]
+}
