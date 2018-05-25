@@ -430,9 +430,9 @@ class EixoQuatro {
                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
                ." WHERE ex.Numero = ".$var." AND (ex.idTipo = 2 OR ex.idTipo = 1) AND ex.Consumo = ?";
 
-        $query .= ($anos > 0) ? " AND ex.Ano = ?" : "" ;
+        $query .= ($ano > 0) ? " AND ex.Ano = ?" : "" ;
         
-        if ($anos > 0) {
+        if ($ano > 0) {
             if ($stmt->prepare($query)) {
                 $stmt->bind_param(
                     'sssss',
@@ -440,7 +440,7 @@ class EixoQuatro {
                     $uf,
                     $cad,
                     $cons,
-                    $anos
+                    $ano
                 );
             }
         } else {
