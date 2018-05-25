@@ -300,10 +300,6 @@ class EixoDois {
             $params[] = $cad;
             $params[] = $var;
 
-            if ($anos > 0) {
-                $query .= " AND ex.Ano = ?";
-                $params[] = $anos;
-            }
             
         } else {
             $query = "SELECT * FROM ".self::$table." AS ex"
@@ -325,9 +321,10 @@ class EixoDois {
 
         $params = [];
         $params[] = $cad;
-        $params[] = $ocp;
+        if($ocp != 3){
+            $params[] = $ocp;
+        }
         $params[] = $var;
-        
         if ($anos > 0) {
             $query .= " AND ex.Ano = ?";
             $params[] = $anos;
