@@ -773,6 +773,8 @@ article.results-article div.results-content{
 	margin: 20px 0;
 }
 
+
+
 .desc-var {
 	color:	#aaa;
 	margin-bottom: 10px;
@@ -969,6 +971,8 @@ article.results-article div.results-content{
 	padding-left: 5%;
 	padding-right:  5%;
 	height: auto;
+	display: flex;
+	justify-content: center;
 }
 .bread-select, .bread-eixo{
 	float: left;
@@ -1403,7 +1407,13 @@ button.opt.active{
 	background-color: black;
 }
 
-@media (max-width: 1499px) {
+@media (max-width: 1599px) {
+	.container-boxes{
+		padding: 0 5%;
+	}
+}
+
+@media (max-width: 1199px) {
 
 	.mob-bread{
 		font-size: 24px;
@@ -1412,6 +1422,18 @@ button.opt.active{
 		padding: 10px 5px 5px 10px;
 		color: white;
 
+	}
+
+
+
+	.nome-var{
+		margin: 80px auto 40px auto;
+	}
+
+	#containerDados, #containerBarra, #containerDesc, #containerMapa{
+		left: 0;
+		right: 0;
+		margin-top: 100px;
 	}
 
 	.bread-select, .bread-eixo{
@@ -1435,6 +1457,11 @@ button.opt.active{
 		height: 40px;
 	}
 
+	.bread-caixa span{
+		margin: 0;
+		text-align: center;
+	}
+
 	#menuvariaveis .row {
 		padding-left: 0px;
 	}
@@ -1449,7 +1476,7 @@ button.opt.active{
 	}
 
 	#view-boxes > div{
-		margin: 0;
+		margin: 20px 0 0 0;
 	}
 
 	#resultado{
@@ -1573,7 +1600,6 @@ button.opt.active{
 		color: #f1f1f1;
 		height: 50px;
 		background-color: #616161;
-		padding-top: 2%;
 		top: 0;
 		width: 100%;
 		position: fixed;
@@ -1770,36 +1796,6 @@ button.opt.active{
 
 }
 
-@media (max-width: 1599px) {
-
-	.bread-caixas{
-		padding-left: 10%;
-	}
-
-	.container{
-		padding-top: 40px;
-	}
-
-
-	#view-boxes{
-		padding-left: 5%;
-		padding-right: 5%;
-	}
-	.bread-select, .bread-eixo{
-		font-size: 13px;
-	}
-
-	.description-number{
-		font-size: 1vw;
-	}
-	.percent-value .description-number{
-		font-size: 1vw;
-		line-height: 20px;
-	}
-
-}
-
-
 
 @media (max-width: 1499px) {
 
@@ -1841,6 +1837,21 @@ button.opt.active{
 }
 
 @media (max-width: 799px) {
+
+	.container-boxes{
+		padding: 0 1%;
+	}
+
+	.view-boxes div{
+		margin: 10px 0 0 0;
+
+	}
+
+	#containerDados, #containerBarra, #containerDesc, #containerMapa{
+		left: 0;
+		right: 0;
+		margin-top: 20px;
+	}
 
 
 	.description-number{
