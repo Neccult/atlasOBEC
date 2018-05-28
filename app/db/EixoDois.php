@@ -385,7 +385,7 @@ class EixoDois {
                 $stmt4->execute();
                 $obj2 = self::fetch_results($stmt4)[0];
             }            
-            $brasil_total = $obj1->Valor - $obj2->Valor;
+            $brasil_total = $obj1->Valor + $obj2->Valor;
             
             $result_aux = array();
             $value_aux = array();
