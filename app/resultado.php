@@ -90,31 +90,11 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 	<div class="results-content">
 		<div class="container">
 
-            <div id="menuvariaveis" ></div>
-
-
-            <div class="col-md-12 col-xs-12">
+            <div class="nome-var col-md-12 col-xs-12">
                 <div class="desc-chart text-center">
 
                     <!--=== título variável ===-->
                     <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
-
-                    <!--<div class="text text-justify" id="desc-var">
-                        <?php
-                        if($view === "mapa") {
-                            echo $text['desc_var_mapa'];
-                        }
-                        if($view === "treemap_scc") {
-                            echo $text['desc_var_treemap_scc'];
-                        }
-                        if($view === "treemap_region") {
-                            echo $text['desc_var_treemap_region'];
-                        }
-                        if($view === "barras") {
-                            echo $text['desc_var_barras'];
-                        }
-                        ?>
-                    </div>-->
 
                 </div>
             </div>
@@ -124,9 +104,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
             <div class="bread-parent">
                 <div class="row breadcrumb">
                     <div class="bread-caixas">
+
+
                         <div class="bread-caixa" style="width: 15%">
                             <span class="rotulo-bread opt view active">Eixo</span>
-
                             <select class="bread-eixo bread-select-eixo" data-id="eixo">
                                 <?php
                                 foreach ($json_text['select']['eixo'] as $bread_eixo) {
@@ -140,7 +121,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 ?>
                             </select>
                         </div>
+
                         <div class="bread-separator">/</div>
+
                         <div class="bread-caixa" style="width: 15%">
                             <span class="rotulo-bread opt view active">Variável</span>
 
@@ -334,213 +317,75 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
 
             <!--==== jquery load menu ===-->
-			<div class="row" id="view-boxes">
-				<!-- MAPA -->
-				<div id='containerMapa' class="col-md-5 col-sm-12" style="height: 452px">
-                    <div class="view-title">
-                        MAPA DO BRASIL
-                        <i class="plus"></i>
-                    </div>
-                    <?php
-                        if($view =='mapa' && $cad === 0) {
-                            $prt = 0;
-                        }
-                        if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
-                            $_GET['ocp']=1;
-                        }
-                        if($view == 'barras' && $eixo == "mercado" && $slc == 0) {
-                            $_GET['ocp']=0;
-                        }
-                        //TODO VER O QUE ESSA FUNÇÃO FAZ DE DIFERENÇA
-                        /*
-                        foreach($text['inativos'][$view] as $filter){
-                            $_GET[$filter]=0;
-                        }*/
-                        if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
-                            $_GET['atc']=0;
-                        }
-                        if($view == 'barras' || $view == 'treemap_scc') {
-                            $view = 'mapa';
-                        }
-                    ?>
-                    <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
-                    <!--=== views gráfico ===-->
-                    <div class="content-btn-mapa ">
-                    <?php foreach($text['type'] as $key => $value):?>
-                        <?php if($value['id'] === "mapa" || $value['id'] == "treemap_region"): ?>
-                        <div class="btn-mapa col-xs-6">
-                            <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
-                        </div>
-                        <?php endif; ?>
-                    <?php endforeach;?>
-                    </div>
-				</div>
-                <!--=============== DADOS! ================-->
-                <div id='containerDados' class="col-md-5 col-s-12 iframe-dados" style="height: 330px;">
-                    <div class="view-title">
-                        DADOS
-                    </div>
-
-                    <div id="btn-opt" class="btn-opt" style=" margin-top: 10px; margin-bottom: 10px;">
-                        <?php
-                        if($eixo == "mercado") {
-                            ?>
-                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
-                            </div>
-                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
-                            </div>
-                        <?php } ?>
-                        <?php
-                        if($eixo == "politicas") {
-                            ?>
-                            <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
-                                <button  class="opt view <?php if($mec == 0) echo 'active';?>" id="recebedora">Recebedor</button>
-                            </div>
-                            <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
-                                <button  class="opt view <?php if($mec == 1) echo 'active';?>" id="trabalhador">Trabalhador</button>
-                            </div>
-                        <?php } ?>
-                        <?php if($eixo == "comercio") { ?>
-                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                <button class="opt view active" id="bens">Bens</button>
-                            </div>
-                            <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                <button class="opt view " id="servicos">Serviços</button>
-                            </div>
-                        <?php } ?>
-                    </div>
-
-
-                    <br>
-                    <br>
-
-                    <?php if($eixo != "comercio") { ?>
-                        <div class="state-title" style="display: none">
-                            BRASIL
-                        </div>
-                    <?php  }?>
-                    <div class="cad-title" style="display:none">
-                        TODOS SETORES
-                    </div>
-                    <div class="data-values" style="display:flex">
-                        <div class="container-flex integer-flex">
-                            <div class="integer-value" style="padding-left: 15px;">
-                                <span class="number"></span>
-                                <span class="description-number"></span>
-                            </div>
-                        </div>
-                        <div class ="container-flex">
-                            <div class="percent-value percent-flex">
-
-                                <div class="box-dado">
-                                    <span class="number">100%</span>
-                                    <span class="description-number" ></span>
-                                </div>
-
-                                <div class="box-dado" style="display:none">
-                                    <span class="number">100%</span>
-                                    <span class="description-number" ></span>
-                                </div>
-
-                                <div class="box-dado" style="display:none">
-                                    <span class="number">100%</span>
-                                    <span class="description-number" ></span>
-                                </div>
-                                <div class ="setor-value" style="display:none;">
-                                    <span class="number"></span>
-                                    <span class="description-number"></span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="value-info-title">
-
-                    </div>
-                    <div class="font-title">
-                        FONTE(S): RAIS
-                    </div>
-                </div>
-                <!--============= opções gráfico! ============-->
-				<div id='containerOpts' class="col-md-12 col-sm-12 opts-result" style="display: none; height: 330px; ">
-                    <div id="menu-view">
+            <div class="container-boxes">
+                <div id="view-boxes">
+                    <!-- MAPA -->
+                    <div id='containerMapa' class="col-md-6 col-sm-12" style="height: 452px">
                         <div class="view-title">
-                            MENU
+                            MAPA DO BRASIL
+                            <i class="plus"></i>
                         </div>
-                        <div id="title-view">
+                        <?php
+                            if($view =='mapa' && $cad === 0) {
+                                $prt = 0;
+                            }
+                            if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
+                                $_GET['ocp']=1;
+                            }
+                            if($view == 'barras' && $eixo == "mercado" && $slc == 0) {
+                                $_GET['ocp']=0;
+                            }
+                            //TODO VER O QUE ESSA FUNÇÃO FAZ DE DIFERENÇA
+                            /*
+                            foreach($text['inativos'][$view] as $filter){
+                                $_GET[$filter]=0;
+                            }*/
+                            if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
+                                $_GET['atc']=0;
+                            }
+                            if($view == 'barras' || $view == 'treemap_scc') {
+                                $view = 'mapa';
+                            }
+                        ?>
+                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>_box.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
+                        <!--=== views gráfico ===-->
+                        <div class="content-btn-mapa ">
+                        <?php foreach($text['type'] as $key => $value):?>
+                            <?php if($value['id'] === "mapa" || $value['id'] == "treemap_region"): ?>
+                            <div class="btn-mapa col-xs-6">
+                                <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
+                            </div>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                        </div>
+                    </div>
+                    <!--=============== DADOS! ================-->
+                    <div id='containerDados' class="col-md-6 col-s-12 iframe-dados" style="height: 330px;">
+                        <div class="view-title">
+                            DADOS
+                        </div>
+
+                        <div id="btn-opt" class="btn-opt" style=" margin-top: 10px; margin-bottom: 10px;">
                             <?php
                             if($eixo == "mercado") {
-                            ?>
+                                ?>
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
                                     <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
                                 </div>
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
                                     <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
                                 </div>
-                                <br>
-                                <div class="omitir">
-                                    <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
-                                    <select class="opt-select" data-id="var">
-                                        <?php
-                                        foreach ($json_text['var'][$eixo_num] as $variavel) {
-                                            echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'];
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <br>
-                                <div class="omitir">
-                                    <div id="option-title-view" <?php echo "class='select-ano'"; ?>>
-                                        <span class="opt view active">Ano:</span>
-                                        <select class="opt-select" data-id="ano">
-                                            <?php
-                                            foreach ($json_text['select']['ano'] as $option) {
-                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <?php
-                                        if($slc == 0) {
-                                    ?>
-                                        <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
-                                            <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
-                                            <select class="opt-select" data-id="deg">
-                                                <!-- opções! -->
-                                                <?php foreach ($select['deg'] as $option): ?>
-                                                    <?php if($option['value'] <= 4):?>
-                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    <?php
-                                        } else {
-                                    ?>
-                                        <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
-                                            <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
-                                            <select class="opt-select" data-id="deg">
-                                                <!-- opções! -->
-                                                <?php foreach ($select['deg'] as $option): ?>
-                                                    <?php if($option['value'] >= 3 || $option['value'] == 0):?>
-                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    <?php
-                                        }
-                                    ?>
-                                </div>
+                            <?php } ?>
                             <?php
-                                } else {
-                            ?>
-
+                            if($eixo == "politicas") {
+                                ?>
+                                <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
+                                    <button  class="opt view <?php if($mec == 0) echo 'active';?>" id="recebedora">Recebedor</button>
+                                </div>
+                                <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
+                                    <button  class="opt view <?php if($mec == 1) echo 'active';?>" id="trabalhador">Trabalhador</button>
+                                </div>
+                            <?php } ?>
                             <?php if($eixo == "comercio") { ?>
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
                                     <button class="opt view active" id="bens">Bens</button>
@@ -549,222 +394,360 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <button class="opt view " id="servicos">Serviços</button>
                                 </div>
                             <?php } ?>
+                        </div>
 
 
-                            <div class = "omitir" id="option-title-view "  <?php echo $json_text['var_desc'] ?>>
-                                <span class="opt view omitir">Variável:</span>
-                                <select class="opt-select" data-id="var">
-                                    <?php
-                                    foreach ($json_text['var'][$eixo_num] as $variavel) {
-                                        echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
+                        <br>
+                        <br>
+
+                        <?php if($eixo != "comercio") { ?>
+                            <div class="state-title" style="display: none">
+                                BRASIL
+                            </div>
+                        <?php  }?>
+                        <div class="cad-title" style="display:none">
+                            TODOS SETORES
+                        </div>
+                        <div class="data-values" style="display:flex">
+                            <div class="container-flex integer-flex">
+                                <div class="integer-value" style="padding-left: 15px;">
+                                    <span class="number"></span>
+                                    <span class="description-number"></span>
+                                </div>
+                            </div>
+                            <div class ="container-flex">
+                                <div class="percent-value percent-flex">
+
+                                    <div class="box-dado">
+                                        <span class="number">100%</span>
+                                        <span class="description-number" ></span>
+                                    </div>
+
+                                    <div class="box-dado" style="display:none">
+                                        <span class="number">100%</span>
+                                        <span class="description-number" ></span>
+                                    </div>
+
+                                    <div class="box-dado" style="display:none">
+                                        <span class="number">100%</span>
+                                        <span class="description-number" ></span>
+                                    </div>
+                                    <div class ="setor-value" style="display:none;">
+                                        <span class="number"></span>
+                                        <span class="description-number"></span>
+                                    </div>
+                                </div>
                             </div>
 
+                        </div>
+                        <div class="value-info-title">
 
-                            <div class = "omitir" id="option-title-view "  <?php echo "class='select-ano'"; ?>>
-                                <span class="opt view omitir">Ano:</span>
-                                <select class="opt-select" data-id="ano">
-                                    <?php
-                                        foreach ($json_text['select']['ano'] as $option) {
-                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                        }
-                                    ?>
-                                </select>
+                        </div>
+                        <div class="font-title">
+                            FONTE(S): RAIS
+                        </div>
+                    </div>
+                    <!--============= opções gráfico! ============-->
+                    <div id='containerOpts' class="col-md-12 col-sm-12 opts-result" style="display: none; height: 330px; ">
+                        <div id="menu-view">
+                            <div class="view-title">
+                                MENU
                             </div>
-
-                            <?php if($eixo == 'politicas') {?>
-                                <div id="option-title-view" <?php echo "class='select-mec'"; ?>>
-                                    <span class="opt view active">Mecanismo :</span>
-                                    <select class="opt-select" data-id="mec">
-                                        <?php
-                                        foreach ($json_text['select']['mec'] as $option) {
-                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div id="option-title-view" <?php echo "class='select-mod' style='display: none'" ; ?>>
-                                    <span class="opt view active">Modalidade :</span>
-                                    <select class="opt-select" data-id="mod">
-                                        <?php
-                                        foreach ($json_text['select']['mod'] as $option) {
-                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div id="option-title-view" <?php echo "class='select-pfj' style='display: none'"; ?>>
-                                    <span class="opt view active">Tipo de Pessoa :</span>
-                                    <select class="opt-select" data-id="pfj">
-                                        <?php
-                                        foreach ($json_text['select']['pfj'] as $option) {
-                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-
-                            <?php } ?>
-
-                            <?php if($eixo == 'comercio') {?>
-                                <div id="option-title-viewss" <?php echo "class='select-typ'"; ?>>
-                                    <span class="opt view active">Tipo :</span>
-                                    <select class="opt-select" data-id="typ">
-                                        <?php
-                                        foreach ($json_text['select']['typ'] as $option) {
-                                            if($option['value'] == "1"){
-                                                echo "<option value='". $option['value'] ."' selected>" . $option['name'] . "</option>";
+                            <div id="title-view">
+                                <?php
+                                if($eixo == "mercado") {
+                                ?>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                                    </div>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
+                                    </div>
+                                    <br>
+                                    <div class="omitir">
+                                        <span data-desc="<?= $json_text['var_desc'] ?>" class="opt active">Variável:</span>
+                                        <select class="opt-select" data-id="var">
+                                            <?php
+                                            foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                                echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'];
                                             }
-                                            else {
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="omitir">
+                                        <div id="option-title-view" <?php echo "class='select-ano'"; ?>>
+                                            <span class="opt view active">Ano:</span>
+                                            <select class="opt-select" data-id="ano">
+                                                <?php
+                                                foreach ($json_text['select']['ano'] as $option) {
+                                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <?php
+                                            if($slc == 0) {
+                                        ?>
+                                            <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
+                                                <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
+                                                <select class="opt-select" data-id="deg">
+                                                    <!-- opções! -->
+                                                    <?php foreach ($select['deg'] as $option): ?>
+                                                        <?php if($option['value'] <= 4):?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        <?php
+                                            } else {
+                                        ?>
+                                            <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
+                                                <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
+                                                <select class="opt-select" data-id="deg">
+                                                    <!-- opções! -->
+                                                    <?php foreach ($select['deg'] as $option): ?>
+                                                        <?php if($option['value'] >= 3 || $option['value'] == 0):?>
+                                                            <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        <?php
+                                            }
+                                        ?>
+                                    </div>
+                                <?php
+                                    } else {
+                                ?>
+
+                                <?php if($eixo == "comercio") { ?>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button class="opt view active" id="bens">Bens</button>
+                                    </div>
+                                    <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                        <button class="opt view " id="servicos">Serviços</button>
+                                    </div>
+                                <?php } ?>
+
+
+                                <div class = "omitir" id="option-title-view "  <?php echo $json_text['var_desc'] ?>>
+                                    <span class="opt view omitir">Variável:</span>
+                                    <select class="opt-select" data-id="var">
+                                        <?php
+                                        foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                            echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+
+                                <div class = "omitir" id="option-title-view "  <?php echo "class='select-ano'"; ?>>
+                                    <span class="opt view omitir">Ano:</span>
+                                    <select class="opt-select" data-id="ano">
+                                        <?php
+                                            foreach ($json_text['select']['ano'] as $option) {
                                                 echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
                                             }
-                                        }
                                         ?>
                                     </select>
                                 </div>
 
-                                <div id="option-title-view" <?php echo "class='select-prc'" ; ?>>
-                                    <span class="opt view active">Parceiro :</span>
-                                    <select class="opt-select" data-id="prc">
-                                        <?php
-                                        foreach ($json_text['select']['prc'] as $option) {
-                                            echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                                <?php if($eixo == 'politicas') {?>
+                                    <div id="option-title-view" <?php echo "class='select-mec'"; ?>>
+                                        <span class="opt view active">Mecanismo :</span>
+                                        <select class="opt-select" data-id="mec">
+                                            <?php
+                                            foreach ($json_text['select']['mec'] as $option) {
+                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
 
+                                    <div id="option-title-view" <?php echo "class='select-mod' style='display: none'" ; ?>>
+                                        <span class="opt view active">Modalidade :</span>
+                                        <select class="opt-select" data-id="mod">
+                                            <?php
+                                            foreach ($json_text['select']['mod'] as $option) {
+                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
 
-                            <?php } ?>
+                                    <div id="option-title-view" <?php echo "class='select-pfj' style='display: none'"; ?>>
+                                        <span class="opt view active">Tipo de Pessoa :</span>
+                                        <select class="opt-select" data-id="pfj">
+                                            <?php
+                                            foreach ($json_text['select']['pfj'] as $option) {
+                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
 
-                            <?php if($eixo == 'empreendimentos') {?>
-
-                                <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
-                                    <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
-                                    <select class="opt-select" data-id="deg">
-                                        <!-- opções! -->
-                                        <?php foreach ($select['deg'] as $option): ?>
-                                            <?php if($option['value'] == 0 || ($option['value'] >= 9 && $option['value'] <= 12)):?>
-                                                <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-
-                                            <?php endif; ?>
-                                            <?php if($var >= 10): ?>
-                                                <?php if($option['value'] == 13 || ($option['value'] == 14)):?>
-                                                    <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
-                                                <?php endif; ?>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            <?php } ?>
-
-
-
-                                <?php
-                            }
-                        ?>
-                        </div>
-                    </div>
-                    <?php if($var < 10){ ?>
-                        <div id="menu-view">
-                            <div class="view-title" data-id="scc&ocp">
-                                SETORES
-                            </div>
-                            <div id="title-view-scc">
-                                <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
-                                <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
-                                <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
-                                <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
-                                <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
-                                <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
-                                <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
-                                <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
-                                <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
-                                <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
-                                <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
-                            </div>
-                        </div>
-                    <?php } ?>
-				</div>
-                <!--=============== BARRAS! ================-->
-                <div id='containerBarra' class="col-md-5 col-sm-12" style="height: 330px;">
-                    <div class="view-title">
-                        SÉRIE HISTÓRICA [uf] [cad]
-                        <i class="plus"></i>
-                    </div>
-                    <?php if ($eixo == "comercio") {?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></iframe>
-                        <div id="menu-view" style=" height: 90%; width: 30%; float: right;">
-                            <div class="view-title-leg" data-id="scc&ocp">
-                            </div>
-                            <div id="title-view-leg-scc" style="">
-                                <span data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)"></i> Exportação<br></span>
-                                <span data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color:  rgb(109, 191, 201)"></i> Importação<br></span>
-                            </div>
-                        </div>
-                    <?php } else if ($eixo == "politicas"){?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
-
-                        <div id="menu-view-donut" style=" height: 80%; padding-top: 5%; width: 30%; float: right; display: none;">
-                            <div class="view-title-leg-donut" data-id="scc&ocp">
-                            </div>
-                            <div id="title-view-leg-scc-donut" style="">
-                            </div>
-                        </div>
-
-                    <?php } else { ?>
-                        <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 265px;" scrolling="no"></iframe>
-
-                    <?php } ?>
-
-                </div>
-                <!--=============== DESCRICAO! ================-->
-                <div id='containerDesc' id="descricao" class="col-md-5 col-s-12" style="height: 210px; top: -220px; overflow: auto;">
-                    <div class="view-title">
-                        DESCRIÇÃO DA VARIÁVEL
-                    </div>
-                    <div class="desc-var">
-                        <?=$text['desc_var_mapa'];?>
-                    </div>
-                </div>
-                <!--=============== TREEMAP! ================-->
-                <div id='containerTree' class="col-md-10 col-sm-12"  style="height: 452px; top: -220px">
-                    <div class="view-title">
-                        <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
-                        <i class="plus"></i>
-                    </div>
-                    <?php if ($eixo != "comercio") {?>
-                        <iframe id="view_box_scc" src="treemap_scc_box.php" scrolling="no"></iframe>
-                        <div id="menu-view" >
-                            <div class="view-title-leg" data-id="scc&ocp">
-                                SETORES
-                            </div>
-                            <div id="title-view-leg-scc">
-                                <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
-                                <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
-                                <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
-                                <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
-                                <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
-                                <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
-                                <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
-                                <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
-                                <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
-                                <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
-                                <?php if($eixo != 'comercio') { ?>  <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
                                 <?php } ?>
+
+                                <?php if($eixo == 'comercio') {?>
+                                    <div id="option-title-viewss" <?php echo "class='select-typ'"; ?>>
+                                        <span class="opt view active">Tipo :</span>
+                                        <select class="opt-select" data-id="typ">
+                                            <?php
+                                            foreach ($json_text['select']['typ'] as $option) {
+                                                if($option['value'] == "1"){
+                                                    echo "<option value='". $option['value'] ."' selected>" . $option['name'] . "</option>";
+                                                }
+                                                else {
+                                                    echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div id="option-title-view" <?php echo "class='select-prc'" ; ?>>
+                                        <span class="opt view active">Parceiro :</span>
+                                        <select class="opt-select" data-id="prc">
+                                            <?php
+                                            foreach ($json_text['select']['prc'] as $option) {
+                                                echo "<option value='" . $option['value'] . "'>" . $option['name'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+
+                                <?php } ?>
+
+                                <?php if($eixo == 'empreendimentos') {?>
+
+                                    <div id="option-title-view" <?php echo "class='select-deg'"; ?>>
+                                        <span data-desc="<?= $json_text['deg'] ?>" class="opt view active">Desagregação:</span>
+                                        <select class="opt-select" data-id="deg">
+                                            <!-- opções! -->
+                                            <?php foreach ($select['deg'] as $option): ?>
+                                                <?php if($option['value'] == 0 || ($option['value'] >= 9 && $option['value'] <= 12)):?>
+                                                    <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+
+                                                <?php endif; ?>
+                                                <?php if($var >= 10): ?>
+                                                    <?php if($option['value'] == 13 || ($option['value'] == 14)):?>
+                                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['name'] ?></option>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                <?php } ?>
+
+
+
+                                    <?php
+                                }
+                            ?>
                             </div>
                         </div>
-                    <?php } else {?>
-                        <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
-                    <?php } ?>
+                        <?php if($var < 10){ ?>
+                            <div id="menu-view">
+                                <div class="view-title" data-id="scc&ocp">
+                                    SETORES
+                                </div>
+                                <div id="title-view-scc">
+                                    <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
+                                    <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
+                                    <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
+                                    <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
+                                    <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
+                                    <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
+                                    <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
+                                    <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
+                                    <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
+                                    <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
+                                    <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <!--=============== BARRAS! ================-->
+                    <div id='containerBarra' class="col-md-6 col-sm-12" style="height: 330px;">
+                        <div class="view-title">
+                            SÉRIE HISTÓRICA [uf] [cad]
+                            <i class="plus"></i>
+                        </div>
+                        <?php if ($eixo == "comercio") {?>
+                            <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></iframe>
+                            <div id="menu-view" style=" height: 90%; width: 30%; float: right;">
+                                <div class="view-title-leg" data-id="scc&ocp">
+                                </div>
+                                <div id="title-view-leg-scc" style="">
+                                    <span data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)"></i> Exportação<br></span>
+                                    <span data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color:  rgb(109, 191, 201)"></i> Importação<br></span>
+                                </div>
+                            </div>
+                        <?php } else if ($eixo == "politicas"){?>
+                            <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+
+                            <div id="menu-view-donut" style=" height: 80%; padding-top: 5%; width: 30%; float: right; display: none;">
+                                <div class="view-title-leg-donut" data-id="scc&ocp">
+                                </div>
+                                <div id="title-view-leg-scc-donut" style="">
+                                </div>
+                            </div>
+
+                        <?php } else { ?>
+                            <iframe id="view_box_barras" src="barras_box.php" style="border: none; width: 100%; height: 265px;" scrolling="no"></iframe>
+
+                        <?php } ?>
+
+                    </div>
+                    <!--=============== DESCRICAO! ================-->
+                    <div id='containerDesc' id="descricao" class="col-md-6 col-s-12" style="height: 210px; top: -225px; overflow: auto;">
+                        <div class="view-title">
+                            DESCRIÇÃO DA VARIÁVEL
+                        </div>
+                        <div class="desc-var">
+                            <?=$text['desc_var_mapa'];?>
+                        </div>
+                    </div>
+                    <!--=============== TREEMAP! ================-->
+                    <div id='containerTree' class="col-md-12 col-sm-12"  style="height: 452px; top: -210px">
+                        <div class="view-title">
+                            <div style="float: left; width: 90%;">TREEMAP - SETORES CULTURAIS CRIATIVOS</div>
+                            <i class="plus"></i>
+                        </div>
+                        <?php if ($eixo != "comercio") {?>
+                            <iframe id="view_box_scc" src="treemap_scc_box.php" scrolling="no"></iframe>
+                            <div id="menu-view" >
+                                <div class="view-title-leg" data-id="scc&ocp">
+                                    SETORES
+                                </div>
+                                <div id="title-view-leg-scc">
+                                    <span class="scc" data-id="0"><i style="display: inline-block; width: 10px; height: 10px; background-color: #071342"></i> Todos<br></span>
+                                    <span class="scc" data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: #87A8CA"></i> Arquitetura e Design<br></span>
+                                    <span class="scc" data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color: #077DDD"></i> Artes Cênicas e Espetáculos<br></span>
+                                    <span class="scc" data-id="3"><i style="display: inline-block; width: 10px; height: 10px; background-color: #0F4B67"></i> Audiovisual<br></span>
+                                    <span class="scc" data-id="4"><i style="display: inline-block; width: 10px; height: 10px; background-color: #8178AF"></i> Cultura Digital<br></span>
+                                    <span class="scc" data-id="5"><i style="display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB"></i> Editorial<br></span>
+                                    <span class="scc" data-id="6"><i style="display: inline-block; width: 10px; height: 10px; background-color: #EC8A91"></i> Educação e Criação em Artes<br></span>
+                                    <span class="scc" data-id="7"><i style="display: inline-block; width: 10px; height: 10px; background-color: #AD5468"></i> Entretenimento<br></span>
+                                    <span class="scc" data-id="8"><i style="display: inline-block; width: 10px; height: 10px; background-color: #6A474D"></i> Música<br></span>
+                                    <span class="scc" data-id="9"><i style="display: inline-block; width: 10px; height: 10px; background-color: #E96B00"></i> Patrimônio<br></span>
+                                    <?php if($eixo != 'comercio') { ?>  <span class="scc" data-id="10"><i style="display: inline-block; width: 10px; height: 10px; background-color: #B2510F"></i> Publicidade<br></span>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } else {?>
+                            <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
+                        <?php } ?>
 
                     </div>
                 </div>
-
             </div>
 
             <div class="row">
@@ -855,7 +838,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                         </div>
                     </div>
                 </span>
-                <span class="col-md-4 col-xs-12 contexto" style="top:-220px"></span>
+
 
             </div>
 		</div>

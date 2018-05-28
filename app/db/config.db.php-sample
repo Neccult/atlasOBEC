@@ -1,7 +1,7 @@
 <?php
 
 define('DB_NOME', 'Atlas');
-define('DB_USUARIO', 'atlas');
-define('DB_SENHA', 'Atl45');
-define('DB_HOST', '127.0.0.1');
+define('DB_USUARIO', 'root');
+define('DB_SENHA', 'root');
+define('DB_HOST', '143.54.231.130');
 

@@ -5,11 +5,6 @@
 	</head>
 	<body>
 
-    <div id="fullpage">
-    </div>
-
-
-
 
     <div class="section " id="section1">
         <?php
@@ -180,21 +175,6 @@
                 });
             });
 
-            $(document).ready(function() {
-                $('#fullpage').fullpage({
-                    'verticalCentered': false,
-                    'css3': false,
-                    'navigation': false,
-                    'hybrid': false,
-                    'offsetSections': true,
-                    'autoScrolling': false,
-                    'fitToSection': false,
-                });
-		
-                $('html, body').animate({
-                    scrollTop: $("#section1").offset().top
-                }, 1);
-            });
 
             /// MENU MOBILE!
 
