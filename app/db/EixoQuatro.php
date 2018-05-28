@@ -290,6 +290,11 @@ class EixoQuatro {
             $params[] = $tipo;
             $params[] = $var;
 
+            if ($anos > 0) {
+                $query .= " AND ex.Ano = ?";
+                $params[] = $anos;
+            }
+
             $paramsStr = '';
             foreach ($params as $param) {
                 $paramsStr .= 's';
