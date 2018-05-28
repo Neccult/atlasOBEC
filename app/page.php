@@ -180,21 +180,6 @@
                 });
             });
 
-            $(document).ready(function() {
-                $('#fullpage').fullpage({
-                    'verticalCentered': false,
-                    'css3': false,
-                    'navigation': false,
-                    'hybrid': false,
-                    'offsetSections': true,
-                    'autoScrolling': false,
-                    'fitToSection': false,
-                });
-		
-                $('html, body').animate({
-                    scrollTop: $("#section1").offset().top
-                }, 1);
-            });
 
             /// MENU MOBILE!
 

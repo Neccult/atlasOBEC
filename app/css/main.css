@@ -745,19 +745,33 @@ article.results-article div.results-content{
 	border-radius:	20px;
 	border: 5px solid #ddd;
 }
-
+.container-boxes{
+	width: 100%;
+	height: auto;
+	padding: 0 15%;
+	display: flex;
+	justify-content: space-around;
+}
 #view-boxes{
 	display: block;
+	padding-left: 0;
 }
 
-/*.plus {*/
-	/*display: inline-block;*/
-	/*float: right;*/
-	/*width: 20px;*/
-	/*height: 20px;*/
-	/*background-image: url(../images/plus.png);*/
-	/*background-size: 20px;*/
-/*}*/
+
+#containerDesc, #containerMapa{
+	right:10px;
+	margin: 10px 0 10px 0;
+}
+
+#containerBarra, #containerDados{
+	left:10px;
+	margin: 10px 0 10px 0;
+
+}
+
+#containerDownload{
+	margin: 20px 0;
+}
 
 .desc-var {
 	color:	#aaa;
