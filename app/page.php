@@ -5,11 +5,6 @@
 	</head>
 	<body>
 
-    <div id="fullpage">
-    </div>
-
-
-
 
     <div class="section " id="section1">
         <?php

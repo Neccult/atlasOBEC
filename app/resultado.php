@@ -90,31 +90,11 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 	<div class="results-content">
 		<div class="container">
 
-            <div id="menuvariaveis" ></div>
-
-
             <div class="nome-var col-md-12 col-xs-12">
                 <div class="desc-chart text-center">
 
                     <!--=== título variável ===-->
                     <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
-
-                    <!--<div class="text text-justify" id="desc-var">
-                        <?php
-                        if($view === "mapa") {
-                            echo $text['desc_var_mapa'];
-                        }
-                        if($view === "treemap_scc") {
-                            echo $text['desc_var_treemap_scc'];
-                        }
-                        if($view === "treemap_region") {
-                            echo $text['desc_var_treemap_region'];
-                        }
-                        if($view === "barras") {
-                            echo $text['desc_var_barras'];
-                        }
-                        ?>
-                    </div>-->
 
                 </div>
             </div>
@@ -124,9 +104,10 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
             <div class="bread-parent">
                 <div class="row breadcrumb">
                     <div class="bread-caixas">
+
+
                         <div class="bread-caixa" style="width: 15%">
                             <span class="rotulo-bread opt view active">Eixo</span>
-
                             <select class="bread-eixo bread-select-eixo" data-id="eixo">
                                 <?php
                                 foreach ($json_text['select']['eixo'] as $bread_eixo) {
@@ -140,7 +121,9 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 ?>
                             </select>
                         </div>
+
                         <div class="bread-separator">/</div>
+
                         <div class="bread-caixa" style="width: 15%">
                             <span class="rotulo-bread opt view active">Variável</span>
 
@@ -856,7 +839,6 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                     </div>
                 </span>
 
-                <span class="col-md-4 col-xs-12 contexto" style="top:-220px"></span>
 
             </div>
 		</div>

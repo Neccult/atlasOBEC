@@ -974,6 +974,7 @@ article.results-article div.results-content{
 	display: flex;
 	justify-content: center;
 }
+
 .bread-select, .bread-eixo{
 	float: left;
 	background-color: #f0f0f0;
