@@ -169,7 +169,6 @@ d3.json('data/colors.json', function(error, data) {
 
 
             dom.forEach(function(dominio, i) {
-                console.log(arrayColors[i]);
                 if(i == 0) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
                 else if(i == 8) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
                 else $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");

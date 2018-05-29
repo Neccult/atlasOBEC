@@ -80,16 +80,6 @@ if($eixo == 0) {
     require_once("EixoUm.php");
 	foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
 
-        /*
-            $mapa[$tupla->idUF] = [
-
-                'id' => (int) $tupla->idUF,
-                'uf' => $tupla->UFNome,
-                'valor' => (double) $tupla->Valor
-            ];
-        */
-
-
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;
         $mapa[$id]['uf'] = $tupla->UFNome;
@@ -105,16 +95,6 @@ else if($eixo == 1) {
     require_once("EixoDois.php");
     foreach (EixoDois::getter_mapa($var, $cad, $ocp, $ano) as $tupla) {
 
-        /*
-            $mapa[$tupla->idUF] = [
-
-                'id' => (int) $tupla->idUF,
-                'uf' => $tupla->UFNome,
-                'valor' => (double) $tupla->Valor
-            ];
-        */
-
-
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;
         $mapa[$id]['uf'] = $tupla->UFNome;
@@ -122,7 +102,6 @@ else if($eixo == 1) {
         $mapa[$id]['valor'] = (double) $tupla->Valor;
         $mapa[$id]['percentual'] = (double) $tupla->Percentual;
         $mapa[$id]['taxa'] = (double) $tupla->Taxa;
-
 
     }
 }

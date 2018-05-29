@@ -1039,6 +1039,8 @@ Saída:
 
 function loadMobile(){
 
+    console.log("oi")
+
 
     $(function() {
         $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
@@ -1102,11 +1104,9 @@ function loadPage(){
         menuView = 'menumobile.php?'+newHash+'=1';
         $('#section0').css("display", "none")
 
+
         loadMobile();
-
-
     }
-
 
     if($("#menuvariaveis").length != 0) {
 	    $("#menuvariaveis").load(menuView, function(){

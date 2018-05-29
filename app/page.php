@@ -71,7 +71,7 @@
 			<!-- se existem informações desta variável -->
 			<?php if(!empty($text)):?>
 				<section id="resultado">
-					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 1650px;" scrolling="no"></iframe>
+					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 1500px;" scrolling="no"></iframe>
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
