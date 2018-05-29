@@ -7,3 +7,6 @@ app/db/config.db.php
 .#*
 
 docker-compose.yml
+.idea/deployment.xml
+.idea/minc.iml
+.idea/modules.xml
