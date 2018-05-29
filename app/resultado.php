@@ -724,7 +724,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                             <i class="plus"></i>
                         </div>
                         <?php if ($eixo != "comercio") {?>
-                            <iframe id="view_box_scc" src="treemap_scc_box.php" scrolling="no"></iframe>
+                            <iframe id="view_box_scc" src="treemap_scc.php" scrolling="no"></iframe>
                             <div id="menu-view" >
                                 <div class="view-title-leg" data-id="scc&ocp">
                                     SETORES
@@ -745,7 +745,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 </div>
                             </div>
                         <?php } else {?>
-                            <iframe id="view_box_scc" src="treemap_scc_box.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
+                            <iframe id="view_box_scc" src="treemap_scc.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
                         <?php } ?>
 
                     </div>

@@ -172,7 +172,7 @@
 		
 		<iframe id="view_box_barras" src="barras_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
 		</iframe>
-		<iframe id="view_box_scc" src="treemap_scc_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
+		<iframe id="view_box_scc" src="treemap_scc.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
 		</iframe>
 
 		<script type="text/javascript">

@@ -26,7 +26,7 @@ function controlVar(clickVar){
 	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
     /* variáveis com valores default */
 }
 
@@ -122,7 +122,7 @@ function changeChart(url){
         $('iframe[id="view_box_barras"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
     if($('iframe[id="view_box_scc"]').length != 0) {
-        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
 }
 
@@ -368,7 +368,7 @@ function updateIframe(url){
     /// BOX DO GRAFICO SCC
 
     if ($('iframe[id="view_box_scc"]').length != 0) {
-        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
         if(eixoAtual == 0) {
 
@@ -390,7 +390,7 @@ function updateIframe(url){
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
                 }
                 else {
-                    $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
                     if(url['uf'] == 0)
                         $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
@@ -438,7 +438,7 @@ function updateIframe(url){
 
             }
             else {
-                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
                 if(url['uf'] == 0){
                     if(url['ocp'] == 0){
@@ -484,7 +484,7 @@ function updateIframe(url){
             }
             else{
                 $('iframe[id="view_box_scc"]').css('display', 'block')
-                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
             }
 
