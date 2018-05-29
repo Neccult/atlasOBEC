@@ -66,9 +66,10 @@
     <a href="page.php#comercio"><div id="eixo4" class="eixo-barra"></div></a>
 </div>
 
-<script src="js/barra_slide.js" type='text/javascript'></script>
 
 <script>
+
+    $("#menuvariaveis").css("display", "none")
 
 
 </script>

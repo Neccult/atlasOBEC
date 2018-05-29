@@ -90,6 +90,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 	<div class="results-content">
 		<div class="container">
 
+            <div id="menuvariaveis" ></div>
+
             <div class="nome-var col-md-12 col-xs-12">
                 <div class="desc-chart text-center">
 

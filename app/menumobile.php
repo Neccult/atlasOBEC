@@ -247,7 +247,6 @@ switch($eixo) {
 
         <script>
 
-            console.log("aqui veio")
             function getNomeEixo(eixo){
                 switch(eixo){
                     case 0: return 'empreendimentos';

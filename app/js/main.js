@@ -1039,9 +1039,6 @@ Saída:
 
 function loadMobile(){
 
-    console.log("oi")
-
-
     $(function() {
         $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
     });
