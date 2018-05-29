@@ -428,7 +428,7 @@ function ready(error, br_states, mapa){
             url['uf'] = d.id;
             if(eixo == 0 && vrv == 9)
                 var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id)
-                                                                                           .replace(/treemap_scc.php\?/, "linhas_box.php?");
+                                                                                           .replace(/treemap_scc.php\?/, "linhas.php?");
             else
                 var newSCCSrc = $(window.parent.document).find("#view_box_scc")
                                                          .attr("src")

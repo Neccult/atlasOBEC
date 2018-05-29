@@ -24,8 +24,8 @@ Saída:
 function controlVar(clickVar){
 	newHash = window.location.hash;
 	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
+    if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
     if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
     /* variáveis com valores default */
 }
@@ -116,10 +116,10 @@ function changeChart(url){
 	});
 	window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
     if($('iframe[id="view_box"]').length != 0) {
-        $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
     if($('iframe[id="view_box_barras"]').length != 0) {
-        $('iframe[id="view_box_barras"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+        $('iframe[id="view_box_barras"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
     if($('iframe[id="view_box_scc"]').length != 0) {
         $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
@@ -154,7 +154,7 @@ function updateIframe(url){
 
 
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
             }
             else{
@@ -174,7 +174,7 @@ function updateIframe(url){
                     $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
 
                 }
-                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
             }
         }
         else if(eixoAtual == 1) {
@@ -183,17 +183,17 @@ function updateIframe(url){
                 if(url['slc'] == 0) {
 
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
-                    $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
                 }
                 else{
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
                     newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=1");
-                    $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES RELACIONADAS");
                 }
             } else {
-                $('iframe[id="view_box"]').attr('src', url['view'] + '_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view'] + '.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
             }
         }
@@ -201,28 +201,28 @@ function updateIframe(url){
             $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
 
             if(url['var'] == 17 || url['var'] == 18 ||  url['var'] == 19){
-                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
             }
             else if(url['var'] == 16){
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=0");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE ÍNDICE HERFINDAHL-HIRSCHMAN PARA CONCENTRAÇÃO DOS PROJETOS FOMENTADOS POR UF");
 
             }
             else if(url['var'] == 15){
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=0");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR UF");
 
             }
             else if (url['var'] > 14 || url['var'] == 10) {
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=0");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO");
             }
             else{
-                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box"]').parent().find(".view-title").html("MAPA DO BRASIL");
             }
 
@@ -248,7 +248,7 @@ function updateIframe(url){
 
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=1");
-                $('iframe[id="view_box"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 if(url['var'] == 8)
@@ -260,14 +260,14 @@ function updateIframe(url){
             else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
      
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
-               //$('iframe[id="view_box"]').attr('src', 'line_scc_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+               //$('iframe[id="view_box"]').attr('src', 'line_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                $('iframe[id="view_box"]').attr('src', 'no-view.html');
                
             }
             else{
 
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
-                $('iframe[id="view_box"]').attr('src', url['view']+'_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
 
             }
 
@@ -276,13 +276,13 @@ function updateIframe(url){
 
     ///BOX DO BARRAS
     if ($('iframe[id="view_box_barras"]').length != 0) {
-        $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+        $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
         if(eixoAtual == 0) {
             $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             if (url['var'] > 9) {
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
             }
         }
@@ -291,13 +291,13 @@ function updateIframe(url){
             if (url['var'] > 11) {
                 if(url['slc'] == 0) {
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-                    $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
                 }
                 else {
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
                     newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=2");
-                    $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
                 }
             }
@@ -307,13 +307,13 @@ function updateIframe(url){
 
             if (url ['var'] == 15) {
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=1");
-                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA POR SETOR");
 
             }
             else if(url['var'] == 16){
                 newUrl = newUrl.replace(/uos=[0-9]/, "uos=1");
-                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE ÍNDICE HERFINDAHL-HIRSCHMAN PARA CONCENTRAÇÃO DOS PROJETOS FOMENTADOS POR SETOR");
 
             }
@@ -338,7 +338,7 @@ function updateIframe(url){
             }
             else if(url['var'] == 10){
                 newUrl = newUrl.replace(/mec=[0-9]/, "mec=1");
-                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_barras"]').parent().find(".view-title").html("SÉRIE HISTÓRICA DESPESA MINC / RECEITA EXECUTIVO");
 
             }
@@ -354,7 +354,7 @@ function updateIframe(url){
 
             else if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=0");
-                $('iframe[id="view_box_barras"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_barras"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 if(url['var'] == 8)
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR PARCEIROS");
                 else if(url['var'] == 5)
@@ -373,20 +373,20 @@ function updateIframe(url){
         if(eixoAtual == 0) {
 
                 if (url['var'] == 3) {
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
                 else if (url['var'] > 9) {
 
 
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".content-btn-mapa").css("display", "none")
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
 
 
                 }
                 else if (url['var'] == 9){
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
                 }
                 else {
@@ -407,33 +407,33 @@ function updateIframe(url){
                     newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=0");
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
 
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
                 else {
                     newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
                     newUrl = newUrl.replace(/ocp=[0-9]*/, "ocp=3");
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
                 }
             }
             else if(url['var'] == 11 ||  url['var'] == 10 || url['var'] == 9 || url['var'] == 8){
-                $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
             }
             else if(url['var'] == 6){
 
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE POR SETOR");
 
-                // $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.locat    ion.hash.substring(1)+window.location.hash);
+                // $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.locat    ion.hash.substring(1)+window.location.hash);
                 // $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
             }
             else if(url['var'] == 4 || url['var'] == 5 ){
 
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=1");
-                $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
 
             }
@@ -461,25 +461,25 @@ function updateIframe(url){
         }
         else if(eixoAtual == 2){
             if(url['var'] == 6 || url['var'] == 8 || url['var'] == 9 || url['var'] == 7 || url['var'] == 13 || url['var'] == 14){
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
             else if(url['var'] ==  17){
-                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             }
 
             else if (url['var'] == 15 || url['var'] == 16 ) {
-                $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
             else if (url['var'] == 18 || url['var'] == 19 ) {
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
-                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
             }
             else if(url['var'] == 10){
-                $('iframe[id="view_box_scc"]').attr('src', 'linhas_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
             else{
@@ -493,7 +493,7 @@ function updateIframe(url){
             
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=2");
-                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
                 if(url['var'] == 8){
                     $('iframe[id="view_box_scc"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR UF");
                 }
@@ -504,7 +504,7 @@ function updateIframe(url){
 
             else if(url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12 ){
                 $('iframe[id="view_box_scc"]').parent().find(".view-title").html("SÉRIE HISTÓRICA [uf] [cad]");
-                $('iframe[id="view_box_scc"]').attr('src', 'barras_box.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
 
             }
@@ -1096,7 +1096,7 @@ Saída:
 -----------------------------------------------------------------------------*/
 function loadPage(){
 	newHash = window.location.hash.substring(1);
-	var menuView = 'menumobile.php?'+newHash+'=1';
+	var menuView = 'menudesktop.php?'+newHash+'=1';
 
     if(windowWidth<1199){
         $('#section0').css("display", "none")
