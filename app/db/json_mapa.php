@@ -156,6 +156,9 @@ else if($eixo == 2) {
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
+    if($mundo == 0){
+        $mapa = new stdClass();
+    }
     foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $uf, $mundo, $slc) as $tupla) {
 
         /*
@@ -169,12 +172,14 @@ else if($eixo == 3) {
 
         if($mundo == 0){
             $id = $tupla->idParceiro;
-            $mapa[$id]['id'] = (int) $tupla->idParceiro;
-            $mapa[$id]['prc'] = $tupla->ParceiroNome;
-            $mapa[$id]['uf'] = $tupla->UFNome;
-            $mapa[$id]['valor'] = (double) $tupla->Valor;
-            $mapa[$id]['percentual'] = (double) $tupla->Percentual;
-            $mapa[$id]['taxa'] = (double) $tupla->Taxa;
+            $mapa->$id = [];
+
+            $mapa->$id['id'] = (int) $tupla->idParceiro;
+            $mapa->$id['prc'] = $tupla->ParceiroNome;
+            $mapa->$id['uf'] = $tupla->UFNome;
+            $mapa->$id['valor'] = (double) $tupla->Valor;
+            $mapa->$id['percentual'] = (double) $tupla->Percentual;
+            $mapa->$id['taxa'] = (double) $tupla->Taxa;
         }
         else{
             if($tupla->idUF != 99){
