@@ -10,3 +10,4 @@ docker-compose.yml
 .idea/deployment.xml
 .idea/minc.iml
 .idea/modules.xml
+.idea/vcs.xml
