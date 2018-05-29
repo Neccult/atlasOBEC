@@ -119,7 +119,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
             key += 'p'
         }
 
-        console.log(key)
+        // console.log(key)
 
     } else {
         switch(typ){

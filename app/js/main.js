@@ -1096,13 +1096,15 @@ Saída:
 -----------------------------------------------------------------------------*/
 function loadPage(){
 	newHash = window.location.hash.substring(1);
-	var menuView = 'menudesktop.php?'+newHash+'=1';
-	if(windowWidth<1199){
-        menuView = 'menumobile.php?'+newHash+'=1';
+	var menuView = 'menumobile.php?'+newHash+'=1';
+
+    if(windowWidth<1199){
         $('#section0').css("display", "none")
 
-
         loadMobile();
+    }
+    else{
+	    $("#menuvariaveis").css("display", "none")
     }
 
     if($("#menuvariaveis").length != 0) {
