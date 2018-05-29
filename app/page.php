@@ -78,6 +78,18 @@
                                 $("iframe").height("2350px");
                                 $("iframe").attr("scrolling", "no");
                             }
+
+                            if($(window).width() < 899) {
+                                $("iframe").height("2380px");
+                                $("iframe").attr("scrolling", "no");
+                            }
+
+                            if($(window).width() < 499) {
+                                $("iframe").height("2450px");
+                                $("iframe").attr("scrolling", "no");
+                            }
+
+
                         }
                         setTimeout(result_mobile(), 500);
                     </script>

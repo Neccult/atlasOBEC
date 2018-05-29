@@ -2342,6 +2342,20 @@ function setMaxFontSize(doc){
 
     }
     // console.log("tamanhoString: "+tamanhoString+"/ tamanhoDiv: "+tamanhoDiv)
+
+
+    tamanho--;
+    tamanho--;
+    tamanho--;
+    tamanho--;
+    tamanho--;
+
+    $(doc).css('font-size', tamanho+'px');
+
+    font = $(doc).css("font-weight")+" "+$(doc).css("font-size")+" "+ $(doc).css("font-family");
+
+    tamanhoString  = getTextWidth(texto.toUpperCase(), font) + texto.length  * letterSpacing;
+
     $(doc).html(texto);
     return;
 
