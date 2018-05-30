@@ -1173,7 +1173,6 @@ else {
             .enter().append("g")
             .attr("class", "cost")
             .style("fill", function (d, i) {
-                console.log(colors(i))
                 return colors(i);
             });
 

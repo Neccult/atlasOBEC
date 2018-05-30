@@ -14,7 +14,14 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- TopoJSON -->
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
 
+
+
+    <!-- Utilidades -->
+    <script src="js/functions.js"></script>
+    <script src="js/descricoes.js"></script>
 
 </head>
 
@@ -229,12 +236,23 @@
             <?php
             if($eixo == "mercado" && $deg != 0  && $var != 4 && $var != 5 && $var != 6) {
                 echo '<script src="https://d3js.org/d3.v3.min.js"></script>';
+                echo '<script src="https://d3js.org/d3-queue.v3.min.js"></script>';
+                echo '<script src="https://d3js.org/d3-color.v1.min.js"></script>';
+                echo '<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>';
+                echo '<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>';
+                echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>';
+
+
                 ?>
                 <style type="text/css">
                     svg {
                         font: 10px sans-serif !important;
                         shape-rendering: crispEdges !important;
                     }
+
+
+
+
 
                     .axis path,
                     .axis line {
@@ -243,16 +261,22 @@
                     }
 
                     .x path.domain {
-                        stroke: none !important;
+                        stroke: #000 !important;
                     }
-
                     .y path.domain {
-                        stroke: #ddd !important;
+                        stroke: #000 !important;
                     }
 
                     .y .tick line {
                         stroke: #ddd !important;
                     }
+
+                    .y .tick:first-child line {
+                        stroke: #000 !important;
+                    }
+
+
+
                 </style>
                 <?php
             }
@@ -261,18 +285,13 @@
             }
             ?>
 
-            <!-- TopoJSON -->
-            <script src="https://d3js.org/topojson.v2.min.js"></script>
 
-            <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+
+
+
 
             <!-- D3 QUEUE -->
-            <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 
-            <!-- Utilidades -->
-            <script src="js/functions.js"></script>
-            <script src="js/descricoes.js"></script>
 
             <div id="corpo"></div>
 
