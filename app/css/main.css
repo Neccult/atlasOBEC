@@ -1419,6 +1419,10 @@ button.opt.active{
 	.container-boxes{
 		padding: 0 5%;
 	}
+
+	.bread-container {
+		width: 100%;
+	}
 }
 
 @media (max-width: 1199px) {
