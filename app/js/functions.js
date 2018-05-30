@@ -7,9 +7,6 @@ $.get("./data/select-deg.json", function(data){
 })
 
 
-
-
-
 function changeDownloadURL(url, eixo){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
     $('#select-pdf input').attr("value", newURL)
