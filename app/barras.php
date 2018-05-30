@@ -251,9 +251,6 @@
                     }
 
 
-
-
-
                     .axis path,
                     .axis line {
                         fill: none !important;

@@ -104,11 +104,11 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
             <!--=== BREADCRUMBS ===-->
 
             <div class="bread-parent">
-                <div class="row breadcrumb">
-                    <div class="bread-caixas">
 
+                <div class="bread-container">
 
-                        <div class="bread-caixa" style="width: 15%">
+                    <div class="bread-caixa"style="width: 12%">
+                        <div class="opcao">
                             <span class="rotulo-bread opt view active">Eixo</span>
                             <select class="bread-eixo bread-select-eixo" data-id="eixo">
                                 <?php
@@ -123,25 +123,29 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 ?>
                             </select>
                         </div>
-
                         <div class="bread-separator">/</div>
+                    </div>
 
-                        <div class="bread-caixa" style="width: 15%">
-                            <span class="rotulo-bread opt view active">Variável</span>
+                    <div class="bread-caixa">
 
-                            <select class="bread-select bread-select-var" data-id="var">
-                                <?php
-                                foreach ($json_text['var'][$eixo_num] as $variavel) {
-                                    echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
-                                }
-                                ?>
-                            </select>
+                        <div class="opcao">
+                        <span class="rotulo-bread opt view active">Variável</span>
+                        <select class="bread-select bread-select-var" data-id="var">
+                            <?php
+                            foreach ($json_text['var'][$eixo_num] as $variavel) {
+                                echo "<option value='" . $variavel['id'] . "'>" . $variavel['title'] . "</option>";
+                            }
+                            ?>
+                        </select>
                         </div>
+                    </div>
 
-                        <?php if($eixo == 'comercio') {?>
+                    <?php if($eixo == 'comercio') {?>
+
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active">Parceiro</span>
 
                                 <select class="bread-select" id="bread-select-prc" data-id="prc">
@@ -151,13 +155,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     }
                                     ?>
                                 </select>
+
                             </div>
+                        </div>
 
-                        <?php } ?>
+                    <?php } ?>
 
+                    <div class="bread-caixa">
                         <div class="bread-separator">/</div>
 
-                        <div class="bread-caixa">
+                        <div class="opcao">
                             <span class="rotulo-bread opt view active">UF</span>
 
                             <select class="bread-select bread-uf" data-id="uf">
@@ -167,9 +174,14 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 }
                                 ?>
                             </select>
+
                         </div>
+                    </div>
+
+                    <div class="bread-caixa">
                         <div class="bread-separator">/</div>
-                        <div class="bread-caixa">
+
+                        <div class="opcao">
                             <span class="rotulo-bread opt view active">Ano</span>
 
                             <select class="bread-select" data-id="ano">
@@ -179,9 +191,14 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 }
                                 ?>
                             </select>
+
                         </div>
+                    </div>
+
+                    <div class="bread-caixa">
                         <div class="bread-separator">/</div>
-                        <div class="bread-caixa">
+
+                        <div class="opcao">
                             <span class="rotulo-bread opt view active">Setor</span>
 
                             <select class="bread-select" id="bread-select-cad" data-id="cad">
@@ -191,16 +208,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                 }
                                 ?>
                             </select>
+
                         </div>
+                    </div>
 
+                    <?php if($eixo == 'empreendimentos'){?>
 
-
-
-                        <?php if($eixo == 'empreendimentos'){?>
-
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active">Desagregação</span>
                                 <select class="bread-select" id="bread-select-deg   " data-id="deg">
                                     <option value="0">Escolher</option>
@@ -212,15 +229,19 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>
+
                             </div>
+                        </div>
 
-                        <?php } ?>
+                    <?php } ?>
 
-                        <?php if($eixo == 'mercado'){?>
+                    <?php if($eixo == 'mercado'){?>
 
+
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active">Desagregação</span>
                                 <select class="bread-select" id="bread-select-deg" data-id="deg">
                                     <option value="0">Escolher</option>
@@ -236,14 +257,17 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
-                        <?php } ?>
 
-                        <?php if($eixo == 'politicas'){?>
+                    <?php } ?>
 
+                    <?php if($eixo == 'politicas'){?>
+
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa ">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active ">Mecanismo</span>
                                 <select class="bread-select" id="bread-select-mec" data-id="mec">
                                     <option value="0">Todos</option>
@@ -256,10 +280,12 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
+                        <div class="bread-caixa" style="display: none">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa" style="display: none">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active ">Modalidade</span>
                                 <select class="bread-select" id="bread-select-mod" data-id="mod">
                                     <option value="0">Todos</option>
@@ -272,11 +298,12 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
+                        <div class="bread-caixa" style="display: none">
                             <div class="bread-separator">/</div>
 
-
-                            <div class="bread-caixa" style="display: none">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active ">Pessoa</span>
                                 <select class="bread-select" id="bread-select-mec" data-id="pfj">
                                     <option value="0">Todos</option>
@@ -289,15 +316,16 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
-                        <?php } ?>
+                    <?php } ?>
 
-                        <?php if($eixo == 'comercio'){?>
+                    <?php if($eixo == 'comercio'){?>
 
-
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
-                            <div class="bread-caixa">
+                            <div class="opcao">
                                 <span class="rotulo-bread opt view active ">Tipo</span>
                                 <select class="bread-select" id="bread-select-typ" data-id="typ">
 
@@ -309,12 +337,12 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                        </div>
 
-                        <?php } ?>
-
-                    </div>
+                    <?php } ?>
 
                 </div>
+
             </div>
 
 
