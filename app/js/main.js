@@ -1099,6 +1099,7 @@ function loadPage(){
 	var menuView = 'menudesktop.php?'+newHash+'=1';
 
     if(windowWidth<1199){
+        menuView = 'menumobile.php?'+newHash+'=1';
         $('#section0').css("display", "none")
 
         loadMobile();
@@ -1680,9 +1681,6 @@ function switchToOcupations() {
 
 $(document).ready(function(){
 
-   // if($(this).find("#resultado_view")[0]){
-   //      console.log(url)
-   //  }
 
 	$(window).on('hashchange', function() {
         loadPage();

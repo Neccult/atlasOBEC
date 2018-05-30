@@ -31,6 +31,7 @@
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>
+    <script src="js/descricoes.js"></script>
 
 </head>
 
@@ -303,5 +304,4 @@
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
 </script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/contraste.js"></script>

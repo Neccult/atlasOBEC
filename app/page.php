@@ -144,7 +144,7 @@
 			var pageTitle = "<?php if(isset($text)) echo strip_tags($text['title'])?>";
 		</script>
 
-    <script src="js/d3/d3.min.js"></script>
+        <script src="js/d3/d3.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="js/contraste.js"></script>

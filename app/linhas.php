@@ -25,6 +25,7 @@
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>
+    <script src="js/descricoes.js"></script>
 
     <div id="corpo" class="fadeIn"></div>
 

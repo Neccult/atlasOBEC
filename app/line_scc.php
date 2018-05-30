@@ -22,6 +22,7 @@
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>
+    <script src="js/descricoes.js"></script>
 
 </head>
 

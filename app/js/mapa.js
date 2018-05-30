@@ -453,8 +453,7 @@ function ready(error, br_states, mapa){
 
             setStateTitle(d['properties']['name']);
             
-            updateIframe(url)
-            
+
         })
 		.style("cursor", "pointer");
 

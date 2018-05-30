@@ -149,6 +149,7 @@
 		<!-- D3 QUEUE -->
 		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 		<script src="js/functions.js"></script>
+		<script src="js/descricoes.js"></script>
 
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>

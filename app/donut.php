@@ -107,6 +107,7 @@
 <script src="https://d3js.org/d3-queue.v3.min.js"></script>
 <!-- Utilidades -->
 <script src="js/functions.js"></script>
+<script src="js/descricoes.js"></script>
 <div class="container-chart">
     <div class="content">
         <div class="chart">
