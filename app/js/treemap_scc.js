@@ -78,23 +78,9 @@ function nodeHeight(d){ return d.y1 - d.y0; }
 
 
 // import pt-br.json file for get the title
-var textJSON;
-d3.json('data/pt-br.json', function(error, data) {
-    if(error) throw error;
+var textJSON = window.parent.textJSON
 
-    textJSON = data;
-
-});
-
-$.ajaxSetup({async: false});
-
-
-var colorJSON;
-d3.json('data/colors.json', function(error, data) {
-    if(error) throw error;
-    colorJSON = data;
-});
-$.ajaxSetup({async: true});
+var colorJSON = window.parent.colorJSON
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	format = d3.format(",d");

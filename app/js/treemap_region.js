@@ -143,19 +143,10 @@ function appendTest(text){
 /*==================*/
 
 /* importa o arquivo de cores */
-var colorJSON;
-d3.json('data/colors.json', function(error, data) {
-	if (error) throw error;
-	colorJSON = data;
-})
+var colorJSON = window.parent.colorJSON
 
 // import pt-br.json file for get the title
-var textJSON;
-d3.json('data/pt-br.json', function(error, data) {
-    if(error) throw error;
-
-    textJSON = data;
-});
+var textJSON = window.parent.textJSON
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
