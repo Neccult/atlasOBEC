@@ -75,7 +75,7 @@
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
-                                $("iframe").height("2350px");
+                                $("iframe").height("2400px");
                                 $("iframe").attr("scrolling", "no");
                             }
 
@@ -209,6 +209,10 @@
                 myFunction()
             };
 
+            window.onscroll = function() {
+                myFunction()
+            };
+
 
             function myFunction() {
                 var iframe = document.getElementById('resultado_view');
@@ -237,7 +241,7 @@
                 var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
 
                 $(innerDoc).find("#mySidebar").css("display", "block");
-                $(innerDoc).find("#mySidebar").css("top", window.parent.pageYOffset+50);
+                $(innerDoc).find("#mySidebar").css("top", window.pageYOffset+50);
                 $(innerDoc).find("#mySidebar").attr("aberto", 1);
 
             }

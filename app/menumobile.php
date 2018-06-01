@@ -72,7 +72,7 @@ switch($eixo) {
             <button class="fechar w3-bar-item w3-button w3-large" onclick="w3_close()">Fechar &times;</button>
             <div class="rotulo-bread w3-bar-item">Eixo</div>
 
-            <select class="w3-bar-item bread-select" data-id="eixo">
+            <select class="w3-bar-item bread-eixo bread-select-eixo" data-id="eixo">
                 <?php
                 foreach ($json_text['select']['eixo'] as $bread_eixo) {
                     if($bread_eixo['value'] === $eixo){
@@ -247,18 +247,8 @@ switch($eixo) {
 
         <script>
 
-            function getNomeEixo(eixo){
-                switch(eixo){
-                    case 0: return 'empreendimentos';
-                    case 1: return 'mercado';
-                    case 2: return 'politicas';
-                    case 3: return 'comercio';
-
-                }
-            }
-
-            // console.log(getEixo(window.location.hash.substring(1)))
-            $('.bread-select[data-id=eixo]').val("mercado")
+            // console.log())
+            $('.bread-eixo').val(window.location.hash.substring(1))
 
             $(".bread-select").on('change', function(){
                 // alert("op")
