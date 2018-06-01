@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="overflow: hidden">
 	<head>
 		<?php include 'head.php';?>
 	</head>
@@ -71,22 +71,11 @@
 			<!-- se existem informações desta variável -->
 			<?php if(!empty($text)):?>
 				<section id="resultado">
-					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 1500px;" scrolling="no"></iframe>
+					<iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 100%; "></iframe>
                     <script>
                         function result_mobile() {
                             if($(window).width() < 1200) {
-                                $("iframe").height("2400px");
-                                $("iframe").attr("scrolling", "no");
-                            }
-
-                            if($(window).width() < 899) {
-                                $("iframe").height("2380px");
-                                $("iframe").attr("scrolling", "no");
-                            }
-
-                            if($(window).width() < 499) {
-                                $("iframe").height("2450px");
-                                $("iframe").attr("scrolling", "no");
+                                $("iframe").height("100%");
                             }
 
 
@@ -205,13 +194,13 @@
                 }
             }
 
-            window.parent.onscroll = function() {
-                myFunction()
-            };
-
-            window.onscroll = function() {
-                myFunction()
-            };
+            // window.parent.onscroll = function() {
+            //     myFunction()
+            // };
+            //
+            // window.onscroll = function() {
+            //     myFunction()
+            // };
 
 
             function myFunction() {

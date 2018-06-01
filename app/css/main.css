@@ -1820,6 +1820,21 @@ button.opt.active{
 
 @media (max-width: 1199px) {
 
+	html, body, #section1, #resultado{
+		height: 100%;
+	}
+
+	#resultado_view{
+		height: 100%;
+		overflow: auto;
+	}
+
+	#mySidebar{
+		height: auto;
+		max-height: 90%;
+		overflow: auto;
+	}
+
 	.bread-select, .bread-eixo{
 		font-size: 11px;
 	}
@@ -1883,4 +1898,15 @@ button.opt.active{
 
 }
 
+
+html, body, #section1, #resultado{
+	height: 100%;
+}
+
+
+
+#resultado_view{
+	height: 100%;
+	overflow: auto;
+}
 
