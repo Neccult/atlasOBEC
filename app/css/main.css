@@ -950,6 +950,9 @@ article.results-article div.results-content{
 	margin: 5px 0px;
 }
 
+.bread-parent{
+
+}
 
 .breadcrumb{
 	display: block;
@@ -964,6 +967,14 @@ article.results-article div.results-content{
 
 }
 
+.bread-caixas{
+	padding-left: 5%;
+	padding-right:  5%;
+	height: auto;
+	display: flex;
+	justify-content: center;
+}
+
 .bread-select, .bread-eixo{
 	float: left;
 	background-color: #f0f0f0;
@@ -974,7 +985,7 @@ article.results-article div.results-content{
 	color: #737277;
 	border: 1px solid #fff;
 	outline: none;
-	width: 100%;
+	width: 100px;
 	font-size: 10px;
 	border-radius: 2px;
 	text-transform: uppercase;
@@ -1002,28 +1013,10 @@ article.results-article div.results-content{
 	width: 10%;
 }
 
-
-.bread-parent{
-	width: 100%;
-	min-height: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.bread-container{
-	width: 80%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .bread-caixa{
-	max-width: 10%;
-	height: 100%;
-	display: flex;
-	flex-flow: row;
+	float: left;
+	width: 100px;
+
 }
 
 .rotulo-bread{
@@ -1038,7 +1031,7 @@ article.results-article div.results-content{
 	float:left;
 	font-size: 20px;
 	color: #ddd;
-	height: auto;
+	height: 60px;
 }
 
 select[disabled].opt-select{
@@ -1418,10 +1411,6 @@ button.opt.active{
 @media (max-width: 1599px) {
 	.container-boxes{
 		padding: 0 5%;
-	}
-
-	.bread-container {
-		width: 100%;
 	}
 }
 
