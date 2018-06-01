@@ -237,7 +237,7 @@
                 var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
 
                 $(innerDoc).find("#mySidebar").css("display", "block");
-                $(innerDoc).find("#mySidebar").css("top", window.parent.pageYOffset+50);
+                $(innerDoc).find("#mySidebar").css("top", window.pageYOffset+50);
                 $(innerDoc).find("#mySidebar").attr("aberto", 1);
 
             }
