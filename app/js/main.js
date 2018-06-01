@@ -130,11 +130,6 @@ function changeChart(url){
 
 function updateIframe(url){
 
-    /* var json;
-    $.get("./data/pt-br.json", function(data) {
-        json = data;
-    }).done(function(){ */
-            
     var newUrl = "",
         count = 0,
         size = Object.keys(url).length;
@@ -146,7 +141,7 @@ function updateIframe(url){
     });
 
     var eixoAtual = getEixo(window.location.hash.substring(1));
-    //console.log(url['fax'])
+
     ///BOX DO MAPA
     if($('iframe[id="view_box"]').length != 0) {
         if(eixoAtual == 0){
@@ -557,8 +552,6 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlFilter(selectvalue, selectid, valueDesag){
 
-
-
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
     if(BarraSrc != undefined && BarraSrc != "no-view.html") var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
@@ -572,9 +565,6 @@ function controlFilter(selectvalue, selectid, valueDesag){
         var uf = 0;
     }
     /* se for PORTE x ATUAÇÃO */
-
-
-        
 
     if(selectid==='var') {
 
@@ -1278,6 +1268,9 @@ function updateUrl() {
 }
 
 function updateLegendByDeg(deg){
+
+    console.log("oi")
+
     if(deg == 0){
         if(url['ocp'] == 0){
             $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
@@ -1392,8 +1385,6 @@ function getCadsByMenuDonut(){
 }
 
 function switchToSetores() {
-
-
 
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
     $("#title-view-leg-scc").empty();
