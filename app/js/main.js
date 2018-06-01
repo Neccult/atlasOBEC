@@ -48,10 +48,12 @@ function getAnoDefault(eixo_atual){
                 url['ocp'] = 0
             }
 
-            if(url['ocp'] == 3)
+            if(url['ocp'] == 3){
                 index_ocp = 1
-            else
+            }
+            else{
                 index_ocp = url['ocp']
+            }
             url['ano'] = anos_default[url['var']][index_ocp]; break;
 
         case 2: 
@@ -1982,7 +1984,7 @@ $(document).ready(function(){
         var dataId = $(this).attr("data-id");
 
         if(dataId !== "eixo") {
-
+            updateUrl()
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
@@ -2007,12 +2009,10 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
-
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
-
                 $('#recebedora').addClass("active");
                 $('#trabalhador').removeClass("active");
 
@@ -2024,10 +2024,13 @@ $(document).ready(function(){
                 else{
                     switchToOcupations();
                 }
+
+
                 if(url['ocp'] > 0)
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 1, url);
                 else
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
+
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
 
@@ -2094,7 +2097,6 @@ $(document).ready(function(){
                 if(eixo_atual == 1){
                     if($(this).find('option:selected').parent().attr("value") != undefined){
                         deg_value =  $(this).find('option:selected').parent().attr("value")
-
                     }
                     else{
                         deg_value = $(this).val()
@@ -2136,7 +2138,6 @@ $(document).ready(function(){
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
 
-            updateUrl();
             updateIframe(url);
 
         }
