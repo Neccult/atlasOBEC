@@ -230,11 +230,21 @@ var path = d3.geoPath()
 	.projection(projection);
 
 // import colors.json file
-var colorJSON = window.parent.colorJSON
+var colorJSON;
+$.ajaxSetup({async: false});
+d3.json('data/colors.json', function(error, data) {
+  if(error) throw error;
+
+  colorJSON = data;
+});
+$.ajaxSetup({async: true});
 
 // import pt-br.json file for get the title
-var textJSON = window.parent.textJSON
-
+var textJSON;
+d3.json('data/pt-br.json', function(error, data) {
+  if(error) throw error;
+  textJSON = data;
+});
 
 var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
 /*$.get('./db/json_mapa.php' + config, function(dado){

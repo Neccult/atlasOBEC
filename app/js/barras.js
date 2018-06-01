@@ -73,8 +73,8 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
 
     // import colors.json file
-    var colorJSON = window.parent.colorJSON
-    var textJSON = window.parent.textJSON
+    var colorJSON;
+    var textJSON;
     var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo + "&deg=" +deg + "&ano=" +ano;
     var brasil_setor = []
     
@@ -86,8 +86,21 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
          // console.log(dado)
      })*/
    
+    d3.json('data/colors.json', function (error, data) {
+        if (error) throw error;
+        colorJSON = data;
 
-    d3.queue().defer(d3.json, "./db/json_barras.php" + config).await(analyze);
+
+        // import pt-br.json file for get the title
+        d3.json('data/pt-br.json', function (error, data) {
+            if (error) throw error;
+            textJSON = data;
+            d3.queue()
+                .defer(d3.json, "./db/json_barras.php" + config)
+                .await(analyze);
+        });
+
+    });
     // return matching color value
     var color = function (colorId) {
         if (colorJSON.cadeias[colorId]) {

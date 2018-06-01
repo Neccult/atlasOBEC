@@ -9,17 +9,30 @@ var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&atc=" + atc + "&slc
 var dados = {key: [], value: []};
 
 // import colors.json file
-var colorJSON = window.parent.colorJSON;
-var textJSON = window.parent.textJSON;
+var colorJSON;
+var textJSON;
 var colors = [];
+d3.json('data/colors.json', function (error, data) {
+    if (error) throw error;
+    colorJSON = data;
 
-d3.queue()
-    .defer(d3.json, "./db/json_linhas.php" + config)
-    .await(analyze);
+    // import pt-br.json file for get the title
+    d3.json('data/pt-br.json', function (error, data) {
+        if (error) throw error;
 
-/*$.get("./db/json_linhas.php"+config, function(data) {
+        textJSON = data;
+
+
+        d3.queue()
+            .defer(d3.json, "./db/json_linhas.php" + config)
+            .await(analyze);
+    });
+
+});
+
+$.get("./db/json_linhas.php"+config, function(data) {
     // console.log(data)
-});*/
+});
 
 
 function getRegexDesag(desag){
