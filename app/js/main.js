@@ -2,7 +2,6 @@ var windowWidth = $(window).width();
 var cont = 0;
 var anos_default;
 
-<<<<<<< HEAD
 textJSON = []
 colorJSON = []
 
@@ -15,8 +14,6 @@ $.get("./data/colors.json", function(data){
 })
 
 //$.ajaxSetup({async: false});
-=======
->>>>>>> 0b2272163aaa445283b0c2c168a4881760f516f2
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 });
