@@ -2,8 +2,8 @@ var windowWidth = $(window).width();
 var cont = 0;
 var anos_default;
 
-textJSON = []
-colorJSON = []
+var textJSON = []
+var colorJSON = []
 
 $.get("./data/pt-br.json", function(data){
     textJSON = data
@@ -849,100 +849,16 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadResult(){
+
+    var eixoUrl = window.location.hash.substring(1);
+
     /* ajusta nome da página */
     $(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
-    $('.menu-select').val(url['var']); /* atualiza select versao mobile */
 
-    /* move scroll para o gráfico */
-    if($("div.container").length != 0)$('html, body').scrollTop($("div.container").offset().top);
-
+    ///TODO ESTÁ FUNCIONANDO?
     /* fade in no resultado */
     $('.fadeInPage').addClass('done');
     $('.fadeIn').addClass('done');
-
-    /*  se não existe setor selecionado,
-        não é possível escolher porte x atuação
-        (exceto no treemap por setores)
-                                        */
-    if(window.location.hash.substring(1) == "empreendimentos") {
-        var SCCSrc = $("#view_box_scc").attr("src");
-        if(SCCSrc != undefined) {
-            var setor = SCCSrc.match(/cad=([0-9]*)/)[1];
-        }
-        else {
-            var setor = 0;
-        }
-
-        if(url['var'] > 3) {
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="9"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="10"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="11"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="12"]').remove();
-
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="9"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="10"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="11"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="12"]').remove();
-        }
-        else {
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='10']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='11']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='12']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
-
-
-        }
-
-
-        if(url['cad']==0 && url['view']!='treemap_scc'){
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-    }
-
-
-    if(window.location.hash.substring(1) == "mercado") {
-
-        if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
-            $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
-            $('.select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if(url['cad'] == 0 && url['ocp']==0 && url['view']!='treemap_scc') {
-            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-fax').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-esc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-fax').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-esc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if((url['ocp']!=0 && url['view']!='treemap_scc') || (url['slc'] == 1)){
-            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if(url['view'] == "barras" && url['cad'] == 0 && url['slc'] == 0) {
-            $('.select-deg').find('select').attr('disabled','disabled'); /* desabilita select */
-        }
-
-
-        // console.log($('.bread-select-var').find('select').find('option[value="3"]'));
-
-
-
-    }
 
     /* set selects com os valores da url */
     $(".bread-select").each(function(){
@@ -1058,11 +974,13 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadPage(){
-    newHash = window.location.hash.substring(1);
-    var menuView = 'menudesktop.php?'+newHash+'=1';
+
+    var eixoUrl = window.location.hash.substring(1)
+
+    var menuView = 'menudesktop.php?'+eixoUrl+'=1';
 
     if(windowWidth<1199){
-        menuView = 'menumobile.php?'+newHash+'=1';
+        menuView = 'menumobile.php?'+eixoUrl+'=1';
         $('#section0').css("display", "none")
 
         loadMobile();
@@ -1071,18 +989,17 @@ function loadPage(){
         $("#menuvariaveis").css("display", "none")
     }
 
+    /// TODO REVER ESSE TRECHO
     if($("#menuvariaveis").length != 0) {
         $("#menuvariaveis").load(menuView, function(){
             if(url['var']!=='' && pageTitle!==''){
                 loadResult();
-                changeDescVar();
             }
         });
     }
     else {
         if(url['var']!=='' && pageTitle!==''){
             loadResult();
-            changeDescVar();
         }
     }
 }
@@ -1117,6 +1034,8 @@ Entrada:
 Saída:
     void
 -----------------------------------------------------------------------------*/
+
+///TODO ESSA FUNCAO É NECESSÁRIA?
 function smoothScroll(link){
     if (location.pathname.replace(/^\//,'') == link.pathname.replace(/^\//,'') && location.hostname == link.hostname) {
         var target = $(link.hash);
@@ -1143,16 +1062,10 @@ function getUf(textJSON) {
 
 function changeDescVar() {
     // import pt-br.json file for get the title
-    var textJSON;
-    d3.json('data/pt-br.json', function(error, data) {
-        if(error) throw error;
+    var eixoUrl = getEixo(window.location.hash.substring(1))
+    var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
-        textJSON = data;
-        eixo = getEixo(window.location.hash.substring(1))
-        variavel = textJSON.var[eixo].filter(function(o){ return o.id == url['var']})[0]
-        $(".desc-var").html(variavel.desc_var_mapa);
-
-    });
+    $(".desc-var").html(variavel.desc_var_mapa);
 }
 
 function cleanDesagsUrl() {
@@ -1174,29 +1087,8 @@ function cleanDesagsUrl() {
     url['uos'] = 0;
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function open_related_links() {
-    document.getElementById("LinksDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
 /*======
-	documento carregando
+	DOCUMENTO CARREGADO
 ======*/
 $(window).bind("load", function() {
 
@@ -1205,23 +1097,6 @@ $(window).bind("load", function() {
     bodyDark(dark);/* alto contraste */
 
 });
-
-function expandMenu(a) {
-    $(a).animate({width: "200px", margin: "5px"}, "fast");
-    $('.eixo-ativo').animate({width: "160px", margin: "15px"}, "fast");
-}
-
-function expandMenuEixoAtivo(a) {
-    $(a).animate({width: "200px", margin: "0px"}, "fast");
-}
-
-function minimizeMenu(a) {
-    $(a).animate({width: "160px", margin: "15px"}, "fast");
-}
-
-function expandMenuVariaveis(a) {
-    $('.eixo-ativo').animate({width: "200px", margin: "0px"}, "fast");
-}
 
 function updateUrl() {
     var eixo_atual = getEixo(window.location.hash.substring(1))
@@ -1243,20 +1118,17 @@ function updateLegendByDeg(deg){
     if(deg == 0){
         if(url['ocp'] == 0){
             $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
-            $("#title-view-leg-scc").html("" +
-                "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
-                "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-                "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-                "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-                "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-                "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
-                "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-                "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
-                "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>"
-            )
 
+            var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            var html = "";
+
+            legendArray.forEach( function(id) {
+                html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            } );
+
+            $("#title-view-leg-scc").html(html);
+
+            /// TODO TRANSFORMAR PRA UMA FUNÇÃO?
             var cads = [];
             $("#title-view-leg-scc").find(".scc").each(function(){
                 cad = {id: $(this).attr("data-id"), nome: $(this).text()}
@@ -1270,75 +1142,31 @@ function updateLegendByDeg(deg){
         }
 
     }
-    else if(deg == 1){
-        $(".view-title-leg[data-id='scc&ocp']").html("PORTE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Micro<br></span>\n" +
-            "<span data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Pequeno<br></span>\n" +
-            "<span data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Médio<br></span>\n" +
-            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Grande<br></span>"
-        )
-    }
-    else if(deg == 2){
-        $(".view-title-leg[data-id='scc&ocp']").html("SEXO");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Masculino<br></span>\n" +
-            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(233, 107, 0)\"></i> Feminino<br></span>"
-        )
-    }
-    else if(deg == 3){
-        $(".view-title-leg[data-id='scc&ocp']").html("IDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> 10 a 17<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> 18 a 29<br></span>"+
-            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> 30 a 49<br></span>"+
-            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> 50 a 64<br></span>"+
-            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> 65 ou mais<br></span>"+
-            "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não classificado<br></span>"
-        )
-    }
-    else if(deg == 4){
-        $(".view-title-leg[data-id='scc&ocp']").html("ESCOLARIDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Sem instruição <br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Fundamental incompleto<br></span>"+
-            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Fundamental completo<br></span>"+
-            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Médio completo<br></span>"+
-            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Superior incompleto<br></span>"+
-            "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Superior completo<br></span>" +
-            "<span data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não determinado<br></span>"
-        )
-    }
-    else if(deg == 5){
-        $(".view-title-leg[data-id='scc&ocp']").html("COR");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Indígena<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Branca<br></span>"+
-            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Preta<br></span>"+
-            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Amarela<br></span>"+
-            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Parda<br></span>"
-        )
-    }
-    else if(deg == 6){
-        $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Formal<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Informal<br></span>"
-        )
-    }
-    else if(deg == 7){
-        $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Contribuinte<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não contribuinte<br></span>"
-        )
-    }
-    else if(deg == 8){
-        $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Membro <br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não membro<br></span>"
-        )
+    else if(deg > 0){
+
+        console.log(deg)
+
+        switch (deg){
+            case 1: $(".view-title-leg[data-id='scc&ocp']").html("PORTE"); break;
+            case 2: $(".view-title-leg[data-id='scc&ocp']").html("SEXO"); break;
+            case 3: $(".view-title-leg[data-id='scc&ocp']").html("IDADE"); break;
+            case 4: $(".view-title-leg[data-id='scc&ocp']").html("ESCOLARIDADE"); break;
+            case 5: $(".view-title-leg[data-id='scc&ocp']").html("COR"); break;
+            case 6: $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE"); break;
+            case 7: $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA"); break;
+            case 8: $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO"); break;
+        }
+
+
+        var legendArray = colorJSON.deg[deg]['subdeg'];
+        var html = "";
+
+        for (var nome in legendArray) {
+            console.log(nome)
+            html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+        }
+
+        $("#title-view-leg-scc").html(html)
     }
 
 }
@@ -2053,6 +1881,9 @@ $(document).ready(function(){
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
 
                 }
+
+                changeDescVar();
+
             }
 
             if(dataId === 'deg') {
@@ -2118,21 +1949,6 @@ $(document).ready(function(){
 
     });
 
-
-    //////////////////// SCRIPT PARA O MENUDESKTOP /////////////////////
-    $(document).on('mouseenter', '.eixo-inativo', function() {
-        expandMenu(this);
-    });
-    $(document).on('mouseleave', '.eixo-inativo', function() {
-        minimizeMenu(this);
-    });
-    $("#menuvariaveis").on('mouseleave', function() {
-        expandMenuVariaveis(this);
-    });
-    $(document).on('mouseenter', '.eixo-ativo', function() {
-        expandMenuEixoAtivo(this);
-    });
-    ///////////////////////////////////////////////////////////////////
 
     updateIframe(url);
 

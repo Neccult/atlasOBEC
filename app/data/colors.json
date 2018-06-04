@@ -1,7 +1,7 @@
 {
 	"ocupacoes": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#071342",
 			"gradient": {
 				"1": "#F2F0F4",
@@ -51,7 +51,7 @@
 	},
 	"cadeias": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#071342",
 			"gradient": {
 				"1": "#F2F0F4",
@@ -242,7 +242,7 @@
 	},
 	"regioes": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#2F484F"
 		},
 		"1": {
@@ -320,7 +320,7 @@
 		"2": {
 			"name": "Sexo",
 			"color": "#071342",
-			"subdegs": {
+			"subdeg": {
 				"Masculino": "rgb(7, 19, 66)",
 				"Feminino": "rgb(233, 107, 0)"
 			}
