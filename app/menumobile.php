@@ -74,7 +74,7 @@ switch($eixo) {
             <div class="opcao">
                 <div class="rotulo-bread w3-bar-item">Eixo</div>
 
-                <select class="w3-bar-item bread-eixo bread-select-eixo" data-id="eixo">
+                <select class="w3-bar-item bread-select bread-select-eixo" data-id="eixo">
                     <?php
                     foreach ($json_text['select']['eixo'] as $bread_eixo) {
                         if($bread_eixo['value'] === $eixo_num){
