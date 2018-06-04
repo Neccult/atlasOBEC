@@ -1602,6 +1602,9 @@ button.opt.active{
 		width: 100%;
 		left: 0;
 		top: 0;
+		background-color: rgb(7, 19, 66);
+		font-weight: 500;
+		color: #ddd;
 	}
 
 	#resultado_view{
