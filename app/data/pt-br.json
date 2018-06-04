@@ -73,6 +73,11 @@
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "RAIS",
 				"mapa_valores": "",
 				"treemap_scc_valores": "",
@@ -104,6 +109,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Porte","id":"prt"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
@@ -140,6 +150,11 @@
 				],
 				"inativos":{
 					"mapa":["uf"],"barras":["ano"]
+				},
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
 				},
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
 				"mapa_valores": "Valores em pecentual.",
@@ -185,6 +200,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 				},
@@ -232,6 +252,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
@@ -282,6 +307,11 @@
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -328,6 +358,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano","prt"]
+				},
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
 				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
@@ -376,6 +411,11 @@
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -407,6 +447,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
@@ -430,6 +475,11 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
 			{
@@ -450,6 +500,11 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
 			{
@@ -470,6 +525,11 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "Elaboração própria com base na RAIS."
 			},
 			{
@@ -487,6 +547,11 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"views": {
+					"view_box1": ["mapa", "treemap_region"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],

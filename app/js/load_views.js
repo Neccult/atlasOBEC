@@ -19,6 +19,7 @@ GLOBAL_DATA = {
 
 PT_BR = []
 COLORS = []
+URL_PARAM = $.param(parameters);
 
 switch(parameters.eixo){
     case 0:
@@ -39,36 +40,13 @@ switch(parameters.eixo){
         break;
 }
 
-function get_url_view(view, parameters){
-    var url = 'db/json_'+view+'.php?';
-    url += $.param(parameters);
-
-    return url;
-}
-
-var view_box1 = 'mapa';
-var view_box2 = 'barras';
-var view_box3 = 'treemap_scc';
-
-var url_box1 = get_url_view('barras', parameters);
-var url_box2 = get_url_view('mapa', parameters);
-var url_box3 = get_url_view('treemap_scc', parameters);
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_JSON, colors_JSON){
     PT_BR = pt_br_JSON[0]
     COLORS = colors_JSON[0]
     
-    $.when($.get(url_box1), $.get(url_box2), $.get(url_box3)).done(function(data_1, data_2, data_3){
-        GLOBAL_DATA.box1 = data_1[0]
-        GLOBAL_DATA.box2 = data_2[0]
-        GLOBAL_DATA.box3 = data_3[0]
-
-
-        $.getScript('js/teste_global_var.js')
-        $.getScript('js/teste_global_var.js')
-        $.getScript('js/teste_global_var.js')
-    })
+    $.getScript('js/teste_global_var.js')
+    $.getScript('js/teste_global_var.js')
+    $.getScript('js/teste_global_var.js')
     
-
-
 })

@@ -316,7 +316,7 @@ else if($eixo == 1) {
             if($var == 6 && $uos == 1 && $desag == 0 && $ocp == 0){
                 $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
                 
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = $tupla->idUF;
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
@@ -324,7 +324,7 @@ else if($eixo == 1) {
             }
             else if($var == 6 && $uos == 1 && $desag == 0 && $ocp != 0){
                 $id = getNameOCP($tupla->idOcupacao);
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = $tupla->idUF;
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
@@ -332,7 +332,7 @@ else if($eixo == 1) {
             }
             else if($var == 6 && $uos == 1 && $desag != 0){
                 $id = getNameDesag($desag, $tupla);
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = $tupla->idUF;
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
