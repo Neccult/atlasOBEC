@@ -281,9 +281,6 @@ switch($eixo) {
 
         <script>
 
-
-            $('.bread-eixo').val(window.location.hash.substring(1))
-
             function hamburguer_click() {
 
                 if($("#mySidebar").attr("aberto") == 1){
@@ -298,19 +295,11 @@ switch($eixo) {
             $("#view-boxes").on('click', function(){
                 if($("#mySidebar").attr("aberto") == 1)
                     w3_close();
-                });
+            });
 
-
-            function w3_open() {
-
-                document.getElementById("mySidebar").style.display = "block";
-                $("#mySidebar").attr("aberto", 1);
-
-            }
             function w3_close() {
                 document.getElementById("mySidebar").style.display = "none";
                 $("#mySidebar").attr("aberto", 0);
-
             }
 
             if(window.parent.innerWidth >= 1199 && window.parent.innerWidth <= 1599)
@@ -335,26 +324,4 @@ switch($eixo) {
                 parent.document.body.appendChild( newNode )
             }
 
-
-
-            /// TODO FUNCAO CASO TENHA QUE DEIXAR O MENU FIXO DEPOIS DE CERTO HEIGHT
-            // window.parent.onscroll = function() {myFunction()};
-            //
-            //
-            //
-            // var menu = document.getElementById("barra-menu");
-            // var sticky = menu.offsetTop;
-            //
-            // function myFunction() {
-            //
-            //     // console.log(window.parent.pageYOffset)
-            //     if (window.parent.pageYOffset  >= window.parent.document.getElementById("section0").offsetHeight) {
-            //         // $("#barra-menu").css("top", window.parent.pageYOffset - $(window.parent).height())
-            //        // menu.classList.add("sticky");
-            //     } else {
-            //         //menu.classList.remove("sticky");
-            //     }
-            // }
-
-
-        </script>
+    </script>

@@ -982,7 +982,7 @@ article.results-article div.results-content{
 	appearance: none;
 	-moz-appearance: none;
 	-webkit-appearance: none;
-	margin: 5px 0px;
+	margin: 2px 0px 5px 0px;
 	background-image: url(../images/arrow.png);
 	cursor: pointer;
 	border: 1px #ddd solid;
@@ -1602,7 +1602,6 @@ button.opt.active{
 		width: 100%;
 		left: 0;
 		top: 0;
-		background-color: rgb(7, 19, 66);
 		font-weight: 500;
 		color: #ddd;
 	}
@@ -1897,3 +1896,13 @@ button.opt.active{
 
 }
 
+html, body, #section1, #resultado{
+	height: 100%;
+}
+
+
+
+#resultado_view{
+	height: 100%;
+	overflow: auto;
+}
