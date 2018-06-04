@@ -1751,6 +1751,9 @@ $(document).ready(function(){
                 }
 
                 changeDescVar();
+                // window.location.href = window.location.pathname+window.location.hash;/cad=[0-9]*/, "cad=1"
+                var urlString = parent.window.location.href.replace(/var=[0-9]*/, "var="+url['var']);
+                parent.window.history.pushState(null, null, urlString)
             }
 
             if(dataId === 'deg') {
