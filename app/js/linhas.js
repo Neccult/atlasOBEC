@@ -1,6 +1,7 @@
 $('#loading').fadeOut('fast');
 var chartHeight = $('.chart').height();
 var chartWidth = $('.chart').width()+25;
+$('#corpo').css("background-color", "#f0f0f0")
 
 /*==== Linhas JS ====*/
 var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;

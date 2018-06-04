@@ -945,81 +945,50 @@ function loadResult(){
     }
 
     /* set selects com os valores da url */
-    $(".opt-select").each(function(){
-
-        var selectId = $(this).attr('data-id'),
-            selectValue = url[selectId];
-
-        /* atualiza valor select */
-        $(this).val(selectValue);
-        /* select porte default */
-        if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
-
-            /* valor atuação */
-            $(this).val('atc-'+url['atc']);
-        }
-
-        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
-
-            /* valor atuação */
-            $(this).val('ocp-'+url['ocp']);
-        }
-
-        if(selectId=='prt') controlAtc(this,1);
-        if(selectId=='atc') controlAtc(this,0);
-        if(selectId=='mec') controlMec(this);
-        if(selectId=='ano') controlAno(this)
-
-    });
-
     $(".bread-select").each(function(){
 
+        if(!($(this).attr('data-id') == 'eixo')){
+            var selectId = $(this).attr('data-id'),
+                selectValue = url[selectId];
 
-        var selectId = $(this).attr('data-id'),
-            selectValue = url[selectId];
+            /* atualiza valor select */
+            $(this).val(selectValue);
+            /* select porte default */
+            if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
 
-        /* atualiza valor select */
-        $(this).val(selectValue);
-        /* select porte default */
-        if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
+                /* valor atuação */
+                $(this).val('atc-'+url['atc']);
+            }
 
-            /* valor atuação */
-            $(this).val('atc-'+url['atc']);
+            if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
+
+                /* valor atuação */
+                $(this).val('ocp-'+url['ocp']);
+            }
+
+            if(selectId=='prt') controlAtc(this,1);
+            if(selectId=='atc') controlAtc(this,0);
+            if(selectId=='mec') controlMec(this);
+            if(selectId=='ano') controlAno(this)
         }
-
-        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
-
-            /* valor atuação */
-            $(this).val('ocp-'+url['ocp']);
-        }
-
-        if(selectId=='prt') controlAtc(this,1);
-        if(selectId=='atc') controlAtc(this,0);
-        if(selectId=='mec') controlMec(this);
-        if(selectId=='ano') controlAno(this)
-
     });
 
+    removeVar('mercado', 3);
+
+}
+
+function removeVar(eixo, vrv){
+
+    var eixoUrl = window.location.hash.substring(1);
 
     //Feito para remover a variável 3 do eixo mercado;
     $(".bread-select-var").find('option').each(function(){
+        var breadVal = $(this).val();
 
-        if(window.location.hash.substring(1) == "mercado" && $(this).val() == 3){
+        if(eixoUrl == eixo && breadVal == vrv){
             $(this).remove();
         }
     });
-
-    if(window.location.hash.substring(1) == "mercado"){
-        $(".opt-select[data-id=var]").find('option').each(function(){
-
-            if($(this).val() == 3){
-                $(this).remove();
-            }
-        });
-
-    }
-
-
 
 }
 /*-----------------------------------------------------------------------------
@@ -1270,8 +1239,6 @@ function updateUrl() {
 }
 
 function updateLegendByDeg(deg){
-
-    console.log("oi")
 
     if(deg == 0){
         if(url['ocp'] == 0){
@@ -1682,9 +1649,11 @@ $(document).ready(function(){
         window.location.href = window.location.pathname+window.location.hash;
         scrollTo(0, 0);
     });
+
+
     /* se a janela for redimensionada */
     $(window).resize(function() {
-        //controlPageWidth();
+        controlPageWidth();
     });
 
 
@@ -1972,19 +1941,14 @@ $(document).ready(function(){
         }
     });
 
-    /* alterar janela filtro */
-    $(document).on('click', ".opt.select", function(){
-
-        openFilter($(this));
-
-    });
 
     $(document).on('change', ".bread-select", function(e){
 
         var dataId = $(this).attr("data-id");
 
+
         if(dataId !== "eixo") {
-            updateUrl()
+            updateUrl();
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
@@ -2063,13 +2027,12 @@ $(document).ready(function(){
                         $(".value-info-title").text("")
                     }
 
-                    if(url['var'] == 18 || url['var'] == 19)
+                    if(url['var'] == 18 || url['var'] == 19){
                         $("#btn-opt").find(".col-btn").css("display", "block")
-                    else
+                    }
+                    else{
                         $("#btn-opt").find(".col-btn").css("display", "none")
-
-
-
+                    }
 
                 }
 
@@ -2141,11 +2104,11 @@ $(document).ready(function(){
             updateIframe(url);
 
         }
+        else{
+            parent.window.location = "page.php#"+$(this).val();
+        }
     });
 
-    $(document).on('change', ".bread-eixo", function(){
-        parent.window.location = "page.php#"+$(this).val();
-    });
 
     /* download doc */
     $(document).on('click', '.button-control-down', function(){
@@ -2172,7 +2135,5 @@ $(document).ready(function(){
     ///////////////////////////////////////////////////////////////////
 
     updateIframe(url);
-
-
 
 });

@@ -110,7 +110,7 @@
                     <div class="bread-caixa"style="width: 12%">
                         <div class="opcao">
                             <span class="rotulo-bread opt view active">Eixo</span>
-                            <select class="bread-eixo bread-select-eixo" data-id="eixo">
+                            <select class="bread-select bread-select-eixo" data-id="eixo">
                                 <?php
                                 foreach ($json_text['select']['eixo'] as $bread_eixo) {
                                     if($bread_eixo['value'] === $eixo){
