@@ -12,14 +12,18 @@ var shapeWidth = 30;
 var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
 var valoresTransform = "translate(10,"+(height-10)+")";
 
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+
 function destacaPais(ufId) {
+
+
 
 	$("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
                 $(this).attr("class", "destacado");
                 $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", "#6DBFC9");
+                $(this).css("fill", corEixo);
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }

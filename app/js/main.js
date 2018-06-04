@@ -1198,6 +1198,7 @@ function switchToSetores() {
 
     if(eixo == 0 && url['var'] > 9){
         $(".view-title-leg[data-id='scc&ocp']").html("");
+
         cads = [
             {id: 0, nome: " Todos"}
         ]
@@ -1220,9 +1221,7 @@ function switchToSetores() {
 
         $("#title-view-leg-scc").html(html);
 
-        var cads = getCadsByMenu();
-        updateBreadcrumbSetores(cads);
-
+        cads = getCadsByMenu();
     }
     else if(eixo == 1 && url['var'] > 11){
         cads = [
@@ -1230,14 +1229,9 @@ function switchToSetores() {
         ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
-
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
-
-
-
-
     }
     else if(eixo == 2 && url['var'] == 2){
 
@@ -1252,11 +1246,8 @@ function switchToSetores() {
 
         $("#title-view-leg-scc").html(html);
 
-        var cads = getCadsByMenu();
-        updateBreadcrumbSetores(cads);
-
+        cads = getCadsByMenu();
     }
-
     else if(eixo == 2 && url['var'] == 18){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
@@ -1270,10 +1261,7 @@ function switchToSetores() {
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
 
-        var cads = getCadsByMenuDonut();
-
-        updateBreadcrumbSetores(cads);
-
+        cads = getCadsByMenuDonut();
     }
     else if(eixo == 2 && url['var'] == 19){
 
@@ -1288,9 +1276,7 @@ function switchToSetores() {
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
 
-        var cads = getCadsByMenuDonut();
-
-        updateBreadcrumbSetores(cads);
+        cads = getCadsByMenuDonut();
 
     }
     else if(eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
@@ -1303,24 +1289,11 @@ function switchToSetores() {
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
-
-
-
     }
     else if(eixo == 2 && (url['var'] == 10)){
         cads =
             [
-                {id: 0, nome: " Todos"},
-                {id: 1, nome: " Arquitetura e Design"},
-                {id: 2, nome: " Artes Cênicas e Espetáculos"},
-                {id: 3, nome: " Audiovisual"},
-                {id: 4, nome: " Cultura Digital"},
-                {id: 5, nome: " Editorial"},
-                {id: 6, nome: " Educação e Criação em Artes"},
-                {id: 7, nome: " Entretenimento"},
-                {id: 8, nome: " Música"},
-                {id: 9, nome: " Patrimônio"},
-                {id: 10, nome: " Publicidade"}
+                {id: 0, nome: " Todos"}
             ]
 
         $(".view-title-leg[data-id='scc&ocp']").html("");
@@ -1328,24 +1301,17 @@ function switchToSetores() {
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
-
-
-
     }
     else if(eixo == 2 && (url['var'] == 17)){
         cads =
             [
                 {id: 0, nome: " Todos"}
-
             ]
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Possui <br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não Possui <br></span>");
-
-
-
 
     }
     else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
@@ -1387,14 +1353,8 @@ function switchToSetores() {
 
         $("#title-view-leg-scc").html(html);
 
-        var cads = getCadsByMenu();
-        updateBreadcrumbSetores(cads);
+        cads = getCadsByMenu();
     }
-
-
-    $(".bread-select[data-id='ocp']").empty();
-    $(".bread-select[data-id='ocp']").append("<option value=\"0\">Todos</option><option value=\"1\">Arquitetura e Design</option><option value=\"2\">Artes Cênicas e Espetáculos</option><option value=\"3\">Audiovisual</option><option value=\"4\">Cultura Digital</option><option value=\"5\">Editorial</option><option value=\"6\">Educação e Criação em Artes</option><option value=\"7\">Entretenimento</option><option value=\"8\">Música</option><option value=\"9\">Patrimônio</option><option value=\"10\">Publicidade</option>");
-    $(".bread-select[data-id='ocp']").attr("data-id", "cad");
 
     updateBreadcrumbSetores(cads);
 }
@@ -1402,13 +1362,20 @@ function switchToSetores() {
 function switchToOcupations() {
 
     $(".view-title-leg[data-id='scc&ocp']").html("OCUPAÇÕES");
-    $("#title-view-leg-scc").empty();
-    $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Atividades Relacionadas<br></span>");
-    $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Cultura<br></span>");
+
+    var legendArray = [1, 2];
+    var html = "";
+
+    legendArray.forEach( function(id) {
+        html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
+    } );
+
+    $("#title-view-leg-scc").html(html);
+
     $(".bread-select[data-id='cad']").empty();
+
     if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
         $(".bread-select[data-id='cad']").append("<option value='3'>Todos</option>");
-
     }
     $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
     $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
@@ -1422,15 +1389,14 @@ function switchToOcupations() {
 
 $(document).ready(function(){
 
-
+    ///TODO ESTÁ FUNCIONANDO?
     $(window).on('hashchange', function() {
-        loadPage();
+        // loadPage();
         window.location.href = window.location.pathname+window.location.hash;
         scrollTo(0, 0);
     });
 
-
-    /* se a janela for redimensionada */
+    /* ATUALIZA OS IFRAMES QUANDO A JANELA FOR REDIMENSIONADA */
     $(window).resize(function() {
         controlPageWidth();
     });
@@ -1471,17 +1437,6 @@ $(document).ready(function(){
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
 
-
-                //enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false, url['slc'], url);
-
-                d3.json('data/pt-br.json', function (error, data) {
-                    if (error) throw error;
-
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.cad[setor].name);
-
-                });
-
             }
         }
         else if(eixo == 2 && url['var'] < 15){
@@ -1490,92 +1445,52 @@ $(document).ready(function(){
             if(setor != url['cad']) {
 
                 var newSCCSrc = $("#view_box_scc").attr("src");
-
                 var changeUF = newSCCSrc.match(/uf=([0-9]*)/);
                 url['cad'] = setor;
                 url['uf'] = changeUF[1];
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
-
-                d3.json('data/pt-br.json', function (error, data) {
-                    if (error) throw error;
-
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.cad[setor].name);
-
-                });
-
             }
         }
-        else if(eixo == 0 && url['var'] < 12){
-
-        }
 
     });
 
-    $(document).on('click', ".ocp", function(){
-        var ocupacao = $(this).attr('data-id');
-        var newSCCSrc = $("#view_box_scc").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        var change = newSCCSrc.match(/uf=([0-9]*)/);
-        var newBarrasSrc = $("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        var newSrc = $("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
-        if(ocupacao == 0) {
-            newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
-            newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
-            newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
-        }
-        $("#view_box").attr("src", newSrc);
-        $("#view_box_barras").attr("src", newBarrasSrc);
-        $("#view_box_scc").attr("src", newSCCSrc);
+    if(url['var'] === "" && window.location.pathname.match("page.php")){
+        controlVarPage(1);
+    }
 
-        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], ocupacao, false, url['slc'], url);
-
-        d3.json('data/pt-br.json', function(error, data) {
-            if (error) throw error;
-
-            textJSON = data;
-            $(".cad-title").first().html(textJSON.select.ocp[ocupacao-1].name);
-
-        });
-
-        $(".bread-select[data-id='ocp']").val($(this).attr("data-id"));
-    });
-
-
-    if(url['var'] === "" && window.location.pathname.match("page.php")) controlVarPage(1);
     if(url['var']) {
         controlVar(url['var']);
     }
-
-    /* velocidade scroll */
-    $(document).on('click','a[href*="#"]:not([href="#"])',function(){
-        smoothScroll(this);
-    });
 
     /*=== resultado ===*/
 
     /* alterar tipo de visualização */
     $(document).on('click', "button.opt.view", function(){
 
-        if($(this).attr("id") == "treemap_region" || $(this).attr("id") == "mapa") {
-            if($(this).html() == "BRASIL" || $(this).html() == "MUNDO"){
+
+        ///TODO REFATORAR
+
+        var id = $(this).attr("id");
+        var texto = $(this).html();
+
+        if(id == "treemap_region" || id == "mapa") {
+            if(texto == "BRASIL" || texto == "MUNDO"){
 
                 url['view'] = "mapa"; /* muda visualização */
 
-                if($(this).html() == "BRASIL"){
+                if(texto == "BRASIL"){
                     url['mundo'] = 1;
                     url['uf'] = 0;
 
                     $("select[data-id='uf']").val(0);
 
-
-                    if($(this).attr("id") === "treemap_region") {
+                    if(id === "treemap_region") {
                         $(this).addClass("active");
                         $('#mapa').removeClass("active");
                     }
-                    else if($(this).attr("id") === "mapa") {
+                    else if(id === "mapa") {
                         $(this).addClass("active");
                         $('#treemap_region').removeClass("active");
                     }
@@ -1586,11 +1501,11 @@ $(document).ready(function(){
 
                     $("select[data-id='prc']").val(0);
 
-                    if($(this).attr("id") === "treemap_region") {
+                    if(id === "treemap_region") {
                         $(this).addClass("active");
                         $('#mapa').removeClass("active");
                     }
-                    else if($(this).attr("id") === "mapa") {
+                    else if(id === "mapa") {
                         $(this).addClass("active");
                         $('#treemap_region').removeClass("active");
                     }
@@ -1600,25 +1515,25 @@ $(document).ready(function(){
             }
             else{
                 updateUrl();
+
                 url['view'] = $(this).attr('id'); /* muda visualização */
+
                 updateIframe(url); /* atualiza gráfico */
 
-                if($(this).attr("id") === "treemap_region") {
+                if(id === "treemap_region") {
                     $(this).addClass("active");
                     $('#mapa').removeClass("active");
                 }
-                else if($(this).attr("id") === "mapa") {
+                else if(id === "mapa") {
                     $(this).addClass("active");
                     $('#treemap_region').removeClass("active");
                 }
             }
 
-
-
         }
-        else if($(this).attr("id") == "bens" || $(this).attr("id") == "servicos"){
+        else if(id == "bens" || id == "servicos"){
             updateUrl();
-            if($(this).attr("id") === "bens") {
+            if(id === "bens") {
                 url['slc'] = 0;
                 $(this).addClass("active");
                 $('#servicos').removeClass("active");
@@ -1635,9 +1550,9 @@ $(document).ready(function(){
             }
             updateIframe(url); /* altera gráfico */
         }
-        else if($(this).attr("id") == "recebedora" || $(this).attr("id") == "trabalhador"){
+        else if(id == "recebedora" || id == "trabalhador"){
 
-            if($(this).attr("id") === "recebedora") {
+            if(id === "recebedora") {
 
                 if(url['mec'] != 0){
 
@@ -1674,7 +1589,7 @@ $(document).ready(function(){
         }
         else {
             updateUrl();
-            if($(this).attr("id") === "setor") {
+            if(id === "setor") {
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
                 switchToSetores();
 
@@ -1725,7 +1640,6 @@ $(document).ready(function(){
 
         var dataId = $(this).attr("data-id");
 
-
         if(dataId !== "eixo") {
             updateUrl();
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
@@ -1752,6 +1666,9 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
+
+
+
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
@@ -1834,7 +1751,6 @@ $(document).ready(function(){
                 }
 
                 changeDescVar();
-
             }
 
             if(dataId === 'deg') {

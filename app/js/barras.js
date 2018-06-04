@@ -17,6 +17,9 @@ function getSoma(barraId) {
     return soma;
 }
 updateTitleClickSCC()
+
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+
 function destacaBarra(barraId, stacked = false) {
     i = 0;
     $("rect").each(function() {
@@ -46,7 +49,7 @@ function destacaBarra(barraId, stacked = false) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", "#6DBFC9");
+                    $(this).css("fill", corEixo);
                     $(this).animate({"opacity": "1"}, "fast");
                 }
             }
@@ -82,9 +85,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         brasil_setor = JSON.parse(dado)
     })
 
-     $.get('./db/json_barras.php' + config, function(dado){
-         console.log(dado)
-     })
+     // $.get('./db/json_barras.php' + config, function(dado){
+     //     console.log(dado)
+     // })
    
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -118,7 +121,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-        console.log(data)
+        // console.log(data)
 
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
