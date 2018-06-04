@@ -919,8 +919,6 @@ function updateMecanismo(url, vrv){
         }
 
         else if(vrv == 3){
-            alert("oi")
-
             $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
             $("select[data-id='mec']").append("<option value='4'>Outros</option>");
         }

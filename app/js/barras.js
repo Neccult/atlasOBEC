@@ -81,10 +81,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
         brasil_setor = JSON.parse(dado)
     })
-    /*
+
      $.get('./db/json_barras.php' + config, function(dado){
-         // console.log(dado)
-     })*/
+         console.log(dado)
+     })
    
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -117,6 +117,8 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         }
 
         var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
+
+        console.log(data)
 
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
