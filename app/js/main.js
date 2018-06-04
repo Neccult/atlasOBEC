@@ -46,10 +46,12 @@ function getAnoDefault(eixo_atual){
                 url['ocp'] = 0
             }
 
-            if(url['ocp'] == 3)
+            if(url['ocp'] == 3){
                 index_ocp = 1
-            else
+            }
+            else{
                 index_ocp = url['ocp']
+            }
             url['ano'] = anos_default[url['var']][index_ocp]; break;
 
         case 2: 
@@ -128,11 +130,6 @@ function changeChart(url){
 
 function updateIframe(url){
 
-    /* var json;
-    $.get("./data/pt-br.json", function(data) {
-        json = data;
-    }).done(function(){ */
-            
     var newUrl = "",
         count = 0,
         size = Object.keys(url).length;
@@ -144,7 +141,7 @@ function updateIframe(url){
     });
 
     var eixoAtual = getEixo(window.location.hash.substring(1));
-    //console.log(url['fax'])
+
     ///BOX DO MAPA
     if($('iframe[id="view_box"]').length != 0) {
         if(eixoAtual == 0){
@@ -555,8 +552,6 @@ Saída:
 -----------------------------------------------------------------------------*/
 function controlFilter(selectvalue, selectid, valueDesag){
 
-
-
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
     if(BarraSrc != undefined && BarraSrc != "no-view.html") var setor = BarraSrc.match(/cad=([0-9]*)/)[1];
@@ -570,9 +565,6 @@ function controlFilter(selectvalue, selectid, valueDesag){
         var uf = 0;
     }
     /* se for PORTE x ATUAÇÃO */
-
-
-        
 
     if(selectid==='var') {
 
@@ -1276,6 +1268,9 @@ function updateUrl() {
 }
 
 function updateLegendByDeg(deg){
+
+    console.log("oi")
+
     if(deg == 0){
         if(url['ocp'] == 0){
             $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
@@ -1390,8 +1385,6 @@ function getCadsByMenuDonut(){
 }
 
 function switchToSetores() {
-
-
 
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
     $("#title-view-leg-scc").empty();
@@ -2093,8 +2086,8 @@ $(document).ready(function(){
     $(document).on('change', ".bread-select", function(e){
 
 
-        if($(this).attr("data-id") !== "eixo") {
-
+        if(dataId !== "eixo") {
+            updateUrl()
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
@@ -2137,15 +2130,12 @@ $(document).ready(function(){
                 $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
                 // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
-            //quando muda a variável, é preciso trocar a UF para 'Brasil'
-            
-            if($(this).attr('data-id') =='var'){
-               
+
+            if(dataId ==='var'){
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
-
                 $('#recebedora').addClass("active");
                 $('#trabalhador').removeClass("active");
 
@@ -2157,10 +2147,13 @@ $(document).ready(function(){
                 else{
                     switchToOcupations();
                 }
+
+
                 if(url['ocp'] > 0)
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 1, url);
                 else
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
+
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
 
@@ -2221,7 +2214,25 @@ $(document).ready(function(){
                     
                 }
             }
-            if($(this).attr('data-id') == 'deg') {
+
+            if(dataId === 'deg') {
+
+                if(eixo_atual == 1){
+                    if($(this).find('option:selected').parent().attr("value") != undefined){
+                        deg_value =  $(this).find('option:selected').parent().attr("value")
+                    }
+                    else{
+                        deg_value = $(this).val()
+
+                    }
+                    controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
+
+                    if(url['var'] == 4 || url['var'] == 5)
+                        updateLegendByDeg(url['deg'])
+                }
+                else{
+                    controlFilter($(this).val(), $(this).attr('data-id'), 1);
+                }
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 document.getElementById('view_box_barras').contentWindow.location.reload(true);             
