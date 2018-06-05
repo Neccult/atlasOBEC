@@ -965,7 +965,6 @@ function updateDefaultOcupation(){
 
 function updateDefaultMec(vrv){
 
-
     if(vrv == 11 || vrv == 7|| vrv == 12 || vrv == 13 || vrv == 14) {
         url['mec'] = 2;
 
@@ -1519,7 +1518,6 @@ function updateServicos(vrv){
 		default: $('#servicos').css('display', 'inline');
 	}
 }
-
 
 function updateDataDesc(vrv, uos, valor){
 
