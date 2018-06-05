@@ -2,32 +2,34 @@ var windowWidth = $(window).width();
 var cont = 0;
 var anos_default;
 
+var textJSON = []
+var colorJSON = []
+
+$.get("./data/pt-br.json", function(data){
+    textJSON = data
+})
+
+$.get("./data/colors.json", function(data){
+    colorJSON = data
+})
+
 //$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 });
 
-//TEMPORARIO enquanto não está funcionando
-// if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 3)
-//     $('.bread-select[data-id=var]').find("option[value=5]").prop("disabled", true)
-// else if($('.bread-eixo[data-id="eixo"]').prop('selectedIndex') == 2)
-//     $('.bread-select[data-id=var]').find("option[value=15]").prop("disabled", true)
-//$.ajaxSetup({async: true});
+
 /*-----------------------------------------------------------------------------
 Função: controlVar
     redireciona a página para o resultado da variável escolhida.
-Entrada: 
+Entrada:
     clickVar = variável escolhida
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
-	newHash = window.location.hash;
-	$('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box"]').length > 0) $('iframe[id="view_box"]').attr('src', url['view']+'.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box_barras"]').length > 0) $('iframe[id="view_box_barras"]').attr('src', 'barras.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
-    if($('iframe[id="view_box_scc"]').length > 0) $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2012&eixo='+newHash.substring(1)+newHash);
-    /* variáveis com valores default */
+    newHash = window.location.hash;
+    $('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
 }
 
 function controlVarPage(clickVar){
@@ -46,41 +48,43 @@ function getAnoDefault(eixo_atual){
                 url['ocp'] = 0
             }
 
-            if(url['ocp'] == 3)
+            if(url['ocp'] == 3){
                 index_ocp = 1
-            else
+            }
+            else{
                 index_ocp = url['ocp']
+            }
             url['ano'] = anos_default[url['var']][index_ocp]; break;
 
-        case 2: 
-            if(url['var'] != 17) 
-                url['ano'] = anos_default[url['var']][0]; 
+        case 2:
+            if(url['var'] != 17)
+                url['ano'] = anos_default[url['var']][0];
             else
                 url['ano'] = 2017
             break;
         case 3:
-        if(url['var'] >= 11)
-            url['slc'] = 0
-        index = url['slc'] == 0 ? 1 : 0
-         
-         url['ano'] = anos_default[url['var']][index]; break;
+            if(url['var'] >= 11)
+                url['slc'] = 0
+            index = url['slc'] == 0 ? 1 : 0
+
+            url['ano'] = anos_default[url['var']][index]; break;
     }
 }
 
 /*-----------------------------------------------------------------------------
 Função: defaultUrl
     atualiza url para valores default (menos a url['var'])
-Entrada: 
+Entrada:
     void
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function defaultUrl(){
-	url['view'] = 'mapa';
-	url['uf'] = 0;
-	url['cad'] = 0;
-	url['prt'] = 0;
-	url['atc'] = 0;
+    url['view'] = 'mapa';
+    url['uf'] = 0;
+    url['cad'] = 0;
+    url['prt'] = 0;
+    url['atc'] = 0;
     url['ocp'] = 0;
     url['fax'] = 0;
     url['cor'] = 0;
@@ -98,23 +102,23 @@ function defaultUrl(){
 /*-----------------------------------------------------------------------------
 Função: changeChart
     redireciona a página de acordo com os parametros da url
-Entrada: 
+Entrada:
     url = objeto com os parâmetros e seus valores
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function changeChart(url){
 
-	var newUrl = "",
-		count = 0,
-		size = Object.keys(url).length;
-	$.each(url, function(key,value){
+    var newUrl = "",
+        count = 0,
+        size = Object.keys(url).length;
+    $.each(url, function(key,value){
 
-		newUrl = newUrl+key+"="+value;
-				
-		if((++count)!=size) newUrl = newUrl+"&";
-	});
-	window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
+        newUrl = newUrl+key+"="+value;
+
+        if((++count)!=size) newUrl = newUrl+"&";
+    });
+    window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
     if($('iframe[id="view_box"]').length != 0) {
         $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
     }
@@ -128,11 +132,6 @@ function changeChart(url){
 
 function updateIframe(url){
 
-    /* var json;
-    $.get("./data/pt-br.json", function(data) {
-        json = data;
-    }).done(function(){ */
-            
     var newUrl = "",
         count = 0,
         size = Object.keys(url).length;
@@ -144,7 +143,7 @@ function updateIframe(url){
     });
 
     var eixoAtual = getEixo(window.location.hash.substring(1));
-    //console.log(url['fax'])
+
     ///BOX DO MAPA
     if($('iframe[id="view_box"]').length != 0) {
         if(eixoAtual == 0){
@@ -249,7 +248,7 @@ function updateIframe(url){
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=1");
                 $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                
+
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
                 if(url['var'] == 8)
                     $('iframe[id="view_box"]').parent().find(".view-title").html("IHH VALOR ABSOLUTO POR SETORES");
@@ -258,11 +257,11 @@ function updateIframe(url){
 
             }
             else if(url['var'] > 5 && url['var'] < 13 || url['var'] == 14 ){
-     
+
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
-               //$('iframe[id="view_box"]').attr('src', 'line_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-               $('iframe[id="view_box"]').attr('src', 'no-view.html');
-               
+                //$('iframe[id="view_box"]').attr('src', 'line_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box"]').attr('src', 'no-view.html');
+
             }
             else{
 
@@ -360,7 +359,7 @@ function updateIframe(url){
                 else if(url['var'] == 5)
                     $('iframe[id="view_box_barras"]').parent().find(".view-title").html("C2 VALOR ABSOLUTO POR PARCEIROS");
             }
-            
+
         }
 
     }
@@ -372,32 +371,32 @@ function updateIframe(url){
 
         if(eixoAtual == 0) {
 
-                if (url['var'] == 3) {
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
-                }
-                else if (url['var'] > 9) {
+            if (url['var'] == 3) {
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
+            }
+            else if (url['var'] > 9) {
 
 
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".content-btn-mapa").css("display", "none")
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".content-btn-mapa").css("display", "none")
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
 
 
-                }
-                else if (url['var'] == 9){
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
-                }
-                else {
-                    $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+            }
+            else if (url['var'] == 9){
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS")
+            }
+            else {
+                $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
 
-                    if(url['uf'] == 0)
-                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
-                    else
-                        $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
+                if(url['uf'] == 0)
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
+                else
+                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf] ");
 
-                }
+            }
         }
         else if(eixoAtual == 1) {
 
@@ -461,8 +460,8 @@ function updateIframe(url){
         }
         else if(eixoAtual == 2){
             if(url['var'] == 6 || url['var'] == 8 || url['var'] == 9 || url['var'] == 7 || url['var'] == 13 || url['var'] == 14){
-                    $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
-                    $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
+                $('iframe[id="view_box_scc"]').attr('src', 'linhas.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
+                $('iframe[id="view_box_scc"]').parent().find(".view-title").html("GRÁFICO DE LINHAS");
             }
             else if(url['var'] ==  17){
                 $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -490,7 +489,7 @@ function updateIframe(url){
 
         }
         else if(eixoAtual == 3){
-            
+
             if(url['var'] == 5 || url['var'] == 8){
                 newUrl = newUrl.replace(/cad=[0-9]*/, "cad=2");
                 $('iframe[id="view_box_scc"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -522,40 +521,38 @@ function updateIframe(url){
 /*-----------------------------------------------------------------------------
 Função: openFilter
     abre ou fecha o filtro que foi clicado
-Entrada: 
+Entrada:
     filter => filtro que foi clicado
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function openFilter(filter){
-	var contexto = $(filter).parents('.contexto'),
-		active = $(filter).hasClass('active');
+    var contexto = $(filter).parents('.contexto'),
+        active = $(filter).hasClass('active');
 
-	/* remove classe active dos botões */
-	$(contexto).find('.opt.select').removeClass('active');	
+    /* remove classe active dos botões */
+    $(contexto).find('.opt.select').removeClass('active');
 
-	/* esconde todos os blocos */
-	$(contexto).find('.select-group').addClass('hide');
+    /* esconde todos os blocos */
+    $(contexto).find('.select-group').addClass('hide');
 
-	/* se está abrindo outro */
-	if(!active){
-		$(contexto).find(filter).addClass('active');
-		$(contexto).find('.select-group#select-'+$(filter).attr('id')).removeClass('hide');
-	}
+    /* se está abrindo outro */
+    if(!active){
+        $(contexto).find(filter).addClass('active');
+        $(contexto).find('.select-group#select-'+$(filter).attr('id')).removeClass('hide');
+    }
 }
 
 /*-----------------------------------------------------------------------------
 Função: controlFilter
     controla relações entre os filtros
-Entrada: 
+Entrada:
     selectvalue => valor do select
     selectid => id do select
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlFilter(selectvalue, selectid, valueDesag){
-
-
 
     var SCCSrc = $("#view_box_scc").attr("src");
     var BarraSrc = $("#view_box_barras").attr("src");
@@ -570,9 +567,6 @@ function controlFilter(selectvalue, selectid, valueDesag){
         var uf = 0;
     }
     /* se for PORTE x ATUAÇÃO */
-
-
-        
 
     if(selectid==='var') {
 
@@ -597,7 +591,7 @@ function controlFilter(selectvalue, selectid, valueDesag){
 
 
     if(window.location.hash === "#mercado" && selectid === 'deg') {
-		if(selectvalue==='0') {
+        if(selectvalue==='0') {
             url['prt'] = 0;
             url['sex'] = 0;
             url['esc'] = 0;
@@ -606,7 +600,7 @@ function controlFilter(selectvalue, selectid, valueDesag){
             url['cor'] = 0;
             url['prv'] = 0;
             url['fax'] = 0;
-		}
+        }
         if(selectvalue==='1') {
             url['prt'] = valueDesag;
             url['sex'] = 0;
@@ -687,23 +681,23 @@ function controlFilter(selectvalue, selectid, valueDesag){
             url['prv'] = 0;
             url['fax'] = 0;
         }
-	}
+    }
 
-	if(selectid=='prt'){
-		/* filtro atuação */
-		if(selectvalue.match('atc-','')){
-			url['atc'] = selectvalue.replace('atc-','');
-			url['prt'] = '0'; /* se for atuação, não há filtro por porte */
-		}
+    if(selectid=='prt'){
+        /* filtro atuação */
+        if(selectvalue.match('atc-','')){
+            url['atc'] = selectvalue.replace('atc-','');
+            url['prt'] = '0'; /* se for atuação, não há filtro por porte */
+        }
 
-		/* filtro porte */
-		else{
-			url['prt'] = selectvalue;
-			url['atc'] = '0';/* se for porte, não há filtro por atuação */
-		}
+        /* filtro porte */
+        else{
+            url['prt'] = selectvalue;
+            url['atc'] = '0';/* se for porte, não há filtro por atuação */
+        }
 
-	}
-	else if(selectid=='deg') {
+    }
+    else if(selectid=='deg') {
         url[selectid] = selectvalue;
         if(selectvalue == 0) {
             url['ano'] = ano;
@@ -724,7 +718,7 @@ function controlFilter(selectvalue, selectid, valueDesag){
             url['uos'] = selectvalue-13;
         }
     }
-	else if(selectid=='cad') {
+    else if(selectid=='cad') {
         if(selectvalue.match('ocp-','')){
 
             url['ocp'] = selectvalue.replace('ocp-','');
@@ -736,10 +730,10 @@ function controlFilter(selectvalue, selectid, valueDesag){
             url['cad'] = selectvalue;
             url['ocp'] = '0';/* se for porte, não há filtro por atuação */
         }
-	}
-	else{
-		url[selectid] = selectvalue;
-	}
+    }
+    else{
+        url[selectid] = selectvalue;
+    }
 
 
 
@@ -757,30 +751,30 @@ function controlMec(select){
 
     if(url['var'] == 1 || url['var'] == 8 || url['var'] == 9){
         $(select).find('option[value="3"]').remove();
-    	$(select).find('option[value="4"]').remove();
+        $(select).find('option[value="4"]').remove();
     }
     if(url['var'] == 3) {
         $(select).find('option[value="1"]').remove();
         $(select).find('option[value="2"]').remove();
-	}
+    }
 }
 
 /*-----------------------------------------------------------------------------
 Função: controlAtc
    restringe filtro de atuação ==> comércio apenas para os setores 4 - 5 - 9 - todos
-Entrada: 
+Entrada:
     select => objeto do select
-    isPrt => boolean é ou não select de porte  
+    isPrt => boolean é ou não select de porte
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlAtc(select,isPrt){
 
-	if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
-		
-		if(isPrt) $(select).find('option[value="atc-1"]').remove();
-		else $(select).find('option[value="1"]').remove();
-	}
+    if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
+
+        if(isPrt) $(select).find('option[value="atc-1"]').remove();
+        else $(select).find('option[value="1"]').remove();
+    }
 }
 
 function controlAno(select){
@@ -832,200 +826,85 @@ Saída:
 function getEixo(eixo){
 
     if(eixo == 'empreendimentos') {
-    	return 0;
-	}
-	else if(eixo == 'mercado') {
-    	return 1;
-	}
-	else if(eixo == 'politicas') {
-		return 2;
-	}
+        return 0;
+    }
+    else if(eixo == 'mercado') {
+        return 1;
+    }
+    else if(eixo == 'politicas') {
+        return 2;
+    }
     else if(eixo == 'comercio') {
-		return 3;
+        return 3;
     }
     else return 0;
 }
 
 /*-----------------------------------------------------------------------------
 Função: loadResult
-   carrega página de resultado e filtros; 
-Entrada: 
+   carrega página de resultado e filtros;
+Entrada:
     void
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadResult(){
-	/* ajusta nome da página */
-	$(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
-	$('.menu-select').val(url['var']); /* atualiza select versao mobile */
 
-	/* move scroll para o gráfico */	
-	if($("div.container").length != 0)$('html, body').scrollTop($("div.container").offset().top);
+    var eixoUrl = window.location.hash.substring(1);
 
-	/* fade in no resultado */
-	$('.fadeInPage').addClass('done');
-	$('.fadeIn').addClass('done');
+    /* ajusta nome da página */
+    $(this).attr("title", pageTitle+" | Atlas Econômico da Cultura Brasileira");
 
-	/*  se não existe setor selecionado,
-		não é possível escolher porte x atuação 
-		(exceto no treemap por setores)
-										*/
-	if(window.location.hash.substring(1) == "empreendimentos") {
-        var SCCSrc = $("#view_box_scc").attr("src");
-        if(SCCSrc != undefined) {
-            var setor = SCCSrc.match(/cad=([0-9]*)/)[1];
-        }
-        else {
-            var setor = 0;
-        }
+    ///TODO ESTÁ FUNCIONANDO?
+    /* fade in no resultado */
+    $('.fadeInPage').addClass('done');
+    $('.fadeIn').addClass('done');
 
-        if(url['var'] > 3) {
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="9"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="10"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="11"]').remove();
-            $(window.parent.document).find('.select-deg').find('select').find('option[value="12"]').remove();
-
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="9"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="10"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="11"]').remove();
-            $(window.parent.document).find('.bread-select-deg').find('select').find('option[value="12"]').remove();
-        }
-        else {
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='10']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='11']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
-            if($(window.parent.document).find("select[data-id='deg']").find("option[value='12']").length == 0) $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
-
-
-        }
-
-
-		if(url['cad']==0 && url['view']!='treemap_scc'){
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-atc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('#select-atc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-    }
-
-
-    if(window.location.hash.substring(1) == "mercado") {
-        
-		if((url['ocp']==0 && url['view']!='treemap_scc') || (url['slc'] == 0)){
-            $('.select-cor').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-frm').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prv').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-snd').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-cor').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-frm').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prv').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>');
-            $('.select-snd').append('<p class=\"error\">Selecione uma ocupação para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if(url['cad'] == 0 && url['ocp']==0 && url['view']!='treemap_scc') {
-            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-fax').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-esc').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-fax').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-esc').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if((url['ocp']!=0 && url['view']!='treemap_scc') || (url['slc'] == 1)){
-            $('.select-sex').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-prt').find('select').attr('disabled','disabled'); /* desabilita select */
-            $('.select-sex').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-            $('.select-prt').append('<p class=\"error\">Selecione um setor para habilitar este filtro. </p>'); /* mensagem de select desabilitado */
-        }
-
-        if(url['view'] == "barras" && url['cad'] == 0 && url['slc'] == 0) {
-            $('.select-deg').find('select').attr('disabled','disabled'); /* desabilita select */
-        }
-
-
-       // console.log($('.bread-select-var').find('select').find('option[value="3"]'));
-
-
-
-    }
-
-	/* set selects com os valores da url */
-	$(".opt-select").each(function(){
-		
-		var selectId = $(this).attr('data-id'),
-			selectValue = url[selectId];
-
-		/* atualiza valor select */
-		$(this).val(selectValue);
-		/* select porte default */
-		if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
-			
-			/* valor atuação */
-			$(this).val('atc-'+url['atc']);	
-		}
-
-        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
-
-            /* valor atuação */
-            $(this).val('ocp-'+url['ocp']);
-        }
-
-		if(selectId=='prt') controlAtc(this,1);
-		if(selectId=='atc') controlAtc(this,0);
-        if(selectId=='mec') controlMec(this);
-        if(selectId=='ano') controlAno(this)
-
-	});
-
+    /* set selects com os valores da url */
     $(".bread-select").each(function(){
 
+        if(!($(this).attr('data-id') == 'eixo')){
+            var selectId = $(this).attr('data-id'),
+                selectValue = url[selectId];
 
-        var selectId = $(this).attr('data-id'),
-            selectValue = url[selectId];
+            /* atualiza valor select */
+            $(this).val(selectValue);
+            /* select porte default */
+            if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
 
-        /* atualiza valor select */
-        $(this).val(selectValue);
-        /* select porte default */
-        if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
+                /* valor atuação */
+                $(this).val('atc-'+url['atc']);
+            }
 
-            /* valor atuação */
-            $(this).val('atc-'+url['atc']);
+            if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
+
+                /* valor atuação */
+                $(this).val('ocp-'+url['ocp']);
+            }
+
+            if(selectId=='prt') controlAtc(this,1);
+            if(selectId=='atc') controlAtc(this,0);
+            if(selectId=='mec') controlMec(this);
+            if(selectId=='ano') controlAno(this)
         }
-
-        if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
-
-            /* valor atuação */
-            $(this).val('ocp-'+url['ocp']);
-        }
-
-        if(selectId=='prt') controlAtc(this,1);
-        if(selectId=='atc') controlAtc(this,0);
-        if(selectId=='mec') controlMec(this);
-        if(selectId=='ano') controlAno(this)
-        
     });
 
+    removeVar('mercado', 3);
+
+}
+
+function removeVar(eixo, vrv){
+
+    var eixoUrl = window.location.hash.substring(1);
 
     //Feito para remover a variável 3 do eixo mercado;
     $(".bread-select-var").find('option').each(function(){
+        var breadVal = $(this).val();
 
-        if(window.location.hash.substring(1) == "mercado" && $(this).val() == 3){
+        if(eixoUrl == eixo && breadVal == vrv){
             $(this).remove();
         }
     });
-
-    if(window.location.hash.substring(1) == "mercado"){
-        $(".opt-select[data-id=var]").find('option').each(function(){
-
-            if($(this).val() == 3){
-                $(this).remove();
-            }
-        });
-    
-    }
-    
-
 
 }
 /*-----------------------------------------------------------------------------
@@ -1089,37 +968,38 @@ function loadMobile(){
 /*-----------------------------------------------------------------------------
 Função: loadPage
     controla tipo de menu (desk/mobile); chama função para carregar os resultados;
-Entrada: 
+Entrada:
     void
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function loadPage(){
-	newHash = window.location.hash.substring(1);
-	var menuView = 'menudesktop.php?'+newHash+'=1';
+
+    var eixoUrl = window.location.hash.substring(1)
+
+    var menuView = 'menudesktop.php?'+eixoUrl+'=1';
 
     if(windowWidth<1199){
-        menuView = 'menumobile.php?'+newHash+'=1';
+        menuView = 'menumobile.php?'+eixoUrl+'=1';
         $('#section0').css("display", "none")
 
         loadMobile();
     }
     else{
-	    $("#menuvariaveis").css("display", "none")
+        $("#menuvariaveis").css("display", "none")
     }
 
+    /// TODO REVER ESSE TRECHO
     if($("#menuvariaveis").length != 0) {
-	    $("#menuvariaveis").load(menuView, function(){
+        $("#menuvariaveis").load(menuView, function(){
             if(url['var']!=='' && pageTitle!==''){
                 loadResult();
-                changeDescVar();
             }
         });
     }
     else {
         if(url['var']!=='' && pageTitle!==''){
             loadResult();
-            changeDescVar();
         }
     }
 }
@@ -1127,35 +1007,37 @@ function loadPage(){
 /*-----------------------------------------------------------------------------
 Função: controlPageWidth
     controla se largura da tela foi alterada: recarrega a página se for preciso, para que os gráficos não fiquem com o tamanho errado.
-Entrada: 
+Entrada:
     void
 Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlPageWidth(){
-	var newWidth = $(window).width();
+    var newWidth = $(window).width();
 
-	/*  só redimensionar o gráfico
-		se a largura for alterada! */
-	if(newWidth!=windowWidth){
+    /*  só redimensionar o gráfico
+        se a largura for alterada! */
+    if(newWidth!=windowWidth){
 
-		windowWidth = newWidth;
-		var wait;
-		clearTimeout(wait);
-		wait = setTimeout(location.reload(), 100); /* reload pg! */
-	}
+        windowWidth = newWidth;
+        var wait;
+        clearTimeout(wait);
+        wait = setTimeout(location.reload(), 100); /* reload pg! */
+    }
 }
 
 /*-----------------------------------------------------------------------------
 Função: smoothScroll
     controla velocidade do scroll
-Entrada: 
+Entrada:
     void
 Saída:
     void
 -----------------------------------------------------------------------------*/
+
+///TODO ESSA FUNCAO É NECESSÁRIA?
 function smoothScroll(link){
-	if (location.pathname.replace(/^\//,'') == link.pathname.replace(/^\//,'') && location.hostname == link.hostname) {
+    if (location.pathname.replace(/^\//,'') == link.pathname.replace(/^\//,'') && location.hostname == link.hostname) {
         var target = $(link.hash);
         target = target.length ? target : $('[name=' + link.hash.slice(1) +']');
 
@@ -1169,27 +1051,21 @@ function smoothScroll(link){
 }
 
 function getUf(textJSON) {
-	var uf_length = textJSON.length;
-	var i;
-	for(i = 0; i < uf_length; i++) {
-		if(textJSON[i].value === url['uf']) {
-			return textJSON[i].name;
-		}
-	}
+    var uf_length = textJSON.length;
+    var i;
+    for(i = 0; i < uf_length; i++) {
+        if(textJSON[i].value === url['uf']) {
+            return textJSON[i].name;
+        }
+    }
 }
 
 function changeDescVar() {
     // import pt-br.json file for get the title
-    var textJSON;
-    d3.json('data/pt-br.json', function(error, data) {
-        if(error) throw error;
+    var eixoUrl = getEixo(window.location.hash.substring(1))
+    var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
-        textJSON = data;
-        eixo = getEixo(window.location.hash.substring(1))
-        variavel = textJSON.var[eixo].filter(function(o){ return o.id == url['var']})[0]
-        $(".desc-var").html(variavel.desc_var_mapa);
-
-    });
+    $(".desc-var").html(variavel.desc_var_mapa);
 }
 
 function cleanDesagsUrl() {
@@ -1211,54 +1087,25 @@ function cleanDesagsUrl() {
     url['uos'] = 0;
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function open_related_links() {
-    document.getElementById("LinksDropdown").classList.toggle("show");
+function updateWindowUrl(id, valor){
+
+    var replace = id+"=[0-9]*";
+    var re = new RegExp(replace,"");
+
+    var urlString = parent.window.location.href.replace(re, id+"="+valor);
+    parent.window.history.pushState(null, null, urlString)
 }
 
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
-/*====== 
-	documento carregando
+/*======
+	DOCUMENTO CARREGADO
 ======*/
 $(window).bind("load", function() {
 
-	loadPage(); /* controla menu e fade */
+    loadPage(); /* controla menu e fade */
 
-	bodyDark(dark);/* alto contraste */
+    bodyDark(dark);/* alto contraste */
 
 });
-
-function expandMenu(a) {
-    $(a).animate({width: "200px", margin: "5px"}, "fast");
-    $('.eixo-ativo').animate({width: "160px", margin: "15px"}, "fast");
-}
-
-function expandMenuEixoAtivo(a) {
-    $(a).animate({width: "200px", margin: "0px"}, "fast");
-}
-
-function minimizeMenu(a) {
-    $(a).animate({width: "160px", margin: "15px"}, "fast");
-}
-
-function expandMenuVariaveis(a) {
-    $('.eixo-ativo').animate({width: "200px", margin: "0px"}, "fast");
-}
 
 function updateUrl() {
     var eixo_atual = getEixo(window.location.hash.substring(1))
@@ -1276,28 +1123,22 @@ function updateUrl() {
 }
 
 function updateLegendByDeg(deg){
+
     if(deg == 0){
         if(url['ocp'] == 0){
             $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
-            $("#title-view-leg-scc").html("" +
-                "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
-                "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-                "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-                "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-                "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-                "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
-                "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-                "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
-                "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>"
-            )
 
-            var cads = [];
-            $("#title-view-leg-scc").find(".scc").each(function(){
-                cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-                cads.push(cad)
-            })
+            var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            var html = "";
+
+            legendArray.forEach( function(id) {
+                html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            } );
+
+            $("#title-view-leg-scc").html(html);
+
+            /// TODO TRANSFORMAR PRA UMA FUNÇÃO?
+            var cads = getCadsByMenu();
 
             updateBreadcrumbSetores(cads);
         }
@@ -1306,81 +1147,38 @@ function updateLegendByDeg(deg){
         }
 
     }
-    else if(deg == 1){
-        $(".view-title-leg[data-id='scc&ocp']").html("PORTE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Micro<br></span>\n" +
-            "<span data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Pequeno<br></span>\n" +
-            "<span data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Médio<br></span>\n" +
-            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Grande<br></span>"
-        )
-    }
-    else if(deg == 2){
-        $(".view-title-leg[data-id='scc&ocp']").html("SEXO");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Masculino<br></span>\n" +
-            "<span data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(233, 107, 0)\"></i> Feminino<br></span>"
-        )
-    }
-    else if(deg == 3){
-        $(".view-title-leg[data-id='scc&ocp']").html("IDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> 10 a 17<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> 18 a 29<br></span>"+
-            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> 30 a 49<br></span>"+
-            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> 50 a 64<br></span>"+
-            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> 65 ou mais<br></span>"+
-            "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não classificado<br></span>"
-    )
-    }
-    else if(deg == 4){
-        $(".view-title-leg[data-id='scc&ocp']").html("ESCOLARIDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Sem instruição <br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Fundamental incompleto<br></span>"+
-        "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Fundamental completo<br></span>"+
-        "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Médio completo<br></span>"+
-        "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Superior incompleto<br></span>"+
-        "<span data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Superior completo<br></span>" +
-        "<span data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: red\"></i> Não determinado<br></span>"
-    )
-    }
-    else if(deg == 5){
-        $(".view-title-leg[data-id='scc&ocp']").html("COR");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: green\"></i> Indígena<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Branca<br></span>"+
-            "<span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: black\"></i> Preta<br></span>"+
-            "<span data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: yellow\"></i> Amarela<br></span>"+
-            "<span data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Parda<br></span>"
-    )
-    }
-    else if(deg == 6){
-        $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Formal<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Informal<br></span>"
-        )
-    }
-    else if(deg == 7){
-        $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Contribuinte<br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não contribuinte<br></span>"
-        )
-    }
-    else if(deg == 8){
-        $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO");
-        $("#title-view-leg-scc").html("" +
-            "<span data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Membro <br></span>\n" +
-            "<span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Não membro<br></span>"
-        )
+    else if(deg > 0){
+
+        console.log(deg)
+
+        switch (deg){
+            case 1: $(".view-title-leg[data-id='scc&ocp']").html("PORTE"); break;
+            case 2: $(".view-title-leg[data-id='scc&ocp']").html("SEXO"); break;
+            case 3: $(".view-title-leg[data-id='scc&ocp']").html("IDADE"); break;
+            case 4: $(".view-title-leg[data-id='scc&ocp']").html("ESCOLARIDADE"); break;
+            case 5: $(".view-title-leg[data-id='scc&ocp']").html("COR"); break;
+            case 6: $(".view-title-leg[data-id='scc&ocp']").html("FORMALIDADE"); break;
+            case 7: $(".view-title-leg[data-id='scc&ocp']").html("PREVIDÊNCIA"); break;
+            case 8: $(".view-title-leg[data-id='scc&ocp']").html("SINDICATO"); break;
+        }
+
+
+        var legendArray = colorJSON.deg[deg]['subdeg'];
+        var html = "";
+
+        for (var nome in legendArray) {
+            console.log(nome)
+            html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+        }
+
+        $("#title-view-leg-scc").html(html)
     }
 
 }
 
 function getCadsByMenuDonut(){
     var cads = [];
+
     $("#title-view-leg-scc-donut").find(".scc").each(function(){
         cad = {id: $(this).attr("data-id"), nome: $(this).text()}
         cads.push(cad)
@@ -1389,176 +1187,122 @@ function getCadsByMenuDonut(){
     return cads;
 }
 
+function getCadsByMenu(){
+    var cads = [];[];
+    $("#title-view-leg-scc").find(".scc").each(function(){
+        cad = {id: $(this).attr("data-id"), nome: $(this).text()}
+        cads.push(cad)
+    })
+
+    return cads;
+}
+
 function switchToSetores() {
-
-
 
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
     $("#title-view-leg-scc").empty();
 
     var eixo = getEixo(window.location.hash.substring(1));
-
     var cads = [];
 
     if(eixo == 0 && url['var'] > 9){
         $(".view-title-leg[data-id='scc&ocp']").html("");
+
         cads = [
-                {id: 0, nome: " Todos"}
+            {id: 0, nome: " Todos"}
         ]
 
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
-
-
-
 
     }
     else if(eixo == 1 && (url['var'] == 3 || url['var'] == 4)){
 
-            $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
-            $("#title-view-leg-scc").append("" +
-                "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
-                "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-                "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-                "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-                "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-                "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-                "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
-                "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-                "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
-                "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>"
-            )
+        $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
 
-            var cads = [];
-            $("#title-view-leg-scc").find(".scc").each(function(){
-                cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-                cads.push(cad)
-            })
+        var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        var html = "";
 
-            updateBreadcrumbSetores(cads);
+        legendArray.forEach( function(id) {
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+        } );
 
+        $("#title-view-leg-scc").html(html);
 
-
+        cads = getCadsByMenu();
     }
     else if(eixo == 1 && url['var'] > 11){
         cads = [
-                {id: 0, nome: " Todos"}
+            {id: 0, nome: " Todos"}
         ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
-
 
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
-
-
-
-
     }
     else if(eixo == 2 && url['var'] == 2){
-        $("#title-view-leg-scc").append("" +
-            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
 
+        ///TODO ESSA VARIAVEL EXISTE???
 
-        var cads = [];
-        $("#title-view-leg-scc").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
+        var legendArray = [0, 2, 3, 5, 8, 11];
+        var html = "";
 
-        updateBreadcrumbSetores(cads);
+        legendArray.forEach( function(id) {
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+        } );
 
+        $("#title-view-leg-scc").html(html);
+
+        cads = getCadsByMenu();
     }
-
     else if(eixo == 2 && url['var'] == 18){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
-        $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n" +
-            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
+        var legendArray = [0, 2, 3, 4, 5, 6, 8, 9, 11];
+        var html = "";
 
-        var cads = [];
-        $("#title-view-leg-scc-donut").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
+        legendArray.forEach( function(id) {
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+        });
 
-        updateBreadcrumbSetores(cads);
+        $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
 
+        cads = getCadsByMenuDonut();
     }
     else if(eixo == 2 && url['var'] == 19){
+
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
-        $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "<span class=\"scc\" data-id=\"11\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Outros<br></span>");
+        var legendArray = [0, 2, 3, 5, 8, 11];
+        var html = "";
 
-        var cads = [];
-        $("#title-view-leg-scc-donut").find(".scc").each(function(){
-            cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-            cads.push(cad)
-        })
+        legendArray.forEach( function(id) {
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+        });
 
-        updateBreadcrumbSetores(cads);
+        $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
+
+        cads = getCadsByMenuDonut();
 
     }
     else if(eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
-        cads = 
+        cads =
             [
-                {id: 0, nome: " Todos"},
-                {id: 1, nome: " Arquitetura e Design"},
-                {id: 2, nome: " Artes Cênicas e Espetáculos"},
-                {id: 3, nome: " Audiovisual"},
-                {id: 4, nome: " Cultura Digital"},
-                {id: 5, nome: " Editorial"},
-                {id: 6, nome: " Educação e Criação em Artes"},
-                {id: 7, nome: " Entretenimento"},
-                {id: 8, nome: " Música"},
-                {id: 9, nome: " Patrimônio"},
-                {id: 10, nome: " Publicidade"}
+                {id: 0, nome: " Todos"}
             ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
-
-
-
     }
     else if(eixo == 2 && (url['var'] == 10)){
-        cads = 
+        cads =
             [
-                {id: 0, nome: " Todos"},
-                {id: 1, nome: " Arquitetura e Design"},
-                {id: 2, nome: " Artes Cênicas e Espetáculos"},
-                {id: 3, nome: " Audiovisual"},
-                {id: 4, nome: " Cultura Digital"},
-                {id: 5, nome: " Editorial"},
-                {id: 6, nome: " Educação e Criação em Artes"},
-                {id: 7, nome: " Entretenimento"},
-                {id: 8, nome: " Música"},
-                {id: 9, nome: " Patrimônio"},
-                {id: 10, nome: " Publicidade"}
+                {id: 0, nome: " Todos"}
             ]
 
         $(".view-title-leg[data-id='scc&ocp']").html("");
@@ -1566,24 +1310,11 @@ function switchToSetores() {
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
-
-
-
     }
     else if(eixo == 2 && (url['var'] == 17)){
-        cads = 
+        cads =
             [
-                {id: 0, nome: " Todos"},
-                {id: 1, nome: " Arquitetura e Design"},
-                {id: 2, nome: " Artes Cênicas e Espetáculos"},
-                {id: 3, nome: " Audiovisual"},
-                {id: 4, nome: " Cultura Digital"},
-                {id: 5, nome: " Editorial"},
-                {id: 6, nome: " Educação e Criação em Artes"},
-                {id: 7, nome: " Entretenimento"},
-                {id: 8, nome: " Música"},
-                {id: 9, nome: " Patrimônio"},
-                {id: 10, nome: " Publicidade"}
+                {id: 0, nome: " Todos"}
             ]
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
@@ -1591,12 +1322,9 @@ function switchToSetores() {
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Possui <br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não Possui <br></span>");
 
-
-
-
     }
     else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
-        cads = 
+        cads =
             [
                 {id: 0, nome: " Todos"},
                 {id: 1, nome: " Arquitetura e Design"},
@@ -1613,47 +1341,29 @@ function switchToSetores() {
 
 
         $("#title-view-leg-scc").append("" +
-        "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Exportação<br></span>\n" +
-        "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Importação<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Exportação<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Importação<br></span>");
 
 
     }
     else{
-        cads = 
-            [
-                {id: 0, nome: " Todos"},
-                {id: 1, nome: " Arquitetura e Design"},
-                {id: 2, nome: " Artes Cênicas e Espetáculos"},
-                {id: 3, nome: " Audiovisual"},
-                {id: 4, nome: " Cultura Digital"},
-                {id: 5, nome: " Editorial"},
-                {id: 6, nome: " Educação e Criação em Artes"},
-                {id: 7, nome: " Entretenimento"},
-                {id: 8, nome: " Música"},
-                {id: 9, nome: " Patrimônio"}
-            ]
-        stringSetores = "<span class=\"scc\" data-id=\"0\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #071342\"></i> Todos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Arquitetura e Design<br></span>\n" +
-            "<span class=\"scc\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Artes Cênicas e Espetáculos<br></span>\n" +
-            "<span class=\"scc\" data-id=\"3\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #0F4B67\"></i> Audiovisual<br></span>\n" +
-            "<span class=\"scc\" data-id=\"4\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #8178AF\"></i> Cultura Digital<br></span>\n" +
-            "<span class=\"scc\" data-id=\"5\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #F6D5AB\"></i> Editorial<br></span>\n" +
-            "<span class=\"scc\" data-id=\"6\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #EC8A91\"></i> Educação e Criação em Artes<br></span>\n" +
-            "<span class=\"scc\" data-id=\"7\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #AD5468\"></i> Entretenimento<br></span>\n" +
-            "<span class=\"scc\" data-id=\"8\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #6A474D\"></i> Música<br></span>\n" +
-            "<span class=\"scc\" data-id=\"9\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #E96B00\"></i> Patrimônio<br></span>\n";
-        //eixo 4 não tem publicidade
+
+        var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
         if(eixo != 3){
-            stringSetores +=  "<span class=\"scc\" data-id=\"10\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #B2510F\"></i> Publicidade<br></span>";
-            cads.push({id: 10, nome: "Publicidade"})
+            legendArray.push(10)
         }
-        $("#title-view-leg-scc").append(stringSetores);
+
+        var html = "";
+
+        legendArray.forEach( function(id) {
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+        } );
+
+        $("#title-view-leg-scc").html(html);
+
+        cads = getCadsByMenu();
     }
-
-
-    $(".bread-select[data-id='ocp']").empty();
-    $(".bread-select[data-id='ocp']").append("<option value=\"0\">Todos</option><option value=\"1\">Arquitetura e Design</option><option value=\"2\">Artes Cênicas e Espetáculos</option><option value=\"3\">Audiovisual</option><option value=\"4\">Cultura Digital</option><option value=\"5\">Editorial</option><option value=\"6\">Educação e Criação em Artes</option><option value=\"7\">Entretenimento</option><option value=\"8\">Música</option><option value=\"9\">Patrimônio</option><option value=\"10\">Publicidade</option>");
-    $(".bread-select[data-id='ocp']").attr("data-id", "cad");
 
     updateBreadcrumbSetores(cads);
 }
@@ -1661,43 +1371,51 @@ function switchToSetores() {
 function switchToOcupations() {
 
     $(".view-title-leg[data-id='scc&ocp']").html("OCUPAÇÕES");
-    $("#title-view-leg-scc").empty();
-    $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #87A8CA\"></i> Atividades Relacionadas<br></span>");
-    $("#title-view-leg-scc").append("<span class=\"ocp\" data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: #077DDD\"></i> Cultura<br></span>");
+
+    var legendArray = [1, 2];
+    var html = "";
+
+    legendArray.forEach( function(id) {
+        html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
+    } );
+
+    $("#title-view-leg-scc").html(html);
+
     $(".bread-select[data-id='cad']").empty();
+
     if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
         $(".bread-select[data-id='cad']").append("<option value='3'>Todos</option>");
-
     }
     $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
     $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
     $(".bread-select[data-id='cad']").attr("data-id", "ocp");
 }
 
-/*====== 
+/*======
 	documento pronto
 ======*/
 
 
 $(document).ready(function(){
 
-
-	$(window).on('hashchange', function() {
-        loadPage();
+    ///TODO ESTÁ FUNCIONANDO?
+    $(window).on('hashchange', function() {
+        // loadPage();
         window.location.href = window.location.pathname+window.location.hash;
         scrollTo(0, 0);
-	});
-	/* se a janela for redimensionada */
-	$(window).resize(function() {
-		//controlPageWidth();
-	});
+    });
+
+    /* ATUALIZA OS IFRAMES QUANDO A JANELA FOR REDIMENSIONADA */
+    $(window).resize(function() {
+        controlPageWidth();
+    });
 
 
-        /*=== selecionar variável ===*/
+    /*=== selecionar variável ===*/
 
-	$(document).on('click', ".scc", function(){
+    $(document).on('click', ".scc", function(){
 
-	    var eixoAtual = getEixo(window.location.hash.substring(1));
+        var eixoAtual = getEixo(window.location.hash.substring(1));
 
         if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12) || (eixoAtual == 2 && url['var'] >= 18) || eixoAtual == 3 ){
             var setor = $(this).attr('data-id');
@@ -1728,17 +1446,6 @@ $(document).ready(function(){
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
 
-
-                //enableDesag(getEixo(window.location.hash.substring(1)), url['var'], setor, false, url['slc'], url);
-
-                d3.json('data/pt-br.json', function (error, data) {
-                    if (error) throw error;
-
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.cad[setor].name);
-
-                });
-
             }
         }
         else if(eixo == 2 && url['var'] < 15){
@@ -1747,102 +1454,52 @@ $(document).ready(function(){
             if(setor != url['cad']) {
 
                 var newSCCSrc = $("#view_box_scc").attr("src");
-
                 var changeUF = newSCCSrc.match(/uf=([0-9]*)/);
                 url['cad'] = setor;
                 url['uf'] = changeUF[1];
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateIframe(url);
-
-                d3.json('data/pt-br.json', function (error, data) {
-                    if (error) throw error;
-
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.cad[setor].name);
-
-                });
-
             }
         }
-        else if(eixo == 0 && url['var'] < 12){
-
-        }
 
     });
 
-    $(document).on('click', ".ocp", function(){
-        var ocupacao = $(this).attr('data-id');
-        var newSCCSrc = $("#view_box_scc").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        var change = newSCCSrc.match(/uf=([0-9]*)/);
-        var newBarrasSrc = $("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        var newSrc = $("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp="+ocupacao);
-        newSrc = newSrc.replace(/uf=[0-9]*/, "uf="+change[1]);
-        if(ocupacao == 0) {
-            newSCCSrc = newSCCSrc.replace(/prt=[0-9]*/, "prt=0");
-            newBarrasSrc = newBarrasSrc.replace(/prt=[0-9]*/, "prt=0");
-            newSrc = newSrc.replace(/prt=[0-9]*/, "prt=0");
-        }
-        $("#view_box").attr("src", newSrc);
-        $("#view_box_barras").attr("src", newBarrasSrc);
-        $("#view_box_scc").attr("src", newSCCSrc);
+    if(url['var'] === "" && window.location.pathname.match("page.php")){
+        controlVarPage(1);
+    }
 
-        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], ocupacao, false, url['slc'], url);
+    if(url['var']) {
+        controlVar(url['var']);
+    }
 
-        d3.json('data/pt-br.json', function(error, data) {
-            if (error) throw error;
+    /*=== resultado ===*/
 
-            textJSON = data;
-            $(".cad-title").first().html(textJSON.select.ocp[ocupacao-1].name);
-
-        });
-
-        $(".bread-select[data-id='ocp']").val($(this).attr("data-id"));
-    });
-
-	$(document).on('click', ".var-click", function(){
-        defaultUrl(); /* valores de filtros default */
-		controlVar($(this).attr('href'));
+    /* alterar tipo de visualização */
+    $(document).on('click', "button.opt.view", function(){
 
 
-	});
+        ///TODO REFATORAR
 
-	if(url['var'] === "" && window.location.pathname.match("page.php")) controlVarPage(1);
-    if(url['var']) controlVar(url['var']);
+        var id = $(this).attr("id");
+        var texto = $(this).html();
 
-    /* mobile! */
-	$(document).on('change', ".menu-select", function(){
-		controlVar(this.value);
-
-	});	
-
-	/* velocidade scroll */
-	$(document).on('click','a[href*="#"]:not([href="#"])',function(){
-    	smoothScroll(this); 
-    });
-
-	/*=== resultado ===*/
-
-	/* alterar tipo de visualização */
-	$(document).on('click', "button.opt.view", function(){
-        
-		if($(this).attr("id") == "treemap_region" || $(this).attr("id") == "mapa") {
-            if($(this).html() == "BRASIL" || $(this).html() == "MUNDO"){
+        if(id == "treemap_region" || id == "mapa") {
+            if(texto == "BRASIL" || texto == "MUNDO"){
 
                 url['view'] = "mapa"; /* muda visualização */
 
-                if($(this).html() == "BRASIL"){
+                if(texto == "BRASIL"){
                     url['mundo'] = 1;
                     url['uf'] = 0;
 
                     $("select[data-id='uf']").val(0);
 
-
-                    if($(this).attr("id") === "treemap_region") {
+                    if(id === "treemap_region") {
                         $(this).addClass("active");
                         $('#mapa').removeClass("active");
                     }
-                    else if($(this).attr("id") === "mapa") {
+                    else if(id === "mapa") {
                         $(this).addClass("active");
                         $('#treemap_region').removeClass("active");
                     }
@@ -1853,11 +1510,11 @@ $(document).ready(function(){
 
                     $("select[data-id='prc']").val(0);
 
-                    if($(this).attr("id") === "treemap_region") {
+                    if(id === "treemap_region") {
                         $(this).addClass("active");
                         $('#mapa').removeClass("active");
                     }
-                    else if($(this).attr("id") === "mapa") {
+                    else if(id === "mapa") {
                         $(this).addClass("active");
                         $('#treemap_region').removeClass("active");
                     }
@@ -1867,25 +1524,25 @@ $(document).ready(function(){
             }
             else{
                 updateUrl();
+
                 url['view'] = $(this).attr('id'); /* muda visualização */
+
                 updateIframe(url); /* atualiza gráfico */
 
-                if($(this).attr("id") === "treemap_region") {
+                if(id === "treemap_region") {
                     $(this).addClass("active");
                     $('#mapa').removeClass("active");
                 }
-                else if($(this).attr("id") === "mapa") {
+                else if(id === "mapa") {
                     $(this).addClass("active");
                     $('#treemap_region').removeClass("active");
                 }
             }
 
-
-
         }
-        else if($(this).attr("id") == "bens" || $(this).attr("id") == "servicos"){
+        else if(id == "bens" || id == "servicos"){
             updateUrl();
-            if($(this).attr("id") === "bens") {
+            if(id === "bens") {
                 url['slc'] = 0;
                 $(this).addClass("active");
                 $('#servicos').removeClass("active");
@@ -1902,9 +1559,9 @@ $(document).ready(function(){
             }
             updateIframe(url); /* altera gráfico */
         }
-        else if($(this).attr("id") == "recebedora" || $(this).attr("id") == "trabalhador"){
+        else if(id == "recebedora" || id == "trabalhador"){
 
-            if($(this).attr("id") === "recebedora") {
+            if(id === "recebedora") {
 
                 if(url['mec'] != 0){
 
@@ -1941,11 +1598,11 @@ $(document).ready(function(){
         }
         else {
             updateUrl();
-		    if($(this).attr("id") === "setor") {
-		        enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
+            if(id === "setor") {
+                enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
                 switchToSetores();
 
-		        url['slc'] = 0;
+                url['slc'] = 0;
                 url['deg'] = 0;
                 url['ocp'] = 0;
                 controlFilter('0', 'deg');
@@ -1956,7 +1613,7 @@ $(document).ready(function(){
 
                 $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
             }
-		    else {
+            else {
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
                 d3.json('data/pt-br.json', function(error, data) {
                     if (error) throw error;
@@ -1967,7 +1624,7 @@ $(document).ready(function(){
                     updateDataDescUoS();
                 });
                 switchToOcupations();
-		        url['slc'] = 1;
+                url['slc'] = 1;
                 url['deg'] = 0;
                 url['cad'] = 0;
                 if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
@@ -1978,193 +1635,76 @@ $(document).ready(function(){
                 url['cad'] = 0;
                 $(this).addClass("active");
                 $('#setor').removeClass("active");
-                
+
                 url['ano'] = anos_default[url['var']][1];
                 //troca o nome do select de setor
                 $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
             }
             updateIframe(url); /* altera gráfico */
         }
-	});
+    });
 
-	/* alterar janela filtro */
-	$(document).on('click', ".opt.select", function(){
-
-        openFilter($(this));
-
-	});
-
-	/* escolher novo filtro */
-	$(document).on('change', ".opt-select", function(e){
-
-        if($(this).attr("data-id") !== "eixo") {
-            var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
-            var eixo_atual = getEixo(window.location.hash.substring(1));
-
-            // updateUrl();
-                            
-
-		    //controlFilter($(this).val(), $(this).attr('data-id'));
-            /* controla relações entre filtros */
-            
-            /* muda o select do bread para o mesmo que o das opções*/
-            $(".bread-select[data-id="+$(this).attr('data-id')+"]").val($(this).val());
-
-            if($(this).attr("data-id") == "prc"){
-                document.getElementById('view_box').contentWindow.location.reload(true);
-                $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
-            }
-            if($(this).attr('data-id') == 'var'){
-                changeDescVar();
-
-                cleanDesagsUrl();
-                enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
-
-                if(url['ocp'] == 0){
-                    switchToSetores(); 
-                    $('#setor').addClass("active");
-                    $('#ocupacao').removeClass("active");
-                }
-
-                $('#bens').addClass("active");
-                $('#servicos').removeClass("active");
-
-
-
-                updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val())
-                $('.bread-select[data-id=uf]').val(0);
-
-                if(url['slc'] == 0) $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
-                else $(window.document).find(".cad-title").first().html($('.bread-select[data-id=ocp] option:selected').text());
-                $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
-                updateBreadUF(eixo_atual, url['var']);
-                getAnoDefault(eixo_atual);
-
-                if(eixo_atual == 0){
-                    $('.opt-select[data-id=deg]').val(0);
-                    $('.bread-select[data-id=deg]').val(0);
-                }
-                if(eixo_atual == 1){
-                    updateOcupacoes($(this).val());
-                }
-                if(eixo_atual == 2){
-                    updateDefaultMec(url['var']);
-
-                }
-
-                if(eixo_atual == 3){
-                    
-                    updateServicos(url['var']);
-                    updateTipo(url['var']);
-                    if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
-                        $(".opt-select[data-id='prc']").val(0)
-                        url['prc'] = 0
-                    }
-                    url['typ'] = 1;
-                    $(".opt-select[data-id='typ']").val(1)
-                    $(window.document).find(".prc-title").first().html($(".opt-select[data-id='prc'] option:selected").text());
-                }
-                
-            }
-            if($(this).attr('data-id') == 'deg'){
-                $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
-                desagregacao = $(window.parent.document).find(".bread-select[data-id=deg]").val();
-            }
-            if($(this).attr('data-id') == 'mod'){
-                $('.opt-select[data-id=mec]').val(0)
-                url['mec'] = 0
-            }
-            if($(this).attr('data-id') == 'mec'){
-                $('.opt-select[data-id=mod]').val(0)
-                $('.opt-select[data-id=pfj]').val(0)
-                url['mod'] = 0
-                url['pfj'] = 0
-            }
-            if($(this).attr('data-id') == 'desag'){
-                url['mec'] = $('.opt-select[data-id=desag]').val()
-            }
-            updateIframe(url);
-        }
-        else {
-		    parent.window.location = "page.php#"+$(this).val();
-        }
-	});
 
     $(document).on('change', ".bread-select", function(e){
 
+        var dataId = $(this).attr("data-id");
+        var dataVal = $(this).val();
 
-        if($(this).attr("data-id") !== "eixo") {
-
+        if(dataId !== "eixo") {
+            updateUrl();
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
-            updateUrl();
+            if( $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value") != undefined){
+                url['deg'] =  $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value")
+            }
+            else{
+                url['deg'] = $(".bread-select[data-id=deg]").val()
+            }
 
-            if($(this).attr("data-id") === "typ") {
+            if(dataId === "typ"){
                 if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "none")
                 else
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
             }
 
-
-
-            if($(this).attr("data-id") == "deg" && eixo_atual == 1){
-                if($(this).find('option:selected').parent().attr("value") != undefined){
-                    deg_value =  $(this).find('option:selected').parent().attr("value")
-
-                }
-                else{
-                    deg_value = $(this).val()
-
-                }
-                controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
-
-                if(url['var'] == 4 || url['var'] == 5)
-                    updateLegendByDeg(url['deg'])
-            }
-            else{
-                controlFilter($(this).val(), $(this).attr('data-id'), 1);
-            }
-            if( $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value") != undefined)
-                url['deg'] =  $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value")
-            else
-                url['deg'] = $(".bread-select[data-id=deg]").val()
-            /* controla relações entre filtros */
-            
-            if($(this).attr("data-id") == "prc"){
+            if(dataId === "prc"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
                 $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
                 // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
-            //quando muda a variável, é preciso trocar a UF para 'Brasil'
-            
-            if($(this).attr('data-id') =='var'){
-               
+
+            if(dataId ==='var'){
+
+
+
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
-
                 $('#recebedora').addClass("active");
                 $('#trabalhador').removeClass("active");
 
                 if(url['ocp'] == 0){
-                    switchToSetores(); 
+                    switchToSetores();
                     $('#setor').addClass("active");
                     $('#ocupacao').removeClass("active");
                 }
                 else{
                     switchToOcupations();
                 }
+
+
                 if(url['ocp'] > 0)
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 1, url);
                 else
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
+
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
 
-                
+
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
 
@@ -2172,7 +1712,7 @@ $(document).ready(function(){
 
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
                 updateBreadUF(eixo_atual, url['var']);
-                
+
                 if(eixo_atual == 0){
                     $('#mapa').addClass("active");
                     $('#treemap_region').removeClass("active");
@@ -2193,13 +1733,12 @@ $(document).ready(function(){
                         $(".value-info-title").text("")
                     }
 
-                    if(url['var'] == 18 || url['var'] == 19)
+                    if(url['var'] == 18 || url['var'] == 19){
                         $("#btn-opt").find(".col-btn").css("display", "block")
-                    else
+                    }
+                    else{
                         $("#btn-opt").find(".col-btn").css("display", "none")
-
-                    
-
+                    }
 
                 }
 
@@ -2218,76 +1757,81 @@ $(document).ready(function(){
                         url['prc'] = 0
                     }
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
-                    
+
                 }
+
+                changeDescVar();
+                // window.location.href = window.location.pathname+window.location.hash;/cad=[0-9]*/, "cad=1"
+
+
             }
-            if($(this).attr('data-id') == 'deg') {
+
+            if(dataId === 'deg') {
+
+                if(eixo_atual == 1){
+                    if($(this).find('option:selected').parent().attr("value") != undefined){
+                        deg_value =  $(this).find('option:selected').parent().attr("value")
+                    }
+                    else{
+                        deg_value = $(this).val()
+
+                    }
+                    controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
+
+                    if(url['var'] == 4 || url['var'] == 5)
+                        updateLegendByDeg(url['deg'])
+                }
+                else{
+                    controlFilter($(this).val(), $(this).attr('data-id'), 1);
+                }
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
-                document.getElementById('view_box_barras').contentWindow.location.reload(true);             
+                document.getElementById('view_box_barras').contentWindow.location.reload(true);
             }
-            if($(this).attr("data-id") == "uf"){
+
+            if(dataId === "uf"){
                 document.getElementById('view_box').contentWindow.location.reload(true);
 
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
                 updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
-            
-            
-            if($(this).attr("data-id") === "cad") {
+
+            if(dataId === "cad") {
 
                 //if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
-                
+
                 url['cad'] = ($(this).val())
                 /*if(eixo_atual == 2 && (vrv == 18 || vrv == 19)){
                     updateTitleBox(SETORES)
                 }*/
 
             }
-            if($(this).attr("data-id") === "ocp") {
+
+            if(dataId === "ocp") {
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
+
             updateIframe(url);
+            updateWindowUrl(dataId, dataVal);
+
 
         }
-        else {
+        else{
             parent.window.location = "page.php#"+$(this).val();
         }
     });
 
 
-    $(document).on('change', ".bread-eixo", function(){
-        parent.window.location = "page.php#"+$(this).val();
-    });
+    /* download doc */
+    $(document).on('click', '.button-control-down', function(){
 
-	/* download doc */
-	$(document).on('click', '.button-control-down', function(){
-
-		var downloadUrl = $(this).siblings('.url-input').val();
-		window.open(downloadUrl, '_blank');
+        var downloadUrl = $(this).siblings('.url-input').val();
+        window.open(downloadUrl, '_blank');
 
     });
 
-    
-	//////////////////// SCRIPT PARA O MENUDESKTOP /////////////////////
-	$(document).on('mouseenter', '.eixo-inativo', function() {
-        expandMenu(this);
-    });
-    $(document).on('mouseleave', '.eixo-inativo', function() {
-        minimizeMenu(this);
-    });
-    $("#menuvariaveis").on('mouseleave', function() {
-        expandMenuVariaveis(this);
-    });
-    $(document).on('mouseenter', '.eixo-ativo', function() {
-        expandMenuEixoAtivo(this);
-    });
-    ///////////////////////////////////////////////////////////////////
 
     updateIframe(url);
 
-
 });
-
-

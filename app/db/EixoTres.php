@@ -419,7 +419,7 @@ class EixoTres {
 	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $cad, $mec, $pf, $mod, $ano = NULL, $uos){
 		
-		$vars_com_cad_0 = array( 1, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16);
+		$vars_com_cad_0 = array( 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 		self::connect();
         $params = [];
         $allObjects = [];
@@ -456,7 +456,8 @@ class EixoTres {
                 
                 $allObjects = self::fetch_results($stmt);
             }
-        } else if($var == 17){
+        }
+        else if($var == 17){
             $query = "SELECT * FROM ".self::$table." AS ex"
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ?"
@@ -495,7 +496,8 @@ class EixoTres {
             }
             $allObjects = $result_aux;
             
-        } else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
+        }
+        else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             
             if(is_null($ano) || $var < 15) {
                 $cad = (is_null($cad)) ? 0 : $cad;
@@ -586,7 +588,8 @@ class EixoTres {
                 $allObjects = self::fetch_results($stmt);
             }
             
-        } else {
+        }
+        else {
             $query = "SELECT * FROM ".self::$table." AS ex"
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ".$ufs
                    ." JOIN Mecanismo AS mec ON mec.idMecanismo =  ex.idMecanismo AND mec.idMecanismo = ".$mec
@@ -622,7 +625,7 @@ class EixoTres {
             }
             $allObjects = $result_aux;
         }
-        
+
 		self::disconnect();
 		
 		return $allObjects;
