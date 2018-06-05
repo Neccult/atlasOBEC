@@ -10,57 +10,6 @@ Saída:
 
 header('charset=utf-8');
 
-function getNameOCP($slc) {
-    switch ($slc) {
-        case 1:
-            return "Relacionadas";
-        case 2:
-            return "Culturais";
-    }
-}
-
-function sigla_cadeia($cadeia) {
-    switch($cadeia) {
-        case "Arquitetura e Design":
-            return "Arq e D";
-        case "Publicidade":
-            return "Publ.";
-        case "Patrimônio":
-            return $cadeia;
-        case "Música":
-            return $cadeia;
-        case "Entretenimento":
-            return "Entret.";
-        case "Educação e Criação em Artes":
-            return "Edu. Art.";
-        case "Editorial":
-            return "Edit.";
-        case "Cultura Digital":
-            return "Cult. Dig.";
-        case "Audiovisual":
-            return "Audio";
-        case "Artes Cênicas e Espetáculos":
-            return "Artes";
-        case "Outros":
-            return $cadeia;
-    }
-}
-function getNameCadeia($id){
-    switch($id){
-        case 0: return "Todos";
-        case 1: return "Arquitetura e Design";
-        case 2: return "Artes Cênicas e Espetáculos";
-        case 3: return "Audiovisual";
-        case 4: return "Cultura Digital";
-        case 5: return "Editorial";
-        case 6: return "Educação e Criação em Artes";
-        case 7: return "Entretenimento";
-        case 8: return "Música";
-        case 9: return "Patrimônio";
-        case 10: return "Publicidade";
-        case 11: return "Outros";
-    }
-}
 
 if (!empty($_GET["var"])) {
 	$var = $_GET["var"];
@@ -114,6 +63,91 @@ else{
     $ano = NULL;
     $snd = 0;
 	$eixo = 0;
+}
+
+function getNameUF($id){
+    switch($id){
+        case 0: return "Todos";
+        case 11: return "Rondônia";
+        case 12: return "Acre";
+        case 13: return "Amazonas";
+        case 14: return "Roraima";
+        case 15: return "Pará";
+        case 16: return "Amapá";
+        case 17: return "Tocantins";
+        case 21: return "Maranhão";
+        case 22: return "Piauí";
+        case 23: return "Ceará";
+        case 24: return "Rio Grande do Norte";
+        case 25: return "Paraíba";
+        case 26: return "Pernambuco";
+        case 27: return "Alagoas";
+        case 28: return "Sergipe";
+        case 29: return "Bahia";
+        case 31: return "Minas Gerais";
+        case 32: return "Espírito Santo";
+        case 33: return "Rio de Janeiro";
+        case 35: return "São Paulo";
+        case 41: return "Paraná";
+        case 42: return "Santa Catarina";
+        case 43: return "Rio Grande do Sul";
+        case 50: return "Mato Grosso do Sul";
+        case 52: return "Mato Grosso";
+        case 53: return "Goiás";
+        case 54: return "Distrito Federal";
+    }
+}
+
+function getNameOCP($slc) {
+    switch ($slc) {
+        case 1:
+            return "Relacionadas";
+        case 2:
+            return "Culturais";
+    }
+}
+
+function sigla_cadeia($cadeia) {
+    switch($cadeia) {
+        case "Arquitetura e Design":
+            return "Arq e D";
+        case "Publicidade":
+            return "Publ.";
+        case "Patrimônio":
+            return $cadeia;
+        case "Música":
+            return $cadeia;
+        case "Entretenimento":
+            return "Entret.";
+        case "Educação e Criação em Artes":
+            return "Edu. Art.";
+        case "Editorial":
+            return "Edit.";
+        case "Cultura Digital":
+            return "Cult. Dig.";
+        case "Audiovisual":
+            return "Audio";
+        case "Artes Cênicas e Espetáculos":
+            return "Artes";
+        case "Outros":
+            return $cadeia;
+    }
+}
+function getNameCadeia($id){
+    switch($id){
+        case 0: return "Todos";
+        case 1: return "Arquitetura e Design";
+        case 2: return "Artes Cênicas e Espetáculos";
+        case 3: return "Audiovisual";
+        case 4: return "Cultura Digital";
+        case 5: return "Editorial";
+        case 6: return "Educação e Criação em Artes";
+        case 7: return "Entretenimento";
+        case 8: return "Música";
+        case 9: return "Patrimônio";
+        case 10: return "Publicidade";
+        case 11: return "Outros";
+    }
 }
 
 
@@ -316,7 +350,7 @@ else if($eixo == 1) {
             if($var == 6 && $uos == 1 && $desag == 0 && $ocp == 0){
                 $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
                 
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
@@ -324,7 +358,7 @@ else if($eixo == 1) {
             }
             else if($var == 6 && $uos == 1 && $desag == 0 && $ocp != 0){
                 $id = getNameOCP($tupla->idOcupacao);
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
@@ -332,7 +366,7 @@ else if($eixo == 1) {
             }
             else if($var == 6 && $uos == 1 && $desag != 0){
                 $id = getNameDesag($desag, $tupla);
-                $barras[$id]['uf'] = $tupla->UFNome;
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
                 $barras[$id]['percentual'] = (double) $tupla->Percentual;
