@@ -28,8 +28,34 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function controlVar(clickVar){
+
     newHash = window.location.hash;
-    $('iframe[id="resultado_view"]').attr('src', 'resultado.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&eixo='+newHash.substring(1)+newHash);
+
+    var urlString = "";
+
+    switch (newHash.substring(1)){
+        case "empreendimentos": urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+            break;
+        case "mercado":         urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+            break;
+        case "politicas":       urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
+            break;
+        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+            break;
+    }
+
+    if(window.location.href.match("resultado.php") != null){
+        var prefixo = parent.window.location.href.split("?")[0];
+        var sufixo = parent.window.location.href.split("?")[1];
+
+        var prefixoRes = window.location.href.split("?")[0];
+        var novaUrlRes = prefixoRes + "?" + sufixo;
+
+        window.location.href = novaUrlRes;
+    }
+
+    $('iframe[id="resultado_view"]').attr('src', urlString);
+
 }
 
 function controlVarPage(clickVar){
@@ -49,6 +75,8 @@ function controlVarPage(clickVar){
     }
 
     window.location.href = urlString;
+
+
 
     /* variáveis com valores default */
 }
@@ -165,7 +193,6 @@ function updateIframe(url){
             if(url['var'] > 9){
 
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "none")
-
 
                 newUrl = newUrl.replace(/uos=[0-9]*/, "uos=0");
                 $('iframe[id="view_box"]').attr('src', 'barras.php?' + newUrl + '&eixo=' + window.location.hash.substring(1) + window.location.hash);
@@ -883,10 +910,9 @@ function loadResult(){
                 selectValue = url[selectId];
 
             /* atualiza valor select */
-            $(this).val(selectValue);
+            //$(this).val(selectValue);
             /* select porte default */
             if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
-
                 /* valor atuação */
                 $(this).val('atc-'+url['atc']);
             }
@@ -894,7 +920,7 @@ function loadResult(){
             if(selectId=='cad' && selectValue=='0' && url['ocp']!='0'){
 
                 /* valor atuação */
-                $(this).val('ocp-'+url['ocp']);
+                //$(this).val('ocp-'+url['ocp']);
             }
 
             if(selectId=='prt') controlAtc(this,1);
@@ -1407,6 +1433,25 @@ function switchToOcupations() {
     $(".bread-select[data-id='cad']").attr("data-id", "ocp");
 }
 
+function updateSelectsByUrl(){
+
+    var urlString = parent.window.location.href;
+    var parametrosUrl = urlString.split("?")[1].split("#")[0].split("&");
+    var parametros = [];
+
+    var obj = {};
+    parametrosUrl.forEach( function(i) {
+        obj[i.split("=")[0]] = i.split("=")[1];
+    } );
+
+
+
+    $(".bread-select").each(function(){
+       $(this).val(obj[$(this).attr("data-id")])
+    })
+
+}
+
 /*======
 	documento pronto
 ======*/
@@ -1420,6 +1465,7 @@ $(document).ready(function(){
         window.location.href = window.location.pathname+window.location.hash;
         scrollTo(0, 0);
     });
+
 
     /* ATUALIZA OS IFRAMES QUANDO A JANELA FOR REDIMENSIONADA */
     $(window).resize(function() {
@@ -1482,7 +1528,7 @@ $(document).ready(function(){
     });
 
     if(url['var'] === "" && window.location.pathname.match("page.php")){
-        controlVarPage(1);
+        controlVarPage(url['var']);
     }
 
     if(url['var']) {
@@ -1493,7 +1539,6 @@ $(document).ready(function(){
 
     /* alterar tipo de visualização */
     $(document).on('click', "button.opt.view", function(){
-
 
         ///TODO REFATORAR
 
@@ -1659,7 +1704,6 @@ $(document).ready(function(){
             updateIframe(url); /* altera gráfico */
         }
     });
-
 
     $(document).on('change', ".bread-select", function(e){
 
@@ -1846,6 +1890,8 @@ $(document).ready(function(){
         window.open(downloadUrl, '_blank');
 
     });
+
+    updateSelectsByUrl();
 
 
     updateIframe(url);
