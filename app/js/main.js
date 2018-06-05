@@ -44,6 +44,16 @@ function controlVar(clickVar){
             break;
     }
 
+    if(window.location.href.match("resultado.php") != null){
+        var prefixo = parent.window.location.href.split("?")[0];
+        var sufixo = parent.window.location.href.split("?")[1];
+
+        var prefixoRes = window.location.href.split("?")[0];
+        var novaUrlRes = prefixoRes + "?" + sufixo;
+
+        window.location.href = novaUrlRes;
+    }
+
     $('iframe[id="resultado_view"]').attr('src', urlString);
 
 }
