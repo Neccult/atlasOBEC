@@ -34,7 +34,22 @@ function controlVar(clickVar){
 
 function controlVarPage(clickVar){
     newHash = window.location.hash;
-    window.location.href = 'page.php?var='+clickVar+'&view=mapa&uf=0&prt=0&atc=0&cad=0&ocp=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+
+    var urlString = "";
+
+    switch (newHash.substring(1)){
+        case "empreendimentos": urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+                                    break;
+        case "mercado":         urlString = 'page.php?var=1&uf=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+                                    break;
+        case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
+                                     break;
+        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+                                    break;
+    }
+
+    window.location.href = urlString;
+
     /* variáveis com valores default */
 }
 
