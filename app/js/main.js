@@ -1093,7 +1093,8 @@ function updateWindowUrl(id, valor){
     var re = new RegExp(replace,"");
 
     var urlString = parent.window.location.href.replace(re, id+"="+valor);
-    parent.window.history.pushState(null, null, urlString)
+    parent.window.history.pushState(null, null, urlString);
+    $.getScript('js/load_views_listeners.js');
 }
 
 /*======
