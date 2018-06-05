@@ -901,6 +901,8 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 <script type="text/javascript" src="js/contraste.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 
+<script type="text/javascript" src="js/load_views.js"></script>
+
 <script>
     $(document).ready(function() {
     });
