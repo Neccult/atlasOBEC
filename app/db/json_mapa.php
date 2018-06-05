@@ -11,18 +11,17 @@ Saída:
 header('charset=utf-8');
 if (!empty($_GET["var"])) {
 
-	$var = $_GET["var"];
-
-	$atc = $_GET["atc"];
-	$cad = $_GET["cad"];
-	$prt = $_GET["prt"];
-    $ocp = $_GET["ocp"];
-    $mod =      isset($_GET['mod'])   ?   $_GET['mod']  :   0; 
-    $mec = $_GET["mec"];
-    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
-    $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
-    $uf    =   isset($_GET["uf"])   ?   $_GET["uf"]  :   0;	   /*== Parceiro ==*/
-    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
+    $var =   $_GET["var"];
+    $atc =   isset($_GET["atc"])    ?   $_GET["atc"]  :   0;
+	$cad =   isset($_GET["cad"])    ?   $_GET["cad"]  :   0;
+	$prt =   isset($_GET["prt"])    ?   $_GET["prt"]  :   0;
+    $ocp =   isset($_GET["ocp"])    ?   $_GET["ocp"]  :   0;
+    $mod =   isset($_GET['mod'])    ?   $_GET['mod']  :   0; 
+    $mec =   isset($_GET["mec"])    ?   $_GET["mec"]  :   0;
+    $pfj =   isset($_GET["pfj"])    ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
+    $prc =   isset($_GET["prc"])    ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $uf  =   isset($_GET["uf"])     ?   $_GET["uf"]   :   0;	   /*== Parceiro ==*/
+    $typ =   isset($_GET["typ"])    ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
     $mundo =    isset($_GET['mundo']) ?   $_GET['mundo']:   0;
@@ -30,7 +29,6 @@ if (!empty($_GET["var"])) {
 }
 else{
 	$var = 1;
-	
 	$atc = 0;
 	$cad = 0;
 	$pfj = 0;

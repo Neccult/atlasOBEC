@@ -12,7 +12,7 @@
 <script src="js/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="js/jquery.fullPage.js"></script>
 <script src="js/continents-mill.js"></script>
-
+<script src="https://d3js.org/topojson.v2.min.js"></script>
 <!-- Fav Icons -->
 <link rel="icon" type="image/x-icon" href="css/icon.png" /> 
 <link rel="shortcut icon" type="image/x-icon"  href="css/icon.png" />

@@ -10,12 +10,18 @@ parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 PT_BR = [];
 COLORS = [];
 URL_PARAM = $.param(parameters);
+VIEWS = {}
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_JSON, colors_JSON){
     PT_BR = pt_br_JSON[0];
     COLORS = colors_JSON[0];
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
+    
+    VIEWS[data_var.views.view_box1[0]] = "view_box";
+    VIEWS[data_var.views.view_box2[0]] = "view_box_barras";
+    VIEWS[data_var.views.view_box3[0]] = "view_box_scc";
+
 
     $.getScript('js/'+data_var.views.view_box1[0]+'.js');
     $.getScript('js/'+data_var.views.view_box2[0]+'.js');

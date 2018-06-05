@@ -377,7 +377,7 @@
                             $view = 'mapa';
                         }
                         ?>
-                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
+                        <div id="view_box" style="border: none; width: 100%; height: 350px;" scrolling="no"></div>
                         <!--=== views gráfico ===-->
                         <div class="content-btn-mapa ">
                             <?php foreach($text['type'] as $key => $value):?>
@@ -711,7 +711,7 @@
                             <i class="plus"></i>
                         </div>
                         <?php if ($eixo == "comercio") {?>
-                            <iframe id="view_box_barras" src="barras.php" style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></iframe>
+                            <div id="view_box_barras"  style="border: none; width: 65%; height: 90%; float: left;" scrolling="no"></div>
                             <div id="menu-view" style=" height: 90%; width: 30%; float: right;">
                                 <div class="view-title-leg" data-id="scc&ocp">
                                 </div>
@@ -721,7 +721,7 @@
                                 </div>
                             </div>
                         <?php } else if ($eixo == "politicas"){?>
-                            <iframe id="view_box_barras" src="barras.php" style="border: none; width: 100%; height: 275px;" scrolling="no"></iframe>
+                            <div id="view_box_barras"  style="border: none; width: 100%; height: 275px;" scrolling="no"></div>
 
                             <div id="menu-view-donut" style=" height: 80%; padding-top: 5%; width: 30%; float: right; display: none;">
                                 <div class="view-title-leg-donut" data-id="scc&ocp">
@@ -731,7 +731,7 @@
                             </div>
 
                         <?php } else { ?>
-                            <iframe id="view_box_barras" src="barras.php" style="border: none; width: 100%; height: 265px;" scrolling="no"></iframe>
+                            <div id="view_box_barras" style="border: none; width: 100%; height: 265px;" scrolling="no"></div>
 
                         <?php } ?>
 
@@ -752,7 +752,7 @@
                             <i class="plus"></i>
                         </div>
                         <?php if ($eixo != "comercio") {?>
-                            <iframe id="view_box_scc" src="treemap_scc.php" scrolling="no"></iframe>
+                            <div id="view_box_scc"  scrolling="no"></div>
                             <div id="menu-view" >
                                 <div class="view-title-leg" data-id="scc&ocp">
                                     SETORES
@@ -773,7 +773,7 @@
                                 </div>
                             </div>
                         <?php } else {?>
-                            <iframe id="view_box_scc" src="treemap_scc.php" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></iframe>
+                            <div id="view_box_scc" style="border: none; width: 100%; height: 90%; float: left;" scrolling="no"></div>
                         <?php } ?>
 
                     </div>
