@@ -1087,6 +1087,15 @@ function cleanDesagsUrl() {
     url['uos'] = 0;
 }
 
+function updateWindowUrl(id, valor){
+
+    var replace = id+"=[0-9]*";
+    var re = new RegExp(replace,"");
+
+    var urlString = parent.window.location.href.replace(re, id+"="+valor);
+    parent.window.history.pushState(null, null, urlString)
+}
+
 /*======
 	DOCUMENTO CARREGADO
 ======*/
@@ -1639,6 +1648,7 @@ $(document).ready(function(){
     $(document).on('change', ".bread-select", function(e){
 
         var dataId = $(this).attr("data-id");
+        var dataVal = $(this).val();
 
         if(dataId !== "eixo") {
             updateUrl();
@@ -1752,8 +1762,8 @@ $(document).ready(function(){
 
                 changeDescVar();
                 // window.location.href = window.location.pathname+window.location.hash;/cad=[0-9]*/, "cad=1"
-                var urlString = parent.window.location.href.replace(/var=[0-9]*/, "var="+url['var']);
-                parent.window.history.pushState(null, null, urlString)
+
+
             }
 
             if(dataId === 'deg') {
@@ -1803,6 +1813,8 @@ $(document).ready(function(){
             }
 
             updateIframe(url);
+            updateWindowUrl(dataId, dataVal);
+
 
         }
         else{
