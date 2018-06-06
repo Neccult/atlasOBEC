@@ -921,9 +921,6 @@ function loadResult(){
             var selectId = $(this).attr('data-id'),
                 selectValue = url[selectId];
 
-            /* atualiza valor select */
-            //$(this).val(selectValue);
-            /* select porte default */
             if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
                 /* valor atuação */
                 $(this).val('atc-'+url['atc']);
@@ -1718,8 +1715,6 @@ $(document).ready(function(){
 
     $(document).on('change', ".bread-select", function(e){
 
-        alert("ui")
-
         var dataId = $(this).attr("data-id");
         var dataVal = $(this).val();
 
@@ -1846,17 +1841,21 @@ $(document).ready(function(){
                     else{
                         deg_value = $(this).val()
 
+
                     }
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
 
+
                     if(url['var'] == 4 || url['var'] == 5)
                         updateLegendByDeg(url['deg'])
+
+                    updateWindowUrl('subdeg', $(this).val());
+
                 }
                 else{
                     controlFilter($(this).val(), $(this).attr('data-id'), 1);
                 }
 
-                $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 document.getElementById('view_box_barras').contentWindow.location.reload(true);
             }
 
@@ -1869,13 +1868,8 @@ $(document).ready(function(){
 
             if(dataId === "cad") {
 
-                //if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
-                $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
 
                 url['cad'] = ($(this).val())
-                /*if(eixo_atual == 2 && (vrv == 18 || vrv == 19)){
-                    updateTitleBox(SETORES)
-                }*/
 
             }
 
@@ -1902,9 +1896,8 @@ $(document).ready(function(){
 
     });
 
+
     updateSelectsByUrl();
-
-
     updateIframe(url);
 
 });
