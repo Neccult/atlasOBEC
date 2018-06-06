@@ -1,10 +1,11 @@
 // Mapa JS //
 /*=== tamanho do mapa ===*/
 var mapa_box = '#'+VIEWS["mapa"];
-var windowWidth = window.parent.outerWidth;
-var legendaWidth = window.parent.outerWidth;
-	width = $(mapa_box).width();
-	height = width/1.2;
+var	width = $(mapa_box).width();
+var	height = width/1.2;
+
+var windowWidth = width;
+var legendaWidth = width;
 
 var shapeWidth = 30;
 
@@ -457,44 +458,14 @@ function ready(error, br_states, mapa){
         })
 		.style("cursor", "pointer");
 
-	//legenda
-	var legend_svg = d3.select(mapa_box+"svg");
+    
 
-	legend_svg.append("g")
-		.attr("class", "legendLinear")
-		.attr("transform", legendTransform);
-
-	var title_aux;
-	if(atc == 0) title_aux = title+" - "+textJSON.select.prt[prt].name;
-	if(atc != 0) title_aux = title+" - "+textJSON.select.atc[atc].name;
-
-	var legendLinear = d3.legendColor()
-		.title(title_aux+" - "+ano)
-		.labelFormat(d3.format(".0f"))
-		.shapeWidth(shapeWidth)
-		.shapePadding(5)
-		.orient('vertical')
-		.scale(color);
-
-    var legendLinear1 = d3.legendColor()
-        .title(function(d) {
-            if(cad === 0) {
-                return "Setores Culturais Criativos";
-            }
-            else {
-                return textJSON.select.cad[parameters.cad].name;
-            }
-        })
-        .labelFormat(d3.format(".0f"))
-        .shapeWidth(shapeWidth)
-        .shapePadding(10)
-        .orient('vertical')
-        .scale(color);
-
-    if(parameters.eixo == 2 && parameters.var == 17)
+    if(parameters.eixo == 2 && parameters.var == 17){
         legendaBinario();
-    else
+    }
+    else{
         escalaMapa();
+    }
 
 /********* LEGENDA DO MAPA *********/
 
@@ -504,18 +475,17 @@ function escalaMapa(){
 
     var x_barra = svg.attr("width")*0.3;
 
-    var y_barra = 350*0.85;
+    var y_barra = svg.attr("height")*0.85;
     var max_barra = maxValue;
     var min_barra = minValue;
-    var height_barra = 350*0.03;
+    var height_barra = svg.attr("height")*0.03;
     var width_barra = width*0.4;
     var prefix = ""
     var fontColor = "#aaa"
 
-    if(y_barra + height_barra + $("svg").offset().top > 350){
-        y_barra = 350 - 23 - $("svg").offset().top - height_barra;
+    if(y_barra + height_barra > svg.attr("height")){
+        y_barra = svg.attr("height") - 23 - height_barra;
     }
-
 
     gradient = svg.append("defs")
         .append("linearGradient")
@@ -738,41 +708,41 @@ function legendaBinario(){
 
     function loadTooltip(d){
 
-        if(parameters.parameters.eixo == 0) {
+        if(parameters.eixo == 0) {
             if(parameters.var === 1){
 
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor, parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)],
                     //    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                 ]);
             }
             else if(parameters.var === 2) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor, parameters.eixo, parameters.var)]
+                    ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)]
                 ]);
             }
             else if(parameters.var === 3) {
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor*100, parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor*100, parameters.eixo, parameters.var)],
                 ]);
             }
             else if(parameters.var === 9) {
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor*100, parameters.eixo, parameters.var)]
+                    ["", formatTextVrv(dict[d.id].valor*100, parameters.eixo, parameters.var)]
                 ]);
 
             }
             else if(parameters.var === 4 || parameters.var === 5 || parameters.var === 6 || parameters.var === 7 || parameters.var === 8) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor, parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)],
                  //   ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 ]);
 
@@ -780,7 +750,7 @@ function legendaBinario(){
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor, parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)],
                     ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
                 //    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
                 ]);
@@ -792,7 +762,7 @@ function legendaBinario(){
             if(parameters.var === 1  || parameters.var === 5 || parameters.var === 7 || parameters.var === 8){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor, parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)],
                     // ["", formatTextTaxaparameters.var(dict[d.id].percentual, parameters.eixo, parameters.var)],
 
                 ]);
@@ -802,13 +772,13 @@ function legendaBinario(){
                 if(url['ocp'] == 0){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatTextparameters.var(dict[d.id].valor*10000,parameters.eixo, parameters.var)]
+                        ["", formatTextVrv(dict[d.id].valor*10000,parameters.eixo, parameters.var)]
                     ]);
                 }
                 else{
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
-                        ["", formatTextparameters.var(dict[d.id].valor*100,parameters.eixo, parameters.var)]
+                        ["", formatTextVrv(dict[d.id].valor*100,parameters.eixo, parameters.var)]
                     ]);
                 }
 
@@ -816,13 +786,13 @@ function legendaBinario(){
             else if(parameters.var === 9 || parameters.var === 6 || parameters.var === 4){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)]
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)]
                 ]);
             }
             else if(parameters.var === 10 || parameters.var === 11) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 //    ["", formatTextTaxaparameters.var(dict[d.id].taxa,parameters.eixo, parameters.var)],
                 ]);
             }
@@ -834,14 +804,14 @@ function legendaBinario(){
                 // console.log(dict[d.id])
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 //    ["", formatTextTaxaparameters.var(dict[d.id].percentual,parameters.eixo, parameters.var)],
                 ]);
             }
             else if(parameters.var === 14){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 ]);
             }
             else if(parameters.var === 17){
@@ -857,7 +827,7 @@ function legendaBinario(){
                 else{
                     SouN = "Possui";
                     if(dict[d.id].valor > 0)
-                        valor = formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var) ;
+                        valor = formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var) ;
                     else
                         valor = "Indisponível."
 
@@ -887,14 +857,14 @@ function legendaBinario(){
             if(parameters.var === 1 || parameters.var === 2){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 //    ["", formatTextTaxaparameters.var(dict[d.id].percentual,parameters.eixo, parameters.var)],
                 ]);
             }
             else if(parameters.var === 99){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
-                    ["", formatTextparameters.var(dict[d.id].valor,parameters.eixo, parameters.var)],
+                    ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 ]);
 
             }

@@ -13,6 +13,14 @@
 <script src="js/jquery.fullPage.js"></script>
 <script src="js/continents-mill.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
+
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <!-- Fav Icons -->
 <link rel="icon" type="image/x-icon" href="css/icon.png" /> 
 <link rel="shortcut icon" type="image/x-icon"  href="css/icon.png" />

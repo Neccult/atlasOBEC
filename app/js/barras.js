@@ -1,6 +1,7 @@
 /* tamanho container */
-var chartWidth = $('.chart').width();
-var chartHeight = $('.chart').height();
+var barras_box = '#'+VIEWS["barras"];
+var chartWidth = $(barras_box).width();
+var chartHeight = $(barras_box).height();
 var minBarHeight = 5;
 var withLabels = false;
 d3.json('./data/descricoes.json', function (error, desc){
@@ -17,6 +18,13 @@ function getSoma(barraId) {
     return soma;
 }
 updateTitleClickSCC()
+
+var eixo = parameters.eixo
+var vrv  = parameters.var
+var cad  = parameters.cad
+var deg  = parameters.deg
+var prt = 0
+var ocp = 0
 
 var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
@@ -78,32 +86,27 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     // import colors.json file
     var colorJSON;
     var textJSON;
-    var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&mundo=" +mundo + "&deg=" +deg + "&ano=" +ano;
+    var config = URL_PARAM
     var brasil_setor = []
     
     $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo+"&prt="+prt, function(dado){
         brasil_setor = JSON.parse(dado)
     })
 
-     // $.get('./db/json_barras.php' + config, function(dado){
-     //     console.log(dado)
-     // })
+     $.get('./db/json_barras.php?' + config, function(dado){
+          console.log(dado)
+     })
    
-    d3.json('data/colors.json', function (error, data) {
-        if (error) throw error;
-        colorJSON = data;
+    colorJSON = COLORS;
 
 
         // import pt-br.json file for get the title
-        d3.json('data/pt-br.json', function (error, data) {
-            if (error) throw error;
-            textJSON = data;
-            d3.queue()
-                .defer(d3.json, "./db/json_barras.php" + config)
-                .await(analyze);
-        });
+    textJSON = PT_BR;
 
-    });
+    d3.queue()
+        .defer(d3.json, "./db/json_barras.php?" + config)
+        .await(analyze);
+
     // return matching color value
     var color = function (colorId) {
         if (colorJSON.cadeias[colorId]) {
@@ -393,7 +396,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         // cria SVG
 
         var valueTop = margin.top + 5;
-        var svg = d3.select("#corpo").append("svg")
+        var svg = d3.select(barras_box).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -569,9 +572,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
 
 
-                if((eixo == 1 && url['var'] > 11) ||
-                    (eixo == 0 && url['var'] > 9) ||
-                    eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
+                if((eixo == 1 && parameters.var > 11) ||
+                    (eixo == 0 && parameters.var > 9) ||
+                    eixo == 2 && (parameters.var == 15 || parameters.var == 16)){
                     if(eixo == 1 && url['slc'] == 1){
                         if(url['ocp'] == 1) {
                             var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
@@ -601,7 +604,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf="+url['uf']);
                     newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
 
-                    if (eixo == 2 && url['var'] == 10) {
+                    if (eixo == 2 && parameters.var == 10) {
                         if (url['mec'] == 0) {
                             var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                             newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad=" + url['cad']);
@@ -613,19 +616,19 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                             $(window.parent.document).find("#view_box").attr("src", newSCCSrc);
                         }
                     }
-                    else if (eixo == 2 && url['var'] == 17) {
+                    else if (eixo == 2 && parameters.var == 17) {
                         var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src");
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
 
                     }
-                    else if (eixo == 2 && (url['var'] == 18 || url['var'] == 19)) {
+                    else if (eixo == 2 && (parameters.var == 18 || parameters.var == 19)) {
                         var newDonutSrc = $(window.parent.document).find("#view_box_barras").attr("src");
                         newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
                         $(window.parent.document).find("#view_box_barras").attr("src", newDonutSrc);
 
                     }
-                    else if (eixo == 3 && (url['var'] == 5 || url['var'] == 8)) {
+                    else if (eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                         newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
@@ -634,7 +637,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
 
                     }
-                    else if (eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)) {
+                    else if (eixo == 3 && (parameters.var >= 1 && parameters.var != 5 && parameters.var != 8 && parameters.var <= 10 || parameters.var == 12)) {
                         var newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         newSCCSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ano=[0-9]*/, "ano=" + dados.key[i]);
                         $(window.parent.document).find("#view_box_barras").attr("src", newSCCSrc);
@@ -769,10 +772,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             .attr("transform", "translate(0, 0)")
             .call(yAxis);
 
-        // center #corpo>svg>g element conditionally to Y axis label number width
         var centerCanvas = function () {
-            var svg = d3.selectAll("#corpo>svg>g");
-            var g = d3.selectAll("#corpo svg g g:last-child g");
+            var svg = d3.selectAll(barras_box+">svg>g");
+            var g = d3.selectAll(barras_box+" svg g g:last-child g");
             // max width that can fit in without centring
             var maxNormalWidth = 45;
             var currentMaxWidth = 0;
@@ -800,7 +802,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             return sum + val;
         }, 0) === 0;
         if (isValueZero && isTaxaZero && isPercentageZero) {
-            d3.selectAll("#corpo>svg>g>*")
+            d3.selectAll(barras_box+">svg>g>*")
                 .filter(function (d) {
                     // não aplica display none no título
                     var clss = d3.select(this).attr("class");
@@ -808,13 +810,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 })
                 .attr("display", "none");
 
-            d3.select("#corpo>svg")
+            d3.select(barras_box+">svg")
                 .append("g")
                 .attr("class", "no-info")
                 .append("text")
                 .text("Não há dados sobre essa desagregação")
-                .attr("x", d3.select("#corpo>svg").attr("width") / 2)
-                .attr("y", d3.select("#corpo>svg").attr("height") / 2)
+                .attr("x", d3.select(barras_box+">svg").attr("width") / 2)
+                .attr("y", d3.select(barras_box+">svg").attr("height") / 2)
                 .attr("text-anchor", "middle");
         }
 
@@ -1105,7 +1107,7 @@ else {
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
-        var svg = d3.select("#corpo")
+        var svg = d3.select(barras_box)
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -1244,7 +1246,7 @@ else {
         configInfoDataBoxBarrasStacked(eixo, vrv, dado, getSoma(dado.x), deg);
         
         
-        $('corpo').find('svg').attr('height',$('.chart').height() + 350);
+        $(barras_box).find('svg').attr('height',$(barras_box).height() + 350);
 
         // Draw legend
         /*var legend = svg.selectAll(".legend")
