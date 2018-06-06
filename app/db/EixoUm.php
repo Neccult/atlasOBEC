@@ -357,15 +357,16 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
+	public static function getter_barras($var, $ufs, $cad, $deg, $uos){
+
+	   $deg = $deg - 8;
 
 		self::connect();
-        if(($prt == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {         
+        if(($deg == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {
             $idCadeia = ($uos == 0) ? $cad : 1;
             
             $query = "SELECT * FROM ".self::$table." AS ex"
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
-                   ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
                    ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$idCadeia
                    ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    ." WHERE ex.Numero = ?";
@@ -373,10 +374,9 @@ class EixoUm {
             $stmt = mysqli_stmt_init(self::$conn);
             if ($stmt->prepare($query)) {
                 $stmt->bind_param(
-                    'ssss',
+                    'sss',
                     $ufs,
-                    $atc,
-                    $prt,
+                    $deg,
                     $var
                 );
                 $stmt->execute();
@@ -397,7 +397,7 @@ class EixoUm {
             }
             $allObjects = $result_aux;
         }
-        
+
 		self::disconnect();
 
         return $allObjects;
