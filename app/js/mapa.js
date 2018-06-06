@@ -1,11 +1,11 @@
 // Mapa JS //
 /*=== tamanho do mapa ===*/
 var mapa_box = '#'+VIEWS["mapa"];
-var	width = $(mapa_box).width();
-var	height = width/1.2;
 
-var windowWidth = width;
-var legendaWidth = width;
+console.log(width_box(mapa_box))
+
+var windowWidth = width_box(mapa_box);
+var legendaWidth = width_box(mapa_box);
 
 var shapeWidth = 30;
 
@@ -16,7 +16,7 @@ function destacaPais(ufId) {
 
 
 
-	$("path").each(function() {
+	svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
                 $(this).attr("class", "destacado");
@@ -33,18 +33,16 @@ function destacaPais(ufId) {
 	});
 }
 
-
 //cria svg
 var svg_mapa = d3.select(corpo).append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width_box(mapa_box))
+    .attr("height", height_box(mapa_box));
 
 //configura projeção
 var projection = d3.geoMercator()
     .rotate([4.4, 0])
     .scale(250)
-    .translate([width / 1.5, height / 1.2]);
-
+    .translate([width_box(mapa_box) / 1.5, height_box(mapa_box) / 1.2]);
 
 var path = d3.geoPath()
 	.projection(projection);
@@ -93,9 +91,10 @@ function ready(error, br_states, mapa){
 	});
 
 
-	//carrega estados JSON
+    //carrega estados JSON
+    console.log(width_box(mapa_box))
 	var states = topojson.feature(br_states, br_states.objects.states);
-    projection.fitExtent([[0,0],[width, 350*0.8]], states)//.fitSize([width, height-100], states)
+    projection.fitExtent([[0,0],[width_box(mapa_box), height_box(mapa_box)*0.8]], states)//.fitSize([width, height-100], states)
 
 	//exclui linha de cabeçario do OBJ
 	info.splice(0,1);
@@ -156,7 +155,7 @@ function ready(error, br_states, mapa){
 
         var arrayAnos = ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018" ];
 
-        $(window.parent.document).find('select[data-id=ano]').each(function(){
+        $(window.document).find('select[data-id=ano]').each(function(){
             selectOp = this;
             $(this.options).each(function(){
                 $(this).remove();
@@ -177,7 +176,7 @@ function ready(error, br_states, mapa){
             soma += dict[key].valor
         })
 
-        if(url['uf'] == 0)
+        if(parameters.uf == 0)
             setIntegerValueData({valor: soma},parameters.eixo, parameters.var);
 
     }
@@ -231,27 +230,27 @@ function ready(error, br_states, mapa){
 		.on("click", function(d) {
 
 
-            if(window.parent.innerWidth <= 1199)
+            if(window.innerWidth <= 1199)
                 return;
             
-			var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
+			var newBarraSrc = $(window.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
             newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
             updateTitleClickMapa(dict[d.id].uf)
-            url['uf'] = d.id;
+            parameters.uf = d.id;
             if(parameters.eixo == 0 && parameters.var == 9)
-                var newSCCSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id)
+                var newSCCSrc = $(window.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id)
                                                                                            .replace(/treemap_scc.php\?/, "linhas.php?");
             else
-                var newSCCSrc = $(window.parent.document).find("#view_box_scc")
+                var newSCCSrc = $(window.document).find("#view_box_scc")
                                                          .attr("src")
                                                         .replace(/uf=[0-9]*/, "uf="+d.id)
                                                         .replace(/ano=[0-9]*/, "ano="+url['ano'])
 
             newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']).replace(/ocp=[0-9]/, "ocp="+url['ocp']);
             
-			$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-            $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
-            $(window.parent.document).find("select[data-id='uf']").val(d.id);
+			$(window.document).find("#view_box_barras").attr("src", newBarraSrc);
+            $(window.document).find("#view_box_scc").attr("src", newSCCSrc);
+            $(window.document).find("select[data-id='uf']").val(d.id);
             destacaPais(d.id);
             //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);
            // if(url['cad'] == 0)
@@ -260,7 +259,7 @@ function ready(error, br_states, mapa){
             if(parameters.eixo == 2 && parameters.var == 17)
                 configInfoDataBoxMapaClick(parameters.eixo, parameters.var, dict[d.id]);
 
-            if(url['deg'] == 0)
+            if(parameters.deg == 0)
                 configInfoDataBoxMapaClick(parameters.eixo, parameters.var, dict[d.id]);
 
             setStateTitle(d['properties']['name']);
@@ -290,7 +289,7 @@ function escalaMapa(){
     var max_barra = maxValue;
     var min_barra = minValue;
     var height_barra = svg_mapa.attr("height")*0.03;
-    var width_barra = width*0.4;
+    var width_barra = width_box(mapa_box)*0.4;
     var prefix = ""
     var fontColor = "#aaa"
 
@@ -322,8 +321,8 @@ function escalaMapa(){
         .attr("y", y_barra)
         .attr("height", height_barra)
         .attr("width", width_barra)
-        .attr("rx", height/150)
-        .attr("ry", height/150)
+        .attr("rx", height_box(mapa_box)/150)
+        .attr("ry", height_box(mapa_box)/150)
         .style("fill", "url(#grad)")
         .style("stroke-width", 1)
         .style("stroke", fontColor);
@@ -362,7 +361,7 @@ function legendaBinario(){
         var x_barra = 350*0.85;
         var y_barra = 350*0.85;
         var height_barra = 350*0.03;
-        var width_barra = width*0.1;
+        var width_barra = width_box(mapa_box)*0.1;
         var prefix = ""
         var fontColor = "#aaa"
 
@@ -376,8 +375,8 @@ function legendaBinario(){
             .attr("y", y_barra-height_barra*1.4)
             .attr("height", height_barra)
             .attr("width", width_barra)
-            .attr("rx", height/150)
-            .attr("ry", height/150)
+            .attr("rx", height_box(mapa_box)/150)
+            .attr("ry", height_box(mapa_box)/150)
             .style("fill", sim_color)
             .style("stroke-width", 1)
             .style("stroke", fontColor);
@@ -388,8 +387,8 @@ function legendaBinario(){
             .attr("y", y_barra)
             .attr("height", height_barra)
             .attr("width", width_barra)
-            .attr("rx", height/150)
-            .attr("ry", height/150)
+            .attr("rx", height_box(mapa_box)/150)
+            .attr("ry", height_box(mapa_box)/150)
             .style("fill", nao_color)
             .style("stroke-width", 1)
             .style("stroke", fontColor);
@@ -415,8 +414,8 @@ function legendaBinario(){
 
 
 
-	$(window.parent.document).find('.value-info-title').html(getDataVar(textJSON, parameters.eixo, parameters.var).mapa_valores);
-    $(window.parent.document).find('.font-title').html("Fonte(s): "+getDataVar(textJSON, parameters.eixo, parameters.var).fontes);
+	$(window.document).find('.value-info-title').html(getDataVar(textJSON, parameters.eixo, parameters.var).mapa_valores);
+    $(window.document).find('.font-title').html("Fonte(s): "+getDataVar(textJSON, parameters.eixo, parameters.var).fontes);
     /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
@@ -472,49 +471,49 @@ function legendaBinario(){
 		});
 	}*/
 
-    if(url['uf'] != 0){
-        destacaPais(url['uf']);
+    if(parameters.uf != 0){
+        destacaPais(parameters.uf);
     }
 
 
-    configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[url['uf']]);
+    configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[parameters.uf]);
 
 
     if(parameters.eixo == 0 || parameters.eixo == 1|| parameters.eixo == 2){
 
     }
     else{
-        if(url['uf'] != 0) {
-            if(url['deg'] == 0){
-                setPercentValueData(dict[url['uf']], parameters.eixo, parameters.var);
-                setIntegerValueData(dict[url['uf']], parameters.eixo, parameters.var);
+        if(parameters.uf != 0) {
+            if(parameters.deg == 0){
+                setPercentValueData(dict[parameters.uf], parameters.eixo, parameters.var);
+                setIntegerValueData(dict[parameters.uf], parameters.eixo, parameters.var);
             }
         }
 
 
-        if(url['cad'] != 0 && url['uf'] != 0) {
+        if(url['cad'] != 0 && parameters.uf != 0) {
 
-            if(url['deg'] == 0){
-                setIntegerValueData(dict[url['uf']], parameters.eixo, parameters.var);
-                setPercentValueData(dict[url['uf']], parameters.eixo, parameters.var);
+            if(parameters.deg == 0){
+                setIntegerValueData(dict[parameters.uf], parameters.eixo, parameters.var);
+                setPercentValueData(dict[parameters.uf], parameters.eixo, parameters.var);
             }
                 
         }
     }
 
 
-    if(url['uf'] == 0 && parameters.eixo != 3) $(window.parent.document).find(".state-title").first().html("Brasil");
+    if(parameters.uf == 0 && parameters.eixo != 3) $(window.document).find(".state-title").first().html("Brasil");
 
-    if(dict[url['uf']])
-        estadoAtual = dict[url['uf']].uf
+    if(dict[parameters.uf])
+        estadoAtual = dict[parameters.uf].uf
     else
         estadoAtual = "BRASIL"
 
 
 
     /*if(parameters.eixo != 3 && parameters.eixo != 1 && parameters.eixo != 2){
-        $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(parameters.eixo, "integer", getDataVar(textJSON, parameters.eixo, parameters.var).desc_int, estadoAtual));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(parameters.eixo, "percent", getDataVar(textJSON, parameters.eixo, parameters.var).desc_percent, estadoAtual));
+        $(window.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(parameters.eixo, "integer", getDataVar(textJSON, parameters.eixo, parameters.var).desc_int, estadoAtual));
+        $(window.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(parameters.eixo, "percent", getDataVar(textJSON, parameters.eixo, parameters.var).desc_percent, estadoAtual));
     }*/
 
     function loadTooltip(d){

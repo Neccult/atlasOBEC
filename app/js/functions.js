@@ -6,6 +6,13 @@ $.get("./data/select-deg.json", function(data){
     data_desag = data;
 })
 
+function width_box(id_box){
+    return $(id_box).width();
+}
+
+function height_box(id_box){
+    return $(id_box).height();
+}
 
 function changeDownloadURL(url, eixo){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
