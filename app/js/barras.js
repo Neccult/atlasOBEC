@@ -567,8 +567,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     return
 
 
-
-
                 if((eixo == 1 && url['var'] > 11) ||
                     (eixo == 0 && url['var'] > 9) ||
                     eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
@@ -653,11 +651,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     }
                 }
 
-
-
-
                 $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
+
                 $(window.parent.document).find("select[data-id='ano']").val(dados.key[i]);
+                updateWindowUrl('ano', dados.key[i])
 
 
                 destacaBarra(dados.key[i]);

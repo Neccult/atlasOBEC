@@ -7,8 +7,19 @@ $.get("./data/select-deg.json", function(data){
 })
 
 
+function updateWindowUrl(id, valor){
+
+    var replace = id+"=[0-9]*";
+    var re = new RegExp(replace,"");
+
+    var urlString = parent.parent.window.location.href.replace(re, id+"="+valor);
+    parent.parent.window.history.pushState(null, null, urlString)
+    parent.window.history.pushState(null, null, urlString)
+
+    // $(window.parent.parent.document).find('iframe[id="resultado_view"]').attr('src', 'resultado.php?'+urlString.split("?")[1])
 
 
+}
 
 function changeDownloadURL(url, eixo){
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);

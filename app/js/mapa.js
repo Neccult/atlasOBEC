@@ -35,200 +35,23 @@ function destacaPais(ufId) {
 	});
 }
 
- /**** desktop! ****/
- if(windowWidth>=1700){
 
-    /* cria svg */
+var height = 350;
+var shapeWidth = 20;
 
-	var svg = d3.select(corpo).append("svg")
-	        	.attr("width", width)
-		        .attr("height", height);
-    // console.log(d3.select(corpo));
-	/* configura projeção */
-	var projection = d3.geoMercator()
-		//.center([-50, -30])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width/2, height/1.2]);
+//cria svg
+var svg = d3.select(corpo).append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-	var legendTransform = "translate(565,350)";
-	var shapeWidth = 80;
-}
-else if(windowWidth>=1550) {
-    /* cria svg */
-     var height = 350;
-    var svg = d3.select(corpo).append("svg")
-        .attr("width", width)
-        .attr("height", height);
+//configura projeção
+var projection = d3.geoMercator()
+    //.center([-50, -28])
+    .rotate([4.4, 0])
+    .scale(250)
+    .translate([width / 1.5, height / 1.2]);
 
-    /* configura projeção */
-    var projection = d3.geoMercator()
-        //.center([-50, -28])
-        .rotate([4.4, 0])
-        .scale(400)
-        .translate([width/2, height/1.2]);
-
-    var legendTransform = "translate(565,350)";
-    var shapeWidth = 80;
-}
-else if(windowWidth>=1280) {
-    /* cria svg */
-     var height = 350;
-    var svg = d3.select(corpo).append("svg")
-        .attr("width", width)
-        .attr("height", height*1.5);
-
-    /* configura projeção */
-    var projection = d3.geoMercator()
-       // .center([-50, -20])
-        .rotate([4.4, 0])
-        .scale(380)
-        .translate([width/2, height/1.2]);
-     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
-     var valoresTransform = "translate(10,"+(height+30)+")";
-    var legendTransform = "translate(565,350)";
-    var shapeWidth = 80;
-}
- else if(windowWidth>=1200) {
-     /* cria svg */
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height*1.5);
-
-     /* configura projeção */
-     var projection = d3.geoMercator()
-        // .center([-50, -20])
-         .rotate([4.4, 0])
-         .scale(350)
-         .translate([width/2, height/1.2]);
-
-     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
-     var valoresTransform = "translate(10,"+(height+30)+")";
-     var legendTransform = "translate(565,350)";
-     var shapeWidth = 80;
- }
-/**** tablet landscape! ****/
-else if(windowWidth>=1000){
-     var height = 350;
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-40, -32])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width / 2, height / 1.2]);
-
-	 var fonteTransform = "translate("+(width-360)+","+(height-80)+")";
-	 var valoresTransform = "translate(70,"+(height-80)+")";
-	var translateX = width-150;
-	var legendTransform = "translate("+translateX+",110)";
-}
-else if(windowWidth>=800){
-     var height = 350;
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         //.center([-40, -28])
-         .rotate([4.4, 0])
-         .scale(400)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-300)+","+(height-20)+")";
-     var valoresTransform = "translate(70,"+(height-20)+")";
-     var translateX = width-150;
-     var legendTransform = "translate("+translateX+",110)";
- }
-/**** tablet portrait! ****/
-else if(windowWidth>=700){
-
-     var height = 350;
-
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-40, -28])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-320)+","+(height-30)+")";
-     var valoresTransform = "translate(120,"+(height-30)+")";
-	var legendTransform = "translate(500,110)";
-}
- /**** tablet portrait! ****/
- else if(windowWidth>=620){
-
-     var height = 350;
-
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         //.center([-40, -27])
-         .rotate([4.4, 0])
-         .scale(400)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-260)+","+(height-20)+")";
-     var valoresTransform = "translate(120,"+(height-20)+")";
-     var legendTransform = "translate(500,110)";
- }
- /**** tablet portrait! ****/
- else if(windowWidth>=100){
-
-     var height = 350;
-
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         .center([-46, -28])
-         .rotate([4.4, 0])
-         .scale(300)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-90)+","+(height-20)+")";
-     var valoresTransform = "translate(120,"+(height-20)+")";
-     var legendTransform = "translate(500,110)";
- }
-/**** mobile! ****/
-else{
-
-	var height = 350;
-	var shapeWidth = 20;
-
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-50, -28])
-		.rotate([4.4, 0])
-		.scale(250)
-		.translate([width / 1.5, height / 1.2]);
-
-	var legendTransform = "translate(0,10)";
-}
+var legendTransform = "translate(0,10)";
 
 var path = d3.geoPath()
 	.projection(projection);
@@ -359,6 +182,7 @@ function ready(error, br_states, mapa){
                     text: d
                 }))
             })
+
             $(this).val(url['ano']);
         });
 
@@ -422,7 +246,6 @@ function ready(error, br_states, mapa){
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
 
-
             if(window.parent.innerWidth <= 1199)
                 return;
             
@@ -443,7 +266,11 @@ function ready(error, br_states, mapa){
             
 			$(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
             $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
+
             $(window.parent.document).find("select[data-id='uf']").val(d.id);
+            updateWindowUrl('uf', d.id)
+
+
             destacaPais(d.id);
             //setIntegerValueData(dict[d.id], eixo, vrv);
            // if(url['cad'] == 0)

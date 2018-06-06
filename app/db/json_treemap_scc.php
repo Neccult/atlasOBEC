@@ -198,9 +198,9 @@ function getNameEtinia($id) {
 
 function getNameFormalidade($id) {
     switch ($id) {
-        case 2:
-            return "Formal";
         case 1:
+            return "Formal";
+        case 2:
             return "Informal";
 
     }
@@ -208,9 +208,9 @@ function getNameFormalidade($id) {
 
 function getNamePrev($id) {
     switch ($id) {
-        case 2:
-            return "Contribuinte";
         case 1:
+            return "Contribuinte";
+        case 2:
             return "Não contribuinte";
 
     }
@@ -218,9 +218,9 @@ function getNamePrev($id) {
 
 function getNameSindical($id) {
     switch ($id) {
-        case 2:
-            return "Membro";
         case 1:
+            return "Membro";
+        case 2:
             return "Não membro";
 
     }
