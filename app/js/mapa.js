@@ -11,10 +11,6 @@ var shapeWidth = 30;
 
 var corpo = mapa_box
 
-var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
-var valoresTransform = "translate(10,"+(height-10)+")";
-
-var corEixo = window.parent.colorJSON['eixo'][parameters.eixo].color;
 
 function destacaPais(ufId) {
 
@@ -37,200 +33,18 @@ function destacaPais(ufId) {
 	});
 }
 
- /**** desktop! ****/
- if(windowWidth>=1700){
 
-    /* cria svg */
+//cria svg
+var svg_mapa = d3.select(corpo).append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-	var svg = d3.select(corpo).append("svg")
-	        	.attr("width", width)
-		        .attr("height", height);
-    // console.log(d3.select(corpo));
-	/* configura projeção */
-	var projection = d3.geoMercator()
-		//.center([-50, -30])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width/2, height/1.2]);
+//configura projeção
+var projection = d3.geoMercator()
+    .rotate([4.4, 0])
+    .scale(250)
+    .translate([width / 1.5, height / 1.2]);
 
-	var legendTransform = "translate(565,350)";
-	var shapeWidth = 80;
-}
-else if(windowWidth>=1550) {
-    /* cria svg */
-     var height = 350;
-    var svg = d3.select(corpo).append("svg")
-        .attr("width", width)
-        .attr("height", height);
-
-    /* configura projeção */
-    var projection = d3.geoMercator()
-        //.center([-50, -28])
-        .rotate([4.4, 0])
-        .scale(400)
-        .translate([width/2, height/1.2]);
-
-    var legendTransform = "translate(565,350)";
-    var shapeWidth = 80;
-}
-else if(windowWidth>=1280) {
-    /* cria svg */
-     var height = 350;
-    var svg = d3.select(corpo).append("svg")
-        .attr("width", width)
-        .attr("height", height*1.5);
-
-    /* configura projeção */
-    var projection = d3.geoMercator()
-       // .center([-50, -20])
-        .rotate([4.4, 0])
-        .scale(380)
-        .translate([width/2, height/1.2]);
-     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
-     var valoresTransform = "translate(10,"+(height+30)+")";
-    var legendTransform = "translate(565,350)";
-    var shapeWidth = 80;
-}
- else if(windowWidth>=1200) {
-     /* cria svg */
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height*1.5);
-
-     /* configura projeção */
-     var projection = d3.geoMercator()
-        // .center([-50, -20])
-         .rotate([4.4, 0])
-         .scale(350)
-         .translate([width/2, height/1.2]);
-
-     var fonteTransform = "translate("+(width-60)+","+(height+30)+")";
-     var valoresTransform = "translate(10,"+(height+30)+")";
-     var legendTransform = "translate(565,350)";
-     var shapeWidth = 80;
- }
-/**** tablet landscape! ****/
-else if(windowWidth>=1000){
-     var height = 350;
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-40, -32])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width / 2, height / 1.2]);
-
-	 var fonteTransform = "translate("+(width-360)+","+(height-80)+")";
-	 var valoresTransform = "translate(70,"+(height-80)+")";
-	var translateX = width-150;
-	var legendTransform = "translate("+translateX+",110)";
-}
-else if(windowWidth>=800){
-     var height = 350;
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         //.center([-40, -28])
-         .rotate([4.4, 0])
-         .scale(400)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-300)+","+(height-20)+")";
-     var valoresTransform = "translate(70,"+(height-20)+")";
-     var translateX = width-150;
-     var legendTransform = "translate("+translateX+",110)";
- }
-/**** tablet portrait! ****/
-else if(windowWidth>=700){
-
-     var height = 350;
-
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-40, -28])
-		.rotate([4.4, 0])
-		.scale(400)
-		.translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-320)+","+(height-30)+")";
-     var valoresTransform = "translate(120,"+(height-30)+")";
-	var legendTransform = "translate(500,110)";
-}
- /**** tablet portrait! ****/
- else if(windowWidth>=620){
-
-     var height = 350;
-
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         //.center([-40, -27])
-         .rotate([4.4, 0])
-         .scale(400)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-260)+","+(height-20)+")";
-     var valoresTransform = "translate(120,"+(height-20)+")";
-     var legendTransform = "translate(500,110)";
- }
- /**** tablet portrait! ****/
- else if(windowWidth>=100){
-
-     var height = 350;
-
-     //cria svg
-     var svg = d3.select(corpo).append("svg")
-         .attr("width", width)
-         .attr("height", height);
-
-     //configura projeção
-     var projection = d3.geoMercator()
-         .center([-46, -28])
-         .rotate([4.4, 0])
-         .scale(300)
-         .translate([width / 2, height / 1.2]);
-
-     var fonteTransform = "translate("+(width-90)+","+(height-20)+")";
-     var valoresTransform = "translate(120,"+(height-20)+")";
-     var legendTransform = "translate(500,110)";
- }
-/**** mobile! ****/
-else{
-
-	var height = 350;
-	var shapeWidth = 20;
-
-	//cria svg
-	var svg = d3.select(corpo).append("svg")
-		.attr("width", width)
-		.attr("height", height);
-
-	//configura projeção
-	var projection = d3.geoMercator()
-		//.center([-50, -28])
-		.rotate([4.4, 0])
-		.scale(250)
-		.translate([width / 1.5, height / 1.2]);
-
-	var legendTransform = "translate(0,10)";
-}
 
 var path = d3.geoPath()
 	.projection(projection);
@@ -238,12 +52,10 @@ var path = d3.geoPath()
 // import colors.json file
 var colorJSON = COLORS;
 
+var corEixo = window.colorJSON['eixo'][parameters.eixo].color;
+
 // import pt-br.json file for get the title
 var textJSON = PT_BR;
-d3.json('data/pt-br.json', function(error, data) {
-  if(error) throw error;
-  textJSON = data;
-});
 
 var config = URL_PARAM;
 /*$.get('./db/json_mapa.php?' + config, function(dado){
@@ -379,9 +191,8 @@ function ready(error, br_states, mapa){
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
-    
 	//concatena propriedades
-	svg.append("g")
+	svg_mapa.append("g")
 		.attr("class", "states")
 		.selectAll("path")
 		.data(states.features)
@@ -473,21 +284,21 @@ function escalaMapa(){
     var low_color = color(minValue);
     var high_color = color(maxValue);
 
-    var x_barra = svg.attr("width")*0.3;
+    var x_barra = svg_mapa.attr("width")*0.3;
 
-    var y_barra = svg.attr("height")*0.85;
+    var y_barra = svg_mapa.attr("height")*0.85;
     var max_barra = maxValue;
     var min_barra = minValue;
-    var height_barra = svg.attr("height")*0.03;
+    var height_barra = svg_mapa.attr("height")*0.03;
     var width_barra = width*0.4;
     var prefix = ""
     var fontColor = "#aaa"
 
-    if(y_barra + height_barra > svg.attr("height")){
-        y_barra = svg.attr("height") - 23 - height_barra;
+    if(y_barra + height_barra > svg_mapa.attr("height")){
+        y_barra = svg_mapa.attr("height") - 23 - height_barra;
     }
 
-    gradient = svg.append("defs")
+    gradient = svg_mapa.append("defs")
         .append("linearGradient")
         .attr("id", "grad")
         .attr("x1", "0%")
@@ -505,7 +316,7 @@ function escalaMapa(){
         .style("stop-color", high_color)
         .style("stop-opacity", 1);
 
-    svg.append("g")
+    svg_mapa.append("g")
         .append("rect")
         .attr("x", x_barra)
         .attr("y", y_barra)
@@ -517,14 +328,14 @@ function escalaMapa(){
         .style("stroke-width", 1)
         .style("stroke", fontColor);
 
-    svg.selectAll("line")
+    svg_mapa.selectAll("line")
         .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
         .enter()
         .append("line")
         .attr("x1", function(d,i){
             var position = x_barra+i*width_barra/2;
 
-            texto = svg.append("text")
+            texto = svg_mapa.append("text")
                 .attr("id", "legenda"+i)
                 .attr("x", position)
                 .attr("y", y_barra+height_barra +12)
@@ -545,8 +356,8 @@ function legendaBinario(){
         var sim_color = colorJSON.binario['1'].color;
         var nao_color = colorJSON.binario['0'].color;
 
-        var sim_barra = svg.attr("width")*0.8;
-        var nao_barra = svg.attr("width")*0.8;
+        var sim_barra = svg_mapa.attr("width")*0.8;
+        var nao_barra = svg_mapa.attr("width")*0.8;
 
         var x_barra = 350*0.85;
         var y_barra = 350*0.85;
@@ -555,11 +366,11 @@ function legendaBinario(){
         var prefix = ""
         var fontColor = "#aaa"
 
-        if(y_barra + height_barra + $("svg").offset().top > 350){
-            y_barra = 350 - 23 - $("svg").offset().top - height_barra;
+        if(y_barra + height_barra + $(mapa_box+" svg").offset().top > 350){
+            y_barra = 350 - 23 - $(mapa_box+" svg").offset().top - height_barra;
         }
 
-        svg.append("g")
+        svg_mapa.append("g")
             .append("rect")
             .attr("x", sim_barra)
             .attr("y", y_barra-height_barra*1.4)
@@ -571,7 +382,7 @@ function legendaBinario(){
             .style("stroke-width", 1)
             .style("stroke", fontColor);
 
-        svg.append("g")
+        svg_mapa.append("g")
             .append("rect")
             .attr("x", nao_barra)
             .attr("y", y_barra)
@@ -583,14 +394,14 @@ function legendaBinario(){
             .style("stroke-width", 1)
             .style("stroke", fontColor);
 
-        svg.append("text")
+        svg_mapa.append("text")
             .attr("x", sim_barra+width_barra*1.2)
             .attr("y", y_barra-height_barra/2)
             .attr("fill", fontColor)
             .text("Possui");
 
 
-        svg.append("text")
+        svg_mapa.append("text")
             .attr("x", nao_barra+width_barra*1.2)
             .attr("y", y_barra+height_barra/5*4)
             .attr("fill", fontColor)

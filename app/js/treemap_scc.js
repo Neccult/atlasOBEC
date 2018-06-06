@@ -1,19 +1,24 @@
-var windowWidth = $(window).width();
+var treemap_scc_box = '#'+VIEWS["treemap_scc"];
+console.log(treemap_scc_box)
+var windowWidth = $(treemap_scc_box).width();
 
 /* cria svg */
-var svg = d3.select("#corpo").append("svg");
+var svg = d3.select(treemap_scc_box).append("svg");
 
-svg.attr('width',$('.chart').width());
-svg.attr('height', $('.chart').height());
+svg.attr('width', $(treemap_scc_box).width());
+svg.attr('height', $(treemap_scc_box).height());
 
 if(window.parent.innerWidth >= 1199 && window.parent.innerWidth <= 1600){
     svg.attr('height', 324);
 }
 
-
-svg = d3.select("svg"),
-	width = +svg.attr("width"),
-	height = +svg.attr("height");
+width   = svg.attr("width"),
+height  = svg.attr("height");
+    
+var eixo = parameters.eixo
+var vrv  = parameters.var
+var cad  = parameters.cad
+var slc  = 0
 
 //svg.attr('height','230');
 
@@ -79,22 +84,12 @@ function nodeHeight(d){ return d.y1 - d.y0; }
 
 // import pt-br.json file for get the title
 var textJSON;
-d3.json('data/pt-br.json', function(error, data) {
-    if(error) throw error;
+textJSON = PT_BR;
 
-    textJSON = data;
-
-});
-
-$.ajaxSetup({async: false});
 
 
 var colorJSON;
-d3.json('data/colors.json', function(error, data) {
-    if(error) throw error;
-    colorJSON = data;
-});
-$.ajaxSetup({async: true});
+colorJSON = COLORS;
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	format = d3.format(",d");
@@ -127,14 +122,14 @@ var treemap = d3.treemap()
 	.round(true)
     .paddingInner(1);
 
-var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&prt="+prt+"&ocp="+ocp+"&sex="+sex+"&typ="+typ+"&prc="+prc+"&slc="+slc+"&fax="+fax+"&esc="+esc+"&deg="+deg+"&cor="+cor+"&frm="+frm+"&prv="+prv+"&snd="+snd+"&mec="+mec+"&mod="+mod+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo;
+var config = URL_PARAM
 /*
 $.get("./db/json_treemap_scc.php"+config, function(data) {
     
      console.log(data);
 });*/
 
-d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
+d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
     $('#loading').fadeOut('fast');
 	if (error) throw error;
 
@@ -181,7 +176,6 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
 	/* *** nodes & tooltips *** */
 	/*==========================*/
 	var tooltipInstance = tooltip.getInstance();
-
 	var cell = svg.selectAll("g")
 				.data(root.leaves())
 				.enter().append("g")

@@ -16,12 +16,12 @@ header('charset=utf-8');
 
 if (!empty($_GET["var"])) {
 
-	$var = $_GET["var"];
-	$uf = $_GET["uf"];
+	$var    =   $_GET["var"];
+	$uf     =   isset($_GET["uf"])    ?   $_GET["uf"]  :   0;
 
-	$atc = $_GET["atc"];
-	$prt = $_GET["prt"];
-    $ocp = $_GET["ocp"];
+	$atc    =   isset($_GET["atc"])   ?   $_GET["atc"]  :   0;
+	$prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;
+    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;
     $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
     $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
     $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
@@ -35,9 +35,9 @@ if (!empty($_GET["var"])) {
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== visualizacao ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
-    $desag    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
-    $ano    = $_GET["ano"];
-    $eixo   = $_GET['eixo'];
+    $desag  =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
+    $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;
+    $eixo   =   isset($_GET["eixo"])   ?   $_GET["eixo"]  :   0;
 }
 else{
 	$var = 1;
