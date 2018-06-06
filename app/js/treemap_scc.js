@@ -1,6 +1,4 @@
 var treemap_scc_box = '#'+VIEWS["treemap_scc"];
-console.log(treemap_scc_box)
-var windowWidth = $(treemap_scc_box).width();
 
 /* cria svg */
 var svg = d3.select(treemap_scc_box).append("svg");
@@ -12,8 +10,6 @@ if(window.parent.innerWidth >= 1199 && window.parent.innerWidth <= 1600){
     svg.attr('height', 324);
 }
 
-width   = svg.attr("width"),
-height  = svg.attr("height");
     
 var eixo = parameters.eixo
 var vrv  = parameters.var
@@ -22,8 +18,8 @@ var slc  = 0
 
 //svg.attr('height','230');
 
-var fonteTransform = "translate("+(width-120)+","+(height+140)+")";
-var valoresTransform = "translate(10,"+(height+140)+")";
+var fonteTransform = "translate("+(width_box(treemap_scc_box)-120)+","+(height_box(treemap_scc_box)+140)+")";
+var valoresTransform = "translate(10,"+(height_box(treemap_scc_box)+140)+")";
 
 var textLeftPadding = 10; // initial padding left for text
 var textTopPadding = 15; // initial padding top for text
@@ -118,7 +114,7 @@ var color = function(colorId){
 /*==================*/
 var treemap = d3.treemap()
 	.tile(d3.treemapResquarify)
-	.size([width, height-50])
+	.size([width_box(treemap_scc_box), height_box(treemap_scc_box)-50])
 	.round(true)
     .paddingInner(1);
 
@@ -490,7 +486,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 	// cria título
 	svg.append("text").append("tspan")
 		.data(root.leaves())
-		.attr("x", (width / 2))             
+		.attr("x", (width_box(treemap_scc_box) / 2))             
 		.attr("y", 20)
 		.attr("font-size", 20)
 		.attr("text-anchor", "middle")  
@@ -545,7 +541,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 		})
 		.attr("font-size", function(d) {
 			var nWidth = nodeWidth(d);
-			var nodePercentage = Math.round(100 * nWidth / width);
+			var nodePercentage = Math.round(100 * nWidth / width_box(treemap_scc_box));
 
 			var fontOrdinalSize = d3.scaleThreshold()
 				.domain([12, 25, 30, 40])
@@ -556,7 +552,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 			return fontSize;	
 		});
 
-	formatTreemapText();
+	formatTreemapText(treemap_scc_box);
 
    /*=== controla texto ===*/
 	var g = d3.selectAll("#corpo svg g");

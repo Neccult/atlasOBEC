@@ -1942,18 +1942,18 @@ var tooltip = (function(){
 			Saída:
 				Renderiza elementos dentro do elemento #tooltip
 		-----------------------------------------------------------------------------*/
-		function showTooltip(d, arr) {
+		function showTooltip(d, arr, view) {
 
 			// remove all elements inside tooltip
 			tp.text('');
 			// create all elements passed via array: arr
 			createElements(d, arr);
 			// graph position on screen
-			var chartOffset = $('.chart').offset(),
+			var chartOffset = $(view).offset(),
 				leftOffset = chartOffset.left,
-				leftOffsetEnd = leftOffset+$('.chart').width(),
+				leftOffsetEnd = leftOffset+$(view).width(),
 				topOffset = chartOffset.top,
-				bottomOffset = topOffset + $('.chart').height();
+				bottomOffset = topOffset + $(view).height();
 			// tooltip dimensions
 			var tooltipWidth = $('.tooltip').width();
 			/*== posição do tooltip ==*/
@@ -2074,8 +2074,8 @@ function debug(value, match, args){
 	Saída:
 		manipula elementos na página/DOM
 -----------------------------------------------------------------------------*/
-var formatTreemapText = function() {
-	var g = d3.selectAll("#corpo svg g");
+var formatTreemapText = function(view) {
+	var g = d3.selectAll(view+" svg g");
 	g.each(function(d){
 		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
 		var minMargin = { horizontal:1, vertical: 2, betweenText: 4 };
