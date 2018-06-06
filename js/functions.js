@@ -748,7 +748,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
             dados.valor = dados.value[dados.key.indexOf(url['ano'])];
 
             if(url['var'] == 2 && url['ocp'] == 0)
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]*100;
+                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
             setIntegerValueData(dados, eixo, vrv);
 
         }
@@ -935,7 +935,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
             if(url['var'] == 2)
                 if(url['ocp'] == 0)
-                    dados.valor = dados.value[i]*100;
+                    dados.valor = dados.value[i];
 
 
             setIntegerValueData(dados, eixo, vrv);

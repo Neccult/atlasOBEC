@@ -801,10 +801,18 @@ function legendaBinario(){
             ///Tooltips com só o valor na interface
             else if(vrv === 2){
                 if(url['ocp'] == 0){
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d['properties']['name']],
-                        ["", formatTextVrv(dict[d.id].valor*10000, eixo, vrv)]
-                    ]);
+                    if(url['cad'] == 0){
+                        tooltipInstance.showTooltip(d, [
+                            ["title", d['properties']['name']],
+                            ["", formatTextVrv(dict[d.id].valor*10000, eixo, vrv)]
+                        ]);
+                    }
+                    else{
+                        tooltipInstance.showTooltip(d, [
+                            ["title", d['properties']['name']],
+                            ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)]
+                        ]);
+                    }                    
                 }
                 else{
                     tooltipInstance.showTooltip(d, [
