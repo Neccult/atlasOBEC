@@ -52,9 +52,21 @@ function controlVar(clickVar){
         var novaUrlRes = prefixoRes + "?" + sufixo;
 
         window.location.href = novaUrlRes;
+
     }
 
-    $('iframe[id="resultado_view"]').attr('src', urlString);
+    if(window.location.href.match("page.php") != null){
+
+        var prefixo = window.location.href.split("?")[0];
+        var sufixo = window.location.href.split("?")[1];
+
+        $('iframe[id="resultado_view"]').attr('src', 'resultado.php?'+sufixo)
+
+    }
+
+
+
+
 
 }
 
@@ -1706,6 +1718,8 @@ $(document).ready(function(){
 
     $(document).on('change', ".bread-select", function(e){
 
+        alert("ui")
+
         var dataId = $(this).attr("data-id");
         var dataVal = $(this).val();
 
@@ -1735,8 +1749,6 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
-
-
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();

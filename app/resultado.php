@@ -345,7 +345,6 @@
 
             </div>
 
-
             <!--==== jquery load menu ===-->
             <div class="container-boxes">
                 <div id="view-boxes">
