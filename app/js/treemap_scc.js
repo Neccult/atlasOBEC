@@ -227,10 +227,15 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                             percent_deg = (d.data.size/d.parent.parent.parent.value)
                             $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
                             $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+                            updateWindowUrl('cad', d.data.colorId)
+                            updateWindowUrl('deg', deg)
+                            updateWindowUrl('subdeg', d.data.desagreg)
 
                         }
                         else{
                             $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+                            updateWindowUrl('cad', d.data.colorId)
+
                         }
 
                         configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf, percent_deg);
@@ -249,6 +254,9 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                         $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
                         $(window.parent.document).find("select[data-id='ocp']").val(d.data.colorId);
+                        updateWindowUrl('ocp', d.data.colorId);
+                        updateWindowUrl('cad', 0);
+
                         enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         destacaSetor(d.data.colorId);
 
@@ -261,13 +269,14 @@ d3.json("./db/json_treemap_scc.php"+config, function(error, data) {
                         else{
                             $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
 
+                            updateWindowUrl('deg', deg)
+                            updateWindowUrl('subdeg', d.data.desagreg)
+
                             cad_percent = d.data.percentual;
                             cad_percent_uf = getSoma(d.data.colorId);
                         }
 
                         configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf );
-                         if(d.parent.data.name.match("Atividades")) $(window.parent.document).find(".cad-title").first().html("Atividades Relacionadas - "+d.data.name);
-                         else if(d.parent.data.name.match("Cultura")) $(window.parent.document).find(".cad-title").first().html("Cultura - "+d.data.name);
                     }
 				})
 		        .style("cursor", "pointer");

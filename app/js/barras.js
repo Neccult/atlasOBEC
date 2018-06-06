@@ -1221,11 +1221,13 @@ else {
                     $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
                     $(window.parent.document).find("#view_box_scc").attr("src", newSCCSrc);
                     $(window.parent.document).find("select[data-id='ano']").val(d.x.getFullYear());
+                    updateWindowUrl('ano', d.x.getFullYear())
                     destacaBarra(d.x, true);
                 }
-                if (slc == 0) $(window.parent.document).find(".cad-title").first().html(textJSON.select.cad[url['cad']].name + " - " + desagregacao_names()[obj]);
-                else $(window.parent.document).find(".cad-title").first().html(textJSON.select.ocp[url['ocp'] - 1].name + " - " + desagregacao_names()[obj]);
+
                 $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(obj+1)+"]").prop('selected', true)//.val(obj+1)
+                updateWindowUrl('deg', deg);
+                updateWindowUrl('subdeg', obj+1)
                 configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
             })
             .style("cursor", "pointer");
@@ -1239,41 +1241,8 @@ else {
         })[0]
         
         configInfoDataBoxBarrasStacked(eixo, vrv, dado, getSoma(dado.x), deg);
-        
-        
+
         $('corpo').find('svg').attr('height',$('.chart').height() + 350);
-
-        // Draw legend
-        /*var legend = svg.selectAll(".legend")
-            .data(colors)
-            .enter().append("g")
-            .attr("class", "legend")
-            .attr("transform", function (d, i) {
-                if(i%3 == 0) {
-                    return "translate("+ (-780+(i%3)*150) +","+ (425+((i/3)*30)) + ")";
-                }
-                else {
-                    return "translate("+ (-780+(i%3)*150) +","+ (425+(Math.floor(i/3))*30) + ")";
-                }
-            });
-
-        legend.append("rect")
-            .attr("x", width - 18)
-            .attr("width", 18)
-            .attr("height", 18)
-            .style("fill", function (d, i) {
-                return colors.slice().reverse()[i];
-            });
-
-        legend.append("text")
-            .attr("x", width + 5)
-            .attr("y", 9)
-            .attr("dy", ".35em")
-            .style("text-anchor", "start")
-            .text(function (d, i) {
-                return desagregacao_names()[(desagregacao_names().length-1)-i];
-            });*/
-
 
         // Prep the tooltip bits, initial display is hidden
         var tooltip = svg.append("g")
@@ -1300,9 +1269,9 @@ else {
             if(url['ano'] < 2011) destacaBarra(dataset[0][url['ano']-2007].x, true);
             else destacaBarra(dataset[0][url['ano']-2008].x, true);
         }
-        if(eixo == 0) setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
-        // console.log(eixo)
-        // console.log(dados)
+        if(eixo == 0){
+            setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
+        }
         if(eixo == 2 && (vrv == 18 || vrv == 19))
             updateDescription(descricoes, eixo, vrv, mec);
         else if(eixo == 3)

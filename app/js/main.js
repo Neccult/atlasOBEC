@@ -1455,7 +1455,8 @@ function updateSelectsByUrl(){
 
 
     $(".bread-select").each(function(){
-       $(this).val(obj[$(this).attr("data-id")])
+        $(this).val(obj[$(this).attr("data-id")]);
+        url[$(this).attr("data-id")] = $(this).val();
     })
 
 }
@@ -1466,6 +1467,7 @@ function updateSelectsByUrl(){
 
 
 $(document).ready(function(){
+
 
     ///TODO ESTÁ FUNCIONANDO?
     $(window).on('hashchange', function() {
@@ -1534,6 +1536,7 @@ $(document).ready(function(){
         }
 
     });
+
 
     if(url['var'] === "" && window.location.pathname.match("page.php")){
         controlVarPage(url['var']);
@@ -1897,6 +1900,7 @@ $(document).ready(function(){
     });
 
 
+    defaultUrl();
     updateSelectsByUrl();
     updateIframe(url);
 
