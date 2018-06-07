@@ -13,6 +13,7 @@ function width_box(id_box){
 function height_box(id_box){
     return $(id_box).height();
 }
+
 function updateWindowUrl(id, valor){
 
     var replace = id+"=[0-9]*";
@@ -1852,9 +1853,9 @@ var tooltip = (function(){
 	function create(){
 		var tp;
 		if (!tp){
-			d3.select(view+' > #tooltip').remove();
+			d3.select('.container > #tooltip').remove();
 
-			tp = d3.select(view)
+			tp = d3.select('.container')
 				.append('div')
 				.attr('id', 'tooltip')
 				.attr('class', 'tooltip none');
@@ -1959,13 +1960,13 @@ var tooltip = (function(){
 			tp.text('');
 			// create all elements passed via array: arr
             createElements(d, arr);
-            console.log(d)
-			// graph position on screen
-			var chartOffset = $().offset(),
+            // graph position on screen
+            console.log($('.container'))
+			var chartOffset = $('.container').offset(),
 				leftOffset = chartOffset.left,
-				leftOffsetEnd = leftOffset+$().width(),
+				leftOffsetEnd = leftOffset+$('.container').width(),
 				topOffset = chartOffset.top,
-				bottomOffset = topOffset + $().height();
+				bottomOffset = topOffset + $('.container').height();
 			// tooltip dimensions
 			var tooltipWidth = $('.tooltip').width();
 			/*== posição do tooltip ==*/
