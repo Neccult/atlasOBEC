@@ -115,7 +115,7 @@ function getNomeUF(idUF){
 
 function configInfoDataBoxMapa(eixo, vrv, dadosUF) {
 
-    deg = $(window.parent.document).find('.bread-select[data-id=deg]').first().val()
+    deg = $('.bread-select[data-id=deg]').first().val()
     if(eixo == 0) {
 
     }
@@ -155,7 +155,7 @@ function configInfoDataBoxMapa(eixo, vrv, dadosUF) {
 }
 
 function configInfoDataBoxMapaClick(eixo, vrv, dados) {
-    deg = $(window.parent.document).find('.bread-select[data-id=deg]').first().val()
+    deg = $('.bread-select[data-id=deg]').first().val()
     if(eixo == 0) {
 
     }
@@ -424,7 +424,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
         else if(url['uf'] == 0 && (url['cad'] == 0 || url['ocp'] == 3)){
             ocp_real = 3
             if(url['ocp'] > 0){
-                ocp_real = $(window.parent.document).find('.bread-select[data-id=ocp]').val()
+                ocp_real = $('.bread-select[data-id=ocp]').val()
             }
             if(ocp_real == 3)
                 setPercentValueData({percentual:1 , taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
@@ -525,7 +525,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
         indexAno = dados.key.indexOf(url['ano'])
 
         var mundo = 0;
-        var mundoRegex = $(window.parent.document).find("#view_box").attr("src").match(/mundo=[0-9]*/);
+        var mundoRegex = $("#view_box").attr("src").match(/mundo=[0-9]*/);
         if(mundoRegex != null)
             mundo = mundoRegex[0].match(/[0-9]/)[0];
 
@@ -721,11 +721,11 @@ Array.prototype.remove = function() {
 
 function appendPorts(iframe){
 	if(iframe) {
-		if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length == 0) {
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
-            $(window.parent.document).find("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
+		if($("select[data-id='deg']").find("option[value='9']").length == 0) {
+            $("select[data-id='deg']").append("<option value='9'>PORTE MICRO</option>");
+            $("select[data-id='deg']").append("<option value='10'>PORTE PEQUENO</option>");
+            $("select[data-id='deg']").append("<option value='11'>PORTE MÉDIO</option>");
+            $("select[data-id='deg']").append("<option value='12'>PORTE GRANDE</option>");
         }
     }
     else {
@@ -746,7 +746,7 @@ function appendDesags(iframe, ocp){
         else
             desag_groups = data_desag.control.mercado.setorial;
 
-        if(iframe) select = $(window.parent.document).find("select[data-id='deg']")
+        if(iframe) select = $("select[data-id='deg']")
         else select = $("select[data-id='deg']")
 
         desag_groups.forEach(function(option){
@@ -765,11 +765,11 @@ function appendDesags(iframe, ocp){
 
 function removePorts(iframe){
 	if(iframe) {
-		if($(window.parent.document).find("select[data-id='deg']").find("option[value='9']").length != 0) {
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='9']").remove();
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='10']").remove();
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='11']").remove();
-            $(window.parent.document).find("select[data-id='deg']").find("option[value='13']").remove();
+		if($("select[data-id='deg']").find("option[value='9']").length != 0) {
+            $("select[data-id='deg']").find("option[value='9']").remove();
+            $("select[data-id='deg']").find("option[value='10']").remove();
+            $("select[data-id='deg']").find("option[value='11']").remove();
+            $("select[data-id='deg']").find("option[value='13']").remove();
         }
     }
     else {
@@ -788,7 +788,7 @@ function removeDesags(iframe, ocp){
         else
             desag_groups = data_desag.control.mercado.setorial;
 
-        if(iframe) select = $(window.parent.document).find("select[data-id='deg']")
+        if(iframe) select = $("select[data-id='deg']")
         else select = $("select[data-id='deg']")
         
         desag_groups.forEach(function(option){
@@ -1103,51 +1103,51 @@ function getDataVar(json, eixo, vrv){
 
 function setTerceiroValueData(eixo, vrv, value, cad){
 
-    uf = $(window.parent.document).find(".bread-select[data-id=uf]").val();
+    uf = $(".bread-select[data-id=uf]").val();
     if(eixo == 0){
-        prt =  $(window.parent.document).find(".bread-select[data-id=deg]").val()
+        prt =  $(".bread-select[data-id=deg]").val()
         array_variaveis = [1, 4, 5, 6, 7, 8]
         if(array_variaveis.includes(parseInt(vrv)) && uf > 0 && ( prt > 0 ||cad > 0)){
-            $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
-            $(window.parent.document).find(".setor-value").first().css("display", "flex");
+            $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
+            $(".setor-value").first().css("display", "flex");
 
-            doc = $(window.parent.document).find(".setor-value").first().find(".number").first();
+            doc = $(".setor-value").first().find(".number").first();
             setMaxFontSize(doc);
         }
         else{
-            $(window.parent.document).find(".setor-value").first().css("display", "none");
+            $(".setor-value").first().css("display", "none");
         }
     }
     if(eixo == 1){
-        ocp = $(window.parent.document).find(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(window.parent.document).find(".bread-select[data-id=ocp]").val()
+        ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
         if(vrv == 1 && (cad > 0 || ocp != 0 && ocp != 3) && uf > 0){
-           $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
-           $(window.parent.document).find(".setor-value").first().css("display", "flex");
+           $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
+           $(".setor-value").first().css("display", "flex");
 
-           doc = $(window.parent.document).find(".setor-value").first().find(".number").first();
+           doc = $(".setor-value").first().find(".number").first();
            setMaxFontSize(doc);
         } 
         else{
-            $(window.parent.document).find(".setor-value").first().css("display", "none");
+            $(".setor-value").first().css("display", "none");
         }
     }
     else if(eixo == 3){
         if(vrv == 5 || vrv == 8){
             if(cad == 1){
-                $(window.parent.document).find(".state-title").first().css("display", "none");
-                $(window.parent.document).find(".prc-title").first().css("display", "none");
-                $(window.parent.document).find(".prc-title").first().css("display", "none");
-                desc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().text();
-                $(window.parent.document).find(".setor-value").first().find(".number").first().text(formatDecimalLimit(value, 2));
-                $(window.parent.document).find(".setor-value").first().find(".description-number").first().text(desc.replace("UF", "SETOR"));
-                $(window.parent.document).find(".setor-value").first().css("display", "block");
-                doc = $(window.parent.document).find(".setor-value").first().find(".number").first();
+                $(".state-title").first().css("display", "none");
+                $(".prc-title").first().css("display", "none");
+                $(".prc-title").first().css("display", "none");
+                desc = $(".percent-value").first().find(".description-number").first().text();
+                $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value, 2));
+                $(".setor-value").first().find(".description-number").first().text(desc.replace("UF", "SETOR"));
+                $(".setor-value").first().css("display", "block");
+                doc = $(".setor-value").first().find(".number").first();
                 setMaxFontSize(doc);
             }
         } else {
-            $(window.parent.document).find(".setor-value").first().css("display", "none");
-            $(window.parent.document).find(".state-title").first().css("display", "block");
-            $(window.parent.document).find(".prc-title").first().css("display", "block");
+            $(".setor-value").first().css("display", "none");
+            $(".state-title").first().css("display", "block");
+            $(".prc-title").first().css("display", "block");
         }    
     }
     
@@ -1205,13 +1205,13 @@ function setIntegerValueData(value, eixo, vrv) {
 
         // console.log(value)
 
-        estado = $(window.parent.document).find(".state-title").first().text()
+        estado = $(".state-title").first().text()
         
 
-        $(window.parent.document).find(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
-        var doc =  $(window.parent.document).find(".integer-value").first().find(".number").first();
+        $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
+        var doc =  $(".integer-value").first().find(".number").first();
 
-        $(window.parent.document).find('.font-title').html("Fonte(s): "+result.fontes);
+        $('.font-title').html("Fonte(s): "+result.fontes);
         setMaxFontSize(doc);
 	});
 }
@@ -1309,75 +1309,75 @@ function setPercentValueData(value, eixo, vrv) {
 
     if(eixo == 0){
         if(vrv == 2 || vrv == 3 || vrv == 9) {
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+            $(".percent-value").first().find(".number").first().html("");
         }
         else if(vrv < 9) {
             if(value.uf == null) {
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+                $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
             }else {
-                $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+                $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
             }
         }
         else if(vrv >= 10 && vrv <= 13){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
         }
 
-        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
     else if(eixo == 1){
 
         if(vrv > 11 ){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
             
         }
         else if(vrv === 2 || vrv === 11 || vrv === 10 ||  vrv === 9  || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 8){
-           $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+           $(".percent-value").first().find(".number").first().html("");
         }
         else{
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
             
         }
-        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
     else if(eixo == 2){
 
 
         if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9|| vrv == 13 || vrv == 14 || vrv == 17){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");
+            $(".percent-value").first().find(".number").first().html("");
         }
         else if(vrv == 15 || vrv == 16){
 
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2));
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2));
 
         }
         else if(vrv == 18 || vrv == 19){
 
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(value.valor);
+            $(".percent-value").first().find(".number").first().html(value.valor);
 
         }
         else if(vrv == 10){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2)+'%');
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2)+'%');
 
         }
         else{
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
         }
 
 
-        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
     else if(eixo == 3){
         if(vrv == 1 || vrv == 13)
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
         else if(vrv == 5 || vrv == 8){
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
+            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
         } else{
-            $(window.parent.document).find(".percent-value").first().find(".number").first().html("");           
+            $(".percent-value").first().find(".number").first().html("");           
         }
-        var doc =  $(window.parent.document).find(".percent-value").first().find(".number").first();
+        var doc =  $(".percent-value").first().find(".number").first();
         
         setMaxFontSize(doc);
     }
@@ -1555,11 +1555,11 @@ function updateDataDesc(vrv, uos, valor){
 */
 function updateDataDescUoS(ocp){
     if(ocp > 0){
-        if($(window.parent.document).find(".integer-value").first().find(".description-number").html() != null){
-            var desc_int = $(window.parent.document).find(".integer-value").first().find(".description-number").first().html().toUpperCase().replace("POR UF", "POR ATIVIDADES RELACIONADAS");
-            var desc_perc = $(window.parent.document).find(".percent-value").first().find(".description-number").first().html().toUpperCase().replace("POR SETOR", "POR ATIVIDADES CULTURAIS");
-            $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(desc_int);
-            $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(desc_perc);
+        if($(".integer-value").first().find(".description-number").html() != null){
+            var desc_int = $(".integer-value").first().find(".description-number").first().html().toUpperCase().replace("POR UF", "POR ATIVIDADES RELACIONADAS");
+            var desc_perc = $(".percent-value").first().find(".description-number").first().html().toUpperCase().replace("POR SETOR", "POR ATIVIDADES CULTURAIS");
+            $(".integer-value").first().find(".description-number").first().html(desc_int);
+            $(".percent-value").first().find(".description-number").first().html(desc_perc);
         }
     }
 

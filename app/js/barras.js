@@ -425,7 +425,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         */
 
         if(!((eixo == 2 && (vrv == 17) ) || (eixo == 1 && vrv == 6 && uos == 1))){
-            $(window.parent.document).find('select[data-id=ano]').each(function(){
+            $('select[data-id=ano]').each(function(){
                 selectOp = this;
                 $(this.options).each(function(){
                     $(this).remove();
@@ -571,7 +571,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
 
                
-                $(window.parent.document).find("select[data-id='ano']").val(dados.key[i]);
+                $("select[data-id='ano']").val(dados.key[i]);
                 updateWindowUrl('ano', dados.key[i])
 
 
@@ -1138,7 +1138,7 @@ else {
         if((vrv == 6 || vrv == 4) && eixo == 1)
             desagregacao = 1
         else
-            desagregacao = $(window.parent.document).find(".bread-select[data-id=deg]").val();
+            desagregacao = $(".bread-select[data-id=deg]").val();
         dado_anos = dataset[desagregacao-1]
         dado = dado_anos.filter(function(obj){
             return obj.x.getFullYear() == url['ano']

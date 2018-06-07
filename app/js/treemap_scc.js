@@ -193,14 +193,14 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                         return;
                     
                     if(url['ocp'] == 0) {
-                        var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
+                        var newMapaSrc = $("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
                         newMapaSrc = newMapaSrc.replace(/prc=[0-9]*/, "prc=" + url['prc']);
-                        var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
+                        var newBarraSrc = $("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad=" + d.data.colorId);
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
-                        $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
-                        $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-                        // $(window.parent.document).find("select[data-id='cad']").val(d.data.colorId);
+                        $("#view_box").attr("src", newMapaSrc);
+                        $("#view_box_barras").attr("src", newBarraSrc);
+                        // $("select[data-id='cad']").val(d.data.colorId);
                         // enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
                         
                         destacaSetor(d.data.colorId);
@@ -215,35 +215,35 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                             // cad_percent_uf = (d.data.size/d.parent.parent.parent.value)
                             cad_percent_uf = (d.data.size/d.parent.parent.value)
                             percent_deg = (d.data.size/d.parent.parent.parent.value)
-                            $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
-                            $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+                            $(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+                            $(".bread-select[data-id=cad]").val(d.data.colorId)
                             updateWindowUrl('cad', d.data.colorId)
                             updateWindowUrl('deg', deg)
                             updateWindowUrl('subdeg', d.data.desagreg)
 
                         }
                         else{
-                            $(window.parent.document).find(".bread-select[data-id=cad]").val(d.data.colorId)
+                            $(".bread-select[data-id=cad]").val(d.data.colorId)
                             updateWindowUrl('cad', d.data.colorId)
 
                         }
 
                         configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf, percent_deg);
                         if(deg  == 0)
-                            $(window.parent.document).find(".cad-title").first().html(d.data.name);
-                        // else $(window.parent.document).find(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
+                            $(".cad-title").first().html(d.data.name);
+                        // else $(".cad-title").first().html(d.parent.data.name+" - "+d.data.name);
                         else
-                            $(window.parent.document).find(".cad-title").first().html(d.parent.data.name);
+                            $(".cad-title").first().html(d.parent.data.name);
 
 				    }
                     else {
-                        var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
+                        var newMapaSrc = $("#view_box").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
                         newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
-                        var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
+                        var newBarraSrc = $("#view_box_barras").attr("src").replace(/ocp=[0-9]*/, "ocp=" + d.data.colorId);
                         newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
-                        $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
-                        $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-                        $(window.parent.document).find("select[data-id='ocp']").val(d.data.colorId);
+                        $("#view_box").attr("src", newMapaSrc);
+                        $("#view_box_barras").attr("src", newBarraSrc);
+                        $("select[data-id='ocp']").val(d.data.colorId);
                         updateWindowUrl('ocp', d.data.colorId);
                         updateWindowUrl('cad', 0);
 
@@ -257,7 +257,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                             cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent")
                         }
                         else{
-                            $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+                            $(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
 
                             updateWindowUrl('deg', deg)
                             updateWindowUrl('subdeg', d.data.desagreg)
@@ -763,7 +763,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-percent"),
             $('svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
-            $('svg').find('rect[data-legend="'+url['cad']+'"][id-subdeg="'+$(window.parent.document).find(".bread-select[data-id=deg]").val()+'"]').attr("data-percent-uf"),
+            $('svg').find('rect[data-legend="'+url['cad']+'"][id-subdeg="'+$(".bread-select[data-id=deg]").val()+'"]').attr("data-percent-uf"),
             $('svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),
             chg);
     }

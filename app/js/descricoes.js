@@ -6,7 +6,7 @@ function mapPronome(string, array_pron, array_new_pron){
 }
 
 function descDesag(desc, deg){
-    var tipo_deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").text();
+    var tipo_deg = $(".bread-select[data-id=deg]").first().find("option:selected").text();
 
     switch(deg)
     {
@@ -146,40 +146,40 @@ function getPrepos(uf){
 
 
 function setStateTitle(stateTitle){
-    docState = $(window.parent.document).find(".state-title").html(stateTitle);
+    docState = $(".state-title").html(stateTitle);
     setMaxFontSize(docState)
 }
 
 function setPrcTitle(prcTitle){
-    docState = $(window.parent.document).find(".prc-title").html(prcTitle);
+    docState = $(".prc-title").html(prcTitle);
     setMaxFontSize(docState)
 }
 
 function updateTitleClickSCC(){
-    scc_click = $(window.parent.document).find('.bread-select[data-id=cad] option:selected').text()
+    scc_click = $('.bread-select[data-id=cad] option:selected').text()
 
     if(scc_click.match(/Todos/) != null){
         scc_click = "NOS SETORES CULTURAIS E CRIATIVOS"
     } else {
         scc_click = "NO SETOR "+scc_click.toUpperCase()
     }
-    title = $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title").text()
-    $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title")
+    title = $("iframe[id=view_box_barras]").parent().find(".view-title").text()
+    $("iframe[id=view_box_barras]").parent().find(".view-title")
         .text(title.replace(/NO SETOR .+|NOS SETORES CULTURAIS E CRIATIVOS/, scc_click))
 
 }
 
 function updateTitleClickMapa(uf_click){
 
-    uf_anterior = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').text()
+    uf_anterior = $('.bread-select[data-id=uf] option:selected').text()
 
     replace_uf = getPrepos(uf_anterior) + ' ' + uf_anterior.toUpperCase()
-    title = $(window.parent.document).find("iframe[id=view_box_scc]").parent().find(".view-title").text()
-    $(window.parent.document).find("iframe[id=view_box_scc]").parent().find(".view-title")
+    title = $("iframe[id=view_box_scc]").parent().find(".view-title").text()
+    $("iframe[id=view_box_scc]").parent().find(".view-title")
         .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
 
-    title = $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title").text()
-    $(window.parent.document).find("iframe[id=view_box_barras]").parent().find(".view-title")
+    title = $("iframe[id=view_box_barras]").parent().find(".view-title").text()
+    $("iframe[id=view_box_barras]").parent().find(".view-title")
         .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
 
 }
@@ -222,30 +222,30 @@ function updateDescription(descricoes, eixo, vrv, slc){
     desc_var = getDataVar(descricoes, eixo, vrv)
 
     key = ''
-    cad = $(window.parent.document).find('.bread-select[data-id=cad]').first().val()
-    cad_text = $(window.parent.document).find('.bread-select[data-id=cad] option:selected').first().text()
+    cad = $('.bread-select[data-id=cad]').first().val()
+    cad_text = $('.bread-select[data-id=cad] option:selected').first().text()
 
-    ocp = $(window.parent.document).find('.bread-select[data-id=ocp]').first().val()
-    ocp_text = $(window.parent.document).find('.bread-select[data-id=ocp] option:selected').first().text()
+    ocp = $('.bread-select[data-id=ocp]').first().val()
+    ocp_text = $('.bread-select[data-id=ocp] option:selected').first().text()
 
 
 
-    uf = $(window.parent.document).find('.bread-select[data-id=uf]').first().val()
-    uf_text = $(window.parent.document).find('.bread-select[data-id=uf] option:selected').first().text()
+    uf = $('.bread-select[data-id=uf]').first().val()
+    uf_text = $('.bread-select[data-id=uf] option:selected').first().text()
 
-    desag = $(window.parent.document).find('.bread-select[data-id=deg]').first().val()
-    desag_text = $(window.parent.document).find('.bread-select[data-id=deg] option:selected').first().text()
+    desag = $('.bread-select[data-id=deg]').first().val()
+    desag_text = $('.bread-select[data-id=deg] option:selected').first().text()
 
-    mec = $(window.parent.document).find('.bread-select[data-id=mec]').first().val()
-    mec_text = $(window.parent.document).find('.bread-select[data-id=mec] option:selected').first().text()
+    mec = $('.bread-select[data-id=mec]').first().val()
+    mec_text = $('.bread-select[data-id=mec] option:selected').first().text()
 
-    pfj = $(window.parent.document).find('.bread-select[data-id=pfj]').first().val()
-    pfj_text = $(window.parent.document).find('.bread-select[data-id=pfj] option:selected').first().text()
+    pfj = $('.bread-select[data-id=pfj]').first().val()
+    pfj_text = $('.bread-select[data-id=pfj] option:selected').first().text()
 
-    mod = $(window.parent.document).find('.bread-select[data-id=mod]').first().val()
-    mod_text = $(window.parent.document).find('.bread-select[data-id=mod] option:selected').first().text()
+    mod = $('.bread-select[data-id=mod]').first().val()
+    mod_text = $('.bread-select[data-id=mod] option:selected').first().text()
 
-    typ = $(window.parent.document).find('.bread-select[data-id=typ]').first().val()
+    typ = $('.bread-select[data-id=typ]').first().val()
     if(eixo != 3){
 
         if(uf > 0){
@@ -286,7 +286,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
 
             nomeestado = getPrepos(uf_text)+' '+uf_text
             nomeporte = "DE "+desag_text;
-            nomeano = $(window.parent.document).find('.bread-select[data-id=ano]').first().val()
+            nomeano = $('.bread-select[data-id=ano]').first().val()
             anoanterior = parseInt(nomeano)-1
             anoanterior = anoanterior.toString()
             if("primeira" in desc_var){
@@ -316,9 +316,9 @@ function updateDescription(descricoes, eixo, vrv, slc){
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text).replace('[deg]', nomeporte).replace('{uf}', nomeestado);
             desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', cad_text).replace('[deg]', nomeporte).replace('{uf}', nomeestado);
 
-            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
-            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
-            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
+            $('.integer-value').find('.description-number').first().text(desc_int)
+            $('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
 
             break;
         case 1:
@@ -334,7 +334,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
                 }
             }
             nomeestado = getPrepos(uf_text)+' '+uf_text
-            var deg = $(window.parent.document).find(".bread-select[data-id=deg]").first().find("option:selected").parent().attr("value");
+            var deg = $(".bread-select[data-id=deg]").first().find("option:selected").parent().attr("value");
 
             if("primeira" in desc_var.ocp[slc]){
                 desc_var.ocp[slc].primeira.forEach(function(d){
@@ -367,9 +367,9 @@ function updateDescription(descricoes, eixo, vrv, slc){
 
 
 
-            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
-            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
-            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
+            $('.integer-value').find('.description-number').first().text(desc_int)
+            $('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
             break;
         case 2:
             var desc_int = ''
@@ -407,16 +407,16 @@ function updateDescription(descricoes, eixo, vrv, slc){
                 .replace('[pfj]', pfj_text).replace('[mod]', mod_text)
                 .replace('{uf}', nomeestado).replace('[mec]', "VIA "+mec_text).replace("{cad}", cad_text)
 
-            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
-            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
-            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
+            $('.integer-value').find('.description-number').first().text(desc_int)
+            $('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
             break;
         case 3:
             var desc_int = ''
             var desc_perc = ''
             var desc_terc = ''
 
-            prc_text = $(window.parent.document).find('.bread-select[data-id=prc] option:selected').first().text()
+            prc_text = $('.bread-select[data-id=prc] option:selected').first().text()
             if(key == 'i'){
                 nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
                 nomeprc = getPrepos(prc_text)+' '+prc_text;
@@ -477,9 +477,9 @@ function updateDescription(descricoes, eixo, vrv, slc){
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
             desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', nomecad).replace('[prc]', nomeprc)
 
-            $(window.parent.document).find('.integer-value').find('.description-number').first().text(desc_int)
-            $(window.parent.document).find('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
-            $(window.parent.document).find('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
+            $('.integer-value').find('.description-number').first().text(desc_int)
+            $('.percent-value').find('.box-dado').first().find('.description-number').text(desc_perc)
+            $('.percent-value').find('.setor-value').first().find('.description-number').text(desc_terc)
             break;
     }
 }
