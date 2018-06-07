@@ -32,9 +32,11 @@ function destacaPais(ufId) {
 }
 
 //cria svg
-var svg_mapa = d3.select(corpo).append("svg")
+if($(corpo).find("svg").length == 0){
+    var svg_mapa = d3.select(corpo).append("svg")
     .attr("width", width_box(mapa_box))
     .attr("height", height_box(mapa_box));
+} 
 
 //configura projeção
 var projection = d3.geoMercator()

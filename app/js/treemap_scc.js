@@ -1,7 +1,9 @@
 var treemap_scc_box = '#'+VIEWS["treemap_scc"];
 
 /* cria svg */
-var svg = d3.select(treemap_scc_box).append("svg");
+if($(treemap_scc_box).find("svg").length == 0){
+    var svg = d3.select(treemap_scc_box).append("svg");
+}
 
 svg.attr('width', $(treemap_scc_box).width());
 svg.attr('height', $(treemap_scc_box).height());

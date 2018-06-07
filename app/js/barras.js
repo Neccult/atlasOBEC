@@ -4,6 +4,7 @@ var chartWidth = width_box(barras_box);
 var chartHeight = height_box(barras_box);
 var minBarHeight = 5;
 var withLabels = false;
+
 d3.json('./data/descricoes.json', function (error, desc){
     if (error) throw error;
     descricoes = desc;
@@ -26,7 +27,6 @@ var deg  = parameters.deg
 var prt = 0
 var ocp = 0
 
-var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
 function destacaBarra(barraId, stacked = false) {
     i = 0;
@@ -98,6 +98,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
      })*/
    
     colorJSON = COLORS;
+    var corEixo = colorJSON['eixo'][eixo].color;
 
 
         // import pt-br.json file for get the title
@@ -395,14 +396,18 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         // cria SVG
 
+console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").size())
         var valueTop = margin.top + 5;
-        var svg = d3.select(barras_box).append("svg")
+        if($(barras_box).find("svg").length == 0){
+            var svg_barras = d3.select(barras_box).append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform",
                 "translate(" + (margin.left+5) + "," + valueTop + ")");
 
+        }
+        
         function make_y_gridlines() {
             return d3.axisLeft(y)
                 .scale(y)
@@ -410,7 +415,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         }
 
         //add the Y gridlines
-        svg.append("g")
+       svg_barras.append("g")
             .attr("class", "grid")
             .style("opacity", 0.1)
             .call(make_y_gridlines()
@@ -442,9 +447,17 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         }
 
         // console.log(dados)
-
         //Cria barras
-        svg.selectAll("rect")
+
+        if($(barras_box).find("svg").find("g").first().find("g.grid").find("rect").length != 0){
+            svg_barras.select("g").selectAll("rect").data(dados.value, function(d){
+                return d;
+            })
+            svg_barras.exit().remove()
+            alert("oi")
+            //svg_barras.selectAll("rect")
+        }
+       svg_barras.selectAll("rect")
             .data(dados.value, function (d) {
                 return d;
             })
@@ -583,9 +596,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
             })
             .style("cursor", "pointer");
+        
         // cria título do gráfico
         if (data[dados.key[0]].uos == undefined) {
-            svg.append("text")
+           svg_barras.append("text")
                 .attr("x", (width / 2))
                 .attr("y", 0 - 9)
                 .attr("text-anchor", "middle")
@@ -593,7 +607,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 .text("");
         }
         else if (data[dados.key[0]].uos != 2) {
-            svg.append("text")
+           svg_barras.append("text")
                 .attr("x", (width / 2))
                 .attr("y", 0 - 9)
                 .attr("text-anchor", "middle")
@@ -601,7 +615,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 .text("");
         }
         else {
-            svg.append("text")
+           svg_barras.append("text")
                 .attr("x", (width / 2))
                 .attr("y", 0 - 9)
                 .attr("text-anchor", "middle")
@@ -612,7 +626,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         //cria labels barras
         if (withLabels) {
-            svg.selectAll("text g")
+           svg_barras.selectAll("text g")
                 .data(dados.value, function (d) {
                     return d;
                 })
@@ -675,17 +689,17 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             .tickFormat(formatYAxis);
 
         //adiciona eixo X
-        svg.append("g")
+       svg_barras.append("g")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
 
         //adiciona eixo Y
-        svg.append("g")
+       svg_barras.append("g")
             .attr("transform", "translate(0, 0)")
             .call(yAxis);
 
         var centerCanvas = function () {
-            var svg = d3.selectAll(barras_box+">svg>g");
+            var svg_barras = d3.selectAll(barras_box+">svg>g");
             var g = d3.selectAll(barras_box+" svg g g:last-child g");
             // max width that can fit in without centring
             var maxNormalWidth = 45;
@@ -700,7 +714,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             });
 
             if (currentMaxWidth > maxNormalWidth)
-                svg.attr("transform", "translate(" + Math.round(margin.left + (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
+                svg_barras.attr("transform", "translate(" + Math.round(margin.left + (currentMaxWidth - maxNormalWidth)) + "," + margin.top + ")");
         }();
 
         // testa e mostra mensagem de valor zerado/indisponível
@@ -1014,7 +1028,7 @@ else {
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
 
-        var svg = d3.select(barras_box)
+        var svg_barras = d3.select(barras_box)
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -1070,11 +1084,11 @@ else {
             .orient("bottom")
             .tickFormat(d3.time.format("%Y"));
 
-        svg.append("g")
+        svg_barras.append("g")
             .attr("class", "y axis")
             .call(yAxis_eixo1);
 
-        svg.append("g")
+        svg_barras.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis_eixo1);
@@ -1082,7 +1096,7 @@ else {
 
 
         // Create groups for each series, rects for each segment
-        var groups = svg.selectAll("g.cost")
+        var groups = svg_barras.selectAll("g.cost")
             .data(dataset)
             .enter().append("g")
             .attr("class", "cost")
@@ -1150,7 +1164,7 @@ else {
         $(barras_box).find('svg').attr('height',$(barras_box).height() + 350);
         
         // Prep the tooltip bits, initial display is hidden
-        var tooltip = svg.append("g")
+        var tooltip = svg_barras.append("g")
             .attr("class", "tooltip")
             .style("display", "none");
 
