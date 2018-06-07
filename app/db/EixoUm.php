@@ -15,7 +15,6 @@ class EixoUm {
 	protected $id;
 	public $Numero;
 	public $idUF;
-	public $idAtuacao;
 	public $idCadeia;
 	public $idPorte;
 	public $Ano;
@@ -351,18 +350,21 @@ class EixoUm {
 	Entrada: 
 	    $var = número da váriavel 
 	    $ufs = id do UF 
-	    $atc = id da atuação
-	    $cad = id do SCC 
-	    $prt = id do porte
+	    $cad = id do SCC
+	    $deg = id do porte
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
 	public static function getter_barras($var, $ufs, $cad, $deg, $uos){
 
-	   $deg = $deg - 8;
+	    if($deg > 0){
+	        $deg = $deg - 8;
+        }
+
 
 		self::connect();
         if(($deg == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {
+
             $idCadeia = ($uos == 0) ? $cad : 1;
             
             $query = "SELECT * FROM ".self::$table." AS ex"

@@ -38,7 +38,7 @@
     $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
-    $deg    =   isset($_GET["subdeg"])   ?   $_GET["deg"]  :   0;	   /*== Subdesagregação ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["deg"]  :   0;	   /*== Subdesagregação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
@@ -299,7 +299,9 @@
         ocp:"<?php echo $ocp; ?>",
         ano:"<?php echo $ano; ?>",
         uos:"<?php echo $uos; ?>",
-        uf:"<?php echo $uf; ?>"
+        uf:"<?php echo $uf; ?>",
+        deg: "<?php echo $deg; ?>",
+        subdeg: <?php echo $subdeg; ?>
     };
     <?php if ($eixo == "mercado" && $view != "mapa") {?>
     url['subdeg'] = "<?php echo $subdeg; ?>";
@@ -315,6 +317,7 @@
     url['slc'] = "<?php echo $slc; ?>";
     url['uos'] = "<?php echo $uos; ?>";
     url['deg'] = "<?php echo $deg; ?>";
+    url['subdeg'] = "<?php echo $subdeg; ?>";
     <?php } ?>
 
     <?php if ($eixo == "mercado" && $view == "mapa") {?>

@@ -85,9 +85,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         brasil_setor = JSON.parse(dado)
     })
 
-     $.get('./db/json_barras.php' + config, function(dado){
-         console.log(dado)
-     })
+     // $.get('./db/json_barras.php' + config, function(dado){
+     //     console.log(dado)
+     // })
    
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -933,7 +933,7 @@ else {
     var colorJSON;
     var textJSON;
 
-    var config = "?var=" + vrv + "&uf=" + uf + "&atc=" + atc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&deg=" + deg + "&ano=" + ano;
+    var config = "?var=" + vrv + "&uf=" + uf + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&ocp=" + ocp + "&typ=" + typ + "&prc=" + prc + "&slc=" + slc + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo + "&deg=" + deg +  "&subdeg=" + subdeg + "&ano=" + ano;
 
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
@@ -944,8 +944,8 @@ else {
             if (error) throw error;
 
             textJSON = data;
-            // $.get("./db/json_barras.php" + config, function(data){
-            //       console.log(data)
+           //  $.get("./db/json_barras.php" + config, function(data){
+           //        console.log(data)
            // })
             d3.queue()
                 .defer(d3.json, "./db/json_barras.php" + config)
@@ -982,7 +982,10 @@ else {
 
     function desagregacao_names() {
 
-        if(prt != 0) {
+        // console.log(deg)
+        // console.log(subdeg)
+
+        if(deg == 1 && subdeg != 0) {
 
             var array_names = [];
             textJSON.select.prt.forEach(function(d, i) {
@@ -992,7 +995,7 @@ else {
             });
 
         }
-        if(esc != 0) {
+        if(deg == 4 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.esc.forEach(function(d, i) {
                 if(i) {
@@ -1001,7 +1004,7 @@ else {
             });
 
         }
-        if(fax != 0) {
+        if(deg == 3 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.fax.forEach(function(d, i) {
                 if(i) {
@@ -1009,7 +1012,7 @@ else {
                 }
             });
         }
-        if(sex != 0) {
+        if(deg == 2 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.sex.forEach(function(d, i) {
                 if(i) {
@@ -1019,7 +1022,7 @@ else {
             // console.log(array_names)
 
         }
-        if(frm != 0) {
+        if(deg == 6 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.frm.forEach(function(d, i) {
                 if(i) {
@@ -1027,7 +1030,7 @@ else {
                 }
             });
         }
-        if(snd != 0) {
+        if(deg == 8 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.snd.forEach(function(d, i) {
                 if(i) {
@@ -1035,7 +1038,7 @@ else {
                 }
             });
         }
-        if(prv != 0) {
+        if(deg == 7 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.prv.forEach(function(d, i) {
                 if(i) {
@@ -1043,7 +1046,7 @@ else {
                 }
             });
         }
-        if(cor != 0) {
+        if(deg == 5 && subdeg  != 0) {
             var array_names = [];
             textJSON.select.cor.forEach(function(d, i) {
                 if(i) {
@@ -1055,16 +1058,7 @@ else {
     }
 
     function selectDesag(){
-        switch(deg){
-            case 1: return prt;
-            case 2: return sex;
-            case 3: return fax;
-            case 4: return esc;
-            case 5: return cor;
-            case 6: return frm;
-            case 7: return prv;
-            case 8: return snd;
-        }
+        return subdeg;
     }
 
     function analyze_eixo1(error, data) {
@@ -1073,7 +1067,8 @@ else {
             console.log(error);
         }
 
-        desag = selectDesag()
+        var desag = selectDesag()
+
         if((vrv == 6 || vrv == 4) && eixo == 1){
             aux = []
             selectDesag();

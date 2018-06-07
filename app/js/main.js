@@ -1853,6 +1853,7 @@ $(document).ready(function(){
                         updateLegendByDeg(url['deg'])
 
                     updateWindowUrl('subdeg', $(this).val());
+                    url['subdeg'] = $(this).val();
 
                 }
                 else{

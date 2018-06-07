@@ -26,7 +26,7 @@ if (!empty($_GET["var"])) {
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
-    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   2;
 
     $mundo  =   isset($_GET['mundo']) ?   $_GET['mundo']:   0;
     $eixo = $_GET['eixo'];
@@ -118,6 +118,7 @@ function sigla_cadeia($cadeia) {
             return $cadeia;
     }
 }
+
 function getNameCadeia($id){
     switch($id){
         case 0: return "Todos";
@@ -134,7 +135,6 @@ function getNameCadeia($id){
         case 11: return "Outros";
     }
 }
-
 
 function getNameDesag($deg, $tupla) {
     switch ($deg) {
@@ -217,7 +217,6 @@ function getNameEscolaridade($id) {
     }
 }
 
-
 function getNameEtinia($id) {
     switch ($id) {
         case 1:
@@ -265,49 +264,52 @@ function getNameSindical($id) {
 
 
 //Trata o sexo
-//switch($sex) {
-//    case "0":
-//        $sex = NULL;
-//        break;
-//    case "1":
-//        $sex = 1;
-//        break;
-//    case "2":
-//        $sex = 0;
-//        break;
-//    default:
-//        $sex = NULL;
-//}
-//
-////Trata a modalidade
-//switch($mod) {
-//    case "0":
-//        $mod = NULL;
-//        break;
-//    case "1":
-//        $mod = 1;
-//        break;
-//    case "2":
-//        $mod = 0;
-//        break;
-//    default:
-//        $mod = NULL;
-//}
-//
-////Trata a pessoa fisica/juridica
-//switch($pfj) {
-//    case "0":
-//        $pfj = NULL;
-//        break;
-//    case "1":
-//        $pfj = 1;
-//        break;
-//    case "2":
-//        $pfj = 0;
-//        break;
-//    default:
-//        $pfj = NULL;
-//}
+if($deg == 2){
+    switch($subdeg) {
+        case "0":
+            $subdeg = NULL;
+            break;
+        case "1":
+            $subdeg = 1;
+            break;
+        case "2":
+            $subdeg = 0;
+            break;
+        default:
+            $subdeg = NULL;
+    }
+}
+
+
+//Trata a modalidade
+switch($mod) {
+    case "0":
+        $mod = NULL;
+        break;
+    case "1":
+        $mod = 1;
+        break;
+    case "2":
+        $mod = 0;
+        break;
+    default:
+        $mod = NULL;
+}
+
+//Trata a pessoa fisica/juridica
+switch($pfj) {
+    case "0":
+        $pfj = NULL;
+        break;
+    case "1":
+        $pfj = 1;
+        break;
+    case "2":
+        $pfj = 0;
+        break;
+    default:
+        $pfj = NULL;
+}
 
 $barras = array();
 if($eixo == 0) {
@@ -327,10 +329,12 @@ if($eixo == 0) {
 }
 else if($eixo == 1) {
     require_once("EixoDois.php");
-    foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $deg, $ano) as $tupla) {
+
+    foreach (EixoDois::getter_barras($var, $uf, $cad, $ocp, $uos, $slc, $deg, $subdeg, $ano) as $tupla) {
         // $barras[$tupla->Ano] = $tupla->Valor;
-        
-        if($deg == 0 && $sex == NULL || $var == 4 || $var == 5 || $var == 6) {
+
+
+        if($deg == 0 || $var == 4 || $var == 5 || $var == 6) {
 
             if($var == 6 && $uos == 1 && $deg == 0 && $ocp == 0){
                 $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));

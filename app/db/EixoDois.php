@@ -259,7 +259,7 @@ class EixoDois {
             $stmt->execute();
             $allObjects = self::fetch_results($stmt);
         }
-        
+
         self::disconnect();
         
         return $allObjects;
@@ -427,7 +427,7 @@ class EixoDois {
     Saída:
         Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
     -----------------------------------------------------------------------------*/
-    public static function getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $uos, $slc, $desag, $ano){
+    public static function getter_barras($var, $uf, $cad, $ocp, $uos, $slc, $desag, $subdeg, $ano){
         self::connect();
         $query = "SELECT * FROM ".self::$table." WHERE Numero =? AND idUF = ?";
 
@@ -450,7 +450,8 @@ class EixoDois {
                 }
             }
             $query .= " AND idOcupacao = 0";
-        } else if($var == 6 && $ocp != 0) {
+        }
+        else if($var == 6 && $ocp != 0) {
             $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
         } else if($ocp == 1){
             $query .= " AND idOcupacao = 1";
@@ -463,12 +464,13 @@ class EixoDois {
         $var_single_deg = array(4, 5);
         
         if(in_array($var, $var_single_deg) || ($var == 6 && $uos == 0)){
-            if($desag == 2 && $sexos >= 0) {
+            if($desag == 2 && $subdeg >= 0) {
                 $query .= " AND Sexo = ?";
-                $params[] = $sexos;
+                $params[] = $subdeg;
             } else {
                 $query .= " AND Sexo is NULL";
             }
+
             $query .= " AND idPorte = ?";
             $query .= " AND idIdade = ?";
             $query .= " AND idEscolaridade = ?";
@@ -477,14 +479,16 @@ class EixoDois {
             $query .= " AND Previdencia = ?";
             $query .= " AND Sindical = ?";
             
-            $params[] = $prt;
-            $params[] = $idd;
-            $params[] = $esc;
-            $params[] = $etn;
-            $params[] = $form;
-            $params[] = $prev;
-            $params[] = $sind;
-        } else {
+            $params[] = self::concatValueDeg($desag, 1, $subdeg);
+            $params[] = self::concatValueDeg($desag, 3, $subdeg);
+            $params[] = self::concatValueDeg($desag, 4, $subdeg);
+            $params[] = self::concatValueDeg($desag, 5, $subdeg);
+            $params[] = self::concatValueDeg($desag, 6, $subdeg);
+            $params[] = self::concatValueDeg($desag, 7, $subdeg);
+            $params[] = self::concatValueDeg($desag, 8, $subdeg);
+
+        }
+        else {
             if($desag == 2) {
                 $query .= " AND (Sexo = 1 OR Sexo = 0)";
             } else {
@@ -705,7 +709,7 @@ class EixoDois {
         $query = "SELECT MAX(Valor) FROM ".self::$table."  WHERE Numero = ".$var." AND idOcupacao = ".$ocp." Group by Ano";
     }
 
-    public static function getter_linhas($var, $uf, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $uos, $slc, $desag){
+    public static function getter_linhas($var, $uf, $cad, $ocp, $uos, $slc, $desag, $subdeg){
         $params = [];
         
         self::connect();
@@ -770,6 +774,14 @@ class EixoDois {
             return " AND ".$texto." > 0";
         } else{
             return " AND ".$texto." = 0";
+        }
+    }
+
+    private static function concatValueDeg($deg, $idDeg, $subdeg){
+        if($deg == $idDeg){
+            return $subdeg;
+        } else{
+            return 0;
         }
     }
 
