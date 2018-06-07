@@ -517,10 +517,8 @@ function legendaBinario(){
     }*/
 
     function loadTooltip(d){
-
         if(parameters.eixo == 0) {
             if(parameters.var === 1){
-
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
@@ -532,7 +530,7 @@ function legendaBinario(){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, parameters.eixo, parameters.var)]
-                ]);
+                ] );
             }
             else if(parameters.var === 3) {
 
@@ -583,7 +581,7 @@ function legendaBinario(){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
                         ["", formatTextVrv(dict[d.id].valor*10000,parameters.eixo, parameters.var)]
-                    ]);
+                    ], mapa_box);
                 }
                 else{
                     tooltipInstance.showTooltip(d, [
@@ -616,7 +614,7 @@ function legendaBinario(){
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor,parameters.eixo, parameters.var)],
                 //    ["", formatTextTaxaparameters.var(dict[d.id].percentual,parameters.eixo, parameters.var)],
-                ]);
+                ], mapa_box);
             }
             else if(parameters.var === 14){
                 tooltipInstance.showTooltip(d, [

@@ -1828,7 +1828,6 @@ var formatDecimalLimit = function(value, limit){
 var tooltip = (function(){
 
 	var instance;
-
 	/*-----------------------------------------------------------------------------
 		Função: create
 			cria elemento #tooltip no html
@@ -1839,11 +1838,10 @@ var tooltip = (function(){
 	-----------------------------------------------------------------------------*/
 	function create(){
 		var tp;
-
 		if (!tp){
-			d3.select('#corpo > #tooltip').remove();
+			d3.select(view+' > #tooltip').remove();
 
-			tp = d3.select('#corpo')
+			tp = d3.select(view)
 				.append('div')
 				.attr('id', 'tooltip')
 				.attr('class', 'tooltip none');
@@ -1942,18 +1940,19 @@ var tooltip = (function(){
 			Saída:
 				Renderiza elementos dentro do elemento #tooltip
 		-----------------------------------------------------------------------------*/
-		function showTooltip(d, arr, view) {
+		function showTooltip(d, arr) {
 
 			// remove all elements inside tooltip
 			tp.text('');
 			// create all elements passed via array: arr
-			createElements(d, arr);
+            createElements(d, arr);
+            console.log(d)
 			// graph position on screen
-			var chartOffset = $(view).offset(),
+			var chartOffset = $().offset(),
 				leftOffset = chartOffset.left,
-				leftOffsetEnd = leftOffset+$(view).width(),
+				leftOffsetEnd = leftOffset+$().width(),
 				topOffset = chartOffset.top,
-				bottomOffset = topOffset + $(view).height();
+				bottomOffset = topOffset + $().height();
 			// tooltip dimensions
 			var tooltipWidth = $('.tooltip').width();
 			/*== posição do tooltip ==*/
@@ -1969,7 +1968,6 @@ var tooltip = (function(){
 			if(yPosition + $('.tooltip').height() > bottomOffset){
 				yPosition = bottomOffset - $('.tooltip').height();// - 30;
 			}
-
 			// sets tooltips new position
 			d3.select(".tooltip")
 				.style("left", xPosition + "px")
@@ -2050,7 +2048,6 @@ var tooltip = (function(){
 		getInstance: function(){
 			if (instance)
 				return instance;
-
 			instance = create();
 
 			return instance;
