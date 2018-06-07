@@ -567,11 +567,11 @@ class EixoDois {
     Saída:
         Um conjunto de instâncias da Classe EixoDois com seus devidos atributos
     -----------------------------------------------------------------------------*/
-    public static function getter_region($var, $cad, $prt, $ocp, $esc, $etn, $idd, $form, $prev, $sind, $sexos, $anos, $regiao){
+    public static function getter_region($var, $cad, $ocp, $anos, $deg, $subdeg, $regiao){
 
         self::connect();
         $params = [];
-        if(is_null($sexos)) {
+        if(is_null($subdeg)) {
             if($ocp != 0) {
                 $query = "SELECT * FROM ".self::$table." AS ex"
                     ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '?'"
@@ -587,15 +587,15 @@ class EixoDois {
                     ." AND ex.Sexo IS NULL";
                 
                 $params[] = $regiao;
-                $params[] = $prt;
+                $params[] = self::concatValueDeg($desag, 1, $subdeg);
                 $params[] = $ocp;
-                $params[] = $esc;
-                $params[] = $etn;
-                $params[] = $idd;
+                $params[] = self::concatValueDeg($desag, 3, $subdeg);
+                $params[] = self::concatValueDeg($desag, 4, $subdeg);
+                $params[] = self::concatValueDeg($desag, 5, $subdeg);
                 $params[] = $var;
-                $params[] = $form;
-                $params[] = $prev;
-                $params[] = $sind;
+                $params[] = self::concatValueDeg($desag, 6, $subdeg);
+                $params[] = self::concatValueDeg($desag, 7, $subdeg);
+                $params[] = self::concatValueDeg($desag, 8, $subdeg);
                 
             } else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
@@ -614,15 +614,15 @@ class EixoDois {
 
                 $params[] = $regiao;
                 $params[] = $cad;
-                $params[] = $prt;
+                $params[] = self::concatValueDeg($desag, 1, $subdeg);
                 $params[] = $ocp;
-                $params[] = $esc;
-                $params[] = $etn;
-                $params[] = $idd;
+                $params[] = self::concatValueDeg($desag, 3, $subdeg);
+                $params[] = self::concatValueDeg($desag, 4, $subdeg);
+                $params[] = self::concatValueDeg($desag, 5, $subdeg);
                 $params[] = $var;
-                $params[] = $form;
-                $params[] = $prev;
-                $params[] = $sind;                
+                $params[] = self::concatValueDeg($desag, 6, $subdeg);
+                $params[] = self::concatValueDeg($desag, 7, $subdeg);
+                $params[] = self::concatValueDeg($desag, 8, $subdeg);
             }
         } else {
             if($ocp != 0) {

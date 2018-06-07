@@ -113,7 +113,7 @@ class EixoUm {
 		return $allObjects;
 	}
 
-	public static function getMaxValueSetor($var, $cad, $prt){
+	public static function getMaxValueSetor($var, $cad, $deg){
 		self::connect();
         $params = [];
         
@@ -125,7 +125,7 @@ class EixoUm {
 
         $params[] = $var;
         $params[] = $cad;
-        $params[] = $prt;
+        $params[] = $deg;
 
         $paramsStr = '';
         foreach ($params as $param) {
@@ -181,13 +181,13 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $ufs, $atc, $cad, $prt, $anos){
+	public static function find($var, $ufs, $cad, $deg, $anos){
 
 		self::connect();
 
         $query = "SELECT * FROM ".self::$table." AS ex"
                ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
-               ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+               ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = 0"
                ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
                ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                ." WHERE ex.Numero = ?"
@@ -196,11 +196,10 @@ class EixoUm {
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             $stmt->bind_param(
-                'ssssss',
+                'sssss',
                 $ufs,
-                $atc,
                 $cad,
-                $prt,
+                $deg,
                 $var,
                 $anos
             );
@@ -419,14 +418,13 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_region($var, $atc, $cad, $prt, $anos, $regiao){
+	public static function getter_region($var, $cad, $deg, $anos, $regiao){
 
 		self::connect();
-        if($prt == 0 || $cad != 0 || $var == 1 || $var == 3|| $var == 2) { 
+        if($deg == 0 || $cad != 0 || $var == 1 || $var == 3|| $var == 2) {
                 
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE ?"
-                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
                    . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    . " WHERE ex.Numero = ?";
@@ -437,22 +435,20 @@ class EixoUm {
             if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
-                        'ssssss',
+                        'sssss',
                         $regiao,
-                        $atc,
                         $cad,
-                        $prt,
+                        $deg,
                         $var,
                         $anos
                     );
                     
                 } else {
                     $stmt->bind_param(
-                        'sssss',
+                        'ssss',
                         $regiao,
-                        $atc,
                         $cad,
-                        $prt,
+                        $deg,
                         $var
                     );
                 }
@@ -466,7 +462,6 @@ class EixoUm {
 
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.UFRegiao LIKE ?"
-                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    . " WHERE ex.Numero = ?";
             
@@ -475,20 +470,18 @@ class EixoUm {
             if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
-                        'sssss',
+                        'ssss',
                         $regiao,
-                        $atc,
-                        $prt,
+                        $deg,
                         $var,
                         $anos
                     );
                     
                 } else {
                     $stmt->bind_param(
-                        'ssss',
+                        'sss',
                         $regiao,
-                        $atc,
-                        $prt,
+                        $deg,
                         $var
                     );
                 }
