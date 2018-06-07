@@ -13,9 +13,7 @@ var corpo = mapa_box
 
 
 function destacaPais(ufId) {
-
-
-
+    console.log(svg_mapa.selectAll("path"))
 	svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
@@ -194,7 +192,7 @@ function ready(error, br_states, mapa){
 	//concatena propriedades
 	svg_mapa.append("g")
 		.attr("class", "states")
-		.selectAll("path")
+        .selectAll("path")
 		.data(states.features)
 		.enter()
 		.append("path")
@@ -234,23 +232,10 @@ function ready(error, br_states, mapa){
             if(window.innerWidth <= 1199)
                 return;
             
-			var newBarraSrc = $(window.document).find("#view_box_barras").attr("src").replace(/uf=[0-9]*/, "uf="+d.id);
-            newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-            updateTitleClickMapa(dict[d.id].uf)
+			updateTitleClickMapa(dict[d.id].uf)
             parameters.uf = d.id;
             if(parameters.eixo == 0 && parameters.var == 9)
-                var newSCCSrc = $(window.document).find("#view_box_scc").attr("src").replace(/uf=[0-9]*/, "uf="+d.id)
-                                                                                           .replace(/treemap_scc.php\?/, "linhas.php?");
-            else
-                var newSCCSrc = $(window.document).find("#view_box_scc")
-                                                         .attr("src")
-                                                        .replace(/uf=[0-9]*/, "uf="+d.id)
-                                                        .replace(/ano=[0-9]*/, "ano="+url['ano'])
-
-            newSCCSrc = newSCCSrc.replace(/cad=[0-9]*/, "cad="+url['cad']).replace(/ocp=[0-9]/, "ocp="+url['ocp']);
             
-			$(window.document).find("#view_box_barras").attr("src", newBarraSrc);
-            $(window.document).find("#view_box_scc").attr("src", newSCCSrc);
             $(window.document).find("select[data-id='uf']").val(d.id);
             destacaPais(d.id);
             //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);

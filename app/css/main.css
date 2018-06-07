@@ -809,7 +809,7 @@ article.results-article div.results-content{
 	text-align: center;
 	height: 100%;
 }
-#corpo svg text{
+svg text{
 	font-size: 10px;
 }
 .axis path,
@@ -822,21 +822,21 @@ article.results-article div.results-content{
 	font-family: sans-serif;
 	font-size: 11px;
 }
-#corpo svg rect {
+svg rect {
 	-moz-transition: all 0.3s;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 	stroke: rgba(255, 255, 255, 0.47);
 }
-#corpo svg path {
+svg path {
 	fill: none;
 	stroke: black;
 }
-#corpo.mapa svg path{
+.states path{
 	stroke: rgba(255, 255, 255, 0.47);
 }
-#corpo svg line {
+svg line {
 	stroke: black;
 }
 .barras-title, .treemap-title{
@@ -1324,7 +1324,7 @@ button.opt.active{
 	a.home button{
 		margin: 10px 0px;
 	}
-	#corpo svg text{
+	svg text{
 		font-size: 9px;
 	}
 	#background_2 {
@@ -1380,7 +1380,7 @@ button.opt.active{
 		font-size: 9px;
 	}
 
-	#corpo svg text{
+	svg text{
 		font-size: 7px;
 	}
 	.chart{
