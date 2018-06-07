@@ -119,11 +119,11 @@ var treemap = d3.treemap()
     .paddingInner(1);
 
 var config = URL_PARAM
-/*
-$.get("./db/json_treemap_scc.php"+config, function(data) {
+
+// $.get("./db/json_treemap_scc.php?"+config, function(data) {
     
-     console.log(data);
-});*/
+//      console.log(data);
+// });
 
 d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
     $('#loading').fadeOut('fast');
@@ -683,7 +683,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             chg);
     }
     else if(eixo == 1) {
-        if(prt !== 0) {
+        if(deg == 1 && subdeg !== 0) {
             svg.selectAll(".swatch").on('mouseover', function(d, i) {
                 tooltipInstance.showTooltip(d, [
                     [colorJSON.cadeias[i+1].color, "Micro"],
@@ -693,7 +693,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                 ]);
             }).on("mouseout", tooltipInstance.hideTooltip);
         }
-        if(sex !== 0) {
+        if(deg == 2 && subdeg !== 0) {
             svg.selectAll(".swatch").on('mouseover', function(d, i) {
                 tooltipInstance.showTooltip(d, [
                     [colorJSON.cadeias[i+1].color, "Masculino"],
@@ -701,7 +701,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                 ]);
             }).on("mouseout", tooltipInstance.hideTooltip);
         }
-        if(fax !== 0) {
+        if(deg == 3 && subdeg !== 0) {
             svg.selectAll(".swatch").on('mouseover', function(d, i) {
                 tooltipInstance.showTooltip(d, [
                     [colorJSON.cadeias[i+1].color, "10 a 17"],
@@ -713,7 +713,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                 ]);
             }).on("mouseout", tooltipInstance.hideTooltip);
         }
-        if(esc !== 0) {
+        if(deg == 4 && subdeg !== 0) {
             svg.selectAll(".swatch").on('mouseover', function(d, i) {
                 tooltipInstance.showTooltip(d, [
                     [colorJSON.cadeias[i+1].color, "Sem Instrução"],
@@ -726,7 +726,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                 ]);
             }).on("mouseout", tooltipInstance.hideTooltip);;
         }
-        if(frm !== 0 || snd !== 0 || prv !== 0) {
+        if(deg >= 6 && subdeg !== 0) {
             svg.selectAll(".swatch").on('mouseover', function(d, i) {
                 tooltipInstance.showTooltip(d, [
                     [colorJSON.cadeias[i+1].color, "Não"],

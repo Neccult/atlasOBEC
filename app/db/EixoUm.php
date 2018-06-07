@@ -15,7 +15,6 @@ class EixoUm {
 	protected $id;
 	public $Numero;
 	public $idUF;
-	public $idAtuacao;
 	public $idCadeia;
 	public $idPorte;
 	public $Ano;
@@ -182,13 +181,13 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function find($var, $ufs, $atc, $cad, $prt, $anos){
+	public static function find($var, $ufs, $cad, $prt, $anos){
 
 		self::connect();
 
         $query = "SELECT * FROM ".self::$table." AS ex"
                ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
-               ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+               ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = 0"
                ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
                ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                ." WHERE ex.Numero = ?"
@@ -197,9 +196,8 @@ class EixoUm {
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
             $stmt->bind_param(
-                'ssssss',
+                'sssss',
                 $ufs,
-                $atc,
                 $cad,
                 $prt,
                 $var,
@@ -351,21 +349,25 @@ class EixoUm {
 	Entrada: 
 	    $var = número da váriavel 
 	    $ufs = id do UF 
-	    $atc = id da atuação
-	    $cad = id do SCC 
-	    $prt = id do porte
+	    $cad = id do SCC
+	    $deg = id do porte
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $ufs, $atc, $cad, $prt, $uos){
+	public static function getter_barras($var, $ufs, $cad, $deg, $uos){
+
+	    if($deg > 0){
+	        $deg = $deg - 8;
+        }
+
 
 		self::connect();
-        if(($prt == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {         
+        if(($deg == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {
+
             $idCadeia = ($uos == 0) ? $cad : 1;
             
             $query = "SELECT * FROM ".self::$table." AS ex"
                    ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
-                   ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
                    ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ".$idCadeia
                    ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    ." WHERE ex.Numero = ?";
@@ -373,10 +375,9 @@ class EixoUm {
             $stmt = mysqli_stmt_init(self::$conn);
             if ($stmt->prepare($query)) {
                 $stmt->bind_param(
-                    'ssss',
+                    'sss',
                     $ufs,
-                    $atc,
-                    $prt,
+                    $deg,
                     $var
                 );
                 $stmt->execute();
@@ -397,7 +398,7 @@ class EixoUm {
             }
             $allObjects = $result_aux;
         }
-        
+
 		self::disconnect();
 
         return $allObjects;

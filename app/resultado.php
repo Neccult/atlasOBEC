@@ -25,21 +25,14 @@
     }
     $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
     $prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;	   /*== porte ==*/
-    $atc    =   isset($_GET["atc"])   ?   $_GET["atc"]  :   0;	   /*== atuacao ==*/
     $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
     $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   0;	   /*== variavel ==*/
     $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   1;	   /*== ocupacao ==*/
     $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
     $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimentos";	   /*== eixo ==*/
-    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
-    $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
-    $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
-    $cor    =   isset($_GET["cor"])   ?   $_GET["cor"]  :   0;	   /*== cor e raça ==*/
-    $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
-    $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
-    $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subdesagregação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
@@ -356,7 +349,7 @@
                         </div>
                         <?php
                         if($view =='mapa' && $cad === 0) {
-                            $prt = 0;
+//                            $prt = 0;
                         }
                         if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
                             $_GET['ocp']=1;
@@ -369,9 +362,9 @@
                         foreach($text['inativos'][$view] as $filter){
                             $_GET[$filter]=0;
                         }*/
-                        if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
-                            $_GET['atc']=0;
-                        }
+//                        if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
+//                            $_GET['atc']=0;
+//                        }
                         if($view == 'barras' || $view == 'treemap_scc') {
                             $view = 'mapa';
                         }
@@ -808,7 +801,7 @@
                         <?php
                         /* cria links download */
                         $basicUrl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
-                        $downloadUrl = $basicUrl.'/download.php?var='.$var.'&view='.$view.'&uf='.$uf.'&prt='.$prt.'&sex='.$sex.'&pfj='.$pfj.'&mod='.$mod.'&prv='.$prv.'&frm='.$frm.'&esc='.$esc.'&cor='.$cor.'&fax='.$fax.'&slc='.$slc.'&snd='.$snd.'&ocp='.$ocp.'&mec='.$mec.'&atc='.$atc.'&typ='.$typ.'&prc='.$prc.'&cad='.$cad.'&ano='.$ano.'&eixo='.$eixo;
+                        $downloadUrl = $basicUrl.'/download.php?var='.$var.'&view='.$view.'&uf='.$uf.'&pfj='.$pfj.'&mod='.$mod.'&slc='.$slc.'&ocp='.$ocp.'&mec='.$mec.'&typ='.$typ.'&prc='.$prc.'&cad='.$cad.'&deg='.$deg.'&subdeg='.$subdeg.'&ano='.$ano.'&eixo='.$eixo;
                         /* csv */
                         switch($var) {
                             case 1:
@@ -879,8 +872,6 @@
     var url = {
         view:"<?php echo $view; ?>",
         var:"<?php echo $var; ?>",
-        prt:"<?php echo $prt; ?>",
-        atc:"<?php echo $atc; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
         ano:"<?php echo $ano; ?>",
@@ -889,28 +880,18 @@
         uf:"<?php echo $uf; ?>"
     };
     <?php if ($eixo == "mercado") {?>
-    url['sex'] = "<?php echo $sex; ?>";
-    url['fax'] = "<?php echo $fax; ?>";
-    url['esc'] = "<?php echo $esc; ?>";
-    url['cor'] = "<?php echo $cor; ?>";
-    url['frm'] = "<?php echo $frm; ?>";
-    url['prv'] = "<?php echo $prv; ?>";
-    url['snd'] = "<?php echo $snd; ?>";
-    <?php } ?>
-    <?php if ($eixo == "mercado") {?>
     url['slc'] = "<?php echo $slc; ?>";
     url['deg'] = "<?php echo $deg; ?>";
+    url['subdeg'] = "<?php echo $subdeg; ?>";
     <?php } ?>
-    <?php if ($eixo == "mercado") {?>
-    url['slc'] = "<?php echo $slc; ?>";
-    url['deg'] = "<?php echo $deg; ?>";
-    <?php } ?>
+
     <?php if ($eixo == "politicas") {?>
     url['mec'] = "<?php echo $mec; ?>";
     url['mod'] = "<?php echo $mod; ?>";
     url['pfj'] = "<?php echo $pfj; ?>";
     url['uos'] = "<?php echo $uos; ?>";
     <?php } ?>
+
     <?php if ($eixo == "comercio") {?>
     url['typ'] = "<?php echo $typ; ?>";
     url['prc'] = "<?php echo $prc; ?>";

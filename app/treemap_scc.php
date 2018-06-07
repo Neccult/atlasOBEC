@@ -41,21 +41,14 @@
     $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
     $prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;	   /*== porte ==*/
-    $atc    =   isset($_GET["atc"])   ?   $_GET["atc"]  :   0;	   /*== atuacao ==*/
     $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
     $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   0;	   /*== variavel ==*/
     $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   1;	   /*== ocupacao ==*/
     $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
     $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
-    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
-    $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
-    $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
-    $cor    =   isset($_GET["cor"])   ?   $_GET["cor"]  :   0;	   /*== cor e raça ==*/
-    $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
-    $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
-    $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   99;	   /*== Modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   99;	   /*== Tipo de pessoa ==*/
@@ -132,16 +125,7 @@
 
                 //variaveis configuracao query
                 var vrv = <?php echo $var; ?>;
-                var atc = <?php echo $atc; ?>;
-                var prt = <?php echo $prt; ?>;
                 var ocp = <?php echo $ocp; ?>;
-                var sex = <?php echo $sex; ?>;
-                var fax = <?php echo $fax; ?>;
-                var esc = <?php echo $esc; ?>;
-                var cor = <?php echo $cor; ?>;
-                var frm = <?php echo $frm; ?>;
-                var prv = <?php echo $prv; ?>;
-                var snd = <?php echo $snd; ?>;
                 var slc = <?php echo $slc; ?>;
                 var mec = <?php echo $mec; ?>;
                 var mod = <?php echo $mod; ?>;
@@ -149,6 +133,7 @@
                 var prc = <?php echo $prc; ?>;
                 var ano = <?php echo $ano; ?>;
                 var deg = <?php echo $deg; ?>;
+                var subdeg = <?php echo $subdeg; ?>;
                 var pfj = <?php echo $pfj; ?>;
                 var chg = <?php echo $chg; ?>;
                 var uf = <?php echo $uf; ?>;
@@ -182,8 +167,7 @@
     var url = {
         view:"<?php echo $view; ?>",
         var:"<?php echo $var; ?>",
-        prt:"<?php echo $prt; ?>",
-        atc:"<?php echo $atc; ?>",
+        deg:"<?php echo $deg; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
         ano:"<?php echo $ano; ?>",
@@ -191,13 +175,7 @@
         uf:"<?php echo $uf; ?>"
     };
     <?php if ($eixo == "mercado" && $view != "mapa") {?>
-    url['sex'] = "<?php echo $sex; ?>";
-    url['fax'] = "<?php echo $fax; ?>";
-    url['esc'] = "<?php echo $esc; ?>";
-    url['cor'] = "<?php echo $cor; ?>";
-    url['frm'] = "<?php echo $frm; ?>";
-    url['prv'] = "<?php echo $prv; ?>";
-    url['snd'] = "<?php echo $snd; ?>";
+    url['subdeg'] = "<?php echo $subdeg; ?>";
     <?php } ?>
 
     <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
