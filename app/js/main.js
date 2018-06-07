@@ -52,9 +52,21 @@ function controlVar(clickVar){
         var novaUrlRes = prefixoRes + "?" + sufixo;
 
         window.location.href = novaUrlRes;
+
     }
 
-    $('iframe[id="resultado_view"]').attr('src', urlString);
+    if(window.location.href.match("page.php") != null){
+
+        var prefixo = window.location.href.split("?")[0];
+        var sufixo = window.location.href.split("?")[1];
+
+        $('iframe[id="resultado_view"]').attr('src', 'resultado.php?'+sufixo)
+
+    }
+
+
+
+
 
 }
 
@@ -909,9 +921,6 @@ function loadResult(){
             var selectId = $(this).attr('data-id'),
                 selectValue = url[selectId];
 
-            /* atualiza valor select */
-            //$(this).val(selectValue);
-            /* select porte default */
             if(selectId=='prt' && selectValue=='0' && url['atc']!='0'){
                 /* valor atuação */
                 $(this).val('atc-'+url['atc']);
@@ -1447,7 +1456,8 @@ function updateSelectsByUrl(){
 
 
     $(".bread-select").each(function(){
-       $(this).val(obj[$(this).attr("data-id")])
+        $(this).val(obj[$(this).attr("data-id")]);
+        url[$(this).attr("data-id")] = $(this).val();
     })
 
 }
@@ -1458,6 +1468,7 @@ function updateSelectsByUrl(){
 
 
 $(document).ready(function(){
+
 
     ///TODO ESTÁ FUNCIONANDO?
     $(window).on('hashchange', function() {
@@ -1526,6 +1537,7 @@ $(document).ready(function(){
         }
 
     });
+
 
     if(url['var'] === "" && window.location.pathname.match("page.php")){
         controlVarPage(url['var']);
@@ -1737,8 +1749,6 @@ $(document).ready(function(){
 
             if(dataId ==='var'){
 
-
-
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
@@ -1835,17 +1845,21 @@ $(document).ready(function(){
                     else{
                         deg_value = $(this).val()
 
+
                     }
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
 
+
                     if(url['var'] == 4 || url['var'] == 5)
                         updateLegendByDeg(url['deg'])
+
+                    updateWindowUrl('subdeg', $(this).val());
+
                 }
                 else{
                     controlFilter($(this).val(), $(this).attr('data-id'), 1);
                 }
 
-                $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 document.getElementById('view_box_barras').contentWindow.location.reload(true);
             }
 
@@ -1858,13 +1872,8 @@ $(document).ready(function(){
 
             if(dataId === "cad") {
 
-                //if(getEixo(window.location.hash.substring(1)) == 1) cleanDesagsUrl();
-                $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
 
                 url['cad'] = ($(this).val())
-                /*if(eixo_atual == 2 && (vrv == 18 || vrv == 19)){
-                    updateTitleBox(SETORES)
-                }*/
 
             }
 
@@ -1891,9 +1900,9 @@ $(document).ready(function(){
 
     });
 
+
+    defaultUrl();
     updateSelectsByUrl();
-
-
     updateIframe(url);
 
 });

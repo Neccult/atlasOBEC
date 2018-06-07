@@ -167,6 +167,7 @@ function ready(error, br_states, mapa){
                     text: d
                 }))
             })
+
             $(this).val(url['ano']);
         });
 
