@@ -1452,6 +1452,15 @@ function updateSelectsByUrl(){
         obj[i.split("=")[0]] = i.split("=")[1];
     } );
 
+    if ( obj.hasOwnProperty('slc') ) {
+        url['slc'] = obj['slc'];
+    }
+
+    if ( obj.hasOwnProperty('ocp') ) {
+        url['ocp'] = obj['ocp'];
+    }
+
+    console.log(obj)
 
 
     $(".bread-select").each(function(){
@@ -1516,6 +1525,7 @@ $(document).ready(function(){
                     url['cor'] = 0;
                 }
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+                updateWindowUrl('cad', setor)
                 updateIframe(url);
 
             }
@@ -1565,6 +1575,8 @@ $(document).ready(function(){
                     url['mundo'] = 1;
                     url['uf'] = 0;
 
+
+
                     $("select[data-id='uf']").val(0);
 
                     if(id === "treemap_region") {
@@ -1591,8 +1603,11 @@ $(document).ready(function(){
                         $('#treemap_region').removeClass("active");
                     }
                 }
+                updateWindowUrl('mundo', url['mundo']);
+                updateWindowUrl('uf', url['uf']);
                 updateUrl();
                 updateIframe(url);
+
             }
             else{
                 updateUrl();
@@ -1616,9 +1631,13 @@ $(document).ready(function(){
             updateUrl();
             if(id === "bens") {
                 url['slc'] = 0;
+
                 $(this).addClass("active");
                 $('#servicos').removeClass("active");
                 url['ano'] = anos_default[url['var']][1]
+
+
+
 
             }
             else {
@@ -1628,7 +1647,12 @@ $(document).ready(function(){
                 $(this).addClass("active");
                 $('#bens').removeClass("active");
                 url['ano'] = anos_default[url['var']][0]
+
+
             }
+
+            updateWindowUrl('slc', url['slc'])
+            updateWindowUrl('ano', url['ano'])
             updateIframe(url); /* altera gráfico */
         }
         else if(id == "recebedora" || id == "trabalhador"){
@@ -1645,7 +1669,9 @@ $(document).ready(function(){
                     }
 
                     updateUrl();
+
                     url['mec'] = 0;
+
                     $(this).addClass("active");
                     $('#trabalhador').removeClass("active");
                     updateIframe(url); /* altera gráfico */
@@ -1667,6 +1693,9 @@ $(document).ready(function(){
                     updateIframe(url); /* altera gráfico */
                 }
             }
+
+            updateWindowUrl('mec', url['mec'])
+
         }
         else {
             updateUrl();
@@ -1677,38 +1706,50 @@ $(document).ready(function(){
                 url['slc'] = 0;
                 url['deg'] = 0;
                 url['ocp'] = 0;
+
                 controlFilter('0', 'deg');
                 $(this).addClass("active");
                 $('#ocupacao').removeClass("active");
 
                 url['ano'] = anos_default[url['var']][0];
 
+                updateWindowUrl('slc', url['slc'])
+                updateWindowUrl('deg', url['deg'])
+                updateWindowUrl('ocp', url['ocp'])
+                updateWindowUrl('ano', url['ano'])
+
                 $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
             }
             else {
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
-                d3.json('data/pt-br.json', function(error, data) {
-                    if (error) throw error;
 
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.ocp[0].name);
+                $(".cad-title").first().html(textJSON.select.ocp[0].name);
 
-                    updateDataDescUoS();
-                });
+                updateDataDescUoS();
+
                 switchToOcupations();
                 url['slc'] = 1;
                 url['deg'] = 0;
                 url['cad'] = 0;
+
                 if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
                     url['ocp'] = 1;
                 else
                     url['ocp'] = 3;
                 controlFilter('0', 'deg');
                 url['cad'] = 0;
+
+                url['ano'] = anos_default[url['var']][1];
+
+                updateWindowUrl('slc', url['slc'])
+                updateWindowUrl('deg', url['deg'])
+                updateWindowUrl('ocp', url['ocp'])
+                updateWindowUrl('ano', url['ano'])
+                updateWindowUrl('cad', url['cad'])
+
                 $(this).addClass("active");
                 $('#setor').removeClass("active");
 
-                url['ano'] = anos_default[url['var']][1];
                 //troca o nome do select de setor
                 $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
             }
