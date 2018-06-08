@@ -12,10 +12,8 @@ header('charset=utf-8');
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
-
-	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
-	$prt = $_GET["prt"];
+	$deg = $_GET["deg"];
     $ocp = $_GET["ocp"];
     $mod =      isset($_GET['mod'])   ?   $_GET['mod']  :   0; 
     $mec = $_GET["mec"];
@@ -23,6 +21,7 @@ if (!empty($_GET["var"])) {
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $uf    =   isset($_GET["uf"])   ?   $_GET["uf"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   1;	   /*== Subdesagregação ==*/
 	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
     $mundo =    isset($_GET['mundo']) ?   $_GET['mundo']:   0;
@@ -30,11 +29,8 @@ if (!empty($_GET["var"])) {
 }
 else{
 	$var = 1;
-	
-	$atc = 0;
 	$cad = 0;
 	$pfj = 0;
-	$prt = 0;
 	$ocp = 0;
     $mec = 0;
     $typ = 1;
@@ -43,6 +39,8 @@ else{
     $eixo = 0;
     $slc = 0;
     $mod = 0;
+    $deg = 0;
+    $subdeg = 0;
     $mundo = 0;
 }
 
@@ -78,7 +76,7 @@ switch($mod) {
 $mapa = array();
 if($eixo == 0) {
     require_once("EixoUm.php");
-	foreach (EixoUm::getter_mapa($var, $atc, $cad, $prt, $ano) as $tupla) {
+	foreach (EixoUm::getter_mapa($var, $cad, $deg, $ano) as $tupla) {
 
         $id = $tupla->idUF;
         $mapa[$id]['id'] = (int) $tupla->idUF;

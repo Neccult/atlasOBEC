@@ -73,10 +73,10 @@ d3.json('data/pt-br.json', function(error, data) {
   textJSON = data;
 });
 
-var config = "?var="+vrv+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
-/*$.get('./db/json_mapa.php' + config, function(dado){
-    // console.log(dado)
-})*/
+var config = "?var="+vrv+"&cad="+cad+"&deg="+deg+"&subdeg="+subdeg+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&mod="+mod+"&ano="+ano+"&eixo="+eixo+"&mundo="+mundo+"&slc="+slc;
+// $.get('./db/json_mapa.php' + config, function(dado){
+//     console.log(dado)
+// })
 //pre-load arquivos
 d3.queue()
 	.defer(d3.json, "./data/br-min.json")
@@ -197,8 +197,6 @@ function ready(error, br_states, mapa){
 
     }
 
-   // console.log(colorJSON)
-   //  console.log(colorJSON.binario['0'].color)
 
     var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
@@ -206,7 +204,8 @@ function ready(error, br_states, mapa){
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
-    
+
+
 	//concatena propriedades
 	svg.append("g")
 		.attr("class", "states")
@@ -295,32 +294,7 @@ function ready(error, br_states, mapa){
 		.attr("class", "legendLinear")
 		.attr("transform", legendTransform);
 
-	var title_aux;
-	if(atc == 0) title_aux = title+" - "+textJSON.select.prt[prt].name;
-	if(atc != 0) title_aux = title+" - "+textJSON.select.atc[atc].name;
 
-	var legendLinear = d3.legendColor()
-		.title(title_aux+" - "+ano)
-		.labelFormat(d3.format(".0f"))
-		.shapeWidth(shapeWidth)
-		.shapePadding(5)
-		.orient('vertical')
-		.scale(color);
-
-    var legendLinear1 = d3.legendColor()
-        .title(function(d) {
-            if(cad === 0) {
-                return "Setores Culturais Criativos";
-            }
-            else {
-                return textJSON.select.cad[cad].name;
-            }
-        })
-        .labelFormat(d3.format(".0f"))
-        .shapeWidth(shapeWidth)
-        .shapePadding(10)
-        .orient('vertical')
-        .scale(color);
 
     if(eixo == 2 && vrv == 17)
         legendaBinario();

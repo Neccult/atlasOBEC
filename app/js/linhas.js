@@ -4,7 +4,7 @@ var chartWidth = $('.chart').width()+25;
 $('#corpo').css("background-color", "#f0f0f0")
 
 /*==== Linhas JS ====*/
-var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&atc=" + atc + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&prt=" + prt + "&ocp=" + ocp + "&sex=" + sex + "&fax=" + fax + "&esc=" + esc + "&cor=" + cor + "&typ=" + typ + "&prc=" + prc + "&frm=" + frm + "&prv=" + prv + "&snd=" + snd + "&mec=" + mec + "&mod=" + mod + "&pfj=" + pfj + "&eixo=" + eixo;
+var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&ocp=" + ocp + "&typ=" + typ + "&prc=" + prc +  "&mec=" + mec + "&mod=" + mod + "&deg=" + deg + "&subdeg=" + subdeg + "&pfj=" + pfj + "&eixo=" + eixo;
 
 // var info = [];
 var dados = {key: [], value: []};
@@ -498,10 +498,12 @@ function analyze(error, data) {
 
                 $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(desagId)+"]").prop('selected', true)
 
+                updateWindowUrl('deg', deg)
+                updateWindowUrl('subdeg', desagId)
 
             }
             else{
-                cadId = getCadId($(path).attr("scc"));
+                var cadId = getCadId($(path).attr("scc"));
 
                 url['cad'] = cadId;
 
@@ -515,6 +517,7 @@ function analyze(error, data) {
                 $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
                 $(window.parent.document).find("select[data-id='cad']").val(cadId);
 
+                updateWindowUrl('cad', cadId)
             }
 
             destacaSetor($(path).attr("scc"));
