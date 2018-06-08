@@ -239,6 +239,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         }
         var formatYAxis = function (d) {
+            
             var higherZeroOcur = maxDecimalAxis;
             var dadosCounter = 0;
             var minFraction = 3;
@@ -394,9 +395,14 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 return formatBillions;
         }();
 
+        function make_y_gridlines() {
+            return d3.axisLeft(y)
+                .scale(y)
+                .ticks(4);
+        }
+
         // cria SVG
 
-console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").size())
         var valueTop = margin.top + 5;
         if($(barras_box).find("svg").length == 0){
             var svg_barras = d3.select(barras_box).append("svg")
@@ -406,23 +412,21 @@ console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").si
             .attr("transform",
                 "translate(" + (margin.left+5) + "," + valueTop + ")");
 
+            svg_barras.append("g")
+                      .attr("class", "grid")
+                      .style("opacity", 0.1)
+    
+
         }
         
-        function make_y_gridlines() {
-            return d3.axisLeft(y)
-                .scale(y)
-                .ticks(4);
-        }
-
+        svg_barras = d3.select(barras_box+">svg>g")
+        
         //add the Y gridlines
-       svg_barras.append("g")
-            .attr("class", "grid")
-            .style("opacity", 0.1)
-            .call(make_y_gridlines()
-                .tickSize(-width + 10)
-                .tickSizeOuter(0)
-                .tickFormat("")
-            );
+        d3.select("g .grid").call(make_y_gridlines()
+            .tickSize(-width + 10)
+            .tickSizeOuter(0)
+            .tickFormat("")
+        );
 
         /*
         *  O trecho a seguir insere os anos contidos na visualização
@@ -449,18 +453,100 @@ console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").si
         // console.log(dados)
         //Cria barras
 
-        if($(barras_box).find("svg").find("g").first().find("g.grid").find("rect").length != 0){
-            svg_barras.select("g").selectAll("rect").data(dados.value, function(d){
-                return d;
+        console.log()    
+
+        if(d3.select(barras_box).select("svg").select("g").selectAll("rect").size()!= 0){
+
+            var rect = d3.select(barras_box)
+                         .select("svg")
+                         .select("g")
+                         .selectAll("rect")
+                         .data(dados.value)
+                         
+            rect.exit().remove()
+                                
+            rect.attr("x", function (d, i) {
+                return x(i);
+            }).attr("y", function (d) {
+                var graphBottom = height;
+                var barPosition = Math.abs(y(d));
+                var barHeight = y(d);
+                var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
+                var isMinValueNegative = zeroPosition !== false;
+                var isValueNegative = d < 0;
+                var zeroPositionExists = zeroPosition < height;
+                var isValueZero = d === 0;
+                var isMaxValue = d3.max(dados.value) == d;
+
+                // TEM VALOR NEGATIVO
+                if (isMinValueNegative) {
+
+                    // NÚMERO NEGATIVO
+                    if (isValueNegative)
+                        return zeroPosition;
+
+                    // S barra for muito pequena
+                    if (barHeight == zeroPosition)
+                        return zeroPosition - 5;
+
+                    return y(d);
+                }
+
+                barHeight = Math.abs(height - barHeight);
+
+                // BARRA MUITO PEQUENA
+            // if (barHeight <= 3)
+                //return barHeight < 5? height - (5 - barHeight) : (barPosition - barHeight) - 1 ;
+                // return height - (minBarHeight - barHeight);
+
+                // BARRA PEQUENA
+                if (barHeight <= minBarHeight)
+                    return height - minBarHeight;
+
+                return barPosition;
+            }).attr("width", x.bandwidth())
+            .attr("height", function (d) {
+                var minValue = y.domain()[0];
+                var maxValue = y.domain()[1];
+                var zeroPosition = y(0);
+                var isMinValueNegative = minValue < 0;
+                var isValueNegative = d < 0;
+                var isValueZero = d === 0;
+                var barHeight = y(d);
+
+                // TEM VALOR NEGATIVO
+                if (isMinValueNegative) {
+                    var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
+
+                    // NÚMERO NEGATIVO
+                    if (isValueNegative) {
+                        barHeight = y(d) - zeroPosition;
+
+                        if (barHeight < minBarHeight || isValueZero)
+                            return minBarHeight;
+
+                        return Math.abs(y(d)) - zeroPosition;
+                    }
+
+                    // NÚMERO POSITIVO
+                    if (isValueZero)
+                        return minBarHeight;
+
+                    return Math.abs(y(d) - zeroPosition);
+                }
+
+                barHeight = height - barHeight;
+
+                if (barHeight < minBarHeight)
+                    return minBarHeight;
+
+                return barHeight;
             })
-            svg_barras.exit().remove()
-            alert("oi")
-            //svg_barras.selectAll("rect")
-        }
-       svg_barras.selectAll("rect")
-            .data(dados.value, function (d) {
-                return d;
-            })
+        } else {
+
+        
+        var rect = svg_barras.selectAll("rect")
+            .data(dados.value)
             .enter().append("rect")
             .attr("class", "bar")
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
@@ -556,8 +642,8 @@ console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").si
                 else
                     return color(cad);
             })
-            //mouseover
-            .on("mouseover", function (d, i, obj) {
+        }    //mouseover
+            rect.on("mouseover", function (d, i, obj) {
                 var title_content = getDataVar(textJSON, eixo, vrv).title;
                 var title = title_content.replace("<span>", "");
                 title = title.replace("<br>", "");
@@ -688,15 +774,29 @@ console.log(d3.select(barras_box).select("svg").select("g").selectAll("rect").si
             .scale(y)
             .tickFormat(formatYAxis);
 
+        
         //adiciona eixo X
-       svg_barras.append("g")
+        if($(".eixo-x").length == 0){
+            svg_barras.append("g").attr("class", "eixo-x")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
+        } else {
+            d3.select("eixo-x").attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+        }
 
         //adiciona eixo Y
-       svg_barras.append("g")
+        if($(".eixo-y").length == 0){
+            svg_barras.append("g").attr("class", "eixo-y")
             .attr("transform", "translate(0, 0)")
             .call(yAxis);
+        } else {
+            d3.select(".eixo-y")
+            .transition()
+            .duration(400)
+            .call(yAxis);
+        }
+       
 
         var centerCanvas = function () {
             var svg_barras = d3.selectAll(barras_box+">svg>g");
