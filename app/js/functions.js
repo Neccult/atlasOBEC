@@ -183,7 +183,7 @@ function configInfoDataBoxMapaClick(eixo, vrv, dados) {
     }
 }
 
-function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url, deg_cad, deg_ocp, chg) {
+function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url, deg_cad, deg_ocp) {
 
     if(eixo == 0){
 
@@ -340,42 +340,48 @@ function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, pe
     }
 }
 
-function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
+function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
 
+    index_ano = dados.key.indexOf(parameters.ano)
     if(eixo == 0){
+
         first_year = Number(dados.key[0]);
-        index_ano = dados.key.indexOf(url['ano'])
          if(vrv == 3 || vrv == 9 ){
+
             if(url['uf'] != 0){
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
+                dados.valor = dados.value[index_ano]/100;
             }
             else{
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
+                dados.valor = dados.value[index_ano]/100;
             }
-            setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+            setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
+            
+    
             setIntegerValueData(dados, eixo, vrv);
         }
         else if(url['uf'] == 0 && url['cad'] == 0 && url['deg'] == 0 && vrv < 10){
             if(vrv !== 3){
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+                setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
+                dados.valor = dados.value[dados.key.indexOf(parameters.ano)];
+                                
                 setIntegerValueData(dados, eixo, vrv);
             }
             else{
-                setPercentValueData({percentual: 1, taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
+                setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
                 if(url['uf'] == 0){
-                    dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
+                    dados.valor = dados.value[index_ano]/100;
 
                 }
                 else{
-                    dados.valor = dados.value[dados.key.indexOf(url['ano'])]/100;
+                    dados.valor = dados.value[index_ano]/100;
                 }
+
                 setIntegerValueData(dados, eixo, vrv);
             }
         }
         else if(vrv > 9){
             if(ano != null) {
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+                dados.valor = dados.value[index_ano];
 
                 if(url['uos'] == 0){
                     setIntegerValueData(dados, eixo, vrv);
@@ -386,7 +392,8 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, cad) {
             }
         }
         else{
-            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+            dados.valor = dados.value[index_ano];
+            
             setIntegerValueData(dados, eixo, vrv);
             if(url['cad'] == 0)
                 setPercentValueData({percentual: dados.percentual[index_ano]}, eixo, vrv)
@@ -952,8 +959,7 @@ function updateMecanismo(url, vrv){
 }
 
 function updateBreadcrumbSetores(cads){
-
-    console.log(cads)
+    
     $(".bread-select[data-id='cad'] > option").each(function() {
         $(this).remove();
     });
@@ -1162,62 +1168,60 @@ function setTerceiroValueData(eixo, vrv, value, cad){
  */
 function setIntegerValueData(value, eixo, vrv) {
 
-	$.get("./data/pt-br.json", function(description) {
+	var description = PT_BR
 
-        // console.log(value)
+    var result = getDataVar(description, eixo, vrv);
+    sufixo = result.sufixo_valor;
+    prefixo = result.prefixo_valor;
+    valor = value.valor;
+    switch(eixo) {
+        case 0:
+            if(vrv == 3) {
+                valor = valor*100;
+            }else if(vrv == 9 && value.uf == null) {
+                valor = valor*100;
+            }
+            break;
+        case 1:
+            if(sufixo == '%')
+                valor *= 100;
+            break;
+    }
+    
+    var literal = formatDecimalLimit(valor, 2);
 
-        var result = getDataVar(description, eixo, vrv);
-	    sufixo = result.sufixo_valor;
-		prefixo = result.prefixo_valor;
-		valor = value.valor;
-		switch(eixo) {
-			case 0:
-				if(vrv == 3) {
-					valor = valor*100;
-				}else if(vrv == 9 && value.uf == null) {
-					valor = valor*100;
-				}
-				break;
-			case 1:
-			    if(sufixo == '%')
-                    valor *= 100;
-                break;
-        }
-
-        var literal = formatDecimalLimit(valor, 2);
-
-        if(eixo == 0 && url['var'] == 3){
-            literal = formatDecimalLimit(valor, 2);
-        }
-        if(eixo == 0 && url['var'] == 9){
-            valor = valor*100;
+    if(eixo == 0 && url['var'] == 3){
+        literal = formatDecimalLimit(valor, 2);
+    }
+    if(eixo == 0 && url['var'] == 9){
+        valor = valor*100;
 
 
-            literal = formatDecimalLimit(valor, 2);
-        }
-        if(eixo == 0 && url['var'] > 9){
-            literal = formatDecimalLimit(valor, 2);
-        }
-        if(eixo == 1 && url['var'] == 2){
-            literal = formatDecimalLimit(valor, 4);
-        }
-        if(eixo == 1 && url['var'] == 9){
-            literal = formatDecimalLimit(valor, 4);
-        }
-        else if(eixo == 3)
-            literal = formatDecimalLimit(valor, 2);
+        literal = formatDecimalLimit(valor, 2);
+    }
+    if(eixo == 0 && url['var'] > 9){
+        literal = formatDecimalLimit(valor, 2);
+    }
+    if(eixo == 1 && url['var'] == 2){
+        literal = formatDecimalLimit(valor, 4);
+    }
+    if(eixo == 1 && url['var'] == 9){
+        literal = formatDecimalLimit(valor, 4);
+    }
+    else if(eixo == 3)
+        literal = formatDecimalLimit(valor, 2);
 
-        // console.log(value)
+    // console.log(value)
 
-        estado = $(".state-title").first().text()
-        
+    estado = $(".state-title").first().text()
+    
 
-        $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
-        var doc =  $(".integer-value").first().find(".number").first();
+    $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
+    var doc =  $(".integer-value").first().find(".number").first();
 
-        $('.font-title').html("Fonte(s): "+result.fontes);
-        setMaxFontSize(doc);
-	});
+    $('.font-title').html("Fonte(s): "+result.fontes);
+    setMaxFontSize(doc);
+	
 }
 
 
@@ -1487,29 +1491,28 @@ function formatTextTaxaVrv(value, eixo, vrv){
 function formatStringVrv(value, eixo, vrv){
     $.ajaxSetup({async: false})
     var string;
-    $.get("./data/pt-br.json", function(d) {
-        getDataVar(d, eixo, vrv)
-        sufixo = getDataVar(d, eixo, vrv).sufixo_valor;
-        prefixo = getDataVar(d, eixo, vrv).prefixo_valor;
-        valor = value;
-        switch(eixo) {
-            case 0:
-                if(vrv == 3) {
-                    valor = valor*100;
-                }
-                break;
-            case 1:
-                if(vrv == 2){
-                    valor *= 100;
-                }
-                else if(vrv == 9){
-                    valor *= 100;
-                }
-                break;
+    var d = PT_BR
+    getDataVar(d, eixo, vrv)
+    sufixo = getDataVar(d, eixo, vrv).sufixo_valor;
+    prefixo = getDataVar(d, eixo, vrv).prefixo_valor;
+    valor = value;
+    switch(eixo) {
+        case 0:
+            if(vrv == 3) {
+                valor = valor*100;
+            }
+            break;
+        case 1:
+            if(vrv == 2){
+                valor *= 100;
+            }
+            else if(vrv == 9){
+                valor *= 100;
+            }
+            break;
 
-        }
-        string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
-    });
+    }
+    string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
     $.ajaxSetup({async: true});
 
     return string;

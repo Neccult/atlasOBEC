@@ -188,6 +188,8 @@ function changeChart(url){
 }
 
 function updateIframe(url){
+    $.getScript('js/load_views_listeners.js');
+
 
     var newUrl = "",
         count = 0,
@@ -1138,7 +1140,6 @@ function updateWindowUrl(id, valor){
 
     var urlString = parent.window.location.href.replace(re, id+"="+valor);
     parent.window.history.pushState(null, null, urlString);
-    $.getScript('js/load_views_listeners.js');
 }
 
 function updateActiveBreadcrumbs(eixo, vrv){
@@ -1838,6 +1839,7 @@ $(document).ready(function(){
 
         if(dataId !== "eixo") {
             updateUrl();
+
             // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
@@ -1957,6 +1959,7 @@ $(document).ready(function(){
                 changeDescVar();
             }
 
+
             if(dataId === 'deg') {
 
                 if(eixo_atual == 1){
@@ -1985,14 +1988,15 @@ $(document).ready(function(){
                     controlFilter($(this).val(), $(this).attr('data-id'), 1);
                 }
 
-                document.getElementById('view_box_barras').contentWindow.location.reload(true);
             }
 
+
             if(dataId === "uf"){
-                document.getElementById('view_box').contentWindow.location.reload(true);
+                updateWindowUrl('uf', dataVal);
 
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
                 updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
+
             }
 
             if(dataId === "cad") {
@@ -2022,7 +2026,6 @@ $(document).ready(function(){
         window.open(downloadUrl, '_blank');
 
     });
-
 
     defaultUrl();
     updateSelectsByUrl();

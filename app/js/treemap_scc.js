@@ -680,8 +680,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-deg"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"),
-            chg);
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
     }
     else if(eixo == 1) {
         if(deg == 1 && subdeg !== 0) {
@@ -765,8 +764,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"][id-subdeg="'+$(".bread-select[data-id=deg]").val()+'"]').attr("data-percent-uf"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"),
-            chg);
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+cad+'"]').attr("data-deg"));
     }
     else if(eixo == 2){
 
@@ -777,8 +775,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-deg"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"),
-            chg);
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
     }
 	else if(eixo == 3){
         configInfoDataBoxTreemapSCC(eixo,
@@ -788,8 +785,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
             url,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"),
-            chg);
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
     }
 
 

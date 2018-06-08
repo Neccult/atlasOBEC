@@ -26,6 +26,7 @@ var cad  = parameters.cad
 var deg  = parameters.deg
 var prt = 0
 var ocp = 0
+var uos = 0
 
 
 function destacaBarra(barraId, stacked = false) {
@@ -464,7 +465,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                          
             rect.exit().remove()
                                 
-            rect.attr("x", function (d, i) {
+            rect
+            .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
+            .attr("data-value", function(d) {   return d; })
+            .attr("x", function (d, i) {
                 return x(i);
             }).attr("y", function (d) {
                 var graphBottom = height;
@@ -685,7 +689,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
 
                 destacaBarra(dados.key[i]);
-                var valor = $('svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+                var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
 
                 configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
@@ -858,12 +862,11 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         destacaBarra(url['ano']);
 
-        var valor = $('svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
-        
+        var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
-
-        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1))
+        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
             configInfoDataBoxBarras(eixo, vrv, dados, valor);         
+        }
 
         if(eixo == 2 && (vrv == 18 || vrv == 19))
             updateDescription(descricoes, eixo, vrv, mec);
@@ -1242,8 +1245,6 @@ else {
             .on("click", function(d, i, obj) {
                 if(window.innerWidth <= 800)
                     return;
-
-                console.log("oi")
 
                 if(d.x.getFullYear() != url['ano']) {
                     url['ano'] = d.x.getFullYear();

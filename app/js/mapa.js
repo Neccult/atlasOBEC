@@ -281,36 +281,59 @@ function escalaMapa(){
     if(y_barra + height_barra > svg_mapa.attr("height")){
         y_barra = svg_mapa.attr("height") - 23 - height_barra;
     }
+    
+    if(svg_mapa.selectAll("defs").size() == 0){
+        gradient = svg_mapa.append("defs")
+                    .append("linearGradient")
+    } else {
+        gradient = svg_mapa.select("defs linearGradient")
+    }
 
-    gradient = svg_mapa.append("defs")
-        .append("linearGradient")
-        .attr("id", "grad")
-        .attr("x1", "0%")
-        .attr("y1", "100%")
-        .attr("x2", "90%")
-        .attr("y2", "100%")
+    gradient.attr("id", "grad")
+            .attr("x1", "0%")
+            .attr("y1", "100%")
+            .attr("x2", "90%")
+            .attr("y2", "100%")
 
-    gradient.append("stop")
+    if(gradient.selectAll("stop").size() == 0){
+
+        gradient.append("stop")
+        .attr("class", "begin")
         .attr("offset", "0%")
         .style("stop-color", low_color)
         .style("stop-opacity", 1);
 
-    gradient.append("stop")
-        .attr("offset", "90%")
-        .style("stop-color", high_color)
-        .style("stop-opacity", 1);
+        gradient.append("stop")
+            .attr("class", "end")
+            .attr("offset", "90%")
+            .style("stop-color", high_color)
+            .style("stop-opacity", 1);
 
-    svg_mapa.append("g")
-        .append("rect")
-        .attr("x", x_barra)
-        .attr("y", y_barra)
-        .attr("height", height_barra)
-        .attr("width", width_barra)
-        .attr("rx", height_box(mapa_box)/150)
-        .attr("ry", height_box(mapa_box)/150)
-        .style("fill", "url(#grad)")
-        .style("stroke-width", 1)
-        .style("stroke", fontColor);
+    } else {
+        gradient.select("stop .begin")
+                .style("stop-color", low_color)
+
+        gradient.select("stop .end")
+                .style("stop-color", high_color)
+    }
+    
+    if(svg_mapa.select("g .legenda").size() == 0){
+        var svg_legenda = svg_mapa.append("g")
+                                    .attr("class", "legenda")
+                                    .append("rect")
+        
+    } else {
+        var svg_legenda = d3.select("g .legenda")
+    }
+    svg_legenda.attr("x", x_barra)
+                .attr("y", y_barra)
+                .attr("height", height_barra)
+                .attr("width", width_barra)
+                .attr("rx", height_box(mapa_box)/150)
+                .attr("ry", height_box(mapa_box)/150)
+                .style("fill", "url(#grad)")
+                .style("stroke-width", 1)
+                .style("stroke", fontColor);
 
     svg_mapa.selectAll("line")
         .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])

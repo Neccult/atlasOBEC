@@ -4,7 +4,7 @@ parameters = {};
 window.parent.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
     parameters[key] = value;
 })
-
+console.log(parameters)
 parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
 URL_PARAM = $.param(parameters);
