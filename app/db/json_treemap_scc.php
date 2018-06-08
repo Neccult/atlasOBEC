@@ -25,10 +25,10 @@ if (!empty($_GET["var"])) {
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== visualizacao ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
-    $desag  =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
+    $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
     $subdeg =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;
-    $ano    =   $_GET["ano"];
-    $eixo   =   isset($_GET['eixo'])  ?   $_GET['eixo'] :   0;
+    $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  : 2014;
+    $eixo   = $_GET['eixo'];
 }
 else{
 	$var = 1;
@@ -36,7 +36,7 @@ else{
 	$prt = 0;
 	$ocp = 0;
     $mec = 0;
-    $desag = 0;
+    $deg = 0;
     $subdeg = 0;
     $mod = 0;
     $pfj = 0;
@@ -163,7 +163,6 @@ function getNameEscolaridade($id) {
     }
 }
 
-
 function getNameEtinia($id) {
     switch ($id) {
         case 1:
@@ -209,9 +208,8 @@ function getNameSindical($id) {
     }
 }
 
-
 //Trata o sexo
-if($desag == 2){
+if($deg == 2){
     switch($subdeg) {
         case 0:
             $subdeg = NULL;
@@ -226,8 +224,6 @@ if($desag == 2){
             $subdeg = NULL;
     }
 }
-
-
 
 //Trata a modalidade
 switch($mod) {
@@ -269,7 +265,7 @@ if($eixo == 0) {
     require_once("EixoUm.php");
     for ($cad=1; $cad <= 10; $cad++) {
 
-        $tupla = EixoUm::find($var, $uf, $cad, $desag, $ano);
+        $tupla = EixoUm::find($var, $uf, $cad, $deg, $ano);
         $treemap .= '
                 {
                   "colorId": "' . $cad . '", 
@@ -296,7 +292,7 @@ else if($eixo == 1) {
     require_once("EixoDois.php");
     if($ocp == 0){
         $cad_atual = 0;
-        foreach(EixoDois::find($var, $uf, $ocp, $desag, $ano) as $tupla){
+        foreach(EixoDois::find($var, $uf, $ocp, $deg, $ano) as $tupla){
             $index = 1;
             if($cad_atual != $tupla->idCadeia){
                 if($tupla->idCadeia != 1){
@@ -313,19 +309,19 @@ else if($eixo == 1) {
                         {
                         "name": "' . getNameCadeia($tupla->idCadeia) . '",
                         "children": [';
-                    if($desag == 1 && $subdeg != 0) {
+                    if($deg == 1 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNamePorte($tupla->idPorte) . '",';
                         $index = $tupla->idPorte;
                     }
-                    else if($desag == 4 && $subdeg != 0){
+                    else if($deg == 4 && $subdeg != 0){
                         $treemap .= '{"name": "' . getNameEscolaridade($tupla->idEscolaridade) . '",';
                         $index = $tupla->idEscolaridade;
                     }
-                    else if($desag == 3 && $subdeg != 0) {
+                    else if($deg == 3 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                         $index = $tupla->idIdade;
                     }
-                    else if($desag == 2 && $subdeg !== NULL) {
+                    else if($deg == 2 && $subdeg !== NULL) {
                         if($tupla->Sexo == 1) {
                             $treemap .= '{"name": "Masculino",';
                             $index = 1;
@@ -343,19 +339,19 @@ else if($eixo == 1) {
                     "size": "' . $tupla->Valor . '"}';     
             } else{
                 $treemap .=  ',';   //adiciona vírgula
-                if($desag == 1 && $subdeg != 0) {
+                if($deg == 1 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNamePorte($tupla->idPorte) . '",';
                     $index = $tupla->idPorte;
                 }
-                else if($desag == 4 && $subdeg != 0){
+                else if($deg == 4 && $subdeg != 0){
                     $treemap .= '{"name": "' . getNameEscolaridade($tupla->idEscolaridade) . '",';
                     $index = $tupla->idEscolaridade;
                 }
-                else if($desag == 3 && $subdeg != 0) {
+                else if($deg == 3 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                     $index = $tupla->idIdade;
                 }
-                else if($desag == 2 && $subdeg !== NULL) {
+                else if($deg == 2 && $subdeg !== NULL) {
                     if($tupla->Sexo == 1) {
                         $treemap .= '{"name": "Masculino",';
                         $index = 1;
@@ -385,7 +381,7 @@ else if($eixo == 1) {
     }
     else {
         $ocp_atual = 0;
-        foreach(EixoDois::find($var, $uf, $ocp, $desag, $ano) as $tupla){
+        foreach(EixoDois::find($var, $uf, $ocp, $deg, $ano) as $tupla){
             $index = 1;
             if($ocp_atual != $tupla->idOcupacao){
                 if($tupla->idOcupacao != 1){
@@ -402,31 +398,31 @@ else if($eixo == 1) {
                         {
                         "name": "' . getNameOcupacao($tupla->idOcupacao) . '",
                         "children": [';
-                    if($desag == 1 && $subdeg != 0) {
+                    if($deg == 1 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNamePorte($tupla->idPorte) . '",';
                         $index = $tupla->idPorte;
                     }
-                    else if($desag == 3 && $subdeg != 0) {
+                    else if($deg == 3 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                         $index = $tupla->idIdade;
                     }
-                    else if($desag == 4 && $subdeg != 0){
+                    else if($deg == 4 && $subdeg != 0){
                         $treemap .= '{"name": "' . getNameEscolaridade($tupla->idEscolaridade) . '",';
                         $index = $tupla->idEscolaridade;
                     }
-                    else if($desag == 5 && $subdeg != 0){
+                    else if($deg == 5 && $subdeg != 0){
                         $treemap .= '{"name": "' . getNameEtinia($tupla->idEtinia) . '",';
                         $index = $tupla->idEtinia; 
                     }
-                    else if($desag == 6 && $subdeg != 0) {
+                    else if($deg == 6 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNameFormalidade($tupla->Formalidade) . '",';
                         $index = $tupla->Formalidade;
                     }
-                    else if($desag == 7 && $subdeg != 0) {
+                    else if($deg == 7 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNamePrev($tupla->Previdencia) . '",';
                         $index = $tupla->Previdencia; 
                     }
-                    else if($desag == 8 && $subdeg != 0) {
+                    else if($deg == 8 && $subdeg != 0) {
                         $treemap .= '{"name": "' . getNameSindical($tupla->Sindical) . '",';
                         $index = $tupla->Sindical;
                     }
@@ -438,31 +434,31 @@ else if($eixo == 1) {
                     "size": "' . $tupla->Valor . '"}';     
             } else{
                 $treemap .=  ',';   //adiciona vírgula
-                if($desag == 1 && $subdeg != 0) {
+                if($deg == 1 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNamePorte($tupla->idPorte) . '",';
                     $index = $tupla->idPorte;
                 }
-                else if($desag == 4 && $subdeg != 0){
+                else if($deg == 4 && $subdeg != 0){
                     $treemap .= '{"name": "' . getNameEscolaridade($tupla->idEscolaridade) . '",';
                     $index = $tupla->idEscolaridade;
                 }
-                else if($desag == 3 && $subdeg != 0) {
+                else if($deg == 3 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNameIdade($tupla->idIdade) . '",';
                     $index = $tupla->idIdade;
                 }
-                else if($desag == 5 && $subdeg != 0){
+                else if($deg == 5 && $subdeg != 0){
                     $treemap .= '{"name": "' . getNameEtinia($tupla->idEtinia) . '",';
                     $index = $tupla->idEtinia; 
                 }
-                else if($desag == 7 && $subdeg != 0) {
+                else if($deg == 7 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNamePrev($tupla->Previdencia) . '",';
                     $index = $tupla->Previdencia; 
                 }
-                else if($desag == 8 && $subdeg != 0) {
+                else if($deg == 8 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNameSindical($tupla->Sindical) . '",';
                     $index = $tupla->Sindical;
                 }
-                else if($desag == 6 && $subdeg != 0) {
+                else if($deg == 6 && $subdeg != 0) {
                     $treemap .= '{"name": "' . getNameFormalidade($tupla->Formalidade) . '",';
                     $index = $tupla->Formalidade;
                 }

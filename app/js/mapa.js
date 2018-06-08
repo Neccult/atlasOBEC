@@ -182,8 +182,6 @@ function ready(error, br_states, mapa){
 
     }
 
-   // console.log(colorJSON)
-   //  console.log(colorJSON.binario['0'].color)
 
     var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
@@ -255,7 +253,6 @@ function ready(error, br_states, mapa){
 
         })
 		.style("cursor", "pointer");
-
     
 
     if(parameters.eixo == 2 && parameters.var == 17){

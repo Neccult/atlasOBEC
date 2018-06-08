@@ -243,7 +243,7 @@ class EixoTres {
 	public static function getter_mapa($var, $cad, $mec, $mod, $pf, $anos){
 
 		self::connect();
-        
+
         $vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16, 17);
         $params = [];
         $allObjects = [];

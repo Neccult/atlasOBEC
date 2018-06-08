@@ -275,7 +275,7 @@
                             </div>
                         </div>
 
-                        <div class="bread-caixa" style="display: none">
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
@@ -293,7 +293,7 @@
                             </div>
                         </div>
 
-                        <div class="bread-caixa" style="display: none">
+                        <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
@@ -874,11 +874,12 @@
         var:"<?php echo $var; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
-        ano:"<?php echo $ano; ?>",
+        ano:"<?php echo "oi"; ?>",
         deg:"<?php echo $deg; ?>",
         uos:"<?php echo $uos; ?>",
         uf:"<?php echo $uf; ?>"
     };
+
     <?php if ($eixo == "mercado") {?>
     url['slc'] = "<?php echo $slc; ?>";
     url['deg'] = "<?php echo $deg; ?>";

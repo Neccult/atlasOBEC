@@ -109,7 +109,8 @@ function getAnoDefault(eixo_atual){
             else{
                 index_ocp = url['ocp']
             }
-            url['ano'] = anos_default[url['var']][index_ocp]; break;
+            url['ano'] = anos_default[url['var']][index_ocp];
+            break;
 
         case 2:
             if(url['var'] != 17)
@@ -123,6 +124,7 @@ function getAnoDefault(eixo_atual){
             index = url['slc'] == 0 ? 1 : 0
 
             url['ano'] = anos_default[url['var']][index]; break;
+            break;
     }
 }
 
@@ -1120,20 +1122,12 @@ function changeDescVar() {
 
 function cleanDesagsUrl() {
     //url['slc'] = 0;
-    url['fax'] = 0;
     //url['ocp'] = 0;
-    url['sex'] = 0;
-    url['esc'] = 0;
-    url['frm'] = 0;
-    url['snd'] = 0;
-    url['cad'] = 0;
+    url['subdeg'] = 0;
     url['pfj'] = 0;
     url['deg'] = 0;
     url['mod'] = 0;
     url['mec'] = 0;
-    url['prt'] = 0;
-    url['cor'] = 0;
-    url['prv'] = 0;
     url['uos'] = 0;
 }
 
@@ -1145,6 +1139,102 @@ function updateWindowUrl(id, valor){
     var urlString = parent.window.location.href.replace(re, id+"="+valor);
     parent.window.history.pushState(null, null, urlString);
     $.getScript('js/load_views_listeners.js');
+}
+
+function updateActiveBreadcrumbs(eixo, vrv){
+    if(eixo == 0){
+        return;
+    }
+    else if(eixo == 1){
+        return;
+    }
+    else if(eixo == 2){
+
+        switch (vrv){
+            case 1:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                break;
+            case 3:
+                hideBreadcrumb('pfj')
+                break;
+            case 4:
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 5:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 7:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 8:
+                hideBreadcrumb('mod')
+                hideBreadcrumb('pfj')
+                break;
+            case 9:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                break;
+            case 10:
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                hideBreadcrumb('pfj')
+                break;
+            case 11:
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                hideBreadcrumb('pfj')
+                break;
+            case 12:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 13:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 14:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 15:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                break;
+            case 16:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                break;
+            case 17:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                break;
+            case 18:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+            case 19:
+                hideBreadcrumb('pfj')
+                hideBreadcrumb('mod')
+                hideBreadcrumb('mec')
+                break;
+
+        }
+
+    }
+}
+
+function hideBreadcrumb(id) {
+    $(".bread-select[data-id='"+id+"']").parent().parent().css("display","none");
 }
 
 /*======
@@ -1200,8 +1290,6 @@ function updateLegendByDeg(deg){
     }
     else if(deg > 0){
 
-        console.log(deg)
-
         switch (deg){
             case 1: $(".view-title-leg[data-id='scc&ocp']").html("PORTE"); break;
             case 2: $(".view-title-leg[data-id='scc&ocp']").html("SEXO"); break;
@@ -1218,7 +1306,6 @@ function updateLegendByDeg(deg){
         var html = "";
 
         for (var nome in legendArray) {
-            console.log(nome)
             html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
         }
 
@@ -1453,6 +1540,13 @@ function updateSelectsByUrl(){
         obj[i.split("=")[0]] = i.split("=")[1];
     } );
 
+    if ( obj.hasOwnProperty('slc') ) {
+        url['slc'] = obj['slc'];
+    }
+
+    if ( obj.hasOwnProperty('ocp') ) {
+        url['ocp'] = obj['ocp'];
+    }
 
 
     $(".bread-select").each(function(){
@@ -1469,19 +1563,11 @@ function updateSelectsByUrl(){
 
 $(document).ready(function(){
 
-
-    ///TODO ESTÁ FUNCIONANDO?
-    $(window).on('hashchange', function() {
-        // loadPage();
-        window.location.href = window.location.pathname+window.location.hash;
-        scrollTo(0, 0);
-    });
-
-
     /* ATUALIZA OS IFRAMES QUANDO A JANELA FOR REDIMENSIONADA */
     $(window).resize(function() {
         controlPageWidth();
     });
+
 
 
     /*=== selecionar variável ===*/
@@ -1506,22 +1592,14 @@ $(document).ready(function(){
                 url['cad'] = setor;
                 url['uf'] = change[1];
                 if (setor == 0 && url['var'] > 7) {
-                    url['prt'] = 0;
-                    url['deg'] = 0;
-                    url['sex'] = 0;
-                    url['frm'] = 0;
-                    url['snd'] = 0;
-                    url['prv'] = 0;
-                    url['fax'] = 0;
-                    url['esc'] = 0;
-                    url['cor'] = 0;
+                    url['subdeg'] = 0;
                 }
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+                updateWindowUrl('cad', setor)
                 updateIframe(url);
-
             }
         }
-        else if(eixo == 2 && url['var'] < 15){
+        else if(eixoAtual == 2 && url['var'] < 15){
             var setor = $(this).attr('data-id');
 
             if(setor != url['cad']) {
@@ -1532,6 +1610,8 @@ $(document).ready(function(){
                 url['uf'] = changeUF[1];
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+                updateWindowUrl('cad', url['cad'])
+                updateWindowUrl('uf', url['uf'])
                 updateIframe(url);
             }
         }
@@ -1544,6 +1624,9 @@ $(document).ready(function(){
     }
 
     if(url['var']) {
+        if(window.location.pathname.match("resultado.php")){
+            updateActiveBreadcrumbs(getEixo(window.location.hash.split("#")[1]), parseInt(url['var']));
+        }
         controlVar(url['var']);
     }
 
@@ -1565,6 +1648,8 @@ $(document).ready(function(){
                 if(texto == "BRASIL"){
                     url['mundo'] = 1;
                     url['uf'] = 0;
+
+
 
                     $("select[data-id='uf']").val(0);
 
@@ -1592,8 +1677,11 @@ $(document).ready(function(){
                         $('#treemap_region').removeClass("active");
                     }
                 }
+                updateWindowUrl('mundo', url['mundo']);
+                updateWindowUrl('uf', url['uf']);
                 updateUrl();
                 updateIframe(url);
+
             }
             else{
                 updateUrl();
@@ -1617,9 +1705,13 @@ $(document).ready(function(){
             updateUrl();
             if(id === "bens") {
                 url['slc'] = 0;
+
                 $(this).addClass("active");
                 $('#servicos').removeClass("active");
                 url['ano'] = anos_default[url['var']][1]
+
+
+
 
             }
             else {
@@ -1629,7 +1721,12 @@ $(document).ready(function(){
                 $(this).addClass("active");
                 $('#bens').removeClass("active");
                 url['ano'] = anos_default[url['var']][0]
+
+
             }
+
+            updateWindowUrl('slc', url['slc'])
+            updateWindowUrl('ano', url['ano'])
             updateIframe(url); /* altera gráfico */
         }
         else if(id == "recebedora" || id == "trabalhador"){
@@ -1646,7 +1743,9 @@ $(document).ready(function(){
                     }
 
                     updateUrl();
+
                     url['mec'] = 0;
+
                     $(this).addClass("active");
                     $('#trabalhador').removeClass("active");
                     updateIframe(url); /* altera gráfico */
@@ -1668,48 +1767,63 @@ $(document).ready(function(){
                     updateIframe(url); /* altera gráfico */
                 }
             }
+
+            updateWindowUrl('mec', url['mec'])
+
         }
         else {
             updateUrl();
             if(id === "setor") {
+                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
+                $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
+
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
                 switchToSetores();
 
                 url['slc'] = 0;
                 url['deg'] = 0;
                 url['ocp'] = 0;
+
                 controlFilter('0', 'deg');
                 $(this).addClass("active");
                 $('#ocupacao').removeClass("active");
 
                 url['ano'] = anos_default[url['var']][0];
 
-                $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
+                updateWindowUrl('slc', url['slc'])
+                updateWindowUrl('deg', url['deg'])
+                updateWindowUrl('ocp', url['ocp'])
+                updateWindowUrl('ano', url['ano'])
+
             }
             else {
                 enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
-                d3.json('data/pt-br.json', function(error, data) {
-                    if (error) throw error;
 
-                    textJSON = data;
-                    $(".cad-title").first().html(textJSON.select.ocp[0].name);
+                updateDataDescUoS();
 
-                    updateDataDescUoS();
-                });
                 switchToOcupations();
                 url['slc'] = 1;
                 url['deg'] = 0;
                 url['cad'] = 0;
+
                 if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
                     url['ocp'] = 1;
                 else
                     url['ocp'] = 3;
                 controlFilter('0', 'deg');
                 url['cad'] = 0;
+
+                url['ano'] = anos_default[url['var']][1];
+
+                updateWindowUrl('slc', url['slc'])
+                updateWindowUrl('deg', url['deg'])
+                updateWindowUrl('ocp', url['ocp'])
+                updateWindowUrl('ano', url['ano'])
+                updateWindowUrl('cad', url['cad'])
+
                 $(this).addClass("active");
                 $('#setor').removeClass("active");
 
-                url['ano'] = anos_default[url['var']][1];
                 //troca o nome do select de setor
                 $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
             }
@@ -1774,11 +1888,20 @@ $(document).ready(function(){
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
 
+                url['uf'] = 0;
+                url['cad'] = 0;
+                url['deg'] = 0;
+
+                updateWindowUrl('uf', url['uf']);
+                updateWindowUrl('cad', url['cad']);
+                updateWindowUrl('deg', url['deg']);
+                updateWindowUrl('ano', url['ano']);
+
+
+
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
-
-
 
                 updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
                 updateBreadUF(eixo_atual, url['var']);
@@ -1788,7 +1911,6 @@ $(document).ready(function(){
                     $('#treemap_region').removeClass("active");
                     $('.bread-select[data-id=deg]').val(0);
 
-                    $('.opt-select[data-id=deg]').val(0);
                 }
                 if(eixo_atual == 1){
                     if(url['ocp'] > 0){
@@ -1819,21 +1941,20 @@ $(document).ready(function(){
                     updateTipo(url['var']);
                     url['typ'] = 1;
 
+                    updateWindowUrl('typ', url['typ'])
+
                     $(".opt-select[data-id='typ']").val(1);
                     $('.bread-select[data-id=typ]').val(1);
                     if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
                         $('.bread-select[data-id=prc]').val(0);
-                        $(".opt-select[data-id='prc']").val(0)
-                        url['prc'] = 0
+                        url['prc'] = 0;
+                        updateWindowUrl('prc', url['prc'])
+
                     }
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
 
                 }
-
                 changeDescVar();
-                // window.location.href = window.location.pathname+window.location.hash;/cad=[0-9]*/, "cad=1"
-
-
             }
 
             if(dataId === 'deg') {
@@ -1853,7 +1974,10 @@ $(document).ready(function(){
                     if(url['var'] == 4 || url['var'] == 5)
                         updateLegendByDeg(url['deg'])
 
+                    updateWindowUrl('deg', deg_value);
                     updateWindowUrl('subdeg', $(this).val());
+
+                    url['deg'] = deg_value;
                     url['subdeg'] = $(this).val();
 
                 }
@@ -1872,10 +1996,7 @@ $(document).ready(function(){
             }
 
             if(dataId === "cad") {
-
-
                 url['cad'] = ($(this).val())
-
             }
 
             if(dataId === "ocp") {
@@ -1883,8 +2004,9 @@ $(document).ready(function(){
             }
 
             updateIframe(url);
-            updateWindowUrl(dataId, dataVal);
-
+            if(!(eixo_atual == 1 && dataId == 'deg')){
+                updateWindowUrl(dataId, dataVal);
+            }
 
         }
         else{

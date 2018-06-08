@@ -58,9 +58,8 @@ if (!empty($_GET["var"])) {
 
     $var = $_GET["var"];
     $uf = $_GET["uf"];
-
     $cad = $_GET["cad"];
-    $prt = $_GET["prt"];
+    $deg = $_GET["deg"];
     $ocp = $_GET["ocp"];
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
@@ -89,6 +88,7 @@ else{
     $prc = 0;
     $ano = NULL;
     $desag = 0;
+    $subdeg = 0;
     $eixo = 0;
 }
 

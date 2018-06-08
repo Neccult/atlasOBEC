@@ -4,7 +4,7 @@ var treemap_scc_box = '#'+VIEWS["treemap_scc"];
 if($(treemap_scc_box).find("svg").length == 0){
     var svg = d3.select(treemap_scc_box).append("svg");
 } else {
-    $(treemap_scc_box).find("svg").remove()
+    d3.select(treemap_scc_box).select("svg").remove()
 
     var svg = d3.select(treemap_scc_box).append("svg");
 }

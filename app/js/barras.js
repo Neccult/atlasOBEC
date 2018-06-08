@@ -1240,7 +1240,6 @@ else {
             })
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
-                console.log("oaps")
                 if(window.innerWidth <= 800)
                     return;
 

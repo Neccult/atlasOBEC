@@ -952,6 +952,8 @@ function updateMecanismo(url, vrv){
 }
 
 function updateBreadcrumbSetores(cads){
+
+    console.log(cads)
     $(".bread-select[data-id='cad'] > option").each(function() {
         $(this).remove();
     });
@@ -993,6 +995,8 @@ function updateDefaultMec(vrv){
 
         $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
     }
+
+    updateWindowUrl('mec', url['mec'])
 }
 
 function updateModalidade(url, vrv){

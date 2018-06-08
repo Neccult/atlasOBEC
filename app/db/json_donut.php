@@ -4,17 +4,9 @@ if (!empty($_GET["var"])) {
 	$var = $_GET["var"];
 	$uf = $_GET["uf"];
 
-	$atc = $_GET["atc"];
 	$cad = $_GET["cad"];
 	$prt = $_GET["prt"];
     $ocp = $_GET["ocp"];
-    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
-    $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
-    $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
-    $cor    =   isset($_GET["cor"])   ?   $_GET["cor"]  :   0;	   /*== cor e raça ==*/
-    $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
-    $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
-    $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
@@ -22,6 +14,8 @@ if (!empty($_GET["var"])) {
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
+    $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
     $mundo  =   isset($_GET['mundo']) ?   $_GET['mundo']:   0;
     $eixo = $_GET['eixo'];
@@ -30,25 +24,18 @@ else{
 	$var = 1;
 	$uf = 0;
 	$mundo = 0;
-	$atc = 0;
 	$cad = 0;
-	$prt = 0;
     $ocp = 0;
-    $sex = 0;
-    $fax = 0;
-    $esc = 0;
     $slc = 0;
-    $cor = 0;
     $mec = 0;
     $mod = 0;
-    $pjj = 0;
-    $frm = 0;
-    $prv = 0;
+    $pfj = 0;
     $uos = 0;
     $typ = 0;
+    $deg = 0;
+    $subdeg = 0;
     $prc = 0;
     $ano = NULL;
-    $snd = 0;
 	$eixo = 0;
 }
 
@@ -87,6 +74,7 @@ function sigla_cadeia($cadeia) {
             return $cadeia;
     }
 }
+
 function getNameCadeia($id){
     switch($id){
         case 0: return "Todos";
