@@ -453,7 +453,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         // console.log(dados)
         //Cria barras
 
-        console.log()    
 
         if(d3.select(barras_box).select("svg").select("g").selectAll("rect").size()!= 0){
 
@@ -541,6 +540,17 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     return minBarHeight;
 
                 return barHeight;
+            }).attr("fill", function (d,i ) {
+                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+                    if(deg == 0)
+                        return color(dados.key[i])
+                    else
+                        return color(cad)
+                }
+                else if(eixo == 3 && (vrv == 5 || vrv == 8))
+                    return color(0);
+                else
+                    return color(cad);
             })
         } else {
 
