@@ -185,6 +185,11 @@ class EixoUm {
 
 		self::connect();
 
+		if($deg > 0){
+            $deg = $deg - 8;
+        }
+
+
         $query = "SELECT * FROM ".self::$table." AS ex"
                ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
                ." JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = 0"
@@ -192,6 +197,7 @@ class EixoUm {
                ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                ." WHERE ex.Numero = ?"
                ." AND ex.Ano = ?";
+
 
         $stmt = mysqli_stmt_init(self::$conn);
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -254,15 +260,20 @@ class EixoUm {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoUm com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_mapa($var, $atc, $cad, $prt, $anos){
+	public static function getter_mapa($var, $cad, $deg, $anos){
 
 		self::connect();
+
+        if($deg > 0){
+            $deg = $deg - 8;
+        }
+
         $stmt = mysqli_stmt_init(self::$conn);
-        if($prt == 0 || $cad != 0 || $var == 1 || $var == 3 || $var == 2) { 
+        if($deg == 0 || $cad != 0 || $var == 1 || $var == 3 || $var == 2) {
             
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF" 
-                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = 0"
                    . " JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    . " WHERE ex.Numero = ?";
@@ -271,20 +282,18 @@ class EixoUm {
             if ($stmt->prepare($query)) {
                 if ($anos > 0) {
                     $stmt->bind_param(
-                        'sssss',
-                        $atc,
+                        'ssss',
                         $cad,
-                        $prt,
+                        $deg,
                         $var,
                         $anos
                     );
                     
                 } else {
                     $stmt->bind_param(
-                        'sssss',
-                        $atc,
+                        'ssss',
                         $cad,
-                        $prt,
+                        $deg,
                         $var
                     );
                 }
@@ -295,7 +304,7 @@ class EixoUm {
         } else {
             $query = "SELECT * FROM " . self::$table . " AS ex"
                    . " JOIN UF AS uf ON uf.idUF =  ex.idUF"
-                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = ?"
+                   . " JOIN Atuacao AS atc ON atc.idAtuacao =  ex.idAtuacao AND atc.idAtuacao = 0"
                    . " JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                    . " WHERE ex.Numero = ?";
             
@@ -303,18 +312,16 @@ class EixoUm {
             if ($stmt->prepare($query)) {                
                 if ($anos > 0) {
                     $stmt->bind_param(
-                        'ssss',
-                        $atc,
-                        $prt,
+                        'sss',
+                        $deg,
                         $var,
                         $anos
                     );
                     
                 } else {
                     $stmt->bind_param(
-                        'sss',
-                        $atc,
-                        $prt,
+                        'ss',
+                        $deg,
                         $var
                     );
                 }
