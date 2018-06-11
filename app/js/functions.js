@@ -1637,7 +1637,6 @@ function updateMenuSetor(eixo, vrv){
     }
     else if (eixo == 3){
 
-
 	    if(vrv == 5 || vrv == 8 || vrv == 11 || vrv == 13 || vrv == 14 ){
             d3.selectAll('#menu-view').filter(function(d, i){
                 return i;

@@ -584,10 +584,10 @@ function analyze(error, data) {
 
         }
 
-        if(deg == 'UF' || deg == 'Formal' || deg == 'Contribuinte' || deg == 'Sim' || deg == 'Membro'){
+        if(deg == 'UF' || deg == 'Formal' || deg == 'Contribuinte' || deg == 'Sim' || deg == 'Membro' || deg == 'Masculino'){
             return (corEixo[1])
         }
-        if(deg == 'Setor' || deg == 'Informal' || deg == 'Não contribuinte' || deg == 'Não' || deg == 'Não membro'){
+        if(deg == 'Setor' || deg == 'Informal' || deg == 'Não contribuinte' || deg == 'Não' || deg == 'Não membro' || deg == 'Feminino'){
             return (corEixo[2])
         }
 

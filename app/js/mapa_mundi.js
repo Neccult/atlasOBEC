@@ -159,6 +159,7 @@ d3.json('data/colors.json', function(error, data) {
                     setPrcTitle(gdpData[convertCode(el)].prc)
 
                     $(window.parent.document).find("select[data-id='prc']").val(convertCode(el));
+                    updateWindowUrl('prc', convertCode(el))
                     destacaPrc(el)
                 }
             })
