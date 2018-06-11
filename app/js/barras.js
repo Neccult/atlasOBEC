@@ -20,7 +20,8 @@ updateTitleClickSCC()
 
 var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
-function destacaBarra(barraId, stacked = false) {
+function destacaBarra(barraId, stacked) {
+    stacked = false;
     i = 0;
     $("rect").each(function() {
 
@@ -74,7 +75,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     var dados = {key: [], value: []};
 
 
-
     // import colors.json file
     var colorJSON;
     var textJSON;
@@ -92,7 +92,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     d3.json('data/colors.json', function (error, data) {
         if (error) throw error;
         colorJSON = data;
-
 
         // import pt-br.json file for get the title
         d3.json('data/pt-br.json', function (error, data) {
@@ -131,25 +130,36 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-            if ((vrv === 3) && data[key].ano === 2007) {
-            } else {
+            if (!((vrv === 3) && data[key].ano === 2007)) {
                 dados.key.push(data[key].ano);
             }
 
-            if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
-            else dados.value.push(data[key].valor);
+            if (( vrv === 3 ) && eixo ==0) {
+                dados.value.push(100 * data[key].valor);
+            }
+            else {
+                dados.value.push(data[key].valor);
+            }
 
-            if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
-            else dados.percentual.push(data[key].percentual);
+            if ( vrv === 2  || vrv === 9){
+                dados.percentual.push(0);
+            }
+            else {
+                dados.percentual.push(data[key].percentual);
+            }
 
-            if (vrv === 2) dados.taxa.push(0);
-            else dados.taxa.push(data[key].taxa);
+            if (vrv === 2) {
+                dados.taxa.push(0);
+            }
+            else {
+                dados.taxa.push(data[key].taxa);
+            }
         });
 
-        // updateAnoDefault(dados.key[dados.key.length-1]);
-        //
         dados.key = d3.keys(data);
-        if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
+        if(eixo == 0 && vrv == 3) {
+            dados.key = ajustaAnos(dados.key);
+        }
         //tamanho do grafico
         // AQUI automatizar map center
         var margin = {top: 20, right: 20, bottom: 30, left: 35},
@@ -157,13 +167,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             height = chartHeight - margin.top - margin.bottom;
 
         dados.value.push(0);
-        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
         //valores maximos e minimos
         var minValue = d3.min(dados.value);
         var maxValue = d3.max(dados.value);
-        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
-
-        // console.log(maxValue)
 
         //distribuicao de frequencias
         var quant = 9;
@@ -194,8 +200,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         // creates cadeia's color range array from color.json file
         var colorsRange = [];
         $.each(colorJSON.cadeias[cad].gradient, function (i, rgb) {
-            if (i > 1)
+            if (i > 1){
                 colorsRange.push(rgb);
+            }
         });
         /*==================*/
         /* *** gráfico! *** */
@@ -233,13 +240,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
 
-        // if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
         dados.value.pop();
 
         if(vrv === 3 && eixo == 0) {
             dados.value.splice(0,1);
-
         }
+
         var formatYAxis = function (d) {
             var higherZeroOcur = maxDecimalAxis;
             var dadosCounter = 0;
@@ -541,12 +547,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     else
                         return color(cad)
                 }
-                else if(eixo == 3 && (vrv == 5 || vrv == 8))
+                else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
                     return color(0);
-                else
+                }
+                else {
                     return color(cad);
+                }
             })
-            //mouseover
             .on("mouseover", function (d, i, obj) {
                 var title_content = getDataVar(textJSON, eixo, vrv).title;
                 var title = title_content.replace("<span>", "");
@@ -556,9 +563,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 var valorTooltip = formatTextVrv(dados.value[i], eixo, vrv);
                 var taxaTooltip = formatTextTaxaVrv(dados.taxa[i], eixo, vrv);
 
-
                 if (eixo === 0 || eixo === 1 || eixo === 2 || eixo === 3){
-
                     loadTooltip(d, i, eixo, vrv)
                 }
 

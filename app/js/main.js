@@ -40,7 +40,7 @@ function controlVar(clickVar){
             break;
         case "politicas":       urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
             break;
-        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
             break;
     }
 
@@ -82,7 +82,7 @@ function controlVarPage(clickVar){
                                     break;
         case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
                                      break;
-        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
     }
 
@@ -142,16 +142,9 @@ function defaultUrl(){
     url['view'] = 'mapa';
     url['uf'] = 0;
     url['cad'] = 0;
-    url['prt'] = 0;
-    url['atc'] = 0;
     url['ocp'] = 0;
-    url['fax'] = 0;
-    url['cor'] = 0;
-    url['frm'] = 0;
-    url['snd'] = 0;
-    url['sex'] = 0;
-    url['prv'] = 0;
     url['deg'] = 0;
+    url['subdeg'] = 0;
     url['mec'] = 0;
     url['mod'] = 0;
     url['pfj'] = 0;
@@ -323,6 +316,8 @@ function updateIframe(url){
             }
             else{
 
+                // console.log(url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash)
+                // console.log(newUrl)
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
                 $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
 
@@ -946,9 +941,6 @@ function loadResult(){
     $(".opt").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][3]);
     $(".number").css("color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][4])
     $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
-
-
-    console.log(colorJSON['eixo'][getEixo(eixoUrl)])
 
     removeVar('mercado', 3);
 

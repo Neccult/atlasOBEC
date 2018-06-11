@@ -14,6 +14,7 @@ if (!empty($_GET["var"])) {
 	$var = $_GET["var"];
 	$cad = $_GET["cad"];
 	$ocp = $_GET["ocp"];
+	$ano = $_GET["ano"];
     $deg = isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
     $mod =      isset($_GET['mod'])   ?   $_GET['mod']  :   0; 
     $mec = $_GET["mec"];
@@ -22,7 +23,6 @@ if (!empty($_GET["var"])) {
     $uf    =   isset($_GET["uf"])   ?   $_GET["uf"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
     $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   1;	   /*== Subdesagregação ==*/
-	$ano = $_GET["ano"];
     $eixo = $_GET['eixo'];
     $mundo =    isset($_GET['mundo']) ?   $_GET['mundo']:   0;
     $slc = isset($_GET['slc']) ?   $_GET['slc']:   0;
@@ -43,6 +43,7 @@ else{
     $subdeg = 0;
     $mundo = 0;
 }
+
 
 //Trata a pessoa fisica/juridica
 switch($pfj) {

@@ -437,8 +437,6 @@ function legendaBinario(){
 
 /************************ */
 
-
-
 	$(window.parent.document).find('.value-info-title').html(getDataVar(textJSON, eixo, vrv).mapa_valores);
     $(window.parent.document).find('.font-title').html("Fonte(s): "+getDataVar(textJSON, eixo, vrv).fontes);
     /*if(legendaWidth > 768) {
@@ -535,75 +533,56 @@ function legendaBinario(){
         estadoAtual = "BRASIL"
 
 
-
-    /*if(eixo != 3 && eixo != 1 && eixo != 2){
-        $(window.parent.document).find(".integer-value").first().find(".description-number").first().html(updateDescPercent(eixo, "integer", getDataVar(textJSON, eixo, vrv).desc_int, estadoAtual));
-        $(window.parent.document).find(".percent-value").first().find(".description-number").first().html(updateDescPercent(eixo, "percent", getDataVar(textJSON, eixo, vrv).desc_percent, estadoAtual));
-    }*/
-
     function loadTooltip(d, eixo, vrv){
 
         if(eixo == 0) {
-            if(vrv === 1){
 
+            var valorTooltip = 0;
 
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                    //    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
-                ]);
-            }
-            else if(vrv === 2) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                ]);
-            }
-            else if(vrv === 3) {
+            var array = [1, 2, 4, 5, 6, 7 ,8]
+            var array100 = [3, 9]
 
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)],
-                ]);
-            }
-            else if(vrv === 9) {
+            var arrayPercentual = [];
 
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor*100, eixo, vrv)]
-                ]);
+            if(array.indexOf(vrv) != -1){
+                valorTooltip = dict[d.id].valor;
+            }
+            else if (array100.indexOf(vrv) != -1){
+                valorTooltip = dict[d.id].valor*100;
+            }
 
-            }
-            else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                 //   ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                ]);
+            tooltipInstance.showTooltip(d, [
+                ["title", d['properties']['name']],
+                ["", formatTextVrv(valorTooltip, eixo, vrv)],
+                //["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                //["", formatDecimalLimit(dict[d.id].taxa, 2)],
+            ]);
 
-            }
-            else {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                    ["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                //    ["", formatDecimalLimit(dict[d.id].taxa, 2)],
-                ]);
-            }
         }
         else if(eixo == 1){
 
-            //tooltips com os 3 valores na interface (valor, percentual e taxa)
-            if(vrv === 1  || vrv === 5 || vrv === 7 || vrv === 8){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                    // ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
+            var valorTooltip = 0;
 
-                ]);
+            var array = [1, 4, 5, 6, 7, 8, 9, 10, 11]
+            var array100 = []
+
+            var arrayPercentual = [];
+
+            if(array.indexOf(vrv) != -1){
+                valorTooltip = dict[d.id].valor;
             }
-            ///Tooltips com só o valor na interface
-            else if(vrv === 2){
+            else if (array100.indexOf(vrv) != -1){
+                valorTooltip = dict[d.id].valor*100;
+            }
+
+            tooltipInstance.showTooltip(d, [
+                ["title", d['properties']['name']],
+                ["", formatTextVrv(valorTooltip, eixo, vrv)],
+                //["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
+                //["", formatDecimalLimit(dict[d.id].taxa, 2)],
+            ]);
+
+            if(vrv === 2){
                 if(url['ocp'] == 0){
                     tooltipInstance.showTooltip(d, [
                         ["title", d['properties']['name']],
@@ -618,35 +597,15 @@ function legendaBinario(){
                 }
 
             }
-            else if(vrv === 9 || vrv === 6 || vrv === 4){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)]
-                ]);
-            }
-            else if(vrv === 10 || vrv === 11) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
-                //    ["", formatTextTaxaVrv(dict[d.id].taxa, eixo, vrv)],
-                ]);
-            }
         }
         else if(eixo == 2){
 
             //tooltips com os 3 valores na interface (valor, percentual e taxa)
-            if(vrv === 1  || vrv === 2 || vrv === 3 || vrv === 4 ||  vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv == 18 || vrv == 19){
-                // console.log(dict[d.id])
+            if(vrv === 1  || vrv === 2 || vrv === 3 || vrv === 4 ||  vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 18 || vrv === 19){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],
                     ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                 //    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
-                ]);
-            }
-            else if(vrv === 14){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d['properties']['name']],
-                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
                 ]);
             }
             else if(vrv === 17){

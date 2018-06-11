@@ -66,12 +66,6 @@ d3.json('data/colors.json', function(error, data) {
             if(gdpData[data].id != 0) gdpAux[unconvertCode(gdpData[data].id)] = gdpData[data].valor;
         }
 
-
-
-        // gdpData.forEach(function(data) {
-        //     if(data.id != 0) gdpAux[unconvertCode(data.id)] = data.valor;
-        // });
-
         var maxValue = Math.max.apply(null, $.map(gdpAux, function(value, index) {
                             return [value];
                         }));
@@ -108,7 +102,6 @@ d3.json('data/colors.json', function(error, data) {
             }
         }
 
-
         var arrayColors;
         $(function(){
             gdpAux["0"] = minValue;
@@ -128,8 +121,8 @@ d3.json('data/colors.json', function(error, data) {
                 onRegionTipShow: function(e, el, code){
                     el.html("")
                     el.html(el.html()+ '<strong>'+gdpData[convertCode(code)].prc+'</strong>')
-                    // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
                     el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
+                    // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
                     //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
                     // el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
                 },
@@ -140,8 +133,10 @@ d3.json('data/colors.json', function(error, data) {
 
                     var newBarraSrc = $(window.parent.document).find("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
                     newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+
                     var newDonutSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
                     newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
+
                     $(window.parent.document).find("#view_box_scc").attr("src", newBarraSrc);
                     $(window.parent.document).find("#view_box_barras").attr("src", newDonutSrc);
 
@@ -168,19 +163,20 @@ d3.json('data/colors.json', function(error, data) {
                 }
             })
 
-
-
             dom.forEach(function(dominio, i) {
-                if(i == 0) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
-                else if(i == 8) $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
-                else $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");
+                if(i == 0) {
+                    $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
+                }
+                else if(i == 8) {
+                    $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
+                }
+                else {
+                    $("#corpo-mundi").append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");
+                }
                 $("#corpo-mundi").children().first().css("margin-bottom", "35px");
             });
             
-            //setPercentValueData({percentual: 1}, eixo, vrv);
-            //if(url['prc'] != 0 ){
             destacaPrc(unconvertCode(parseInt(url['prc'])));
-
 
             if(gdpData[0].valor == 0)
                 valor = 0
@@ -188,10 +184,6 @@ d3.json('data/colors.json', function(error, data) {
                 valor = gdpData[url['prc']].valor/gdpData[0].valor;
 
             setPercentValueData({percentual: valor}, eixo, vrv);
-
-            //}
-
-
 
         });
 

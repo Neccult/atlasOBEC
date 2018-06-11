@@ -883,11 +883,13 @@
     <?php } ?>
 
     <?php if ($eixo == "comercio") {?>
+
     url['typ'] = "<?php echo $typ; ?>";
     url['prc'] = "<?php echo $prc; ?>";
     url['slc'] = "<?php echo $slc; ?>";
     <?php } ?>
     var pageTitle = "<?php echo strip_tags($text['title'])?>";
+
 </script>
 
 <script src="js/d3/d3.min.js"></script>
