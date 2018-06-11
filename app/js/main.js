@@ -113,10 +113,12 @@ function getAnoDefault(eixo_atual){
             break;
 
         case 2:
-            if(url['var'] != 17)
+            if(url['var'] != 17){
                 url['ano'] = anos_default[url['var']][0];
-            else
+            }
+            else{
                 url['ano'] = 2017
+            }
             break;
         case 3:
             if(url['var'] >= 11)
@@ -1568,7 +1570,6 @@ $(document).ready(function(){
     });
 
 
-
     /*=== selecionar variável ===*/
 
     $(document).on('click', ".scc", function(){
@@ -2021,7 +2022,6 @@ $(document).ready(function(){
         window.open(downloadUrl, '_blank');
 
     });
-
 
     defaultUrl();
     updateSelectsByUrl();

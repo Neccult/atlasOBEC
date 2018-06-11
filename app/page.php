@@ -65,6 +65,7 @@
         uf:"<?php echo $uf; ?>",
         deg:"<?php echo $deg; ?>"
     };
+
     <?php if ($eixo == "mercado" && $view != "mapa") {?>
     url['subdeg'] = "<?php echo $subdeg; ?>";
     <?php } ?>

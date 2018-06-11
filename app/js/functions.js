@@ -946,7 +946,6 @@ function updateMecanismo(url, vrv){
 
 function updateBreadcrumbSetores(cads){
 
-    console.log(cads)
     $(".bread-select[data-id='cad'] > option").each(function() {
         $(this).remove();
     });

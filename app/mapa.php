@@ -59,30 +59,7 @@
     /* informações JSON */
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
-    foreach($json_text['var'][3] as $key=>$vrbs){
-        if($vrbs['id'] == $_GET["var"]){
-            $vrb = $key;
-            break;
-        }
-    }
-    if($eixo == "empreendimentos") {
-        $text = $json_text['var'][0][$key]; /*== informações da variável ==*/
-    }
-    else if($eixo == "mercado") {
-        $text = $json_text['var'][1][$key]; /*== informações da variável ==*/
-    }
-    else if($eixo == "politicas") {
-        $text = $json_text['var'][2][$key   ]; /*== informações da variável ==*/
-    }
-    else if($eixo == "comercio") {
-        foreach($json_text['var'][3] as $key=>$vrbs){
-            if($vrbs['id'] == $_GET["var"]){
-                $vrb = $key;
-                break;
-            }
-        }
-        $text = $json_text['var'][3][$key]; /*== informações da variável ==*/
-    }
+
     $select = $json_text['select'];			   /*== informação dos selects ==*/
 
     /*
@@ -90,6 +67,7 @@
         se esta não existir busca a
         primeira declarada no json
     */
+
     $eixo_num = 0;
     switch($eixo) {
         case "empreendimento":
@@ -105,6 +83,14 @@
             $eixo_num = 3;
     }
 
+    foreach($json_text['var'][$eixo_num] as $key=>$vrbs){
+        if($vrbs['id'] == $_GET["var"]){
+            $vrb = $key;
+            $text = $json_text['var'][$eixo_num][$key]; /*== informações da variável ==*/
+            break;
+        }
+    }
+
     if(!isset($text[$view])) $view = $text['type'][0]['id'];
 
     $descView = $json_text[$view];			   /*== descrição da visualização ==*/
@@ -114,6 +100,7 @@
 <div class="container-chart">
     <div class="content">
         <div class="chart">
+
             <?php
 
             if (!empty($_GET["var"]))
@@ -175,6 +162,7 @@
                 $ano = $_GET["ano"];
             else
                 $ano = 2014;
+
             if (!empty($_GET["mundo"]))
                 $mundo = $_GET["mundo"];
             else
@@ -203,7 +191,6 @@
             ?>
 
             <script type="text/javascript">
-
                 //variaveis configuracao query
                 var vrv = <?php echo $var; ?>;
                 var cad = <?php echo $cad; ?>;

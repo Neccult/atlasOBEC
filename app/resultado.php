@@ -43,18 +43,8 @@
     /* informações JSON */
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
-    if($eixo == "empreendimentos") {
-        $text = $json_text['var'][0][$_GET["var"]-1]; /*== informações da variável ==*/
-    }
-    else if($eixo == "mercado") {
-        $text = $json_text['var'][1][$_GET["var"]-1]; /*== informações da variável ==*/
-    }
-    else if($eixo == "politicas") {
-        $text = $json_text['var'][2][$_GET["var"]-1]; /*== informações da variável ==*/
-    }
-    else if($eixo == "comercio") {
-        $text = $json_text['var'][3][$_GET["var"]-1]; /*== informações da variável ==*/
-    }
+
+
     $select = $json_text['select'];			   /*== informação dos selects ==*/
     /*
         busca a view do gráfico,
@@ -75,9 +65,15 @@
         case "comercio":
             $eixo_num = 3;
     }
-    if(!isset($text[$view])) $view = $text['type'][0]['id'];
-    $descView = $json_text[$view];			   /*== descrição da visualização ==*/
+
+    foreach ($json_text['var'][$eixo_num] as $i => $varJSON){
+        if ($varJSON['id'] == $_GET['var']){
+            $text = $varJSON;
+        }
+    }
+
     ?>
+
 <?php endif; ?>
 <article class="results-article fadeInPage">
     <div class="results-content">
@@ -368,8 +364,9 @@
                         if($view == 'barras' || $view == 'treemap_scc') {
                             $view = 'mapa';
                         }
+
                         ?>
-                        <iframe id="view_box" src="<?php if($view != "") echo $view; else echo "mapa"; ?>.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
+                        <iframe id="view_box" src="mapa.php" style="border: none; width: 100%; height: 350px;" scrolling="no"></iframe>
                         <!--=== views gráfico ===-->
                         <div class="content-btn-mapa ">
                             <?php foreach($text['type'] as $key => $value):?>
@@ -874,7 +871,7 @@
         var:"<?php echo $var; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
-        ano:"<?php echo "oi"; ?>",
+        ano:"<?php echo $ano; ?>",
         deg:"<?php echo $deg; ?>",
         uos:"<?php echo $uos; ?>",
         uf:"<?php echo $uf; ?>"
