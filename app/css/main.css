@@ -726,7 +726,7 @@ article.results-article div.results-content{
 .container-chart{
 	display: table;
 	height: 100%;
-	background-color: #f0f0f0;
+	background-color: white;
 	width: 100%;
 }
 .container-chart .content{
@@ -738,12 +738,12 @@ article.results-article div.results-content{
 .container-chart .content .chart{
 	width: 100%;
 	height: 100%;
-	background-color: #f0f0f0;
+	background-color: white;
 	padding: 15px;
 }
 
 #view-boxes>div {
-	background-color: #f0f0f0;
+	background-color: white;
 	border-radius:	20px;
 	border: 5px solid #ddd;
 }
