@@ -92,7 +92,6 @@ function ready(error, br_states, mapa){
 
 
     //carrega estados JSON
-    console.log(width_box(mapa_box))
 	var states = topojson.feature(br_states, br_states.objects.states);
     projection.fitExtent([[0,0],[width_box(mapa_box), height_box(mapa_box)*0.8]], states)//.fitSize([width, height-100], states)
 
@@ -196,8 +195,7 @@ function ready(error, br_states, mapa){
 		.data(states.features)
 		.enter()
 		.append("path")
-		.attr("data-legend",function(d) { return d.id; })
-		// .style('fill', function(d){return color(d.properties.name.replace(/\s+/g, '').length);})
+        .attr("data-legend",function(d) { return d.id; })
 		.style('fill', function(d){
 
             if(parameters.eixo == 2 && parameters.var == 17){
@@ -216,8 +214,6 @@ function ready(error, br_states, mapa){
                     return color((dict[d.id].valor))
             }
         })
-
-
 		.attr("d", path)
 
 		//mouseover
@@ -275,7 +271,6 @@ function escalaMapa(){
     var min_barra = minValue;
     var height_barra = svg_mapa.attr("height")*0.03;
     var width_barra = width_box(mapa_box)*0.4;
-    var prefix = ""
     var fontColor = "#aaa"
 
     if(y_barra + height_barra > svg_mapa.attr("height")){
@@ -283,17 +278,17 @@ function escalaMapa(){
     }
     
     if(svg_mapa.selectAll("defs").size() == 0){
+        
         gradient = svg_mapa.append("defs")
                     .append("linearGradient")
+                    .attr("id", "grad")
+                    .attr("x1", "0%")
+                    .attr("y1", "100%")
+                    .attr("x2", "90%")
+                    .attr("y2", "100%")
     } else {
-        gradient = svg_mapa.select("defs linearGradient")
+        gradient = svg_mapa.select("#grad")
     }
-
-    gradient.attr("id", "grad")
-            .attr("x1", "0%")
-            .attr("y1", "100%")
-            .attr("x2", "90%")
-            .attr("y2", "100%")
 
     if(gradient.selectAll("stop").size() == 0){
 
@@ -310,21 +305,21 @@ function escalaMapa(){
             .style("stop-opacity", 1);
 
     } else {
-        gradient.select("stop .begin")
-                .style("stop-color", low_color)
+        gradient.select("stop.begin")
+                .style("stop-color", low_color);
 
-        gradient.select("stop .end")
-                .style("stop-color", high_color)
+        gradient.select("stop.end")
+                .style("stop-color", high_color);
     }
     
-    if(svg_mapa.select("g .legenda").size() == 0){
+    if(svg_mapa.select("g.legenda").size() == 0){
         var svg_legenda = svg_mapa.append("g")
                                     .attr("class", "legenda")
-                                    .append("rect")
-        
+                                    .append("rect");
     } else {
-        var svg_legenda = d3.select("g .legenda")
+        var svg_legenda = d3.select("g.legenda rect");
     }
+
     svg_legenda.attr("x", x_barra)
                 .attr("y", y_barra)
                 .attr("height", height_barra)
@@ -334,19 +329,29 @@ function escalaMapa(){
                 .style("fill", "url(#grad)")
                 .style("stroke-width", 1)
                 .style("stroke", fontColor);
-
-    svg_mapa.selectAll("line")
+    if(svg_mapa.selectAll("line").size() == 0){
+        var lines =  svg_mapa.selectAll("line")
+                            .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
+                            .enter()
+                            .append("line")
+                            .attr("class", "lines-legenda")
+    } else {
+        var lines = d3.selectAll(".lines-legenda")
         .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
-        .enter()
-        .append("line")
-        .attr("x1", function(d,i){
+    }
+   
+        lines.attr("x1", function(d,i){
             var position = x_barra+i*width_barra/2;
-
-            texto = svg_mapa.append("text")
-                .attr("id", "legenda"+i)
-                .attr("x", position)
-                .attr("y", y_barra+height_barra +12)
-                .attr("fill", fontColor);
+            if(d3.select("#legenda"+i).size() == 0){
+                var texto = svg_mapa.append("text")
+            } else {
+                var texto = d3.select("#legenda"+i)
+            }
+                texto.attr("id", "legenda"+i)
+                    .attr("class", "text-legenda")
+                    .attr("x", position)
+                    .attr("y", y_barra+height_barra +12)
+                    .attr("fill", fontColor);
 
             formatBarTextMap(d, parameters.eixo, parameters.var, texto)
 

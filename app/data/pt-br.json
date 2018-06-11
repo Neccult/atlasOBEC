@@ -567,6 +567,11 @@
 				"title":"Total de Ocupados",
 				"sufixo_valor" :"",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"desc_var_mapa": " A variável apresenta o número total de indivíduos ocupado(a)s em atividades produtivas ligadas aos setores ou às ocupações criativas e culturais, com possibilidade de desagregações.",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",

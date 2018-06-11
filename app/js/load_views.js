@@ -17,7 +17,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_
     COLORS = colors_JSON[0];
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
-    
+    console.log(data_var.views.view_box1)
     VIEWS[data_var.views.view_box1[0]] = "view_box";
     VIEWS[data_var.views.view_box2[0]] = "view_box_barras";
     VIEWS[data_var.views.view_box3[0]] = "view_box_scc";

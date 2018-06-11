@@ -1397,34 +1397,32 @@ function setPercentValueData(value, eixo, vrv) {
 * Centraliza, muda o tamanho da fonte e formata o texto.
 */
 function formatBarTextMap(value, eixo, vrv, obj){
-	var font_size = 9
-	$.get("./data/pt-br.json", function(description) {
+    var font_size = 9
+    var description = PT_BR;
+    sufixo = getDataVar(description, eixo, vrv).sufixo_valor;
+    prefixo = getDataVar(description, eixo, vrv).prefixo_valor;
+    valor = value;
+    switch(eixo) {
+        case 0:
+            if(vrv == 3) {
+                valor = valor*100;
+            }
+            break;
+        case 1:
+            if(vrv == 2){
+                valor *= 100;
+            }
+            break;
 
-		sufixo = getDataVar(description, eixo, vrv).sufixo_valor;
-		prefixo = getDataVar(description, eixo, vrv).prefixo_valor;
-		valor = value;
-		switch(eixo) {
-			case 0:
-				if(vrv == 3) {
-					valor = valor*100;
-				}
-				break;
-			case 1:
-			    if(vrv == 2){
-			        valor *= 100;
-                }
-				break;
+    }
 
-		}
+    if(sufixo == 'h')
+        sufixo = '';
 
-		if(sufixo == 'h')
-			sufixo = '';
+    obj.transition().duration(800).text(formatGreatNumbers(valor, prefixo)+sufixo).style('font-size', font_size);
 
-		obj.text(formatGreatNumbers(valor, prefixo)+sufixo).style('font-size', font_size);
-
-		width_text =  Math.floor((obj.text()).length*font_size*0.7);
-		obj.attr("x", obj.attr("x")-Math.floor(width_text/2));
-	});
+    width_text =  Math.floor((obj.text()).length*font_size*0.7);
+    obj.attr("x", obj.attr("x")-Math.floor(width_text/2));
 }
 
 function formatTextVrv(value, eixo, vrv){
