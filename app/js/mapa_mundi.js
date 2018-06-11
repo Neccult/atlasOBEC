@@ -55,7 +55,7 @@ d3.json('data/colors.json', function(error, data) {
 
     var colorJSON = data;
 
-    var config = "?var="+vrv+"&uf="+uf+"&atc="+atc+"&cad="+cad+"&prt="+prt+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
+    var config = "?var="+vrv+"&uf="+uf+"&cad="+cad+"&ocp="+ocp+"&mec="+mec+"&typ="+typ+"&prc="+prc+"&pfj="+pfj+"&ano="+ano+"&eixo="+eixo+"&slc="+slc;
     var gdpData;
     $.get("./db/json_mapa.php"+config, function(data) {
         gdpData = JSON.parse(data);

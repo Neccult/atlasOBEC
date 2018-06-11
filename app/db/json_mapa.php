@@ -13,8 +13,8 @@ if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
 	$cad = $_GET["cad"];
-	$deg = $_GET["deg"];
-    $ocp = $_GET["ocp"];
+	$ocp = $_GET["ocp"];
+    $deg = isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
     $mod =      isset($_GET['mod'])   ?   $_GET['mod']  :   0; 
     $mec = $_GET["mec"];
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
