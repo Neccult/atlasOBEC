@@ -6,6 +6,7 @@ var tooltipInstance = tooltip.getInstance();
 $.get("./db/json_donut.php"+config, function(data){
     // console.log(data)
 });
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
 $.get("./db/json_donut.php"+config, ready);
 
@@ -80,7 +81,7 @@ function ready(json){
                 }
 
             }
-            if(eixo == 2 && vrv >= 18){
+            else if(eixo == 2 && vrv >= 18){
                 tooltipInstance.showTooltip(d.data, [
                     ["title", d.data.tipo],
                     ["", formatTextVrv(d.data.valor, 2, vrv)],
@@ -161,8 +162,6 @@ function ready(json){
 
         })
 
-
-
     if(eixo == 2 && (vrv == 18 || vrv == 19)){
         var soma = 0;
         var acumuladoSetor;
@@ -188,6 +187,8 @@ function ready(json){
 
 
 function color(tipo){
+
+
     colors = {
         "Exportação": "#071342",
         "Importação": "rgb(109, 191, 201)",
@@ -205,6 +206,13 @@ function color(tipo){
         "Publ.":  "#B2510F",
         "Outros": "#B2510F"
         }
+
+    if(tipo == "Sim"){
+        return corEixo[1];
+    }
+    else if(tipo == "Não"){
+        return corEixo[2];
+    }
 
     return colors[tipo];
 }

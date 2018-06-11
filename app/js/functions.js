@@ -1620,6 +1620,7 @@ function updateMenuSetor(eixo, vrv){
             d3.select("#view_box_barras").style("width", "65%");
             $("#menu-view-donut").css("display", "inline-block")
             d3.select("#view_box_scc").style("width", "100%");
+
         }
 
         else{

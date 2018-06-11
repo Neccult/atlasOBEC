@@ -4,6 +4,7 @@ var anos_default;
 
 var textJSON = []
 var colorJSON = []
+var corEixo;
 
 $.get("./data/pt-br.json", function(data){
     textJSON = data
@@ -11,12 +12,15 @@ $.get("./data/pt-br.json", function(data){
 
 $.get("./data/colors.json", function(data){
     colorJSON = data
+    corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
 })
 
 //$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 });
+
+// var corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
 
 
 /*-----------------------------------------------------------------------------
@@ -1305,8 +1309,17 @@ function updateLegendByDeg(deg){
         var legendArray = colorJSON.deg[deg]['subdeg'];
         var html = "";
 
-        for (var nome in legendArray) {
-            html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+        if(deg == 2 || deg == 6 || deg == 7 || deg == 8){
+            var cont = 1;
+            for (var nome in legendArray) {
+                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[cont]+"\"></i> "+nome+"<br></span>\n";
+                cont++;
+            }
+        }
+        else{
+            for (var nome in legendArray) {
+                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+            }
         }
 
         $("#title-view-leg-scc").html(html)
@@ -1341,9 +1354,16 @@ function switchToSetores() {
     $("#title-view-leg-scc").empty();
 
     var eixo = getEixo(window.location.hash.substring(1));
-    var cads = [];
+    var cads = updateMenuLegenda(eixo, url['var']);
 
-    if(eixo == 0 && url['var'] > 9){
+
+    updateBreadcrumbSetores(cads);
+}
+
+function updateMenuLegenda(eixo, vrv){
+
+    var cads = [];
+    if(eixo == 0 && vrv > 9){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         cads = [
@@ -1351,11 +1371,11 @@ function switchToSetores() {
         ]
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
 
     }
-    else if(eixo == 1 && (url['var'] == 3 || url['var'] == 4)){
+    else if(eixo == 1 && (vrv == 3 || vrv == 4)){
 
         $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
 
@@ -1370,17 +1390,17 @@ function switchToSetores() {
 
         cads = getCadsByMenu();
     }
-    else if(eixo == 1 && url['var'] > 11){
+    else if(eixo == 1 && vrv > 11){
         cads = [
             {id: 0, nome: " Todos"}
         ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
     }
-    else if(eixo == 2 && url['var'] == 2){
+    else if(eixo == 2 && vrv == 2){
 
         ///TODO ESSA VARIAVEL EXISTE???
 
@@ -1395,7 +1415,7 @@ function switchToSetores() {
 
         cads = getCadsByMenu();
     }
-    else if(eixo == 2 && url['var'] == 18){
+    else if(eixo == 2 && vrv == 18){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
@@ -1410,7 +1430,7 @@ function switchToSetores() {
 
         cads = getCadsByMenuDonut();
     }
-    else if(eixo == 2 && url['var'] == 19){
+    else if(eixo == 2 && vrv == 19){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
@@ -1426,7 +1446,7 @@ function switchToSetores() {
         cads = getCadsByMenuDonut();
 
     }
-    else if(eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
+    else if(eixo == 2 && (vrv == 15 || vrv == 16)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1434,10 +1454,10 @@ function switchToSetores() {
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
     }
-    else if(eixo == 2 && (url['var'] == 10)){
+    else if(eixo == 2 && (vrv == 10)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1446,10 +1466,10 @@ function switchToSetores() {
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
     }
-    else if(eixo == 2 && (url['var'] == 17)){
+    else if(eixo == 2 && (vrv == 17)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1457,11 +1477,11 @@ function switchToSetores() {
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Possui <br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não Possui <br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  Possui <br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> Não Possui <br></span>");
 
     }
-    else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
+    else if(eixo == 3 && (vrv >= 1 && vrv != 5 && vrv != 8 && vrv <= 10 || vrv == 12)){
         cads =
             [
                 {id: 0, nome: " Todos"},
@@ -1503,7 +1523,8 @@ function switchToSetores() {
         cads = getCadsByMenu();
     }
 
-    updateBreadcrumbSetores(cads);
+    return cads;
+
 }
 
 function switchToOcupations() {
@@ -1897,8 +1918,6 @@ $(document).ready(function(){
                 updateWindowUrl('ano', url['ano']);
 
 
-
-
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
 
@@ -2024,6 +2043,12 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
+
+    if(window.location.pathname.match("resultado")){
+        updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
+        // updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var'])
+
+    }
     updateIframe(url);
 
 });

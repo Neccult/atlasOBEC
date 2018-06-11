@@ -5,6 +5,7 @@ $('#corpo').css("background-color", "#f0f0f0")
 
 /*==== Linhas JS ====*/
 var config = "?var=" + vrv + "&deg=" + deg + "&uf=" + uf + "&slc=" + slc + "&cad=" + cad + "&uos=" + uos + "&ano=" + ano + "&ocp=" + ocp + "&typ=" + typ + "&prc=" + prc +  "&mec=" + mec + "&mod=" + mod + "&deg=" + deg + "&subdeg=" + subdeg + "&pfj=" + pfj + "&eixo=" + eixo;
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
 // var info = [];
 var dados = {key: [], value: []};
@@ -528,10 +529,10 @@ function analyze(error, data) {
 
     function color(deg){
         colors = {
-            "Setor": "#071342",
-            "UF": "rgb(109, 191, 201)",
+
             "Relacionadas": "#87A8CA",
             "Culturais": "#077DDD",
+
             "Despesa Minc / Receita executivo": "#071342",
             "Financiamento Estatal / Receita executivo": "rgb(109, 191, 201)",
 
@@ -548,18 +549,6 @@ function analyze(error, data) {
             "6": "rgb(109, 191, 201)",
             "7": "#8178AF",
             "8": "#EC8A91",
-
-            "Sim": "#071342",
-            "Não": "rgb(109, 191, 201)",
-
-            "Membro": "#071342",
-            "Não membro": "rgb(109, 191, 201)",
-
-            "Formal": "#071342",
-            "Informal": "rgb(109, 191, 201)",
-
-            "Contribuinte": "#071342",
-            "Não contribuinte": "rgb(109, 191, 201)",
 
             "Branca": "#EC8A91",
             "Parda": "rgb(109, 191, 201)",
@@ -595,6 +584,12 @@ function analyze(error, data) {
 
         }
 
+        if(deg == 'UF' || deg == 'Formal' || deg == 'Contribuinte' || deg == 'Sim' || deg == 'Membro'){
+            return (corEixo[1])
+        }
+        if(deg == 'Setor' || deg == 'Informal' || deg == 'Não contribuinte' || deg == 'Não' || deg == 'Não membro'){
+            return (corEixo[2])
+        }
 
         Object.keys(colorJSON.cadeias).forEach(function (i, key) {
             colors[colorJSON.cadeias[i].name] = colorJSON.cadeias[i].color;

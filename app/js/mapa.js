@@ -12,18 +12,16 @@ var shapeWidth = 30;
 var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
 var valoresTransform = "translate(10,"+(height-10)+")";
 
-var corEixo = window.parent.colorJSON['eixo'][eixo].color[1];
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
 function destacaPais(ufId) {
-
-
 
 	$("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
                 $(this).attr("class", "destacado");
                 $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", corEixo);
+                $(this).css("fill", corEixo[1]);
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }
@@ -87,10 +85,6 @@ d3.queue()
 function ready(error, br_states, mapa){
     $('#loading').fadeOut('fast');
 	if (error) return console.error(error);
-    // console.log(mapa);
-
-    //if(url['var'] != 17)
-
 
 	//variaveis informacao
 	var dict = {};
@@ -220,10 +214,13 @@ function ready(error, br_states, mapa){
             if(eixo == 2 && vrv == 17){
 
                 if(dict[d.id].SouN == 0){
-                   return  colorJSON.binario['0'].color;
+                   // return  colorJSON.binario['0'].color;
+                   return  corEixo[2];
                 }
                 else{
-                    return colorJSON.binario['1'].color;
+                    // return colorJSON.binario['1'].color;
+                    return  corEixo[1];
+
                 }
             }
             else{
@@ -377,15 +374,16 @@ function escalaMapa(){
 }
 
 function legendaBinario(){
-        var sim_color = colorJSON.binario['1'].color;
-        var nao_color = colorJSON.binario['0'].color;
+        var sim_color = corEixo[1];
+
+        var nao_color = corEixo[2];
 
         var sim_barra = svg.attr("width")*0.8;
         var nao_barra = svg.attr("width")*0.8;
 
         var x_barra = 350*0.85;
         var y_barra = 350*0.85;
-        var height_barra = 350*0.03;
+        var height_barra = 350*0.04;
         var width_barra = width*0.1;
         var prefix = ""
         var fontColor = "#aaa"
@@ -430,7 +428,6 @@ function legendaBinario(){
             .attr("y", y_barra+height_barra/5*4)
             .attr("fill", fontColor)
             .text("Não Possui");
-
 
     }
 
@@ -498,9 +495,7 @@ function legendaBinario(){
         destacaPais(url['uf']);
     }
 
-
     configInfoDataBoxMapa(eixo, vrv, dict[url['uf']]);
-
 
     if(eixo == 0 || eixo == 1|| eixo == 2){
 
@@ -524,8 +519,9 @@ function legendaBinario(){
         }
     }
 
-
-    if(url['uf'] == 0 && eixo != 3) $(window.parent.document).find(".state-title").first().html("Brasil");
+    if(url['uf'] == 0 && eixo != 3) {
+        $(window.parent.document).find(".state-title").first().html("Brasil");
+    }
 
     if(dict[url['uf']])
         estadoAtual = dict[url['uf']].uf

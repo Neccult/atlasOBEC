@@ -113,6 +113,11 @@
             else
                 $var = 1;
 
+            if (!empty($_GET["view"]))
+                $view = $_GET["view"];
+            else
+                $view = 'mapa';
+
             if (!empty($_GET["uf"]))
                 $uf = $_GET["uf"];
             else
