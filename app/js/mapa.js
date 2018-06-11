@@ -12,7 +12,7 @@ var shapeWidth = 30;
 var fonteTransform = "translate("+(width-120)+","+(height-10)+")";
 var valoresTransform = "translate(10,"+(height-10)+")";
 
-var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+var corEixo = window.parent.colorJSON['eixo'][eixo].color[1];
 
 function destacaPais(ufId) {
 

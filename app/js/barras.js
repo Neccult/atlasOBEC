@@ -49,7 +49,7 @@ function destacaBarra(barraId, stacked = false) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", corEixo);
+                    $(this).css("fill", corEixo[1]);
                     $(this).animate({"opacity": "1"}, "fast");
                 }
             }
@@ -107,7 +107,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     // return matching color value
     var color = function (colorId) {
         if (colorJSON.cadeias[colorId]) {
-            return colorJSON.cadeias[colorId].color;
+            if(colorId){
+                return colorJSON.cadeias[colorId].color;
+
+            }
+            else{
+                return corEixo[2];
+            }
         } else {
             return colorJSON.cadeias[0].color;
         }

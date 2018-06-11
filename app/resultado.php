@@ -44,13 +44,8 @@
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
 
-
     $select = $json_text['select'];			   /*== informação dos selects ==*/
-    /*
-        busca a view do gráfico,
-        se esta não existir busca a
-        primeira declarada no json
-    */
+
     $eixo_num = 0;
     switch($eixo) {
         case "empreendimento":
@@ -83,10 +78,8 @@
 
             <div class="nome-var col-md-12 col-xs-12">
                 <div class="desc-chart text-center">
-
                     <!--=== título variável ===-->
                     <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
-
                 </div>
             </div>
 
@@ -98,7 +91,7 @@
 
                     <div class="bread-caixa"style="width: 12%">
                         <div class="opcao">
-                            <span class="rotulo-bread opt view active">Eixo</span>
+                            <span class="rotulo-bread opt view">Eixo</span>
                             <select class="bread-select bread-select-eixo" data-id="eixo">
                                 <?php
                                 foreach ($json_text['select']['eixo'] as $bread_eixo) {
@@ -118,7 +111,7 @@
                     <div class="bread-caixa">
 
                         <div class="opcao">
-                            <span class="rotulo-bread opt view active">Variável</span>
+                            <span class="rotulo-bread opt view">Variável</span>
                             <select class="bread-select bread-select-var" data-id="var">
                                 <?php
                                 foreach ($json_text['var'][$eixo_num] as $variavel) {
@@ -154,7 +147,7 @@
                         <div class="bread-separator">/</div>
 
                         <div class="opcao">
-                            <span class="rotulo-bread opt view active">UF</span>
+                            <span class="rotulo-bread opt view">UF</span>
 
                             <select class="bread-select bread-uf" data-id="uf">
                                 <?php
@@ -171,7 +164,7 @@
                         <div class="bread-separator">/</div>
 
                         <div class="opcao">
-                            <span class="rotulo-bread opt view active">Ano</span>
+                            <span class="rotulo-bread opt view">Ano</span>
 
                             <select class="bread-select" data-id="ano">
                                 <?php
@@ -188,7 +181,7 @@
                         <div class="bread-separator">/</div>
 
                         <div class="opcao">
-                            <span class="rotulo-bread opt view active">Setor</span>
+                            <span class="rotulo-bread opt view">Setor</span>
 
                             <select class="bread-select" id="bread-select-cad" data-id="cad">
                                 <?php
@@ -207,7 +200,7 @@
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
-                                <span class="rotulo-bread opt view active">Desagregação</span>
+                                <span class="rotulo-bread opt view">Desagregação</span>
                                 <select class="bread-select" id="bread-select-deg   " data-id="deg">
                                     <option value="0">Escolher</option>
 
@@ -226,12 +219,11 @@
 
                     <?php if($eixo == 'mercado'){?>
 
-
                         <div class="bread-caixa">
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
-                                <span class="rotulo-bread opt view active">Desagregação</span>
+                                <span class="rotulo-bread opt view">Desagregação</span>
                                 <select class="bread-select" id="bread-select-deg" data-id="deg">
                                     <option value="0">Escolher</option>
 
@@ -257,7 +249,7 @@
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
-                                <span class="rotulo-bread opt view active ">Mecanismo</span>
+                                <span class="rotulo-bread opt view ">Mecanismo</span>
                                 <select class="bread-select" id="bread-select-mec" data-id="mec">
                                     <option value="0">Todos</option>
 
@@ -315,7 +307,7 @@
                             <div class="bread-separator">/</div>
 
                             <div class="opcao">
-                                <span class="rotulo-bread opt view active ">Tipo</span>
+                                <span class="rotulo-bread opt view ">Tipo</span>
                                 <select class="bread-select" id="bread-select-typ" data-id="typ">
 
                                     <?php foreach ($select['typ'] as $option): ?>
@@ -904,8 +896,3 @@
 <script type="text/javascript" src="js/descricoes.js"></script>
 <script type="text/javascript" src="js/contraste.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-
-<script>
-    $(document).ready(function() {
-    });
-</script>

@@ -1290,8 +1290,6 @@ function getTextWidth(text, font) {
  */
 
 
-
-
 /*
 * Função para atribuir o valor certo para o dado percentual da variavel em questão
 *

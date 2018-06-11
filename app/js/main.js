@@ -943,6 +943,13 @@ function loadResult(){
         }
     });
 
+    $(".opt").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][3]);
+    $(".number").css("color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][4])
+    $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
+
+
+    console.log(colorJSON['eixo'][getEixo(eixoUrl)])
+
     removeVar('mercado', 3);
 
 }
