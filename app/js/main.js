@@ -1560,6 +1560,7 @@ function switchToOcupations() {
 
 function updateSelectsByUrl(){
 
+    var eixo = parent.window.location.hash.substring(1)
     var urlString = parent.window.location.href;
     var parametrosUrl = urlString.split("?")[1].split("#")[0].split("&");
     var parametros = [];
@@ -1577,11 +1578,24 @@ function updateSelectsByUrl(){
         url['ocp'] = obj['ocp'];
     }
 
+    if ( obj.hasOwnProperty('subdeg') ) {
+        url['subdeg'] = obj['subdeg'];
+    }
 
     $(".bread-select").each(function(){
-        $(this).val(obj[$(this).attr("data-id")]);
-        url[$(this).attr("data-id")] = $(this).val();
+
+        if(eixo == "mercado" && $(this).attr("data-id") == 'deg'){
+            $(this).find("optgroup[value="+obj['deg']+"]").find("option[value="+obj['subdeg']+"]").prop('selected', true);
+            url['deg'] = obj['deg'];
+        }
+        else{
+            $(this).val(obj[$(this).attr("data-id")]);
+            url[$(this).attr("data-id")] = $(this).val();
+        }
+
+
     })
+
 
 }
 

@@ -10,7 +10,7 @@
 <script src="js/dependencias/jquery.min.js"></script>
 <script src="js/control-colors.js"></script>
 <script src="js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
-<script src="js/jquery.fullPage.js"></script>
+<script src="js/dependencias/jquery.fullPage.js"></script>
 <script src="js/continents-mill.js"></script>
 
 <!-- Fav Icons -->
