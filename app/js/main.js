@@ -6,21 +6,27 @@ var textJSON = []
 var colorJSON = []
 var corEixo;
 
+
+
+
+
+$.ajaxSetup({async: false});
+$.get("./data/colors.json")
+    .done(function(data){
+        colorJSON = data
+        corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
+    });
+
 $.get("./data/pt-br.json", function(data){
     textJSON = data
 })
 
-$.get("./data/colors.json", function(data){
-    colorJSON = data
-    corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
-})
-
-//$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 });
 
-// var corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
+
+$.ajaxSetup({async: true});
 
 
 /*-----------------------------------------------------------------------------
@@ -1417,10 +1423,12 @@ function updateMenuLegenda(eixo, vrv){
     }
     else if(eixo == 2 && vrv == 18){
 
+
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         var legendArray = [0, 2, 3, 4, 5, 6, 8, 9, 11];
         var html = "";
+
 
         legendArray.forEach( function(id) {
             html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
@@ -2046,7 +2054,7 @@ $(document).ready(function(){
 
     if(window.location.pathname.match("resultado")){
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
-        // updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var'])
+        updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var'])
 
     }
     updateIframe(url);

@@ -20,15 +20,27 @@ updateTitleClickSCC()
 
 var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
-function destacaBarra(barraId, stacked) {
-    stacked = false;
+
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function destacaBarra(barraId, stacked = false) {
     i = 0;
     $("rect").each(function() {
 
         if(stacked) {
-            r = 109
-            g = 191
-            b = 201
+
+            var rgb = hexToRgb(corEixo[1].split("#")[1]);
+            r = rgb.r;
+            g = rgb.g;
+            b = rgb.b;
 
             if($(this).attr("data-legend") == barraId) {
                 if($(this).attr("class") !== "destacado") {
@@ -44,6 +56,7 @@ function destacaBarra(barraId, stacked) {
                 if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
                 $(this).animate({"opacity": "0.7"}, "fast");
             }
+
         }
         else {
             if($(this).attr("data-legend") == barraId) {
