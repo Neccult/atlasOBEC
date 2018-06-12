@@ -897,6 +897,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     ]);
                 }
                 else if(vrv === 2){
+
                     if(url['ocp'] == 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
@@ -904,6 +905,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                         ]);
                     }
                     else{
+
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
@@ -1216,10 +1218,7 @@ else {
             })
             .attr("width", x_eixo1.rangeBand())
             .on("mouseover", function (d, i, obj) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", desagregacao_names()[obj]],
-                    ["", formatDecimalLimit(d.y, 2)]
-                ]);
+                loadTooltip(d, obj,  i, eixo, vrv);
             })
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
@@ -1298,6 +1297,42 @@ else {
         else
             updateDescription(descricoes, eixo, vrv, ocp);
         // console.log(dataset)
+
+    }
+
+    function loadTooltip(d, obj, i, eixo, vrv){
+
+
+        if(eixo === 1){
+            if (vrv === 9) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", desagregacao_names()[obj]],
+                    ["", formatTextVrv(d.y, eixo, vrv)]
+                ]);
+            }
+            else if(vrv === 2){
+
+                if(url['ocp'] == 0){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", desagregacao_names()[obj]],
+                        ["", formatTextVrv(d.y*100, eixo, vrv)]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d, [
+                        ["title", desagregacao_names()[obj]],
+                        ["", formatTextVrv(d.y*100, eixo, vrv)]
+                    ]);
+                }
+            }
+            else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", desagregacao_names()[obj]],
+                    ["", formatTextVrv(d.y, eixo, vrv)]
+                ]);
+            }
+        }
+
 
     }
 
