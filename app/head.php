@@ -7,9 +7,9 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<script src="js/jquery.min.js"></script>
+<script src="js/dependencias/jquery.min.js"></script>
 <script src="js/control-colors.js"></script>
-<script src="js/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="js/jquery.fullPage.js"></script>
 <script src="js/continents-mill.js"></script>
 

@@ -102,9 +102,9 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <script src="js/d3/d3.min.js"></script>
 
-<script src="js/jquery-2.2.0.min.js"></script>
+<script src="js/dependencias/jquery-2.2.0.min.js"></script>
 <!-- D3 QUEUE -->
-<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+<script src="js/d3/d3-queue.v3.min.js"></script>
 <!-- Utilidades -->
 <script src="js/functions.js"></script>
 <script src="js/descricoes.js"></script>
@@ -141,6 +141,7 @@
     var fax = <?php echo $fax; ?>;
     var mundo = <?php echo $mundo; ?>;
 	var eixo;
+
 	switch(window.location.hash.substring(1)) {
         case "empreendimentos":
             eixo = 0;

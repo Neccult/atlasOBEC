@@ -10,18 +10,18 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/dependencias/html5shiv.min.js"></script>
+    <script src="js/dependencias/respond.min.js"></script>
     <![endif]-->
 
     <!-- D3 JS v4 -->
     <script src="js/d3/d3.min.js" charset="utf-8"></script>
 
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+    <script src="js/d3/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/d3/d3-legend.min.js"></script>
 
     <!-- D3 QUEUE -->
-    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="js/d3/d3-queue.v3.min.js"></script>
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>

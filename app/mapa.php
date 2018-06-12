@@ -11,23 +11,23 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="./js/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="js/dependencias/html5shiv.min.js"></script>
+    <script src="js/dependencias/respond.min.js"></script>
+    <script src="js/dependencias/jquery.min.js"></script>
+    <script src="js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="./js/continents-mill.js"></script>
     <![endif]-->
 
     <!-- TopoJSON -->
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="js/dependencias/topojson.v2.min.js"></script>
 
     <!-- D3 JS v4 -->
     <script src="js/d3/d3.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+    <script src="js/d3/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/d3/d3-legend.min.js"></script>
 
     <!-- D3 QUEUE -->
-    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="js/d3/d3-queue.v3.min.js"></script>
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>

@@ -8,7 +8,7 @@
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="../js/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="../js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="../js/continents-mill.js"></script>
 
 <!-- Fav Icons -->
