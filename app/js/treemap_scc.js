@@ -601,54 +601,7 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 	var ordinal = d3.scaleOrdinal()
 		.domain(legendPartOne.domain)
 		.range(legendPartOne.range);
-
-	/*svg.append("g")
-		.attr("class", "legendOrdinalLeft")
-		.attr("transform", "translate(1," + (height + 15 + svgMarginTop) + ")");
-
-	var legendOrdinalLeft = d3.legendColor()
-		.cells(legendPartOne.domain)
-		.scale(ordinal);
-
-	svg.select(".legendOrdinalLeft")
-		.call(legendOrdinalLeft);
-
-	var ajuste = windowWidth>480 ? 30 : 0,
-		centerLeg = width/3 + ajuste,
-		rightLeg = centerLeg*2;
-
-	// middle legends
-	var ordinal = d3.scaleOrdinal()
-		.domain(legendPartTwo.domain)
-		.range(legendPartTwo.range);
-
-	svg.append("g")
-		.attr("class", "legendOrdinalMiddle")
-		.attr("transform", "translate("+centerLeg+"," + (height + 15 + svgMarginTop) + ")");
-
-	var legendOrdinalMiddle = d3.legendColor()
-		.cells(legendPartTwo.domain)
-		.scale(ordinal);
-
-	svg.select(".legendOrdinalMiddle")
-		.call(legendOrdinalMiddle);
-
-	// right legends
-	var ordinal = d3.scaleOrdinal()
-		.domain(legendPartThree.domain)
-		.range(legendPartThree.range);
-
-	svg.append("g")
-		.attr("class", "legendOrdinalRight")
-		.attr("transform", "translate("+rightLeg+"," + (height + 15 + svgMarginTop) + ")");
-
-	var legendOrdinalRight = d3.legendColor()
-		.cells(legendPartThree.domain)
-		.scale(ordinal);
-
-	svg.select(".legendOrdinalRight")
-		.call(legendOrdinalRight);
-*/
+	
 	d3.selectAll('#testDiv').remove();
 
 	// testa e mostra mensagem de valor zerado/indisponível
