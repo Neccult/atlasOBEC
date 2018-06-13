@@ -233,7 +233,7 @@ function ready(error, br_states, mapa){
             url['uf'] = d.id;
 
             UpdateWindowUrl('uf', d.id);
-
+            updateIframe()
             destacaPais(d.id);
 
             //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);
