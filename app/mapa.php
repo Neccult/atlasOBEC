@@ -7,27 +7,27 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="js/dependencias/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="./js/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="js/dependencias/html5shiv.min.js"></script>
+    <script src="js/dependencias/respond.min.js"></script>
+    <script src="js/dependencias/jquery.min.js"></script>
+    <script src="js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="./js/continents-mill.js"></script>
     <![endif]-->
 
     <!-- TopoJSON -->
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="js/dependencias/topojson.v2.min.js"></script>
 
     <!-- D3 JS v4 -->
     <script src="js/d3/d3.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
+    <script src="js/d3/d3-scale-chromatic.v1.min.js"></script>
+    <script src="js/d3/d3-legend.min.js"></script>
 
     <!-- D3 QUEUE -->
-    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="js/d3/d3-queue.v3.min.js"></script>
 
     <!-- Utilidades -->
     <script src="js/functions.js"></script>
@@ -59,30 +59,7 @@
     /* informações JSON */
     $json = file_get_contents('data/pt-br.json');
     $json_text = json_decode($json, true);
-    foreach($json_text['var'][3] as $key=>$vrbs){
-        if($vrbs['id'] == $_GET["var"]){
-            $vrb = $key;
-            break;
-        }
-    }
-    if($eixo == "empreendimentos") {
-        $text = $json_text['var'][0][$key]; /*== informações da variável ==*/
-    }
-    else if($eixo == "mercado") {
-        $text = $json_text['var'][1][$key]; /*== informações da variável ==*/
-    }
-    else if($eixo == "politicas") {
-        $text = $json_text['var'][2][$key   ]; /*== informações da variável ==*/
-    }
-    else if($eixo == "comercio") {
-        foreach($json_text['var'][3] as $key=>$vrbs){
-            if($vrbs['id'] == $_GET["var"]){
-                $vrb = $key;
-                break;
-            }
-        }
-        $text = $json_text['var'][3][$key]; /*== informações da variável ==*/
-    }
+
     $select = $json_text['select'];			   /*== informação dos selects ==*/
 
     /*
@@ -90,6 +67,7 @@
         se esta não existir busca a
         primeira declarada no json
     */
+
     $eixo_num = 0;
     switch($eixo) {
         case "empreendimento":
@@ -105,6 +83,14 @@
             $eixo_num = 3;
     }
 
+    foreach($json_text['var'][$eixo_num] as $key=>$vrbs){
+        if($vrbs['id'] == $_GET["var"]){
+            $vrb = $key;
+            $text = $json_text['var'][$eixo_num][$key]; /*== informações da variável ==*/
+            break;
+        }
+    }
+
     if(!isset($text[$view])) $view = $text['type'][0]['id'];
 
     $descView = $json_text[$view];			   /*== descrição da visualização ==*/
@@ -114,6 +100,7 @@
 <div class="container-chart">
     <div class="content">
         <div class="chart">
+
             <?php
 
             if (!empty($_GET["var"]))
@@ -175,6 +162,7 @@
                 $ano = $_GET["ano"];
             else
                 $ano = 2014;
+
             if (!empty($_GET["mundo"]))
                 $mundo = $_GET["mundo"];
             else
@@ -203,7 +191,6 @@
             ?>
 
             <script type="text/javascript">
-
                 //variaveis configuracao query
                 var vrv = <?php echo $var; ?>;
                 var cad = <?php echo $cad; ?>;

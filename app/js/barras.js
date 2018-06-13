@@ -29,14 +29,27 @@ var ocp = 0
 var uos = 0
 
 
+
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
 function destacaBarra(barraId, stacked = false) {
     i = 0;
     d3.select(barras_box).selectAll("rect").each(function() {
 
         if(stacked) {
-            r = 109
-            g = 191
-            b = 201
+
+            var rgb = hexToRgb(corEixo[1].split("#")[1]);
+            r = rgb.r;
+            g = rgb.g;
+            b = rgb.b;
 
             if($(this).attr("data-legend") == barraId) {
                 if($(this).attr("class") !== "destacado") {
@@ -52,13 +65,14 @@ function destacaBarra(barraId, stacked = false) {
                 if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
                 $(this).animate({"opacity": "0.7"}, "fast");
             }
+
         }
         else {
             if($(this).attr("data-legend") == barraId) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", corEixo);
+                    $(this).css("fill", corEixo[1]);
                     $(this).animate({"opacity": "1"}, "fast");
                 }
             }
@@ -83,7 +97,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     var dados = {key: [], value: []};
 
 
-
     // import colors.json file
     var colorJSON;
     var textJSON;
@@ -101,7 +114,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     colorJSON = COLORS;
     var corEixo = colorJSON['eixo'][eixo].color;
 
-
         // import pt-br.json file for get the title
     textJSON = PT_BR;
 
@@ -112,7 +124,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     // return matching color value
     var color = function (colorId) {
         if (colorJSON.cadeias[colorId]) {
-            return colorJSON.cadeias[colorId].color;
+            if(colorId){
+                return colorJSON.cadeias[colorId].color;
+
+            }
+            else{
+                return corEixo[2];
+            }
         } else {
             return colorJSON.cadeias[0].color;
         }
@@ -131,6 +149,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         if(vrv == 3 && eixo == 0){
             delete data['2007'];
         }
+        
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
             
@@ -142,8 +161,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
             else dados.percentual.push(data[key].percentual);
 
-            if (vrv === 2) dados.taxa.push(0);
-            else dados.taxa.push(data[key].taxa);
+            if (vrv === 2) {
+                dados.taxa.push(0);
+            }
+            else {
+                dados.taxa.push(data[key].taxa);
+            }
         });
         // updateAnoDefault(dados.key[dados.key.length-1]);
         //
@@ -159,9 +182,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         //valores maximos e minimos
         var minValue = d3.min(dados.value);
         var maxValue = d3.max(dados.value);
-        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
-
-        // console.log(maxValue)
 
         //distribuicao de frequencias
         var quant = 9;
@@ -192,8 +212,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         // creates cadeia's color range array from color.json file
         var colorsRange = [];
         $.each(colorJSON.cadeias[cad].gradient, function (i, rgb) {
-            if (i > 1)
+            if (i > 1){
                 colorsRange.push(rgb);
+            }
         });
         /*==================*/
         /* *** gráfico! *** */
@@ -236,8 +257,8 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         if(vrv === 3 && eixo == 0) {
             dados.value.splice(0,1);
-
         }
+
         var formatYAxis = function (d) {
             
             var higherZeroOcur = maxDecimalAxis;
@@ -650,10 +671,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     else
                         return color(cad)
                 }
-                else if(eixo == 3 && (vrv == 5 || vrv == 8))
+                else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
                     return color(0);
-                else
+                }
+                else {
                     return color(cad);
+                }
             })
         }    //mouseover
             rect.on("mouseover", function (d, i, obj) {
@@ -665,9 +688,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 var valorTooltip = formatTextVrv(dados.value[i], eixo, vrv);
                 var taxaTooltip = formatTextTaxaVrv(dados.taxa[i], eixo, vrv);
 
-
                 if (eixo === 0 || eixo === 1 || eixo === 2 || eixo === 3){
-
                     loadTooltip(d, i, eixo, vrv)
                 }
 
@@ -918,6 +939,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     ]);
                 }
                 else if(vrv === 2){
+
                     if(url['ocp'] == 0){
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
@@ -925,6 +947,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                         ]);
                     }
                     else{
+
                         tooltipInstance.showTooltip(d, [
                             ["title", dados.key[i]],
                             ["", formatTextVrv(dados.value[i]*100, eixo, vrv)],
@@ -1237,10 +1260,7 @@ else {
             })
             .attr("width", x_eixo1.rangeBand())
             .on("mouseover", function (d, i, obj) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", desagregacao_names()[obj]],
-                    ["", formatDecimalLimit(d.y, 2)]
-                ]);
+                loadTooltip(d, obj,  i, eixo, vrv);
             })
             .on("mouseout", tooltipInstance.hideTooltip)
             .on("click", function(d, i, obj) {
@@ -1308,7 +1328,42 @@ else {
             updateDescription(descricoes, eixo, vrv, mundo);
         else
             updateDescription(descricoes, eixo, vrv, ocp);
-        // console.log(dataset)
+
+    }
+
+    function loadTooltip(d, obj, i, eixo, vrv){
+
+
+        if(eixo === 1){
+            if (vrv === 9) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", desagregacao_names()[obj]],
+                    ["", formatTextVrv(d.y, eixo, vrv)]
+                ]);
+            }
+            else if(vrv === 2){
+
+                if(url['ocp'] == 0){
+                    tooltipInstance.showTooltip(d, [
+                        ["title", desagregacao_names()[obj]],
+                        ["", formatTextVrv(d.y*100, eixo, vrv)]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d, [
+                        ["title", desagregacao_names()[obj]],
+                        ["", formatTextVrv(d.y*100, eixo, vrv)]
+                    ]);
+                }
+            }
+            else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+                tooltipInstance.showTooltip(d, [
+                    ["title", desagregacao_names()[obj]],
+                    ["", formatTextVrv(d.y, eixo, vrv)]
+                ]);
+            }
+        }
+
 
     }
 

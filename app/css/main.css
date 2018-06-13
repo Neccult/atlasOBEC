@@ -127,19 +127,21 @@ i.color {
 }
 
 span.opt{
-	display: inline-block;
 	vertical-align: middle;
 	width: 100%;
-	padding: 1px;
 	cursor: pointer;
 	padding-left: 5px;
 	padding-right: 5px;
-	font-size: 12px;
-	height: 14px;
+	font-size: 10px;
+	height: 18px;
 	border-radius: 10px;
 	background-color: #6DBFC9;
 	color: #FFF;
 	line-height: 12px;
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 button.opt{
@@ -326,7 +328,6 @@ button.opt:hover, button.opt.active{
 
 .description-number {
 	text-transform: uppercase;
-	padding-left: 5px;
 	font-weight: 500;
 }
 
@@ -725,6 +726,7 @@ article.results-article div.results-content{
 	display: table;
 	height: 100%;
 	background-color: #f0f0f0;
+	/*background-color: white;*/
 	width: 100%;
 }
 .container-chart .content{
@@ -737,11 +739,13 @@ article.results-article div.results-content{
 	width: 100%;
 	height: 100%;
 	background-color: #f0f0f0;
+	/*background-color: white;*/
 	padding: 15px;
 }
 
 #view-boxes>div {
 	background-color: #f0f0f0;
+	/*background-color: white;*/
 	border-radius:	20px;
 	border: 5px solid #ddd;
 }
@@ -773,7 +777,29 @@ article.results-article div.results-content{
 	margin: 20px 0;
 }
 
+.col-btn:first-child button{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0	;
+}
+.col-btn:nth-child(2) button{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
 
+#containerDownload .col-btn:nth-child(2) button{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+#containerDownload  .col-btn:nth-child(3) button{
+	border-radius: 0;
+}
+
+#containerDownload  .col-btn:nth-child(4) button{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
 
 .desc-var {
 	color:	#aaa;
@@ -794,7 +820,8 @@ article.results-article div.results-content{
 }
 
 .view-title-leg{
-	padding: 20px 0 0 20px;
+	padding: 20px 0 0 0;
+	text-align: center;
 }
 
 
@@ -1008,7 +1035,7 @@ svg line {
 }
 
 .bread-container{
-	width: 80%;
+	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -1047,7 +1074,7 @@ select[disabled].opt-select{
 .desc-chart .title {
 	margin-bottom: 40px;
 	margin-top: 40px;
-	font-size: 24px;
+	font-size: 26px;
 	text-transform: uppercase;
 	letter-spacing: 10px;
 	line-height: 40px;
@@ -1809,12 +1836,9 @@ button.opt.active{
 
 @media (max-width: 1499px) {
 
-	#view-boxes div{
-
-	}
 
 	.bread-select, .bread-eixo{
-		font-size: 13px;
+		/*font-size: 13px;*/
 	}
 
 	.description-number{

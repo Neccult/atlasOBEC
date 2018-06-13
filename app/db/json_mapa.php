@@ -44,6 +44,7 @@ else{
     $mundo = 0;
 }
 
+
 //Trata a pessoa fisica/juridica
 switch($pfj) {
     case "0":

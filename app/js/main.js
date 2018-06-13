@@ -4,19 +4,29 @@ var anos_default;
 
 var textJSON = []
 var colorJSON = []
+var corEixo;
+
+
+
+
+
+$.ajaxSetup({async: false});
+$.get("./data/colors.json")
+    .done(function(data){
+        colorJSON = data
+        corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
+    });
 
 $.get("./data/pt-br.json", function(data){
     textJSON = data
 })
 
-$.get("./data/colors.json", function(data){
-    colorJSON = data
-})
-
-//$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 });
+
+
+$.ajaxSetup({async: true});
 
 
 /*-----------------------------------------------------------------------------
@@ -40,7 +50,7 @@ function controlVar(clickVar){
             break;
         case "politicas":       urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
             break;
-        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
             break;
     }
 
@@ -82,7 +92,7 @@ function controlVarPage(clickVar){
                                     break;
         case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
                                      break;
-        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=0&cad=0&ano=2014&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
     }
 
@@ -113,10 +123,12 @@ function getAnoDefault(eixo_atual){
             break;
 
         case 2:
-            if(url['var'] != 17)
+            if(url['var'] != 17){
                 url['ano'] = anos_default[url['var']][0];
-            else
+            }
+            else{
                 url['ano'] = 2017
+            }
             break;
         case 3:
             if(url['var'] >= 11)
@@ -140,16 +152,9 @@ function defaultUrl(){
     url['view'] = 'mapa';
     url['uf'] = 0;
     url['cad'] = 0;
-    url['prt'] = 0;
-    url['atc'] = 0;
     url['ocp'] = 0;
-    url['fax'] = 0;
-    url['cor'] = 0;
-    url['frm'] = 0;
-    url['snd'] = 0;
-    url['sex'] = 0;
-    url['prv'] = 0;
     url['deg'] = 0;
+    url['subdeg'] = 0;
     url['mec'] = 0;
     url['mod'] = 0;
     url['pfj'] = 0;
@@ -323,6 +328,8 @@ function updateIframe(url){
             }
             else{
 
+                // console.log(url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash)
+                // console.log(newUrl)
                 $('iframe[id="view_box"]').parent().find(".content-btn-mapa").css("display", "block")
                 $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
 
@@ -943,6 +950,10 @@ function loadResult(){
         }
     });
 
+    $(".opt").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][3]);
+    $(".number").css("color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][4])
+    $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
+
     removeVar('mercado', 3);
 
 }
@@ -1306,8 +1317,17 @@ function updateLegendByDeg(deg){
         var legendArray = colorJSON.deg[deg]['subdeg'];
         var html = "";
 
-        for (var nome in legendArray) {
-            html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+        if(deg == 2 || deg == 6 || deg == 7 || deg == 8){
+            var cont = 1;
+            for (var nome in legendArray) {
+                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[cont]+"\"></i> "+nome+"<br></span>\n";
+                cont++;
+            }
+        }
+        else{
+            for (var nome in legendArray) {
+                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+            }
         }
 
         $("#title-view-leg-scc").html(html)
@@ -1342,9 +1362,16 @@ function switchToSetores() {
     $("#title-view-leg-scc").empty();
 
     var eixo = getEixo(window.location.hash.substring(1));
-    var cads = [];
+    var cads = updateMenuLegenda(eixo, url['var']);
 
-    if(eixo == 0 && url['var'] > 9){
+
+    updateBreadcrumbSetores(cads);
+}
+
+function updateMenuLegenda(eixo, vrv){
+
+    var cads = [];
+    if(eixo == 0 && vrv > 9){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         cads = [
@@ -1352,11 +1379,11 @@ function switchToSetores() {
         ]
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
 
     }
-    else if(eixo == 1 && (url['var'] == 3 || url['var'] == 4)){
+    else if(eixo == 1 && (vrv == 3 || vrv == 4)){
 
         $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
 
@@ -1371,17 +1398,17 @@ function switchToSetores() {
 
         cads = getCadsByMenu();
     }
-    else if(eixo == 1 && url['var'] > 11){
+    else if(eixo == 1 && vrv > 11){
         cads = [
             {id: 0, nome: " Todos"}
         ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
     }
-    else if(eixo == 2 && url['var'] == 2){
+    else if(eixo == 2 && vrv == 2){
 
         ///TODO ESSA VARIAVEL EXISTE???
 
@@ -1396,12 +1423,14 @@ function switchToSetores() {
 
         cads = getCadsByMenu();
     }
-    else if(eixo == 2 && url['var'] == 18){
+    else if(eixo == 2 && vrv == 18){
+
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         var legendArray = [0, 2, 3, 4, 5, 6, 8, 9, 11];
         var html = "";
+
 
         legendArray.forEach( function(id) {
             html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
@@ -1411,7 +1440,7 @@ function switchToSetores() {
 
         cads = getCadsByMenuDonut();
     }
-    else if(eixo == 2 && url['var'] == 19){
+    else if(eixo == 2 && vrv == 19){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
@@ -1427,7 +1456,7 @@ function switchToSetores() {
         cads = getCadsByMenuDonut();
 
     }
-    else if(eixo == 2 && (url['var'] == 15 || url['var'] == 16)){
+    else if(eixo == 2 && (vrv == 15 || vrv == 16)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1435,10 +1464,10 @@ function switchToSetores() {
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
     }
-    else if(eixo == 2 && (url['var'] == 10)){
+    else if(eixo == 2 && (vrv == 10)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1447,10 +1476,10 @@ function switchToSetores() {
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
     }
-    else if(eixo == 2 && (url['var'] == 17)){
+    else if(eixo == 2 && (vrv == 17)){
         cads =
             [
                 {id: 0, nome: " Todos"}
@@ -1458,11 +1487,11 @@ function switchToSetores() {
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 125, 221)\"></i>  Possui <br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(217, 213, 222)\"></i> Não Possui <br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  Possui <br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> Não Possui <br></span>");
 
     }
-    else if(eixo == 3 && (url['var'] >= 1 && url['var'] != 5 && url['var'] != 8 && url['var'] <= 10 || url['var'] == 12)){
+    else if(eixo == 3 && (vrv >= 1 && vrv != 5 && vrv != 8 && vrv <= 10 || vrv == 12)){
         cads =
             [
                 {id: 0, nome: " Todos"},
@@ -1480,8 +1509,8 @@ function switchToSetores() {
 
 
         $("#title-view-leg-scc").append("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)\"></i> Exportação<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: rgb(109, 191, 201)\"></i> Importação<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Exportação<br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[3]+"\"></i> Importação<br></span>");
 
 
     }
@@ -1504,7 +1533,8 @@ function switchToSetores() {
         cads = getCadsByMenu();
     }
 
-    updateBreadcrumbSetores(cads);
+    return cads;
+
 }
 
 function switchToOcupations() {
@@ -1532,6 +1562,7 @@ function switchToOcupations() {
 
 function updateSelectsByUrl(){
 
+    var eixo = parent.window.location.hash.substring(1)
     var urlString = parent.window.location.href;
     var parametrosUrl = urlString.split("?")[1].split("#")[0].split("&");
     var parametros = [];
@@ -1549,11 +1580,24 @@ function updateSelectsByUrl(){
         url['ocp'] = obj['ocp'];
     }
 
+    if ( obj.hasOwnProperty('subdeg') ) {
+        url['subdeg'] = obj['subdeg'];
+    }
 
     $(".bread-select").each(function(){
-        $(this).val(obj[$(this).attr("data-id")]);
-        url[$(this).attr("data-id")] = $(this).val();
+
+        if(eixo == "mercado" && $(this).attr("data-id") == 'deg'){
+            $(this).find("optgroup[value="+obj['deg']+"]").find("option[value="+obj['subdeg']+"]").prop('selected', true);
+            url['deg'] = obj['deg'];
+        }
+        else{
+            $(this).val(obj[$(this).attr("data-id")]);
+            url[$(this).attr("data-id")] = $(this).val();
+        }
+
+
     })
+
 
 }
 
@@ -1568,7 +1612,6 @@ $(document).ready(function(){
     $(window).resize(function() {
         controlPageWidth();
     });
-
 
 
     /*=== selecionar variável ===*/
@@ -1900,8 +1943,6 @@ $(document).ready(function(){
                 updateWindowUrl('ano', url['ano']);
 
 
-
-
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
 
@@ -2029,6 +2070,12 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
+
+    if(window.location.pathname.match("resultado")){
+        updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
+        updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var'])
+
+    }
     updateIframe(url);
 
 });

@@ -6,16 +6,16 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="js/ie-emulation-modes-warning.js"></script>
+    <script src="js/dependencias/ie-emulation-modes-warning.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="js/dependencias/html5shiv.min.js"></script>
+    <script src="js/dependencias/respond.min.js"></script>
     <![endif]-->
 
     <!-- TopoJSON -->
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="js/dependencias/topojson.v2.min.js"></script>
 
 
 
@@ -113,6 +113,11 @@
             else
                 $var = 1;
 
+            if (!empty($_GET["view"]))
+                $view = $_GET["view"];
+            else
+                $view = 'mapa';
+
             if (!empty($_GET["uf"]))
                 $uf = $_GET["uf"];
             else
@@ -189,12 +194,12 @@
             <!-- D3 JS v4 -->
             <?php
             if($eixo == "mercado" && $deg != 0  && $var != 4 && $var != 5 && $var != 6) {
-                echo '<script src="https://d3js.org/d3.v3.min.js"></script>';
-                echo '<script src="https://d3js.org/d3-queue.v3.min.js"></script>';
-                echo '<script src="https://d3js.org/d3-color.v1.min.js"></script>';
-                echo '<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>';
-                echo '<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>';
-                echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>';
+                echo '<script src="js/d3/d3.v3.min.js"></script>';
+                echo '<script src="js/d3/d3-queue.v3.min.js"></script>';
+                echo '<script src="js/d3/d3-color.v1.min.js"></script>';
+                echo '<script src="js/d3/d3-interpolate.v1.min.js"></script>';
+                echo '<script src="js/d3/d3-scale-chromatic.v1.min.js"></script>';
+                echo '<script src="js/d3/d3-legend.min.js"></script>';
 
 
                 ?>
