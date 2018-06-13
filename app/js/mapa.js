@@ -232,7 +232,7 @@ function ready(error, br_states, mapa){
             $(".bread-select[data-id='uf']").val(d.id);
             url['uf'] = d.id;
 
-            testeUpdateWindowUrl('uf', d.id);
+            UpdateWindowUrl('uf', d.id);
 
             destacaPais(d.id);
 

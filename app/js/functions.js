@@ -28,7 +28,7 @@ function height_box(id_box){
 //
 // }
 
-function testeUpdateWindowUrl(id, valor){
+function UpdateWindowUrl(id, valor){
 
     var replace = id+"=[0-9]*";
     var re = new RegExp(replace,"");
@@ -37,14 +37,6 @@ function testeUpdateWindowUrl(id, valor){
 
     var urlString = window.location.href.replace(re, id+"="+valor);
     window.history.pushState(null, null, urlString);
-
-    // console.log(window.location.href)
-
-
-
-    // $(window.parent.document).find('iframe[id="resultado_view"]').attr('src', urlString);
-
-
 
 }
 
