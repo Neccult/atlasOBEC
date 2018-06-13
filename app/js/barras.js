@@ -31,7 +31,7 @@ var uos = 0
 
 function destacaBarra(barraId, stacked = false) {
     i = 0;
-    $("rect").each(function() {
+    d3.select(barras_box).selectAll("rect").each(function() {
 
         if(stacked) {
             r = 109
@@ -42,7 +42,7 @@ function destacaBarra(barraId, stacked = false) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", function(d){ return'rgb('+(r+i*15)+','+(g+i*15)+','+(b+i*15)+')'});
+                    $(this).css("fill", function(){ return'rgb('+(r+i*15)+','+(g+i*15)+','+(b+i*15)+')'});
                     $(this).animate({"opacity": "1"}, "fast");
                     i++;
                 }
@@ -64,7 +64,7 @@ function destacaBarra(barraId, stacked = false) {
             }
             else {
                 $(this).attr("class", "");
-                if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+                $(this).css("fill", $(this).attr("data-color"));
                 $(this).animate({"opacity": "0.7"}, "fast");
             }
         }
@@ -123,40 +123,39 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         if (error) {
             console.log(error);
         }
-
+        
         var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
         // console.log(data)
 
+        if(vrv == 3 && eixo == 0){
+            delete data['2007'];
+        }
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-            if ((vrv === 3) && data[key].ano === 2007) {
-            } else {
-                dados.key.push(data[key].ano);
-            }
+            
+            dados.key.push(data[key].ano);
 
             if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
             else dados.value.push(data[key].valor);
-
+            
             if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
             else dados.percentual.push(data[key].percentual);
 
             if (vrv === 2) dados.taxa.push(0);
             else dados.taxa.push(data[key].taxa);
         });
-
         // updateAnoDefault(dados.key[dados.key.length-1]);
         //
         dados.key = d3.keys(data);
-        if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
+        //if(eixo == 0 && vrv == 3) dados.key = ajustaAnos(dados.key);
         //tamanho do grafico
         // AQUI automatizar map center
         var margin = {top: 20, right: 20, bottom: 30, left: 35},
             width = chartWidth - margin.left - margin.right,
             height = chartHeight - margin.top - margin.bottom;
-
-        dados.value.push(0);
-        // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
+        
+            // if(eixo === 0 && (vrv >= 10 && vrv <= 13)) dados.value.push(1);
         //valores maximos e minimos
         var minValue = d3.min(dados.value);
         var maxValue = d3.max(dados.value);
@@ -209,13 +208,14 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             var tamanho = dados.value.length;
         }
         else if(eixo == 0 && (vrv == 3)) {
-            var tamanho = dados.value.length - 1;
+            var tamanho = dados.value.length;
         }
         else {
             var tamanho = dados.value.length;
         }
+        
         var x = d3.scaleBand()
-            .domain(d3.range(tamanho - 1))
+            .domain(dados.key)
             .rangeRound([0, width])
             .padding(0.1);
 
@@ -233,7 +233,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         });
 
         // if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
-        dados.value.pop();
 
         if(vrv === 3 && eixo == 0) {
             dados.value.splice(0,1);
@@ -451,35 +450,37 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             });
         }
 
-        // console.log(dados)
         //Cria barras
 
-
         if(d3.select(barras_box).select("svg").select("g").selectAll("rect").size()!= 0){
-
             var rect = d3.select(barras_box)
                          .select("svg")
                          .select("g")
                          .selectAll("rect")
                          .data(dados.value)
-                         
+
             rect.exit().remove()
-                                
+
+            rect.enter().append("rect").attr("x", function(d, i){
+                return x(dados.key[i]);
+            })
+            
+            rect = d3.select(barras_box)
+                    .select("svg")
+                    .select("g")
+                    .selectAll("rect")
+
             rect
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
             .attr("data-value", function(d) {   return d; })
             .attr("x", function (d, i) {
-                return x(i);
+                return x(dados.key[i]);
             }).attr("y", function (d) {
-                var graphBottom = height;
                 var barPosition = Math.abs(y(d));
                 var barHeight = y(d);
                 var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
                 var isMinValueNegative = zeroPosition !== false;
                 var isValueNegative = d < 0;
-                var zeroPositionExists = zeroPosition < height;
-                var isValueZero = d === 0;
-                var isMaxValue = d3.max(dados.value) == d;
 
                 // TEM VALOR NEGATIVO
                 if (isMinValueNegative) {
@@ -497,17 +498,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
                 barHeight = Math.abs(height - barHeight);
 
-                // BARRA MUITO PEQUENA
-            // if (barHeight <= 3)
-                //return barHeight < 5? height - (5 - barHeight) : (barPosition - barHeight) - 1 ;
-                // return height - (minBarHeight - barHeight);
-
                 // BARRA PEQUENA
                 if (barHeight <= minBarHeight)
                     return height - minBarHeight;
 
                 return barPosition;
-            }).attr("width", x.bandwidth())
+            })
+            .attr("width", x.bandwidth())
             .attr("height", function (d) {
                 var minValue = y.domain()[0];
                 var maxValue = y.domain()[1];
@@ -551,10 +548,12 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     else
                         return color(cad)
                 }
-                else if(eixo == 3 && (vrv == 5 || vrv == 8))
+                else if(eixo == 3 && (vrv == 5 || vrv == 8)){
                     return color(0);
-                else
+                }
+                else{
                     return color(cad);
+                }
             })
         } else {
 
@@ -566,7 +565,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
             .attr("data-value", function(d) {   return d; })
             .attr("x", function (d, i) {
-                return x(i);
+                return x(dados.key[i]);
             })
             .attr("y", function (d) {
                 var graphBottom = height;
@@ -738,7 +737,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                 })
                 .attr("text-anchor", "middle")
                 .attr("x", function (d, i) {
-                    return x(i) + x.bandwidth() / 2;
+                    return x(dados.key[i]) + x.bandwidth() / 2;
                 })
                 .attr("y", function (d) {
                     var minValue = y.domain()[0];
@@ -778,8 +777,8 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
         //formata labels eixo X
         var xAxis = d3.axisBottom(x)
-            .tickFormat(function (d) {
-                if (eixo == 0 && vrv === 3) return dados.key[d]; else return dados.key[d];
+            .tickFormat(function (d, i) {
+                return dados.key[i];
             })
             .tickSize(5)
             .tickPadding(5);
@@ -795,7 +794,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
         } else {
-            d3.select("eixo-x").attr("transform", "translate(0," + height + ")")
+            d3.select(".eixo-x")
+            .transition()
+            .duration(400)
             .call(xAxis);
         }
 
