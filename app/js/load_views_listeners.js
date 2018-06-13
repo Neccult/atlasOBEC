@@ -2,8 +2,8 @@
 
 if(parameters != undefined){
     parameters = {};
-
-    window.parent.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
+    console.log(window.location.href)
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
     })
 

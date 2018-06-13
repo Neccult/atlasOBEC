@@ -618,6 +618,11 @@
 				"desc_int":"de participação do emprego [cad] no emprego total",
 				"title":"Participação no Emprego Total",
 				"desc_percent": "",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
@@ -669,6 +674,11 @@
 				"sufixo_valor":"h",
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
 				"desc_var_mapa": "A variável mostra o volume total de horas semanais trabalhadas nas atividades ligadas aos Setores e às Ocupações Culturais e Criativos.",
 				"type":[
@@ -716,6 +726,11 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"desc_var_mapa": "A variável retrata o valor médio das remunerações monetárias, em R$, recebidas como compensação pelo(a)s trabalhadore(a)s empregado(a)s pelos setores e nas ocupações culturais e criativas.",
@@ -743,6 +758,11 @@
 				"title":"Remuneração por Hora Trabalhada",
 				"desc_percent": "",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"prefixo_valor":"R$ ",
 				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
@@ -771,6 +791,11 @@
 				"title":"Jornada de Trabalho Média",
 				"desc_percent": "",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"prefixo_valor":"",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
@@ -799,6 +824,11 @@
 				"desc_int":"",
 				"desc_percent": "da soma de remunerações pagas aos [ocp] [cad] [uf]",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"prefixo_valor":"R$ ",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
@@ -848,6 +878,11 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes":"Elaboração do NECCULT com base na RAIS.",
 				"desc_var_mapa": "A variável mostra a relação entre o total de rendimentos do trabalho pagos e o valor adicionado, que é a soma de todas rendas novas criadas pelos setores culturais e criativos no País.",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",

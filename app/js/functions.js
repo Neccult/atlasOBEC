@@ -33,11 +33,9 @@ function UpdateWindowUrl(id, valor){
     var replace = id+"=[0-9]*";
     var re = new RegExp(replace,"");
 
-    var iframe = $(window.parent.document).find('iframe[id="resultado_view"]');
-
     var urlString = window.location.href.replace(re, id+"="+valor);
     window.history.pushState(null, null, urlString);
-
+    console.log(window.location.href)
 }
 
 function changeDownloadURL(url, eixo){
