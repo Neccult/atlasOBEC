@@ -1964,7 +1964,7 @@ var tooltip = (function(){
 			// create all elements passed via array: arr
             createElements(d, arr);
             // graph position on screen
-            console.log($('.container'))
+            // console.log($('.container'))
 			var chartOffset = $('.container').offset(),
 				leftOffset = chartOffset.left,
 				leftOffsetEnd = leftOffset+$('.container').width(),

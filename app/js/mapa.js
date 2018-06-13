@@ -2,7 +2,7 @@
 /*=== tamanho do mapa ===*/
 var mapa_box = '#'+VIEWS["mapa"];
 
-console.log(width_box(mapa_box))
+// console.log(width_box(mapa_box))
 
 var windowWidth = width_box(mapa_box);
 var legendaWidth = width_box(mapa_box);
@@ -13,7 +13,7 @@ var corpo = mapa_box
 
 
 function destacaPais(ufId) {
-    console.log(svg_mapa.selectAll("path"))
+    // console.log(svg_mapa.selectAll("path"))
 	svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
@@ -56,10 +56,10 @@ var corEixo = window.colorJSON['eixo'][parameters.eixo].color;
 var textJSON = PT_BR;
 
 var config = URL_PARAM;
-$.get('./db/json_mapa.php?' + config, function(dado){
-    console.log(config)
-    console.log(dado)
-})
+// $.get('./db/json_mapa.php?' + config, function(dado){
+    // console.log(config)
+    // console.log(dado)
+// })
 //pre-load arquivos
 
 d3.queue()
@@ -223,15 +223,15 @@ function ready(error, br_states, mapa){
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
 
-
             if(window.innerWidth <= 1199)
                 return;
             
 			updateTitleClickMapa(dict[d.id].uf)
             parameters.uf = d.id;
             if(parameters.eixo == 0 && parameters.var == 9)
-            
-            $(window.document).find("select[data-id='uf']").val(d.id);
+
+            $(".bread-select[data-id='uf']").val(d.id);
+            console.log($(".bread-select[data-id='uf']"))
             destacaPais(d.id);
             //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);
            // if(url['cad'] == 0)
