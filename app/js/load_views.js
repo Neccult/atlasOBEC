@@ -6,7 +6,6 @@ window.parent.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,va
 })
 
 parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
-
 PT_BR = [];
 COLORS = [];
 URL_PARAM = $.param(parameters);
