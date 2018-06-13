@@ -228,20 +228,25 @@ function ready(error, br_states, mapa){
             
 			updateTitleClickMapa(dict[d.id].uf)
             parameters.uf = d.id;
-            if(parameters.eixo == 0 && parameters.var == 9)
 
             $(".bread-select[data-id='uf']").val(d.id);
-            console.log($(".bread-select[data-id='uf']"))
+            url['uf'] = d.id;
+
+            testeUpdateWindowUrl('uf', d.id);
+
             destacaPais(d.id);
+
             //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);
            // if(url['cad'] == 0)
                 //setPercentValueData(dict[d.id], parameters.eixo, parameters.var);
 
-            if(parameters.eixo == 2 && parameters.var == 17)
+            if(parameters.eixo == 2 && parameters.var == 17) {
                 configInfoDataBoxMapaClick(parameters.eixo, parameters.var, dict[d.id]);
+            }
 
-            if(parameters.deg == 0)
+            if(parameters.deg == 0) {
                 configInfoDataBoxMapaClick(parameters.eixo, parameters.var, dict[d.id]);
+            }
 
             setStateTitle(d['properties']['name']);
             
