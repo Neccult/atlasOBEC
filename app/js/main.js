@@ -1045,10 +1045,10 @@ function loadPage(){
     var menuView = 'menudesktop.php?'+eixoUrl+'=1';
 
     if(windowWidth<1199){
-        menuView = 'menumobile.php?'+eixoUrl+'=1';
+        // menuView = 'menumobile.php?'+eixoUrl+'=1';
         $('#section0').css("display", "none")
 
-        loadMobile();
+        // loadMobile();
     }
     else{
         $("#menuvariaveis").css("display", "none")
