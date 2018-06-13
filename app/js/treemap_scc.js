@@ -510,57 +510,64 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 		.attr("x", 10)
 		.attr("y", 19)
 		.attr("text-anchor", "start");
-			
-	var percentageTextElement = cell.append("text")
-		.attr("text-anchor", "start")
-		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-		.attr("class", "percentage");
-	percentageTextElement.append('tspan')
-		.text(function(d) {
-			if(eixo == 0) {
-				if(uf) {
-				    return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
-                } else if(vrv == 2 || vrv === 9) {
-				    if(uf === 0) {
-				        return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
+
+	if(d3.select(treemap_scc_box).selectAll("text.percentage").size() == 0) {
+
+        var percentageTextElement = cell.append("text")
+            .attr("text-anchor", "start")
+            .attr("clip-path", function (d) {
+                return "url(#clip-" + d.data.id + ")";
+            })
+            .attr("class", "percentage");
+
+
+        percentageTextElement.append('tspan')
+            .text(function (d) {
+                if (eixo == 0) {
+                    if (uf) {
+                        return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                    } else if (vrv == 2 || vrv === 9) {
+                        if (uf === 0) {
+                            return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                        }
+                        else {
+                            return ((100 * d.data.size)).toFixed(2) + "%";
+                        }
+                    } else {
+                        return formatDecimalLimit((d.data.size / root.value) * 100, 2) + '%';
                     }
-                    else {
-                        return ((100*d.data.size)).toFixed(2)+"%";
-                    }
-				} else {
-				    return formatDecimalLimit((d.data.size/root.value)*100,2) + '%';
                 }
-            }
-            else if(eixo == 1) {
+                else if (eixo == 1) {
 
 
+                    if (deg !== 0) return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                    else return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                }
+                else if (eixo === 2) {
+                    return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                }
+                else if (eixo === 3) {
+                    return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                }
+            })
+            .attr("display", function (d, i) {
+                // se porcentagem for muito pequena e só mostrar 0%, opacity é 0
+                if (vrv !== 2) return parseFloat(formatDecimalLimit((d.data.size / root.value) * 100, 2).replace(",", ".")) === 0 ? "none" : "block";
+            })
+            .attr("font-size", function (d) {
+                var nWidth = nodeWidth(d);
+                var nodePercentage = Math.round(100 * nWidth / width_box(treemap_scc_box));
 
-                if(deg !== 0) return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
-                else return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
-			}
-            else if(eixo === 2){
-                return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
-            }
-            else if(eixo === 3){
-                return formatDecimalLimit((d.data.size/root.value)*100,2)+"%";
-            }
-		})
-		.attr("display", function(d, i) {			
-			// se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-			if(vrv !== 2) return parseFloat(formatDecimalLimit((d.data.size/root.value)*100, 2).replace(",", ".")) === 0? "none" : "block";
-		})
-		.attr("font-size", function(d) {
-			var nWidth = nodeWidth(d);
-			var nodePercentage = Math.round(100 * nWidth / width_box(treemap_scc_box));
+                var fontOrdinalSize = d3.scaleThreshold()
+                    .domain([12, 25, 30, 40])
+                    .range([8, 12, 16, 20]);
 
-			var fontOrdinalSize = d3.scaleThreshold()
-				.domain([12, 25, 30, 40])
-				.range([8, 12, 16, 20]);
+                var fontSize = fontOrdinalSize(nodePercentage);
 
-			var fontSize = fontOrdinalSize(nodePercentage);
-			
-			return fontSize;	
-		});
+                return fontSize;
+            });
+
+    }
 
 	formatTreemapText(treemap_scc_box);
 
