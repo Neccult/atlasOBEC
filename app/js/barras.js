@@ -149,7 +149,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         if(vrv == 3 && eixo == 0){
             delete data['2007'];
         }
-        
+
         Object.keys(data).forEach(function (key) {
             dados.percentual_setor.push(data[key].valor/brasil_setor[key])
             
@@ -494,6 +494,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             rect
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
             .attr("data-value", function(d) {   return d; })
+            .attr("data-color", '')
             .attr("x", function (d, i) {
                 return x(dados.key[i]);
             }).attr("y", function (d) {
@@ -700,9 +701,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
                     return;
 
                 if(eixo == 1 && vrv == 6 && uos == 1)
-                    return
-
-
+                    return;
                
                 $("select[data-id='ano']").val(dados.key[i]);
                 updateWindowUrl('ano', dados.key[i])
