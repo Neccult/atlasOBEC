@@ -119,7 +119,7 @@ function ready(json){
 
                 if(cadClick != cad){
 
-                    console.log(cad)
+                    // console.log(cad)
 
                     srcMapa = $(parent.document).find("iframe#view_box").first().attr("src");
                     srcMapa = srcMapa.replace(/cad=[0-9]/, "cad="+cadClick);
