@@ -235,11 +235,7 @@ function ready(error, br_states, mapa){
             UpdateWindowUrl('uf', d.id);
             updateIframe()
             destacaPais(d.id);
-
-            //setIntegerValueData(dict[d.id], parameters.eixo, parameters.var);
-           // if(url['cad'] == 0)
-                //setPercentValueData(dict[d.id], parameters.eixo, parameters.var);
-
+            
             if(parameters.eixo == 2 && parameters.var == 17) {
                 configInfoDataBoxMapaClick(parameters.eixo, parameters.var, dict[d.id]);
             }

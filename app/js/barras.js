@@ -137,6 +137,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     }
 
     function analyze(error, data) {
+
+        console.log(data)
+
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
@@ -220,21 +223,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         /* *** gráfico! *** */
         /*==================*/
 
-
-        // console.log(dados)
-
-        var minDisplayValue = minValue > 0 ? minValue - (minValue / 10) : 0;
-
-        if(eixo == 0 & (vrv >= 10 && vrv <= 13)) {
-            var tamanho = dados.value.length;
-        }
-        else if(eixo == 0 && (vrv == 3)) {
-            var tamanho = dados.value.length;
-        }
-        else {
-            var tamanho = dados.value.length;
-        }
-        
         var x = d3.scaleBand()
             .domain(dados.key)
             .rangeRound([0, width])
@@ -249,15 +237,10 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
         })).nice();
 
         var maxDecimalAxis = 0;
+
         $.each(dados.value, function (i, d) {
             maxDecimalAxis = countValidDecimalDigits(d) > maxDecimalAxis ? countValidDecimalDigits(d) : maxDecimalAxis;
         });
-
-        // if(eixo == 0 & (vrv >= 10 && vrv <= 13)) dados.value.pop();
-
-        if(vrv === 3 && eixo == 0) {
-            dados.value.splice(0,1);
-        }
 
         var formatYAxis = function (d) {
             
