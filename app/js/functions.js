@@ -1232,7 +1232,7 @@ function updateMecanismo(url, vrv){
     if(url['var'] != 17){
         $("select[data-id='mec']").append("<option value='0'>Todos</option>");
 
-        $("select[data-id='mec']").parent().css('display', 'block')
+        $("select[data-id='mec']").parent().parent().css('display', 'flex')
 
         if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
             $("select[data-id='mec']").append("<option value='1'>FNC</option>");
@@ -1249,12 +1249,12 @@ function updateMecanismo(url, vrv){
             $("select[data-id='mec']").append("<option value='4'>Outros</option>");
         }
         else {
-            $("select[data-id='mec']").parent().css('display', 'none')
+            $("select[data-id='mec']").parent().parent().css('display', 'none')
         }
 
     } 
     else{
-        $("select[data-id='mec']").parent().css('display', 'block')
+        $("select[data-id='mec']").parent().parent().css('display', 'flex')
         $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
         $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
     }
@@ -1317,13 +1317,13 @@ function updateModalidade(url, vrv){
     });
 
     if(vrv == 3){
-        $("select[data-id='mod']").parent().css('display', 'block')
+        $("select[data-id='mod']").parent().parent().css('display', 'flex')
 
         $("select[data-id='mod']").append("<option value='1'>Direta</option>");
         $("select[data-id='mod']").append("<option value='2'>Indireta</option>");
     }
     else{
-        $("select[data-id='mod']").parent().css('display', 'none')
+        $("select[data-id='mod']").parent().parent().css('display', 'none')
     }
 
     // $("select[data-id='mod']").val(url['mod'])
@@ -1339,13 +1339,13 @@ function updatePfj(url, vrv){
     $("select[data-id='pfj']").append("<option value='0'>Todos</option>");
 
     if(vrv == 4){
-        $("select[data-id='pfj']").parent().css('display', 'block')
+        $("select[data-id='pfj']").parent().parent().css('display', 'flex')
 
         $("select[data-id='pfj']").append("<option value='1'>Pessoa Física</option>");
         $("select[data-id='pfj']").append("<option value='2'>Pessoa Jurídica</option>");
     }
     else{
-        $("select[data-id='pfj']").parent().css('display', 'none')
+        $("select[data-id='pfj']").parent().parent().css('display', 'none')
     }
 
     // $("select[data-id='pfj']").val(url['pfj'])

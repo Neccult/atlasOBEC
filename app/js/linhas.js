@@ -12,6 +12,10 @@ var dados = {key: [], value: []};
 var colorJSON;
 var textJSON;
 var colors = [];
+
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+
+
 d3.json('data/colors.json', function (error, data) {
     if (error) throw error;
     colorJSON = data;
@@ -524,10 +528,10 @@ function analyze(error, data) {
 
     function color(deg){
         colors = {
-            "Setor": "#071342",
-            "UF": "rgb(109, 191, 201)",
+
             "Relacionadas": "#87A8CA",
             "Culturais": "#077DDD",
+
             "Despesa Minc / Receita executivo": "#071342",
             "Financiamento Estatal / Receita executivo": "rgb(109, 191, 201)",
 
@@ -544,18 +548,6 @@ function analyze(error, data) {
             "6": "rgb(109, 191, 201)",
             "7": "#8178AF",
             "8": "#EC8A91",
-
-            "Sim": "#071342",
-            "Não": "rgb(109, 191, 201)",
-
-            "Membro": "#071342",
-            "Não membro": "rgb(109, 191, 201)",
-
-            "Formal": "#071342",
-            "Informal": "rgb(109, 191, 201)",
-
-            "Contribuinte": "#071342",
-            "Não contribuinte": "rgb(109, 191, 201)",
 
             "Branca": "#EC8A91",
             "Parda": "rgb(109, 191, 201)",
@@ -591,6 +583,12 @@ function analyze(error, data) {
 
         }
 
+        if(deg == 'UF' || deg == 'Formal' || deg == 'Contribuinte' || deg == 'Sim' || deg == 'Membro' || deg == 'Masculino'){
+            return (corEixo[1])
+        }
+        if(deg == 'Setor' || deg == 'Informal' || deg == 'Não contribuinte' || deg == 'Não' || deg == 'Não membro' || deg == 'Feminino'){
+            return (corEixo[2])
+        }
 
         Object.keys(colorJSON.cadeias).forEach(function (i, key) {
             colors[colorJSON.cadeias[i].name] = colorJSON.cadeias[i].color;

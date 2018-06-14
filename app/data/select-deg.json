@@ -65,24 +65,24 @@
 				"name":"Por formalidade",
 				"value":"6",
 				"desags": [
-					{"name":"Informal","value":"1"},
-					{"name":"Formal","value":"2"}
+					{"name":"Formal","value":"1"},
+					{"name":"Informal","value":"2"}
 				]
 			},
 			{
 				"name":"Por previdência",
 				"value":"7",
 				"desags": [
-					{"name":"Não contribuinte","value":"1"},
-					{"name":"Contribuinte","value":"2"}
+					{"name":"Contribuinte","value":"1"},
+					{"name":"Não contribuinte","value":"2"}
 				]
 			},
 			{
 				"name":"Por sindicato",
 				"value":"8",
 				"desags": [
-					{"name":"Não membro","value":"1"},
-					{"name":"Membro","value":"2"}
+					{"name":"Membro","value":"1"},
+					{"name":"Não membro","value":"2"}
 				]
 			},
 			{"name":"Porte micro","value":"9"},

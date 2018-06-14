@@ -7,6 +7,9 @@ $.get("./db/json_donut.php"+config, function(data){
     // console.log(data)
 });
 
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+var colorJSON = window.parent.colorJSON;
+
 $.get("./db/json_donut.php"+config, ready);
 
 function ready(json){
@@ -188,25 +191,18 @@ function ready(json){
 
 
 function color(tipo){
-    colors = {
-        "Exportação": "#071342",
-        "Importação": "rgb(109, 191, 201)",
-        "Sim": "#077DDD",
-        "Não": "rgb(217, 213, 222)",
-        "Arq e D": "#87A8CA",
-        "Artes":  "#077DDD",
-        "Audio": "#0F4B67",
-        "Cult. Dig.": "#8178AF",
-        "Edit.":  "#E6C59B",
-        "Edu. Art.":"#EC8A91",
-        "Entretenimento":  "#AD5468",
-        "Música": "#6A474D",
-        "Patrimônio": "#E96B00",
-        "Publ.":  "#B2510F",
-        "Outros": "#B2510F"
-        }
 
-    return colors[tipo];
+    if(tipo == "Sim" || tipo == "Exportação"){
+        return corEixo[1];
+    }
+    else if(tipo == "Não"){
+        return corEixo[2];
+    }
+    else if(tipo == "Importação"){
+        return corEixo[3];
+    }
+
+    return colorJSON['cadeias'][tipo].color;
 }
 
 function getPercent(data){

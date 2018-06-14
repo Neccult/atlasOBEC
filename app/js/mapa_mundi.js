@@ -36,7 +36,7 @@ function destacaPrc(prcID) {
             if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
                 $(this).attr("class", "destacado jvectormap-region jvectormap-element");
                 $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", "#6DBFC9");
+                $(this).css("fill", corEixo[2]);
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }
@@ -49,6 +49,7 @@ function destacaPrc(prcID) {
 }
 // import colors.json file
 var colorJSON;
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
 
 d3.json('data/colors.json', function(error, data) {
     if(error) throw error;
@@ -116,7 +117,7 @@ d3.json('data/colors.json', function(error, data) {
 
             $('#corpo-mundi').vectorMap({
                 map: 'continents_mill',
-                backgroundColor:  "#f0f0f0",
+                backgroundColor:  "white",
                 series: {
                     regions: [{
                         values: gdpAux,

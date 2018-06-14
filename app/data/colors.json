@@ -51,7 +51,7 @@
 	},
 	"cadeias": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#071342",
 			"gradient": {
 				"1": "#F2F0F4",
@@ -305,5 +305,132 @@
 			"name": "Sim",
 			"color": "#077DDD"
 		}
+	},
+	"deg": {
+		"1": {
+			"name": "Porte",
+			"color": "#071342",
+			"subdeg": {
+				"Micro": "rgb(109, 191, 201)",
+				"Pequeno": "green",
+				"Médio": "black",
+				"Grande": "yellow"
+			}
+		},
+		"2": {
+			"name": "Sexo",
+			"color": "#071342",
+			"subdeg": {
+				"Masculino": "rgb(7, 19, 66)",
+				"Feminino": "rgb(233, 107, 0)"
+			}
+		},
+		"3": {
+			"name": "Idade",
+			"color": "#071342",
+			"subdeg": {
+				"10 a 17": "rgb(109, 191, 201)",
+				"18 a 29": "#077DDD",
+				"30 a 49": "#8178AF",
+				"50 a 64": "#EC8A91",
+				"65 ou mais": "rgb(109, 191, 201)",
+				"Não classificado": "red"
+			}
+		},
+		"4": {
+			"name": "Escolaridade",
+			"color": "#071342",
+			"subdeg": {
+				"Sem instruição": "#071342",
+				"Fundamental incompleto": "#077DDD",
+				"Fundamental completo": "#8178AF",
+				"Médio completo": "#EC8A91",
+				"Superior incompleto": "#E96B00",
+				"Superior completo": "rgb(109, 191, 201)",
+				"Não determinado": "red"
+			}
+		},
+		"5": {
+			"name": "Cor",
+			"color": "#071342",
+			"subdeg": {
+				"Indígena": "green",
+				"Branca": "#EC8A91",
+				"Preta": "black",
+				"Amarela": "yellow",
+				"Parda": "rgb(109, 191, 201)"
+			}
+		},
+		"6": {
+			"name": "Formalidade",
+			"color": "#071342",
+			"subdeg": {
+				"Formal": "rgb(7, 19, 66)",
+				"Informal": "rgb(109, 191, 201)"
+			}
+		},
+		"7": {
+			"name": "Previdência",
+			"color": "#071342",
+			"subdeg": {
+				"Contribuinte": "rgb(7, 19, 66)",
+				"Não contribuinte": "rgb(109, 191, 201)"
+			}
+		},
+		"8": {
+			"name": "Sindicato",
+			"color": "#071342",
+			"subdeg": {
+				"Membro": "rgb(7, 19, 66)",
+				"Não membro": "rgb(109, 191, 201)"
+			}
+		}
+	},
+	"eixo": {
+		"0": {
+			"name": "Empreendimentos",
+			"color": {
+				"1": "#f2c94d",
+				"2": "#ffe866",
+				"3": "#f2c94d",
+				"4": "#f2c94d",
+				"5": "#f2c94d",
+				"6": "#"
+			}
+		},
+		"1": {
+			"name": "Mercado",
+			"color": {
+				"1": "#97BE13",
+				"2": "#679a7f",
+				"3": "#97BE13",
+				"4": "#97BE13",
+				"5": "#97BE13",
+				"6": "#"
+			}
+		},
+		"2": {
+			"name": "Fomento",
+			"color": {
+				"1": "#00916D",
+				"2": "#90d7bc",
+				"3": "#00916D",
+				"4": "#00916D",
+				"5": "#00916D",
+				"6": "#"
+			}
+		},
+		"3": {
+			"name": "Comércio",
+			"color": {
+				"1": "#003F33",
+				"2": "#195e3a",
+				"3": "#5A8A71",
+				"4": "#5A8A71",
+				"5": "#5A8A71",
+				"6": "#"
+			}
+		}
+
 	}
 }

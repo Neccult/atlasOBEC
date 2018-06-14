@@ -1762,18 +1762,18 @@
 		],
 		"frm":[
 			{"name":"Todos","value":"0"},
-			{"name":"Informal","value":"1"},
-			{"name":"Formal","value":"2"}
+			{"name":"Formal","value":"1"},
+			{"name":"Informal","value":"2"}
 		],
 		"prv":[
 			{"name":"Todos","value":"0"},
-			{"name":"Não contribuinte","value":"1"},
-			{"name":"Contribuinte","value":"2"}
+			{"name":"Contribuinte","value":"1"},
+			{"name":"Não contribuinte","value":"2"}
 		],
 		"snd":[
 			{"name":"Todos","value":"0"},
-			{"name":"Não membro","value":"1"},
-			{"name":"Membro","value":"2"}
+			{"name":"Membro","value":"1"},
+			{"name":"Não membro","value":"2"}
 		],
 		"slc":[
 			{"name":"Setor","value":"0"},

@@ -16,15 +16,29 @@ function getSoma(barraId) {
     });
     return soma;
 }
+
+var corEixo = window.parent.colorJSON['eixo'][eixo].color;
+
 updateTitleClickSCC()
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
 function destacaBarra(barraId, stacked = false) {
     i = 0;
     $("rect").each(function() {
 
         if(stacked) {
-            r = 109
-            g = 191
-            b = 201
+
+            var rgb = hexToRgb(corEixo[1].split("#")[1]);
+            r = rgb.r;
+            g = rgb.g;
+            b = rgb.b;
 
             if($(this).attr("data-legend") == barraId) {
                 if($(this).attr("class") !== "destacado") {
@@ -40,13 +54,14 @@ function destacaBarra(barraId, stacked = false) {
                 if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
                 $(this).animate({"opacity": "0.7"}, "fast");
             }
+
         }
         else {
             if($(this).attr("data-legend") == barraId) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", "#6DBFC9");
+                    $(this).css("fill", corEixo[1]);
                     $(this).animate({"opacity": "1"}, "fast");
                 }
             }
@@ -104,7 +119,13 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     // return matching color value
     var color = function (colorId) {
         if (colorJSON.cadeias[colorId]) {
-            return colorJSON.cadeias[colorId].color;
+            if(colorId){
+                return colorJSON.cadeias[colorId].color;
+
+            }
+            else{
+                return corEixo[2];
+            }
         } else {
             return colorJSON.cadeias[0].color;
         }
