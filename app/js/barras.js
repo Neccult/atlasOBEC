@@ -1158,9 +1158,20 @@ else {
             })])
             .range([height, 0]);
 
+        var corInicial;
+        var corFinal;
+
+        if(cad == 0){
+            corInicial = corEixo[2];
+            corFinal = "#f0f0f0";
+        }
+        else{
+            corInicial = colorJSON.cadeias[cad].color;
+            corFinal = colorJSON.cadeias[cad].gradient['2'];
+        }
         var colors = d3.scale.linear()
                     .domain([0, dados.length])
-                    .range([colorJSON.cadeias[cad].color, colorJSON.cadeias[cad].gradient['2']])
+                    .range([corInicial, corFinal])
                     
         // Define and draw axes
         var yAxis_eixo1 = d3.svg.axis()
