@@ -1541,8 +1541,6 @@ function updateMenuLegenda(eixo, vrv){
             ]
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
-
-        alert("Oi")
         $("#title-view-leg-scc").append("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Exportação<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[3]+"\"></i> Importação<br></span>");
