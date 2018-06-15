@@ -1035,7 +1035,7 @@ svg line {
 }
 
 .bread-container{
-	width: 100%;
+	width: 70%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -1043,10 +1043,14 @@ svg line {
 }
 
 .bread-caixa{
-	max-width: 10%;
+	min-width: 10%;
 	height: 100%;
 	display: flex;
 	flex-flow: row;
+}
+
+.bread-caixa .opcao{
+	width: 100%;
 }
 
 .rotulo-bread{
@@ -1444,7 +1448,7 @@ button.opt.active{
 	}
 
 	.bread-container {
-		width: 100%;
+		width: 90%;
 	}
 }
 

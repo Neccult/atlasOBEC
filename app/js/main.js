@@ -6,10 +6,6 @@ var textJSON = []
 var colorJSON = []
 var corEixo;
 
-
-
-
-
 $.ajaxSetup({async: false});
 $.get("./data/colors.json")
     .done(function(data){
@@ -98,8 +94,6 @@ function controlVarPage(clickVar){
 
     window.location.href = urlString;
 
-
-
     /* variáveis com valores default */
 }
 
@@ -161,69 +155,12 @@ function defaultUrl(){
     url['uos'] = 0;
 }
 
-/*-----------------------------------------------------------------------------
-Função: changeChart
-    redireciona a página de acordo com os parametros da url
-Entrada:
-    url = objeto com os parâmetros e seus valores
-Saída:
-    void
------------------------------------------------------------------------------*/
-function changeChart(url){
-
-    var newUrl = "",
-        count = 0,
-        size = Object.keys(url).length;
-    $.each(url, function(key,value){
-
-        newUrl = newUrl+key+"="+value;
-
-        if((++count)!=size) newUrl = newUrl+"&";
-    });
-    window.location.href = 'resultado.php?'+newUrl+"&eixo="+window.location.hash.substring(1)+window.location.hash;
-    if($('iframe[id="view_box"]').length != 0) {
-        $('iframe[id="view_box"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-    }
-    if($('iframe[id="view_box_barras"]').length != 0) {
-        $('iframe[id="view_box_barras"]').attr('src', url['view']+'.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-    }
-    if($('iframe[id="view_box_scc"]').length != 0) {
-        $('iframe[id="view_box_scc"]').attr('src', 'treemap_scc.php?'+newUrl+'&eixo='+window.location.hash.substring(1)+window.location.hash);
-    }
-}
-
 function updateIframe(url){
     $.getScript('js/load_views_listeners.js');
 
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
-
-    updateTitleBox();
+    // updateTitleBox();
     
-}
-
-/*-----------------------------------------------------------------------------
-Função: openFilter
-    abre ou fecha o filtro que foi clicado
-Entrada:
-    filter => filtro que foi clicado
-Saída:
-    void
------------------------------------------------------------------------------*/
-function openFilter(filter){
-    var contexto = $(filter).parents('.contexto'),
-        active = $(filter).hasClass('active');
-
-    /* remove classe active dos botões */
-    $(contexto).find('.opt.select').removeClass('active');
-
-    /* esconde todos os blocos */
-    $(contexto).find('.select-group').addClass('hide');
-
-    /* se está abrindo outro */
-    if(!active){
-        $(contexto).find(filter).addClass('active');
-        $(contexto).find('.select-group#select-'+$(filter).attr('id')).removeClass('hide');
-    }
 }
 
 /*-----------------------------------------------------------------------------
@@ -272,115 +209,13 @@ function controlFilter(selectvalue, selectid, valueDesag){
     }
 
 
-
+    ///TODO
     if(window.location.hash === "#mercado" && selectid === 'deg') {
-        if(selectvalue==='0') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='1') {
-            url['prt'] = valueDesag;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='2') {
-            url['prt'] = 0;
-            url['sex'] = valueDesag;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='3') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = valueDesag;
-        }
-        if(selectvalue==='4') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = valueDesag;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='5') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = valueDesag;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='6') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = valueDesag;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='7') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = 0;
-            url['cor'] = 0;
-            url['prv'] = valueDesag;
-            url['fax'] = 0;
-        }
-        if(selectvalue==='8') {
-            url['prt'] = 0;
-            url['sex'] = 0;
-            url['esc'] = 0;
-            url['frm'] = 0;
-            url['snd'] = valueDesag;
-            url['cor'] = 0;
-            url['prv'] = 0;
-            url['fax'] = 0;
-        }
+        url['subdeg'] = valueDesag;
     }
 
-    if(selectid=='prt'){
-        /* filtro atuação */
-        if(selectvalue.match('atc-','')){
-            url['atc'] = selectvalue.replace('atc-','');
-            url['prt'] = '0'; /* se for atuação, não há filtro por porte */
-        }
 
-        /* filtro porte */
-        else{
-            url['prt'] = selectvalue;
-            url['atc'] = '0';/* se for porte, não há filtro por atuação */
-        }
-
-    }
-    else if(selectid=='deg') {
+    if(selectid=='deg') {
         url[selectid] = selectvalue;
         if(selectvalue == 0) {
             url['ano'] = ano;
@@ -420,44 +255,6 @@ function controlFilter(selectvalue, selectid, valueDesag){
 
 
 
-}
-
-/*-----------------------------------------------------------------------------
-Função: controlMec
-   restringe filtro de mecanismo ==> variaveis 1 - 8 - 9 do eixo 2 possuem apenas FNC e Mecenato, variavel 3 possui fundo cultura e outros
-Entrada:
-    select => objeto do select
-Saída:
-    void
------------------------------------------------------------------------------*/
-function controlMec(select){
-
-    if(url['var'] == 1 || url['var'] == 8 || url['var'] == 9){
-        $(select).find('option[value="3"]').remove();
-        $(select).find('option[value="4"]').remove();
-    }
-    if(url['var'] == 3) {
-        $(select).find('option[value="1"]').remove();
-        $(select).find('option[value="2"]').remove();
-    }
-}
-
-/*-----------------------------------------------------------------------------
-Função: controlAtc
-   restringe filtro de atuação ==> comércio apenas para os setores 4 - 5 - 9 - todos
-Entrada:
-    select => objeto do select
-    isPrt => boolean é ou não select de porte
-Saída:
-    void
------------------------------------------------------------------------------*/
-function controlAtc(select,isPrt){
-
-    if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
-
-        if(isPrt) $(select).find('option[value="atc-1"]').remove();
-        else $(select).find('option[value="1"]').remove();
-    }
 }
 
 function controlAno(select){
@@ -561,9 +358,9 @@ function loadResult(){
                 //$(this).val('ocp-'+url['ocp']);
             }
 
-            if(selectId=='prt') controlAtc(this,1);
-            if(selectId=='atc') controlAtc(this,0);
-            if(selectId=='mec') controlMec(this);
+            // if(selectId=='prt') controlAtc(this,1);
+            // if(selectId=='atc') controlAtc(this,0);
+            // if(selectId=='mec') controlMec(this);
             if(selectId=='ano') controlAno(this)
         }
     });
@@ -876,8 +673,6 @@ function hideBreadcrumb(id) {
 $(window).bind("load", function() {
 
     loadPage(); /* controla menu e fade */
-
-    bodyDark(dark);/* alto contraste */
 
 });
 
