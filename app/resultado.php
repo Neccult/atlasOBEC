@@ -102,7 +102,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 <div class="bread-container">
 
-                    <div class="bread-caixa">
+                    <div class="bread-caixa" style="display: none">
                         <div class="opcao">
                             <span class="rotulo-bread opt view">Eixo</span>
                             <select class="bread-select-eixo bread-eixo" data-id="eixo">
