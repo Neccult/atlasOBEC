@@ -12,7 +12,7 @@ var shapeWidth = 30;
 var corpo = mapa_box
 
 
-function destacaPais(ufId) {
+function destacaPais(svg_mapa, ufId) {
     // console.log(svg_mapa.selectAll("path"))
 	svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
@@ -48,12 +48,12 @@ var path = d3.geoPath()
 	.projection(projection);
 
 // import colors.json file
-var colorJSON = COLORS;
+var COLORS = COLORS;
 
-var corEixo = window.colorJSON['eixo'][parameters.eixo].color;
+var corEixo = window.COLORS['eixo'][parameters.eixo].color;
 
 // import pt-br.json file for get the title
-var textJSON = PT_BR;
+var PT_BR = PT_BR;
 
 var config = URL_PARAM;
 // $.get('./db/json_mapa.php?' + config, function(dado){
@@ -129,8 +129,8 @@ function ready(error, br_states, mapa){
 	// creates cadeia's color range array from color.json file
 	var colorsRange = [];
 
-	if(colorJSON.cadeias[parameters.cad] != undefined){
-        colorMax = colorJSON.cadeias[parameters.cad].gradient['6']
+	if(COLORS.cadeias[parameters.cad] != undefined){
+        colorMax = COLORS.cadeias[parameters.cad].gradient['6']
         baseLightness = d3.hsl(colorMax).l
         newHSL = d3.hsl(colorMax)
         for(var j = 1; j < quant ; j++){
@@ -141,7 +141,7 @@ function ready(error, br_states, mapa){
 	//coloração do mapa
 	var color = d3.scaleLinear()
         .domain([minValue, maxValue])
-        .range([colorJSON.cadeias[parameters.cad].gradient['2'], colorJSON.cadeias[parameters.cad].gradient['6']])
+        .range([COLORS.cadeias[parameters.cad].gradient['2'], COLORS.cadeias[parameters.cad].gradient['6']])
 
 
 	//para funcionar var 17parameters.eixo 3
@@ -180,7 +180,7 @@ function ready(error, br_states, mapa){
 
     var tooltipInstance = tooltip.getInstance();
     //retira tag <span> do title
-    var title_content = getDataVar(textJSON,parameters.eixo, parameters.var).title;
+    var title_content = getDataVar(PT_BR,parameters.eixo, parameters.var).title;
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
@@ -197,11 +197,11 @@ function ready(error, br_states, mapa){
             if(parameters.eixo == 2 && parameters.var == 17){
 
                 if(dict[d.id].SouN == 0){
-                   // return  colorJSON.binario['0'].color;
+                   // return  COLORS.binario['0'].color;
                    return  corEixo[2];
                 }
                 else{
-                    // return colorJSON.binario['1'].color;
+                    // return COLORS.binario['1'].color;
                     return  corEixo[1];
 
                 }
@@ -427,8 +427,8 @@ function legendaBinario(){
 
 
 
-	$(window.document).find('.value-info-title').html(getDataVar(textJSON, parameters.eixo, parameters.var).mapa_valores);
-    $(window.document).find('.font-title').html("Fonte(s): "+getDataVar(textJSON, parameters.eixo, parameters.var).fontes);
+	$(window.document).find('.value-info-title').html(getDataVar(PT_BR, parameters.eixo, parameters.var).mapa_valores);
+    $(window.document).find('.font-title').html("Fonte(s): "+getDataVar(PT_BR, parameters.eixo, parameters.var).fontes);
     /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
@@ -461,7 +461,7 @@ function legendaBinario(){
                 return "Setores Culturais Criativos";
             }
             else {
-                return textJSON.select.cad[parameters.cad].name;
+                return PT_BR.select.cad[parameters.cad].name;
             }
         }).attr("transform", "translate(0, 10)")
             .style("font-size","8px")
@@ -658,3 +658,38 @@ function legendaBinario(){
 };
 
 
+function create_mapa(mapa_box, data){
+
+    var windowWidth = width_box(mapa_box);
+    var legendaWidth = width_box(mapa_box);
+
+    var shapeWidth = 30;
+
+    var corpo = mapa_box
+
+    var svg_mapa = d3.select(corpo)
+                    .append("svg")
+                    .attr("width", width_box(mapa_box))
+                    .attr("height", height_box(mapa_box));
+
+    var projection = d3.geoMercator()
+                        .rotate([4.4, 0])
+                        .scale(250)
+                        .translate([width_box(mapa_box) / 1.5, height_box(mapa_box) / 1.2]);
+
+    var path = d3.geoPath()
+                .projection(projection);
+
+    var config = URL_PARAM;
+
+    
+    Object.keys(mapa).forEach(function(key) {
+
+        info.push(mapa[key]);
+        if(parameters.eixo == 2 && parameters.var == 17)
+		    return dict[mapa[key].id] = {id:mapa[key].id, SouN:mapa[key].SouN, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
+		else
+            return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
+
+	});
+}

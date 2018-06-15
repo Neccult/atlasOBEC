@@ -1,84 +1,8 @@
-/* tamanho container */
-var barras_box = '#'+VIEWS["barras"];
-var chartWidth = width_box(barras_box);
-var chartHeight = height_box(barras_box);
-var minBarHeight = 5;
-var withLabels = false;
-
-d3.json('./data/descricoes.json', function (error, desc){
-    if (error) throw error;
-    descricoes = desc;
-})
-function getSoma(barraId) {
-    var soma = 0;
-    $("rect").each(function() {
-        if($(this).attr("data-legend") == barraId) {
-            if($(this).attr("data-value") != "NaN") soma+=parseFloat($(this).attr("data-value"));
-        }
-    });
-    return soma;
-}
-//updateTitleClickSCC()
-
-var eixo = parameters.eixo
-var vrv  = parameters.var
-var cad  = parameters.cad
-var deg  = parameters.deg
-var prt = 0
-var ocp = 0
-var uos = 0
-
-
-function destacaBarra(barraId, stacked = false) {
-    i = 0;
-    d3.select(barras_box).selectAll("rect").each(function() {
-
-        if(stacked) {
-
-            var rgb = d3.rgb(corEixo[1]);
-            r = rgb.r;
-            g = rgb.g;
-            b = rgb.b;
-
-            if($(this).attr("data-legend") == barraId) {
-                if($(this).attr("class") !== "destacado") {
-                    $(this).attr("class", "destacado");
-                    $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", function(){ return'rgb('+(r+i*15)+','+(g+i*15)+','+(b+i*15)+')'});
-                    $(this).animate({"opacity": "1"}, "fast");
-                    i++;
-                }
-            }
-            else {
-                $(this).attr("class", "");
-                if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
-                $(this).animate({"opacity": "0.7"}, "fast");
-            }
-
-        }
-        else {
-
-            if($(this).attr("data-legend") == barraId) {
-                if($(this).attr("class") !== "destacado") {
-                    $(this).attr("class", "destacado");
-                    $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", corEixo[1]);
-                    $(this).animate({"opacity": "1"}, "fast");
-                }
-            }
-            else {
-                $(this).attr("class", "");
-                $(this).css("fill", $(this).attr("data-color"));
-                $(this).animate({"opacity": "0.7"}, "fast");
-            }
-        }
-    });
-}
+/*
 var descricoes = []
 
-
 var tooltipInstance = tooltip.getInstance();
-if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) {    /*==== Barras JS ====*/
+if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) {    
     
     //Variaveis/Objetos
     var dict = {};
@@ -98,12 +22,11 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
      /*$.get('./db/json_barras.php?' + config, function(dado){
           console.log(dado)
      })*/
-   
-    var corEixo = COLORS['eixo'][eixo].color;
+   //var corEixo = COLORS['eixo'][eixo].color;
 
         // import pt-br.json file for get the title
 
-    d3.queue()
+/*    d3.queue()
         .defer(d3.json, "./db/json_barras.php?" + config)
         .await(analyze);
 
@@ -121,9 +44,9 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
             return COLORS.cadeias[0].color;
         }
     }
-
+*/
     function analyze(error, data) {
-
+        alert("oi")
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);
@@ -819,7 +742,7 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
 
     }
 
-
+/*
 }
 //BARRA 2
 else {
@@ -1001,7 +924,7 @@ else {
 
 
         /* Data in strings like it would be if imported from a csv */
-
+/*
         var parse = d3.time.format("%Y").parse;
         var dados = desagregacao_names().map(function (fruit) {
             return data.map(function (d) {
@@ -1195,328 +1118,4 @@ else {
     }
 
 }
-
-function create_bars(barras_box, data){
-    var chartWidth = width_box(barras_box);
-    var chartHeight = height_box(barras_box);
-    var minBarHeight = 5;
-    
-    $.get('./db/total_setor.php' + "?var=" + vrv+"&cad="+cad+"&eixo="+eixo, function(dado){
-        brasil_setor = JSON.parse(dado)
-    })
-    
-    var corEixo = COLORS['eixo'][eixo].color;
-    
-    var color = function (colorId) {
-        if (COLORS.cadeias[colorId]) {
-            if(colorId){
-                return COLORS.cadeias[colorId].color;
-
-            }
-            else {
-                return corEixo[2];
-            }
-        }
-        else {
-            return COLORS.cadeias[0].color;
-        }
-    }
-
-    var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
-
-        // console.log(data)
-
-        if(vrv == 3 && eixo == 0){
-            delete data['2007'];
-        }
-
-    Object.keys(data).forEach(function (key) {
-        dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-        
-        dados.key.push(data[key].ano);
-
-        if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
-        else dados.value.push(data[key].valor);
-        
-        if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
-        else dados.percentual.push(data[key].percentual);
-
-        if (vrv === 2) {
-            dados.taxa.push(0);
-        }
-        else {
-            dados.taxa.push(data[key].taxa);
-        }
-    });
-
-    dados.key = d3.keys(data);
-
-    // AQUI automatizar map center
-    var margin = {top: 20, right: 20, bottom: 30, left: 35},
-        width = chartWidth - margin.left - margin.right,
-        height = chartHeight - margin.top - margin.bottom;
-
-    var x = d3.scaleBand()
-            .domain(dados.key)
-            .rangeRound([0, width])
-            .padding(0.1);
-
-    var y = d3.scaleLinear()
-            .domain(d3.extent(dados.value))
-            .rangeRound([height, 0], .002);
-
-
-    y.domain(d3.extent(dados.value, function (d) {
-        return d;
-    })).nice();
-
-    var grid_lines = d3.axisLeft(y)
-                        .scale(y)
-                        .ticks(4)
-                        .tickSize(-width + 10)
-                        .tickSizeOuter(0)
-                        .tickFormat("")
-
-    var svg_barras = d3.select(barras_box).append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                        .append("g")
-                        .attr("transform",
-                              "translate(" + (margin.left+5) + "," + valueTop + ")");
-
-    svg_barras.append("g")
-        .attr("class", "grid")
-        .style("opacity", 0.1)
-        .call(grid_lines);
-
-        var rect = svg_barras.selectAll("rect")
-            .data(dados.value)
-            .enter().append("rect")
-            .attr("class", "bar")
-            .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
-            .attr("data-value", function(d) {   return d; })
-            .attr("x", function (d, i) {
-                return x(dados.key[i]);
-            })
-            .attr("y", function (d) {
-                var barHeight = y(d);
-                    var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
-                    var isValueNegative = d < 0;
-
-                    // TEM VALOR NEGATIVO
-                    if (isValueNegative) {
-                        // NÚMERO NEGATIVO
-                        if (isValueNegative)
-                            return zeroPosition;
-                        // S barra for muito pequena
-                        if (barHeight == zeroPosition)
-                            return zeroPosition - 5;
-
-                            return y(0);
-                    }
-
-                    barHeight = Math.abs(height - barHeight);
-
-                    // BARRA PEQUENA
-                    if (barHeight <= minBarHeight)
-                        return height - minBarHeight;
-
-                    return y(d);
-            })
-            .attr("width", x.bandwidth())
-            .attr("height", function (d) {
-                var barHeight = y(d);
-
-                // TEM VALOR NEGATIVO
-                var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-                
-                var isValueZero = y(d) == zeroPosition;
-                if (isValueZero)
-                    return minBarHeight;
-                if (barHeight < minBarHeight)
-                    return minBarHeight;
-
-                return  Math.abs(y(d) - zeroPosition);
-            })
-            .attr("fill", function (d,i ) {
-                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                    if(deg == 0)
-                        return color(dados.key[i])
-                    else
-                        return color(cad)
-                }
-                else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
-                    return color(0);
-                }
-                else {
-                    return color(cad);
-                }
-            });
-
-        var xAxis = d3.axisBottom(x)
-            .tickFormat(function (d, i) {
-                return dados.key[i];
-            })
-            .tickSize(5)
-            .tickPadding(5);
-
-        var yAxis = d3.axisLeft()
-            .scale(y)
-            .tickFormat(formatYAxis);
-        
-        svg_barras.append("g").attr("class", "eixo-x")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xAxis);
-
-        svg_barras.append("g").attr("class", "eixo-y")
-            .attr("transform", "translate(0, 0)")
-            .call(yAxis);
-
-        destacaBarra(parameters.ano);
-
-        var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
-
-        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-            configInfoDataBoxBarras(eixo, vrv, dados, valor);         
-        }
-}
-
-function update_bars(barras_box, data){
-    var svg_barras = d3.select(barras_box+">svg>g");
-
-    var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
-
-        // console.log(data)
-
-    if(vrv == 3 && eixo == 0){
-        delete data['2007'];
-    }
-
-    Object.keys(data).forEach(function (key) {
-        dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-        
-        dados.key.push(data[key].ano);
-
-        if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
-        else dados.value.push(data[key].valor);
-        
-        if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
-        else dados.percentual.push(data[key].percentual);
-
-        if (vrv === 2) {
-            dados.taxa.push(0);
-        }
-        else {
-            dados.taxa.push(data[key].taxa);
-        }
-    });
-    // updateAnoDefault(dados.key[dados.key.length-1]);
-    //
-    dados.key = d3.keys(data);
-
-
-    var x = d3.scaleBand()
-                .domain(dados.key)
-                .rangeRound([0, width])
-                .padding(0.1);
-
-    var y = d3.scaleLinear()
-            .domain(d3.extent(dados.value))
-            .rangeRound([height, 0], .002);
-
-    var rect = svg_barras.selectAll("rect")
-                         .data(dados.value) 
-    
-    rect.exit().remove()
-
-    rect.enter().append("rect").attr("x", function(d, i){
-        return x(dados.key[i]);
-    })
-
-    var rect = svg_barras.selectAll("rect")
-
-    rect.attr("data-legend", function(d, i, obj) { return dados.key[i]; })
-        .attr("data-value", function(d) {   return d; })
-        .attr("data-color", '')
-        .attr("x", function (d, i) {
-            return x(dados.key[i]);
-        }).attr("y", function (d) {
-            var barHeight = y(d);
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
-            var isValueNegative = d < 0;
-
-            // TEM VALOR NEGATIVO
-            if (isValueNegative) {
-                // NÚMERO NEGATIVO
-                if (isValueNegative)
-                    return zeroPosition;
-                // S barra for muito pequena
-                if (barHeight == zeroPosition)
-                    return zeroPosition - 5;
-
-                    return y(0);
-            }
-
-            barHeight = Math.abs(height - barHeight);
-
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight)
-                return height - minBarHeight;
-
-            return y(d);
-        })
-        .attr("width", x.bandwidth())
-        .attr("height", function (d) {
-
-            var barHeight = y(d);
-
-            // TEM VALOR NEGATIVO
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-            var isValueZero = y(d) === zeroPosition;
-            if (isValueZero)
-                return minBarHeight;
-            if (barHeight < minBarHeight)
-                return minBarHeight;
-
-            return  Math.abs(y(d) - zeroPosition);
-
-        }).attr("fill", function (d,i ) {
-            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                if(deg == 0)
-                    return color(dados.key[i])
-                else
-                    return color(cad)
-            }
-            else if(eixo == 3 && (vrv == 5 || vrv == 8)){
-                return color(0);
-            }
-            else{
-                return color(cad);
-            }
-        });
-
-        var xAxis = d3.axisBottom(x)
-                        .tickFormat(function (d, i) {
-                            return dados.key[i];
-                        })
-                        .tickSize(5)
-                        .tickPadding(5);
-
-        var yAxis = d3.axisLeft()
-                    .scale(y)
-                    .tickFormat(formatYAxis);
-
-        d3.select(".eixo-x")
-            .transition()
-            .duration(400)
-            .call(xAxis);
-
-        d3.select(".eixo-y")
-            .transition()
-            .duration(400)
-            .call(yAxis);
-
-        
-        destacaBarra(parameters.ano);
-
-}
+*/
