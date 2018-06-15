@@ -111,7 +111,7 @@ d3.json('data/colors.json', function(error, data) {
 
             $('#corpo-mundi').vectorMap({
                 map: 'continents_mill',
-                backgroundColor:  "#f0f0f0",
+                backgroundColor:  "#fff",
                 series: {
                     regions: [{
                         values: gdpAux,

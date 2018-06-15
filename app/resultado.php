@@ -79,10 +79,9 @@
             <!--=== BREADCRUMBS ===-->
 
             <div class="bread-parent">
-
                 <div class="bread-container">
 
-                    <div class="bread-caixa"style="width: 12%">
+                    <div class="bread-caixa">
                         <div class="opcao">
                             <span class="rotulo-bread opt view">Eixo</span>
                             <select class="bread-select bread-select-eixo" data-id="eixo">
@@ -316,7 +315,6 @@
                     <?php } ?>
 
                 </div>
-
             </div>
 
             <div class="nome-var col-md-12 col-xs-12">
@@ -336,9 +334,7 @@
                             <i class="plus"></i>
                         </div>
                         <?php
-                        if($view =='mapa' && $cad === 0) {
-//                            $prt = 0;
-                        }
+
                         if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
                             $_GET['ocp']=1;
                         }
@@ -346,19 +342,14 @@
                             $_GET['ocp']=0;
                         }
                         //TODO VER O QUE ESSA FUNÇÃO FAZ DE DIFERENÇA
-                        /*
-                        foreach($text['inativos'][$view] as $filter){
-                            $_GET[$filter]=0;
-                        }*/
-//                        if($view!='treemap_scc' && (($cad!=5 && $cad!=1 && $cad!=8 && $cad!=0) && $atc==1)){
-//                            $_GET['atc']=0;
-//                        }
+
                         if($view == 'barras' || $view == 'treemap_scc') {
                             $view = 'mapa';
                         }
 
                         ?>
                         <div id="view_box" style="border: none; width: 100%; height: 350px;" scrolling="no"></div>
+
                         <!--=== views gráfico ===-->
                         <div class="content-btn-mapa ">
                             <?php foreach($text['type'] as $key => $value):?>
@@ -775,6 +766,7 @@
                     }
                     setTimeout(result_mobile(), 500);
                 </script>
+
                 <span class="col-md-4 col-xs-12 contexto" style="top:-220px"></span>
 
                 <span id="containerDownload" class="col-md-4 col-xs-10 contexto" style="top:-220px">

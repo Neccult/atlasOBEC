@@ -9,27 +9,26 @@
 <div class="section " id="section1">
     <?php
     /* GETS! */
-    $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
-    $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
-    $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
-    $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   "";	   /*== variavel ==*/
-    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupacao ==*/
-    $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
-    $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
-    $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
-    $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
-    $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
-    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
-    $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
-    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
-    $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
-    $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
-    $uos    =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
-    $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
-    $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
+    $uf         =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
+    $ano        =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
+    $cad        =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
+    $var        =   isset($_GET["var"])   ?   $_GET["var"]  :   "";	   /*== variavel ==*/
+    $ocp        =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupacao ==*/
+    $view       =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
+    $eixo       =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
+    $slc        =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
+    $deg        =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $mec        =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== Mecanismo ==*/
+    $mod        =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
+    $deg        =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $subdeg     =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
+    $mod        =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== Modalidade ==*/
+    $pfj        =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== Tipo de pessoa ==*/
+    $uos        =   isset($_GET["uos"])   ?   $_GET["uos"]  :   0;	   /*== UF ou Setor ==*/
+    $prc        =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
+    $typ        =   isset($_GET["typ"])   ?   $_GET["typ"]  :   1;	   /*== Tipo de atividade ==*/
     ?>
 
-    <!--=== resultados -> gráfico! ===-->
     <?php if(isset($_GET["var"])):?>
 
         <?php
@@ -41,17 +40,10 @@
         <!-- se existem informações desta variável -->
         <section id="resultado">
             <iframe id="resultado_view" src="resultado.php" style="border: none; width: 100%; height: 100%; "></iframe>
-            <script>
-                function result_mobile() {
-                    if($(window).width() < 1200) {
-                        $("iframe").height("100%");
-                    }
-                }
-                setTimeout(result_mobile(), 500);
-            </script>
         </section>
 
     <?php endif;?>
+
 </div>
 <!---/* url atual para o js */-->
 <script type="text/javascript">
@@ -92,34 +84,7 @@
 <script src="js/d3/d3.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/contraste.js"></script>
 <script type="text/javascript">
-    function controlHeight(){
-        var windowHeight = $(window).height(),
-            headerHeight = $('.barra-gov').height(),
-            contentHeight = windowHeight - headerHeight;
-        $('.control-height').css('max-height',contentHeight);
-    }
-    /* ajusta o tamanho do vídeo,
-        para seguir da altura do container */
-    function videoHeight(){
-        $('.menu-item').find('.video').each(function(index){
-            var parentHeight = $(this).parents('.menu-item').height();
-            $(this).height(parentHeight);
-        });
-    }
-    /* quando a janela é carregada */
-    $(window).bind("load", function() {
-        controlHeight();
-        videoHeight();
-        bodyDark(dark);/* alto contraste */
-    });
-    $(document).ready(function(){
-        /* se a janela for redimensionada */
-        $(window).resize(function() {
-            videoHeight();
-        });
-    });
 
     /// MENU MOBILE!
 
@@ -133,7 +98,6 @@
             w3_open();
         }
     }
-
 
     $("#view-boxes").on('click', function(){
         var iframe = document.getElementById('resultado_view');
