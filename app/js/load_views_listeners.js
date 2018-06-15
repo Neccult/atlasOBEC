@@ -1,5 +1,4 @@
 
-
 if(parameters != undefined){
     parameters = {};
     
@@ -21,10 +20,12 @@ if(parameters != undefined){
     }
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
-    VIEWS[data_var.views.view_box1[0]] = "view_box";
+    //VIEWS[data_var.views.view_box1[0]] = "view_box";
 
     // $.getScript('js/'+data_var.views.view_box1[0]+'.js');
 
+    //$.getScript('js/'+data_var.views.view_box1[0]+'.js');
+    
     d3.json("./db/json_barras.php?"+URL_PARAM, function(json){
         UPDATE_VIEWS[data_var.views.view_box2[0]].call(this, "#view_box_barras", json);
     })
@@ -34,5 +35,5 @@ if(parameters != undefined){
     })
 
     
-    // $.getScript('js/'+data_var.views.view_box3[0]+'.js');
+    //$.getScript('js/'+data_var.views.view_box3[0]+'.js');
 }
