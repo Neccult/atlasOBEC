@@ -1039,7 +1039,7 @@ article.results-article div.results-content{
 }
 
 .bread-container{
-	width: 100%;
+	width: 70%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -1047,10 +1047,14 @@ article.results-article div.results-content{
 }
 
 .bread-caixa{
-	max-width: 10%;
+	min-width: 8%;
 	height: 100%;
 	display: flex;
 	flex-flow: row;
+}
+
+.bread-caixa .opcao{
+	width: 100%;
 }
 
 .rotulo-bread{
@@ -1078,7 +1082,7 @@ select[disabled].opt-select{
 .desc-chart .title {
 	margin-bottom: 40px;
 	margin-top: 40px;
-	font-size: 26px;
+	font-size: 28px;
 	text-transform: uppercase;
 	letter-spacing: 10px;
 	line-height: 40px;
@@ -1448,7 +1452,7 @@ button.opt.active{
 	}
 
 	.bread-container {
-		width: 100%;
+		width: 90%;
 	}
 }
 

@@ -92,14 +92,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
             <div id="menuvariaveis" ></div>
 
-            <div class="nome-var col-md-12 col-xs-12">
-                <div class="desc-chart text-center">
 
-                    <!--=== título variável ===-->
-                    <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
-
-                </div>
-            </div>
 
             <!--=== BREADCRUMBS ===-->
 
@@ -109,7 +102,7 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
                 <div class="bread-container">
 
-                    <div class="bread-caixa"style="width: 12%">
+                    <div class="bread-caixa">
                         <div class="opcao">
                             <span class="rotulo-bread opt view">Eixo</span>
                             <select class="bread-select-eixo bread-eixo" data-id="eixo">
@@ -346,6 +339,15 @@ $descView = $json_text[$view];			   /*== descrição da visualização ==*/
 
             </div>
 
+
+            <div class="nome-var col-md-12 col-xs-12">
+                <div class="desc-chart text-center">
+
+                    <!--=== título variável ===-->
+                    <div class="title" data-id="var-title"><?php echo $text['title'];?></div>
+
+                </div>
+            </div>
 
             <!--==== jquery load menu ===-->
             <div class="container-boxes">
