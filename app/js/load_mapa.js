@@ -122,7 +122,88 @@ function create_mapa(mapa_box, mapa){
         else{
             escalaMapa();
         }    
+        function escalaMapa(){
+            var low_color = color(minValue);
+            var high_color = color(maxValue);
+        
+            var x_barra = svg_mapa.attr("width")*0.3;
+        
+            var y_barra = svg_mapa.attr("height")*0.85;
+            var max_barra = maxValue;
+            var min_barra = minValue;
+            var height_barra = svg_mapa.attr("height")*0.03;
+            var width_barra = width_box(mapa_box)*0.4;
+            var fontColor = "#aaa";
+    
+            if(y_barra + height_barra > svg_mapa.attr("height")){
+                y_barra = svg_mapa.attr("height") - 23 - height_barra;
+            }
+            
+            var gradient = svg_mapa.append("defs")
+                            .append("linearGradient")
+                            .attr("id", "grad")
+                            .attr("x1", "0%")
+                            .attr("y1", "100%")
+                            .attr("x2", "90%")
+                            .attr("y2", "100%")
+    
+            gradient.append("stop")
+                    .attr("class", "begin")
+                    .attr("offset", "0%")
+                    .style("stop-color", low_color)
+                    .style("stop-opacity", 1);
+    
+            gradient.append("stop")
+                    .attr("class", "end")
+                    .attr("offset", "90%")
+                    .style("stop-color", high_color)
+                    .style("stop-opacity", 1);
+    
+            var svg_legenda = svg_mapa.append("g")
+                    .attr("class", "legenda")
+                    .append("rect")
+                    .attr("x", x_barra)
+                    .attr("y", y_barra)
+                    .attr("height", height_barra)
+                    .attr("width", width_barra)
+                    .attr("rx", height_box(mapa_box)/150)
+                    .attr("ry", height_box(mapa_box)/150)
+                    .style("fill", "url(#grad)")
+                    .style("stroke-width", 1)
+                    .style("stroke", fontColor);
+    
+            var lines =  svg_mapa.selectAll("line")
+                    .data([min_barra, String((parseFloat(min_barra)+parseFloat(max_barra))/2), max_barra])
+                    .enter()
+                    .append("line")
+                    .attr("class", "lines-legenda").attr("x1", function(d,i){
+                        var position = x_barra+i*width_barra/2;
+                        if(d3.select("#legenda"+i).size() == 0){
+                            var texto = svg_mapa.append("text")
+                        } else {
+                            var texto = d3.select("#legenda"+i)
+                        }
+                            texto.attr("id", "legenda"+i)
+                                .attr("class", "text-legenda")
+                                .attr("x", position)
+                                .attr("y", y_barra+height_barra +12)
+                                .attr("fill", fontColor);
+            
+                        formatBarTextMap(d, parameters.eixo, parameters.var, texto)
+            
+                        return position;
+                    })
+                    .attr("x2", function(d,i){return x_barra+i*width_barra/2})
+                    .attr("y1", y_barra-2)
+                    .attr("y2", y_barra+height_barra+2)
+                    .style("stroke", fontColor)
+                    .style("stroke-width", 1);
+        }
     })
     
+    
+}
+
+function update_mapa(mapa_box, data){
 
 }
