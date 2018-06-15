@@ -549,49 +549,9 @@
                         $basicUrl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
                         $downloadUrl = $basicUrl.'/download.php?var='.$var.'&view='.$view.'&uf='.$uf.'&pfj='.$pfj.'&mod='.$mod.'&slc='.$slc.'&ocp='.$ocp.'&mec='.$mec.'&typ='.$typ.'&prc='.$prc.'&cad='.$cad.'&deg='.$deg.'&subdeg='.$subdeg.'&ano='.$ano.'&eixo='.$eixo;
                         /* csv */
-                        switch($var) {
-                            case 1:
-                                $name_url = "total_empresas";
-                                break;
-                            case 2:
-                                $name_url = "peso_empresas";
-                                break;
-                            case 3:
-                                $name_url = "variacao_total_empresas";
-                                break;
-                            case 4:
-                                $name_url = "receita_total";
-                                break;
-                            case 5:
-                                $name_url = "receita_liquida";
-                                break;
-                            case 6:
-                                $name_url = "custo";
-                                break;
-                            case 7:
-                                $name_url = "lucro";
-                                break;
-                            case 8:
-                                $name_url = "valor_adicionado";
-                                break;
-                            case 9:
-                                $name_url = "va_pib";
-                                break;
-                            case 10:
-                                $name_url = "ihh_empresas";
-                                break;
-                            case 11:
-                                $name_url = "ihh_valor_adicionado";
-                                break;
-                            case 12:
-                                $name_url = "C4_empresas";
-                                break;
-                            case 13:
-                                $name_url = "C4_valor_adicionado";
-                                break;
-                            default:
-                                $name_url = "total_empresas";
-                        }
+
+                        $name_url = "total_empresas";
+
                         $csvUrl = $basicUrl.'/data/csv/'.$name_url.'.ods';
                         ?>
 
