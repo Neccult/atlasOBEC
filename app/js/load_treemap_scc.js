@@ -5,10 +5,6 @@ function create_treemap_scc(treemap_scc_box, data){
     svg.attr('width', $(treemap_scc_box).width());
     svg.attr('height', $(treemap_scc_box).height());
 
-    if(window.parent.innerWidth >= 1199 && window.parent.innerWidth <= 1600){
-        svg.attr('height', 324);
-    }
-
     var eixo = parameters.eixo
     var vrv  = parameters.var
     var cad  = parameters.cad
@@ -259,31 +255,33 @@ function create_treemap_scc(treemap_scc_box, data){
 
         percentageTextElement.append('tspan')
             .text(function (d) {
+
+                var divisao = d.data.size / root.value;
                 if (eixo == 0) {
                     if (uf) {
-                        return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                        return formatDecimalLimit((divisao) * 100, 2) + "%";
                     } else if (vrv == 2 || vrv === 9) {
                         if (uf === 0) {
-                            return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                            return formatDecimalLimit((divisao) * 100, 2) + "%";
                         }
                         else {
                             return ((100 * d.data.size)).toFixed(2) + "%";
                         }
                     } else {
-                        return formatDecimalLimit((d.data.size / root.value) * 100, 2) + '%';
+                        return formatDecimalLimit((divisao) * 100, 2) + '%';
                     }
                 }
                 else if (eixo == 1) {
 
 
-                    if (deg !== 0) return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
-                    else return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                    if (deg !== 0) return formatDecimalLimit((divisao) * 100, 2) + "%";
+                    else return formatDecimalLimit((divisao) * 100, 2) + "%";
                 }
                 else if (eixo === 2) {
-                    return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                    return formatDecimalLimit((divisao) * 100, 2) + "%";
                 }
                 else if (eixo === 3) {
-                    return formatDecimalLimit((d.data.size / root.value) * 100, 2) + "%";
+                    return formatDecimalLimit((divisao) * 100, 2) + "%";
                 }
             })
             .attr("display", function (d, i) {
