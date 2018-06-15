@@ -209,9 +209,9 @@ function controlFilter(selectvalue, selectid, valueDesag){
     }
 
 
-
+    ///TODO
     if(window.location.hash === "#mercado" && selectid === 'deg') {
-        url['subdeg'] = valueDesag6;
+        url['subdeg'] = valueDesag;
     }
 
 
@@ -255,44 +255,6 @@ function controlFilter(selectvalue, selectid, valueDesag){
 
 
 
-}
-
-/*-----------------------------------------------------------------------------
-Função: controlMec
-   restringe filtro de mecanismo ==> variaveis 1 - 8 - 9 do eixo 2 possuem apenas FNC e Mecenato, variavel 3 possui fundo cultura e outros
-Entrada:
-    select => objeto do select
-Saída:
-    void
------------------------------------------------------------------------------*/
-function controlMec(select){
-
-    if(url['var'] == 1 || url['var'] == 8 || url['var'] == 9){
-        $(select).find('option[value="3"]').remove();
-        $(select).find('option[value="4"]').remove();
-    }
-    if(url['var'] == 3) {
-        $(select).find('option[value="1"]').remove();
-        $(select).find('option[value="2"]').remove();
-    }
-}
-
-/*-----------------------------------------------------------------------------
-Função: controlAtc
-   restringe filtro de atuação ==> comércio apenas para os setores 4 - 5 - 9 - todos
-Entrada:
-    select => objeto do select
-    isPrt => boolean é ou não select de porte
-Saída:
-    void
------------------------------------------------------------------------------*/
-function controlAtc(select,isPrt){
-
-    if(url['cad']!=1 && url['cad']!=5 && url['cad']!=8 && url['cad']!=0){
-
-        if(isPrt) $(select).find('option[value="atc-1"]').remove();
-        else $(select).find('option[value="1"]').remove();
-    }
 }
 
 function controlAno(select){
@@ -396,9 +358,9 @@ function loadResult(){
                 //$(this).val('ocp-'+url['ocp']);
             }
 
-            if(selectId=='prt') controlAtc(this,1);
-            if(selectId=='atc') controlAtc(this,0);
-            if(selectId=='mec') controlMec(this);
+            // if(selectId=='prt') controlAtc(this,1);
+            // if(selectId=='atc') controlAtc(this,0);
+            // if(selectId=='mec') controlMec(this);
             if(selectId=='ano') controlAno(this)
         }
     });
