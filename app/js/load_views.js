@@ -12,14 +12,16 @@ URL_PARAM = $.param(parameters);
 VIEWS = {
     "barras": function (barras_box, data){
         create_bars(barras_box, data)
+    },
+
+    "treemap_scc": function (treemap_box_scc, data){
+        create_treemap_scc(treemap_box_scc, data)
     }
 }
 brasil_setor = []
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
     brasil_setor = JSON.parse(dado)
 })
-
-
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_JSON, colors_JSON){
     PT_BR = pt_br_JSON[0];
@@ -31,15 +33,18 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_
 
     d3.json("./db/json_barras.php?"+URL_PARAM, function(json){
         VIEWS[data_var.views.view_box2[0]].call(this, "#view_box_barras", json);
-        console.log(d3.select("#view_box_barras>svg"))
     });
 
-    VIEWS[data_var.views.view_box3[0]] = "view_box_scc";
+    d3.json("./db/json_treemap_scc.php?"+URL_PARAM, function(json){
+        VIEWS[data_var.views.view_box3[0]].call(this, "#view_box_scc", json);
+    });
+
+    // VIEWS[data_var.views.view_box3[0]] = "view_box_scc";
 
 
     $.getScript('js/'+data_var.views.view_box1[0]+'.js');
     
-    $.getScript('js/'+data_var.views.view_box3[0]+'.js');
+    // $.getScript('js/'+data_var.views.view_box3[0]+'.js');
     
 })
 
