@@ -44,12 +44,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_
         VIEWS[data_var.views.view_box3[0]].call(this, "#view_box_scc", json);
     });
 
-    // VIEWS[data_var.views.view_box3[0]] = "view_box_scc";
-
-    //$.getScript('js/'+data_var.views.view_box1[0]+'.js');
-    
-    // $.getScript('js/'+data_var.views.view_box3[0]+'.js');
-    
 })
 
 function indexEixo(eixo){
