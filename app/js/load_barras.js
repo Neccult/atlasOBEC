@@ -316,7 +316,28 @@ function create_bars(barras_box, data){
                 else {
                     return color(cad);
                 }
-            });
+            })
+            .on("click", function(d, i, obj) {
+
+                if(window.innerWidth <= 1199)
+                    return;
+
+                if(eixo == 1 && vrv == 6 && uos == 1)
+                    return;
+
+                $("select[data-id='ano']").val(dados.key[i]);
+                updateWindowUrl('ano', dados.key[i])
+
+
+                destacaBarra(barras_box, dados.key[i], false);
+                var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+
+                configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
+
+                updateIframe();
+
+            })
+            .style("cursor", "pointer");
 
         var xAxis = d3.axisBottom(x)
             .tickFormat(function (d, i) {

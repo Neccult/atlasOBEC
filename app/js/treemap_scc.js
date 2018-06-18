@@ -75,6 +75,8 @@ function nodeWidth(d){ return d.x1 - d.x0; }
 // return node box height
 function nodeHeight(d){ return d.y1 - d.y0; }
 
+var tooltipInstance = tooltip.getInstance();
+
 /*==================*/
 /* ***  cores   *** */
 /*==================*/
@@ -177,7 +179,6 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 	/*==========================*/
 	/* *** nodes & tooltips *** */
 	/*==========================*/
-    var tooltipInstance = tooltip.getInstance();
 
     if(d3.select(treemap_scc_box).select("svg").select("g").size() == 0){
         var cell = svg.selectAll("g")
@@ -196,7 +197,9 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
                 title = title.replace("<br>", "");
                 title = title.replace("</span>", "");
 
-                loadTooltip(d, eixo , vrv);
+                // loadTooltip(d, eixo , vrv);
+
+            alert("oi")
 
             })
             .on("mouseout", tooltipInstance.hideTooltip)
@@ -272,148 +275,150 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 
 	function loadTooltip(d, eixo, vrv){
 
-
-        if(eixo === 0) {
-            if(vrv === 2 || vrv === 9){
-                if (url['uf'] != 0) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
-
-                    ]);
-                }
-                else if (url['uf'] == 0) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size*100, eixo, vrv)],
-                        //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
-
-                    ]);
-                }
-            }
-
-            else{
-                if (url['uf'] != 0) {
-
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
-                        //["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-                    ]);
-                }
-                else if (url['uf'] == 0) {
-
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
-                    ]);
-                }
-            }
-        }
-
-        else if(eixo === 1) {
+	    return;
 
 
-            if(vrv === 2){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size*100, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
-
-                ]);
-            }
-            else if(uf == 0){
-                if(deg !== 0) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        //["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                    ]);
-                }
-                else {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-
-                    ]);
-
-                }
-            }
-            else{
-                if(deg !== 0) {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-                    ]);
-                }
-                else {
-                    tooltipInstance.showTooltip(d, [
-                        ["title", d.data.name],
-                        ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-
-                    ]);
-
-                }
-            }
-        }
-
-
-        else if(eixo === 2){
-            if(url['uf'] == 0 || url['var'] == 3){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    //["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
-
-                ]);
-            }
-            else{
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
-                    //["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-
-                ]);
-            }
-
-        }
-
-        else if(eixo === 3){
-            if (url['uf'] != 0 && (vrv === 1 || vrv === 2)){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
-                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
-
-                ]);
-            }
-            else if (url['uf'] == 0 && (vrv === 1 || vrv === 2)){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
-
-                ]);
-            }
-            else if(vrv === 99 && url['uf'] == 0){
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
-
-                ]);
-            }
-        }
+        // if(eixo === 0) {
+        //     if(vrv === 2 || vrv === 9){
+        //         if (url['uf'] != 0) {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+        //
+        //             ]);
+        //         }
+        //         else if (url['uf'] == 0) {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size*100, eixo, vrv)],
+        //                 //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+        //
+        //             ]);
+        //         }
+        //     }
+        //
+        //     else{
+        //         if (url['uf'] != 0) {
+        //
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+        //                 //["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+        //             ]);
+        //         }
+        //         else if (url['uf'] == 0) {
+        //
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 //["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+        //             ]);
+        //         }
+        //     }
+        // }
+        //
+        // else if(eixo === 1) {
+        //
+        //
+        //     if(vrv === 2){
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size*100, eixo, vrv)],
+        //             ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        //     else if(uf == 0){
+        //         if(deg !== 0) {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 //["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+        //             ]);
+        //         }
+        //         else {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+        //
+        //             ]);
+        //
+        //         }
+        //     }
+        //     else{
+        //         if(deg !== 0) {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+        //                 ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+        //             ]);
+        //         }
+        //         else {
+        //             tooltipInstance.showTooltip(d, [
+        //                 ["title", d.data.name],
+        //                 ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //                 ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+        //                 ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+        //
+        //             ]);
+        //
+        //         }
+        //     }
+        // }
+        //
+        //
+        // else if(eixo === 2){
+        //     if(url['uf'] == 0 || url['var'] == 3){
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //             //["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        //     else{
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //             ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
+        //             //["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        //
+        // }
+        //
+        // else if(eixo === 3){
+        //     if (url['uf'] != 0 && (vrv === 1 || vrv === 2)){
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //             ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
+        //             ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        //     else if (url['uf'] == 0 && (vrv === 1 || vrv === 2)){
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //             ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        //     else if(vrv === 99 && url['uf'] == 0){
+        //         tooltipInstance.showTooltip(d, [
+        //             ["title", d.data.name],
+        //             ["", formatTextVrv(d.data.size, eixo, vrv)],
+        //             ["", formatTextTaxaVrv((d.data.size/root.value), eixo, vrv)],
+        //
+        //         ]);
+        //     }
+        // }
 
     }
 
@@ -555,7 +560,9 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
             })
             .attr("display", function (d, i) {
                 // se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-                if (vrv !== 2) return parseFloat(formatDecimalLimit((divisao) * 100, 2).replace(",", ".")) === 0 ? "none" : "block";
+                if (vrv !== 2) {
+                    return parseFloat(formatDecimalLimit((d.data.size / root.value) * 100, 2).replace(",", ".")) === 0 ? "none" : "block";
+                }
             })
             .attr("font-size", function (d) {
                 var nWidth = nodeWidth(d);

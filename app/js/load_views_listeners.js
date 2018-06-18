@@ -1,7 +1,7 @@
 
 if(parameters != undefined){
     parameters = {};
-    
+
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
     })
@@ -22,11 +22,6 @@ if(parameters != undefined){
     }
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
-    //VIEWS[data_var.views.view_box1[0]] = "view_box";
-
-    // $.getScript('js/'+data_var.views.view_box1[0]+'.js');
-
-    //$.getScript('js/'+data_var.views.view_box1[0]+'.js');
     d3.json("./db/json_mapa.php?"+URL_PARAM, function(json){
         UPDATE_VIEWS[data_var.views.view_box1[0]].call(this, "#view_box", json);
     })
@@ -39,6 +34,5 @@ if(parameters != undefined){
         UPDATE_VIEWS[data_var.views.view_box3[0]].call(this, "#view_box_scc", json);
     })
 
-    
-    //$.getScript('js/'+data_var.views.view_box3[0]+'.js');
+
 }
