@@ -2098,6 +2098,7 @@ function debug(value, match, args){
 		manipula elementos na página/DOM
 -----------------------------------------------------------------------------*/
 var formatTreemapText = function(view) {
+
 	var g = d3.selectAll(view+" svg g");
 	g.each(function(d){
 		var acceptableMargin = { horizontal:6, vertical: 6, betweenText: 10 };
