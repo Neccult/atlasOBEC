@@ -17,10 +17,6 @@ $.get("./data/pt-br.json", function(data){
     textJSON = data
 })
 
-$.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
-    anos_default = JSON.parse(data);
-});
-
 
 $.ajaxSetup({async: true});
 
@@ -99,7 +95,7 @@ function controlVarPage(clickVar){
 
 function getAnoDefault(eixo_atual){
     switch(eixo_atual){
-        case 0: url['ano'] = anos_default[url['var']][0]; break;
+        case 0: url['ano'] = d3.max(anos_default[url['var']]); break;
         case 1:
 
             if(url['var'] == 10 || url['var'] == 9 || url['var'] == 11){
@@ -130,7 +126,6 @@ function getAnoDefault(eixo_atual){
             index = url['slc'] == 0 ? 1 : 0
 
             url['ano'] = anos_default[url['var']][index]; break;
-            break;
     }
 }
 
@@ -1328,6 +1323,19 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
+                $('select[data-id=ano]').each(function(){
+                    selectOp = this;
+                    $(this.options).each(function(){
+                        $(this).remove();
+                    })
+                    dummy = anos_default[dataVal];
+                    dummy.reverse().forEach(function(d){
+                        $(selectOp).append($('<option>', {
+                            value: d,
+                            text: d
+                        }))
+                    })
+                });
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();

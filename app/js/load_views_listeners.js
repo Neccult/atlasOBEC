@@ -6,6 +6,8 @@ if(parameters != undefined){
         parameters[key] = value;
     })
 
+    
+
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
     URL_PARAM = $.param(parameters);

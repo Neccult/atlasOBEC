@@ -22,9 +22,31 @@ VIEWS = {
 }
 
 brasil_setor = []
+
+//NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
+$.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
+    anos_default = JSON.parse(data);
+    
+    $('select[data-id=ano]').each(function(){
+        selectOp = this;
+        $(this.options).each(function(){
+            $(this).remove();
+        })
+        dummy = anos_default[parameters.var];
+        dummy.reverse().forEach(function(d){
+            $(selectOp).append($('<option>', {
+                value: d,
+                text: d
+            }))
+        })
+        $(this).val(parameters.ano);
+    });
+});
+
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
     brasil_setor = JSON.parse(dado)
 })
+
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json')).done(function(pt_br_JSON, colors_JSON){
     PT_BR = pt_br_JSON[0];
