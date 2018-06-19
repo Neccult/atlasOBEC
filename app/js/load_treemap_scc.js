@@ -413,6 +413,9 @@ function create_treemap_scc(treemap_scc_box, data){
 
 function update_treemap_scc(treemap_scc_box, data){
 
+    svg.attr('width', $(treemap_scc_box).width());
+    svg.attr('height', $(treemap_scc_box).height());
+
     var eixo = parameters.eixo;
     var vrv  = parameters.var;
     var cad  = parameters.cad;
@@ -465,84 +468,32 @@ function update_treemap_scc(treemap_scc_box, data){
     /*==========================*/
     var tooltipInstance = tooltip.getInstance();
 
-    cell.data(root.leaves())
-        .transition().duration(500)
-
-        .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-        .select("rect")
-        .attr("id", function(d) { return d.data.id; })
-        .attr("width", function(d) { return d.x1 - d.x0; })
-        .attr("height", function(d) { return d.y1 - d.y0; })
-        .attr("fill", function(d) { return color(d.data.colorId); });
-
-
-    var titleTextElement = cell.select("text")
-        .text(function(d) {return d.data.name; })
-
-
     var svgMarginTop = 15;
 
+    var percentageTextElement = cell.select(".percentage")
+        .style("opacity", 0)
 
-    var percentageTextElement = cell.select("text")
-        .attr("text-anchor", "start")
-        .attr("clip-path", function (d) {
-            return "url(#clip-" + d.data.id + ")";
-        })
-        .attr("class", "percentage");
+    // percentageTextElement.select("tspan").remove()
+
+    cell.data(root.leaves())
+        .transition().duration(500)
+        // .on("end",     formatTreemapText(treemap_scc_box))
+        .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
+        .select("rect")
+        .attr("id", function(d) { return d.data.id; })
+        .attr("width", function(d) { console.log("width d3: "+ (d.x1 - d.x0)); return d.x1 - d.x0; })
+        .attr("height", function(d) { return d.y1 - d.y0; })
+        .attr("fill", function(d) { return color(d.data.colorId); })
 
 
-    percentageTextElement.select('tspan')
-        .text(function (d) {
+    setTimeout(function () {
+        formatTreemapText(treemap_scc_box);
+        percentageTextElement
+            .transition()
+            .style("opacity", 1)
+    }, 800);
 
-            var divisao = d.data.size / root.value;
-            if (uf) {
-                return formatDecimalLimit((divisao) * 100, 2) + "%";
-            } else if (vrv == 2 || vrv === 9) {
-                if (uf === 0) {
-                    return formatDecimalLimit((divisao) * 100, 2) + "%";
-                }
-                else {
-                    return ((100 * d.data.size)).toFixed(2) + "%";
-                }
-            } else {
-                return formatDecimalLimit((divisao) * 100, 2) + '%';
-            }
-        })
-        .attr("display", function (d, i) {
-            // se porcentagem for muito pequena e só mostrar 0%, opacity é 0
-            if (vrv !== 2) {
-                return parseFloat(formatDecimalLimit((d.data.size / root.value) * 100, 2).replace(",", ".")) === 0 ? "none" : "block";
-            }
-        })
-        .attr("font-size", function (d) {
-            var nWidth = nodeWidth(d);
-            var nodePercentage = Math.round(100 * nWidth / width_box(treemap_scc_box));
 
-            var fontOrdinalSize = d3.scaleThreshold()
-                .domain([12, 25, 30, 40])
-                .range([8, 12, 16, 20]);
-
-            var fontSize = fontOrdinalSize(nodePercentage);
-
-            return fontSize;
-        });
-
-    // formatTreemapText(treemap_scc_box);
-
-    /*=== controla texto ===*/
-    var g = d3.selectAll(treemap_scc_box +" svg g");
-
-    g.each(function(d){
-        var that = d3.select(this);
-
-        // creates a top margin for title positioning
-        var transformValues = that.attr("transform").split("(")[1].replace(/\)/g, "").split(",");
-        var xVal = parseFloat(transformValues[0]),
-            yVal = parseFloat(transformValues[1]);
-
-        that.attr("transform", "translate(" + xVal + "," + (yVal + svgMarginTop) + ")");
-
-    });
 
 
     // testa e mostra mensagem de valor zerado/indisponível
@@ -555,7 +506,7 @@ function update_treemap_scc(treemap_scc_box, data){
             var isSizeZero = size === 0 || size === null || size === undefined;
             if (!isSizeZero && isValueZero)
                 isValueZero = false;
-        });
+        })
 
     // testa se o valor de size é zero
     if (isValueZero) {
@@ -572,93 +523,39 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("text-anchor", "middle");
     }
 
+    // formatTreemapText(treemap_scc_box);
+}
+
+function formatTreemapPercent(treemap_scc_box){
+
+   d3.selectAll(treemap_scc_box+">svg>g").each(function(){
+
+       var transformValues = d3.select(this).attr("transform").split("(")[1].replace(/\)/g, "").split(",");
+       var xRect = transformValues[0];
+       var yRect = transformValues[1];
+
+       var widthRect = d3.select(this).select("rect").attr("width");
+       var heightRect = d3.select(this).select("rect").attr("height");
+
+       console.log("function: "+widthRect)
+
+
+       d3.select(this).select("percentage").attr("x", function(){
+           return parseFloat(xRect) + parseFloat(widthRect);
+       });
+
+       d3.select(this).select("percentage").attr("y", function(){
+           return parseFloat(yRect) + parseFloat(heightRect);
+       });
+
+
+
+
+    })
+
 
 
 }
-// function update_treemap_scc(treemap_scc_box, data){
-//
-//     svg = d3.select(treemap_scc_box).select("svg");
-//
-//     svg.attr('width', $(treemap_scc_box).width());
-//     svg.attr('height', $(treemap_scc_box).height()-50);
-//
-//     var eixo = parameters.eixo;
-//     var vrv  = parameters.var;
-//     var cad  = parameters.cad;
-//     var deg  = parameters.deg;
-//     var slc  = 0;
-//
-//     /*==================*/
-//     /* ***  treemap *** */
-//     /*==================*/
-//
-//     var attachColor=function(d){
-//         return (d.depth==3)? d.data.colorId=d.parent.parent.data.colorId : '';
-//     };
-//
-//     root = d3.hierarchy(data)
-//         .eachBefore(function(d) {
-//             attachColor(d);
-//             d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
-//         })
-//         .sum(sumBySize)
-//         .sort(function(a, b) { return b.height - a.height || b.value - a.value; });
-//
-//     treemap(root);
-//
-//     cell
-//         .transition()
-//         .duration(500)
-//         .on("end", formatTreemapText(treemap_scc_box))
-//         .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
-//         .select("rect")
-//         .attr("width", function(d) { return d.x1 - d.x0; })
-//         .attr("height", function(d) { return d.y1 - d.y0; })
-//
-//
-//
-//
-//     var config = URL_PARAM
-//
-//
-//
-//     /*==========================*/
-//     /* *** nodes & tooltips *** */
-//     /*==========================*/
-//     var tooltipInstance = tooltip.getInstance();
-//
-//
-//     // testa e mostra mensagem de valor zerado/indisponível
-//     var isValueZero = true;
-//
-//     d3.selectAll(treemap_scc_box+">svg>g")
-//         .data(root.leaves())
-//         .attr("display", function(d){
-//             var size = parseFloat(d.data.size);
-//             var isSizeZero = size === 0 || size === null || size === undefined;
-//             if (!isSizeZero && isValueZero)
-//                 isValueZero = false;
-//         });
-//
-//
-//
-//     // testa se o valor de size é zero
-//     if (isValueZero) {
-//         d3.selectAll(treemap_scc_box+">svg>g")
-//             .attr("display", "none");
-//
-//         d3.select(treemap_scc_box+">svg")
-//             .append("g")
-//             .attr("class", "no-info")
-//             .append("text")
-//             .text("Não há dados sobre essa desagregação")
-//             .attr("x", d3.select("#corpo>svg").attr("width") / 2)
-//             .attr("y", d3.select("#corpo>svg").attr("height") / 2)
-//             .attr("text-anchor", "middle");
-//     }
-//
-//
-// }
 
 
 function destacaSetor(cadId) {

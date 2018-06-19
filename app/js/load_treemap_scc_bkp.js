@@ -247,7 +247,10 @@ function create_treemap_scc(treemap_scc_box, data){
 
     }
 
-    formatTreemapText(treemap_scc_box);
+    setTimeout(function () {
+        formatTreemapText(treemap_scc_box);;
+    }, 3000);
+
 
     /*=== controla texto ===*/
     var g = d3.selectAll(treemap_scc_box +" svg g");
