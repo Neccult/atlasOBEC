@@ -156,7 +156,6 @@ function updateIframe(url){
         return;
     }
 
-
     $.getScript('js/load_views_listeners.js');
 
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
@@ -1506,6 +1505,5 @@ $(document).ready(function(){
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var'])
 
     }
-    updateIframe(url);
 
 });
