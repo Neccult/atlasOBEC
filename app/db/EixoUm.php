@@ -100,7 +100,7 @@ class EixoUm {
 	public static function getter_most_recent_year(){
 		self::connect();
         
-		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_1` WHERE `idUF` = 0  GROUP BY Numero";
+		$query = "SELECT DISTINCT Ano, Numero FROM `Eixo_1` WHERE `idUF` = 0";
         
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        
