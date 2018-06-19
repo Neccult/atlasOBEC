@@ -24,6 +24,8 @@ if(parameters != undefined){
     }
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
+    updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
+
     d3.json("./db/json_mapa.php?"+URL_PARAM, function(json){
         UPDATE_VIEWS[data_var.views.view_box1[0]].call(this, "#view_box", json);
     })
