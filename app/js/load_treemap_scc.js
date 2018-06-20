@@ -94,7 +94,6 @@ function create_treemap_scc(treemap_scc_box, data){
 
     if(eixo == 1) {
         if(deg == 0) {
-            console.log(cell.selectAll("rect").size())
             cell.append("rect")
                 .attr("data-legend", function(d) { return d.data.colorId; })
                 .attr("data-value", function(d) { return (d.value); })
@@ -147,6 +146,10 @@ function create_treemap_scc(treemap_scc_box, data){
 
         cell.append("rect")
             .attr("id", function(d) { return d.data.id; })
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.value); })
+            .attr("data-percent", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
             .attr("width", function(d) { return d.x1 - d.x0; })
             .attr("height", function(d) { return d.y1 - d.y0; })
             .attr("fill", function(d) { return color(d.data.colorId); })
@@ -264,11 +267,11 @@ function create_treemap_scc(treemap_scc_box, data){
 
     configInfoDataBoxTreemapSCC(eixo,
         vrv,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-value"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-percent-uf"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
         url,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-deg"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
         $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
 
     function loadTooltip(d, eixo, vrv){
@@ -526,6 +529,10 @@ function update_treemap_scc(treemap_scc_box, data){
         .transition().duration(500)
         .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
         .select("rect")
+        .attr("data-legend", function(d) { return d.data.colorId; })
+        .attr("data-value", function(d) { return (d.value); })
+        .attr("data-percent", function(d) { return (d.data.size/root.value); })
+        .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
         .attr("id", function(d) { return d.data.id; })
         .style("opacity", function(d){
             if(d.data.colorId == parameters.cad) {
@@ -594,7 +601,16 @@ function update_treemap_scc(treemap_scc_box, data){
             .duration(800)
             .style("opacity", 1);
 
-
+        
+        configInfoDataBoxTreemapSCC(eixo,
+            vrv,
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
+            url,
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg")
+        );
 
 
     }, 750);

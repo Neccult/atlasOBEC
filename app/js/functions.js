@@ -198,6 +198,7 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
 
         if(url['cad'] != 0){
             if (vrv == 1 || vrv == 3 || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 ||vrv == 9) {
+                console.log(percent)
                 setPercentValueData({percentual: percent}, eixo, vrv);
             }
             else{
@@ -357,7 +358,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
         first_year = Number(dados.key[0]);
          if(vrv == 3 || vrv == 9 ){
 
-            if(url['uf'] != 0){
+            if(parameters.uf != 0){
                 dados.valor = dados.value[index_ano]/100;
             }
             else{
@@ -368,7 +369,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
     
             setIntegerValueData(dados, eixo, vrv);
         }
-        else if(url['uf'] == 0 && url['cad'] == 0 && url['deg'] == 0 && vrv < 10){
+        else if(parameters.uf == 0 && parameters.cad == 0 && parameters.deg == 0 && vrv < 10){
             if(vrv !== 3){
                 setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
                 dados.valor = dados.value[dados.key.indexOf(parameters.ano)];
@@ -377,7 +378,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
             }
             else{
                 setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
-                if(url['uf'] == 0){
+                if(prameters.uf == 0){
                     dados.valor = dados.value[index_ano]/100;
 
                 }
@@ -404,7 +405,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
             dados.valor = dados.value[index_ano];
             
             setIntegerValueData(dados, eixo, vrv);
-            if(url['cad'] == 0)
+            if(parameters.cad == 0)
                 setPercentValueData({percentual: dados.percentual[index_ano]}, eixo, vrv)
         }
 
@@ -1327,11 +1328,7 @@ function setPercentValueData(value, eixo, vrv) {
             $(".percent-value").first().find(".number").first().html("");
         }
         else if(vrv < 9) {
-            if(value.uf == null) {
                 $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
-            }else {
-                $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
-            }
         }
         else if(vrv >= 10 && vrv <= 13){
             $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
