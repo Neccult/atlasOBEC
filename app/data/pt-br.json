@@ -154,7 +154,7 @@
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
 				"mapa_valores": "Valores em pecentual.",
@@ -476,7 +476,7 @@
 					{"name":"UF ou Setores","id":"uos"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
+					"view_box1": ["barras"],
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
@@ -501,7 +501,7 @@
 					{"name":"UF ou Setores","id":"uos"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
+					"view_box1": ["barras"],
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
@@ -526,7 +526,7 @@
 					{"name":"UF ou Setores","id":"uos"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
+					"view_box1": ["barras"],
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
@@ -548,7 +548,7 @@
 					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
+					"view_box1": ["barras"],
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
