@@ -689,7 +689,12 @@ function update_bars(barras_box, data){
 
         
         destacaBarra(barras_box, parameters.ano);
+        
+        var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
+        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+            configInfoDataBoxBarras(eixo, vrv, dados, valor);         
+        }
 }
 
 
