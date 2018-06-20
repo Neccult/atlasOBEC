@@ -78,7 +78,7 @@ function controlVarPage(clickVar){
     var urlString = "";
 
     switch (newHash.substring(1)){
-        case "empreendimentos": urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+        case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
                                     break;
         case "mercado":         urlString = 'page.php?var=1&uf=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
@@ -138,8 +138,8 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function defaultUrl(){
-    url['view'] = 'mapa';
     url['uf'] = 0;
+    url['chg'] = 0;
     url['cad'] = 0;
     url['ocp'] = 0;
     url['deg'] = 0;
@@ -1153,11 +1153,15 @@ $(document).ready(function(){
                 if(id === "treemap_region") {
                     $(this).addClass("active");
                     $('#mapa').removeClass("active");
+                    url['chg'] = '1';
                 }
                 else if(id === "mapa") {
                     $(this).addClass("active");
                     $('#treemap_region').removeClass("active");
+                    url['chg'] = '0';
                 }
+
+                updateWindowUrl('chg', url['chg'])
             }
 
         }

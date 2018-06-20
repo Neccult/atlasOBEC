@@ -680,6 +680,7 @@ ul.var-list li{
 }
 .container {
 	width: 100% !important;
+	padding-top: 80px;
 }
 /*=============  resultados =================*/
 article.results-article{
@@ -1028,10 +1029,15 @@ svg line {
 
 .bread-parent{
 	width: 100%;
-	min-height: 100px;
+	min-height: 70px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	position: fixed;
+	top: 0;
+	z-index: 99;
+	background-color: white;
 }
 
 .bread-container{

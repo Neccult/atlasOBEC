@@ -495,7 +495,8 @@ function update_treemap_scc(treemap_scc_box, data){
             var divisao = d.data.size / root.value;
             if (uf) {
                 return formatDecimalLimit((divisao) * 100, 2) + "%";
-            } else if (vrv == 2 || vrv === 9) {
+            }
+            else if (vrv == 2 || vrv === 9) {
                 if (uf === 0) {
                     return formatDecimalLimit((divisao) * 100, 2) + "%";
                 }
@@ -557,16 +558,15 @@ function update_treemap_scc(treemap_scc_box, data){
 
 
     setTimeout(function () {
+
         formatTreemapText(treemap_scc_box);
 
-
         titleTextElement.text(function(d) {return d.data.name; })
+            .attr("display", "block")
             .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
             .transition()
             .duration(200)
             .style("opacity", 1);
-
-
 
         percentageTextElement
             .text(function (d) {
