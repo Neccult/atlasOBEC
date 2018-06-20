@@ -1,8 +1,4 @@
-br_states = []
 
-d3.json("./data/br-min.json", function(data){
-    br_states = data;
-})
 
 function create_mapa(mapa_box, mapa){
     
@@ -351,8 +347,8 @@ function mapaClick(svg_mapa, dict, d){
 
     $(".bread-select[data-id='uf']").val(d.id);
     url['uf'] = d.id;
-
-    UpdateWindowUrl('uf', d.id);
+    console.log(d.id)
+    updateWindowUrl('uf', d.id);
 
 
 

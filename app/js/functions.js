@@ -29,7 +29,7 @@ function height_box(id_box){
 // }
 
 function UpdateWindowUrl(id, valor){
-
+    
     var replace = id+"=[0-9]*";
     var re = new RegExp(replace,"");
 
