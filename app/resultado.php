@@ -24,11 +24,10 @@
         }
     }
     $uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
-    $prt    =   isset($_GET["prt"])   ?   $_GET["prt"]  :   0;	   /*== porte ==*/
     $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
     $var    =   isset($_GET["var"])   ?   $_GET["var"]  :   0;	   /*== variavel ==*/
     $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   1;	   /*== ocupacao ==*/
-    $view   =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
+    $chg   =   isset($_GET["chg"])  ?   $_GET["chg"] :   0;	   /*== visualizacao ==*/
     $eixo   =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimentos";	   /*== eixo ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
@@ -100,17 +99,13 @@
                         </div>
                         <?php
 
-                        if($view == 'barras' && $eixo == "mercado" && $slc == 1 && $ocp == 0) {
+                        if($eixo == "mercado" && $slc == 1 && $ocp == 0) {
                             $_GET['ocp']=1;
                         }
-                        if($view == 'barras' && $eixo == "mercado" && $slc == 0) {
+                        if($eixo == "mercado" && $slc == 0) {
                             $_GET['ocp']=0;
                         }
                         //TODO VER O QUE ESSA FUNÇÃO FAZ DE DIFERENÇA
-
-                        if($view == 'barras' || $view == 'treemap_scc') {
-                            $view = 'mapa';
-                        }
 
                         ?>
                         <div id="view_box" style="border: none; width: 100%; height: 350px;" scrolling="no"></div>
@@ -120,7 +115,7 @@
                             <?php foreach($text['type'] as $key => $value):?>
                                 <?php if($value['id'] === "mapa" || $value['id'] == "treemap_region"): ?>
                                     <div class="btn-mapa col-xs-6">
-                                        <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view <?php if($value['id']==$view) echo 'active';?>" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
+                                        <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach;?>
@@ -547,7 +542,7 @@
                         <?php
                         /* cria links download */
                         $basicUrl = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
-                        $downloadUrl = $basicUrl.'/download.php?var='.$var.'&view='.$view.'&uf='.$uf.'&pfj='.$pfj.'&mod='.$mod.'&slc='.$slc.'&ocp='.$ocp.'&mec='.$mec.'&typ='.$typ.'&prc='.$prc.'&cad='.$cad.'&deg='.$deg.'&subdeg='.$subdeg.'&ano='.$ano.'&eixo='.$eixo;
+                        $downloadUrl = $basicUrl.'/download.php?var='.$var.'&uf='.$uf.'&pfj='.$pfj.'&mod='.$mod.'&slc='.$slc.'&ocp='.$ocp.'&mec='.$mec.'&typ='.$typ.'&prc='.$prc.'&cad='.$cad.'&deg='.$deg.'&subdeg='.$subdeg.'&ano='.$ano.'&eixo='.$eixo;
                         /* csv */
 
                         $name_url = "total_empresas";
@@ -576,7 +571,6 @@
 <!---/* url atual para o js */-->
 <script type="text/javascript">
     var url = {
-        view:"<?php echo $view; ?>",
         var:"<?php echo $var; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
@@ -585,6 +579,10 @@
         uos:"<?php echo $uos; ?>",
         uf:"<?php echo $uf; ?>"
     };
+
+    <?php if ($eixo == "empreendimentos") {?>
+    url['chg'] = "<?php echo $chg; ?>";
+    <?php } ?>
 
     <?php if ($eixo == "mercado") {?>
     url['slc'] = "<?php echo $slc; ?>";

@@ -10,11 +10,11 @@
     <?php
     /* GETS! */
     $uf         =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
+    $chg         =   isset($_GET["chg"])    ?   $_GET["chg"]   :   0;	   /*== VIEW ==*/
     $ano        =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
     $cad        =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
     $var        =   isset($_GET["var"])   ?   $_GET["var"]  :   "";	   /*== variavel ==*/
     $ocp        =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupacao ==*/
-    $view       =   isset($_GET["view"])  ?   $_GET["view"] :   "mapa";	   /*== visualizacao ==*/
     $eixo       =   isset($_GET["eixo"])  ?   $_GET["eixo"] :   "empreendimento";	   /*== eixo ==*/
     $slc        =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Visualização ==*/
     $deg        =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
@@ -48,7 +48,6 @@
 <!---/* url atual para o js */-->
 <script type="text/javascript">
     var url = {
-        view:"<?php echo $view; ?>",
         var:"<?php echo $var; ?>",
         cad:"<?php echo $cad; ?>",
         ocp:"<?php echo $ocp; ?>",
@@ -58,16 +57,17 @@
         deg:"<?php echo $deg; ?>"
     };
 
-    <?php if ($eixo == "mercado" && $view != "mapa") {?>
-    url['subdeg'] = "<?php echo $subdeg; ?>";
+    <?php if ($eixo == "empreendimentos") {?>
+    url['chg'] = "<?php echo $chg; ?>";
     <?php } ?>
-    <?php if ($eixo == "mercado" && $view == "treemap_scc") {?>
+
+    <?php if ($eixo == "mercado") {?>
     url['slc'] = "<?php echo $slc; ?>";
     url['deg'] = "<?php echo $deg; ?>";
+    url['subdeg'] = "<?php echo $subdeg; ?>";
+
     <?php } ?>
-    <?php if ($eixo == "mercado" && $view == "barras") {?>
-    url['deg'] = "<?php echo $deg; ?>";
-    <?php } ?>
+
     <?php if ($eixo == "politicas") {?>
     url['mec'] = "<?php echo $mec; ?>";
     url['mod'] = "<?php echo $mod; ?>";
