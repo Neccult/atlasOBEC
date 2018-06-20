@@ -256,7 +256,7 @@ function update_mapa(mapa_box, mapa){
 	var color = d3.scaleLinear()
         .domain([minValue, maxValue])
         .range([COLORS.cadeias[parameters.cad].gradient['2'], COLORS.cadeias[parameters.cad].gradient['6']])
-
+    
     destacaPais(svg_mapa, parameters.uf);
 
 
@@ -347,7 +347,7 @@ function mapaClick(svg_mapa, dict, d){
 
     $(".bread-select[data-id='uf']").val(d.id);
     url['uf'] = d.id;
-    console.log(d.id)
+
     updateWindowUrl('uf', d.id);
 
 
@@ -382,6 +382,7 @@ function destacaPais(svg_mapa, ufId) {
             if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
+
     });
 
 }
