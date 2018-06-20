@@ -154,6 +154,10 @@ function create_treemap_scc(treemap_scc_box, data){
             .attr("height", function(d) { return d.y1 - d.y0; })
             .attr("fill", function(d) { return color(d.data.colorId); })
             .style("opacity", function(d){
+                if(parameters.cad == 0){
+                    return "1";
+                }
+
                 if(d.data.colorId == parameters.cad) {
                     return "1";
                 }
@@ -536,6 +540,11 @@ function update_treemap_scc(treemap_scc_box, data){
         .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
         .attr("id", function(d) { return d.data.id; })
         .style("opacity", function(d){
+
+            if(parameters.cad == 0){
+                return "1";
+            }
+
             if(d.data.colorId == parameters.cad) {
                 return "1";
             }
