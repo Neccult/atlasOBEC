@@ -951,7 +951,8 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
-               "mapa_valores": ""
+               "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado",
+				"fontes": "SEFIC-MINC"
 			},
 			{
 				"id":"19",
@@ -960,7 +961,7 @@
 				"desc_percent": "[cad] [uf]",
 				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
 				"desc":"",
-				"fontes":"COORDENAÇÃO GERAL DO PROGRAMA CULTURA DO TRABALHADOR (SEFIC-MINC)",
+				"fontes":"SEFIC-MINC",
 				"sufixo_valor":" ",
 				"prefixo_valor":"",
 				"type":[
@@ -970,7 +971,7 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
-                "mapa_valores": ""
+				"mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado"
 			},
 			{
 				"id":"3",

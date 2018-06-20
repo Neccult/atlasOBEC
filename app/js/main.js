@@ -1888,6 +1888,8 @@ $(document).ready(function(){
                     $("#trabalhador").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][2]);
                     updateIframe(url); /* altera gráfico */
 
+                    $(".value-info-title").css("display", "block")
+
                 }
             }
             else {
@@ -1908,6 +1910,9 @@ $(document).ready(function(){
                     $(this).css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][3]);
                     $("#recebedora").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][2]);
                     updateIframe(url); /* altera gráfico */
+
+                    $(".value-info-title").css("display", "none")
+
                 }
             }
         }
