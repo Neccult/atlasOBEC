@@ -44,6 +44,14 @@ if(parameters != undefined){
                 $(box+" svg").remove()
                 create_treemap_region(box, data);
             }
+        },
+        "linhas": function (box, data, update){
+            if(update){
+                update_linhas(box, data)
+            } else {
+                $(box+" svg").remove()
+                create_linhas(box, data);
+            }
         }
     }
 
@@ -66,7 +74,7 @@ if(parameters != undefined){
     var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
-    
+
     var UPDATE_1 = (view_box1 == view_box1_ant);
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);

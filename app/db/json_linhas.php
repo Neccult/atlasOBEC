@@ -60,7 +60,7 @@ if (!empty($_GET["var"])) {
     $uf = $_GET["uf"];
     $cad = $_GET["cad"];
     $deg = $_GET["deg"];
-    $ocp = $_GET["ocp"];
+    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
@@ -294,24 +294,28 @@ function getNameSindical($id) {
 }
 
 $linhas = array();
+$anos = array();
 if($eixo == 0 && ($var == 3 || $var == 9)) {
     require_once("EixoUm.php");
-    for ($cad = 1; $cad <= 10; $cad++) {
 
-        foreach (EixoUm::getter_barras($var, $uf, $cad, $deg, $uos) as $tupla) {
+
+    foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
             $id = $tupla->Ano;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
+        $anos[$id]['ano'] = (int)$tupla->Ano;
+        $anos[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
 
-        }
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 0 && $var > 9 ) {
     require_once("EixoUm.php");
     for ($uos = 0; $uos <= 1; $uos++) {
 
-        foreach (EixoUm::getter_barras($var, $uf, $cad, $deg, $uos) as $tupla) {
+        foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
             $id = $tupla->Ano;
             $linhas[$id]['ano'] = (int)$tupla->Ano;

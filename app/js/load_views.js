@@ -28,6 +28,9 @@ VIEWS = {
     },
     "treemap_region": function (box, data){
         create_treemap_region(box, data)
+    },
+    "linhas": function (linhas_box, data){
+        create_linhas(linhas_box, data)
     }
 }
 
@@ -91,6 +94,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+uos_2, function(json){
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
+
 
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
