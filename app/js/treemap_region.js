@@ -143,19 +143,9 @@ function appendTest(text){
 /*==================*/
 
 /* importa o arquivo de cores */
-var colorJSON;
-d3.json('data/colors.json', function(error, data) {
-	if (error) throw error;
-	colorJSON = data;
-})
-
+var COLORS;
 // import pt-br.json file for get the title
-var textJSON;
-d3.json('data/pt-br.json', function(error, data) {
-    if(error) throw error;
-
-    textJSON = data;
-});
+var PT_BR;
 
 var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
@@ -164,17 +154,17 @@ var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
 /* retorna cor do elemento */
 var color = function(colorId){
 	if(eixo == 3) {
-        if(colorJSON.parceiros[colorId]){
-            return colorJSON.parceiros[colorId].color;
+        if(COLORS.parceiros[colorId]){
+            return COLORS.parceiros[colorId].color;
         }else{
-            return colorJSON.parceiros[0].color;
+            return COLORS.parceiros[0].color;
         }
 	}
     else {
-		if(colorJSON.regioes[colorId]){
-            return colorJSON.regioes[colorId].color;
+		if(COLORS.regioes[colorId]){
+            return COLORS.regioes[colorId].color;
         }else{
-            return colorJSON.regioes[0].color;
+            return COLORS.regioes[0].color;
         }
     }
 }
@@ -243,7 +233,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 				.enter().append("g")
 					.attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 					.on("mouseover", function(d){
-                        var title_content = getDataVar(textJSON, eixo, vrv).title;
+                        var title_content = getDataVar(PT_BR, eixo, vrv).title;
                         var title = title_content.replace("<span>", "");
                         title = title.replace("<br>", "");
                         title = title.replace("</span>", "");
@@ -435,7 +425,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 	// creates cadeia's color range array from color.json file
 	var colors = { domain: [], range: [] };
 	if(eixo == 3) {
-        $.each(colorJSON.parceiros, function(i, parceiro){
+        $.each(COLORS.parceiros, function(i, parceiro){
             if (i>0) {
                 colors.domain.push(parceiro.name);
                 colors.range.push(parceiro.color);
@@ -443,7 +433,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
         });
     }
     else {
-		$.each(colorJSON.regioes, function(i, regiao){
+		$.each(COLORS.regioes, function(i, regiao){
             if (i>0) {
                 colors.domain.push(regiao.name);
                 colors.range.push(regiao.color);
