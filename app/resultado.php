@@ -616,5 +616,6 @@
 <script type="text/javascript" src="js/load_barras.js"></script>
 <script type="text/javascript" src="js/load_mapa.js"></script>
 <script type="text/javascript" src="js/load_treemap_scc.js"></script>
+<script type="text/javascript" src="js/load_linhas.js"></script>
 <script type="text/javascript" src="js/load_views.js"></script>
 

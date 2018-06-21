@@ -33,7 +33,16 @@ if(parameters != undefined){
                 update_treemap_scc(box, data)
             } else {
                 $(box+" svg").remove()
-                create_mapa(box, data);
+                create_treemap_scc(box, data);
+            }
+        }
+        ,
+        "linhas": function (box, data, update){
+            if(update){
+                update_linhas(box, data)
+            } else {
+                $(box+" svg").remove()
+                create_linhas(box, data);
             }
         }
     }

@@ -25,6 +25,9 @@ VIEWS = {
     },
     "treemap_scc": function (treemap_box_scc, data){
         create_treemap_scc(treemap_box_scc, data)
+    },
+    "linhas": function (linhas_box, data){
+        create_linhas(linhas_box, data)
     }
 }
 
@@ -83,16 +86,13 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     var view_box3 = data_var.views.view_box3[0]
 
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+uos_1, function(json){
-        console.log("./db/json_"+view_box1+".php?"+URL_PARAM+"uos="+uos_1)
-        console.log(json)
         VIEWS[view_box1].call(this, "#view_box", json);
     })
 
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+uos_2, function(json){
-        console.log("./db/json_"+view_box2+".php?"+URL_PARAM+"uos="+uos_2)
-        console.log(json)
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
+
 
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
