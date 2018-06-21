@@ -25,12 +25,17 @@ VIEWS = {
     },
     "treemap_scc": function (treemap_box_scc, data){
         create_treemap_scc(treemap_box_scc, data)
+    },
+    "treemap_region": function (box, data){
+        create_treemap_region(box, data)
     }
 }
 
 brasil_setor = []
 
-
+$.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+    brasil_setor = JSON.parse(dado)
+})
 
 //NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
@@ -52,9 +57,6 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
     });
 });
 
-$.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-    brasil_setor = JSON.parse(dado)
-})
 
 if(parameters.eixo == 0){
     if(parameters.var >= 10){
@@ -78,19 +80,15 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
         
-    var view_box1 = data_var.views.view_box1[0]
+    var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
 
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+uos_1, function(json){
-        console.log("./db/json_"+view_box1+".php?"+URL_PARAM+"uos="+uos_1)
-        console.log(json)
         VIEWS[view_box1].call(this, "#view_box", json);
     })
 
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+uos_2, function(json){
-        console.log("./db/json_"+view_box2+".php?"+URL_PARAM+"uos="+uos_2)
-        console.log(json)
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 

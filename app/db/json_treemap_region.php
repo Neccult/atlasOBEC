@@ -15,18 +15,18 @@ if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
 
-	$atc = $_GET["atc"];
-	$cad = $_GET["cad"];
-	$deg = $_GET["deg"];
-    $ocp = $_GET["ocp"];
+    $atc    =   0;
+    $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;
+    $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
+    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
-    $subdeg   =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subdesagregação ==*/
-	$ano = $_GET["ano"];
-    $eixo = $_GET['eixo'];
+    $subdeg =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subdesagregação ==*/
+	  $ano    = $_GET["ano"];
+    $eixo   = $_GET['eixo'];
 }
 else{
 	$var = 1;

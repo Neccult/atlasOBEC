@@ -350,8 +350,8 @@ function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, pe
     }
 }
 
-function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
-
+function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
+    
     index_ano = dados.key.indexOf(parameters.ano)
     if(eixo == 0){
 
@@ -393,9 +393,9 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
             if(parameters.ano != null) {
                 dados.valor = dados.value[index_ano];
 
-                if(url['uos'] == 0){
+                if(uos == 0){
                     setIntegerValueData(dados, eixo, vrv);
-                } else if(url['uos'] == 1){
+                } else if(uos == 1){
                     setPercentValueData(dados, eixo, vrv);
                 }
 

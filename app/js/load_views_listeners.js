@@ -1,6 +1,7 @@
 
 if(parameters != undefined){
-    data_var_ant = getDataVar(PT_BR, parameters.eixo, parameters.var);
+    var data_var_ant = getDataVar(PT_BR, parameters.eixo, parameters.var);
+    var view_box1_ant = data_var_ant.views.view_box1[parameters.chg];
 
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
@@ -33,7 +34,15 @@ if(parameters != undefined){
                 update_treemap_scc(box, data)
             } else {
                 $(box+" svg").remove()
-                create_mapa(box, data);
+                create_treemap_scc(box, data);
+            }
+        },
+        "treemap_region": function (box, data, update){
+            if(update){
+                update_treemap_region(box, data)
+            } else {
+                $(box+" svg").remove()
+                create_treemap_region(box, data);
             }
         }
     }
@@ -54,11 +63,11 @@ if(parameters != undefined){
 
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
 
-    var view_box1 = data_var.views.view_box1[0]
+    var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
-
-    var UPDATE_1 = (view_box1 == data_var_ant.views.view_box1[0]);
+    
+    var UPDATE_1 = (view_box1 == view_box1_ant);
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
     
