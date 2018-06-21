@@ -59,9 +59,7 @@ if(parameters != undefined){
     var view_box3 = data_var.views.view_box3[0]
 
     var UPDATE_1 = (view_box1 == data_var_ant.views.view_box1[0]);
-
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
-
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
     
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+uos_1, function(json){

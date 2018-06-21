@@ -367,7 +367,6 @@ function create_bars(barras_box, data){
 
 function update_bars(barras_box, data){
     var svg_barras = d3.select(barras_box+" svg g");
-
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
@@ -381,9 +380,9 @@ function update_bars(barras_box, data){
     var uos = 0
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 35},
-    width = chartWidth - margin.left - margin.right,
-    height = chartHeight - margin.top - margin.bottom;
+    var margin = {top: 20, right: 20, bottom: 30, left: 35};
+    var width = chartWidth - margin.left - margin.right;
+    var height = chartHeight - margin.top - margin.bottom;
 
     if(vrv == 3 && eixo == 0){
         delete data['2007'];
@@ -575,9 +574,11 @@ function update_bars(barras_box, data){
                 .rangeRound([0, width])
                 .padding(0.1);
 
+    
     var y = d3.scaleLinear()
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
+    
 
     var rect = svg_barras.selectAll("rect")
                          .data(dados.value) 
@@ -587,7 +588,7 @@ function update_bars(barras_box, data){
     rect.enter().append("rect").attr("x", function(d, i){
         return x(dados.key[i]);
     })
-
+    
     var rect = svg_barras.selectAll("rect")
 
     rect.attr("data-legend", function(d, i, obj) { return dados.key[i]; })
@@ -678,12 +679,12 @@ function update_bars(barras_box, data){
                     .scale(y)
                     .tickFormat(formatYAxis);
 
-        d3.select(".eixo-x")
+        d3.select(barras_box+".eixo-x")
             .transition()
             .duration(400)
             .call(xAxis);
 
-        d3.select(".eixo-y")
+        d3.select(barras_box+".eixo-y")
             .transition()
             .duration(400)
             .call(yAxis);
