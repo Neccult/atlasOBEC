@@ -30,9 +30,6 @@ function create_linhas(linhas_box, data){
             keys.push(key);
     });
 
-
-
-
     // append the svg obgect to the body of the page
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
@@ -85,7 +82,6 @@ function create_linhas(linhas_box, data){
     x.domain(d3.extent(data, function(d) { return d.ano; }));
 
     var tooltipInstance = tooltip.getInstance();
-
 
     var min = getMin(valoresBrutos);
     var max = getMax(valoresBrutos)
@@ -157,8 +153,6 @@ function create_linhas(linhas_box, data){
             }
         })
 
-
-
     d3.selectAll('.x g').each(function (d, index) {
         transform = d3.select(this).attr('transform')
         transform = transform.replace('translate(', '');
@@ -185,6 +179,11 @@ function update_linhas(linhas_box, data){
 
 
     getBoxXY();
+
+
+
+    coordsAxisX = [];
+    coordsAxisY = [];
 
     var svg = d3.select(linhas_box).select("svg")
         .select("g")
@@ -227,7 +226,7 @@ function update_linhas(linhas_box, data){
     var tooltipInstance = tooltip.getInstance();
 
     var min = getMin(valoresBrutos);
-    var max = getMax(valoresBrutos)
+    var max = getMax(valoresBrutos);
 
     if(!(parameters.eixo == 0 && parameters.var > 9 || parameters.eixo == 1 && parameters.var == 6)){
         if(min >= 0)
@@ -241,6 +240,11 @@ function update_linhas(linhas_box, data){
         .data(dados)
         .transition().duration(800)
         .attr("d", valueline);
+
+    // Add the Y Axis
+    svg.select(".y")
+        .transition().duration(800)
+        .call(d3.axisLeft(y))
 
     svg.selectAll("path")
         .on("mouseover", function (d) {
@@ -268,6 +272,23 @@ function update_linhas(linhas_box, data){
                 d3.selectAll("path").style("opacity", 1)
             }
         })
+
+    d3.selectAll('.x g').each(function (d, index) {
+        transform = d3.select(this).attr('transform')
+        transform = transform.replace('translate(', '');
+
+        x = parseFloat(transform.split(',')[0]);
+        y = parseFloat(transform.split(',')[1].replace(')', ''));
+        coordsAxisX.push({'ano': anos[index], 'x': x, 'y': y})
+    })
+    d3.selectAll('.y g').each(function (d, index) {
+        transform = d3.select(this).attr('transform')
+        transform = transform.replace('translate(', '');
+
+        x = parseFloat(transform.split(',')[0]);
+        y = parseFloat(transform.split(',')[1].replace(')', ''));
+        coordsAxisY.push({'ano': anos[index], 'x': x, 'y': y})
+    })
 }
 
 
