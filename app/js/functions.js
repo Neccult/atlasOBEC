@@ -390,7 +390,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
             }
         }
         else if(vrv > 9){
-            if(ano != null) {
+            if(parameters.ano != null) {
                 dados.valor = dados.value[index_ano];
 
                 if(url['uos'] == 0){
@@ -416,7 +416,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor) {
         // first_year = Number(dados.key[0]);
         index_ano = dados.key.indexOf(url['ano'])
         if(vrv > 11){
-            if(ano != null) {
+            if(parameters.ano != null) {
                 dados.valor = dados.value[index_ano];
                 if(url['slc'] == 0){
                     if(url['uos'] == 0){
