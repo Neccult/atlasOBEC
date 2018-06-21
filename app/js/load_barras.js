@@ -679,12 +679,13 @@ function update_bars(barras_box, data){
                     .scale(y)
                     .tickFormat(formatYAxis);
 
-        d3.select(barras_box+".eixo-x")
+        d3.select(barras_box+" g.eixo-x")
             .transition()
             .duration(400)
             .call(xAxis);
 
-        d3.select(barras_box+".eixo-y")
+        console.log(d3.select(barras_box+" g.eixo-y"))
+        d3.select(barras_box+" g.eixo-y")
             .transition()
             .duration(400)
             .call(yAxis);
