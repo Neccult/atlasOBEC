@@ -46,22 +46,7 @@ function ready(json){
         .style("fill", function(d) { return color(d.data.tipo); })
         .style("stroke", "none");
 
-    /*g.append("text")
-        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-        .attr("dy", ".40em")
-        .attr("dx", -radius/6)
-        .text(function(d) { 
-            if(vrv == 3 && eixo == 3 && d.data.valor != 0){
-                return formatTextVrv(d.data.valor, 3, vrv);
-            }
-            if(eixo == 2 && vrv >= 18)
-                return;
-            if(d.data.percent != 0) 
-                return percentFormat(d.data.percent) 
-            })
-        .style("font-family", "arial")
-        .style("fill", "#fff")
-        .style("font-size", radius/10)*/
+    
 
         d3.selectAll(".arc")
         .on("mouseover", function(d){

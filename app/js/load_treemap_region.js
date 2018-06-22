@@ -1,22 +1,25 @@
-function create_treemap_region(barras_box, data){
-    var width = $(barras_box).width(); /* dimensão da tela */
-    var height = $(barras_box).height();
+function create_treemap_region(treemap_box, data){
+    var width = $(treemap_box).width(); /* dimensão da tela */
+    var height = $(treemap_box).height();
     /* cria svg */
-    var svg = d3.select(barras_box).append("svg");
+    var svg_treemap_region = d3.select(treemap_box).append("svg");
+
+    var vrv = parameters.var;
+    var cad = parameters.cad;
     /*=== dimensões do gráfico ===*/
     if(width>768){
-        svg.attr('width',width);
-        svg.attr('height', height/1.5);
-        svg.style('padding-bottom',"30px");
+        svg_treemap_region.attr('width',width);
+        svg_treemap_region.attr('height', height/1.5);
+        svg_treemap_region.style('padding-bottom',"30px");
     }
     else{
-        svg.attr('width', width-20);
-        svg.attr('height', height);
+        svg_treemap_region.attr('width', width-20);
+        svg_treemap_region.attr('height', height);
     }
 
-    svg = d3.select("svg");
-	width = svg.attr("width"),
-    height = svg.attr("height");
+    svg_treemap_region = d3.select("svg");
+	width = svg_treemap_region.attr("width"),
+    height = svg_treemap_region.attr("height");
     
     var fonteTransform = "translate("+(width-120)+","+(height+100)+")";
     var valoresTransform = "translate(10,"+(height+100)+")";
@@ -75,7 +78,7 @@ function create_treemap_region(barras_box, data){
     var integerValue = 0;
     var percentValue = 0;
     
-    var cell = svg.selectAll("g")
+    var cell = svg_treemap_region.selectAll("g")
 				.data(root.leaves())
 				.enter().append("g")
                 .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
@@ -150,7 +153,7 @@ function create_treemap_region(barras_box, data){
         });
         
     var isValueZero = true;
-	svg.selectAll("g")
+	svg_treemap_region.selectAll("g")
         .data(root.leaves())
         .attr("display", function(d){
             var size = parseFloat(d.data.size);
@@ -161,10 +164,10 @@ function create_treemap_region(barras_box, data){
 
 	// testa se o valor de size é zero
 	if (isValueZero) {
-		svg.selectAll("g")
+		svg_treemap_region.selectAll("g")
 		.attr("display", "none");
 
-		svg.append("g")
+		svg_treemap_region.append("g")
 			.attr("class", "no-info")
 			.append("text")
 			.text("Não há dados sobre essa desagregação")
@@ -179,8 +182,97 @@ function create_treemap_region(barras_box, data){
 
 }
 
-function update_treemap_region(){
+function update_treemap_region(treemap_box, data){
+    var width = $(treemap_box).width(); /* dimensão da tela */
+    var height = $(treemap_box).height();
+
+    var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
+	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
+	format = d3.format(",d");
+
+    var color = function(colorId){
+        if(parameters.eixo == 3) {
+            if(COLORS.parceiros[colorId]){
+                return COLORS.parceiros[colorId].color;
+            }else{
+                return COLORS.parceiros[0].color;
+            }
+        }
+        else {
+            if(COLORS.regioes[colorId]){
+                return COLORS.regioes[colorId].color;
+            }else{
+                return COLORS.regioes[0].color;
+            }
+        }
+    }
+
+    var treemap = d3.treemap()
+                    .tile(d3.treemapResquarify)
+                    .size([width, height])
+                    .round(true)
+                    .paddingInner(1);
+
+    var totais = brasil_setor;
+
+    var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };
+
+	var root = d3.hierarchy(data)
+				.eachBefore(function(d) {
+					attachColor(d);
+					d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
+				})
+				.sum(sumBySize)
+				.sort(function(a, b) { return b.height - a.height || b.value - a.value; });
+
+    treemap(root);
+
+    var svg_treemap_region = d3.select(treemap_box+" svg");
+
+    var cell = svg_treemap_region.selectAll("g")
+                                .data(root.leaves())
+                                .append("g");
+
+    cell.exit().remove();
     
+    cell.enter().append("g")
+                .attr("x", function(d, i){
+                    return x(dados.key[i]);
+                }).append("g")
+                .style("cursor", "pointer")
+                .attr("transform", function(d) { 
+                    return "translate(" + d.x0 + "," + d.y0 + ")"; 
+                })
+                .append("rect")
+    
+    cell = svg_treemap_region.selectAll("g")
+                            .data(root.leaves())
+                            .attr("transform", function(d) { 
+                                return "translate(" + d.x0 + "," + d.y0 + ")"; 
+                            });
+
+    cell.attr("data-legend", function(d) {
+            return ufId(d.data.name); 
+        })
+        .attr("data-integer", function(d) { 
+            return d.data.size; 
+        })
+        .attr("data-percent", function(d) { 
+            return d.data.size/root.value; 
+        })
+        .attr("id", function(d) { 
+            return d.data.id; 
+        })
+        .attr("width", function(d) { 
+            return d.x1 - d.x0; 
+        })
+        .attr("height", function(d) {
+            return d.y1 - d.y0; 
+        })
+        .attr("fill", function(d){
+            return color(d.data.colorId);
+        });
+
 }
 
 function nodeWidth(d){ return d.x1 - d.x0; }

@@ -267,28 +267,28 @@ function create_bars(barras_box, data){
             })
             .attr("y", function (d) {
                 var barHeight = y(d);
-                    var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
-                    var isValueNegative = d < 0;
+                var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
+                var isValueNegative = d < 0;
 
-                    // TEM VALOR NEGATIVO
-                    if (isValueNegative) {
-                        // NÚMERO NEGATIVO
-                        if (isValueNegative)
-                            return zeroPosition;
-                        // S barra for muito pequena
-                        if (barHeight == zeroPosition)
-                            return zeroPosition - 5;
+                // TEM VALOR NEGATIVO
+                if (isValueNegative) {
+                    // NÚMERO NEGATIVO
+                    if (isValueNegative)
+                        return zeroPosition;
+                    // S barra for muito pequena
+                    if (barHeight == zeroPosition)
+                        return zeroPosition - 5;
 
-                            return y(0);
-                    }
+                        return y(0);
+                }
 
-                    barHeight = Math.abs(height - barHeight);
+                barHeight = Math.abs(height - barHeight);
 
-                    // BARRA PEQUENA
-                    if (barHeight <= minBarHeight)
-                        return height - minBarHeight;
+                // BARRA PEQUENA
+                if (barHeight <= minBarHeight)
+                    return height - minBarHeight;
 
-                    return y(d);
+                return y(d);
             })
             .attr("width", x.bandwidth())
             .attr("height", function (d) {
@@ -628,11 +628,11 @@ function update_bars(barras_box, data){
 
             // TEM VALOR NEGATIVO
             var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-            var isValueZero = y(d) === zeroPosition;
             
+            var isValueZero = y(d) == zeroPosition;
             if (isValueZero)
                 return minBarHeight;
-                
+
             return  Math.abs(y(d) - zeroPosition);
 
         }).attr("fill", function (d,i ) {
