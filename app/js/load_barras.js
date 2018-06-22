@@ -265,6 +265,20 @@ function create_bars(barras_box, data){
             .enter().append("rect")
             .attr("class", "bar")
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
+            .attr("data-color", function(d, i, obj) { 
+                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+                    if(deg == 0)
+                        return color(dados.key[i])
+                    else
+                        return color(cad)
+                }
+                else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+                    return color(0);
+                }
+                else {
+                    return color(cad);
+                }
+            })
             .attr("data-value", function(d) {   return d; })
             .attr("x", function (d, i) {
                 return x(dados.key[i]);
@@ -668,6 +682,20 @@ function update_bars(barras_box, data){
                 return color(0);
             }
             else{
+                return color(cad);
+            }
+        })
+        .attr("data-color", function(d, i, obj) { 
+            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+                if(deg == 0)
+                    return color(dados.key[i])
+                else
+                    return color(cad)
+            }
+            else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+                return color(0);
+            }
+            else {
                 return color(cad);
             }
         })
