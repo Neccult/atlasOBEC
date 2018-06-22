@@ -49,7 +49,11 @@ function create_treemap_region(treemap_box, data){
 
     var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };
 
-	root_region = d3.hierarchy(data)
+
+    var tooltipInstance = tooltip.getInstance();
+
+
+    root_region = d3.hierarchy(data)
 				.eachBefore(function(d) {
 					attachColor(d);
 					d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
@@ -84,6 +88,16 @@ function create_treemap_region(treemap_box, data){
         .append("use")
         .attr("xlink:href", function(d) { return "#" + d.data.id; });
 
+
+    cell_region
+        .on("mouseover", function(d){
+            loadTooltip(d, tooltipInstance)
+        })
+        .on("click", function(d) {
+            treemapRegionClick(d, root_region);
+        })
+        .style("cursor", "pointer");
+
 	var titleTextElement = cell_region.append("text")
 		.text(function(d) {return d.data.name; })
 		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
@@ -110,7 +124,7 @@ function create_treemap_region(treemap_box, data){
                     return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
 				}
 				else if(vrv == 1){
-					return formatDecimalLimit((d.data.size/totais[ano])*100, 2) + '%';
+					return formatDecimalLimit((d.data.size/totais[parameters.ano])*100, 2) + '%';
 				}
                 else {
                     return formatDecimalLimit(d.data.percentual*100, 2) + '%';
@@ -212,6 +226,19 @@ function update_treemap_region(treemap_box, data){
         .attr("width", function(d) { return d.x1 - d.x0; })
         .attr("height", function(d) { return d.y1 - d.y0; })
 
+    var tooltipInstance = tooltip.getInstance();
+
+    cell_region
+        .on("mouseover", function(d){
+            loadTooltip(d, tooltipInstance)
+        })
+        .on("click", function(d) {
+            treemapRegionClick(d, root_region);
+        })
+        .on("mouseout", tooltipInstance.hideTooltip)
+        .style("cursor", "pointer");
+
+
 
     var percentageTextElement = cell_region.select(".percentage").select('tspan')
         .style("opacity", 0)
@@ -235,7 +262,7 @@ function update_treemap_region(treemap_box, data){
                         return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
                     }
                     else if(vrv == 1){
-                        return formatDecimalLimit((d.data.size/totais[ano])*100, 2) + '%';
+                        return formatDecimalLimit((d.data.size/totais[parameters.ano])*100, 2) + '%';
                     }
                     else {
                         return formatDecimalLimit(d.data.percentual*100, 2) + '%';
@@ -377,4 +404,79 @@ function ufId(uf) {
         case "DF":
             return 53;
 	}
+}
+
+function treemapRegionClick(d, root_region){
+    updateWindowUrl('uf', ufId(d.data.name));
+    updateIframe()
+}
+
+function treemapRegionMouseover(d){
+    console.log("salve")
+}
+
+function loadTooltip(d, tooltipInstance){
+
+    var intergerValue = 0;
+    var percentValue = 0;
+
+    var title_content = getDataVar(PT_BR, parameters.eixo, parameters.var).title;
+    var title = title_content.replace("<span>", "");
+    title = title.replace("<br>", "");
+    title = title.replace("</span>", "");
+    if(parameters.var === 2) {
+        integerValue = d.data.size;
+        tooltipInstance.showTooltip(d, [
+            ["title", d.data.name],
+            ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)]
+        ]);
+    }
+    else if(parameters.var === 4 || parameters.var === 5 || parameters.var === 6 || parameters.var === 7 || parameters.var === 8) {
+        if(cad !== 0) {
+
+            integerValue = d.data.size;
+            percentValue = d.data.size/root.value;
+            tooltipInstance.showTooltip(d, [
+                ["title", d.data.name],
+                ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
+                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+            ]);
+        }
+        else {
+            integerValue = d.data.size;
+            percentValue = d.data.size/root.value;
+            tooltipInstance.showTooltip(d, [
+                ["title", d.data.name],
+                ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
+                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+            ]);
+        }
+    }
+    else if(parameters.var == 1){
+        tooltipInstance.showTooltip(d, [
+            ["title", d.data.name],
+            ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
+            ["", formatDecimalLimit(d.data.size/brasil_setor[parameters.ano]*100, 2) + "%"]
+        ]);
+    }
+    else{
+        if(cad !== 0) {
+            integerValue = d.data.size;
+            percentValue = d.data.size/root.value;
+            tooltipInstance.showTooltip(d, [
+                ["title", d.data.name],
+                ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
+                ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"]
+            ]);
+        }
+        else {
+            integerValue = d.data.size;
+            percentValue = d.data.size/root.value;
+            tooltipInstance.showTooltip(d, [
+                ["title", d.data.name],
+                ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
+                ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"]
+            ]);
+        }
+    }
 }
