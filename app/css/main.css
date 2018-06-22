@@ -994,7 +994,7 @@ article.results-article div.results-content{
 
 .bread-select, .bread-eixo{
 	float: left;
-	background-color: white;
+	background-color: #f0f0f0;
 	background-size: 10px;
 	background-position: right center;
 	background-repeat: no-repeat;
@@ -1044,7 +1044,7 @@ article.results-article div.results-content{
 	top: 0;
 	left: 0;
 	z-index: 99;
-	background-color: #f0f0f0;
+	background-color: white;
 }
 .bread-container{
 	width: 70%;
