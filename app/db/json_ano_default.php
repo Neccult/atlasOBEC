@@ -18,12 +18,15 @@
             break;
         case 1:
             require_once('EixoDois.php');
-            foreach(EixoDois::getter_most_recent_year() as $result){
 
+            foreach(EixoDois::getter_most_recent_year() as $result){
                 if(!isset($json[$result->Numero]))
                     $json[$result->Numero] = array();
                     
-                $json[$result->Numero][(string)$result->idOcupacao] = $result->Ano;
+                if(!isset($json[$result->Numero][$result->idOcupacao]))
+                    $json[$result->Numero][$result->idOcupacao] = array();
+                    
+                array_push($json[$result->Numero][$result->idOcupacao],$result->Ano);
             }
             break;
         case 2:

@@ -66,10 +66,6 @@ function controlVar(clickVar){
 
     }
 
-
-
-
-
 }
 
 function controlVarPage(clickVar){
@@ -80,7 +76,7 @@ function controlVarPage(clickVar){
     switch (newHash.substring(1)){
         case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
                                     break;
-        case "mercado":         urlString = 'page.php?var=1&uf=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "mercado":         urlString = 'page.php?var=1&uf=0&chg=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
         case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
                                      break;
@@ -109,7 +105,7 @@ function getAnoDefault(eixo_atual){
             else{
                 index_ocp = url['ocp']
             }
-            url['ano'] = anos_default[url['var']][index_ocp];
+            url['ano'] = d3.max(anos_default[url['var']][index_ocp]);
             break;
 
         case 2:
@@ -1277,7 +1273,7 @@ $(document).ready(function(){
                 controlFilter('0', 'deg');
                 url['cad'] = 0;
 
-                url['ano'] = anos_default[url['var']][1];
+                url['ano'] = d3.max(anos_default[url['var']][1]);
 
                 updateWindowUrl('slc', url['slc'])
                 updateWindowUrl('deg', url['deg'])
