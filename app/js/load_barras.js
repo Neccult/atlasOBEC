@@ -11,21 +11,25 @@ function create_bars(barras_box, data){
     var prt = 0
     var ocp = 0
     var uos = 0
-    
-    
+
+
     var corEixo = COLORS['eixo'][eixo].color;
-    
+
     var color = function (colorId) {
+
         if (COLORS.cadeias[colorId]) {
             if(colorId){
-                return COLORS.cadeias[colorId].color;
-
+                if(colorId == 0){
+                    return corEixo[1]
+                }
+                else{
+                    return COLORS.cadeias[colorId].color;
+                }
             }
-            else {
+            else{
                 return corEixo[2];
             }
-        }
-        else {
+        } else {
             return COLORS.cadeias[0].color;
         }
     }
@@ -388,6 +392,25 @@ function update_bars(barras_box, data){
         delete data['2007'];
     }
 
+    var color = function (colorId) {
+
+        if (COLORS.cadeias[colorId]) {
+            if(colorId){
+                if(colorId == 0){
+                    return corEixo[1]
+                }
+                else{
+                    return COLORS.cadeias[colorId].color;
+                }
+            }
+            else{
+                return corEixo[2];
+            }
+        } else {
+            return COLORS.cadeias[0].color;
+        }
+    }
+
     Object.keys(data).forEach(function (key) {
 
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
@@ -593,7 +616,6 @@ function update_bars(barras_box, data){
 
     rect.attr("data-legend", function(d, i, obj) { return dados.key[i]; })
         .attr("data-value", function(d) {   return d; })
-        .attr("data-color", '')
         .attr("x", function (d, i) {
             return x(dados.key[i]);
         }).attr("y", function (d) {
@@ -757,3 +779,4 @@ function destacaBarra(barras_box, barraId, stacked = false) {
         }
     });
 }
+
