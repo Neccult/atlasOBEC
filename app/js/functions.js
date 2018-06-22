@@ -351,8 +351,8 @@ function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, pe
 }
 
 function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
-    
-    index_ano = dados.key.indexOf(parameters.ano)
+    index_ano = dados.key.indexOf(parameters.ano);
+
     if(eixo == 0){
 
         first_year = Number(dados.key[0]);
@@ -414,7 +414,6 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
     }
     else if(eixo == 1){
         // first_year = Number(dados.key[0]);
-        index_ano = dados.key.indexOf(url['ano'])
         if(vrv > 11){
             if(parameters.ano != null) {
                 dados.valor = dados.value[index_ano];
@@ -438,26 +437,28 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
             }
         }
-        else if(url['uf'] == 0 && (url['cad'] == 0 || url['ocp'] == 3)){
+        else if(parameters.uf == 0 && (parameters.cad == 0 || parameters.ocp == 3)){
             ocp_real = 3
-            if(url['ocp'] > 0){
+            if(parameters.ocp > 0){
                 ocp_real = $('.bread-select[data-id=ocp]').val()
             }
             if(ocp_real == 3)
-                setPercentValueData({percentual:1 , taxa: dados.taxa[url['ano']-2007]}, eixo, vrv);
-            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+                setPercentValueData({percentual:1 , taxa: dados.taxa[index_ano]}, eixo, vrv);
+            dados.valor = dados.value[index_ano];
 
-            if(url['var'] == 2 && url['ocp'] == 0)
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]*100;
+            if(vrv == 2 && parameters.ocp == 0)
+                dados.valor = dados.value[index_ano]*100;
 
             setIntegerValueData(dados, eixo, vrv);
 
         }
         else {
-            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+            dados.valor = dados.value[index_ano];
 
-            if(url['var'] == 2 && url['ocp'] == 0)
-                dados.valor = dados.value[dados.key.indexOf(url['ano'])]*100;
+            if(vrv == 2 && parameters.ocp == 0){
+                dados.valor = dados.value[index_ano]*100;
+            }
+            console.log(index_ano, eixo, vrv)
             setIntegerValueData(dados, eixo, vrv);
 
         }
