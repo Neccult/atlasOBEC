@@ -564,13 +564,15 @@ video::-webkit-media-controls {
 	text-align: left;
 	font-size: 8px;
 	width: 85%;
-	height: 60%;
+	height: 70%;
 	padding-top: 5%;
 	margin: auto;
 	justify-content: space-around;
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 2px;
+
+
 }
 
 #title-view-leg-scc-donut{
@@ -610,7 +612,7 @@ video::-webkit-media-controls {
 
 #containerTree #menu-view{
 	float: right;
-	width: 20%;
+	width: 19%;
 }
 
 /*==== menu círculos ====*/
@@ -820,6 +822,11 @@ article.results-article div.results-content{
 	font-family: Lato Regular;
 }
 
+#menu-view .view-title-leg{
+	margin-top: 0px;
+	font-size: 18px;
+}
+
 .view-title-leg{
 	padding: 20px 0 0 0;
 	text-align: center;
@@ -829,8 +836,13 @@ article.results-article div.results-content{
 
 #menu-view, #menu-view-donut {
 	float: left;
-	width: 50%;
-	margin-bottom: 16px;
+	width: 40%;
+	margin-top: 16px;
+	border: 3px #f0f0f0 solid;
+	border-radius: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 2px;
 }
 
 svg text{
@@ -1739,6 +1751,7 @@ button.opt.active{
 
 		display: flex;
 		flex-flow: column wrap;
+
 	}
 
 	#title-view-leg-scc span{
