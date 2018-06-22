@@ -10,6 +10,8 @@ PT_BR = [];
 COLORS = [];
 URL_PARAM = $.param(parameters);
 br_states = []
+anos_default = []
+
 VIEWS = {
     "barras": function (barras_box, data){
         create_bars(barras_box, data)
@@ -49,7 +51,16 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
         $(this.options).each(function(){
             $(this).remove();
         })
-        dummy = anos_default[parameters.var];
+        if(parameters.eixo == 1){
+            if(parameters.ocp > 0){
+                var ocp = 1
+            } else {
+                var ocp = 0;
+            }
+            dummy = anos_default[parameters.var][ocp]
+        } else {
+            dummy = anos_default[parameters.var];
+        }
         dummy.reverse().forEach(function(d){
             $(selectOp).append($('<option>', {
                 value: d,
@@ -61,17 +72,31 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
 });
 
 
-if(parameters.eixo == 0){
-    if(parameters.var >= 10){
-        uos_1 = '0'
-        uos_2 = '1'
-        uos_3 = '0'
-    } else {
-        uos_1 = '0'
-        uos_2 = '0'
-        uos_3 = '0'
-    }
+switch(parameters.eixo){
+    case 0:
+        if(parameters.var >= 10){
+            uos_1 = '0'
+            uos_2 = '1'
+            uos_3 = '0'
+        } else {
+            uos_1 = '0'
+            uos_2 = '0'
+            uos_3 = '0'
+        }
+        break;
+    case 1:
+        if(parameters.var > 11){
+            uos_1 = '0'
+            uos_2 = '1'
+            uos_3 = '0'
+        } else {
+            uos_1 = '0'
+            uos_2 = '0'
+            uos_3 = '0'
+        }
 }
+    
+
 
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){

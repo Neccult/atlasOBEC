@@ -586,6 +586,7 @@
 
     <?php if ($eixo == "mercado") {?>
     url['slc'] = "<?php echo $slc; ?>";
+    url['chg'] = "<?php echo $chg; ?>";
     url['deg'] = "<?php echo $deg; ?>";
     url['subdeg'] = "<?php echo $subdeg; ?>";
     <?php } ?>

@@ -100,7 +100,7 @@ class EixoDois {
     public static function getter_most_recent_year(){
         self::connect();
 
-        $query = "SELECT MAX(Ano) AS Ano, Numero, idOcupacao FROM `Eixo_2` WHERE `idUF` = 0 AND `idPorte` = 0 AND `idEscolaridade` = 0 AND `idEtinia` = 0 AND `idIdade` = 0 AND `Formalidade` = 0 AND `Previdencia` = 0 AND `Sindical` = 0 AND `Sexo` is NULL GROUP BY Numero, idOcupacao";
+        $query = "SELECT DISTINCT Ano, Numero, idOcupacao FROM `Eixo_2` WHERE `idUF` = 0 and (idOcupacao = 0 OR idOcupacao = 1)";
         
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        
