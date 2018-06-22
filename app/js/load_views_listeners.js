@@ -7,11 +7,41 @@ if(parameters != undefined){
         parameters[key] = value;
     })
 
+  
     
-
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
     URL_PARAM = $.param(parameters);
+      
+    $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+        brasil_setor = JSON.parse(dado)
+    })
+
+    
+    $('select[data-id=ano]').each(function(){
+        selectOp = this;
+        $(this.options).each(function(){
+            $(this).remove();
+        })
+        if(parameters.eixo == 1){
+            if(parameters.ocp > 0){
+                var ocp = 1
+            } else {
+                var ocp = 0;
+            }
+            dummy = anos_default[parameters.var][ocp]
+        } else {
+            dummy = anos_default[parameters.var];
+        }
+        dummy.reverse().forEach(function(d){
+            $(selectOp).append($('<option>', {
+                value: d,
+                text: d
+            }))
+        })
+        $(this).val(parameters.ano);
+    });
+    
     UPDATE_VIEWS = {
         "barras": function (box, data, update){
             if(update){
@@ -68,7 +98,7 @@ if(parameters != undefined){
     }
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
-
+    
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
 
     var view_box1 = data_var.views.view_box1[parameters.chg]

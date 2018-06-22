@@ -1248,7 +1248,7 @@ $(document).ready(function(){
                 $(this).addClass("active");
                 $('#ocupacao').removeClass("active");
 
-                url['ano'] = anos_default[url['var']][0];
+                url['ano'] = d3.max(anos_default[url['var']][0]);
 
                 updateWindowUrl('slc', url['slc'])
                 updateWindowUrl('deg', url['deg'])

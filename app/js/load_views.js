@@ -10,6 +10,7 @@ PT_BR = [];
 COLORS = [];
 URL_PARAM = $.param(parameters);
 br_states = []
+anos_default = []
 
 VIEWS = {
     "barras": function (barras_box, data){
@@ -51,7 +52,12 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
             $(this).remove();
         })
         if(parameters.eixo == 1){
-            dummy = anos_default[parameters.var][parameters.ocp]
+            if(parameters.ocp > 0){
+                var ocp = 1
+            } else {
+                var ocp = 0;
+            }
+            dummy = anos_default[parameters.var][ocp]
         } else {
             dummy = anos_default[parameters.var];
         }
