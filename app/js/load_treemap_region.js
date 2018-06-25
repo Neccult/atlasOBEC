@@ -243,10 +243,23 @@ function update_treemap_region(treemap_box, data){
     var percentageTextElement = cell_region.select(".percentage").select('tspan')
         .style("opacity", 0)
 
+    var titleTextElement = cell_region.select("text")
+        .style("opacity", 0)
+
+
+
     setTimeout(function () {
 
         formatTreemapText(treemap_box);
 
+        titleTextElement = cell_region.select("text")
+            .text(function(d) {return d.data.name; })
+            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+            .attr("class", "title")
+            .attr("x", 10)
+            .attr("y", 19)
+            .attr("text-anchor", "start")
+            .style("opacity", 1);
 
 
         percentageTextElement
