@@ -457,7 +457,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
             if(vrv == 2 && parameters.ocp == 0){
                 dados.valor = dados.value[index_ano]*100;
             }
-            console.log(index_ano, eixo, vrv)
+            // console.log(index_ano, eixo, vrv)
             setIntegerValueData(dados, eixo, vrv);
 
         }
