@@ -119,6 +119,8 @@ function create_mapa(mapa_box, mapa){
                     if(window.innerWidth <= 1199)
                         return;
                     mapaClick(svg_mapa, dict, d)
+                    destacaPais(svg_mapa, parameters.uf);
+
                 })
                 .style("cursor", "pointer");
     
