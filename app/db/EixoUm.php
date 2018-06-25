@@ -418,7 +418,7 @@ class EixoUm {
         }
 
         self::connect();
-        if(($deg == 0 || $cad != 0) || $var == 1 || $var == 3 || $var == 2) {
+        if($var == 1 || $var == 3 || $var == 2) {
 
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
@@ -439,6 +439,28 @@ class EixoUm {
             }
 
 
+        }
+        else if($var >= 10){
+
+            $query = "SELECT * FROM ".self::$table." AS ex"
+                ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
+                ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
+                ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
+                ." WHERE ex.Numero = ?";
+
+
+            $stmt = mysqli_stmt_init(self::$conn);
+            if ($stmt->prepare($query)) {
+                $stmt->bind_param(
+                    'ssss',
+                    $ufs,
+                    $uos,
+                    $deg,
+                    $var
+                );
+                $stmt->execute();
+                $allObjects = self::fetch_results($stmt);
+            }
         }
 
         self::disconnect();

@@ -1,7 +1,7 @@
 
 
 function create_mapa(mapa_box, mapa){
-    
+
     var windowWidth = width_box(mapa_box);
     var legendaWidth = width_box(mapa_box);
     var shapeWidth = 30;

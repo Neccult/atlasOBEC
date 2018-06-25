@@ -450,7 +450,7 @@
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -478,7 +478,7 @@
 				"views": {
 					"view_box1": ["barras"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
@@ -503,7 +503,7 @@
 				"views": {
 					"view_box1": ["barras"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
@@ -528,7 +528,7 @@
 				"views": {
 					"view_box1": ["barras"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"fontes": "Elaboração própria com base na RAIS."
 			},
@@ -550,7 +550,7 @@
 				"views": {
 					"view_box1": ["barras"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}

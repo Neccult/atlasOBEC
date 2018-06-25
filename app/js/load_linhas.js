@@ -21,6 +21,8 @@ function create_linhas(linhas_box, data){
     getDivSize(linhas_box);
     getBoxXY();
 
+    console.log(data)
+
     Object.keys(data).forEach(function (key) {
         anos.push(data[key].ano);
     });

@@ -52,12 +52,19 @@ if(parameters != undefined){
             }                
         },
         "mapa": function (box, data, update){
-            if(update){
-                update_mapa(box, data)
-            } else {
-                $(box+" svg").remove()
-                create_mapa(box, data);
-            }
+
+            br_states = []
+
+            d3.json("./data/br-min.json", function(states){
+                br_states = states;
+                if(update){
+                    update_mapa(box, data)
+                } else {
+                    $(box+" svg").remove()
+                    create_mapa(box, data);
+                }
+            })
+
         },
         "treemap_scc": function (box, data, update){
             if(update){

@@ -301,7 +301,7 @@ if($eixo == 0 && ($var == 3 || $var == 9)) {
 
     foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
-            $id = $tupla->Ano;
+        $id = $tupla->Ano;
         $anos[$id]['ano'] = (int)$tupla->Ano;
         $anos[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
 
@@ -318,10 +318,14 @@ else if($eixo == 0 && $var > 9 ) {
         foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
             $id = $tupla->Ano;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getName($uos)] = (double)$tupla->Valor;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getName($uos)] = (double)$tupla->Valor;
 
         }
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 1 && ($var > 11)) {
