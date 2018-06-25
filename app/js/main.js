@@ -1030,40 +1030,44 @@ $(document).ready(function(){
 
     $(document).on('click', ".scc", function(){
 
-        var eixoAtual = getEixo(window.location.hash.substring(1));
 
-        if((eixoAtual == 0 && url['var'] < 10) || (eixoAtual == 1 && url['var'] < 12) || (eixoAtual == 2 && url['var'] >= 18) || eixoAtual == 3 ){
+
+        var eixo = parameters.eixo
+
+        if((eixo == 0 && url['var'] < 10) || (eixo == 1 && url['var'] < 12) || (eixo == 2 && url['var'] >= 18) || eixo == 3 ){
+
             var setor = $(this).attr('data-id');
 
 
-            if(setor != url['cad']) {
+            if(setor != parameters.cad) {
 
-
-                if(eixoAtual == 2 && url['var'] == 19 && url['mec'] == 1)
+                if(eixo == 2 && parameters.var == 19 && parameters.mec == 1)
                     return;
 
-                var newSCCSrc = $("#view_box_scc").attr("src");
-                var change = newSCCSrc.match(/uf=([0-9]*)/);
 
                 url['cad'] = setor;
-                url['uf'] = change[1];
-                if (setor == 0 && url['var'] > 7) {
+                parameters.cad = url['cad']
+
+                if (setor == 0 && parameters.var > 7) {
                     url['subdeg'] = 0;
+                    parameters.subdeg = url['subdeg']
                 }
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', setor)
                 updateIframe(url);
             }
         }
-        else if(eixoAtual == 2 && url['var'] < 15){
+        else if(eixo == 2 && parameters.var < 15){
             var setor = $(this).attr('data-id');
 
-            if(setor != url['cad']) {
+            if(setor != parameters.cad) {
 
                 var newSCCSrc = $("#view_box_scc").attr("src");
                 var changeUF = newSCCSrc.match(/uf=([0-9]*)/);
                 url['cad'] = setor;
+                parameters.cad = url['cad'];
                 url['uf'] = changeUF[1];
+                parameters.uf = url['uf'];
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', url['cad'])
