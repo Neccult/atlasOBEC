@@ -114,6 +114,7 @@ function create_mapa(mapa_box, mapa){
                     }
                 })
                 .attr("d", path)
+                .attr("stroke-linecap", "round")
                 .on("click", function(d) {
 
                     if(window.innerWidth <= 1199)

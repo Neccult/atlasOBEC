@@ -709,7 +709,6 @@ function update_treemap_scc(treemap_scc_box, data){
 
     setTimeout(function () {
 
-        formatTreemapText(treemap_scc_box);
 
         var rects = svg.selectAll("g");
 
@@ -752,6 +751,9 @@ function update_treemap_scc(treemap_scc_box, data){
             .transition()
             .duration(800)
             .style("opacity", 1);
+
+        formatTreemapText(treemap_scc_box);
+
 
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
