@@ -45,6 +45,7 @@ VIEWS = {
 brasil_setor = []
 
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+    console.log(dado)
     brasil_setor = JSON.parse(dado)
 })
 
