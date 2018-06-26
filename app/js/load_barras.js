@@ -13,6 +13,8 @@ function create_bars(barras_box, data){
     var uos = 0
 
 
+    console.log(data)
+
     var corEixo = COLORS['eixo'][eixo].color;
 
     var color = function (colorId) {

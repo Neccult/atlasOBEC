@@ -18,6 +18,7 @@ var valueline = d3.line()
 
 function create_linhas(linhas_box, data){
 
+
     getDivSize(linhas_box);
     getBoxXY();
 
@@ -312,12 +313,12 @@ function getCadId(cadName){
 
 function destacaSetor(cadName){
 
-    $( "path" ).each(function( index ) {
-        if($( this ).attr("scc") == cadName)
-            $( this ).css("opacity", "1")
-        else
-            $( this ).css("opacity", "0.2")
-    });
+    // $( "path" ).each(function( index ) {
+    //     if($( this ).attr("scc") == cadName)
+    //         $( this ).css("opacity", "1")
+    //     else
+    //         $( this ).css("opacity", "0.2")
+    // });
 }
 
 function clickLinhas(d, path) {

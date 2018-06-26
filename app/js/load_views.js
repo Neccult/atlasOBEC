@@ -14,8 +14,14 @@ anos_default = []
 
 VIEWS = {
     "barras": function (barras_box, data){
-        create_bars(barras_box, data)
+        if(parseInt(parameters.subdeg)){
+            create_bars_stacked(barras_box, data);
+        }
+        else {
+            create_bars(barras_box, data);
+        }
     },
+
     "mapa": function (mapa_box, data){
         br_states = []
 
@@ -120,13 +126,8 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(data) {
-        console.log(data)
-    })
 
-
-
-        d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
+    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
