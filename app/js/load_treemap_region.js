@@ -18,10 +18,6 @@ function create_treemap_region(treemap_box, data){
 	width = svg_treemap_region.attr("width"),
     height = svg_treemap_region.attr("height");
     
-    var fader = function(color) { return d3.interpolateRgb(color, "#fff")(0.2); },
-	color = d3.scaleOrdinal(d3.schemeCategory20.map(fader)),
-	format = d3.format(",d");
-
     var color = function(colorId){
         if(parameters.eixo == 3) {
             if(COLORS.parceiros[colorId]){
@@ -49,9 +45,7 @@ function create_treemap_region(treemap_box, data){
 
     var attachColor = function(d){ return (d.depth == 3)? d.data.colorId = d.parent.parent.data.colorId : ''; };
 
-
     var tooltipInstance = tooltip.getInstance();
-
 
     root_region = d3.hierarchy(data)
 				.eachBefore(function(d) {
@@ -243,10 +237,22 @@ function update_treemap_region(treemap_box, data){
     var percentageTextElement = cell_region.select(".percentage").select('tspan')
         .style("opacity", 0)
 
+    var titleTextElement = cell_region.select("text")
+        .style("opacity", 0)
+
+
+
     setTimeout(function () {
 
-        formatTreemapText(treemap_box);
 
+        titleTextElement = cell_region.select("text")
+            .text(function(d) {return d.data.name; })
+            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+            .attr("class", "title")
+            .attr("x", 10)
+            .attr("y", 19)
+            .attr("text-anchor", "start")
+            .style("opacity", 1);
 
 
         percentageTextElement
@@ -290,6 +296,9 @@ function update_treemap_region(treemap_box, data){
             .transition()
             .duration(800)
             .style("opacity", 1);
+
+        formatTreemapText(treemap_box);
+
 
 
     }, 750);

@@ -450,7 +450,7 @@
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]

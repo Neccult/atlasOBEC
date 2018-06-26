@@ -198,7 +198,6 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
 
         if(url['cad'] != 0){
             if (vrv == 1 || vrv == 3 || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 ||vrv == 9) {
-                console.log(percent)
                 setPercentValueData({percentual: percent}, eixo, vrv);
             }
             else{
@@ -213,7 +212,7 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
             if(url['cad'] != 0) {
                 destacaSetor(url['cad']);
 
-                if(deg == 0){
+                if(parameters.deg == 0){
                     setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
                 }
                 else{
@@ -458,7 +457,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
             if(vrv == 2 && parameters.ocp == 0){
                 dados.valor = dados.value[index_ano]*100;
             }
-            console.log(index_ano, eixo, vrv)
+            // console.log(index_ano, eixo, vrv)
             setIntegerValueData(dados, eixo, vrv);
 
         }

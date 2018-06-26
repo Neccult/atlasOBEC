@@ -126,7 +126,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
-
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });

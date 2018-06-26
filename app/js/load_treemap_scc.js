@@ -80,7 +80,7 @@ function create_treemap_scc(treemap_scc_box, data){
         title = title.replace("<br>", "");
         title = title.replace("</span>", "");
 
-        loadTooltip(d, eixo , vrv);
+        loadTooltipSCC(d, eixo , vrv);
     })
         .on("mouseout", tooltipInstance.hideTooltip)
         .on("click", function(d) {
@@ -92,57 +92,7 @@ function create_treemap_scc(treemap_scc_box, data){
         })
         .style("cursor", "pointer");
 
-    if(eixo == 1) {
-        if(deg == 0) {
-            cell.append("rect")
-                .attr("data-legend", function(d) { return d.data.colorId; })
-                .attr("data-value", function(d) { return (d.value); })
-                .attr("data-percent", function(d) { return (d.data.size/root.value); })
-                .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
-                .attr("id", function(d) { return d.data.id; })
-                .attr("width", function(d) { return nodeWidth(d); })
-                .attr("height", function(d) { return d.y1 - d.y0; })
-                .attr("fill", function(d) { return color(d.data.colorId)[8-d.data.desagreg]; });
-        }
-        else {
-
-            cell.append("rect")
-                .attr("data-legend", function(d) { return d.data.colorId; })
-                .attr("data-value", function(d) {  return (d.value); })
-                .attr("data-percent", function(d) { return (d.parent.value/root.value); })
-                .attr("data-percent-uf", function(d) { return (d.data.size/root.value); })
-                .attr("data-deg", function(d) { return (d.parent.value); })
-                .attr("id-subdeg", function(d) { return d.data.desagreg})
-                .attr("id", function(d) { return d.data.id; })
-                .attr("width", function(d) { return nodeWidth(d); })
-                .attr("height", function(d) { return d.y1 - d.y0; })
-                .attr("fill", function(d) { return color(d.data.colorId)[8-d.data.desagreg]; });
-        }
-    }
-    else if(eixo == 3){
-        cell.append("rect")
-            .attr("data-legend", function(d) { return d.data.colorId; })
-            .attr("data-value", function(d) { return (d.data.size/root.value); })
-            .attr("data-percent", function(d) { return (d.data.percentual); })
-            .attr("id", function(d) { return d.data.id; })
-            .attr("width", function(d) { return nodeWidth(d); })
-            .attr("height", function(d) { return d.y1 - d.y0; })
-            .attr("fill", function(d) { return color(d.data.colorId); });
-    }
-    else if(eixo == 2) {
-
-        cell.append("rect")
-            .attr("data-legend", function(d) { return d.data.colorId; })
-            .attr("data-valor", function(d) { return d.value; })
-            .attr("data-valor", function(d) { return d.value; })
-            .attr("data-percent-uf", function(d) { return d.data.percentual; })
-            .attr("data-percent", function(d) { return d.data.size/root.value; })
-            .attr("id", function(d) { return d.data.id; })
-            .attr("width", function(d) { return nodeWidth(d); })
-            .attr("height", function(d) { return d.y1 - d.y0; })
-            .attr("fill", function(d) { return color(d.data.colorId); });
-    }
-    else {
+    if(eixo == 0) {
 
         cell.append("rect")
             .attr("id", function(d) { return d.data.id; })
@@ -165,17 +115,66 @@ function create_treemap_scc(treemap_scc_box, data){
                     return "0.7";
                 }
             });
-
-
-        var titleTextElement = cell.append("text")
-            .text(function(d) {return d.data.name; })
-            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
-            .attr("class", "title")
-            .attr("x", 10)
-            .attr("y", 19)
-            .attr("text-anchor", "start");
-
     }
+    else if(eixo == 1) {
+        if(deg == 0) {
+            cell.append("rect")
+                .attr("data-legend", function(d) { return d.data.colorId; })
+                .attr("data-value", function(d) { return (d.value); })
+                .attr("data-percent", function(d) { return (d.data.size/root.value); })
+                .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
+                .attr("id", function(d) { return d.data.id; })
+                .attr("width", function(d) { return nodeWidth(d); })
+                .attr("height", function(d) { return d.y1 - d.y0; })
+                .attr("fill", function(d) { return color(d.data.colorId)});
+        }
+        else {
+
+            cell.append("rect")
+                .attr("data-legend", function(d) { return d.data.colorId; })
+                .attr("data-value", function(d) {  return (d.value); })
+                .attr("data-percent", function(d) { return (d.parent.value/root.value); })
+                .attr("data-percent-uf", function(d) { return (d.data.size/root.value); })
+                .attr("data-deg", function(d) { return (d.parent.value); })
+                .attr("id-subdeg", function(d) { return d.data.desagreg})
+                .attr("id", function(d) { return d.data.id; })
+                .attr("width", function(d) { return nodeWidth(d); })
+                .attr("height", function(d) { return d.y1 - d.y0; })
+                .attr("fill", function(d) { return color(d.data.colorId)});
+        }
+    }
+    else if(eixo == 3) {
+        cell.append("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent", function(d) { return (d.data.percentual); })
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); });
+    }
+    else if(eixo == 2) {
+
+        cell.append("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-valor", function(d) { return d.value; })
+            .attr("data-valor", function(d) { return d.value; })
+            .attr("data-percent-uf", function(d) { return d.data.percentual; })
+            .attr("data-percent", function(d) { return d.data.size/root.value; })
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); });
+    }
+
+
+    var titleTextElement = cell.append("text")
+        .text(function(d) {return d.data.name; })
+        .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+        .attr("class", "title")
+        .attr("x", 10)
+        .attr("y", 19)
+        .attr("text-anchor", "start");
 
     var svgMarginTop = 15;
     // cria título
@@ -278,7 +277,7 @@ function create_treemap_scc(treemap_scc_box, data){
         $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
         $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
 
-    function loadTooltip(d, eixo, vrv){
+    function loadTooltipSCC(d, eixo, vrv){
 
         if(eixo === 0) {
             if(vrv === 2 || vrv === 9){
@@ -530,54 +529,197 @@ function update_treemap_scc(treemap_scc_box, data){
     var titleTextElement = cell.select("text")
         .style("opacity", 0)
 
-    cell.data(root.leaves())
-        .transition().duration(500)
-        .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
-        .select("rect")
-        .attr("data-legend", function(d) { return d.data.colorId; })
-        .attr("data-value", function(d) { return (d.value); })
-        .attr("data-percent", function(d) { return (d.data.size/root.value); })
-        .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
-        .attr("id", function(d) { return d.data.id; })
-        .style("opacity", function(d){
 
-            if(parameters.cad == 0){
-                return "1";
-            }
+    if(eixo == 0){
+        cell.data(root.leaves())
+            .transition().duration(500)
+            .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
+            .select("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.value); })
+            .attr("data-percent", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
+            .attr("id", function(d) { return d.data.id; })
+            .style("opacity", function(d){
 
-            if(d.data.colorId == parameters.cad) {
-                return "1";
-            }
-            else{
-                return "0.7";
-            }
+                if(parameters.cad == 0){
+                    return "1";
+                }
+
+                if(d.data.colorId == parameters.cad) {
+                    return "1";
+                }
+                else{
+                    return "0.7";
+                }
+            })
+            .style("stroke", function(d){
+                if(d.data.colorId == parameters.cad) {
+                    return "#555";
+                }
+                else{
+                    return "rgba(255, 255, 255, 0.47)";
+                }
+
+            })
+            .attr("width", function(d) { return d.x1 - d.x0; })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); })
+    }
+    else if(eixo == 1){
+
+        var rect = svg.selectAll("g")
+            .data(root.leaves())
+
+        rect.exit().remove()
+
+        var newR = rect.enter().append("g")
+            .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
+
+        newR
+            .append("rect")
+            .style("opacity","0")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.value); })
+            .attr("data-percent", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId)})
+            .attr("cursor", "pointer")
+            .transition().duration(500)
+            .style("opacity","1");
+
+        tooltipInstance = tooltip.getInstance();
+
+        newR.on("mouseover", function(d){
+            var title_content = getDataVar(PT_BR, eixo, vrv).title;
+            var title = title_content.replace("<span>", "");
+            title = title.replace("<br>", "");
+            title = title.replace("</span>", "");
+
+            loadTooltipSCC(d, eixo , vrv, tooltipInstance);
         })
-        .style("stroke", function(d){
-            if(d.data.colorId == parameters.cad) {
-                return "#555";
-            }
-            else{
-                return "rgba(255, 255, 255, 0.47)";
-            }
+            .on("mouseout", tooltipInstance.hideTooltip)
+            .on("click", function(d) {
 
-        })
-        .attr("width", function(d) { return d.x1 - d.x0; })
-        .attr("height", function(d) { return d.y1 - d.y0; })
-        .attr("fill", function(d) { return color(d.data.colorId); })
+                if(window.parent.innerWidth <= 1199)
+                    return;
 
+                treemapClick(d, root);
+            })
+
+
+        newR
+            .append("text")
+            .text(function(d) {return d.data.name; })
+            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+            .attr("class", "title")
+            .attr("x", 10)
+            .attr("y", 19)
+            .attr("text-anchor", "start")
+            .style("opacity","0")
+
+
+        newR
+            .append("text")
+            .attr("text-anchor", "start")
+            .attr("clip-path", function (d) {
+                return "url(#clip-" + d.data.id + ")";
+            })
+            .attr("class", "percentage")
+            .append('tspan')
+            .text(function (d) {
+
+                var divisao = d.data.size / root.value;
+                if (uf) {
+                    return formatDecimalLimit((divisao) * 100, 2) + "%";
+                } else if (vrv == 2 || vrv === 9) {
+                    if (uf === 0) {
+                        return formatDecimalLimit((divisao) * 100, 2) + "%";
+                    }
+                    else {
+                        return ((100 * d.data.size)).toFixed(2) + "%";
+                    }
+                } else {
+                    return formatDecimalLimit((divisao) * 100, 2) + '%';
+                }
+            })
+            .attr("display", function (d, i) {
+                // se porcentagem for muito pequena e só mostrar 0%, opacity é 0
+                if (vrv !== 2) {
+                    return parseFloat(formatDecimalLimit((d.data.size / root.value) * 100, 2).replace(",", ".")) === 0 ? "none" : "block";
+                }
+            })
+            .attr("font-size", function (d) {
+                var nWidth = nodeWidth(d);
+                var nodePercentage = Math.round(100 * nWidth / width_box(treemap_scc_box));
+
+                var fontOrdinalSize = d3.scaleThreshold()
+                    .domain([12, 25, 30, 40])
+                    .range([8, 12, 16, 20]);
+
+                var fontSize = fontOrdinalSize(nodePercentage);
+
+                return fontSize;
+            })
+            .style("opacity","0")
+
+
+        rect
+            .transition().duration(500)
+            .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
+            .select("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.value); })
+            .attr("data-percent", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("id", function(d) { return d.data.id; })
+            .style("opacity", function(d){
+
+                if(parameters.cad == 0){
+                    return "1";
+                }
+
+                if(d.data.colorId == parameters.cad) {
+                    return "1";
+                }
+                else{
+                    return "0.7";
+                }
+            })
+            .style("stroke", function(d){
+                if(d.data.colorId == parameters.cad) {
+                    return "#555";
+                }
+                else{
+                    return "rgba(255, 255, 255, 0.47)";
+                }
+
+            })
+            .attr("fill", function(d) { return color(d.data.colorId)});
+
+        cell = rect
+
+
+    }
 
     setTimeout(function () {
 
-        formatTreemapText(treemap_scc_box);
 
-        titleTextElement.text(function(d) {return d.data.name; })
+        var rects = svg.selectAll("g");
+
+        rects.select("text").text(function(d) {return d.data.name; })
             .attr("display", "block")
             .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
             .transition()
             .duration(200)
             .style("opacity", 1);
 
-        percentageTextElement
+        rects.select(".percentage")
             .text(function (d) {
 
                 var divisao = d.data.size / root.value;
@@ -610,7 +752,9 @@ function update_treemap_scc(treemap_scc_box, data){
             .duration(800)
             .style("opacity", 1);
 
-        
+        formatTreemapText(treemap_scc_box);
+
+
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
@@ -694,9 +838,7 @@ function formatValor(valor) {
     }
 }
 
-function loadTooltip(d, eixo, vrv){
-
-    return;
+function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
 
     if(eixo === 0) {
@@ -752,7 +894,7 @@ function loadTooltip(d, eixo, vrv){
             ]);
         }
         else if(uf == 0){
-            if(deg !== 0) {
+            if(parameters.deg !== 0) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -770,7 +912,7 @@ function loadTooltip(d, eixo, vrv){
             }
         }
         else{
-            if(deg !== 0) {
+            if(parameters.deg !== 0) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -863,17 +1005,22 @@ function debug(value, match, args){
 function color(colorId){
 
     if(parameters.eixo == 1) {
+
+
         if(COLORS.cadeias[colorId]){
+
             COLORS.cadeias[colorId].gradient["7"] = COLORS.cadeias[colorId].color;
-            return COLORS.cadeias[colorId].gradient;
-        }else{
+            return COLORS.cadeias[colorId].color;
+        }
+        else{
             return COLORS.cadeias[0].gradient;
         }
     }
     else {
         if(COLORS.cadeias[colorId]){
             return COLORS.cadeias[colorId].color;
-        }else{
+        }
+        else{
             return COLORS.cadeias[0].color;
         }
     }

@@ -1,7 +1,7 @@
 
 
 function create_mapa(mapa_box, mapa){
-    
+
     var windowWidth = width_box(mapa_box);
     var legendaWidth = width_box(mapa_box);
     var shapeWidth = 30;
@@ -114,11 +114,14 @@ function create_mapa(mapa_box, mapa){
                     }
                 })
                 .attr("d", path)
+                .attr("stroke-linecap", "round")
                 .on("click", function(d) {
 
                     if(window.innerWidth <= 1199)
                         return;
                     mapaClick(svg_mapa, dict, d)
+                    destacaPais(svg_mapa, parameters.uf);
+
                 })
                 .style("cursor", "pointer");
     
