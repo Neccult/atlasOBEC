@@ -435,7 +435,7 @@ function update_treemap_scc(treemap_scc_box, data){
     var cad  = parameters.cad;
     var deg  = parameters.deg;
     var slc  = 0;
-
+    var transition_time = 200;
     var config = URL_PARAM
 
     var attachColor=function(d){
@@ -532,7 +532,7 @@ function update_treemap_scc(treemap_scc_box, data){
 
     if(eixo == 0){
         cell.data(root.leaves())
-            .transition().duration(500)
+            .transition().duration(transition_time)
             .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
             .select("rect")
             .attr("data-legend", function(d) { return d.data.colorId; })
@@ -588,7 +588,7 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("height", function(d) { return d.y1 - d.y0; })
             .attr("fill", function(d) { return color(d.data.colorId)})
             .attr("cursor", "pointer")
-            .transition().duration(500)
+            .transition().duration(transition_time)
             .style("opacity","1");
 
         tooltipInstance = tooltip.getInstance();
@@ -668,7 +668,7 @@ function update_treemap_scc(treemap_scc_box, data){
 
 
         rect
-            .transition().duration(500)
+            .transition().duration(transition_time)
             .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
             .select("rect")
             .attr("data-legend", function(d) { return d.data.colorId; })
@@ -716,7 +716,7 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("display", "block")
             .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
             .transition()
-            .duration(200)
+            .duration(transition_time - 300)
             .style("opacity", 1);
 
         rects.select(".percentage")
@@ -749,7 +749,7 @@ function update_treemap_scc(treemap_scc_box, data){
                 return fontSize;
             })
             .transition()
-            .duration(800)
+            .duration(transition_time+200)
             .style("opacity", 1);
 
         formatTreemapText(treemap_scc_box);

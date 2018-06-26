@@ -407,7 +407,6 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
             if(parameters.cad == 0)
                 setPercentValueData({percentual: dados.percentual[index_ano]}, eixo, vrv)
         }
-
         setTerceiroValueData(eixo, vrv, dados.percentual_setor[index_ano], url['cad']);  
 
     }

@@ -481,7 +481,12 @@ class EixoUm {
 	-----------------------------------------------------------------------------*/
 	public static function getter_region($var, $cad, $deg, $anos, $regiao){
 
-		self::connect();
+        self::connect();
+        
+		if($deg > 0){
+            $deg = $deg - 8;
+        }
+        
         if($deg == 0 || $cad != 0 || $var == 1 || $var == 3|| $var == 2) {
                 
             $query = "SELECT * FROM " . self::$table . " AS ex"

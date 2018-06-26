@@ -4,8 +4,11 @@
     $cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;
 
-    $json = array();
+    if($deg != 0){
+        $deg = $deg - 8;
+    }
 
+    $json = array();
     if($eixo == 0){
         require_once("EixoUm.php");
         $vars = array(1,4,5,6,7,8);
