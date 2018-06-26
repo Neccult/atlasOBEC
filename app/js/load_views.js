@@ -1,6 +1,12 @@
 
 parameters = {};
 
+//Guarda informações que serão usadas localmente por cada views. ex: uos
+views_parameters = {
+    "#view_box": {},
+    "#view_box_barras": {},
+    "#view_box_scc": {}
+};
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
     parameters[key] = value;
 })
@@ -75,24 +81,24 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
 switch(parameters.eixo){
     case 0:
         if(parameters.var >= 10){
-            uos_1 = '0'
-            uos_2 = '1'
-            uos_3 = '0'
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '1'
+            views_parameters["#view_box_scc"].uos = '0'
         } else {
-            uos_1 = '0'
-            uos_2 = '0'
-            uos_3 = '0'
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'
         }
         break;
     case 1:
         if(parameters.var > 11){
-            uos_1 = '0'
-            uos_2 = '1'
-            uos_3 = '0'
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '1'
+            views_parameters["#view_box_scc"].uos = '0'
         } else {
-            uos_1 = '0'
-            uos_2 = '0'
-            uos_3 = '0'
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'
         }
 }
     
@@ -112,16 +118,16 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
 
-    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+uos_1, function(json){
+    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
 
-    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+uos_2, function(json){
+    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
 
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
+    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 

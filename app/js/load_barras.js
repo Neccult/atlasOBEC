@@ -10,7 +10,7 @@ function create_bars(barras_box, data){
     var deg  = parameters.deg
     var prt = 0
     var ocp = 0
-    var uos = 0
+    var uos = views_parameters[barras_box].uos;
 
 
     var corEixo = COLORS['eixo'][eixo].color;
@@ -76,6 +76,7 @@ function create_bars(barras_box, data){
     var y = d3.scaleLinear()
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
+
 
 
     y.domain(d3.extent(dados.value, function (d) {
@@ -379,7 +380,7 @@ function create_bars(barras_box, data){
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-            configInfoDataBoxBarras(eixo, vrv, dados, valor);         
+            configInfoDataBoxBarras(eixo, vrv, dados, valor, uos);         
         }
 }
 
@@ -395,7 +396,7 @@ function update_bars(barras_box, data){
     var deg  = parameters.deg
     var prt = 0
     var ocp = 0
-    var uos = 0
+    var uos = views_parameters[barras_box].uos;
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
     var margin = {top: 20, right: 20, bottom: 30, left: 35};
@@ -616,6 +617,9 @@ function update_bars(barras_box, data){
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
     
+    y.domain(d3.extent(dados.value, function (d) {
+        return d;
+    })).nice();
 
     var rect = svg_barras.selectAll("rect")
                          .data(dados.value) 
@@ -659,7 +663,6 @@ function update_bars(barras_box, data){
         })
         .attr("width", x.bandwidth())
         .attr("height", function (d) {
-
             var barHeight = y(d);
 
             // TEM VALOR NEGATIVO
@@ -670,20 +673,6 @@ function update_bars(barras_box, data){
                 return minBarHeight;
 
             return  Math.abs(y(d) - zeroPosition);
-
-        }).attr("fill", function (d,i ) {
-            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                if(deg == 0)
-                    return color(dados.key[i])
-                else
-                    return color(cad)
-            }
-            else if(eixo == 3 && (vrv == 5 || vrv == 8)){
-                return color(0);
-            }
-            else{
-                return color(cad);
-            }
         })
         .attr("data-color", function(d, i, obj) { 
             if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){

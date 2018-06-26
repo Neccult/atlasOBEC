@@ -85,16 +85,29 @@ if(parameters != undefined){
         }
     }
 
-    if(parameters.eixo == 0){
-        if(parameters.var >= 10){
-            uos_1 = '0'
-            uos_2 = '1'
-            uos_3 = '0'
-        } else {
-            uos_1 = '0'
-            uos_2 = '0'
-            uos_3 = '0'
-        }
+
+    switch(parameters.eixo){
+        case 0:
+            if(parameters.var >= 10){
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '1'
+                views_parameters["#view_box_scc"].uos = '0'
+            } else {
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'
+            }
+            break;
+        case 1:
+            if(parameters.var > 11){
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '1'
+                views_parameters["#view_box_scc"].uos = '0'
+            } else {
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'
+            }
     }
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
@@ -109,15 +122,15 @@ if(parameters != undefined){
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
     
-    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+uos_1, function(json){
+    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         UPDATE_VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
     })
 
-    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+uos_2, function(json){
+    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
         UPDATE_VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
     })
 
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
+    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         UPDATE_VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
     })
 
