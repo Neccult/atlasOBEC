@@ -1,6 +1,9 @@
 
 parameters = {};
 
+
+tooltipInstance = tooltip.getInstance();
+
 //Guarda informações que serão usadas localmente por cada views. ex: uos
 views_parameters = {
     "#view_box": {},

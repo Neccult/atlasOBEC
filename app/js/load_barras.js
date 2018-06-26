@@ -354,6 +354,21 @@ function create_bars(barras_box, data){
                 updateIframe();
 
             })
+            .on("mouseover", function (d, i, obj) {
+                var title_content = getDataVar(textJSON, eixo, vrv).title;
+                var title = title_content.replace("<span>", "");
+                title = title.replace("<br>", "");
+                title = title.replace("</span>", "");
+
+                var valorTooltip = formatTextVrv(dados.value[i], eixo, vrv);
+                var taxaTooltip = formatTextTaxaVrv(dados.taxa[i], eixo, vrv);
+
+                if (eixo === 0 || eixo === 1 || eixo === 2 || eixo === 3){
+                    loadTooltip_barras(d, dados.key[i], eixo, vrv)
+                }
+
+            })
+            .on("mouseout", tooltipInstance.hideTooltip)
             .style("cursor", "pointer");
 
         var xAxis = d3.axisBottom(x)
@@ -795,4 +810,93 @@ function destacaBarra(barras_box, barraId, stacked = false) {
         }
     });
 }
+
+function loadTooltip_barras(d, key, eixo, vrv, dados){
+
+    if(eixo === 0){
+        if(vrv === 3){
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+           ]);
+       }
+       else if(vrv === 9){
+
+            tooltipInstance.showTooltip(d, [
+                ["title", key],
+                ["", formatTextVrv(d*100, eixo, vrv)],
+                //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+            ]);
+       }
+       else{
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+           ]);
+       }
+
+   }
+   else if(eixo === 1){
+       if (vrv === 9) {
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+           ]);
+       }
+       else if(vrv === 2){
+
+           if(url['ocp'] == 0){
+               tooltipInstance.showTooltip(d, [
+                   ["title", key],
+                   ["", formatTextVrv(d*10000, eixo, vrv)],
+               ]);
+           }
+           else{
+
+               tooltipInstance.showTooltip(d, [
+                   ["title", key],
+                   ["", formatTextVrv(d*100, eixo, vrv)],
+               ]);
+           }
+
+       }
+       else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+               // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+           ]);
+       }
+   }
+   else if(eixo === 2){
+       if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv == 10 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16 || vrv === 18 || vrv === 19){
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+               // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+           ]);
+       }
+       else if(vrv === 17){
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+           ]);
+       }
+   }
+   else if(eixo === 3){
+           tooltipInstance.showTooltip(d, [
+               ["title", key],
+               ["", formatTextVrv(d, eixo, vrv)],
+               // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
+           ]);
+   }
+
+}
+
+
+
+
+
+
+
 
