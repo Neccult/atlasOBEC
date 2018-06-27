@@ -13,28 +13,8 @@ function create_bars_stacked(barras_box, data){
     var ocp = 0
     var uos = 0
 
-    var maxDecimalAxis = 0;
 
     var corEixo = COLORS['eixo'][eixo].color;
-
-    var color = function (colorId) {
-
-        if (COLORS.cadeias[colorId]) {
-            if(colorId){
-                if(colorId == 0){
-                    return corEixo[1]
-                }
-                else{
-                    return COLORS.cadeias[colorId].color;
-                }
-            }
-            else{
-                return corEixo[2];
-            }
-        } else {
-            return COLORS.cadeias[0].color;
-        }
-    }
 
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
@@ -113,20 +93,34 @@ function create_bars_stacked(barras_box, data){
                         })})])
                     .range([height, 0]);
 
+    var cor;
+    if(cad == 0){
+        cor = corEixo[1];
+    }
+    else{
+        cor = COLORS.cadeias[cad].color
+    }
+
+    var cor2 = COLORS.cadeias[cad].gradient['2'];
+
     var colors = d3.scaleLinear()
         .domain([0, dados.length])
-        .range([COLORS.cadeias[cad].color, COLORS.cadeias[cad].gradient['2']])
-
+        .range([cor, cor2])
 
     var formatYAxis = function (d) {
-        var formatInit = d3.format(".0f");
-        return formatInit(d);
+
+        function kFormatter(num) {
+            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
+        }
+
+        return kFormatter(d);
+
     }
 
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
-        .ticks(10)
+        .ticks(8)
         .tickFormat(formatYAxis)
         .tickSize(5)
         .tickPadding(10);
@@ -204,6 +198,200 @@ function create_bars_stacked(barras_box, data){
     // if(eixo == 0){
     //     setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
     // }
+
+
+}
+
+function update_bars_stacked(barras_box, data){
+
+    var chartWidth = width_box(barras_box);
+    var chartHeight = height_box(barras_box);
+    var minBarHeight = 5;
+
+    var eixo = parameters.eixo
+    var vrv  = parameters.var
+    var cad  = parameters.cad
+    var deg  = parameters.deg
+    var subdeg  = parameters.subdeg
+    var prt = 0
+    var ocp = 0
+    var uos = 0
+
+    var maxDecimalAxis = 0;
+
+    var corEixo = COLORS['eixo'][eixo].color;
+
+    var color = function (colorId) {
+
+        if (COLORS.cadeias[colorId]) {
+            if(colorId){
+                if(colorId == 0){
+                    return corEixo[1]
+                }
+                else{
+                    return COLORS.cadeias[colorId].color;
+                }
+            }
+            else{
+                return corEixo[2];
+            }
+        } else {
+            return COLORS.cadeias[0].color;
+        }
+    }
+
+
+    var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
+
+    if(vrv == 3 && eixo == 0){
+        delete data['2007'];
+    }
+
+    var desag = selectDesag()
+
+    if((vrv == 6 || vrv == 4) && eixo == 1){
+        aux = []
+        selectDesag();
+        Object.keys(data).forEach(function (key) {
+            soma = 0;
+            cont = 0;
+            Object.keys(data[key]).forEach(function (chave) {
+
+                if(chave != "year" && cont == desag){
+                    obj = {};
+                    valor = data[key][chave];
+
+                }
+                cont++;
+            });
+            aux.push({year: data[key].year, Média: valor})
+        });
+        data = aux;
+    }
+
+
+
+    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = chartWidth - margin.left - margin.right,
+        height = chartHeight - margin.top - margin.bottom;
+
+    var svg_barras = d3.select(barras_box)
+        .select("svg");
+
+
+    /* Data in strings like it would be if imported from a csv */
+
+    var parse = d3.timeParse("%Y");
+
+    var dados = desagregacao_names().map(function (fruit) {
+        return data.map(function (d) {
+            return {x: parse(d.year), y: +d[fruit]};
+        });
+    });
+
+    var keys = [];
+
+    for (var key in data[0]) {
+        if(key != "year"){
+            keys.push(key)
+        }
+    }
+
+    // Transpose the data into layers
+    var dataset = d3.stack().keys(keys)(data);
+
+    // Set x, y and colors
+    var x_eixo1 = d3.scaleBand()
+        .domain(anos_default[parameters.var][0])
+        .range([0, width])
+        .padding(0.05)
+
+    var y_eixo1 = d3.scaleLinear()
+        .domain([0, d3.max(dataset, function (d) {
+            return d3.max(d, function (d) {
+                return d[0] + d[1];
+            })})])
+        .range([height, 0]);
+
+
+    var cor;
+    if(cad == 0){
+        cor = corEixo[1];
+    }
+    else{
+        cor = COLORS.cadeias[cad].color
+    }
+
+    var cor2 = COLORS.cadeias[cad].gradient['2'];
+
+    var colors = d3.scaleLinear()
+        .domain([0, dados.length])
+        .range([cor, cor2])
+
+
+    var formatYAxis = function (d) {
+        var formatInit = d3.format(".0f");
+        return formatInit(d);
+    }
+
+    // Define and draw axes
+    var yAxis_eixo1 = d3.axisLeft()
+        .scale(y_eixo1)
+        .ticks(8)
+        .tickFormat(formatYAxis)
+        .tickSize(5)
+        .tickPadding(10);
+
+    var xAxis_eixo1 = d3.axisBottom(x_eixo1)
+        .scale(x_eixo1)
+        .tickSize(5)
+
+    svg_barras.select(".y.axis")
+        .transition().duration(500)
+        .call(yAxis_eixo1);
+
+    svg_barras.select(".x.axis")
+        .transition().duration(500)
+        .call(xAxis_eixo1);
+
+    var groups = svg_barras.select("g").selectAll(".cost")
+        .data(dataset)
+        .style("fill", function (d, i) {
+            return colors(i);
+        })
+
+    groups.exit().remove();
+
+    var newR = groups.enter()
+                .append("g")
+                .attr("class", "cost")
+                .style("fill", function (d, i) {
+                    return colors(i);
+                })
+
+    newR.selectAll("rect")
+        .data(function (d) { return d; })
+        .enter()
+        .append("rect")
+        .attr("data-legend", function(d) { return d.data.year; })
+        .attr("data-value", function(d) { return d[1]; })
+        .attr("x", function (d) { return x_eixo1(d.data.year); })
+        .attr("y", function (d) { return y_eixo1(d[0] + d[1]); })
+        .attr("height", function (d) { return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]); })
+        .attr("width", x_eixo1.bandwidth())
+        .style("cursor", "pointer");
+
+    var rect = groups.selectAll("rect");
+
+    rect
+        .data(function (d) { return d; })
+        .attr("data-legend", function(d) { return d.data.year; })
+        .attr("data-value", function(d) { return d[1]; })
+        .attr("x", function (d) { return x_eixo1(d.data.year); })
+        .attr("y", function (d) { return y_eixo1(d[0] + d[1]); })
+        .attr("height", function (d) { return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]); })
+        .attr("width", x_eixo1.bandwidth())
+        .style("cursor", "pointer");
 
 
 }

@@ -59,6 +59,7 @@ $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
 })
 
 //NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
+$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 
@@ -86,6 +87,7 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
         $(this).val(parameters.ano);
     });
 });
+$.ajaxSetup({async: true});
 
 
 switch(parameters.eixo){
@@ -136,12 +138,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
-<<<<<<< HEAD
-
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+uos_3, function(json){
-=======
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
->>>>>>> a4b1bea13fa294fcf43ba34b745d488fb61872b3
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 

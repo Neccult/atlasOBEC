@@ -44,12 +44,26 @@ if(parameters != undefined){
     
     UPDATE_VIEWS = {
         "barras": function (box, data, update){
-            if(update){
-                update_bars(box, data);
-            } else {
-                $(box+" svg").remove()
-                create_bars(box, data);
-            }                
+            if(parseInt(parameters.subdeg)){
+                if(update){
+                    update_bars_stacked(box, data);
+                }
+                else {
+                    $(box+" svg").remove()
+                    create_bars_stacked(box, data);
+                }
+            }
+            else{
+                if(update){
+                    update_bars(box, data);
+                }
+                else {
+                    $(box+" svg").remove()
+                    create_bars(box, data);
+                }
+            }
+
+
         },
         "mapa": function (box, data, update){
 
