@@ -54,7 +54,6 @@ VIEWS = {
 brasil_setor = []
 
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-    console.log(dado)
     brasil_setor = JSON.parse(dado)
 })
 
@@ -125,6 +124,8 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
 
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
+
+    console.log(data_var.views)
         
     var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]

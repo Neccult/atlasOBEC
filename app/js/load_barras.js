@@ -392,7 +392,6 @@ function create_bars(barras_box, data){
             .call(yAxis);
 
 
-        console.log("oi")
         destacarBarra(barras_box, parameters.ano);
 
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");

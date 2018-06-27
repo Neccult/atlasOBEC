@@ -923,7 +923,12 @@
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
-				]
+				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				}
 			},
 			{
 				"id":"12",
@@ -941,7 +946,12 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
-				]
+				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["linhas"]
+				}
 			},
 			{
 				"id":"13",
