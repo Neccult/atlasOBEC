@@ -336,6 +336,7 @@ function create_bars(barras_box, data){
                     return color(cad);
                 }
             })
+            .attr("opacity", 0.8)
             .on("click", function(d, i, obj) {
                 if(window.innerWidth <= 1199)
                     return;
@@ -346,7 +347,7 @@ function create_bars(barras_box, data){
                 $("select[data-id='ano']").val(dados.key[i]);
                 updateWindowUrl('ano', dados.key[i])
 
-                destacaBarra(barras_box, dados.key[i], false);
+                destacarBarra(barras_box, dados.key[i]);
                 var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
                 configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
@@ -390,7 +391,8 @@ function create_bars(barras_box, data){
             .attr("transform", "translate(0, 0)")
             .call(yAxis);
 
-        destacaBarra(barras_box, parameters.ano);
+
+        destacarBarra(barras_box, parameters.ano);
 
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
@@ -471,9 +473,9 @@ function update_bars(barras_box, data){
     
         var formatInit = d3.format(".2f");
         var format3dc = d3.format(".3f");
-    
-    
-    
+
+
+
         var formatDefault = function (d) {
             return removeDecimalZeroes(formatInit(d));
         };
@@ -650,7 +652,8 @@ function update_bars(barras_box, data){
         .attr("data-value", function(d) {   return d; })
         .attr("x", function (d, i) {
             return x(dados.key[i]);
-        }).attr("y", function (d) {
+        })
+        .attr("y", function (d) {
             var barHeight = y(d);
             var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
             var isValueNegative = d < 0;
@@ -702,6 +705,21 @@ function update_bars(barras_box, data){
                 return color(cad);
             }
         })
+        .attr("fill", function (d,i ) {
+            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
+                if(deg == 0)
+                    return color(dados.key[i])
+                else
+                    return color(cad)
+            }
+            else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+                return color(0);
+            }
+            else {
+                return color(cad);
+            }
+        })
+        .attr("opacity", 0.8)
         .on("click", function(d, i, obj) {
             if(window.innerWidth <= 1199)
                 return;
@@ -712,7 +730,7 @@ function update_bars(barras_box, data){
             $("select[data-id='ano']").val(dados.key[i]);
             updateWindowUrl('ano', dados.key[i])
 
-            destacaBarra(barras_box, dados.key[i], false);
+            destacarBarra(barras_box, dados.key[i]);
             var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
             configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
@@ -743,7 +761,7 @@ function update_bars(barras_box, data){
             .call(yAxis);
 
         
-        destacaBarra(barras_box, parameters.ano);
+        destacarBarra(barras_box, parameters.ano);
         
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
@@ -765,49 +783,24 @@ function getSoma(barraId) {
     return soma;
 }
 
-function destacaBarra(barras_box, barraId, stacked = false) {
-    i = 0;
+function destacarBarra(barras_box, barraId) {
+
     d3.select(barras_box).selectAll("rect").each(function() {
 
-        if(stacked) {
 
-            var rgb = d3.rgb(corEixo[1]);
-            r = rgb.r;
-            g = rgb.g;
-            b = rgb.b;
-
-            if($(this).attr("data-legend") == barraId) {
-                if($(this).attr("class") !== "destacado") {
-                    $(this).attr("class", "destacado");
-                    $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", function(){ return'rgb('+(r+i*15)+','+(g+i*15)+','+(b+i*15)+')'});
-                    $(this).animate({"opacity": "1"}, "fast");
-                    i++;
-                }
-            }
-            else {
-                $(this).attr("class", "");
-                if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
-                $(this).animate({"opacity": "0.7"}, "fast");
-            }
-
+    if($(this).attr("data-legend") == barraId) {
+        if($(this).attr("class") !== "destacado") {
+            $(this).attr("class", "destacado");
+            $(this).attr("data-color", $(this).css("fill"));
+            $(this).css("fill", corEixo[1]);
+            $(this).css("opacity", "1");
         }
-        else {
-
-            if($(this).attr("data-legend") == barraId) {
-                if($(this).attr("class") !== "destacado") {
-                    $(this).attr("class", "destacado");
-                    $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", corEixo[1]);
-                    $(this).animate({"opacity": "1"}, "fast");
-                }
-            }
-            else {
-                $(this).attr("class", "");
-                $(this).css("fill", $(this).attr("data-color"));
-                $(this).animate({"opacity": "0.7"}, "fast");
-            }
-        }
+    }
+    else {
+        $(this).attr("class", "");
+        $(this).css("fill", $(this).attr("data-color"));
+        $(this).css("opacity", "0.7");
+    }
     });
 }
 

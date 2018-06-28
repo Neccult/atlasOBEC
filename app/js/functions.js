@@ -227,7 +227,7 @@ function configInfoDataBoxTreemapSCC(eixo, vrv, valor,  percent, percent_uf, url
         }
         else{
 
-            if(url['deg'] == 0 || deg == 0){
+            if(url['deg'] == 0 || parameters.deg == 0){
                 if(url['ocp'] != 3){
                     setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
                 }

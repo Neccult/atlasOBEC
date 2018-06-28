@@ -766,7 +766,7 @@ function update_treemap_scc(treemap_scc_box, data){
         );
 
 
-    }, 750);
+    }, 500);
 
 
 

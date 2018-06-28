@@ -23,8 +23,14 @@ anos_default = []
 
 VIEWS = {
     "barras": function (barras_box, data){
-        create_bars(barras_box, data)
+        if(parseInt(parameters.subdeg)){
+            create_bars_stacked(barras_box, data);
+        }
+        else {
+            create_bars(barras_box, data);
+        }
     },
+
     "mapa": function (mapa_box, data){
         br_states = []
 
@@ -52,6 +58,7 @@ $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
 })
 
 //NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
+$.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 
@@ -79,6 +86,7 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
         $(this).val(parameters.ano);
     });
 });
+$.ajaxSetup({async: true});
 
 switch(parameters.eixo){
     case 0:
@@ -125,6 +133,8 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
 
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
+
+    console.log(data_var.views)
         
     var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]

@@ -418,7 +418,7 @@ class EixoUm {
         }
 
         self::connect();
-        if($var == 1 || $var == 3 || $var == 2) {
+        if($var == 3 || $var == 9) {
 
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
@@ -445,17 +445,15 @@ class EixoUm {
             $query = "SELECT * FROM ".self::$table." AS ex"
                 ." JOIN UF AS uf ON uf.idUF =  ex.idUF AND uf.idUF = ?"
                 ." JOIN Cadeia AS cad ON cad.idCadeia =  ex.idCadeia AND cad.idCadeia = ?"
-                ." JOIN Porte AS prt ON prt.idPorte =  ex.idPorte AND prt.idPorte = ?"
                 ." WHERE ex.Numero = ?";
 
 
             $stmt = mysqli_stmt_init(self::$conn);
             if ($stmt->prepare($query)) {
                 $stmt->bind_param(
-                    'ssss',
+                    'sss',
                     $ufs,
                     $uos,
-                    $deg,
                     $var
                 );
                 $stmt->execute();
