@@ -48,7 +48,6 @@ VIEWS = {
 brasil_setor = []
 
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-    console.log(dado)
     brasil_setor = JSON.parse(dado)
 })
 
@@ -81,7 +80,6 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
     });
 });
 
-
 switch(parameters.eixo){
     case 0:
         if(parameters.var >= 10){
@@ -92,6 +90,11 @@ switch(parameters.eixo){
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '0'
             views_parameters["#view_box_scc"].uos = '0'
+        }
+        if(parameters.var >= 10 || parameters.var == 2 || parameters.var == 3){
+            $(".content-btn-mapa").css("display", "none");
+        } else {
+            $(".content-btn-mapa").css("display", "block");
         }
         break;
     case 1:
@@ -104,6 +107,12 @@ switch(parameters.eixo){
             views_parameters["#view_box_barras"].uos = '0'
             views_parameters["#view_box_scc"].uos = '0'
         }
+
+        if(parameters.var != 1){
+            $(".content-btn-mapa").css("display", "none");
+        } else {
+            $(".content-btn-mapa").css("display", "block");
+        }
 }
     
 
@@ -113,7 +122,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     PT_BR = pt_br_JSON[0];
     COLORS = colors_JSON[0];
     DESCRICOES = descricoes[0];
-    
 
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);

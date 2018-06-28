@@ -112,7 +112,7 @@
 
                         <!--=== views gráfico ===-->
                         <div class="content-btn-mapa ">
-                            <?php foreach($text['type'] as $key => $value):?>
+                            <?php foreach($text['botoes'] as $key => $value):?>
                                 <?php if($value['id'] === "mapa" || $value['id'] == "treemap_region"): ?>
                                     <div class="btn-mapa col-xs-6">
                                         <button data-desc="<?= $json_text[$value['id']] ?>" class="opt view" id="<?php echo $value['id'];?>"><?php echo $value['name'];?></button>
