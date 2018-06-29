@@ -73,6 +73,10 @@
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],				
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
@@ -97,6 +101,7 @@
 				"desc_var_barras": "A porcentagem corresponde à participação das empresas <span data-id='setor'></span> no total de empresas formais <span data-id='uf'></span> ano a ano",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
@@ -114,6 +119,10 @@
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],				
 				"inativos":{
 					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
@@ -136,6 +145,7 @@
 				"desc_var_barras": "A porcentagem representa o crescimento (taxa positiva) ou a queda (taxa negativa) na quantidade de empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
 				"mapa":[
@@ -151,6 +161,10 @@
 				"inativos":{
 					"mapa":["uf"],"barras":["ano"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
@@ -205,6 +219,10 @@
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
 				},
@@ -260,6 +278,10 @@
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -284,6 +306,7 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"},
@@ -312,6 +335,10 @@
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -336,6 +363,7 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"},
@@ -359,6 +387,10 @@
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano","prt"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
@@ -388,6 +420,7 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Atuação","id":"atc"},
@@ -411,6 +444,10 @@
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"views": {
 					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
@@ -436,6 +473,10 @@
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
@@ -472,6 +513,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],				
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
@@ -497,6 +542,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],				
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
 				],
@@ -522,8 +571,13 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
+				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
 					"view_box1": ["barras"],
@@ -546,6 +600,10 @@
 				"desc_var_barras": "O índice C4 demonstra a concentração do Valor Adicionado considerando os 4 UFs ou setores (selecionar no box ao lado) com maior VA. Se o C4 for próximo a 1, isso significa que a distribuição do Valor Adicionado é mais concentrada.",
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
+				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
 					"view_box1": ["barras"],
@@ -581,6 +639,10 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -634,6 +696,10 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -691,6 +757,10 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Porte","id":"prt"},
@@ -738,6 +808,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -771,6 +845,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -804,6 +882,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -829,6 +911,10 @@
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"prefixo_valor":"R$ ",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
@@ -890,6 +976,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
@@ -920,6 +1010,10 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
@@ -943,6 +1037,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
@@ -966,6 +1064,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
@@ -989,6 +1091,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
@@ -1012,6 +1118,10 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}

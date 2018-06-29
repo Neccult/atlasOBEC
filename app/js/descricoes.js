@@ -185,16 +185,9 @@ function updateTitleClickMapa(uf_click){
 }
 
 function updateTitleBox(){
-
-    title_scc = $('iframe[id="view_box_scc"]')
-        .parent()
-        .find(".view-title")
-        .text();
-    title_barras = $('iframe[id="view_box_barras"]')
-        .parent()
-        .find(".view-title")
-        .text();
-
+    title_scc = $("#containerTree").find(".view-title").text();
+    
+    title_barras =  $("#containerBarra").find(".view-title").text();
 
     cad = $('.bread-select[data-id=cad] option:selected').text()
 
@@ -212,10 +205,10 @@ function updateTitleBox(){
     uf = getNomeUF(url['uf'])
 
     if(title_scc != undefined)
-        $('iframe[id="view_box_scc"]').parent().find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+        $("#containerTree").find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
 
     if(title_barras != undefined)
-        $('iframe[id="view_box_barras"]').parent().find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+        $("#containerBarra").find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
 }
 
 function updateDescription(descricoes, eixo, vrv, slc){

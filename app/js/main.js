@@ -151,11 +151,13 @@ function updateIframe(url){
     if(window.location.pathname.match("page.php")){
         return;
     }
+    
 
     $.getScript('js/load_views_listeners.js');
 
+    
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
-    // updateTitleBox();
+    updateTitleBox();
     
 }
 
@@ -1341,6 +1343,8 @@ $(document).ready(function(){
                     })
                 });
 
+                
+
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
@@ -1375,6 +1379,10 @@ $(document).ready(function(){
                 updateWindowUrl('deg', url['deg']);
                 updateWindowUrl('ano', url['ano']);
 
+                if(eixo_atual == 0 || eixo_atual == 1){
+                    updateWindowUrl('chg', 0);
+                }
+                
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
