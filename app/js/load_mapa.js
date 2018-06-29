@@ -25,7 +25,6 @@ function create_mapa(mapa_box, mapa){
     var info = [];
         Object.keys(mapa).forEach(function(key) {
 
-            console.log(dict)
             info.push(mapa[key]);
             if(parameters.eixo == 2 && parameters.var == 17)
                 return dict[mapa[key].id] = {id:mapa[key].id, SouN:mapa[key].SouN, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};

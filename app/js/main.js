@@ -1344,8 +1344,6 @@ $(document).ready(function(){
                     })
                 });
 
-                
-
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();

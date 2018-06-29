@@ -437,6 +437,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         }
         else if(parameters.uf == 0 && (parameters.cad == 0 || parameters.ocp == 3)){
             ocp_real = 3
+
             if(parameters.ocp > 0){
                 ocp_real = $('.bread-select[data-id=ocp]').val()
             }
@@ -452,7 +453,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         }
         else {
             dados.valor = dados.value[index_ano];
-
+            
             if(vrv == 2 && parameters.ocp == 0){
                 dados.valor = dados.value[index_ano]*100;
             }
@@ -1317,7 +1318,6 @@ function getTextWidth(text, font) {
 * Parâmetros: valores, eixo e variável
  */
 function setPercentValueData(value, eixo, vrv) {
-
     if(value.percentual == "NaN"){
         value.percentual = 0;
     }
@@ -1337,12 +1337,11 @@ function setPercentValueData(value, eixo, vrv) {
         setMaxFontSize(doc);
     }
     else if(eixo == 1){
-
         if(vrv > 11 ){
             $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
             
         }
-        else if(vrv === 2 || vrv === 11 || vrv === 10 ||  vrv === 9  || vrv === 4 || vrv === 5 || vrv === 6 || vrv === 8){
+        else if(vrv == 2 || vrv == 11 || vrv == 10 ||  vrv == 9  || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 8){
            $(".percent-value").first().find(".number").first().html("");
         }
         else{
