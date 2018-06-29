@@ -25,6 +25,7 @@ function create_mapa(mapa_box, mapa){
     var info = [];
         Object.keys(mapa).forEach(function(key) {
 
+            console.log(dict)
             info.push(mapa[key]);
             if(parameters.eixo == 2 && parameters.var == 17)
                 return dict[mapa[key].id] = {id:mapa[key].id, SouN:mapa[key].SouN, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
@@ -115,7 +116,8 @@ function create_mapa(mapa_box, mapa){
                 .attr("d", path)
                 .attr("stroke-linecap", "round")
                 .on("mouseover", function(d){
-                    loadTooltip_mapa(d, parameters.eixo, parameters.var);
+
+                    loadTooltip_mapa(d, dict, parameters.eixo, parameters.var);
                 })
                 .on("mouseout", tooltipInstance.hideTooltip)
                 .on("click", function(d) {
@@ -232,7 +234,6 @@ function update_mapa(mapa_box, mapa){
 
     
     Object.keys(mapa).forEach(function(key) {
-
         info.push(mapa[key]);
         if(parameters.eixo == 2 && parameters.var == 17)
 		    return dict[mapa[key].id] = {id:mapa[key].id, SouN:mapa[key].SouN, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
@@ -283,7 +284,11 @@ function update_mapa(mapa_box, mapa){
             }
 
         })
-        .style("cursor", "pointer");
+        .style("cursor", "pointer")
+        .on("mouseover", function(d){
+                    
+            loadTooltip_mapa(d, dict, parameters.eixo, parameters.var);
+        });
 
 
     var low_color = color(minValue);
@@ -393,16 +398,15 @@ function destacaPais(svg_mapa, ufId) {
 
 }
 
-function loadTooltip_mapa(d, eixo, vrv){
+function loadTooltip_mapa(d, dict, eixo, vrv){
 
     if(eixo == 0) {
 
         var valorTooltip = 0;
 
-        var array = [1, 2, 4, 5, 6, 7 ,8]
-        var array100 = [3, 9]
+        var array = ['1', '2', '4', '5', '6', '7' , '8'];
+        var array100 = ['3', '9'];
 
-        var arrayPercentual = [];
 
         if(array.indexOf(vrv) != -1){
             valorTooltip = dict[d.id].valor;
@@ -413,9 +417,7 @@ function loadTooltip_mapa(d, eixo, vrv){
 
         tooltipInstance.showTooltip(d, [
             ["title", d['properties']['name']],
-            ["", formatTextVrv(valorTooltip, eixo, vrv)],
-            //["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-            //["", formatDecimalLimit(dict[d.id].taxa, 2)],
+            ["", formatTextVrv(valorTooltip, eixo, vrv)]
         ]);
 
     }

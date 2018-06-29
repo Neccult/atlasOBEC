@@ -482,7 +482,7 @@ function legendaBinario(){
 
 
     function loadTooltip(d){
-
+        alert("oi")
         if(eixo == 0) {
 
             var valorTooltip = 0;
@@ -497,13 +497,10 @@ function legendaBinario(){
             }
             else if (array100.indexOf(parameters.var) != -1){
                 valorTooltip = dict[d.id].valor*100;
-            }
-
+            }alert("oi")
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
-                ["", formatTextVrv(valorTooltip, parameters.eixo, parameters.var)],
-                //["", formatDecimalLimit(dict[d.id].percentual*100, 2) + "%"],
-                //["", formatDecimalLimit(dict[d.id].taxa, 2)],
+                ["", formatTextVrv(valorTooltip, parameters.eixo, parameters.var)]
             ]);
 
         }
