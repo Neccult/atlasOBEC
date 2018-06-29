@@ -163,9 +163,8 @@ function updateTitleClickSCC(){
     } else {
         scc_click = "NO SETOR "+scc_click.toUpperCase()
     }
-    title = $("iframe[id=view_box_barras]").parent().find(".view-title").text()
-    $("iframe[id=view_box_barras]").parent().find(".view-title")
-        .text(title.replace(/NO SETOR .+|NOS SETORES CULTURAIS E CRIATIVOS/, scc_click))
+    title = $("#containerBarra").find(".view-title").text()
+    $("#containerBarra").find(".view-title").text(title.replace(/NO SETOR .+|NOS SETORES CULTURAIS E CRIATIVOS/, scc_click))
 
 }
 
@@ -174,14 +173,19 @@ function updateTitleClickMapa(uf_click){
     uf_anterior = $('.bread-select[data-id=uf] option:selected').text()
 
     replace_uf = getPrepos(uf_anterior) + ' ' + uf_anterior.toUpperCase()
-    title = $("iframe[id=view_box_scc]").parent().find(".view-title").text()
-    $("iframe[id=view_box_scc]").parent().find(".view-title")
-        .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
+    title = $("#containerTree").find(".view-title").text();
+    
+    $("#containerTree").find(".view-title").text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
 
-    title = $("iframe[id=view_box_barras]").parent().find(".view-title").text()
-    $("iframe[id=view_box_barras]").parent().find(".view-title")
-        .text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
+    title = $("#containerBarra").find(".view-title").text()
+    $("#containerBarra").find(".view-title").text(title.replace(replace_uf, getPrepos(uf_click)+' '+uf_click.toUpperCase()))
 
+}
+
+function initTitleBox(){
+    $("#containerBarra").find(".view-title").text('SÉRIE HISTÓRICA [uf] [cad]');
+    
+    $("#containerTree").find(".view-title").text("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]");
 }
 
 function updateTitleBox(){
@@ -202,7 +206,7 @@ function updateTitleBox(){
         }
     }
 
-    uf = getNomeUF(url['uf'])
+    uf = getNomeUF(url['uf']);
 
     if(title_scc != undefined)
         $("#containerTree").find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
