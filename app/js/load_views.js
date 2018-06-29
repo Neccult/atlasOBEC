@@ -57,6 +57,9 @@ $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
     brasil_setor = JSON.parse(dado)
 })
 
+initTitleBox();
+updateTitleBox();
+
 //NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
 $.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
