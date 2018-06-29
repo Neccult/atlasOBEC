@@ -134,7 +134,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
-    console.log(data_var.views)
+    // console.log(data_var.views)
         
     var view_box1 = data_var.views.view_box1[parameters.chg]
     var view_box2 = data_var.views.view_box2[0]
@@ -152,6 +152,9 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
+    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function (data) {
+        console.log(data)
+    })
 })
 
 function indexEixo(eixo){

@@ -587,17 +587,18 @@ class EixoDois {
                     ." AND ex.Sexo IS NULL";
                 
                 $params[] = $regiao;
-                $params[] = self::concatValueDeg($desag, 1, $subdeg);
+                $params[] = self::concatValueDeg($deg, 1, $subdeg);
                 $params[] = $ocp;
-                $params[] = self::concatValueDeg($desag, 3, $subdeg);
-                $params[] = self::concatValueDeg($desag, 4, $subdeg);
-                $params[] = self::concatValueDeg($desag, 5, $subdeg);
+                $params[] = self::concatValueDeg($deg, 3, $subdeg);
+                $params[] = self::concatValueDeg($deg, 4, $subdeg);
+                $params[] = self::concatValueDeg($deg, 5, $subdeg);
                 $params[] = $var;
-                $params[] = self::concatValueDeg($desag, 6, $subdeg);
-                $params[] = self::concatValueDeg($desag, 7, $subdeg);
-                $params[] = self::concatValueDeg($desag, 8, $subdeg);
+                $params[] = self::concatValueDeg($deg, 6, $subdeg);
+                $params[] = self::concatValueDeg($deg, 7, $subdeg);
+                $params[] = self::concatValueDeg($deg, 8, $subdeg);
                 
-            } else {
+            }
+            else {
                 $query = "SELECT * FROM ".self::$table." AS ex"
                        ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '?'"
                        ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
@@ -614,17 +615,18 @@ class EixoDois {
 
                 $params[] = $regiao;
                 $params[] = $cad;
-                $params[] = self::concatValueDeg($desag, 1, $subdeg);
+                $params[] = self::concatValueDeg($deg, 1, $subdeg);
                 $params[] = $ocp;
-                $params[] = self::concatValueDeg($desag, 3, $subdeg);
-                $params[] = self::concatValueDeg($desag, 4, $subdeg);
-                $params[] = self::concatValueDeg($desag, 5, $subdeg);
+                $params[] = self::concatValueDeg($deg, 3, $subdeg);
+                $params[] = self::concatValueDeg($deg, 4, $subdeg);
+                $params[] = self::concatValueDeg($deg, 5, $subdeg);
                 $params[] = $var;
-                $params[] = self::concatValueDeg($desag, 6, $subdeg);
-                $params[] = self::concatValueDeg($desag, 7, $subdeg);
-                $params[] = self::concatValueDeg($desag, 8, $subdeg);
+                $params[] = self::concatValueDeg($deg, 6, $subdeg);
+                $params[] = self::concatValueDeg($deg, 7, $subdeg);
+                $params[] = self::concatValueDeg($deg, 8, $subdeg);
             }
-        } else {
+        }
+        else {
             if($ocp != 0) {
                 $query = "SELECT * FROM ".self::$table." AS ex"
                        ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '?'"
@@ -650,9 +652,11 @@ class EixoDois {
                 $params[] = $prev;
                 $params[] = $sind;
                 $params[] = $sexos;
-            } else {
+            }
+            else {
+
                 $query = "SELECT * FROM ".self::$table." AS ex"
-                       ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE '?'"
+                       ." JOIN UF AS uf ON uf.idUF = ex.idUF AND uf.UFRegiao LIKE ?"
                        ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
                        ." JOIN Porte AS prt ON prt.idPorte = ex.idPorte AND prt.idPorte = ?"
                        ." JOIN Ocupacao AS ocp ON ocp.idOcupacao = ex.idOcupacao AND ocp.idOcupacao = ?"
@@ -662,29 +666,40 @@ class EixoDois {
                        ." WHERE ex.Numero = ?"
                        ." AND ex.Formalidade = ?"
                        ." AND ex.Previdencia = ?"
-                       ." AND ex.Sindical = ?"
-                       ." AND ex.Sexo = ?";
-                
+                       ." AND ex.Sindical = ?";
+
+
+                if(self::concatValueDegSexo($deg, 2, $subdeg) == "IS NULL"){
+                    $query .= " AND ex.Sexo IS NULL";
+                }
+                else{
+                    $query .= " AND ex.Sexo = ?";
+                };
+
+
                 $params[] = $regiao;
                 $params[] = $cad;
-                $params[] = $prt;
+                $params[] = self::concatValueDeg($deg, 1, $subdeg);
                 $params[] = $ocp;
-                $params[] = $esc;
-                $params[] = $etn;
-                $params[] = $idd;
+                $params[] = self::concatValueDeg($deg, 3, $subdeg);
+                $params[] = self::concatValueDeg($deg, 4, $subdeg);
+                $params[] = self::concatValueDeg($deg, 5, $subdeg);
                 $params[] = $var;
-                $params[] = $form;
-                $params[] = $prev;
-                $params[] = $sind;
-                $params[] = $sexos;
-                
+                $params[] = self::concatValueDeg($deg, 6, $subdeg);
+                $params[] = self::concatValueDeg($deg, 7, $subdeg);
+                $params[] = self::concatValueDeg($deg, 8, $subdeg);
+                if(self::concatValueDegSexo($deg, 2, $subdeg) != "IS NULL"){
+                    $params[] = self::concatValueDegSexo($deg, 2, $subdeg);
+                };
+
             }
         }
 
         if($anos > 0){
             $query .= " AND ex.Ano = ?";
             $params[] = $anos;
-        }            
+        }
+
 
         $paramsStr = '';
         foreach ($params as $param) {
@@ -717,26 +732,30 @@ class EixoDois {
         $query = "SELECT * FROM ".self::$table." WHERE Numero = ? AND idUF = ?";
         $params[] = $var;
         $params[] = $uf;
-        
-       
+
         if($ocp == 0){
 
             if($desag != 0 && $cad == 0) {
                 $query .= " AND idCadeia != 0";
-            } else {
+            }
+            else {
                 if($uos == 1 && $var == 6) {
                     $query .= " AND idCadeia != 0";
-                } else {
+                }
+                else {
                     $query .= " AND idCadeia = ?";
                     $params[] = $cad;
                 }
             }
             $query .= " AND idOcupacao = 0";
-        } else if($ocp == 1){
+        }
+        else if($ocp == 1){
             $query .= " AND idOcupacao = 1";
-        } else if($ocp == 2){
+        }
+        else if($ocp == 2){
             $query .= " AND idOcupacao = 2";
-        } else if($ocp == 3){
+        }
+        else if($ocp == 3){
             $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
         }
                     
@@ -767,8 +786,6 @@ class EixoDois {
 
     }
 
-
-
     private static function concatDeg($deg, $idDeg, $texto){
         if($deg == $idDeg){
             return " AND ".$texto." > 0";
@@ -782,6 +799,14 @@ class EixoDois {
             return $subdeg;
         } else{
             return 0;
+        }
+    }
+
+    private static function concatValueDegSexo($deg, $idDeg, $subdeg){
+        if($deg == $idDeg){
+            return $subdeg;
+        } else{
+            return "IS NULL";
         }
     }
 
