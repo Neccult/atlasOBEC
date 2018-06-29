@@ -424,11 +424,11 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
 
         var valorTooltip = 0;
 
-        var array = [1, 4, 5, 6, 7, 8, 9, 10, 11]
+        var array = ['1', '4', '5', '6', '7', '8', '9', '10', '11']
         var array100 = []
 
         var arrayPercentual = [];
-
+        console.log()
         if(array.indexOf(vrv) != -1){
             valorTooltip = dict[d.id].valor;
         }
