@@ -568,7 +568,7 @@
 				"sufixo_valor" :"",
 				"prefixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
+					"view_box1": ["mapa", "treemap_region"],
 					"view_box2": ["barras"],
 					"view_box3": ["treemap_scc"]
 				},
@@ -729,7 +729,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
@@ -969,7 +969,12 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
-				]
+				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["linhas"]
+				}
 			},
 			{
 				"id":"14",
@@ -987,7 +992,12 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
-				]
+				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["linhas"]
+				}
 			},
 			{
 				"id":"15",
@@ -1005,7 +1015,12 @@
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ocupação","id":"ocp"}
-				]
+				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["linhas"]
+				}
 			}
 		],
 		[
