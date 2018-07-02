@@ -1,5 +1,6 @@
 
 function create_bars_stacked(barras_box, data){
+
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
@@ -13,9 +14,7 @@ function create_bars_stacked(barras_box, data){
     var ocp = 0
     var uos = 0
 
-
     var corEixo = COLORS['eixo'][eixo].color;
-
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
@@ -24,6 +23,8 @@ function create_bars_stacked(barras_box, data){
         }
 
     var desag = selectDesag()
+
+    console.log(data)
 
     if((vrv == 6 || vrv == 4) && eixo == 1){
         aux = []
@@ -55,6 +56,7 @@ function create_bars_stacked(barras_box, data){
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .attr("type", "stacked")
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -68,6 +70,9 @@ function create_bars_stacked(barras_box, data){
             return {x: parse(d.year), y: +d[fruit]};
         });
     });
+
+
+    console.log(data)
 
     var keys = [];
 
@@ -120,7 +125,7 @@ function create_bars_stacked(barras_box, data){
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
-        .ticks(8)
+        .ticks(10)
         .tickFormat(formatYAxis)
         .tickSize(5)
         .tickPadding(10);
@@ -204,6 +209,16 @@ function create_bars_stacked(barras_box, data){
 
 function update_bars_stacked(barras_box, data){
 
+
+    var svg_barras = d3.select(barras_box)
+        .select("svg");
+
+    if(svg_barras.attr("type") == "simples"){
+        svg_barras.remove()
+        create_bars_stacked(barras_box, data);
+        return;
+    }
+
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
@@ -249,25 +264,25 @@ function update_bars_stacked(barras_box, data){
 
     var desag = selectDesag()
 
-    if((vrv == 6 || vrv == 4) && eixo == 1){
-        aux = []
-        selectDesag();
-        Object.keys(data).forEach(function (key) {
-            soma = 0;
-            cont = 0;
-            Object.keys(data[key]).forEach(function (chave) {
-
-                if(chave != "year" && cont == desag){
-                    obj = {};
-                    valor = data[key][chave];
-
-                }
-                cont++;
-            });
-            aux.push({year: data[key].year, Média: valor})
-        });
-        data = aux;
-    }
+    // if((vrv == 6 || vrv == 4) && eixo == 1){
+    //     aux = []
+    //     selectDesag();
+    //     Object.keys(data).forEach(function (key) {
+    //         soma = 0;
+    //         cont = 0;
+    //         Object.keys(data[key]).forEach(function (chave) {
+    //
+    //             if(chave != "year" && cont == desag){
+    //                 obj = {};
+    //                 valor = data[key][chave];
+    //
+    //             }
+    //             cont++;
+    //         });
+    //         aux.push({year: data[key].year, Média: valor})
+    //     });
+    //     data = aux;
+    // }
 
 
 
@@ -275,8 +290,7 @@ function update_bars_stacked(barras_box, data){
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
-    var svg_barras = d3.select(barras_box)
-        .select("svg");
+
 
 
     /* Data in strings like it would be if imported from a csv */
@@ -288,6 +302,7 @@ function update_bars_stacked(barras_box, data){
             return {x: parse(d.year), y: +d[fruit]};
         });
     });
+
 
     var keys = [];
 

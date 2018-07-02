@@ -12,17 +12,14 @@ var margin = {top: 20, right: 25, bottom: 40, left: 45},
 var x, y;
 
 
-var valueline = d3.line()
-    .x(function(d) { return x(d.ano); })
-    .y(function(d) { return y(d.valor); });
+
 
 function create_linhas(linhas_box, data){
 
+    keys = [];
 
     getDivSize(linhas_box);
     getBoxXY();
-
-    console.log(data)
 
     Object.keys(data).forEach(function (key) {
         anos.push(data[key].ano);
@@ -37,9 +34,10 @@ function create_linhas(linhas_box, data){
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
 
-    var svg = d3.select(linhas_box).append("svg")
+    var svg_linhas = d3.select(linhas_box).append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
+        .attr("deg", parameters.deg)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -62,7 +60,7 @@ function create_linhas(linhas_box, data){
     var dados = [];
     var valoresBrutos = [];
 
-    $.each( keys, function( i, deg ) {
+    $.each(keys, function(i, deg) {
 
         var valores = [];
         var obj = {};
@@ -80,6 +78,8 @@ function create_linhas(linhas_box, data){
 
     });
 
+    // console.log(dados)
+
 
     // Scale the range of the data
     x.domain(d3.extent(data, function(d) { return d.ano; }));
@@ -96,65 +96,45 @@ function create_linhas(linhas_box, data){
 
     y.domain([min, max]);
 
-    Object.keys(dados).forEach(function (i) {
+    var valueline = d3.line()
+        .x(function(d) { return x(d.ano); })
+        .y(function(d) { return y(d.valor); });
 
-        var scc = dados[i][0].deg;
 
-        svg.append("path")
-            .data([dados[i]])
-            .attr("class", "line")
-            .attr("scc", scc)
-            .style("opacity",  function(d){
-                if(url['cad'] != 0 ){
-                    if(getCadId(scc) == url['cad'])
-                        return 1;
-                    else return 0.2;
-                }
-                else
-                    return 1;})
-            .style("stroke-width", function(d){return 2;})
-            .style("stroke", colorLinhas(scc))
-            .attr("d", valueline);
-    });
+    svg_linhas.selectAll("path.line")
+        .data(dados)
+        .enter().append("path")
+        .attr("class", "line")
+        .attr("scc", function(d){
+            d[0].deg;
+        })
+        .style("opacity",  function(d){
+            if(url['cad'] != 0 ){
+                if(getCadId(d[0].deg) == url['cad'])
+                    return 1;
+                else return 0.2;
+            }
+            else
+                return 1;})
+        .style("stroke-width", function(d){return 2;})
+        .style("stroke", function(d){
+            return colorLinhas(d[0].deg)
+        })
+        .attr("d", valueline);
 
 
     // Add the X Axis
-    svg.append("g")
+    svg_linhas.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x))
         .attr("class", "x");
 
     // Add the Y Axis
-    svg.append("g")
+    svg_linhas.append("g")
         .call(d3.axisLeft(y))
         .attr("class", "y");
 
-    svg.selectAll("path")
-        .on("mouseover", function (d) {
-            mousemoveLinhas(d, (this), data, tooltipInstance);
 
-            if(url['cad'] == 0){
-                d3.select(this).style("opacity", 1)
-            }
-        })
-        .on("click", function (data) {
-
-            if(window.parent.innerWidth <= 800)
-                return;
-
-            if(!(parameters.eixo == 0 && parameters.var >= 10 ||
-                    parameters.eixo == 1 && parameters.var > 11 ||
-                    parameters.eixo == 2 && (parameters.var == 15 || parameters.var == 16 || parameters.var == 10)))
-
-                clickLinhas(data, (this));
-        })
-        .on("mouseout", function () {
-            tooltipInstance.hideTooltip();
-
-            if(url['cad'] == 0){
-                d3.selectAll("path").style("opacity", 1)
-            }
-        })
 
     d3.selectAll('.x g').each(function (d, index) {
         transform = d3.select(this).attr('transform')
@@ -179,19 +159,31 @@ function create_linhas(linhas_box, data){
 
 function update_linhas(linhas_box, data){
 
+    var svg_linhas = d3.select(linhas_box).select("svg");
 
+
+    if(svg_linhas.attr("deg") != parameters.deg){
+        svg_linhas.remove()
+        create_linhas(linhas_box, data);
+        return;
+    }
+
+    var valueline = d3.line()
+        .x(function(d) { return x(d.ano); })
+        .y(function(d) { return y(d.valor); });
 
     getBoxXY();
-
-
 
     coordsAxisX = [];
     coordsAxisY = [];
 
-    var svg = d3.select(linhas_box).select("svg")
+    var svg_linhas = d3.select(linhas_box).select("svg")
         .select("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
+
+
 
     data.forEach(function(d) {
 
@@ -222,9 +214,10 @@ function update_linhas(linhas_box, data){
             valoresBrutos.push(data[key][deg]);
             valores.push({'ano': data[key]['ano'], 'deg': deg, 'valor': data[key][deg]})
         });
-        dados.push(valores)
-    });
 
+        dados.push(valores)
+
+    });
 
     var tooltipInstance = tooltip.getInstance();
 
@@ -236,45 +229,59 @@ function update_linhas(linhas_box, data){
             min = 0;
     }
 
+    console.log(dados)
+
     x.domain(d3.extent(data, function(d) { return d.ano; }));
     y.domain([min, max]);
 
-    svg.selectAll("path")
+    // var paths = svg_linhas.selectAll("path")
+    //     .data(dados)
+    //     .transition().duration(800)
+    //     .attr("d", valueline)
+
+    var paths = svg_linhas.selectAll("path")
         .data(dados)
         .transition().duration(800)
-        .attr("d", valueline);
+        .attr("d", valueline)
+    // var newPaths = paths
+    //                 .enter().append("path")
+    //                 .attr("class", "line")
+    //                 .attr("scc", function(d){
+    //                     d[0].deg;
+    //                 })
+    //                 .style("opacity",  function(d){
+    //                     if(url['cad'] != 0 ){
+    //                         if(getCadId(d[0].deg) == url['cad'])
+    //                             return 1;
+    //                         else return 0.2;
+    //                     }
+    //                     else
+    //                         return 1;})
+    //                 .style("stroke-width", function(d){return 2;})
+    //                 .style("stroke", function(d){
+    //                     return colorLinhas(d[0].deg)
+    //                 })
+
+
+
+
+
+    // var paths = svg_linhas.selectAll("path.line")
+    //     .data(dados)
+    //
+    // paths.exit().remove();
+    //
+    // paths.enter().attr("d", valueline);
+
+    //
+
+
 
     // Add the Y Axis
-    svg.select(".y")
+    svg_linhas.select(".y")
         .transition().duration(800)
         .call(d3.axisLeft(y))
 
-    svg.selectAll("path")
-        .on("mouseover", function (d) {
-            mousemoveLinhas(d, (this), data, tooltipInstance);
-
-            if(url['cad'] == 0){
-                d3.select(this).style("opacity", 1)
-            }
-        })
-        .on("click", function (data) {
-
-            if(window.parent.innerWidth <= 800)
-                return;
-
-            if(!(parameters.eixo == 0 && parameters.var >= 10 ||
-                    parameters.eixo == 1 && parameters.var > 11 ||
-                    parameters.eixo == 2 && (parameters.var == 15 || parameters.var == 16 || parameters.var == 10)))
-
-                clickLinhas(data, (this));
-        })
-        .on("mouseout", function () {
-            tooltipInstance.hideTooltip();
-
-            if(url['cad'] == 0){
-                d3.selectAll("path").style("opacity", 1)
-            }
-        })
 
     d3.selectAll('.x g').each(function (d, index) {
         transform = d3.select(this).attr('transform')
@@ -690,7 +697,6 @@ function getMin(valores) {
         return Math.min(d);
     }
 )};
-
 
 function getMax(valores) {
     return d3.max (valores, function(d) {

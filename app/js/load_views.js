@@ -25,7 +25,7 @@ view_box1_ant = ''
 
 VIEWS = {
     "barras": function (box, data, update){
-        if(parseInt(parameters.subdeg)){
+        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6))){
             if(update){
                 update_bars_stacked(box, data);
             }
@@ -153,7 +153,13 @@ switch(parameters.eixo){
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '1'
             views_parameters["#view_box_scc"].uos = '0'
-        } else {
+        }
+        else if(parameters.var == 6){
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '1'
+        }
+        else {
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '0'
             views_parameters["#view_box_scc"].uos = '0'
@@ -278,7 +284,13 @@ function loadViews(){
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '1'
                 views_parameters["#view_box_scc"].uos = '0'
-            } else {
+            }
+            else if(parameters.var == 6){
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '1'
+            }
+            else {
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '0'
                 views_parameters["#view_box_scc"].uos = '0'
