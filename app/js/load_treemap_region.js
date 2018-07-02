@@ -279,6 +279,10 @@ function update_treemap_region(treemap_box, data){
                         return formatDecimalLimit(d.data.percentual*100, 2) + '%';
                     }
                 }
+
+                else if(parameters.eixo == 1){
+                    return formatDecimalLimit((d.data.size/root_region.value)*100 , 2) + '%';
+                }
                 else if(parameters.eixo == 2){
                     if(vrv === 7) {
                         return formatDecimalLimit(d.data.size, 3);

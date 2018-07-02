@@ -363,7 +363,7 @@ function loadResult(){
         }
     });
 
-    $(".opt").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][3]);
+    $("#containerDownload button").css("background-color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][3])
     $(".number").css("color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][4])
     $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
 
@@ -1611,11 +1611,11 @@ function updateOptView(container, btn){
 
                 }
                 else{
-                    $(this).css("opacity", "1")
+                    $(this).css("opacity", "0.8")
                     if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
                         $(this).css("background-color", corEixo[2]);
+                    else
+                        $(this).css("background-color", corEixo[1]);
                 }
             }
             else{
@@ -1627,7 +1627,7 @@ function updateOptView(container, btn){
                         $(this).css("background-color", corEixo[2]);
                 }
                 else{
-                    $(this).css("opacity", "0.1")
+                    $(this).css("opacity", "0.8")
                     if(parameters.eixo == 0)
                         $(this).css("background-color", corEixo[1]);
                     else
@@ -1647,11 +1647,11 @@ function updateOptView(container, btn){
                         $(this).css("background-color", corEixo[2]);
                 }
                 else{
-                    $(this).css("opacity", "0.5")
+                    $(this).css("opacity", "0.8")
                     if(parameters.eixo == 0)
                         $(this).css("background-color", corEixo[1]);
                     else
-                        $(this).css("background-color", corEixo[2]);
+                        $(this).css("background-color", corEixo[1]);
                 }
             }
             else{
@@ -1684,7 +1684,7 @@ function updateOptView(container, btn){
                         $(this).css("background-color", corEixo[2]);
                 }
                 else{
-                    $(this).css("opacity", "")
+                    $(this).css("opacity", "0.8")
                     if(parameters.eixo == 0)
                         $(this).css("background-color", corEixo[2]);
                     else
@@ -1704,7 +1704,7 @@ function updateOptView(container, btn){
                             $(this).css("background-color", corEixo[2]);
                     }
                     else{
-                        $(this).css("opacity", "")
+                        $(this).css("opacity", "0.8")
                         if(parameters.eixo == 0)
                             $(this).css("background-color", corEixo[2]);
                         else
