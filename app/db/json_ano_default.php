@@ -35,7 +35,7 @@
                 if(!isset($json[$result->Numero]))
                     $json[$result->Numero] = array();
                     
-                $json[$result->Numero][0] = $result->Ano;
+                array_push($json[$result->Numero],$result->Ano);
             }
             break;
         case 3:

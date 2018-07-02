@@ -98,7 +98,6 @@ function create_treemap_scc(treemap_scc_box, data){
 
     if(eixo == 1) {
         if(deg == 0) {
-            console.log(cell.selectAll("rect").size())
             cell.append("rect")
                 .attr("data-legend", function(d) { return d.data.colorId; })
                 .attr("data-value", function(d) { return (d.value); })

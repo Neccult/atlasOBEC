@@ -219,7 +219,6 @@ function create_mapa(mapa_box, mapa){
 function update_mapa(mapa_box, mapa){
 
     svg_mapa = d3.select(mapa_box+">svg")
-
     d3.json("./data/br-min.json", function(data){
         br_states = data;
     })
@@ -229,8 +228,6 @@ function update_mapa(mapa_box, mapa){
     
 	var dict = {};
     var info = [];
-
-
     
     Object.keys(mapa).forEach(function(key) {
         info.push(mapa[key]);
@@ -262,7 +259,7 @@ function update_mapa(mapa_box, mapa){
 	var color = d3.scaleLinear()
         .domain([minValue, maxValue])
         .range([COLORS.cadeias[parameters.cad].gradient['2'], COLORS.cadeias[parameters.cad].gradient['6']])
-    
+
     destacaPais(svg_mapa, parameters.uf);
 
 
@@ -428,7 +425,6 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
         var array100 = []
 
         var arrayPercentual = [];
-        console.log()
         if(array.indexOf(vrv) != -1){
             valorTooltip = dict[d.id].valor;
         }

@@ -5,7 +5,6 @@ var cell_region;
 
 function create_treemap_region(treemap_box, data){
 
-    console.log(data)
 
     /* cria svg */
     svg_treemap_region = d3.select(treemap_box).append("svg");
@@ -127,6 +126,9 @@ function create_treemap_region(treemap_box, data){
                     return formatDecimalLimit(d.data.percentual*100, 2) + '%';
                 }
 			}
+			else if(parameters.eixo == 1){
+                return formatDecimalLimit((d.data.size/root_region.value)*100 , 2) + '%';
+            }
 			else if(parameters.eixo == 2){
                 if(vrv === 7) {
                     return formatDecimalLimit(d.data.size, 3);

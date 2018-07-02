@@ -151,7 +151,7 @@ function updateIframe(url){
     if(window.location.pathname.match("page.php")){
         return;
     }
-    
+
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
     initTitleBox();
     updateTitleBox();
@@ -1103,6 +1103,7 @@ $(document).ready(function(){
         var texto = $(this).html();
 
         updateOptView($(this).parent().parent().attr("class"), $(this))
+
 
         if(id == "treemap_region" || id == "mapa") {
             updateUrl();
