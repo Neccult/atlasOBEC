@@ -151,7 +151,7 @@ function updateIframe(url){
     if(window.location.pathname.match("page.php")){
         return;
     }
-    
+
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
     initTitleBox();
     updateTitleBox();
@@ -1150,7 +1150,7 @@ $(document).ready(function(){
 
                 url['view'] = $(this).attr('id'); /* muda visualização */
 
-                updateIframe(url); /* atualiza gráfico */
+                
 
                 if(id === "treemap_region") {
                     $(this).addClass("active");
@@ -1164,6 +1164,7 @@ $(document).ready(function(){
                 }
 
                 updateWindowUrl('chg', url['chg'])
+                updateIframe(url); /* atualiza gráfico */
             }
 
         }

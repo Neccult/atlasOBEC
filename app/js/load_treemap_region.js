@@ -5,7 +5,6 @@ var cell_region;
 
 function create_treemap_region(treemap_box, data){
 
-    console.log(data)
 
     /* cria svg */
     svg_treemap_region = d3.select(treemap_box).append("svg");

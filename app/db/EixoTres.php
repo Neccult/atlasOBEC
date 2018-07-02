@@ -97,9 +97,9 @@ class EixoTres {
 	    Array com os resultados da busca
 	-----------------------------------------------------------------------------*/
 	public static function getter_most_recent_year(){
-		self::connect();
-
-		$query = "SELECT MAX(Ano) AS Ano, Numero FROM `Eixo_3` WHERE (idUF = 11 or idUF = 0) AND idCadeia = 0 AND PessoaFisica is NULL  GROUP BY Numero";
+        self::connect();
+        
+        $query = "SELECT DISTINCT Ano, Numero FROM `Eixo_3` WHERE `idUF` = 0";
 
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        

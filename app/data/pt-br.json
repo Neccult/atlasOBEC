@@ -1150,6 +1150,7 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
+				"botoes":[],
 				"mapa":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"},
@@ -1173,6 +1174,11 @@
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1180,6 +1186,7 @@
 				"title":"<span>CONSUMO VIA VALE-CULTURA<span>",
 				"desc_int":"consumidos via cartão Vale-Cultura [cad] [uf] ",
 				"desc_percent": "Total consumido [cad] [uf] ",
+				"botoes":[],
 				"desc_var_mapa": "Valor do consumo realizado por meio do cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa recebedora onde o cartão foi utilizado.",
 				"desc":"",
 				"sufixo_valor":"",
@@ -1187,6 +1194,11 @@
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
@@ -1200,6 +1212,7 @@
 				"desc_percent": "[cad] [uf]",
 				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
 				"desc":"",
+				"botoes":[],
 				"fontes":"COORDENAÇÃO GERAL DO PROGRAMA CULTURA DO TRABALHADOR (SEFIC-MINC)",
 				"sufixo_valor":" ",
 				"prefixo_valor":"",
@@ -1210,6 +1223,11 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1220,6 +1238,7 @@
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES () [uf]",
 				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, destinado ao financiamento da produção artística e cultural no Brasil por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
 				"fontes": "BNDES.",
+				"botoes":[],
 				"title":"Financiamento pelo BNDES",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
@@ -1249,6 +1268,11 @@
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
 				},
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1260,6 +1284,7 @@
 				"sufixo_valor":"",
 				"fontes": "SALICnet.",
 				"prefixo_valor":"R$ ",
+				"botoes":[],
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
@@ -1274,6 +1299,11 @@
 					{"name":"Ano","id":"ano"},
 					{"name":"Tipo de Pessoa","id":"pfj"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Tipo de Pessoa","id":"pfj"}
@@ -1298,6 +1328,7 @@
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Barras", "id":"barras"}
 				],
+				"botoes":[],
 				"mapa":[
 					{"name":"Ano","id":"ano"}
 				],
@@ -1309,6 +1340,11 @@
 				],
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				},
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
 				},
                "mapa_valores": ""
 			},
@@ -1336,6 +1372,12 @@
 				"barras":[
 					{"name":"UF","id":"uf"}
 				],
+				"botoes":[],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
 				},
@@ -1371,10 +1413,16 @@
 					{"name":"Ano","id":"ano"},
 					{"name":"Mecanismo","id":"mec"}
 				],
+				"botoes":[],
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
@@ -1401,6 +1449,7 @@
 					{"name":"Ano","id":"ano"},
 					{"name":"Mecanismo","id":"mec"}
 				],
+				"botoes":[],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Ano","id":"ano"},
@@ -1416,6 +1465,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Mecanismo","id":"mec"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
@@ -1431,9 +1485,15 @@
 				"desc_var_mapa": "A variável mede a razão entre a despesa total com cultura (orçamento MinC) e a arrecadação federal total, e também a relação entre o financiamento total do fomento à cultura (FNC e mecenato) e arrecadação federal total.",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1446,6 +1506,7 @@
 				"sufixo_valor":"",
 				"fontes": "SALICnet. ",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1464,6 +1525,11 @@
 					{"name":"UF","id":"uf"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
@@ -1480,6 +1546,7 @@
 				"sufixo_valor":"",
 				"fontes": "SALICnet. Atualizado para 2016. ",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1498,6 +1565,11 @@
 					{"name":"UF","id":"uf"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
@@ -1514,6 +1586,7 @@
 				"desc_var_mapa": "A variável mostra o intervalo médio, em número de dias, entre a data de proposta do projeto de financiamento e a data da aprovação efetiva para início de captação de recursos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
@@ -1532,6 +1605,11 @@
 					{"name":"UF","id":"uf"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF","id":"uf"},
 					{"name":"Setor","id":"cad"}
@@ -1548,9 +1626,15 @@
 				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
 				"desc_var_mapa": "A variável calcula o percentual médio financiado do projeto, obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto. ",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
@@ -1567,9 +1651,15 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
@@ -1586,6 +1676,7 @@
 				"sufixo_valor":"",
 				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1593,6 +1684,11 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1604,6 +1700,7 @@
 				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1611,6 +1708,11 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["mapa"],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"fontes": "",
 				"mapa_valores": "Observação: Valor total referente à soma dos valores enviados pelas Unidades Federativas brasileiras. Algumas Unidades Federativas que possuem esse mecanismo de financiamento não enviaram dados."
 			}
@@ -1653,6 +1755,11 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"}
 				],
+				"views": {
+					"view_box1": ["mapa-mundi", "mapa"],
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
+				},
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				}

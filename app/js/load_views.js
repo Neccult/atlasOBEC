@@ -107,6 +107,7 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
         $(this.options).each(function(){
             $(this).remove();
         })
+        console.log(anos_default)
         if(parameters.eixo == 1){
             if(parameters.ocp > 0){
                 var ocp = 1
@@ -130,6 +131,7 @@ $.ajaxSetup({async: true});
 
 switch(parameters.eixo){
     case 0:
+        index_view_box1 = parameters.chg;
         if(parameters.var >= 10){
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '1'
@@ -146,6 +148,7 @@ switch(parameters.eixo){
         }
         break;
     case 1:
+        index_view_box1 = parameters.chg;
         if(parameters.var > 11){
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '1'
@@ -161,6 +164,9 @@ switch(parameters.eixo){
         } else {
             $(".content-btn-mapa").css("display", "block");
         }
+        break;
+    case 2:
+        index_view_box1 = 0;
 }
     
 
@@ -176,7 +182,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
 
     // console.log(data_var.views)
         
-    var view_box1 = data_var.views.view_box1[parameters.chg]
+    var view_box1 = data_var.views.view_box1[index_view_box1]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
 
@@ -192,15 +198,19 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function (data) {
-        console.log(data)
-    })
 })
 
 function updateParameters(){
 
     data_var_ant = getDataVar(PT_BR, parameters.eixo, parameters.var);
-    view_box1_ant = data_var_ant.views.view_box1[parameters.chg];
+    
+    if(parameters.chg == undefined){
+        index_view_box1 = 0;
+    } else {
+        index_view_box1 = parameters.chg;
+    }
+
+    view_box1_ant = data_var_ant.views.view_box1[index_view_box1];
 
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
@@ -245,6 +255,7 @@ function loadViews(){
 
     switch(parameters.eixo){
         case 0:
+            index_view_box1 = parameters.chg;
             if(parameters.var >= 10){
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '1'
@@ -262,6 +273,7 @@ function loadViews(){
             }
             break;
         case 1:
+            index_view_box1 = parameters.chg;
             if(parameters.var > 11){
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '1'
@@ -278,13 +290,16 @@ function loadViews(){
             } else {
                 $(".content-btn-mapa").css("display", "block");
             }
+            break;
+        case 2:
+            index_view_box1 = 0;
     }
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
     
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     
-    var view_box1 = data_var.views.view_box1[parameters.chg]
+    var view_box1 = data_var.views.view_box1[index_view_box1]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
 
@@ -292,8 +307,8 @@ function loadViews(){
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
 
-    
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
+
         VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
     })
 

@@ -35,6 +35,7 @@ function UpdateWindowUrl(id, valor){
 
     var urlString = window.location.href.replace(re, id+"="+valor);
     window.history.pushState(null, null, urlString);
+
 }
 
 function changeDownloadURL(url, eixo){
@@ -416,9 +417,9 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
             if(parameters.ano != null) {
                 dados.valor = dados.value[index_ano];
                 if(url['slc'] == 0){
-                    if(url['uos'] == 0){
+                    if(uos == 0){
                         setIntegerValueData(dados, eixo, vrv);
-                    } else if(url['uos'] == 1){
+                    } else if(uos == 1){
 
                         setPercentValueData(dados, eixo, vrv);
                     }
@@ -467,10 +468,8 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
     }
     else if(eixo == 2){
 
-
-        indexAno = dados.key.indexOf(url['ano'])
         if(vrv == 15 || vrv == 16){
-            if(url['uos'] == 0){
+            if(uos == 0){
                 dados.valor = dados.value[indexAno]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
@@ -515,19 +514,19 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
         }
         else{
-            if(url['uf'] == 0){
+            if(parameters.uf == 0){
 
-                dados.valor = dados.value[indexAno];
+                dados.valor = dados.value[index_ano];
 
                 setIntegerValueData(dados, eixo, vrv);
-                if(url['cad'] == 0){
-                    setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
+                if(parameters.cad == 0){
+                    setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
                 }
             }
             else{
-                if(url['cad'] == 0){
-                    dados.valor = dados.value[indexAno];
-                    dados.percentual = dados.percentual[indexAno];
+                if(parameters.cad == 0){
+                    dados.valor = dados.value[index_ano];
+                    dados.percentual = dados.percentual[index_ano];
                    // console.log(dados)
                     setIntegerValueData(dados, eixo, vrv);
                     //setPercentValueData(dados, eixo, vrv);
@@ -598,7 +597,7 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
                 dados.valor = dados.value[i];
                 setIntegerValueData(dados, eixo, vrv);
             }
-            else if(url['uf'] !== 0){
+            else if(url['uf'] != 0){
                 dados.valor = dados.value[i];
                 setIntegerValueData(dados, eixo, vrv);
                 //setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
@@ -616,10 +615,10 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
         }
         else if (vrv > 9) {
             dados.valor = dados.value[i];
-            if(url["uos"] == 0){
+            if(uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
             }
-            else if(url["uos"] == 1){
+            else if(uos == 1){
                 setPercentValueData(dados, eixo, vrv);
             }
         }
@@ -632,9 +631,9 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
         if(vrv >= 12){
             dados.valor = dados.value[i];
-            if(url["uos"] == 0){
+            if(uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(url["uos"] == 1){
+            } else if(uos == 1){
                 setPercentValueData({valor: dados.value[i]}, eixo, vrv);
             }
         }
@@ -655,23 +654,23 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
     }
     else if(eixo == 2){
 
-        if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 || vrv == 5 || vrv == 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 18 || vrv === 19){
+        if(vrv == 1 || vrv == 2 || vrv == 3 || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14 || vrv == 18 || vrv == 19){
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
         }
-        else if(vrv === 17){
+        else if(vrv == 17){
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
         }
-        else if(vrv === 15 || vrv === 16){
+        else if(vrv == 15 || vrv == 16){
             dados.valor = dados.value[i];
-            if(url["uos"] == 0){
+            if(uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(url["uos"] == 1){
+            } else if(uos == 1){
                 setPercentValueData({percentual: dados.value[i]}, eixo, vrv);
             }
         }
-        else if(vrv === 10){
+        else if(vrv == 10){
             dados.valor = dados.value[i];
             if(url["mec"] == 0){
                 setIntegerValueData(dados, eixo, vrv);

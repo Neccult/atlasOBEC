@@ -28,7 +28,6 @@ function ready(json){
     var pie = d3.pie()
         .value(function(d) { return d.valor; })(data);
 
-
     var svg = d3.select("#corpo").append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -169,8 +168,6 @@ function ready(json){
 
 
 }
-
-
 
 function color(tipo){
 
