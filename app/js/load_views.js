@@ -25,7 +25,7 @@ view_box1_ant = ''
 
 VIEWS = {
     "barras": function (box, data, update){
-        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6))){
+        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)) && !(parameters.eixo == 0)){
             if(update){
                 update_bars_stacked(box, data);
             }

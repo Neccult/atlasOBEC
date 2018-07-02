@@ -38,6 +38,7 @@ function create_linhas(linhas_box, data){
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .attr("deg", parameters.deg)
+        .attr("ocp", parameters.ocp)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -162,11 +163,12 @@ function update_linhas(linhas_box, data){
     var svg_linhas = d3.select(linhas_box).select("svg");
 
 
-    if(svg_linhas.attr("deg") != parameters.deg){
+    if((svg_linhas.attr("deg") != parameters.deg) || (svg_linhas.attr("ocp") != parameters.ocp)){
         svg_linhas.remove()
         create_linhas(linhas_box, data);
         return;
     }
+
 
     var valueline = d3.line()
         .x(function(d) { return x(d.ano); })
