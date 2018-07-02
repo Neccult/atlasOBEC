@@ -152,13 +152,12 @@ function updateIframe(url){
         return;
     }
     
-
-    $.getScript('js/load_views_listeners.js');
-
-    
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
     initTitleBox();
     updateTitleBox();
+
+
+    updateViews();
     
 }
 
@@ -1488,11 +1487,11 @@ $(document).ready(function(){
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
 
-            updateIframe(url);
             if(!(eixo_atual == 1 && dataId == 'deg')){
                 updateWindowUrl(dataId, dataVal);
             }
 
+            updateIframe(url);
         }
         else{
             parent.window.location = "page.php#"+$(this).val();

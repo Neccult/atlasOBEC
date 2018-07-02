@@ -92,6 +92,7 @@ function create_treemap_region(treemap_box, data){
         .on("click", function(d) {
             treemapRegionClick(d, root_region);
         })
+        .on("mouseout", tooltipInstance.hideTooltip)
         .style("cursor", "pointer");
 
 	var titleTextElement = cell_region.append("text")

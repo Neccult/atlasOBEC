@@ -6,8 +6,6 @@ if(parameters != undefined){
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
     })
-
-  
     
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
@@ -67,17 +65,18 @@ if(parameters != undefined){
         },
         "mapa": function (box, data, update){
 
-            br_states = []
+            if(update){
+                update_mapa(box, data)
+            } else {
 
-            d3.json("./data/br-min.json", function(states){
-                br_states = states;
-                if(update){
-                    update_mapa(box, data)
-                } else {
-                    $(box+" svg").remove()
-                    create_mapa(box, data);
-                }
-            })
+                br_states = []
+                d3.json("./data/br-min.json", function(states){
+                    br_states = states;
+                        $(box+" svg").remove()
+                        create_mapa(box, data);
+                })
+            }
+            
 
         },
         "treemap_scc": function (box, data, update){
@@ -156,9 +155,6 @@ if(parameters != undefined){
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
 
-
-    if(parameters.eixo == 0){
-    }
     
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         UPDATE_VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);

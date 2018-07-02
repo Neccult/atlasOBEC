@@ -482,7 +482,6 @@ function legendaBinario(){
 
 
     function loadTooltip(d){
-        alert("oi")
         if(eixo == 0) {
 
             var valorTooltip = 0;

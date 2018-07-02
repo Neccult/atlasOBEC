@@ -46,7 +46,6 @@ if(eixo != 1 || deg == 0 || (eixo == 1 && (vrv == 4 || vrv == 5 || vrv == 6 ))) 
     }
 */
     function analyze(error, data) {
-        alert("oi")
         $('#loading').fadeOut('fast');
         if (error) {
             console.log(error);

@@ -199,7 +199,6 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 
                 // loadTooltip(d, eixo , vrv);
 
-            alert("oi")
 
             })
             .on("mouseout", tooltipInstance.hideTooltip)
