@@ -25,7 +25,7 @@ view_box1_ant = ''
 
 VIEWS = {
     "barras": function (box, data, update){
-        if(parseInt(parameters.subdeg)){
+        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6))){
             if(update){
                 update_bars_stacked(box, data);
             }
@@ -192,9 +192,9 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function (data) {
-        console.log(data)
-    })
+    // $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function (data) {
+    //     console.log(data)
+    // })
 })
 
 function updateParameters(){

@@ -12,17 +12,19 @@ var margin = {top: 20, right: 25, bottom: 40, left: 45},
 var x, y;
 
 
-var valueline = d3.line()
-    .x(function(d) { return x(d.ano); })
-    .y(function(d) { return y(d.valor); });
+
 
 function create_linhas(linhas_box, data){
+
+    var valueline = d3.line()
+        .x(function(d) { return x(d.ano); })
+        .y(function(d) { return y(d.valor); });
 
 
     getDivSize(linhas_box);
     getBoxXY();
 
-    console.log(data)
+    // console.log(data)
 
     Object.keys(data).forEach(function (key) {
         anos.push(data[key].ano);
@@ -62,7 +64,7 @@ function create_linhas(linhas_box, data){
     var dados = [];
     var valoresBrutos = [];
 
-    $.each( keys, function( i, deg ) {
+    $.each(keys, function(i, deg) {
 
         var valores = [];
         var obj = {};
@@ -80,6 +82,8 @@ function create_linhas(linhas_box, data){
 
     });
 
+    // console.log(dados)
+
 
     // Scale the range of the data
     x.domain(d3.extent(data, function(d) { return d.ano; }));
@@ -96,26 +100,28 @@ function create_linhas(linhas_box, data){
 
     y.domain([min, max]);
 
-    Object.keys(dados).forEach(function (i) {
 
-        var scc = dados[i][0].deg;
 
-        svg.append("path")
-            .data([dados[i]])
-            .attr("class", "line")
-            .attr("scc", scc)
-            .style("opacity",  function(d){
-                if(url['cad'] != 0 ){
-                    if(getCadId(scc) == url['cad'])
-                        return 1;
-                    else return 0.2;
-                }
-                else
-                    return 1;})
-            .style("stroke-width", function(d){return 2;})
-            .style("stroke", colorLinhas(scc))
-            .attr("d", valueline);
-    });
+    svg.selectAll("path.line")
+        .data(dados)
+        .enter().append("path")
+        .attr("class", "line")
+        .attr("scc", function(d){
+            d[0].deg;
+        })
+        .style("opacity",  function(d){
+            if(url['cad'] != 0 ){
+                if(getCadId(d[0].deg) == url['cad'])
+                    return 1;
+                else return 0.2;
+            }
+            else
+                return 1;})
+        .style("stroke-width", function(d){return 2;})
+        .style("stroke", function(d){
+            return colorLinhas(d[0].deg)
+        })
+        .attr("d", valueline);
 
 
     // Add the X Axis
@@ -179,19 +185,20 @@ function create_linhas(linhas_box, data){
 
 function update_linhas(linhas_box, data){
 
-
+    var valueline = d3.line()
+        .x(function(d) { return x(d.ano); })
+        .y(function(d) { return y(d.valor); });
 
     getBoxXY();
-
-
 
     coordsAxisX = [];
     coordsAxisY = [];
 
-    var svg = d3.select(linhas_box).select("svg")
+    var svg_linhas = d3.select(linhas_box).select("svg")
         .select("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
 
     data.forEach(function(d) {
 
@@ -222,9 +229,10 @@ function update_linhas(linhas_box, data){
             valoresBrutos.push(data[key][deg]);
             valores.push({'ano': data[key]['ano'], 'deg': deg, 'valor': data[key][deg]})
         });
-        dados.push(valores)
-    });
 
+        dados.push(valores)
+
+    });
 
     var tooltipInstance = tooltip.getInstance();
 
@@ -239,17 +247,45 @@ function update_linhas(linhas_box, data){
     x.domain(d3.extent(data, function(d) { return d.ano; }));
     y.domain([min, max]);
 
-    svg.selectAll("path")
-        .data(dados)
-        .transition().duration(800)
-        .attr("d", valueline);
+    // var paths = svg_linhas.selectAll("path")
+    //     .data(dados)
+    //     .transition().duration(800)
+    //     .attr("d", valueline)
+    //
+    //
+
+    var paths = svg_linhas.selectAll("path.line")
+        .data(dados).attr("d", valueline);
+
+    paths.exit().remove();
+
+    paths
+        .enter().append("path")
+        .attr("class", "line")
+        .attr("scc", function(d){
+            d[0].deg;
+        })
+        .style("opacity",  function(d){
+            if(url['cad'] != 0 ){
+                if(getCadId(d[0].deg) == url['cad'])
+                    return 1;
+                else return 0.2;
+            }
+            else
+                return 1;})
+        .style("stroke-width", function(d){return 2;})
+        .style("stroke", function(d){
+            return colorLinhas(d[0].deg)
+        }).attr("d", valueline);
+
+
 
     // Add the Y Axis
-    svg.select(".y")
+    svg_linhas.select(".y")
         .transition().duration(800)
         .call(d3.axisLeft(y))
 
-    svg.selectAll("path")
+    svg_linhas.selectAll("path.line")
         .on("mouseover", function (d) {
             mousemoveLinhas(d, (this), data, tooltipInstance);
 
@@ -690,7 +726,6 @@ function getMin(valores) {
         return Math.min(d);
     }
 )};
-
 
 function getMax(valores) {
     return d3.max (valores, function(d) {

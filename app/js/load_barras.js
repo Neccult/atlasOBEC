@@ -252,6 +252,7 @@ function create_bars(barras_box, data){
     var svg_barras = d3.select(barras_box).append("svg")
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
+                        .attr("type", "simples")
                         .append("g")
                         .attr("transform",
                               "translate(" + (margin.left+5) + "," + valueTop + ")");
@@ -402,6 +403,15 @@ function create_bars(barras_box, data){
 }
 
 function update_bars(barras_box, data){
+    var svg_barras = d3.select(barras_box+" svg");
+
+    if(svg_barras.attr("type") == "stacked"){
+        svg_barras.remove()
+        create_bars(barras_box, data);
+        return;
+    }
+
+
     var svg_barras = d3.select(barras_box+" svg g");
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
