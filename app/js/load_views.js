@@ -150,7 +150,13 @@ switch(parameters.eixo){
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '1'
             views_parameters["#view_box_scc"].uos = '0'
-        } else {
+        }
+        else if(parameters.var == 6){
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '1'
+        }
+        else {
             views_parameters["#view_box"].uos = '0'
             views_parameters["#view_box_barras"].uos = '0'
             views_parameters["#view_box_scc"].uos = '0'
@@ -266,7 +272,13 @@ function loadViews(){
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '1'
                 views_parameters["#view_box_scc"].uos = '0'
-            } else {
+            }
+            else if(parameters.var == 6){
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '1'
+            }
+            else {
                 views_parameters["#view_box"].uos = '0'
                 views_parameters["#view_box_barras"].uos = '0'
                 views_parameters["#view_box_scc"].uos = '0'

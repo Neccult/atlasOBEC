@@ -3,6 +3,7 @@ function create_bars(barras_box, data){
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
 
+    console.log(data)
 
     var eixo = parameters.eixo
     var vrv  = parameters.var
@@ -91,9 +92,7 @@ function create_bars(barras_box, data){
     
         var formatInit = d3.format(".2f");
         var format3dc = d3.format(".3f");
-    
-    
-    
+
         var formatDefault = function (d) {
             return removeDecimalZeroes(formatInit(d));
         };
@@ -141,11 +140,8 @@ function create_bars(barras_box, data){
                     return removeDecimalZeroes(formatInit(d * 1e2)) + "%";
                 else{
                     return format3dc(d*1e2) + "%";
-    
                 }
-    
             }
-    
             return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
     
         };
@@ -410,6 +406,10 @@ function update_bars(barras_box, data){
         create_bars(barras_box, data);
         return;
     }
+
+    console.log(data)
+
+
 
 
     var svg_barras = d3.select(barras_box+" svg g");
