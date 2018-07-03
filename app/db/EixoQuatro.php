@@ -101,8 +101,7 @@ class EixoQuatro {
 	public static function getter_most_recent_year(){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 GROUP BY Numero, Consumo";
-
+		$query = "SELECT DISTINCT Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 and (Consumo = 0 OR Consumo = 1)";
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        
         $stmt->execute();

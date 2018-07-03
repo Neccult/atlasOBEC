@@ -85,6 +85,14 @@ VIEWS = {
             $(box+" svg").remove()
             create_linhas(box, data);
         }
+    },
+    "donut" : function (box, data, update){
+        if(update){
+            update_donut(box, data)
+        } else {
+            $(box+" svg").remove()
+            create_donut(box, data);
+        }
     }
 }
 
@@ -102,30 +110,7 @@ $.ajaxSetup({async: false});
 $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
     anos_default = JSON.parse(data);
 
-    $('select[data-id=ano]').each(function(){
-        selectOp = this;
-        $(this.options).each(function(){
-            $(this).remove();
-        })
-        console.log(anos_default)
-        if(parameters.eixo == 1){
-            if(parameters.ocp > 0){
-                var ocp = 1
-            } else {
-                var ocp = 0;
-            }
-            dummy = anos_default[parameters.var][ocp]
-        } else {
-            dummy = anos_default[parameters.var];
-        }
-        dummy.reverse().forEach(function(d){
-            $(selectOp).append($('<option>', {
-                value: d,
-                text: d
-            }))
-        })
-        $(this).val(parameters.ano);
-    });
+    updateSelectAnos();
 });
 $.ajaxSetup({async: true});
 
@@ -173,6 +158,16 @@ switch(parameters.eixo){
         break;
     case 2:
         index_view_box1 = 0;
+        views_parameters["#view_box"].uos = '0'
+        views_parameters["#view_box_barras"].uos = '0'
+        views_parameters["#view_box_scc"].uos = '0'
+        break;
+    case 3:
+        index_view_box1 = parameters.chg;
+
+        views_parameters["#view_box"].uos = '0'
+        views_parameters["#view_box_barras"].uos = '0'
+        views_parameters["#view_box_scc"].uos = '0'
 }
     
 
@@ -185,8 +180,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
 
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
-
-    // console.log(data_var.views)
         
     var view_box1 = data_var.views.view_box1[index_view_box1]
     var view_box2 = data_var.views.view_box2[0]
@@ -195,8 +188,9 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
-
+    
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
+        console.log(json)
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
@@ -237,12 +231,9 @@ function updateSelectAnos(){
             $(this).remove();
         })
         if(parameters.eixo == 1){
-            if(parameters.ocp > 0){
-                var ocp = 1
-            } else {
-                var ocp = 0;
-            }
-            dummy = anos_default[parameters.var][ocp]
+            dummy = anos_default[parameters.var][parameters.slc]
+        } else if(parameters.eixo == 3){
+            dummy = anos_default[parameters.var][parameters.slc == 0 ? 1 : 0]
         } else {
             dummy = anos_default[parameters.var];
         }

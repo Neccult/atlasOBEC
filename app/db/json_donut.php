@@ -2,11 +2,10 @@
 if (!empty($_GET["var"])) {
 
 	$var = $_GET["var"];
-	$uf = $_GET["uf"];
+	$uf     =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;
 
-	$cad = $_GET["cad"];
-	$prt = $_GET["prt"];
-    $ocp = $_GET["ocp"];
+	$cad    =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;
+    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
@@ -15,10 +14,10 @@ if (!empty($_GET["var"])) {
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
     $deg    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
-    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
+    $subdeg =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subesagregação ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
     $mundo  =   isset($_GET['mundo']) ?   $_GET['mundo']:   0;
-    $eixo = $_GET['eixo'];
+    $eixo   = $_GET['eixo'];
 }
 else{
 	$var = 1;

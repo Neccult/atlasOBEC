@@ -44,7 +44,10 @@
                 if(!isset($json[$result->Numero]))
                     $json[$result->Numero] = array();
                     
-                $json[$result->Numero][(string)$result->Consumo] = $result->Ano;
+                if(!isset($json[$result->Numero][$result->Consumo]))
+                    $json[$result->Numero][$result->Consumo] = array();
+                    
+                array_push($json[$result->Numero][$result->Consumo],$result->Ano);
             }
             break;
     }
