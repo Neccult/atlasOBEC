@@ -470,10 +470,10 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
         if(vrv == 15 || vrv == 16){
             if(uos == 0){
-                dados.valor = dados.value[indexAno]
+                dados.valor = dados.value[index_ano]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
-                setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
+                setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[indexAno]}, eixo, vrv)
             }
                 
         }
@@ -501,7 +501,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
                 dados.valor = dados.value[indexAno]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
-                setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
+                setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[indexAno]}, eixo, vrv)
             }
         }
         else if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 13){
@@ -538,27 +538,22 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         
     }
     else if(eixo == 3){
-        indexAno = dados.key.indexOf(url['ano'])
-
-        var mundo = 0;
-        var mundoRegex = $("#view_box").attr("src").match(/mundo=[0-9]*/);
-        if(mundoRegex != null)
-            mundo = mundoRegex[0].match(/[0-9]/)[0];
+        var mundo = parameters.mundo;
 
 
-       if(url['var'] == 5 || url['var'] == 8){
-            dados.valor = dados.value[dados.key.indexOf(url['ano'])];
+       if(parameters.var == 5 || parameters.var == 8){
+            dados.valor = dados.value[index_ano];
 
-            if(url['cad'] == 0){
+            if(parameters.cad == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(url['cad'] == 2){
+            } else if(parameters.cad == 2){
                 setPercentValueData(dados, eixo, vrv);
             } 
        }
        else if(url['var'] == 1 || url['var'] == 13){
 
-           dados.valor = dados.value[indexAno];
-           dados.percentual = dados.percentual[indexAno];
+           dados.valor = dados.value[index_ano];
+           dados.percentual = dados.percentual[index_ano];
 
            setIntegerValueData(dados, eixo, vrv);
            if(mundo == 1)
@@ -570,11 +565,11 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
                 dados.valor = dados.value[indexAno];
 
                 setIntegerValueData(dados, eixo, vrv);
-                setPercentValueData({percentual : dados.percentual[indexAno]}, eixo, vrv);
+                setPercentValueData({percentual : dados.percentual[index_ano]}, eixo, vrv);
 
             }
 
-       setTerceiroValueData(eixo, vrv, valor, url['cad']);            
+       setTerceiroValueData(eixo, vrv, valor, parameters.cad);            
 
     }
 }
@@ -682,16 +677,16 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
     }
     else if(eixo == 3){
-        if(url['var'] == 5 || url['var'] == 8){
+        if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[i];
 
-            if(url['cad'] == 0){
+            if(parameters.cad == 0){
                 setIntegerValueData(dados, eixo, vrv);
             } else if(url['cad'] == 2){
                 setPercentValueData(dados, eixo, vrv);
             }
        }
-       else if(url['var'] == 1 || url['var'] == 13){
+       else if(parameters.cad == 1 || parameters.var == 13){
         }
        else{
             dados.valor = dados.value[i];
