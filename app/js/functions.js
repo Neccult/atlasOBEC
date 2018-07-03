@@ -631,9 +631,9 @@ function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
         if(vrv >= 12){
             dados.valor = dados.value[i];
-            if(uos == 0){
+            if(parameters.uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(uos == 1){
+            } else if(parameters.uos == 1){
                 setPercentValueData({valor: dados.value[i]}, eixo, vrv);
             }
         }

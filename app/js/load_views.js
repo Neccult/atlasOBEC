@@ -25,7 +25,7 @@ view_box1_ant = ''
 
 VIEWS = {
     "barras": function (box, data, update){
-        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6))){
+        if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)) && !(parameters.eixo == 0)){
             if(update){
                 update_bars_stacked(box, data);
             }
@@ -169,9 +169,6 @@ switch(parameters.eixo){
         views_parameters["#view_box_barras"].uos = '0'
         views_parameters["#view_box_scc"].uos = '0'
 }
-    
-
-
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){
     PT_BR = pt_br_JSON[0];
@@ -197,6 +194,10 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
+
+    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
+        // console.log(data)
+    })
 
 })
 

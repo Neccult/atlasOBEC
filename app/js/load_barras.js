@@ -3,8 +3,6 @@ function create_bars(barras_box, data){
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
 
-    console.log(data)
-
     var eixo = parameters.eixo
     var vrv  = parameters.var
     var cad  = parameters.cad
@@ -406,8 +404,6 @@ function update_bars(barras_box, data){
         create_bars(barras_box, data);
         return;
     }
-
-    console.log(data)
 
 
 

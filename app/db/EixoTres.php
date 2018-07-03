@@ -174,12 +174,14 @@ class EixoTres {
             $query .= " AND ex.PessoaFisica IS NULL";
         }
             
-        if(!is_null($mod)) {
-            $query .= " AND ex.Modalidade = ".$mod;
+        if($mod != 99 && $mod != NULL) {
+            $query .= " AND ex.Modalidade = ?";
             $params[] = $mod;
         } else {
             $query .= " AND ex.Modalidade IS NULL";
         }
+
+
         
         $paramsStr = '';
         foreach ($params as $param) {
@@ -302,7 +304,8 @@ class EixoTres {
                 $result_aux[$data->idUF]->Percentual = $percent_aux[$data->idUF];
             }
             $allObjects = $result_aux;
-        } else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){            
+        }
+        else if($mec == 0 || ($cad != 0 && $mec != 0) || in_array($var, $vars_com_cad_0)){
             $vars_com_cad_0 = array( 1, 3, 4, 6, 7, 8, 9,  11, 12, 13, 14, 15, 16);
             $cad = (is_null($cad)) ? '0' : $cad;
             $cad = ($cad == 'null') ? '0' : $cad;
