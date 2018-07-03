@@ -173,9 +173,6 @@ switch(parameters.eixo){
     case 2:
         index_view_box1 = 0;
 }
-    
-
-
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){
     PT_BR = pt_br_JSON[0];
@@ -202,6 +199,10 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
+
+    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
+        // console.log(data)
+    })
 
 })
 

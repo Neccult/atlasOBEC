@@ -1064,12 +1064,8 @@ $(document).ready(function(){
 
             if(setor != parameters.cad) {
 
-                var newSCCSrc = $("#view_box_scc").attr("src");
-                var changeUF = newSCCSrc.match(/uf=([0-9]*)/);
                 url['cad'] = setor;
-                parameters.cad = url['cad'];
-                url['uf'] = changeUF[1];
-                parameters.uf = url['uf'];
+                parameters.cad = setor;
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', url['cad'])
@@ -1591,6 +1587,7 @@ $(document).ready(function(){
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
         updateOptView("init");
+        updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
 
     }
 

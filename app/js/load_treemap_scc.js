@@ -6,6 +6,7 @@ var svg;
 
 function create_treemap_scc(treemap_scc_box, data){
 
+
     svg = d3.select(treemap_scc_box).append("svg");
 
     svg.attr('width', $(treemap_scc_box).width());
@@ -143,16 +144,6 @@ function create_treemap_scc(treemap_scc_box, data){
                 .attr("fill", function(d) { return color(d.data.colorId)});
         }
     }
-    else if(eixo == 3) {
-        cell.append("rect")
-            .attr("data-legend", function(d) { return d.data.colorId; })
-            .attr("data-value", function(d) { return (d.data.size/root.value); })
-            .attr("data-percent", function(d) { return (d.data.percentual); })
-            .attr("id", function(d) { return d.data.id; })
-            .attr("width", function(d) { return nodeWidth(d); })
-            .attr("height", function(d) { return d.y1 - d.y0; })
-            .attr("fill", function(d) { return color(d.data.colorId); });
-    }
     else if(eixo == 2) {
 
         cell.append("rect")
@@ -161,6 +152,16 @@ function create_treemap_scc(treemap_scc_box, data){
             .attr("data-valor", function(d) { return d.value; })
             .attr("data-percent-uf", function(d) { return d.data.percentual; })
             .attr("data-percent", function(d) { return d.data.size/root.value; })
+            .attr("id", function(d) { return d.data.id; })
+            .attr("width", function(d) { return nodeWidth(d); })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); });
+    }
+    else if(eixo == 3) {
+        cell.append("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-value", function(d) { return (d.data.size/root.value); })
+            .attr("data-percent", function(d) { return (d.data.percentual); })
             .attr("id", function(d) { return d.data.id; })
             .attr("width", function(d) { return nodeWidth(d); })
             .attr("height", function(d) { return d.y1 - d.y0; })
@@ -259,12 +260,13 @@ function create_treemap_scc(treemap_scc_box, data){
             .attr("display", "none");
 
         d3.select(treemap_scc_box+">svg")
+            .attr("no-data", 1)
             .append("g")
             .attr("class", "no-info")
             .append("text")
             .text("Não há dados sobre essa desagregação")
-            .attr("x", d3.select("#corpo>svg").attr("width") / 2)
-            .attr("y", d3.select("#corpo>svg").attr("height") / 2)
+            .attr("x", svg.attr("width") / 2)
+            .attr("y", svg.attr("height") / 2)
             .attr("text-anchor", "middle");
     }
 
@@ -427,6 +429,12 @@ function create_treemap_scc(treemap_scc_box, data){
 
 function update_treemap_scc(treemap_scc_box, data){
 
+
+    if(svg.attr("no-data") == 1){
+        svg.remove()
+        create_treemap_scc(treemap_scc_box, data);
+        return;
+    }
     svg.attr('width', $(treemap_scc_box).width());
     svg.attr('height', $(treemap_scc_box).height());
 
@@ -706,11 +714,53 @@ function update_treemap_scc(treemap_scc_box, data){
 
 
     }
+    else if(eixo == 2){
+        cell.data(root.leaves())
+            .transition().duration(transition_time)
+            .attr("transform", function(d) { return "translate(" + d.x0 + "," + (d.y0+svgMarginTop)  + ")"; })
+            .select("rect")
+            .attr("data-legend", function(d) { return d.data.colorId; })
+            .attr("data-valor", function(d) { return d.value; })
+            .attr("data-percent-uf", function(d) { return d.data.percentual; })
+            .attr("data-percent", function(d) { return d.data.size/root.value; })
+            .attr("id", function(d) { return d.data.id; })
+            .style("opacity", function(d){
+
+                if(parameters.cad == 0){
+                    return "1";
+                }
+
+                if(d.data.colorId == parameters.cad) {
+                    return "1";
+                }
+                else{
+                    return "0.7";
+                }
+            })
+            .style("stroke", function(d){
+                if(d.data.colorId == parameters.cad) {
+                    return "#555";
+                }
+                else{
+                    return "rgba(255, 255, 255, 0.47)";
+                }
+
+            })
+            .attr("width", function(d) { return d.x1 - d.x0; })
+            .attr("height", function(d) { return d.y1 - d.y0; })
+            .attr("fill", function(d) { return color(d.data.colorId); })
+    }
+
 
     setTimeout(function () {
 
+        if(svg.attr("no-data") == 1){
+            return;
+        }
 
         var rects = svg.selectAll("g");
+
+
 
         rects.select("text").text(function(d) {return d.data.name; })
             .attr("display", "block")
@@ -768,8 +818,6 @@ function update_treemap_scc(treemap_scc_box, data){
 
     }, 500);
 
-
-
     // testa e mostra mensagem de valor zerado/indisponível
     var isValueZero = true;
 
@@ -788,12 +836,13 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("display", "none");
 
         d3.select(treemap_scc_box+">svg")
+            .attr("no-data", 1)
             .append("g")
             .attr("class", "no-info")
             .append("text")
             .text("Não há dados sobre essa desagregação")
-            .attr("x", d3.select("#corpo>svg").attr("width") / 2)
-            .attr("y", d3.select("#corpo>svg").attr("height") / 2)
+            .attr("x", svg.attr("width") / 2)
+            .attr("y", svg.attr("height") / 2)
             .attr("text-anchor", "middle");
     }
 
