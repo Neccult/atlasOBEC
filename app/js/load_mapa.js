@@ -218,7 +218,7 @@ function create_mapa(mapa_box, mapa){
 
 function update_mapa(mapa_box, mapa){
 
-    svg_mapa = d3.select(mapa_box+">svg")
+    var svg_mapa = d3.select(mapa_box+">svg")
     d3.json("./data/br-min.json", function(data){
         br_states = data;
     })
@@ -253,15 +253,10 @@ function update_mapa(mapa_box, mapa){
     var minValue = d3.min(info, function(d) {return d.valor; });
 	var maxValue = d3.max(info, function(d) {return d.valor; });
 
-
-	
 	//coloração do mapa
 	var color = d3.scaleLinear()
         .domain([minValue, maxValue])
         .range([COLORS.cadeias[parameters.cad].gradient['2'], COLORS.cadeias[parameters.cad].gradient['6']])
-
-    destacaPais(svg_mapa, parameters.uf);
-
 
     svg_mapa.select("g")
         .selectAll("path").data(states.features)
@@ -293,10 +288,8 @@ function update_mapa(mapa_box, mapa){
         })
         .style("cursor", "pointer")
         .on("mouseover", function(d){
-                    
             loadTooltip_mapa(d, dict, parameters.eixo, parameters.var);
         });
-
 
     var low_color = color(minValue);
     var high_color = color(maxValue);
@@ -357,6 +350,9 @@ function update_mapa(mapa_box, mapa){
         .style("stroke", fontColor)
         .style("stroke-width", 1)
 
+    // destacaPais(svg_mapa, parameters.uf);
+
+
 }
 
 function mapaClick(svg_mapa, dict, d){
@@ -393,12 +389,10 @@ function destacaPais(svg_mapa, ufId) {
                 $(this).attr("data-color", $(this).css("fill"));
                 $(this).css("fill", corEixo[1]);
                 $(this).animate({"opacity": "1"}, "fast");
-
             }
         }
         else {
             $(this).attr("class", "");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
 
