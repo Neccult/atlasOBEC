@@ -502,11 +502,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
                 dados.valor = dados.value[index_ano]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
-<<<<<<< HEAD
                 setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[index_ano]}, eixo, vrv)
-=======
-                setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[indexAno]}, eixo, vrv)
->>>>>>> ecf34ed1761c8e89ae242555633afcc70983a12b
             }
         }
         else if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 13){
@@ -543,17 +539,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         
     }
     else if(eixo == 3){
-<<<<<<< HEAD
-        var indexAno = dados.key.indexOf(url['ano'])
-
-        var mundo = 0;
-        var mundoRegex = $("#view_box").attr("src").match(/mundo=[0-9]*/);
-        if(mundoRegex != null)
-            mundo = mundoRegex[0].match(/[0-9]/)[0];
-=======
         var mundo = parameters.mundo;
->>>>>>> ecf34ed1761c8e89ae242555633afcc70983a12b
-
 
        if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[index_ano];
