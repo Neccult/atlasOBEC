@@ -47,19 +47,26 @@ VIEWS = {
 
     },
     "mapa": function (box, data, update){
-
+        var mapa_mundi = parameters.eixo == 3 && parameters.mundo == 0;
         if(update){
-            update_mapa(box, data)
+            if(mapa_mundi){
+                update_mapa_mundi(box, data);
+            } else {
+                update_mapa(box, data)
+            }            
         } else {
-
-            br_states = []
-            d3.json("./data/br-min.json", function(states){
-                br_states = states;
-                    $(box+" svg").remove()
-                    create_mapa(box, data);
-            })
-        }
-        
+            if(mapa_mundi){
+                $(box+" svg").remove()
+                create_mapa_mundi(box, data);
+            } else {
+                br_states = []
+                d3.json("./data/br-min.json", function(states){
+                    br_states = states;
+                        $(box+" svg").remove()
+                        create_mapa(box, data);
+                })
+            } 
+        }        
 
     },
     "treemap_scc": function (box, data, update){
@@ -163,41 +170,42 @@ switch(parameters.eixo){
         views_parameters["#view_box_scc"].uos = '0'
         break;
     case 3:
-        index_view_box1 = parameters.chg;
-
+        index_view_box1 = parameters.mundo;
         views_parameters["#view_box"].uos = '0'
         views_parameters["#view_box_barras"].uos = '0'
         views_parameters["#view_box_scc"].uos = '0'
+        break;
 }
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){
     PT_BR = pt_br_JSON[0];
     COLORS = colors_JSON[0];
     DESCRICOES = descricoes[0];
-
+    
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
-        
+
     var view_box1 = data_var.views.view_box1[index_view_box1]
     var view_box2 = data_var.views.view_box2[0]
     var view_box3 = data_var.views.view_box3[0]
 
+    if(parameters.eixo == 3){
+        if(view_box1 == "mapa-mundi"){
+            view_box1 = "mapa";
+        }
+    }
+    console.log(view_box1)
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
     
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-        console.log(json)
         VIEWS[view_box2].call(this, "#view_box_barras", json);
     });
 
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
-
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
-        // console.log(data)
-    })
 
 })
 
