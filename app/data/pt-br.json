@@ -1376,7 +1376,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
@@ -1421,7 +1421,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1468,7 +1468,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1492,7 +1492,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
                 "mapa_valores": ""
 			},
@@ -1608,7 +1608,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1633,7 +1633,7 @@
 				"views": {
 					"view_box1": ["mapa"],
 					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box3": ["linhas"]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},

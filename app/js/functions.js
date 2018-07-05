@@ -351,7 +351,8 @@ function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, pe
 }
 
 function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
-    index_ano = dados.key.indexOf(parameters.ano);
+    var index_ano = dados.key.indexOf(parameters.ano);
+
 
     if(eixo == 0){
 
@@ -470,10 +471,10 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
         if(vrv == 15 || vrv == 16){
             if(uos == 0){
-                dados.valor = dados.value[indexAno]
+                dados.valor = dados.value[index_ano]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
-                setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
+                setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[index_ano]}, eixo, vrv)
             }
                 
         }
@@ -489,7 +490,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
                     soma += dados.value[key];
             }
 
-            dados.valor = dados.value[indexAno]
+            dados.valor = dados.value[index_ano]
 
             setIntegerValueData(dados, eixo, vrv)
             setPercentValueData({valor: formatTextVrv(soma, eixo, vrv)}, eixo, vrv)
@@ -498,19 +499,19 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         }
         else if(vrv == 10){
             if(url['mec'] == 0){
-                dados.valor = dados.value[indexAno]
+                dados.valor = dados.value[index_ano]
                 setIntegerValueData(dados, eixo, vrv)
             }else{
-                setPercentValueData({percentual: dados.value[indexAno], taxa: dados.taxa[indexAno]}, eixo, vrv)
+                setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[index_ano]}, eixo, vrv)
             }
         }
         else if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 13){
 
             // VARIAVEIS QUE NAO  TEM TREEMAP!!!
-            dados.valor = dados.value[indexAno];
+            dados.valor = dados.value[index_ano];
 
             setIntegerValueData(dados, eixo, vrv);
-            setPercentValueData({percentual: 1, taxa: dados.taxa[indexAno]}, eixo, vrv);
+            setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
 
         }
         else{
@@ -538,7 +539,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         
     }
     else if(eixo == 3){
-        indexAno = dados.key.indexOf(url['ano'])
+        var indexAno = dados.key.indexOf(url['ano'])
 
         var mundo = 0;
         var mundoRegex = $("#view_box").attr("src").match(/mundo=[0-9]*/);

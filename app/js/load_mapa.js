@@ -267,7 +267,19 @@ function update_mapa(mapa_box, mapa){
         .selectAll("path").data(states.features)
         .attr("data-legend",function(d) { return d.id; })
         .style('fill', function(d){
-            if(parameters.uf == d.id){
+            if(parameters.eixo == 2 && parameters.var == 17){
+
+                if(dict[d.id].SouN == 0){
+                    // return  COLORS.binario['0'].color;
+                    return  corEixo[2];
+                }
+                else{
+                    // return COLORS.binario['1'].color;
+                    return  corEixo[1];
+
+                }
+            }
+            else if(parameters.uf == d.id){
                 return corEixo[1];
             }
             else{
@@ -278,7 +290,6 @@ function update_mapa(mapa_box, mapa){
                     return color((dict[d.id].valor))
                 }
             }
-
         })
         .style("cursor", "pointer")
         .on("mouseover", function(d){
@@ -374,6 +385,7 @@ function mapaClick(svg_mapa, dict, d){
 }
 
 function destacaPais(svg_mapa, ufId) {
+
     svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
