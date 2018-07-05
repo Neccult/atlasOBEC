@@ -1760,6 +1760,10 @@
 					"view_box2": ["donut"],
 					"view_box3": ["barras"]
 				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				}
