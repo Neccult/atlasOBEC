@@ -218,7 +218,7 @@ function create_mapa(mapa_box, mapa){
 
 function update_mapa(mapa_box, mapa){
 
-    svg_mapa = d3.select(mapa_box+">svg")
+    var svg_mapa = d3.select(mapa_box+">svg")
     d3.json("./data/br-min.json", function(data){
         br_states = data;
     })
@@ -253,21 +253,28 @@ function update_mapa(mapa_box, mapa){
     var minValue = d3.min(info, function(d) {return d.valor; });
 	var maxValue = d3.max(info, function(d) {return d.valor; });
 
-
-	
 	//coloração do mapa
 	var color = d3.scaleLinear()
         .domain([minValue, maxValue])
         .range([COLORS.cadeias[parameters.cad].gradient['2'], COLORS.cadeias[parameters.cad].gradient['6']])
 
-    destacaPais(svg_mapa, parameters.uf);
-
-
     svg_mapa.select("g")
         .selectAll("path").data(states.features)
         .attr("data-legend",function(d) { return d.id; })
         .style('fill', function(d){
-            if(parameters.uf == d.id){
+            if(parameters.eixo == 2 && parameters.var == 17){
+
+                if(dict[d.id].SouN == 0){
+                    // return  COLORS.binario['0'].color;
+                    return  corEixo[2];
+                }
+                else{
+                    // return COLORS.binario['1'].color;
+                    return  corEixo[1];
+
+                }
+            }
+            else if(parameters.uf == d.id){
                 return corEixo[1];
             }
             else{
@@ -278,14 +285,11 @@ function update_mapa(mapa_box, mapa){
                     return color((dict[d.id].valor))
                 }
             }
-
         })
         .style("cursor", "pointer")
         .on("mouseover", function(d){
-                    
             loadTooltip_mapa(d, dict, parameters.eixo, parameters.var);
         });
-
 
     var low_color = color(minValue);
     var high_color = color(maxValue);
@@ -346,6 +350,9 @@ function update_mapa(mapa_box, mapa){
         .style("stroke", fontColor)
         .style("stroke-width", 1)
 
+    // destacaPais(svg_mapa, parameters.uf);
+
+
 }
 
 function mapaClick(svg_mapa, dict, d){
@@ -374,6 +381,7 @@ function mapaClick(svg_mapa, dict, d){
 }
 
 function destacaPais(svg_mapa, ufId) {
+
     svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == ufId) {
             if($(this).attr("class") !== "destacado") {
@@ -381,12 +389,10 @@ function destacaPais(svg_mapa, ufId) {
                 $(this).attr("data-color", $(this).css("fill"));
                 $(this).css("fill", corEixo[1]);
                 $(this).animate({"opacity": "1"}, "fast");
-
             }
         }
         else {
             $(this).attr("class", "");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
 
