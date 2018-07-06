@@ -42,77 +42,10 @@
 </body>
 
 <script>
-    function convertCode(code) {
-    switch(code) {
-        case "AF":
-            return 1;
-        case "NA":
-            return 2;
-        case "SA":
-            return 3;
-        case "AS":
-            return 4;
-        case "EU":
-            return 5;
-        case "OC":
-            return 6;
-    }
-}
-function unconvertCode(code) {
-    switch(code) {
-        case 1:
-            return "AF";
-        case 2:
-            return "NA";
-        case 3:
-            return "SA";
-        case 4:
-            return "AS";
-        case 5:
-            return "EU";
-        case 6:
-            return "OC";
-    }
-}
-function destacaPrc(prcID) {
-    $("path").each(function() {
-        if($(this).attr("data-code") == prcID) {
-            if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
-                $(this).attr("class", "destacado jvectormap-region jvectormap-element");
-                $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", "#6DBFC9");
-                $(this).animate({"opacity": "1"}, "fast");
-            }
-        }
-        else {
-            $(this).attr("class", "jvectormap-region jvectormap-element");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
-            $(this).animate({"opacity": "0.7"}, "fast");
-        }
-    });
-}
-// import colors.json file
-var colorJSON;
 
-$.ajaxSetup({async: false});
-d3.json('data/colors.json', function(error, data) {
-    if(error) throw error;
-
-    colorJSON = data;
-});
-
-$.ajaxSetup({async: true});
-
-var vrv = 1;
-var eixo = 3;
-var cad = 0;
-var prc = 0;
-var gdpData;
-
-$.get("./db/json_mapa.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=comercio#comercio", function(data) {
-
+$.get("./db/json_mapa.php?var=1&uf=0&ocp=0&mec=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=comercio#comercio", function(data) {
     gdpData = JSON.parse(data);
-   
+    
 
     var arrayColors;
     $(function(){
