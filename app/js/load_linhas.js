@@ -115,7 +115,7 @@ function create_linhas(linhas_box, data){
         })
         .style("opacity",  function(d){
 
-            if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)){
+            if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6) && parameters.deg != 0){
 
                 var urlDegName = getSubdegName(parameters.deg, parameters.subdeg)
 
@@ -145,12 +145,9 @@ function create_linhas(linhas_box, data){
         })
         .attr("d", valueline)
         .on("mouseover", function (d) {
-
             mousemoveLinhas(d, dados, (this), tooltipInstance);
-
         })
         .on("click", function (dados) {
-
             if(window.parent.innerWidth <= 800)
                 return;
 
@@ -331,7 +328,8 @@ function getCadId(cadName){
 function destacaSetor(cadName){
 
     d3.selectAll("path.line").style("opacity", function(d){
-        if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)){
+
+        if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6) && parameters.deg != 0){
 
             var urlDegName = getSubdegName(parameters.deg, parameters.subdeg)
 
@@ -364,7 +362,6 @@ function clickLinhas(d, path) {
 
 
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+getSubdegId(parameters.deg, $(path).attr("scc"))+"]").prop('selected', true)//.val(obj+1)
-
             updateWindowUrl('subdeg', getSubdegId(parameters.deg, $(path).attr("scc")))
             updateIframe();
 

@@ -438,6 +438,8 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
             valorTooltip = dict[d.id].valor*100;
         }
 
+
+        console.log("oi")
         tooltipInstance.showTooltip(d, [
             ["title", d['properties']['name']],
             ["", formatTextVrv(valorTooltip, eixo, vrv)],
@@ -445,7 +447,7 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
             //["", formatDecimalLimit(dict[d.id].taxa, 2)],
         ]);
 
-        if(vrv === 2){
+        if(parameters.var === 2){
             if(url['ocp'] == 0){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],

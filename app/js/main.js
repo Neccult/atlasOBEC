@@ -734,13 +734,13 @@ function updateLegendByDeg(deg){
         if(deg == 2 || deg == 6 || deg == 7 || deg == 8){
             var cont = 1;
             for (var nome in legendArray) {
-                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[cont]+"\"></i> "+nome+"<br></span>\n";
+                html += "<span class=\"deg\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[cont]+"\"></i>"+nome+"<br></span>\n";
                 cont++;
             }
         }
         else{
             for (var nome in legendArray) {
-                html += "<span class=\"scc\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i> "+nome+"<br></span>\n";
+                html += "<span class=\"deg\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+legendArray[nome]+"\"></i>"+nome+"<br></span>\n";
             }
         }
 
@@ -1076,6 +1076,21 @@ $(document).ready(function(){
 
     });
 
+    $(document).on('click', ".deg", function(){
+
+
+        parameters.subdeg = getSubdegId(parameters.deg, $(this).text());
+
+
+        updateWindowUrl('subdeg', parameters.subdeg)
+
+
+        $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+parameters.subdeg+"]").prop('selected', true)
+        updateIframe();
+
+
+    });
+
 
     if(url['var'] === "" && window.location.pathname.match("page.php")){
         controlVarPage(url['var']);
@@ -1175,199 +1190,6 @@ $(document).ready(function(){
             updateIframe(url); /* altera gráfico */
         }
 
-        // if(id == "treemap_region" || id == "mapa") {
-        //     if(texto == "BRASIL" || texto == "MUNDO"){
-        //
-        //         url['view'] = "mapa"; /* muda visualização */
-        //
-        //         if(texto == "BRASIL"){
-        //             url['mundo'] = 1;
-        //             url['uf'] = 0;
-        //
-        //
-        //
-        //             $("select[data-id='uf']").val(0);
-        //
-        //             if(id === "treemap_region") {
-        //                 $(this).addClass("active");
-        //                 $('#mapa').removeClass("active");
-        //             }
-        //             else if(id === "mapa") {
-        //                 $(this).addClass("active");
-        //                 $('#treemap_region').removeClass("active");
-        //             }
-        //         }
-        //         else{
-        //             url['mundo'] = 0;
-        //             url['prc'] = 0;
-        //
-        //             $("select[data-id='prc']").val(0);
-        //
-        //             if(id === "treemap_region") {
-        //                 $(this).addClass("active");
-        //                 $('#mapa').removeClass("active");
-        //             }
-        //             else if(id === "mapa") {
-        //                 $(this).addClass("active");
-        //                 $('#treemap_region').removeClass("active");
-        //             }
-        //         }
-        //         updateWindowUrl('mundo', url['mundo']);
-        //         updateWindowUrl('uf', url['uf']);
-        //         updateUrl();
-        //         updateIframe(url);
-        //
-        //     }
-        //     else{
-        //         updateUrl();
-        //
-        //         url['view'] = $(this).attr('id'); /* muda visualização */
-        //
-        //         updateIframe(url); /* atualiza gráfico */
-        //
-        //         if(id === "treemap_region") {
-        //             $(this).addClass("active");
-        //             $('#mapa').removeClass("active");
-        //             url['chg'] = '1';
-        //         }
-        //         else if(id === "mapa") {
-        //             $(this).addClass("active");
-        //             $('#treemap_region').removeClass("active");
-        //             url['chg'] = '0';
-        //         }
-        //
-        //         updateWindowUrl('chg', url['chg'])
-        //     }
-        //
-        // }
-        // else if(id == "bens" || id == "servicos"){
-        //     updateUrl();
-        //     if(id === "bens") {
-        //         url['slc'] = 0;
-        //
-        //         $(this).addClass("active");
-        //         $('#servicos').removeClass("active");
-        //         url['ano'] = anos_default[url['var']][1]
-        //
-        //
-        //
-        //
-        //     }
-        //     else {
-        //         if(url['ano'] < 2014)
-        //             url['ano'] = 2014;
-        //         url['slc'] = 1;
-        //         $(this).addClass("active");
-        //         $('#bens').removeClass("active");
-        //         url['ano'] = anos_default[url['var']][0]
-        //
-        //
-        //     }
-        //
-        //     updateWindowUrl('slc', url['slc'])
-        //     updateWindowUrl('ano', url['ano'])
-        //     updateIframe(url); /* altera gráfico */
-        // }
-        // else if(id == "recebedora" || id == "trabalhador"){
-        //
-        //     if(id === "recebedora") {
-        //
-        //         if(url['mec'] != 0){
-        //
-        //             if(url['var'] == 19){
-        //                 $("#menu-view-donut").css("display", "block")
-        //
-        //                 var cads = getCadsByMenuDonut();
-        //                 updateBreadcrumbSetores(cads)
-        //             }
-        //
-        //             updateUrl();
-        //
-        //             url['mec'] = 0;
-        //
-        //             $(this).addClass("active");
-        //             $('#trabalhador').removeClass("active");
-        //             updateIframe(url); /* altera gráfico */
-        //
-        //         }
-        //     }
-        //     else {
-        //         if(url['mec'] != 1){
-        //
-        //             if(url['var'] == 19){
-        //                 $("#menu-view-donut").css("display", "none")
-        //                 updateBreadcrumbSetores([{id: 0, nome: "Todos"}])
-        //             }
-        //
-        //             updateUrl();
-        //             url['mec'] = 1;
-        //             $(this).addClass("active");
-        //             $('#recebedora').removeClass("active");
-        //             updateIframe(url); /* altera gráfico */
-        //         }
-        //     }
-        //
-        //     updateWindowUrl('mec', url['mec'])
-        //
-        // }
-        // else {
-        //     updateUrl();
-        //     if(id === "setor") {
-        //         $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
-        //         $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
-        //
-        //         enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
-        //         switchToSetores();
-        //
-        //         url['slc'] = 0;
-        //         url['deg'] = 0;
-        //         url['ocp'] = 0;
-        //
-        //         controlFilter('0', 'deg');
-        //         $(this).addClass("active");
-        //         $('#ocupacao').removeClass("active");
-        //
-        //         url['ano'] = d3.max(anos_default[url['var']][0]);
-        //
-        //         updateWindowUrl('slc', url['slc'])
-        //         updateWindowUrl('deg', url['deg'])
-        //         updateWindowUrl('ocp', url['ocp'])
-        //         updateWindowUrl('ano', url['ano'])
-        //
-        //     }
-        //     else {
-        //         enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
-        //
-        //         updateDataDescUoS();
-        //
-        //         switchToOcupations();
-        //         url['slc'] = 1;
-        //         url['deg'] = 0;
-        //         url['cad'] = 0;
-        //
-        //         if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
-        //             url['ocp'] = 1;
-        //         else
-        //             url['ocp'] = 3;
-        //         controlFilter('0', 'deg');
-        //         url['cad'] = 0;
-        //
-        //         url['ano'] = d3.max(anos_default[url['var']][1]);
-        //
-        //         updateWindowUrl('slc', url['slc'])
-        //         updateWindowUrl('deg', url['deg'])
-        //         updateWindowUrl('ocp', url['ocp'])
-        //         updateWindowUrl('ano', url['ano'])
-        //         updateWindowUrl('cad', url['cad'])
-        //
-        //         $(this).addClass("active");
-        //         $('#setor').removeClass("active");
-        //
-        //         //troca o nome do select de setor
-        //         $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
-        //     }
-        //     updateIframe(url); /* altera gráfico */
-        // }
     });
 
     $(document).on('change', ".bread-select", function(e){
