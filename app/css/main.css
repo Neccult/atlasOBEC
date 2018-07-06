@@ -865,10 +865,6 @@ svg rect {
 	transition: all 0.3s;
 	stroke: rgba(255, 255, 255, 0.47);
 }
-svg path {
-	fill: none;
-	stroke: black;
-}
 .states path{
 	stroke: rgba(255, 255, 255, 0.47);
 }
