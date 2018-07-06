@@ -133,25 +133,18 @@ else if($eixo == 2) {
     }
 }
 else if($eixo == 3) {
+
     require_once("EixoQuatro.php");
     if($mundo == 0){
         $mapa = new stdClass();
     }
+
     foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $uf, $mundo, $slc) as $tupla) {
 
-        /*
-            $mapa[$tupla->idUF] = [
-
-                'id' => (int) $tupla->idUF,
-                'uf' => $tupla->UFNome,
-                'valor' => (double) $tupla->Valor
-            ];
-        */
-
+        
         if($mundo == 0){
             $id = $tupla->idParceiro;
             $mapa->$id = [];
-
             $mapa->$id['id'] = (int) $tupla->idParceiro;
             $mapa->$id['prc'] = $tupla->ParceiroNome;
             $mapa->$id['uf'] = $tupla->UFNome;

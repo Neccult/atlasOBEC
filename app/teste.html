@@ -43,10 +43,10 @@
 
 <script>
 
-$.get("./db/json_mapa.php?var=1&uf=0&ocp=0&mec=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=comercio#comercio", function(data) {
-    gdpData = JSON.parse(data);
-    
+$.get("./db/json_mapa.php?var=1&uf=0&ocp=0&mec=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=3", function(data) {
 
+    gdpData = JSON.parse(data);
+    console.log(gdpData);
     var arrayColors;
     $(function(){
     $('#corpo-mundi').vectorMap({
