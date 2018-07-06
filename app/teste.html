@@ -1,0 +1,133 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/gov.css">
+<link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-2.0.3.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="js/dependencias/jquery.min.js"></script>
+<script src="js/control-colors.js"></script>
+<script src="js/dependencias/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="js/dependencias/jquery.fullPage.js"></script>
+<script src="js/continents-mill.js"></script>
+<script src="js/dependencias/topojson.v2.min.js"></script>
+
+
+<script src="js/d3/d3.min.js"></script>
+
+<script src="js/d3/d3-queue.v3.min.js"></script>
+<script src="js/d3/d3-color.v1.min.js"></script>
+<script src="js/d3/d3-legend.min.js"></script>
+<script src="js/d3/d3-interpolate.v1.min.js"></script>
+<script src="js/d3/d3-scale-chromatic.v1.min.js"></script>
+
+<!-- Fav Icons -->
+<link rel="icon" type="image/x-icon" href="css/icon.png" /> 
+<link rel="shortcut icon" type="image/x-icon"  href="css/icon.png" />
+
+<script type="text/javascript" src="js/jqplot/jquery.jqplot.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.barRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.pieRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+<script type="text/javascript" src="js/jqplot/plugins/jqplot.pointLabels.js"></script>
+<link rel="stylesheet" type="text/css" href="js/jqplot/jquery.jqplot.css" />
+
+
+<body>
+    <div id="corpo-mundi">
+
+    </div>
+</body>
+
+<script>
+    function convertCode(code) {
+    switch(code) {
+        case "AF":
+            return 1;
+        case "NA":
+            return 2;
+        case "SA":
+            return 3;
+        case "AS":
+            return 4;
+        case "EU":
+            return 5;
+        case "OC":
+            return 6;
+    }
+}
+function unconvertCode(code) {
+    switch(code) {
+        case 1:
+            return "AF";
+        case 2:
+            return "NA";
+        case 3:
+            return "SA";
+        case 4:
+            return "AS";
+        case 5:
+            return "EU";
+        case 6:
+            return "OC";
+    }
+}
+function destacaPrc(prcID) {
+    $("path").each(function() {
+        if($(this).attr("data-code") == prcID) {
+            if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
+                $(this).attr("class", "destacado jvectormap-region jvectormap-element");
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", "#6DBFC9");
+                $(this).animate({"opacity": "1"}, "fast");
+            }
+        }
+        else {
+            $(this).attr("class", "jvectormap-region jvectormap-element");
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+    });
+}
+// import colors.json file
+var colorJSON;
+
+$.ajaxSetup({async: false});
+d3.json('data/colors.json', function(error, data) {
+    if(error) throw error;
+
+    colorJSON = data;
+});
+
+$.ajaxSetup({async: true});
+
+var vrv = 1;
+var eixo = 3;
+var cad = 0;
+var prc = 0;
+var gdpData;
+
+$.get("./db/json_mapa.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=comercio#comercio", function(data) {
+
+    gdpData = JSON.parse(data);
+   
+
+    var arrayColors;
+    $(function(){
+    $('#corpo-mundi').vectorMap({
+        map: 'continents_mill',
+        series: {
+            regions: [{
+                values: gdpData,
+                scale: ['#C8EEFF', '#0071A4'],
+                normalizeFunction: 'polynomial'
+            }]
+        }
+    });
+});
+
+
+});
+</script>
