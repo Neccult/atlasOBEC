@@ -180,31 +180,7 @@ function create_bars_stacked(barras_box, data){
     else
         desagregacao = $(".bread-select[data-id=deg]").val();
 
-    // dado_anos = dataset[desagregacao-1]
-    //
-    // dado = dado_anos.filter(function(obj){
-    //     console.log(obj)
-    //     return obj.data[0].x.getFullYear() == url['ano']
-    // })[0]
-    //
-    // configInfoDataBoxBarrasStacked(eixo, vrv, dado, getSoma(dado.x), deg);
-
-
-    // $(barras_box).find('svg').attr('height',$(barras_box).height() + 350);
-
-    //
-    // if(parameters.slc == 0) {
-    //     destacaBarra(dataset[0][url['ano']-2007].x, true);
-    // }
-    // else {
-    //     if(url['ano'] < 2011) destacaBarra(dataset[0][url['ano']-2007].x, true);
-    //     else destacaBarra(dataset[0][url['ano']-2008].x, true);
-    // }
-    // if(eixo == 0){
-    //     setStateTitle(function(){if(data[dados.key[0]].uf == "Todos") return "Brasil"; else return data[dados.key[0]].uf});
-    // }
-
-
+    
 }
 
 function update_bars_stacked(barras_box, data){
@@ -262,36 +238,9 @@ function update_bars_stacked(barras_box, data){
         delete data['2007'];
     }
 
-    var desag = selectDesag()
-
-    // if((vrv == 6 || vrv == 4) && eixo == 1){
-    //     aux = []
-    //     selectDesag();
-    //     Object.keys(data).forEach(function (key) {
-    //         soma = 0;
-    //         cont = 0;
-    //         Object.keys(data[key]).forEach(function (chave) {
-    //
-    //             if(chave != "year" && cont == desag){
-    //                 obj = {};
-    //                 valor = data[key][chave];
-    //
-    //             }
-    //             cont++;
-    //         });
-    //         aux.push({year: data[key].year, Média: valor})
-    //     });
-    //     data = aux;
-    // }
-
-
-
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
-
-
-
 
     /* Data in strings like it would be if imported from a csv */
 

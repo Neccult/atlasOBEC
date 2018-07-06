@@ -22,7 +22,7 @@ function create_linhas(linhas_box, data){
     getBoxXY();
 
     Object.keys(data).forEach(function (key) {
-        anos.push(data[key].ano);
+            anos.push(data[key].ano);
     });
 
     Object.keys(data[0]).forEach(function (key) {
@@ -39,6 +39,7 @@ function create_linhas(linhas_box, data){
         .attr("height", height + margin.top + margin.bottom)
         .attr("deg", parameters.deg)
         .attr("ocp", parameters.ocp)
+        .attr("var", parameters.var)
         .style("opacity", "0.1")
         .append("g")
         .attr("transform",
@@ -84,9 +85,6 @@ function create_linhas(linhas_box, data){
 
     });
 
-    // console.log(dados)
-
-
     // Scale the range of the data
     x.domain(d3.extent(data, function(d) { return d.ano; }));
 
@@ -112,13 +110,13 @@ function create_linhas(linhas_box, data){
         .enter().append("path")
         .attr("class", "line")
         .attr("scc", function(d){
-            d[0].deg;
+            return d[0].deg;
         })
         .style("opacity",  function(d){
             if(url['cad'] != 0 ){
                 if(getCadId(d[0].deg) == url['cad'])
                     return 1;
-                else return 0.2;
+                else return 0.3;
             }
             else
                 return 1;})
@@ -126,7 +124,32 @@ function create_linhas(linhas_box, data){
         .style("stroke", function(d){
             return colorLinhas(d[0].deg)
         })
-        .attr("d", valueline);
+        .attr("d", valueline)
+        .on("mouseover", function (d) {
+
+            mousemoveLinhas(d, dados, (this), tooltipInstance);
+
+            if(parameters.cad == 0){
+                d3.select(this).style("opacity", 1)
+            }
+        })
+        .on("click", function (dados) {
+
+            if(window.parent.innerWidth <= 800)
+                return;
+
+            if(!(parameters.eixo == 0 && parameters.var >= 10 ||
+                    parameters.eixo == 1 && parameters.var > 11 ||
+                    parameters.eixo == 2 && (parameters.var == 15 || parameters.var == 16 || parameters.var == 10))){
+                clickLinhas(dados, (this));
+            }
+        })
+        .on("mouseout", function () {
+            tooltipInstance.hideTooltip();
+            if(parameters.cad == 0){
+                d3.selectAll("path").style("opacity", 1)
+            }
+        });
 
 
     // Add the X Axis
@@ -167,8 +190,7 @@ function update_linhas(linhas_box, data){
 
     var svg_linhas = d3.select(linhas_box).select("svg");
 
-
-    if((svg_linhas.attr("deg") != parameters.deg) || (svg_linhas.attr("ocp") != parameters.ocp)){
+    if((svg_linhas.attr("deg") != parameters.deg) || (svg_linhas.attr("ocp") != parameters.ocp) || (svg_linhas.attr("var") != parameters.var)){
         svg_linhas.transition().duration(500).style("opacity", "0.1")
 
         setTimeout(function () {
@@ -272,6 +294,8 @@ function update_linhas(linhas_box, data){
         y = parseFloat(transform.split(',')[1].replace(')', ''));
         coordsAxisY.push({'ano': anos[index], 'x': x, 'y': y})
     })
+
+    destacaSetor();
 }
 
 
@@ -293,12 +317,17 @@ function getCadId(cadName){
 
 function destacaSetor(cadName){
 
-    // $( "path" ).each(function( index ) {
-    //     if($( this ).attr("scc") == cadName)
-    //         $( this ).css("opacity", "1")
-    //     else
-    //         $( this ).css("opacity", "0.2")
-    // });
+    d3.selectAll("path.line").style("opacity", function(d){
+        if(parameters.cad == 0){
+            return 1
+        }
+        else if(parameters.cad == getCadId(d[0].deg)){
+            return 1
+        }
+        else{
+            return 0.3;
+        }
+    })
 }
 
 function clickLinhas(d, path) {
@@ -306,9 +335,11 @@ function clickLinhas(d, path) {
 
     if(!($(path).hasClass("domain")) ) {
 
-        if(eixo == 1 && (vrv == 4 || vrv == 5) && deg != 0){
-            desagId = (getDesagId(deg, $(path).attr("scc")));
-            desagName = updateUrlDesag(deg, desagId)
+        if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5) && parameters.deg != 0){
+            var desagId = (getDesagId(deg, $(path).attr("scc")));
+            var desagName = updateUrlDesag(deg, desagId)
+
+            ///TODO
 
             // var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(replace, desagName+"=" +desagId);
             var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(getRegexDesag(deg), desagName+"=" +desagId);
@@ -328,18 +359,12 @@ function clickLinhas(d, path) {
             var cadId = getCadId($(path).attr("scc"));
 
             url['cad'] = cadId;
+            parameters.cad = cadId;
 
-            var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(/cad=[0-9]*/, "cad=" +cadId);
-            newMapaSrc = newMapaSrc.replace(/uf=[0-9]*/, "uf=" + url['uf']);
-
-            var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(/cad=[0-9]*/, "cad=" + cadId);
-            newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano=" + url['ano']);
-
-            $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
-            $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-            $(window.parent.document).find("select[data-id='cad']").val(cadId);
+            $(".bread-select[data-id='cad']").val(cadId);
 
             updateWindowUrl('cad', cadId)
+            updateIframe();
         }
 
         destacaSetor($(path).attr("scc"));
@@ -347,7 +372,7 @@ function clickLinhas(d, path) {
     }
 }
 
-function mousemoveLinhas(d, path, data, tooltipInstance) {
+function mousemoveLinhas(d, data,  path, tooltipInstance) {
 
     if(!($(path).hasClass("domain")) ){
         var scc = ($(path).attr("scc"));
@@ -357,7 +382,9 @@ function mousemoveLinhas(d, path, data, tooltipInstance) {
         for (var i = 1; i < coordsAxisX.length; i++) {
 
 
-            calc1 = (Number(coordsAxisX[i - 1].x) + Number(coordsAxisX[i].x)) / 2;
+            var calc1 = (Number(coordsAxisX[i - 1].x) + Number(coordsAxisX[i].x)) / 2;
+            var calc2;
+
             if(i <= coordsAxisX.length - 2)
                 calc2 = (Number(coordsAxisX[i].x) + Number(coordsAxisX[i + 1].x)) / 2;
             else
@@ -371,14 +398,21 @@ function mousemoveLinhas(d, path, data, tooltipInstance) {
 
         }
 
-        var valor = 2;
 
+        var valor;
+        var indexAno = anos.indexOf(ano);
 
-        Object.keys(d).forEach(function (key) {
-            if(d[key].ano.getFullYear() == ano)
-                valor = data[key][scc];
-        })
-
+        if(parameters.eixo == 0 && parameters.var == 3){
+            if(indexAno == 10){
+                valor = 0;
+            }
+            else{
+                valor = d[anos.indexOf(ano)].valor;
+            }
+        }
+        else{
+            valor = d[anos.indexOf(ano)].valor;
+        }
 
 
         if(parameters.eixo == 0){
@@ -396,6 +430,15 @@ function mousemoveLinhas(d, path, data, tooltipInstance) {
                     ["", valor+"%"]
                 ])
             }
+            else if(parameters.var >= 12){
+                valor =  formatNumber(valor, 2).toString().replace(".", "");
+                tooltipInstance.showTooltip(d, [
+                    ["title", scc],
+                    ["", valor]
+                ])
+            }
+
+
 
         }
         else if(parameters.eixo == 1){

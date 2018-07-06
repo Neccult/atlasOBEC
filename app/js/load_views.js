@@ -194,7 +194,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
             view_box1 = "mapa";
         }
     }
-    console.log(view_box1)
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
@@ -318,6 +317,12 @@ function loadViews(){
     var UPDATE_1 = (view_box1 == view_box1_ant);
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
+
+    if(parameters.eixo == 3){
+        if(view_box1 == "mapa-mundi"){
+            view_box1 = "mapa";
+        }
+    }
 
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
 

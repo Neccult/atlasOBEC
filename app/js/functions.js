@@ -576,49 +576,49 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
 function configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor) {
 
-    if(eixo == 0) {
-        if (vrv == 3) {
+    if(parameters.eixo == 0) {
+        if (parameters.var == 3) {
             dados.valor = dados.value[i] / 100;
             setIntegerValueData(dados, eixo, vrv);
         }
-        else if (vrv == 1) {
+        else if (parameters.var == 1) {
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
-            if(url['cad'] == 0)
+            if(parameters.cad == 0)
                 setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv)
         }
-        else if (vrv == 2) {
-            if(url['uf'] == 0){
+        else if (parameters.var == 2) {
+            if(parameters.uf == 0){
                 dados.valor = dados.value[i];
                 setIntegerValueData(dados, eixo, vrv);
             }
-            else if(url['uf'] != 0){
+            else if(parameters.uf != 0){
                 dados.valor = dados.value[i];
                 setIntegerValueData(dados, eixo, vrv);
                 //setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
             }
         }
-        else if (vrv == 9) {
+        else if (parameters.var == 9) {
             dados.valor = dados.value[i]/100;
             setIntegerValueData(dados, eixo, vrv);
         }
-        else if (vrv >= 4 && vrv <= 8) {
+        else if (parameters.var >= 4 && parameters.var <= 8) {
             dados.valor = dados.value[i];
             setIntegerValueData(dados, eixo, vrv);
-            if(url['cad'] == 0)
+            if(parameters.cad == 0)
                 setPercentValueData({percentual: dados.percentual[i]}, eixo, vrv);
         }
-        else if (vrv > 9) {
+        else if (parameters.var > 9) {
             dados.valor = dados.value[i];
-            if(uos == 0){
+            if(parameters.uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
             }
-            else if(uos == 1){
+            else if(parameters.uos == 1){
                 setPercentValueData(dados, eixo, vrv);
             }
         }
 
-        setTerceiroValueData(eixo, vrv, dados.percentual_setor[i], url['cad']);  
+        setTerceiroValueData(parameters.eixo, parameters.var, dados.percentual_setor[i], parameters.cad);
 
 
     }
