@@ -1,47 +1,18 @@
+var mapa_mundi;
+
 function create_mapa_mundi(mapa_box, gdpData){
     gdpAux = {}; 
     var eixo = parameters.eixo;
     var vrv  = parameters.var;
     var cad = parameters.cad;
+    
     for(var data in gdpData){
         if(gdpData[data].id != 0) gdpAux[unconvertCode(gdpData[data].id)] = gdpData[data].valor;
     }
 
-    var maxValue = Math.max.apply(null, $.map(gdpAux, function(value, index) {
+    var minValue = Math.min.apply(null, $.map(gdpAux, function(value, index) {
         return [value];
     }));
-
-    var minValue = Math.min.apply(null, $.map(gdpAux, function(value, index) {
-            return [value];
-        }));
-
-    minValue = minValue-(minValue*0.4);
-    //distribuicao de frequencias
-    var quant = 9;
-    var range = maxValue - minValue;
-    var amp = minValue < 1 && minValue > -1 ? range / quant : Math.round(range / quant);
-
-    //domino de valores para as cores do mapa
-    var dom = [
-        (minValue+(amp/4)),
-        (minValue+amp),
-        (minValue+(2*amp)),
-        (minValue+(3*amp)),
-        (minValue+(4*amp)),
-        (minValue+(5*amp)),
-        (minValue+(6*amp)),
-        (minValue+(7*amp)),
-        (minValue+(8*amp))
-    ];
-
-    //ajuste do dominio
-    var i = 0;
-    if(amp > 1){
-        while(i<=9){
-            dom[i] = dom[i] - (dom[i] % 5);
-            i++;
-        }
-    }
 
     var arrayColors;
     $(function(){
@@ -51,22 +22,20 @@ function create_mapa_mundi(mapa_box, gdpData){
             return [value];
         });
         
-        $(mapa_box).vectorMap({
+        mapa_mundi = new jvm.Map({
             map: 'continents_mill',
             backgroundColor:  "#fff",
+            container: $(mapa_box),
             series: {
                 regions: [{
                     values: gdpAux,
-                    scale: arrayColors,
+                    scale: arrayColors
                 }]
             },
             onRegionTipShow: function(e, el, code){
                 el.html("")
                 el.html(el.html()+ '<strong>'+gdpData[convertCode(code)].prc+'</strong>')
                 el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
-                // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
-                //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
-                // el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
             },
             onRegionClick: function(e, el, code){
                 
@@ -105,20 +74,6 @@ function create_mapa_mundi(mapa_box, gdpData){
                 destacaPrc(el, mapa_box)
             }
         })
-
-        /*dom.forEach(function(dominio, i) {
-            if(i == 0) {
-                $(mapa_box).append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Menor que: "+dom[i].toFixed(4)+"</div>");
-            }
-            else if(i == 8) {
-                $(mapa_box).append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Maior que: "+dom[i].toFixed(4)+"</div>");
-            }
-            else {
-                $(mapa_box).append("<div style='position: relative; display: block; float:left; width: 150px; font-size: 10px; color: white;'><div style='margin-right: 5px; display: inline-block; width: 15px; height: 15px; background-color: "+arrayColors[i]+"'></div>Entre: "+dom[i-1].toFixed(4)+" e "+dom[i].toFixed(4)+"</div>");
-            }
-                $(mapa_box).children().first().css("margin-bottom", "35px");
-        });*/
-
         destacaPrc(unconvertCode(parseInt(parameters.prc)), mapa_box);
         if(gdpData[0].valor == 0)
             valor = 0
@@ -133,20 +88,8 @@ function create_mapa_mundi(mapa_box, gdpData){
 }
 
 function update_mapa_mundi(mapa_box, gdpData){
-    gdpAux = {};
-    for(data in gdpData){
-        if(gdpData[data].id != 0) gdpAux[unconvertCode(gdpData[data].id)] = gdpData[data].valor;
-    }
-
-    var maxValue = Math.max.apply(null, $.map(gdpAux, function(value, index) {
-                        return [value];
-                    }));
-
-    var minValue = Math.min.apply(null, $.map(gdpAux, function(value, index) {
-                        return [value];
-                    }));
-
-    minValue = minValue-(minValue*0.4);
+    mapa_mundi.remove()
+    create_mapa_mundi(mapa_box, gdpData)
 }
 
 function convertCode(code) {
@@ -183,19 +126,19 @@ function unconvertCode(code) {
 }
 function destacaPrc(prcID, box) {
     var corEixo = COLORS['eixo'][parameters.eixo].color;
-    console.log($(box).find("path"))
+
     $(box).find("path").each(function() {
         if($(this).attr("data-code") == prcID) {
             if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
                 $(this).attr("class", "destacado jvectormap-region jvectormap-element");
-                $(this).attr("data-color", '#000');
-                $(this).css("fill", '#000');
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", corEixo[2]);
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }
         else {
             $(this).attr("class", "jvectormap-region jvectormap-element");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", '#000');
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
     });

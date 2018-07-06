@@ -139,15 +139,6 @@ else if($eixo == 3) {
     }
     foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $uf, $mundo, $slc) as $tupla) {
 
-        /*
-            $mapa[$tupla->idUF] = [
-
-                'id' => (int) $tupla->idUF,
-                'uf' => $tupla->UFNome,
-                'valor' => (double) $tupla->Valor
-            ];
-        */
-
         if($mundo == 0){
             $id = $tupla->idParceiro;
             $mapa->$id = [];

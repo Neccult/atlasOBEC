@@ -121,7 +121,7 @@ function getAnoDefault(eixo_atual){
                 url['slc'] = 0
             index = url['slc'] == 0 ? 1 : 0
 
-            url['ano'] = anos_default[url['var']][index]; break;
+            url['ano'] = d3.max(anos_default[url['var']][index]); break;
     }
 }
 
@@ -1402,19 +1402,6 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
-                $('select[data-id=ano]').each(function(){
-                    selectOp = this;
-                    $(this.options).each(function(){
-                        $(this).remove();
-                    })
-                    dummy = anos_default[dataVal];
-                    dummy.reverse().forEach(function(d){
-                        $(selectOp).append($('<option>', {
-                            value: d,
-                            text: d
-                        }))
-                    })
-                });
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();

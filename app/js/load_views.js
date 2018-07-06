@@ -171,9 +171,15 @@ switch(parameters.eixo){
         break;
     case 3:
         index_view_box1 = parameters.mundo;
-        views_parameters["#view_box"].uos = '0'
-        views_parameters["#view_box_barras"].uos = '0'
-        views_parameters["#view_box_scc"].uos = '0'
+        if(parameters.var == 5 || parameters.var == 8){
+            views_parameters["#view_box"].uos = '1'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '2'
+        } else {
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'    
+        }
         break;
 }
 
@@ -194,6 +200,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
             view_box1 = "mapa";
         }
     }
+
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
@@ -245,6 +252,7 @@ function updateSelectAnos(){
         } else {
             dummy = anos_default[parameters.var];
         }
+        
         dummy.reverse().forEach(function(d){
             $(selectOp).append($('<option>', {
                 value: d,
@@ -294,8 +302,6 @@ function loadViews(){
                 views_parameters["#view_box_barras"].uos = '0'
                 views_parameters["#view_box_scc"].uos = '0'
             }
-
-
             if(parameters.var != 1){
                 $(".content-btn-mapa").css("display", "none");
             } else {
@@ -304,6 +310,19 @@ function loadViews(){
             break;
         case 2:
             index_view_box1 = 0;
+            break;
+        case 3:
+            index_view_box1 = parameters.mundo;
+            if(parameters.var == 5 || parameters.var == 8){
+                views_parameters["#view_box"].uos = '1'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '2'
+            } else {
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'    
+            }
+            break;
     }
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
@@ -317,13 +336,16 @@ function loadViews(){
     var UPDATE_1 = (view_box1 == view_box1_ant);
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
-
+    
     if(parameters.eixo == 3){
+        if(!UPDATE_1 && view_box1_ant == "mapa-mundi"){
+            console.log($(".jvectormap-container"))
+            $(".jvectormap-container").remove()
+        }
         if(view_box1 == "mapa-mundi"){
             view_box1 = "mapa";
         }
     }
-
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
 
         VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);

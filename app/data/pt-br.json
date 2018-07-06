@@ -1804,6 +1804,15 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"}
 				],
+				"views": {
+					"view_box1": ["mapa-mundi", "mapa"],
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				],
 				"inativos":{
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				}
@@ -1844,6 +1853,15 @@
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"}
 				],
+				"views": {
+					"view_box1": ["mapa-mundi", "mapa"],
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				],
 				"inativos":{
 					"mapa":["prt","uf"],"barras":["ano"]
 				}
@@ -1869,6 +1887,7 @@
 					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes":[],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"},
@@ -1879,6 +1898,11 @@
 					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["barras"]
+				},
 				"barras":[
 					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
@@ -1909,11 +1933,17 @@
 					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes": [],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["barras"]
+				},
 				"treemap_scc":[
 					{"name":"Parceiro","id":"prc"},
 					{"name":"Tipo","id":"typ"},
@@ -1974,6 +2004,15 @@
 				"prefixo_valor":"",
 				"type":[
 					{"name":"Barras", "id":"barras"}
+				],
+				"views": {
+					"view_box1": ["mapa-mundi", "mapa"],
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
 				],
 				"barras":[
 					{"name":"Setor","id":"cad"}
