@@ -18,13 +18,13 @@ function create_bars_stacked(barras_box, data){
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-        if(vrv == 3 && eixo == 0){
+    if(vrv == 3 && eixo == 0){
             delete data['2007'];
         }
 
     var desag = selectDesag()
 
-    console.log(data)
+    var anos = [];
 
     if((vrv == 6 || vrv == 4) && eixo == 1){
         aux = []
@@ -46,6 +46,9 @@ function create_bars_stacked(barras_box, data){
         data = aux;
     }
 
+    Object.keys(data).forEach(function (key) {
+       anos.push(data[key].year);
+    });
 
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -71,9 +74,6 @@ function create_bars_stacked(barras_box, data){
         });
     });
 
-
-    console.log(data)
-
     var keys = [];
 
     for (var key in data[0]) {
@@ -97,6 +97,7 @@ function create_bars_stacked(barras_box, data){
                             return d[0] + d[1];
                         })})])
                     .range([height, 0]);
+
 
     var cor;
     if(cad == 0){
@@ -167,20 +168,32 @@ function create_bars_stacked(barras_box, data){
             return x_eixo1(d.data.year);
         })
         .attr("y", function (d) {
-            return y_eixo1(d[0] + d[1]);
+            return y_eixo1(d[1] + d[0]);
         })
         .attr("height", function (d) {
             return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]);
         })
         .attr("width", x_eixo1.bandwidth())
-        .style("cursor", "pointer");
+        .style("cursor", "pointer")
+        .on("mouseover", function (d, i, obj) {
+            loadTooltipStacked(d, obj,  i, eixo, vrv, tooltipInstance);
+        })
+        .on("mouseout", tooltipInstance.hideTooltip)
+        .on("click", function(d, i, obj) {
+
+            clickBarraStacked(d, i, obj, anos);
+
+
+
+        });
+
 
     if((vrv == 6 || vrv == 4) && eixo == 1)
         desagregacao = 1
     else
         desagregacao = $(".bread-select[data-id=deg]").val();
 
-    
+
 }
 
 function update_bars_stacked(barras_box, data){
@@ -360,6 +373,43 @@ function update_bars_stacked(barras_box, data){
 
 }
 
+function clickBarraStacked(d, i, obj, anos){
+
+    // console.log(d)
+    // console.log(i)
+    // console.log(obj)
+
+    var indexAno = anos.indexOf(d.data.year);
+
+    $(".cost").each(function(i){
+        $(this).find("rect").each(function(k){
+            if(indexAno == k) {
+                $(this).css("opacity", 1);
+            }
+            else{
+                $(this).css("opacity", 0.5);
+
+            }
+
+        })
+    })
+
+    // if(window.innerWidth <= 800)
+    //     return;
+    //
+    // if(d.x.getFullYear() != url['ano']) {
+    //     url['ano'] = d.x.getFullYear();
+    //
+    //     updateWindowUrl('ano', d.x.getFullYear())
+    //     destacaBarra(d.x, true);
+    // }
+    //
+    // $(window.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(obj+1)+"]").prop('selected', true)//.val(obj+1)
+    // updateWindowUrl('deg', deg);
+    // updateWindowUrl('subdeg', obj+1)
+    // configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
+
+}
 
 function getSoma(barraId) {
     var soma = 0;
@@ -399,8 +449,7 @@ function destacaBarra(barras_box, barraId) {
     });
 }
 
-function loadTooltip(d, obj, i, eixo, vrv) {
-
+function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance) {
 
     if (eixo === 1) {
         if (vrv === 9) {

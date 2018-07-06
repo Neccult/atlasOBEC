@@ -1215,10 +1215,7 @@ function setIntegerValueData(value, eixo, vrv) {
     else if(eixo == 3)
         literal = formatDecimalLimit(valor, 2);
 
-    // console.log(value)
-
     estado = $(".state-title").first().text()
-    
 
     $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
     var doc =  $(".integer-value").first().find(".number").first();
@@ -1392,6 +1389,11 @@ function setPercentValueData(value, eixo, vrv) {
 * Função que mexe no texto da barra de legenda do mapa.
 * Centraliza, muda o tamanho da fonte e formata o texto.
 */
+
+function getDegName(){
+
+}
+
 function formatBarTextMap(value, eixo, vrv, obj){
     var font_size = 9
     var description = PT_BR;
@@ -2206,4 +2208,220 @@ var formatTreemapText = function(view) {
 			}
 		}
 	});
+}
+
+function getSubdegName(deg, subdeg) {
+
+    switch (deg) {
+
+        case '1':
+            switch (subdeg){
+                case '1':
+                    return "Micro";
+                case '2':
+                    return "Pequeno";
+                case '3':
+                    return "Médio";
+                case '4':
+                    return "Grande";
+            }
+
+            break;
+        case '2':
+            switch (subdeg) {
+                case '0':
+                    return "Feminino";
+                case '1':
+                    return "Masculino";
+            }
+            break;
+        case '3':
+            switch (subdeg) {
+                case '1':
+                    return "10 a 17";
+                case '2':
+                    return "18 a 29";
+                case '3':
+                    return "30 a 49";
+                case '4':
+                    return "50 a 64";
+                case '5':
+                    return "65 ou mais";
+                case '6':
+                    return "Não classificado";
+            }
+            break;
+
+        case '4':
+            switch (subdeg) {
+                case '1':
+                    return "Sem instrução";
+                case '2':
+                    return "Fundamental incompleto";
+                case '3':
+                    return "Fundamental completo";
+                case '4':
+                    return "Médio completo";
+                case '5':
+                    return "Superior incompleto";
+                case '6':
+                    return "Superior completo";
+                case '7':
+                    return "Não determinado";
+            }
+            break;
+
+        case '5':
+            switch (subdeg) {
+                case '1':
+                    return "Indígena";
+                case '2':
+                    return "Branca";
+                case '3':
+                    return "Preta";
+                case '4':
+                    return "Amarela";
+                case '5':
+                    return "Parda";
+            }
+            break;
+
+        case '6':
+            switch (subdeg) {
+                case '1':
+                    return "Formal";
+                case '2':
+                    return "Informal";
+            }
+            break;
+
+        case '7':
+            switch (subdeg) {
+                case '1':
+                    return "Contribuinte";
+                case '2':
+                    return "Não contribuinte";
+
+            }
+            break;
+
+        case '8':
+            switch (subdeg) {
+                case '1':
+                    return "Membro";
+                case '2':
+                    return "Não membro";
+
+            }
+            break;
+
+    }
+}
+
+function getSubdegId(deg, subdeg) {
+
+    switch (deg) {
+
+        case '1':
+            switch (subdeg){
+                case "Micro":
+                    return '1';
+                case "Pequeno":
+                    return '2';
+                case 'Médio':
+                    return "3";
+                case 'Grande':
+                    return "4";
+            }
+
+            break;
+        case '2':
+            switch (subdeg) {
+                case 'Feminino':
+                    return "0";
+                case 'Masculino':
+                    return "1";
+            }
+            break;
+        case '3':
+            switch (subdeg) {
+                case '10 a 17':
+                    return "1";
+                case '18 a 29':
+                    return "2";
+                case '30 a 49':
+                    return "3";
+                case '50 a 64':
+                    return "4";
+                case '65 ou mais':
+                    return "5";
+                case 'Não classificado':
+                    return "6";
+            }
+            break;
+
+        case '4':
+            switch (subdeg) {
+                case 'Sem instrução':
+                    return "1";
+                case 'Fundamental incompleto':
+                    return "2";
+                case 'Fundamental completo':
+                    return "3";
+                case 'Médio completo':
+                    return "4";
+                case 'Superior incompleto':
+                    return "5";
+                case 'Superior completo':
+                    return "6";
+                case 'Não determinado':
+                    return "7";
+            }
+            break;
+
+        case '5':
+            switch (subdeg) {
+                case 'Indígena':
+                    return "1";
+                case 'Branca':
+                    return "2";
+                case 'Preta':
+                    return "3";
+                case 'Amarela':
+                    return "4";
+                case 'Parda':
+                    return "5";
+            }
+            break;
+
+        case '6':
+            switch (subdeg) {
+                case 'Formal':
+                    return "1";
+                case 'Informal':
+                    return "2";
+            }
+            break;
+
+        case '7':
+            switch (subdeg) {
+                case 'Contribuinte':
+                    return "1";
+                case 'Não contribuinte':
+                    return "2";
+
+            }
+            break;
+
+        case '8':
+            switch (subdeg) {
+                case 'Membro':
+                    return "1";
+                case 'Não membro':
+                    return "2";
+
+            }
+            break;
+
+    }
 }

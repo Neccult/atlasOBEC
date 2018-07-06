@@ -108,15 +108,34 @@ function create_linhas(linhas_box, data){
     svg_linhas.selectAll("path.line")
         .data(dados)
         .enter().append("path")
+        .attr("fill", "none")
         .attr("class", "line")
         .attr("scc", function(d){
             return d[0].deg;
         })
         .style("opacity",  function(d){
-            if(url['cad'] != 0 ){
-                if(getCadId(d[0].deg) == url['cad'])
+
+            if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)){
+
+                var urlDegName = getSubdegName(parameters.deg, parameters.subdeg)
+
+                if(d[0].deg == urlDegName){
+                    return 1
+                }
+                else{
+                    return 0.3
+                }
+
+
+                return 1;
+            }
+            else if(parameters.cad != 0 ){
+                if(getCadId(d[0].deg) == parameters.cad){
                     return 1;
-                else return 0.3;
+                }
+                else {
+                    return 0.3;
+                }
             }
             else
                 return 1;})
@@ -129,9 +148,6 @@ function create_linhas(linhas_box, data){
 
             mousemoveLinhas(d, dados, (this), tooltipInstance);
 
-            if(parameters.cad == 0){
-                d3.select(this).style("opacity", 1)
-            }
         })
         .on("click", function (dados) {
 
@@ -146,9 +162,6 @@ function create_linhas(linhas_box, data){
         })
         .on("mouseout", function () {
             tooltipInstance.hideTooltip();
-            if(parameters.cad == 0){
-                d3.selectAll("path").style("opacity", 1)
-            }
         });
 
 
@@ -318,7 +331,19 @@ function getCadId(cadName){
 function destacaSetor(cadName){
 
     d3.selectAll("path.line").style("opacity", function(d){
-        if(parameters.cad == 0){
+        if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)){
+
+            var urlDegName = getSubdegName(parameters.deg, parameters.subdeg)
+
+
+            if(d[0].deg == urlDegName){
+                return 1
+            }
+            else{
+                return 0.3
+            }
+        }
+        else if(parameters.cad == 0){
             return 1
         }
         else if(parameters.cad == getCadId(d[0].deg)){
@@ -336,23 +361,12 @@ function clickLinhas(d, path) {
     if(!($(path).hasClass("domain")) ) {
 
         if(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5) && parameters.deg != 0){
-            var desagId = (getDesagId(deg, $(path).attr("scc")));
-            var desagName = updateUrlDesag(deg, desagId)
 
-            ///TODO
 
-            // var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(replace, desagName+"=" +desagId);
-            var newMapaSrc = $(window.parent.document).find("#view_box").attr("src").replace(getRegexDesag(deg), desagName+"=" +desagId);
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+getSubdegId(parameters.deg, $(path).attr("scc"))+"]").prop('selected', true)//.val(obj+1)
 
-            var newBarraSrc = $(window.parent.document).find("#view_box_barras").attr("src").replace(getRegexDesag(deg), desagName+"=" +desagId);
-
-            $(window.parent.document).find("#view_box").attr("src", newMapaSrc);
-            $(window.parent.document).find("#view_box_barras").attr("src", newBarraSrc);
-
-            $(window.parent.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(desagId)+"]").prop('selected', true)
-
-            updateWindowUrl('deg', deg)
-            updateWindowUrl('subdeg', desagId)
+            updateWindowUrl('subdeg', getSubdegId(parameters.deg, $(path).attr("scc")))
+            updateIframe();
 
         }
         else{
