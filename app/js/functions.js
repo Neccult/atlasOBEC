@@ -562,7 +562,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
        }
         else{
-                dados.valor = dados.value[indexAno];
+                dados.valor = dados.value[index_ano];
 
                 setIntegerValueData(dados, eixo, vrv);
                 setPercentValueData({percentual : dados.percentual[index_ano]}, eixo, vrv);

@@ -246,6 +246,7 @@ function updateSelectAnos(){
         } else {
             dummy = anos_default[parameters.var];
         }
+        
         dummy.reverse().forEach(function(d){
             $(selectOp).append($('<option>', {
                 value: d,

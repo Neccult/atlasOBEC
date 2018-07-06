@@ -1,3 +1,5 @@
+var mapa_mundi;
+
 function create_mapa_mundi(mapa_box, gdpData){
     gdpAux = {}; 
     var eixo = parameters.eixo;
@@ -20,7 +22,7 @@ function create_mapa_mundi(mapa_box, gdpData){
             return [value];
         });
         
-        var teste = new jvm.Map({
+        mapa_mundi = new jvm.Map({
             map: 'continents_mill',
             backgroundColor:  "#fff",
             container: $(mapa_box),
@@ -109,61 +111,9 @@ function update_mapa_mundi(mapa_box, gdpData){
         arrayColors = $.map(COLORS["cadeias"][cad]["gradient"], function(value, index) {
             return [value];
         });
-        
-        $(mapa_box).vectorMap({
-            map: 'continents_mill',
-            backgroundColor:  "#fff",
-            series: {
-                regions: [{
-                    values: gdpAux,
-                    scale: arrayColors,
-                }]
-            },
-            onRegionTipShow: function(e, el, code){
-                el.html("")
-                el.html(el.html()+ '<strong>'+gdpData[convertCode(code)].prc+'</strong>')
-                el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
-                // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
-                //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
-                // el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
-            },
-            onRegionClick: function(e, el, code){
-                
-                if(window.innerWidth <= 1199)
-                    return;
-
-                var newBarraSrc = $("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-
-                var newDonutSrc = $("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-
-                $("#view_box_scc").attr("src", newBarraSrc);
-                $("#view_box_barras").attr("src", newDonutSrc);
-
-                setIntegerValueData(gdpData[convertCode(el)], eixo, vrv);
-
-                if(cad == 0){
-                    setPercentValueData(gdpData[convertCode(el)], eixo, vrv);
-                }
-
-                if(parameters.var == 1  || parameters.var == 13){
-
-                    if(gdpData[0].valor == 0)
-                        valor = 0
-                    else
-                        valor = gdpData[convertCode(el)].valor/gdpData[0].valor;
-
-                    setPercentValueData({percentual: valor}, eixo, vrv);
-                }
-
-                setPrcTitle(gdpData[convertCode(el)].prc)
-
-                $("select[data-id='prc']").val(convertCode(el));
-                updateWindowUrl('prc', convertCode(el))
-                destacaPrc(el, mapa_box)
-            }
-        })
+        console.log(mapa_mundi)
+        mapa_mundi.series.regions[0].setScale(arrayColors)
+        mapa_mundi.series.regions[0].setValues(gdpAux)
 
         destacaPrc(unconvertCode(parseInt(parameters.prc)), mapa_box);
         if(gdpData[0].valor == 0)
@@ -210,19 +160,19 @@ function unconvertCode(code) {
 }
 function destacaPrc(prcID, box) {
     var corEixo = COLORS['eixo'][parameters.eixo].color;
-    console.log($(box).find("path"))
+    
     $(box).find("path").each(function() {
         if($(this).attr("data-code") == prcID) {
             if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
                 $(this).attr("class", "destacado jvectormap-region jvectormap-element");
-                $(this).attr("data-color", '#000');
-                $(this).css("fill", '#000');
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", corEixo[2]);
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }
         else {
             $(this).attr("class", "jvectormap-region jvectormap-element");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", '#000');
+            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
     });
