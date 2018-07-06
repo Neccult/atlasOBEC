@@ -325,7 +325,7 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc){
+	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc, $uos){
 
 		self::connect();
         $stmt = mysqli_stmt_init(self::$conn);
@@ -340,7 +340,13 @@ class EixoQuatro {
 
         $params[] = $parc;
         $params[] = $uf;
-        $params[] = $cad;
+        
+        //variáveis de IHH e C4
+        if($var == 5 || $var == 8){
+            $params[] = $uos;
+        } else {
+            $params[] = $cad;
+        }
         $params[] = $tipo;
         $params[] = $var;
         

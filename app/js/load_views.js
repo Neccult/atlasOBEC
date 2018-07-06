@@ -171,9 +171,15 @@ switch(parameters.eixo){
         break;
     case 3:
         index_view_box1 = parameters.mundo;
-        views_parameters["#view_box"].uos = '0'
-        views_parameters["#view_box_barras"].uos = '0'
-        views_parameters["#view_box_scc"].uos = '0'
+        if(parameters.var == 5 || parameters.var == 8){
+            views_parameters["#view_box"].uos = '1'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '2'
+        } else {
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'    
+        }
         break;
 }
 
@@ -194,7 +200,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
             view_box1 = "mapa";
         }
     }
-    
+
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
@@ -307,9 +313,15 @@ function loadViews(){
             break;
         case 3:
             index_view_box1 = parameters.mundo;
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'
+            if(parameters.var == 5 || parameters.var == 8){
+                views_parameters["#view_box"].uos = '1'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '2'
+            } else {
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'    
+            }
             break;
     }
 
@@ -326,6 +338,10 @@ function loadViews(){
     var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
     
     if(parameters.eixo == 3){
+        if(!UPDATE_1 && view_box1_ant == "mapa-mundi"){
+            console.log($(".jvectormap-container"))
+            $(".jvectormap-container").remove()
+        }
         if(view_box1 == "mapa-mundi"){
             view_box1 = "mapa";
         }

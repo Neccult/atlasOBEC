@@ -1887,6 +1887,7 @@
 					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes":[],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"},
@@ -1897,6 +1898,11 @@
 					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["barras"]
+				},
 				"barras":[
 					{"name":"Parceiro","id":"prc"},
 					{"name":"Setor","id":"cad"},
@@ -1927,11 +1933,17 @@
 					{"name":"Tipo", "id": "typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"botoes": [],
 				"treemap_region":[
 					{"name":"Setor","id":"cad"},
 					{"name":"Tipo","id":"typ"},
 					{"name":"Ano","id":"ano"}
 				],
+				"views": {
+					"view_box1": ["barras"],
+					"view_box2": ["barras"],
+					"view_box3": ["barras"]
+				},
 				"treemap_scc":[
 					{"name":"Parceiro","id":"prc"},
 					{"name":"Tipo","id":"typ"},

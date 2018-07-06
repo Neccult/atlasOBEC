@@ -36,9 +36,6 @@ function create_mapa_mundi(mapa_box, gdpData){
                 el.html("")
                 el.html(el.html()+ '<strong>'+gdpData[convertCode(code)].prc+'</strong>')
                 el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, eixo, vrv));
-                // el.html(el.html()+'<br>'+formatTextVrv(gdpData[convertCode(code)].valor, vrv, eixo))
-                //el.html(el.html()+'<br>Taxa: '+formatDecimalLimit(gdpData[convertCode(code)].taxa+''), 2);
-                // el.html(el.html()+'<br>'+formatTextTaxaVrv(gdpData[convertCode(code)].percentual, eixo, vrv));
             },
             onRegionClick: function(e, el, code){
                 
