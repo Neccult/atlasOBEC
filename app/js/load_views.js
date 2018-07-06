@@ -194,7 +194,7 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
             view_box1 = "mapa";
         }
     }
-    console.log(view_box1)
+    
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
     })
@@ -330,7 +330,6 @@ function loadViews(){
             view_box1 = "mapa";
         }
     }
-    
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
 
         VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
