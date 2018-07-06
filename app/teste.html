@@ -1,11 +1,8 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="css/gov.css">
-<link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-2.0.3.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
 
+<link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-2.0.3.css">
+
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <script src="js/dependencias/jquery.min.js"></script>
 <script src="js/control-colors.js"></script>
@@ -13,7 +10,6 @@
 <script src="js/dependencias/jquery.fullPage.js"></script>
 <script src="js/continents-mill.js"></script>
 <script src="js/dependencias/topojson.v2.min.js"></script>
-
 
 <script src="js/d3/d3.min.js"></script>
 
@@ -23,20 +19,8 @@
 <script src="js/d3/d3-interpolate.v1.min.js"></script>
 <script src="js/d3/d3-scale-chromatic.v1.min.js"></script>
 
-<!-- Fav Icons -->
-<link rel="icon" type="image/x-icon" href="css/icon.png" /> 
-<link rel="shortcut icon" type="image/x-icon"  href="css/icon.png" />
-
-<script type="text/javascript" src="js/jqplot/jquery.jqplot.js"></script>
-<script type="text/javascript" src="js/jqplot/plugins/jqplot.barRenderer.js"></script>
-<script type="text/javascript" src="js/jqplot/plugins/jqplot.pieRenderer.js"></script>
-<script type="text/javascript" src="js/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
-<script type="text/javascript" src="js/jqplot/plugins/jqplot.pointLabels.js"></script>
-<link rel="stylesheet" type="text/css" href="js/jqplot/jquery.jqplot.css" />
-
-
 <body>
-    <div id="corpo-mundi">
+    <div id="teste">
 
     </div>
 </body>
@@ -44,12 +28,12 @@
 <script>
 
 $.get("./db/json_mapa.php?var=1&uf=0&ocp=0&mec=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo=3", function(data) {
-    gdpData = JSON.parse(data);
-    console.log(gdpData)
 
+    gdpData = JSON.parse(data);
+    
     var arrayColors;
     $(function(){
-    $('#corpo-mundi').vectorMap({
+    $('#teste').vectorMap({
         map: 'continents_mill',
         series: {
             regions: [{
