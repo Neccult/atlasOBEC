@@ -102,7 +102,7 @@ function create_mapa_mundi(mapa_box, gdpData){
 
                 $("select[data-id='prc']").val(convertCode(el));
                 updateWindowUrl('prc', convertCode(el))
-                destacaPrc(el)
+                destacaPrc(el, mapa_box)
             }
         })
 
@@ -119,7 +119,7 @@ function create_mapa_mundi(mapa_box, gdpData){
                 $(mapa_box).children().first().css("margin-bottom", "35px");
         });*/
 
-        destacaPrc(unconvertCode(parseInt(parameters.prc)));
+        destacaPrc(unconvertCode(parseInt(parameters.prc)), mapa_box);
         if(gdpData[0].valor == 0)
             valor = 0
         else
@@ -181,20 +181,21 @@ function unconvertCode(code) {
             return "OC";
     }
 }
-function destacaPrc(prcID) {
+function destacaPrc(prcID, box) {
     var corEixo = COLORS['eixo'][parameters.eixo].color;
-    $("path").each(function() {
+    console.log($(box).find("path"))
+    $(box).find("path").each(function() {
         if($(this).attr("data-code") == prcID) {
             if($(this).attr("class") !== "destacado jvectormap-region jvectormap-element") {
                 $(this).attr("class", "destacado jvectormap-region jvectormap-element");
-                $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", corEixo[2]);
+                $(this).attr("data-color", '#000');
+                $(this).css("fill", '#000');
                 $(this).animate({"opacity": "1"}, "fast");
             }
         }
         else {
             $(this).attr("class", "jvectormap-region jvectormap-element");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
+            if($(this).attr("data-color") != undefined) $(this).css("fill", '#000');
             $(this).animate({"opacity": "0.7"}, "fast");
         }
     });
