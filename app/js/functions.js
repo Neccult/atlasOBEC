@@ -2329,7 +2329,11 @@ function getSubdegId(deg, subdeg) {
                     return '1';
                 case "Pequeno":
                     return '2';
+                case "Pequena":
+                    return '2';
                 case 'Médio':
+                    return "3";
+                case 'Média':
                     return "3";
                 case 'Grande':
                     return "4";

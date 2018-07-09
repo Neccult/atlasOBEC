@@ -2049,7 +2049,15 @@
 			"slc": 1,
 			"deg": 0,
 			"typ": 0,
-			"complement": "bens"		
+			"complement": "bens"
+		},
+		"recebedora": {
+			"mec": 0,
+			"complement": "trabalhador"
+		},
+		"trabalhador": {
+			"mec": 1,
+			"complement": "recebedora"
 		}
 	},
 	"select":

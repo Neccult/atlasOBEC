@@ -1168,7 +1168,7 @@ $(document).ready(function(){
             updateUrl();
             if(parameters.eixo == 3){
                 var botao = PT_BR.dados_botoes[id];
-                
+
                 url['slc'] = botao.slc;
                 var index_ano = botao.slc == 0 ? 1 : 0;
                 url['ano'] = d3.max(anos_default[parameters.var][index_ano]);
@@ -1178,6 +1178,20 @@ $(document).ready(function(){
 
                 updateWindowUrl('slc', url['slc']);
                 updateWindowUrl('ano', url['ano']);
+
+                updateIframe(url);
+            } else if(parameters.eixo == 2){
+
+                var botao = PT_BR.dados_botoes[id];
+
+                console.log("oi")
+
+                url['mec'] = botao.mec;
+                updateWindowUrl('mec', url['mec'])
+
+                updateOptView($(this).parent().parent().attr("class"), $(this))
+
+
 
                 updateIframe(url);
             } else {
@@ -1276,12 +1290,9 @@ $(document).ready(function(){
 
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
-                changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
 
-                $('#recebedora').addClass("active");
-                $('#trabalhador').removeClass("active");
 
                 if(url['ocp'] == 0){
                     switchToSetores();
@@ -1478,10 +1489,14 @@ function updateOptView(container, btn){
 
 
 
+
     if(container == "init"){
 
 
+
         $(".btn-mapa button.opt.view").each(function(){
+
+
             if(parameters.chg){
                 if($(this).attr("id") == "mapa"){
 
@@ -1520,46 +1535,86 @@ function updateOptView(container, btn){
         });
 
         $(".btn-opt button.opt.view").each(function(){
-            if(parameters.ocp){
 
-                switchToOcupations();
-                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
+            if(parameters.eixo == 2){
+                if(parameters.var == 18 || parameters.var == 19){
+                    $(this).css("display","block")
 
-                if($(this).attr("id") == "setor"){
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[1]);
                 }
                 else{
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[2]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
+                    $(this).css("display","none")
+
                 }
             }
-            else{
 
-                switchToSetores();
-                $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
+            if(parameters.eixo == 1){
+                if(parameters.ocp != '0'){
 
-                if($(this).attr("id") == "ocupacao"){
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
+                    switchToOcupations();
+                    $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
+
+                    if($(this).attr("id") == "setor"){
+                        $(this).css("opacity", "0.8")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[2]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
                 }
-                else {
-                    $(this).css("opacity", "1")
-                    if (parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
+                else{
+
+                    switchToSetores();
+                    $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
+
+                    if($(this).attr("id") == "ocupacao"){
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+                    }
+                    else {
+                        $(this).css("opacity", "1")
+                        if (parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
                 }
             }
+            else if(parameters.eixo == 2){
+
+                if(parameters.mec == 0){
+                    if($(this).attr("id") == "recebedora"){
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[1]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                }
+                else{
+                    if($(this).attr("id") == "recebedora"){
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[1]);
+                    }
+                }
+
+            }
+
+
         });
     }
     else{
@@ -1588,14 +1643,14 @@ function updateOptView(container, btn){
                 $("#btn-opt button.opt.view").each(function(){
                     if($(btn).attr("id") == $(this).attr("id")){
                         $(this).css("opacity", "1");
-                        if(parameters.eixo == 0)
+                        if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[1]);
                         else
                             $(this).css("background-color", corEixo[2]);
                     }
                     else{
                         $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0)
+                        if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[2]);
                         else
                             $(this).css("background-color", corEixo[1]);

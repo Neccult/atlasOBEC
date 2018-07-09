@@ -154,6 +154,7 @@ function create_bars_stacked(barras_box, data){
         .data(dataset)
         .enter().append("g")
         .attr("class", "cost")
+        .attr("subdeg", function(d) {return d.key})
         .style("fill", function (d, i) {
             return colors(i);
         });
@@ -164,7 +165,7 @@ function create_bars_stacked(barras_box, data){
         })
         .enter()
         .append("rect")
-        .attr("data-legend", function(d) { return d.data.year; })
+        .attr("data-legend", function(d) {  return d.data.year; })
         .attr("data-value", function(d) { return d[1]; })
         .attr("x", function (d) {
             return x_eixo1(d.data.year);
@@ -178,13 +179,19 @@ function create_bars_stacked(barras_box, data){
         .attr("width", x_eixo1.bandwidth())
         .style("cursor", "pointer")
         .on("mouseover", function (d, i, obj) {
-            loadTooltipStacked(d, obj,  i, eixo, vrv, tooltipInstance);
+            var name = $(this).parent().attr("subdeg");
+            loadTooltipStacked(d, obj,  i, parameters.eixo, parameters.var, tooltipInstance, name);
         })
         .on("mouseout", tooltipInstance.hideTooltip)
         .on("click", function(d, i, obj) {
 
-            clickBarraStacked(d, i, obj, anos);
+            var newSubdeg = getSubdegId(parameters.deg, $(this).parent().attr("subdeg"));
+            updateWindowUrl('subdeg', newSubdeg)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
+
+            clickBarraStacked(d, i, obj, anos);
+            updateIframe()
 
 
         });
@@ -379,10 +386,6 @@ function update_bars_stacked(barras_box, data){
 
 function clickBarraStacked(d, i, obj, anos){
 
-    // console.log(d)
-    // console.log(i)
-    // console.log(obj)
-
     var indexAno = anos.indexOf(d.data.year);
 
     $(".cost").each(function(i){
@@ -392,26 +395,11 @@ function clickBarraStacked(d, i, obj, anos){
             }
             else{
                 $(this).css("opacity", 0.5);
-
             }
-
         })
     })
 
-    // if(window.innerWidth <= 800)
-    //     return;
-    //
-    // if(d.x.getFullYear() != url['ano']) {
-    //     url['ano'] = d.x.getFullYear();
-    //
-    //     updateWindowUrl('ano', d.x.getFullYear())
-    //     destacaBarra(d.x, true);
-    // }
-    //
-    // $(window.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(obj+1)+"]").prop('selected', true)//.val(obj+1)
-    // updateWindowUrl('deg', deg);
-    // updateWindowUrl('subdeg', obj+1)
-    // configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
+    updateWindowUrl('ano', d.data.year)
 
 }
 
@@ -453,34 +441,34 @@ function destacaBarra(barras_box, barraId) {
     });
 }
 
-function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance) {
+function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance, name) {
 
-    if (eixo === 1) {
-        if (vrv === 9) {
+    if (eixo == 1) {
+        if (vrv == 9) {
             tooltipInstance.showTooltip(d, [
-                ["title", desagregacao_names()[obj]],
+                ["title", name],
                 ["", formatTextVrv(d.y, eixo, vrv)]
             ]);
         }
-        else if (vrv === 2) {
+        else if (vrv == 2) {
 
             if (url['ocp'] == 0) {
                 tooltipInstance.showTooltip(d, [
-                    ["title", desagregacao_names()[obj]],
+                    ["title", name],
                     ["", formatTextVrv(d.y * 100, eixo, vrv)]
                 ]);
             }
             else {
                 tooltipInstance.showTooltip(d, [
-                    ["title", desagregacao_names()[obj]],
+                    ["title", name],
                     ["", formatTextVrv(d.y * 100, eixo, vrv)]
                 ]);
             }
         }
-        else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+        else if (vrv == 1 || (vrv >= 4 && vrv <= 8) || vrv == 11 || vrv == 10 || vrv >= 12) {
             tooltipInstance.showTooltip(d, [
-                ["title", desagregacao_names()[obj]],
-                ["", formatTextVrv(d.y, eixo, vrv)]
+                ["title", name],
+                ["", formatTextVrv(d[1] - d[0], eixo, vrv)]
             ]);
         }
     }

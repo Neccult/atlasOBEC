@@ -39,6 +39,10 @@ function create_donut(donut_box, data){
 }
 
 function update_donut(donut_box, data){
+
+
+
+
     var height = $(donut_box).height();
     var width = $(donut_box).width();
 
