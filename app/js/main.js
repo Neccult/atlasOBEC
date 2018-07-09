@@ -1116,17 +1116,24 @@ $(document).ready(function(){
         updateOptView($(this).parent().parent().attr("class"), $(this))
 
 
-        if(id == "treemap_region" || id == "mapa") {
+        if(id == "treemap_region" || id == "mapa" || id == "mundo") {
             updateUrl();
 
+            if(parameters.eixo == 3){
 
-            if(id === "treemap_region") {
-                url['chg'] = '1';
+                if(id == "mapa") url['mundo'] = 1;
+                else if(id == "mundo") url['mundo'] = 0;
+
+                updateWindowUrl('mundo', url['mundo']);
+
+            } else {
+                
+                if(id === "treemap_region") url['chg'] = '1';
+                else if(id === "mapa") url['chg'] = '0';
+
+                updateWindowUrl('chg', url['chg'])
             }
-            else if(id === "mapa") {
-                url['chg'] = '0';
-            }
-            updateWindowUrl('chg', url['chg'])
+            
             updateIframe(url); /* atualiza gráfico */
 
 

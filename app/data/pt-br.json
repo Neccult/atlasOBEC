@@ -3,7 +3,7 @@
 	"mapa":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_region":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_scc":"Essa visualização permite observar a variável de interesse segmentada pelos Setores Culturais e Criativos.",
-
+	"mundo":"Mapa-mundi",
 	"var_desc": "Selecione aqui a variável que deseja visualizar.",
 	"uf":"Selecione aqui a Unidade da Federação que deseja visualizar.",
 	"prt":"Selecione aqui o porte de empresa que deseja visualizar. Este filtro só será habilitado quando você selecionar o setor.",

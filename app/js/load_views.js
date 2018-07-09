@@ -48,6 +48,7 @@ VIEWS = {
     },
     "mapa": function (box, data, update){
         var mapa_mundi = parameters.eixo == 3 && parameters.mundo == 0;
+        
         if(update){
             if(mapa_mundi){
                 update_mapa_mundi(box, data);
@@ -231,10 +232,15 @@ function updateParameters(){
 
     data_var_ant = getDataVar(PT_BR, parameters.eixo, parameters.var);
     
-    if(parameters.chg == undefined){
-        index_view_box1 = 0;
+    
+    if(parameters.eixo == 3){
+        index_view_box1 = parameters.mundo;
     } else {
-        index_view_box1 = parameters.chg;
+        if(parameters.chg == undefined){
+            index_view_box1 = 0;
+        } else {
+            index_view_box1 = parameters.chg;
+        }
     }
 
     view_box1_ant = data_var_ant.views.view_box1[index_view_box1];
