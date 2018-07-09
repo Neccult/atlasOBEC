@@ -443,7 +443,8 @@ function mapaClick(svg_mapa, dict, d){
 function destacaPais(svg_mapa, ufId) {
 
     svg_mapa.selectAll("path").each(function() {
-        if($(this).attr("data-legend") == ufId) {
+        if($(this).attr("data-legend") == parameters.uf) {
+            console.log("oi")
             if($(this).attr("class") !== "destacado") {
                 $(this).attr("class", "destacado");
                 $(this).attr("data-color", $(this).css("fill"));
@@ -453,6 +454,7 @@ function destacaPais(svg_mapa, ufId) {
         }
         else {
             $(this).attr("class", "");
+            $(this).css("fill", $(this).attr("data-color"));
             $(this).animate({"opacity": "0.7"}, "fast");
         }
 
@@ -485,6 +487,7 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
     }
     else if(eixo == 1){
 
+
         var valorTooltip = 0;
 
         var array = ['1', '4', '5', '6', '7', '8', '9', '10', '11']
@@ -506,7 +509,7 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
             //["", formatDecimalLimit(dict[d.id].taxa, 2)],
         ]);
 
-        if(parameters.var === 2){
+        if(parameters.var == 2){
             if(url['ocp'] == 0){
                 tooltipInstance.showTooltip(d, [
                     ["title", d['properties']['name']],

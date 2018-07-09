@@ -959,7 +959,7 @@ function switchToOcupations() {
     var html = "";
 
     legendArray.forEach( function(id) {
-        html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
+        html += "<span class=\"ocp\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
     } );
 
     $("#title-view-leg-scc").html(html);
@@ -1040,7 +1040,6 @@ $(document).ready(function(){
 
             var setor = $(this).attr('data-id');
 
-
             if(setor != parameters.cad) {
 
                 if(eixo == 2 && parameters.var == 19 && parameters.mec == 1)
@@ -1054,6 +1053,7 @@ $(document).ready(function(){
                     url['subdeg'] = 0;
                     parameters.subdeg = url['subdeg']
                 }
+
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', setor)
                 updateIframe(url);
@@ -1072,6 +1072,32 @@ $(document).ready(function(){
                 updateWindowUrl('uf', url['uf'])
                 updateIframe(url);
             }
+        }
+
+    });
+
+    $(document).on('click', ".ocp", function(){
+
+
+
+        var eixo = parameters.eixo
+
+        if(eixo == 1 && url['var'] < 12){
+
+            var ocp = $(this).attr('data-id');
+
+            console.log(ocp)
+
+            if(ocp != parameters.ocp){
+                url['ocp'] = ocp;
+                parameters.ocp = url['ocp']
+                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+
+                updateWindowUrl('ocp', ocp)
+                updateIframe(url);
+            }
+
+
         }
 
     });
@@ -1434,7 +1460,11 @@ $(document).ready(function(){
 
 function updateOptView(container, btn){
 
+
+
     if(container == "init"){
+
+
         $(".btn-mapa button.opt.view").each(function(){
             if(parameters.chg){
                 if($(this).attr("id") == "mapa"){
@@ -1475,22 +1505,30 @@ function updateOptView(container, btn){
 
         $(".btn-opt button.opt.view").each(function(){
             if(parameters.ocp){
+
+                switchToOcupations();
+                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
+
                 if($(this).attr("id") == "setor"){
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
-                }
-                else{
                     $(this).css("opacity", "0.8")
                     if(parameters.eixo == 0)
                         $(this).css("background-color", corEixo[1]);
                     else
                         $(this).css("background-color", corEixo[1]);
                 }
+                else{
+                    $(this).css("opacity", "1")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[2]);
+                    else
+                        $(this).css("background-color", corEixo[2]);
+                }
             }
             else{
+
+                switchToSetores();
+                $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
+
                 if($(this).attr("id") == "ocupacao"){
                     $(this).css("opacity", "1")
                     if(parameters.eixo == 0)

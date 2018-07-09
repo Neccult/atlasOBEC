@@ -1225,8 +1225,8 @@
 				],
 				"views": {
 					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
 				},
                 "mapa_valores": ""
 			},
