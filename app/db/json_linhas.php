@@ -469,7 +469,7 @@ else if($eixo == 2 && $var == 10) {
     require_once("EixoTres.php");
     for ($mec = 0; $mec <= 1; $mec++) {
 
-        foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+        foreach (EixoTres::getter_linhas($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
             $id = $tupla->Ano;
             // $linhas[$tupla->Ano] = $tupla->Valor;
             $anos[$id]['ano'] = (int)$tupla->Ano;
@@ -487,8 +487,10 @@ else if($eixo == 2 && $var == 10) {
 
 }
 else if($eixo == 2 && $var < 15){
+
     require_once("EixoTres.php");
     for ($cad = 1; $cad <= 10; $cad++) {
+
 
         foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
