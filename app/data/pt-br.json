@@ -2038,6 +2038,20 @@
 
 		]
 	],
+	"dados_botoes": {
+		"bens": {
+			"slc": 0,
+			"deg": 0,
+			"typ": 0,
+			"complement": "servicos"
+		},
+		"servicos": {
+			"slc": 1,
+			"deg": 0,
+			"typ": 0,
+			"complement": "bens"		
+		}
+	},
 	"select":
 	{
 		"eixo":[

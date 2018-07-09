@@ -1127,7 +1127,7 @@ $(document).ready(function(){
                 updateWindowUrl('mundo', url['mundo']);
 
             } else {
-                
+
                 if(id === "treemap_region") url['chg'] = '1';
                 else if(id === "mapa") url['chg'] = '0';
 
@@ -1140,62 +1140,78 @@ $(document).ready(function(){
         }
         else {
             updateUrl();
-            if(id === "setor") {
-                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
-                $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
-
-                enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
-                switchToSetores();
-
-                url['slc'] = 0;
-                url['deg'] = 0;
-                url['ocp'] = 0;
-
-                controlFilter('0', 'deg');
-                $(this).addClass("active");
-                $('#ocupacao').removeClass("active");
-
-                url['ano'] = d3.max(anos_default[url['var']][0]);
-
-                updateWindowUrl('slc', url['slc'])
-                updateWindowUrl('deg', url['deg'])
-                updateWindowUrl('ocp', url['ocp'])
-                updateWindowUrl('ano', url['ano'])
-
-            }
-            else {
-                enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
-
-                updateDataDescUoS();
-
-                switchToOcupations();
-                url['slc'] = 1;
-                url['deg'] = 0;
-                url['cad'] = 0;
-
-                if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
-                    url['ocp'] = 1;
-                else
-                    url['ocp'] = 3;
-                controlFilter('0', 'deg');
-                url['cad'] = 0;
-
-                url['ano'] = d3.max(anos_default[url['var']][1]);
-
-                updateWindowUrl('slc', url['slc'])
-                updateWindowUrl('deg', url['deg'])
-                updateWindowUrl('ocp', url['ocp'])
-                updateWindowUrl('ano', url['ano'])
-                updateWindowUrl('cad', url['cad'])
+            if(parameters.eixo == 3){
+                var botao = PT_BR.dados_botoes[id];
+                
+                url['slc'] = botao.slc;
+                var index_ano = botao.slc == 0 ? 1 : 0;
+                url['ano'] = d3.max(anos_default[parameters.var][index_ano]);
 
                 $(this).addClass("active");
-                $('#setor').removeClass("active");
+                $('#'+botao.complement).removeClass("active");
 
-                //troca o nome do select de setor
-                $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
-            }
+                updateWindowUrl('slc', url['slc']);
+                updateWindowUrl('ano', url['ano']);
+
+                updateIframe(url);
+            } else {
+                if(id === "setor") {
+                    $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
+                    $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
+
+                    enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
+                    switchToSetores();
+
+                    url['slc'] = 0;
+                    url['deg'] = 0;
+                    url['ocp'] = 0;
+
+                    controlFilter('0', 'deg');
+                    $(this).addClass("active");
+                    $('#ocupacao').removeClass("active");
+
+                    url['ano'] = d3.max(anos_default[url['var']][0]);
+
+                    updateWindowUrl('slc', url['slc'])
+                    updateWindowUrl('deg', url['deg'])
+                    updateWindowUrl('ocp', url['ocp'])
+                    updateWindowUrl('ano', url['ano'])
+
+                }
+                else {
+                    enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
+
+                    updateDataDescUoS();
+
+                    switchToOcupations();
+                    url['slc'] = 1;
+                    url['deg'] = 0;
+                    url['cad'] = 0;
+
+                    if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
+                        url['ocp'] = 1;
+                    else
+                        url['ocp'] = 3;
+                    controlFilter('0', 'deg');
+                    url['cad'] = 0;
+
+                    url['ano'] = d3.max(anos_default[url['var']][1]);
+
+                    updateWindowUrl('slc', url['slc'])
+                    updateWindowUrl('deg', url['deg'])
+                    updateWindowUrl('ocp', url['ocp'])
+                    updateWindowUrl('ano', url['ano'])
+                    updateWindowUrl('cad', url['cad'])
+
+                    $(this).addClass("active");
+                    $('#setor').removeClass("active");
+
+                    //troca o nome do select de setor
+                    $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
+                }
             updateIframe(url); /* altera gráfico */
         }
+    }
 
     });
 
