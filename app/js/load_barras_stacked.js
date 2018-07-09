@@ -84,6 +84,10 @@ function create_bars_stacked(barras_box, data){
 
     // Transpose the data into layers
     var dataset = d3.stack().keys(keys)(data);
+    var max_value = -1;
+    dataset[dataset.length-1].forEach(function(d){
+        max_value = Math.max(d[1], max_value);
+    })
 
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
@@ -91,12 +95,10 @@ function create_bars_stacked(barras_box, data){
                   .range([0, width])
                   .padding(0.05)
 
+
     var y_eixo1 = d3.scaleLinear()
-                    .domain([0, d3.max(dataset, function (d) {
-                        return d3.max(d, function (d) {
-                            return d[0] + d[1];
-                        })})])
-                    .range([height, 0]);
+                    .domain([0, max_value])
+                    .rangeRound([height, 0]);
 
 
     var cor;
@@ -168,10 +170,10 @@ function create_bars_stacked(barras_box, data){
             return x_eixo1(d.data.year);
         })
         .attr("y", function (d) {
-            return y_eixo1(d[1] + d[0]);
+            return y_eixo1(d[1]);
         })
         .attr("height", function (d) {
-            return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]);
+            return Math.abs(y_eixo1(d[0])-y_eixo1(d[1]));
         })
         .attr("width", x_eixo1.bandwidth())
         .style("cursor", "pointer")
@@ -277,6 +279,12 @@ function update_bars_stacked(barras_box, data){
     // Transpose the data into layers
     var dataset = d3.stack().keys(keys)(data);
 
+    var max_value = -1;
+    dataset[dataset.length-1].forEach(function(d){
+        max_value = Math.max(d[1], max_value);
+    })
+    
+
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
         .domain(anos_default[parameters.var][0])
@@ -284,11 +292,8 @@ function update_bars_stacked(barras_box, data){
         .padding(0.05)
 
     var y_eixo1 = d3.scaleLinear()
-        .domain([0, d3.max(dataset, function (d) {
-            return d3.max(d, function (d) {
-                return d[0] + d[1];
-            })})])
-        .range([height, 0]);
+        .domain([0, max_value])
+        .rangeRound([height, 0]);
 
 
     var cor;
@@ -353,20 +358,19 @@ function update_bars_stacked(barras_box, data){
         .attr("data-legend", function(d) { return d.data.year; })
         .attr("data-value", function(d) { return d[1]; })
         .attr("x", function (d) { return x_eixo1(d.data.year); })
-        .attr("y", function (d) { return y_eixo1(d[0] + d[1]); })
-        .attr("height", function (d) { return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]); })
+        .attr("y", function (d) { return y_eixo1(d[1]); })
+        .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
         .style("cursor", "pointer");
 
     var rect = groups.selectAll("rect");
 
-    rect
-        .data(function (d) { return d; })
+    rect.data(function (d) { return d; })
         .attr("data-legend", function(d) { return d.data.year; })
         .attr("data-value", function(d) { return d[1]; })
         .attr("x", function (d) { return x_eixo1(d.data.year); })
-        .attr("y", function (d) { return y_eixo1(d[0] + d[1]); })
-        .attr("height", function (d) { return y_eixo1(d[0]) - y_eixo1(d[0] + d[1]); })
+        .attr("y", function (d) { return y_eixo1(d[1]); })
+        .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
         .style("cursor", "pointer");
 
