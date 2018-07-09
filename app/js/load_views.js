@@ -222,9 +222,9 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
-        console.log(data)
-    })
+    // $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
+    //     console.log(data)
+    // })
 
 })
 

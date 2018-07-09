@@ -862,7 +862,7 @@ function destacaSetor(cadId) {
     });
 }
 
-function getSoma(regiaoId) {
+function getSomaScc(regiaoId) {
     var soma = 0;
     $("rect").each(function() {
         if($(this).attr("data-legend") == regiaoId) {
@@ -1120,26 +1120,26 @@ function treemapClick(d, root){
         updateWindowUrl('ocp', d.data.colorId);
         updateWindowUrl('cad', 0);
 
-        enableDesag(eixo, vrv, d.data.colorId, true, slc, url);
+        enableDesag(parameters.eixo, parameters.var, d.data.colorId, true, parameters.slc, url);
         destacaSetor(d.data.colorId);
 
         cad_valor = d.data.size;
 
-        if(deg == 0){
+        if(parameters.deg == 0){
             cad_percent_uf = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf");
             cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent")
         }
         else{
-            $(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
 
-            updateWindowUrl('deg', deg)
+            updateWindowUrl('deg', parameters.deg)
             updateWindowUrl('subdeg', d.data.desagreg)
 
             cad_percent = d.data.percentual;
-            cad_percent_uf = getSoma(d.data.colorId);
+            cad_percent_uf = getSomaScc(d.data.colorId);
         }
 
-        configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf );
+        configInfoDataBoxTreemapSCCOcupation(parameters.eixo, parameters.var, d, root, parameters.deg, cad_valor, cad_percent, cad_percent_uf );
     }
 
     updateIframe();
