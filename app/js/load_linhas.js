@@ -702,9 +702,18 @@ function colorLinhas(deg){
         return (corEixo[2])
     }
 
+    if(deg == 'Despesa Minc / Receita executivo'){
+        return (corEixo[1])
+    }
+
+    if(deg == 'Financiamento Estatal / Receita executivo'){
+        return (corEixo[2])
+    }
+
     Object.keys(colorJSON.cadeias).forEach(function (i, key) {
         colors[colorJSON.cadeias[i].name] = colorJSON.cadeias[i].color;
     });
+
     return colors[deg];
 
 }

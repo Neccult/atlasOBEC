@@ -134,7 +134,67 @@ function create_mapa(mapa_box, mapa){
         }
         else{
             escalaMapa();
-        }    
+        }
+
+        function legendaBinario(){
+        var sim_color = corEixo[1];
+
+        var nao_color = corEixo[2];
+
+        var sim_barra = svg_mapa.attr("width")*0.8;
+        var nao_barra = svg_mapa.attr("width")*0.8;
+
+        var x_barra = 350*0.85;
+        var y_barra = 350*0.85;
+        var height_barra = 350*0.04;
+        var width_barra = width_box(mapa_box)*0.1;
+        var prefix = ""
+        var fontColor = "#aaa"
+
+        if(y_barra + height_barra + $(mapa_box+" svg").offset().top > 350){
+            y_barra = 350 - 23 - $(mapa_box+" svg").offset().top - height_barra;
+        }
+
+        svg_mapa.append("g")
+            .append("rect")
+            .attr("x", sim_barra)
+            .attr("y", y_barra-height_barra*1.4)
+            .attr("height", height_barra)
+            .attr("width", width_barra)
+            .attr("rx", height_box(mapa_box)/150)
+            .attr("ry", height_box(mapa_box)/150)
+            .style("fill", sim_color)
+            .style("stroke-width", 1)
+            .style("stroke", fontColor);
+
+        svg_mapa.append("g")
+            .append("rect")
+            .attr("x", nao_barra)
+            .attr("y", y_barra)
+            .attr("height", height_barra)
+            .attr("width", width_barra)
+            .attr("rx", height_box(mapa_box)/150)
+            .attr("ry", height_box(mapa_box)/150)
+            .style("fill", nao_color)
+            .style("stroke-width", 1)
+            .style("stroke", fontColor);
+
+        svg_mapa.append("text")
+            .attr("x", sim_barra+width_barra*1.2)
+            .attr("y", y_barra-height_barra/2)
+            .attr("fill", fontColor)
+            .text("Possui");
+
+
+        svg_mapa.append("text")
+            .attr("x", nao_barra+width_barra*1.2)
+            .attr("y", y_barra+height_barra/5*4)
+            .attr("fill", fontColor)
+            .text("Não Possui");
+
+    }
+
+
         function escalaMapa(){
             var low_color = color(minValue);
             var high_color = color(maxValue);
@@ -439,7 +499,6 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
         }
 
 
-        console.log("oi")
         tooltipInstance.showTooltip(d, [
             ["title", d['properties']['name']],
             ["", formatTextVrv(valorTooltip, eixo, vrv)],

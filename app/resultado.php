@@ -453,7 +453,7 @@
                                 </div>
                             </div>
                         <?php } else if ($eixo == "politicas"){?>
-                            <div id="view_box_barras"  style="border: none; width: 100%; height: 275px;" scrolling="no"></div>
+                            <div id="view_box_barras"  style="border: none; width: 100%; height: 275px;float: left;" scrolling="no"></div>
 
                             <div id="menu-view-donut" style=" height: 80%; padding-top: 5%; width: 30%; float: right; display: none;">
                                 <div class="view-title-leg-donut" data-id="scc&ocp">

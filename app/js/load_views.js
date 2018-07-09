@@ -165,9 +165,17 @@ switch(parameters.eixo){
         break;
     case 2:
         index_view_box1 = 0;
-        views_parameters["#view_box"].uos = '0'
-        views_parameters["#view_box_barras"].uos = '0'
-        views_parameters["#view_box_scc"].uos = '0'
+        if(parameters.var == 10 || parameters.var == 15 || parameters.var == 16){
+            views_parameters["#view_box"].uos = '1'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'
+        }
+        else{
+            views_parameters["#view_box"].uos = '0'
+            views_parameters["#view_box_barras"].uos = '0'
+            views_parameters["#view_box_scc"].uos = '0'
+        }
+
         break;
     case 3:
         index_view_box1 = parameters.mundo;
@@ -212,6 +220,10 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
+
+    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
+        console.log(data)
+    })
 
 })
 
@@ -358,6 +370,8 @@ function loadViews(){
     d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
         VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
     })
+
+
 }
 
 function updateViews(){

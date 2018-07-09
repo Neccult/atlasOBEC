@@ -1225,10 +1225,12 @@ $(document).ready(function(){
 
             if(dataId ==='var'){
 
+
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 changeDescVar();
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
+
                 $('#recebedora').addClass("active");
                 $('#trabalhador').removeClass("active");
 
@@ -1249,20 +1251,23 @@ $(document).ready(function(){
 
                 $('.bread-select[data-id=uf]').val(0);
                 $('.bread-select[data-id=cad]').val(0);
+                $('.bread-select[data-id=deg]').val(0);
 
                 url['uf'] = 0;
                 url['cad'] = 0;
                 url['deg'] = 0;
+                url['subdeg'] = 0;
+
 
                 updateWindowUrl('uf', url['uf']);
                 updateWindowUrl('cad', url['cad']);
                 updateWindowUrl('deg', url['deg']);
+                updateWindowUrl('subdeg', url['subdeg']);
                 updateWindowUrl('ano', url['ano']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateWindowUrl('chg', 0);
                 }
-                
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
@@ -1277,6 +1282,7 @@ $(document).ready(function(){
 
                 }
                 if(eixo_atual == 1){
+
                     if(url['ocp'] > 0){
                         updateDefaultOcupation()
                     }
@@ -1365,6 +1371,22 @@ $(document).ready(function(){
                 url['cad'] = ($(this).val())
             }
 
+            if(dataId === "mod") {
+                url['mod'] = ($(this).val())
+                url['mec'] = 0;
+                updateWindowUrl('mec', 0)
+                $(".bread-select[data-id=mec]").val(0);
+
+            }
+
+            if(dataId === "mec") {
+                url['mec'] = ($(this).val())
+                url['mod'] = 0;
+                updateWindowUrl('mod', 0)
+                $(".bread-select[data-id=mod]").val(0);
+
+            }
+
             if(dataId === "ocp") {
                 $(window.document).find(".cad-title").first().html(this.options[e.target.selectedIndex].text);
             }
@@ -1397,6 +1419,7 @@ $(document).ready(function(){
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
         updateOptView("init");
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
+        updateMecanismo(url, url['var'])
 
     }
 

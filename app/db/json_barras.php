@@ -452,14 +452,24 @@ else if($eixo == 2) {
 
             // $barras[$tupla->Ano] = $tupla->Valor;
             if ($var < 15) {
-                $id = $tupla->Ano;
-                $barras[$id]['uf'] = $tupla->UFNome;
-                $barras[$id]['ano'] = (int)$tupla->Ano;
-                $barras[$id]['valor'] = (double)$tupla->Valor;
-                $barras[$id]['percentual'] = (double)$tupla->Percentual;
-                $barras[$id]['taxa'] = (double)$tupla->Taxa;
-                $barras[$id]['uos'] = 2;
-            } else if(($var == 18 || $var == 19)) {
+                if($var == 10){
+                    $id = $tupla->Ano;
+                    $barras[$id]['ano'] = (int)$tupla->Ano;
+                    $barras[$id]['valor'] = (double)$tupla->Valor;
+                    $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                    $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                }
+                else{
+                    $id = $tupla->Ano;
+                    $barras[$id]['uf'] = $tupla->UFNome;
+                    $barras[$id]['ano'] = (int)$tupla->Ano;
+                    $barras[$id]['valor'] = (double)$tupla->Valor;
+                    $barras[$id]['percentual'] = (double)$tupla->Percentual;
+                    $barras[$id]['taxa'] = (double)$tupla->Taxa;
+                }
+
+            }
+            else if(($var == 18 || $var == 19)) {
                 if($uos == 1){
                     $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
                     $barras[$id]['uf'] = $tupla->UFNome;
