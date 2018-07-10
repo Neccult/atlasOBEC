@@ -36,9 +36,75 @@ function create_donut(donut_box, data){
         .each(function(d) { this._current = d; });
 
     donut = g;
+
+    d3.selectAll(".arc")
+        .on("mouseover", function(d){
+            d3.select(this).attr("transform", "scale(1.01)")
+
+
+            if(parameters.eixo == 2 && parameters.var == 17){
+                if(d.data.tipo == "Não"){
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", "Não Possui"]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", "Possui"],
+                        ["", formatTextVrv(d.data.total, 2, parameters.var)]
+                    ]);
+                }
+
+            }
+            else if(parameters.eixo == 2 && parameters.var >= 18){
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 2, parameters.var)],
+                    ["", percentFormat(d.data.percent).replace(".",",")]
+
+
+                ]);
+
+            }
+            else{
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 3, parameters.var)],
+                    ["", percentFormat(d.data.percent).replace(".",",")]
+                ]);
+            }
+
+
+        })
+        .on("mouseout", function(d){
+            d3.select(this).attr("transform", "scale(1)")
+            tooltipInstance.hideTooltip()
+        })
+
+    if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
+        var soma = 0;
+        var acumuladoSetor;
+
+        Object.keys(data).forEach(function (key) {
+            soma += data[key].valor;
+            if(cad == data[key].cad)
+                acumuladoSetor = data[key].valor;
+        })
+
+        if(parameters.cad == 0)
+            acumuladoSetor = soma;
+
+
+        setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
+
+    }
 }
 
 function update_donut(donut_box, data){
+
+
+
+
     var height = $(donut_box).height();
     var width = $(donut_box).width();
 
@@ -69,6 +135,68 @@ function update_donut(donut_box, data){
      .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
      .style("fill", function(d) { return color_donut(d.data.tipo); })
      .style("stroke", "none");
+
+    d3.selectAll(".arc")
+        .on("mouseover", function(d){
+            d3.select(this).attr("transform", "scale(1.01)")
+
+
+            if(parameters.eixo == 2 && parameters.var == 17){
+                if(d.data.tipo == "Não"){
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", "Não Possui"]
+                    ]);
+                }
+                else{
+                    tooltipInstance.showTooltip(d.data, [
+                        ["title", "Possui"],
+                        ["", formatTextVrv(d.data.total, 2, parameters.var)]
+                    ]);
+                }
+
+            }
+            else if(parameters.eixo == 2 && parameters.var >= 18){
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 2, parameters.var)],
+                    ["", percentFormat(d.data.percent).replace(".",",")]
+
+
+                ]);
+
+            }
+            else{
+                tooltipInstance.showTooltip(d.data, [
+                    ["title", d.data.tipo],
+                    ["", formatTextVrv(d.data.valor, 3, parameters.var)],
+                    ["", percentFormat(d.data.percent).replace(".",",")]
+                ]);
+            }
+
+
+        })
+        .on("mouseout", function(d){
+            d3.select(this).attr("transform", "scale(1)")
+            tooltipInstance.hideTooltip()
+        })
+
+    if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
+        var soma = 0;
+        var acumuladoSetor;
+
+        Object.keys(data).forEach(function (key) {
+            soma += data[key].valor;
+            if(cad == data[key].cad)
+                acumuladoSetor = data[key].valor;
+        })
+
+        if(parameters.cad == 0)
+            acumuladoSetor = soma;
+
+
+        setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
+
+    }
 
 }
 

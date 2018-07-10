@@ -141,11 +141,11 @@
                             <?php
                             if($eixo == "politicas") {
                                 ?>
-                                <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
-                                    <button  class="opt view <?php if($mec == 0) echo 'active';?>" id="recebedora">Recebedor</button>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button  class="opt view" id="recebedora">Recebedor</button>
                                 </div>
-                                <div style="margin-bottom: 10px; display: none" class="col-xs-6 col-btn">
-                                    <button  class="opt view <?php if($mec == 1) echo 'active';?>" id="trabalhador">Trabalhador</button>
+                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
+                                    <button  class="opt view" id="trabalhador">Trabalhador</button>
                                 </div>
                             <?php } ?>
                             <?php if($eixo == "comercio") { ?>
@@ -614,6 +614,7 @@
 <script type="text/javascript" src="js/descricoes.js"></script>
 <script type="text/javascript" src="js/contraste.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/controller_dados.js"></script>
 <script type="text/javascript" src="js/load_barras.js"></script>
 <script type="text/javascript" src="js/load_barras_stacked.js"></script>
 <script type="text/javascript" src="js/load_mapa.js"></script>

@@ -51,7 +51,6 @@ function ready(json){
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
 
-
             if(eixo == 2 && vrv == 17){
                 if(d.data.tipo == "Não"){
                     tooltipInstance.showTooltip(d.data, [
