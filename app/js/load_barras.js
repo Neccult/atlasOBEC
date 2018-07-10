@@ -66,7 +66,7 @@ function create_bars(barras_box, data){
     var margin = {top: 20, right: 20, bottom: 30, left: 35},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
-
+        
     var x = d3.scaleBand()
             .domain(dados.key)
             .rangeRound([0, width])
