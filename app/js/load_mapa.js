@@ -1,4 +1,4 @@
-
+var data_mapa = [];
 
 function create_mapa(mapa_box, mapa){
 
@@ -23,6 +23,7 @@ function create_mapa(mapa_box, mapa){
     var config = URL_PARAM;
     var dict = {};
     var info = [];
+
         Object.keys(mapa).forEach(function(key) {
 
             info.push(mapa[key]);
@@ -272,6 +273,10 @@ function create_mapa(mapa_box, mapa){
                     .style("stroke", fontColor)
                     .style("stroke-width", 1);
         }
+
+    configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[parameters.uf]);
+
+        data_mapa = mapa;
     
     
 }
@@ -412,6 +417,8 @@ function update_mapa(mapa_box, mapa){
 
     // destacaPais(svg_mapa, parameters.uf);
 
+    configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[parameters.uf]);
+
 
 }
 
@@ -444,7 +451,6 @@ function destacaPais(svg_mapa, ufId) {
 
     svg_mapa.selectAll("path").each(function() {
         if($(this).attr("data-legend") == parameters.uf) {
-            console.log("oi")
             if($(this).attr("class") !== "destacado") {
                 $(this).attr("class", "destacado");
                 $(this).attr("data-color", $(this).css("fill"));
@@ -528,14 +534,14 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
     else if(eixo == 2){
 
         //tooltips com os 3 valores na interface (valor, percentual e taxa)
-        if(vrv === 1  || vrv === 2 || vrv === 3 || vrv === 4 ||  vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 18 || vrv === 19){
+        if(vrv == 1  || vrv == 2 || vrv == 3 || vrv == 4 ||  vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14 || vrv == 18 || vrv == 19){
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
                 ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
             //    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
             ]);
         }
-        else if(vrv === 17){
+        else if(vrv == 17){
 
             var SouN = "";
             var valor = "";
@@ -575,14 +581,14 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
     }
     else if(eixo == 3){
         //tooltips com os 3 valores na interface (valor, percentual e taxa)
-        if(vrv === 1 || vrv === 2){
+        if(vrv == 1 || vrv == 2){
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
                 ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
             //    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
             ]);
         }
-        else if(vrv === 99){
+        else if(vrv == 99){
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
                 ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
@@ -592,3 +598,4 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
 
     }
 }
+

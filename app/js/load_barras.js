@@ -1,4 +1,9 @@
+var data_barra = [];
+
 function create_bars(barras_box, data){
+
+    data_barra = data;
+
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
@@ -394,9 +399,16 @@ function create_bars(barras_box, data){
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
             configInfoDataBoxBarras(eixo, vrv, dados, valor, uos);         
         }
+
+        data_barra = data;
+
+        updateData();
 }
 
 function update_bars(barras_box, data){
+
+    data_barra = data;
+
     var svg_barras = d3.select(barras_box+" svg");
 
     if(svg_barras.attr("type") == "stacked"){
@@ -774,6 +786,11 @@ function update_bars(barras_box, data){
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
             configInfoDataBoxBarras(eixo, vrv, dados, valor, uos);         
         }
+
+
+    updateData();
+
+
 }
 
 
@@ -868,21 +885,21 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
        }
    }
    else if(eixo === 2){
-       if(vrv === 1 || vrv === 2 || vrv === 3 || vrv === 4 ||   vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8 || vrv === 9 || vrv == 10 || vrv === 11 || vrv === 12 || vrv === 13 || vrv === 14 || vrv === 15 || vrv === 16 || vrv === 18 || vrv === 19){
+       if(vrv == 1 || vrv == 2 || vrv == 3 || vrv == 4 ||   vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 10 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14 || vrv == 15 || vrv == 16 || vrv == 18 || vrv == 19){
            tooltipInstance.showTooltip(d, [
                ["title", key],
                ["", formatTextVrv(d, eixo, vrv)],
                // ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
            ]);
        }
-       else if(vrv === 17){
+       else if(vrv == 17){
            tooltipInstance.showTooltip(d, [
                ["title", key],
                ["", formatTextVrv(d, eixo, vrv)],
            ]);
        }
    }
-   else if(eixo === 3){
+   else if(eixo == 3){
            tooltipInstance.showTooltip(d, [
                ["title", key],
                ["", formatTextVrv(d, eixo, vrv)],
@@ -891,7 +908,6 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
    }
 
 }
-
 
 
 

@@ -176,7 +176,9 @@ function ready(error, br_states, mapa){
 		//mouseover
 		.on("mouseover", function(d){
 
-		    loadTooltip(d,parameters.eixo, parameters.var)
+		    console.log("IJiojio")
+
+		    loadTooltip_mapa(d,parameters.eixo, parameters.var)
 		})
 		.on("mouseout", tooltipInstance.hideTooltip)
 		.on("click", function(d) {
@@ -387,6 +389,7 @@ function legendaBinario(){
 
 	$(window.document).find('.value-info-title').html(getDataVar(PT_BR, parameters.eixo, parameters.var).mapa_valores);
     $(window.document).find('.font-title').html("Fonte(s): "+getDataVar(PT_BR, parameters.eixo, parameters.var).fontes);
+
     /*if(legendaWidth > 768) {
         legend_svg.select(".legendLinear").call(legendLinear);
         legend_svg.select(".legendCells").call(legendLinear1);
@@ -481,7 +484,7 @@ function legendaBinario(){
         estadoAtual = "BRASIL"
 
 
-    function loadTooltip(d){
+    function loadTooltip_mapa(d, eixo, vrv){
         if(eixo == 0) {
 
             var valorTooltip = 0;
@@ -496,7 +499,7 @@ function legendaBinario(){
             }
             else if (array100.indexOf(parameters.var) != -1){
                 valorTooltip = dict[d.id].valor*100;
-            }alert("oi")
+            }
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
                 ["", formatTextVrv(valorTooltip, parameters.eixo, parameters.var)]
@@ -540,7 +543,8 @@ function legendaBinario(){
 
             }
         }
-        else if(parameters.eixo == 2){
+        else if(eixo == 2){
+
 
             //tooltips com os 3 valores na interface (valor, percentual e taxa)
             if(parameters.var === 1  || parameters.var === 2 || parameters.var === 3 || parameters.var === 4 ||  parameters.var === 5 || parameters.var === 6 || parameters.var === 14 || parameters.var === 7 || parameters.var === 8 || parameters.var === 9 || parameters.var === 11 || parameters.var === 12 || parameters.var === 13 || parameters.var == 18 || parameters.var == 19){
@@ -551,7 +555,9 @@ function legendaBinario(){
                 //    ["", formatTextTaxaparameters.var(dict[d.id].percentual,parameters.eixo, parameters.var)],
                 ], mapa_box);
             }
-            else if(vrv === 17){
+            else if(parameters.var === 17){
+
+
 
                 var SouN = "";
                 var valor = "";

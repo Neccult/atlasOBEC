@@ -148,6 +148,8 @@ function defaultUrl(){
 
 function updateIframe(url){
 
+
+
     if(window.location.pathname.match("page.php")){
         return;
     }
@@ -158,7 +160,9 @@ function updateIframe(url){
 
 
     updateViews();
-    
+
+    updateData();
+
 }
 
 /*-----------------------------------------------------------------------------
@@ -1086,8 +1090,6 @@ $(document).ready(function(){
 
             var ocp = $(this).attr('data-id');
 
-            console.log(ocp)
-
             if(ocp != parameters.ocp){
                 url['ocp'] = ocp;
                 parameters.ocp = url['ocp']
@@ -1183,8 +1185,6 @@ $(document).ready(function(){
             } else if(parameters.eixo == 2){
 
                 var botao = PT_BR.dados_botoes[id];
-
-                console.log("oi")
 
                 url['mec'] = botao.mec;
                 updateWindowUrl('mec', url['mec'])
@@ -1288,6 +1288,8 @@ $(document).ready(function(){
 
             if(dataId ==='var'){
 
+                updateOptView()
+
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 cleanDesagsUrl();
@@ -1324,6 +1326,7 @@ $(document).ready(function(){
                 updateWindowUrl('deg', url['deg']);
                 updateWindowUrl('subdeg', url['subdeg']);
                 updateWindowUrl('ano', url['ano']);
+                updateWindowUrl('var', url['var']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateWindowUrl('chg', 0);
@@ -1350,6 +1353,7 @@ $(document).ready(function(){
                 }
 
                 if(eixo_atual == 2){
+                    updateOptView('init')
                     updateDefaultMec(url['var']);
                     if(url['var'] != 17){
                         $(".value-info-title").text("")
@@ -1385,6 +1389,8 @@ $(document).ready(function(){
 
                 }
                 changeDescVar();
+
+
             }
 
 
@@ -1474,6 +1480,7 @@ $(document).ready(function(){
     defaultUrl();
     updateSelectsByUrl();
 
+
     if(window.location.pathname.match("resultado")){
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
@@ -1486,7 +1493,6 @@ $(document).ready(function(){
 });
 
 function updateOptView(container, btn){
-
 
 
 
@@ -1537,7 +1543,7 @@ function updateOptView(container, btn){
         $(".btn-opt button.opt.view").each(function(){
 
             if(parameters.eixo == 2){
-                if(parameters.var == 18 || parameters.var == 19){
+                if(url['var'] == 18 || url['var'] == 19){
                     $(this).css("display","block")
 
                 }
