@@ -1968,6 +1968,12 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
+				"views": {
+					"view_box1": [""],
+					"view_box2": ["barras"],
+					"view_box3": ["treemap_scc"]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -1985,6 +1991,12 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
+				"views": {
+					"view_box1": [""],
+					"view_box2": ["donut"],
+					"view_box3": ["barras"]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
@@ -2028,6 +2040,12 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC, FUNCEX e BIS.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
+				"views": {
+					"view_box1": [""],
+					"view_box2": ["barras"],
+					"view_box3": [""]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
