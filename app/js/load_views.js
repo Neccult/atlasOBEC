@@ -110,8 +110,6 @@ $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
     brasil_setor = JSON.parse(dado)
 })
 
-initTitleBox();
-updateTitleBox();
 
 //NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
 $.ajaxSetup({async: false});
@@ -122,75 +120,7 @@ $.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1
 });
 $.ajaxSetup({async: true});
 
-switch(parameters.eixo){
-    case 0:
-        index_view_box1 = parameters.chg;
-        if(parameters.var >= 10){
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '1'
-            views_parameters["#view_box_scc"].uos = '0'
-        } else {
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'
-        }
-        if(parameters.var >= 10 || parameters.var == 2 || parameters.var == 3){
-            $(".content-btn-mapa").css("display", "none");
-        } else {
-            $(".content-btn-mapa").css("display", "block");
-        }
-        break;
-    case 1:
-        index_view_box1 = parameters.chg;
-        if(parameters.var > 11){
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '1'
-            views_parameters["#view_box_scc"].uos = '0'
-        }
-        else if(parameters.var == 6){
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '1'
-        }
-        else {
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'
-        }
-
-        if(parameters.var != 1){
-            $(".content-btn-mapa").css("display", "none");
-        } else {
-            $(".content-btn-mapa").css("display", "block");
-        }
-        break;
-    case 2:
-        index_view_box1 = 0;
-        if(parameters.var == 10 || parameters.var == 15 || parameters.var == 16){
-            views_parameters["#view_box"].uos = '1'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'
-        }
-        else{
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'
-        }
-
-        break;
-    case 3:
-        index_view_box1 = parameters.mundo;
-        if(parameters.var == 5 || parameters.var == 8){
-            views_parameters["#view_box"].uos = '1'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '2'
-        } else {
-            views_parameters["#view_box"].uos = '0'
-            views_parameters["#view_box_barras"].uos = '0'
-            views_parameters["#view_box_scc"].uos = '0'    
-        }
-        break;
-}
+virtualParameters();
 
 $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){
     PT_BR = pt_br_JSON[0];
@@ -203,6 +133,10 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     var view_box1 = data_var.views.view_box1[index_view_box1].id
     var view_box2 = data_var.views.view_box2[0].id
     var view_box3 = data_var.views.view_box3[0].id
+
+
+    initTitleBox(index_view_box1, 0, 0);
+    updateTitleBox();
 
     if(parameters.eixo == 3){
         if(view_box1 == "mapa-mundi"){
@@ -276,8 +210,7 @@ function updateSelectAnos(){
     
 }
 
-function loadViews(){
-
+function virtualParameters(){
     switch(parameters.eixo){
         case 0:
             index_view_box1 = parameters.chg;
@@ -336,6 +269,11 @@ function loadViews(){
             }
             break;
     }
+}
+
+function loadViews(){
+
+    virtualParameters();
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
     
@@ -344,6 +282,9 @@ function loadViews(){
     var view_box1 = data_var.views.view_box1[index_view_box1].id
     var view_box2 = data_var.views.view_box2[0].id
     var view_box3 = data_var.views.view_box3[0].id
+    
+    initTitleBox(index_view_box1, 0, 0);
+    updateTitleBox();
 
     var UPDATE_1 = (view_box1 == view_box1_ant);
     var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0].id);

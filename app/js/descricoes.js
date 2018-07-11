@@ -182,10 +182,13 @@ function updateTitleClickMapa(uf_click){
 
 }
 
-function initTitleBox(){
-    $("#containerBarra").find(".view-title").text('SÉRIE HISTÓRICA [uf] [cad]');
-    
-    $("#containerTree").find(".view-title").text("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]");
+function initTitleBox(index1, index2, index3){
+    var data_var = getDataVar(PT_BR, parameters.eixo, parameters.var)
+    $("#containerMapa").find(".view-title").text(data_var.views.view_box1[index1].title);
+    $("#containerBarra").find(".view-title").text(data_var.views.view_box2[index2].title);
+    //$("#containerBarra").find(".view-title").text('SÉRIE HISTÓRICA [uf] [cad]');
+    $("#containerTree").find(".view-title").text(data_var.views.view_box3[index3].title);
+    //$("#containerTree").find(".view-title").text("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]");
 }
 
 function updateTitleBox(){
