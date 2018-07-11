@@ -421,9 +421,9 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
         if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[index_ano];
 
-            if(parameters.cad == 0){
+            if(uos == 0){
                 setIntegerValueData(dados, eixo, vrv);
-            } else if(parameters.cad == 2){
+            } else if(uos == 2){
                 setPercentValueData(dados, eixo, vrv);
             }
         }
@@ -446,7 +446,7 @@ function configInfoDataBoxBarras(eixo, vrv, dados, valor, uos) {
 
         }
 
-        setTerceiroValueData(eixo, vrv, valor, parameters.cad);
+        setTerceiroValueData(eixo, vrv, valor, uos);
 
     }
 }
