@@ -42,14 +42,7 @@ function create_mapa_mundi(mapa_box, gdpData){
                 if(window.innerWidth <= 1199)
                     return;
 
-                var newBarraSrc = $("#view_box_scc").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newBarraSrc = newBarraSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-
-                var newDonutSrc = $("#view_box_barras").attr("src").replace(/prc=[0-9]*/, "prc="+convertCode(el));
-                newDonutSrc = newDonutSrc.replace(/ano=[0-9]*/, "ano="+url['ano']);
-
-                $("#view_box_scc").attr("src", newBarraSrc);
-                $("#view_box_barras").attr("src", newDonutSrc);
+                url['prc'] = convertCode(el);
 
                 setIntegerValueData(gdpData[convertCode(el)], eixo, vrv);
 
@@ -68,7 +61,7 @@ function create_mapa_mundi(mapa_box, gdpData){
                 }
 
                 setPrcTitle(gdpData[convertCode(el)].prc)
-
+                
                 $("select[data-id='prc']").val(convertCode(el));
                 updateWindowUrl('prc', convertCode(el))
                 destacaPrc(el, mapa_box)

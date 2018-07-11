@@ -222,10 +222,6 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         VIEWS[view_box3].call(this, "#view_box_scc", json);
     });
 
-    // $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(data){
-    //     console.log(data)
-    // })
-
 })
 
 function updateParameters(){
@@ -288,13 +284,13 @@ function loadViews(){
         case 0:
             index_view_box1 = parameters.chg;
             if(parameters.var >= 10){
-                views_parameters["#view_box"].uos = '0'
-                views_parameters["#view_box_barras"].uos = '1'
-                views_parameters["#view_box_scc"].uos = '0'
+                views_parameters["#view_box"].uos = '0';
+                views_parameters["#view_box_barras"].uos = '1';
+                views_parameters["#view_box_scc"].uos = '0';
             } else {
-                views_parameters["#view_box"].uos = '0'
-                views_parameters["#view_box_barras"].uos = '0'
-                views_parameters["#view_box_scc"].uos = '0'
+                views_parameters["#view_box"].uos = '0';
+                views_parameters["#view_box_barras"].uos = '0';
+                views_parameters["#view_box_scc"].uos = '0';
             }
 
             if(parameters.var >= 10 || parameters.var == 2 || parameters.var == 3){
@@ -332,13 +328,13 @@ function loadViews(){
         case 3:
             index_view_box1 = parameters.mundo;
             if(parameters.var == 5 || parameters.var == 8){
-                views_parameters["#view_box"].uos = '1'
-                views_parameters["#view_box_barras"].uos = '0'
-                views_parameters["#view_box_scc"].uos = '2'
+                views_parameters["#view_box"].uos = '1';
+                views_parameters["#view_box_barras"].uos = '0';
+                views_parameters["#view_box_scc"].uos = '2';
             } else {
-                views_parameters["#view_box"].uos = '0'
-                views_parameters["#view_box_barras"].uos = '0'
-                views_parameters["#view_box_scc"].uos = '0'    
+                views_parameters["#view_box"].uos = '0';
+                views_parameters["#view_box_barras"].uos = '0';
+                views_parameters["#view_box_scc"].uos = '0';    
             }
             break;
     }
@@ -357,8 +353,7 @@ function loadViews(){
     
     if(parameters.eixo == 3){
         if(!UPDATE_1 && view_box1_ant == "mapa-mundi"){
-            console.log($(".jvectormap-container"))
-            $(".jvectormap-container").remove()
+            $(".jvectormap-container").remove();
         }
         if(view_box1 == "mapa-mundi"){
             view_box1 = "mapa";

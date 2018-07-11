@@ -1281,7 +1281,7 @@ $(document).ready(function(){
             }
 
             if(dataId === "prc"){
-                document.getElementById('view_box').contentWindow.location.reload(true);
+                updateWindowUrl('prc', dataVal);
                 $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
                 // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
