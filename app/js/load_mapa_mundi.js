@@ -61,10 +61,12 @@ function create_mapa_mundi(mapa_box, gdpData){
                 }
 
                 setPrcTitle(gdpData[convertCode(el)].prc)
-                
+
                 $("select[data-id='prc']").val(convertCode(el));
                 updateWindowUrl('prc', convertCode(el))
                 destacaPrc(el, mapa_box)
+
+                updateIframe()
             }
         })
         destacaPrc(unconvertCode(parseInt(parameters.prc)), mapa_box);

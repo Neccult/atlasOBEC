@@ -102,9 +102,6 @@ function create_donut(donut_box, data){
 
 function update_donut(donut_box, data){
 
-
-
-
     var height = $(donut_box).height();
     var width = $(donut_box).width();
 
@@ -214,18 +211,31 @@ function color_donut(tipo){
     var eixo = parameters.eixo;
 
     var corEixo = COLORS['eixo'][eixo].color;
-
-    if(tipo == "Sim" || tipo == "Exportação"){
+    
+    if(tipo == "Sim"){
         return corEixo[1];
     }
     else if(tipo == "Não"){
         return corEixo[2];
     }
-    else if(tipo == "Importação"){
-        return corEixo[3];
+    
+    if(parameters.cad == 0){
+        if(tipo == "Exportação"){
+            return corEixo[1]
+        }
+        else if(tipo == "Importação"){
+            return corEixo[3];
+        }
+    } else {
+        if(tipo == "Exportação"){
+            return COLORS['cadeias'][parameters.cad].gradient[6];
+        }
+        else if(tipo == "Importação"){
+            return COLORS['cadeias'][parameters.cad].gradient[3];
+        }
     }
 
-    return colorJSON['cadeias'][tipo].color;
+    return COLORS['cadeias'][tipo].color;
 }
 
 function getPercent(data){
