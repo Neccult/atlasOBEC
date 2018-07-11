@@ -76,11 +76,11 @@
 				"botoes":[
 					{"name": "Mapa", "id": "mapa"},
 					{"name": "Treemap", "id": "treemap_region"}
-				],				
+				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"fontes": "RAIS",
 				"mapa_valores": "",
@@ -115,9 +115,9 @@
 					{"name":"Porte","id":"prt"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"botoes":[
 					{"name": "Mapa", "id": "mapa"},
@@ -166,9 +166,9 @@
 					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
 				"mapa_valores": "Valores em pecentual.",
@@ -215,9 +215,9 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"botoes":[
 					{"name": "Mapa", "id": "mapa"},
@@ -271,9 +271,9 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"inativos":{
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -331,9 +331,9 @@
 					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"botoes":[
 					{"name": "Mapa", "id": "mapa"},
@@ -392,9 +392,9 @@
 					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
@@ -449,9 +449,9 @@
 					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
@@ -489,9 +489,9 @@
 					{"name":"Atuação","id":"atc"}
 				],
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -521,9 +521,9 @@
 					{"name":"UF ou Setores","id":"uos"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
@@ -550,9 +550,9 @@
 					{"name":"UF ou Setores","id":"uos"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
@@ -580,9 +580,9 @@
 					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"fontes": "Elaboração própria com base na RAIS."
 			},
@@ -606,9 +606,9 @@
 					{"name": "Treemap", "id": "treemap_region"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"}
@@ -626,9 +626,9 @@
 				"sufixo_valor" :"",
 				"prefixo_valor":"",
 				"views": {
-					"view_box1": ["mapa", "treemap_region"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"desc_var_mapa": " A variável apresenta o número total de indivíduos ocupado(a)s em atividades produtivas ligadas aos setores ou às ocupações criativas e culturais, com possibilidade de desagregações.",
@@ -681,9 +681,9 @@
 				"title":"Participação no Emprego Total",
 				"desc_percent": "",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
@@ -741,9 +741,9 @@
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"prefixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
 				"desc_var_mapa": "A variável mostra o volume total de horas semanais trabalhadas nas atividades ligadas aos Setores e às Ocupações Culturais e Criativos.",
@@ -797,9 +797,9 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
@@ -833,9 +833,9 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"prefixo_valor":"R$ ",
 				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
@@ -870,9 +870,9 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"prefixo_valor":"",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
@@ -907,9 +907,9 @@
 				"desc_percent": "da soma de remunerações pagas aos [ocp] [cad] [uf]",
 				"sufixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"botoes":[
 					{"name": "Mapa", "id": "mapa"},
@@ -965,9 +965,9 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"fontes":"Elaboração do NECCULT com base na RAIS.",
 				"desc_var_mapa": "A variável mostra a relação entre o total de rendimentos do trabalho pagos e o valor adicionado, que é a soma de todas rendas novas criadas pelos setores culturais e criativos no País.",
@@ -1019,9 +1019,9 @@
 					{"name":"Setor","id":"cad"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				}
 			},
 			{
@@ -1046,9 +1046,9 @@
 					{"name":"Ocupação","id":"ocp"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				}
 			},
 			{
@@ -1073,9 +1073,9 @@
 					{"name":"Ocupação","id":"ocp"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				}
 			},
 			{
@@ -1100,9 +1100,9 @@
 					{"name":"Ocupação","id":"ocp"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				}
 			},
 			{
@@ -1127,9 +1127,9 @@
 					{"name":"Ocupação","id":"ocp"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				}
 			}
 		],
@@ -1175,9 +1175,9 @@
 					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
 				},
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": ""}]
 				},
                 "mapa_valores": ""
 			},
@@ -1195,9 +1195,9 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
@@ -1224,9 +1224,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1269,9 +1269,9 @@
 					"mapa":["prt","uf"],"barras":["ano"]
 				},
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1300,9 +1300,9 @@
 					{"name":"Tipo de Pessoa","id":"pfj"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1342,9 +1342,9 @@
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
 				},
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
                "mapa_valores": ""
 			},
@@ -1374,9 +1374,9 @@
 				],
 				"botoes":[],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
@@ -1419,9 +1419,9 @@
 					{"name":"Setor","id":"cad"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"inativos":{
 					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1466,9 +1466,9 @@
 					{"name":"Mecanismo","id":"mec"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"inativos":{
 					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
@@ -1490,9 +1490,9 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1526,9 +1526,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1566,9 +1566,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1606,9 +1606,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"UF","id":"uf"},
@@ -1631,9 +1631,9 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
@@ -1656,9 +1656,9 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"UF ou Setores","id":"uos"},
@@ -1685,9 +1685,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["linhas"]
+					"view_box1": [{"id": "barras", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1709,9 +1709,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"fontes": "",
 				"mapa_valores": "Observação: Valor total referente à soma dos valores enviados pelas Unidades Federativas brasileiras. Algumas Unidades Federativas que possuem esse mecanismo de financiamento não enviaram dados."
@@ -1756,9 +1756,9 @@
 					{"name":"Tipo","id":"typ"}
 				],
 				"views": {
-					"view_box1": ["mapa-mundi", "mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa-mundi", "title": "Mapa-Mundi"}, {"id":"mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Importação x Exportação"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"botoes":[
 					{"name": "Mundo", "id": "mundo"},
@@ -1805,9 +1805,9 @@
 					{"name":"Tipo","id":"typ"}
 				],
 				"views": {
-					"view_box1": ["mapa-mundi", "mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa-mundi", "title": "Mapa-Mundi"}, {"id":"mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Importação x Exportação"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"botoes":[
 					{"name": "Mundo", "id": "mundo"},
@@ -1854,9 +1854,9 @@
 					{"name":"Tipo","id":"typ"}
 				],
 				"views": {
-					"view_box1": ["mapa-mundi", "mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa-mundi", "title": "Mapa-Mundi"}, {"id":"mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Importação x Exportação"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"botoes":[
 					{"name": "Mundo", "id": "mundo"},
@@ -1899,9 +1899,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"barras":[
 					{"name":"Parceiro","id":"prc"},
@@ -1940,9 +1940,9 @@
 					{"name":"Ano","id":"ano"}
 				],
 				"views": {
-					"view_box1": ["barras"],
-					"view_box2": ["barras"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"treemap_scc":[
 					{"name":"Parceiro","id":"prc"},
@@ -1970,9 +1970,9 @@
 				"prefixo_valor":"",
 				"botoes":[],
 				"views": {
-					"view_box1": [""],
-					"view_box2": ["barras"],
-					"view_box3": ["treemap_scc"]
+					"view_box1": [{"id": "", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
 				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1993,9 +1993,9 @@
 				"prefixo_valor":"",
 				"botoes":[],
 				"views": {
-					"view_box1": [""],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "", "title": "Série Histórica"}],
+					"view_box2": [{"id": "donut", "title": "Importação x Exportação"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -2018,9 +2018,9 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": ["mapa-mundi", "mapa"],
-					"view_box2": ["donut"],
-					"view_box3": ["barras"]
+					"view_box1": [{"id": "mapa-mundi", "title": "Mapa-Mundi"}, {"id":"mapa", "title": "Mapa do Brasil"}],
+					"view_box2": [{"id": "donut", "title": "Importação x Exportação"}],
+					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
 				},
 				"botoes":[
 					{"name": "Mundo", "id": "mundo"},
@@ -2042,9 +2042,9 @@
 				"prefixo_valor":"",
 				"botoes":[],
 				"views": {
-					"view_box1": [""],
-					"view_box2": ["barras"],
-					"view_box3": [""]
+					"view_box1": [{"id": "", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box3": [{"id": "", "title": "Série Histórica"}]
 				},
 				"type":[
 					{"name":"Barras", "id":"barras"}

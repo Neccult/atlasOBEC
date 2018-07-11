@@ -157,6 +157,8 @@ function appendPorts(iframe){
 /*
 * Põe as desagregações no select das desagregações referentes aos setores do eixo 2.
 */
+
+
 function appendDesags(iframe, ocp){
         if(ocp == true)
             desag_groups = data_desag.control.mercado.ocupacional;

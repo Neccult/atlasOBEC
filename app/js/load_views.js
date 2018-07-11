@@ -200,9 +200,9 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
-    var view_box1 = data_var.views.view_box1[index_view_box1]
-    var view_box2 = data_var.views.view_box2[0]
-    var view_box3 = data_var.views.view_box3[0]
+    var view_box1 = data_var.views.view_box1[index_view_box1].id
+    var view_box2 = data_var.views.view_box2[0].id
+    var view_box3 = data_var.views.view_box3[0].id
 
     if(parameters.eixo == 3){
         if(view_box1 == "mapa-mundi"){
@@ -228,7 +228,6 @@ function updateParameters(){
 
     data_var_ant = getDataVar(PT_BR, parameters.eixo, parameters.var);
     
-    
     if(parameters.eixo == 3){
         index_view_box1 = parameters.mundo;
     } else {
@@ -239,7 +238,7 @@ function updateParameters(){
         }
     }
 
-    view_box1_ant = data_var_ant.views.view_box1[index_view_box1];
+    view_box1_ant = data_var_ant.views.view_box1[index_view_box1].id;
 
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
@@ -248,7 +247,6 @@ function updateParameters(){
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
     URL_PARAM = $.param(parameters);
-
 
 }
 
@@ -343,13 +341,13 @@ function loadViews(){
     
     updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
     
-    var view_box1 = data_var.views.view_box1[index_view_box1]
-    var view_box2 = data_var.views.view_box2[0]
-    var view_box3 = data_var.views.view_box3[0]
+    var view_box1 = data_var.views.view_box1[index_view_box1].id
+    var view_box2 = data_var.views.view_box2[0].id
+    var view_box3 = data_var.views.view_box3[0].id
 
     var UPDATE_1 = (view_box1 == view_box1_ant);
-    var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0]);
-    var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0]);
+    var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0].id);
+    var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0].id);
     
     if(parameters.eixo == 3){
         if(!UPDATE_1 && view_box1_ant == "mapa-mundi"){
