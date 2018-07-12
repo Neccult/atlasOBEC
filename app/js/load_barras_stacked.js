@@ -166,7 +166,7 @@ function create_bars_stacked(barras_box, data){
         .enter()
         .append("rect")
         .attr("data-legend", function(d) {  return d.data.year; })
-        .attr("data-value", function(d) { return d[1]; })
+        .attr("data-value", function(d) { return Math.abs(d[0] - d[1])})
         .attr("x", function (d) {
             return x_eixo1(d.data.year);
         })
@@ -193,6 +193,8 @@ function create_bars_stacked(barras_box, data){
             clickBarraStacked(d, i, obj, anos);
             updateIframe()
 
+            configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
+
 
         });
 
@@ -202,6 +204,9 @@ function create_bars_stacked(barras_box, data){
     else
         desagregacao = $(".bread-select[data-id=deg]").val();
 
+    var selectedValue = parseFloat(getSelectedValueStacked(barras_box));
+    var soma = getSomaStacked();
+    configInfoDataBoxBarrasStacked(selectedValue, soma);
 
 }
 
@@ -363,7 +368,7 @@ function update_bars_stacked(barras_box, data){
         .enter()
         .append("rect")
         .attr("data-legend", function(d) { return d.data.year; })
-        .attr("data-value", function(d) { return d[1]; })
+        .attr("data-value", function(d) { return Math.abs(d[0] - d[1]); })
         .attr("x", function (d) { return x_eixo1(d.data.year); })
         .attr("y", function (d) { return y_eixo1(d[1]); })
         .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
@@ -374,13 +379,47 @@ function update_bars_stacked(barras_box, data){
 
     rect.data(function (d) { return d; })
         .attr("data-legend", function(d) { return d.data.year; })
-        .attr("data-value", function(d) { return d[1]; })
+        .attr("data-value", function(d) { return Math.abs(d[0] - d[1]); })
         .attr("x", function (d) { return x_eixo1(d.data.year); })
         .attr("y", function (d) { return y_eixo1(d[1]); })
         .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
         .style("cursor", "pointer");
 
+    var selectedValue = parseFloat(getSelectedValueStacked(barras_box));
+    var soma = getSomaStacked();
+
+    configInfoDataBoxBarrasStacked(selectedValue, soma);
+
+}
+
+function getSelectedValueStacked(barras_box){
+
+    var value;
+
+    // console.log(getSubdegId(parameters.deg, $(this).attr("subdeg")) )
+
+    d3.select(barras_box).selectAll(".cost").each(function() {
+
+
+        if(getSubdegId(parameters.deg, $(this).attr("subdeg")) == parameters.subdeg) {
+
+
+            d3.select(this).selectAll("rect").each(function() {
+
+                if($(this).attr("data-legend") == parameters.ano){
+
+
+                    value = $(this).attr("data-value");
+                }
+
+            });
+        }
+
+    });
+
+
+    return value;
 
 }
 
@@ -403,17 +442,24 @@ function clickBarraStacked(d, i, obj, anos){
 
 }
 
-function getSoma(barraId) {
+function getSomaStacked() {
+
     var soma = 0;
+
     $("rect").each(function() {
-        if($(this).attr("data-legend") == barraId) {
-            if($(this).attr("data-value") != "NaN") soma+=parseFloat($(this).attr("data-value"));
-        }
+
+        if($(this).attr("data-legend") == parameters.ano){
+            if($(this).attr("data-value") != "NaN"){
+                soma += parseFloat($(this).attr("data-value"));
+            }
+        };
+
     });
     return soma;
 }
 
 function destacaBarra(barras_box, barraId) {
+
 
     return ;
         i = 0;

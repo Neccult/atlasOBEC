@@ -350,7 +350,7 @@ function create_bars(barras_box, data){
                 destacarBarra(barras_box, dados.key[i]);
                 var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-                configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
+                configInfoDataBoxBarrasClick(dados, i, valor);
 
                 updateIframe();
 
@@ -397,12 +397,12 @@ function create_bars(barras_box, data){
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
         if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-            configInfoDataBoxBarras(eixo, vrv, dados, valor, uos);         
+            configInfoDataBoxBarras(dados, valor, uos);
         }
 
         data_barra = data;
 
-        updateData();
+        updateData('barras');
 }
 
 function update_bars(barras_box, data){
@@ -416,9 +416,6 @@ function update_bars(barras_box, data){
         create_bars(barras_box, data);
         return;
     }
-
-
-
 
     var svg_barras = d3.select(barras_box+" svg g");
     var chartWidth = width_box(barras_box);
@@ -751,7 +748,7 @@ function update_bars(barras_box, data){
             destacarBarra(barras_box, dados.key[i]);
             var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-            configInfoDataBoxBarrasClick(eixo, vrv, dados, i, valor);
+            configInfoDataBoxBarrasClick(dados, i, valor);
             
             updateIframe();
 
@@ -783,13 +780,12 @@ function update_bars(barras_box, data){
         
         var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
 
-        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-            configInfoDataBoxBarras(eixo, vrv, dados, valor, uos);         
+        if(!(parameters.eixo == 1 && parameters.var == 6 && parameters.uos == 1) && !(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
+            configInfoDataBoxBarras(dados, valor, uos);
         }
 
 
-    updateData();
-
+        updateData('barras');
 
 }
 

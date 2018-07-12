@@ -524,10 +524,11 @@ function getDataVar(json, eixo, vrv){
     })[0];
 }
 
-function setTerceiroValueData(eixo, vrv, value, cad){
+function setTerceiroValueData(value, cad){
 
     uf = $(".bread-select[data-id=uf]").val();
-    if(eixo == 0){
+
+    if(parameters.eixo == 0){
         prt =  $(".bread-select[data-id=deg]").val()
         array_variaveis = [1, 4, 5, 6, 7, 8]
         if(array_variaveis.includes(parseInt(vrv)) && uf > 0 && ( prt > 0 ||cad > 0)){
@@ -541,9 +542,9 @@ function setTerceiroValueData(eixo, vrv, value, cad){
             $(".setor-value").first().css("display", "none");
         }
     }
-    if(eixo == 1){
+    if(parameters.eixo == 1){
         ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
-        if(vrv == 1 && (cad > 0 || ocp != 0 && ocp != 3) && uf > 0){
+        if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
            $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
            $(".setor-value").first().css("display", "flex");
 
@@ -554,9 +555,9 @@ function setTerceiroValueData(eixo, vrv, value, cad){
             $(".setor-value").first().css("display", "none");
         }
     }
-    else if(eixo == 3){
-        if(vrv == 5 || vrv == 8){
-            if(cad == 1){
+    else if(parameters.eixo == 3){
+        if(parameters.var == 5 || parameters.var == 8){
+            if(parameters.cad == 1){
                 $(".state-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
@@ -579,19 +580,19 @@ function setTerceiroValueData(eixo, vrv, value, cad){
 * Função para atribuir o valor do dado inteiro para a variável em questão
 * Parâmetros: valores, eixo e variável
  */
-function setIntegerValueData(value, eixo, vrv) {
+function setIntegerValueData(value) {
 
 	var description = PT_BR
 
-    var result = getDataVar(description, eixo, vrv);
+    var result = getDataVar(description, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
     valor = value.valor;
-    switch(eixo) {
+    switch(parameters.eixo) {
         case 0:
-            if(vrv == 3) {
+            if(parameters.var == 3) {
                 valor = valor*100;
-            }else if(vrv == 9 && value.uf == null) {
+            }else if(parameters.var == 9 && value.uf == null) {
                 valor = valor*100;
             }
             break;
@@ -603,31 +604,27 @@ function setIntegerValueData(value, eixo, vrv) {
     
     var literal = formatDecimalLimit(valor, 2);
 
-    if(eixo == 0 && url['var'] == 3){
+    if(parameters.eixo == 0 && parameters.var == 3){
         literal = formatDecimalLimit(valor, 2);
-    }else
-    if(eixo == 0 && url['var'] == 9){
+    }
+    else if(parameters.eixo == 0 && parameters.var == 9){
         valor = valor*100;
-
-
-        literal = formatDecimalLimit(valor, 2);
-    }else
-    if(eixo == 0 && url['var'] > 9){
-        literal = formatDecimalLimit(valor, 2);
-    }else
-    if(eixo == 1 && url['var'] == 2){
-        literal = formatDecimalLimit(valor, 4);
-    }else
-    if(eixo == 1 && url['var'] == 9){
-        literal = formatDecimalLimit(valor, 4);
-    }
-    else if(eixo == 3){
         literal = formatDecimalLimit(valor, 2);
     }
-
+    else if(parameters.eixo == 0 && parameters.var > 9){
+        literal = formatDecimalLimit(valor, 2);
+    }
+    else if(parameters.eixo == 1 && parameters.var == 2){
+        literal = formatDecimalLimit(valor, 4);
+    }
+    else if(parameters.eixo == 1 && parameters.var == 9){
+        literal = formatDecimalLimit(valor, 4);
+    }
+    else if(parameters.eixo == 3){
+        literal = formatDecimalLimit(valor, 2);
+    }
 
     estado = $(".state-title").first().text()
-
 
     $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
     var doc =  $(".integer-value").first().find(".number").first();
@@ -720,81 +717,81 @@ function getTextWidth(text, font) {
 *
 * Parâmetros: valores, eixo e variável
  */
-function setPercentValueData(value, eixo, vrv) {
+function setPercentValueData(value) {
     if(value.percentual == "NaN"){
         value.percentual = 0;
     }
 
-    if(eixo == 0){
-        if(vrv == 2 || vrv == 3 || vrv == 9) {
-            $(".percent-value").first().find(".number").first().html("");
+    var percentual = "";
+
+    if(parameters.eixo == 0){
+        if(parameters.var == 2 || parameters.var == 3 || parameters.var == 9) {
+            percentual = "";
         }
-        else if(vrv < 9) {
-                $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+        else if(parameters.var < 9) {
+            percentual = formatDecimalLimit(value.percentual*100, 2)+"%"
         }
-        else if(vrv >= 10 && vrv <= 13){
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2));
+        else if(parameters.var >= 10 && parameters.var <= 13){
+            percentual = formatDecimalLimit(value.valor, 2);
         }
 
+        $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
-    else if(eixo == 1){
-        if(vrv > 11 ){
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
-            
+    else if(parameters.eixo == 1){
+        if(parameters.var > 11 ){
+            percentual = formatDecimalLimit(value.valor, 2)
         }
-        else if(vrv == 2 || vrv == 11 || vrv == 10 ||  vrv == 9  || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 8){
-           $(".percent-value").first().find(".number").first().html("");
+        else if(parameters.var == 2 || parameters.var == 11 || parameters.var == 10 ||  parameters.var == 9  || parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 8){
+            percentual = "";
         }
         else{
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
-            
+            percentual = formatDecimalLimit(value.percentual*100, 2)+"%";
         }
+
+        $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
-    else if(eixo == 2){
+    else if(parameters.eixo == 2){
 
-
-        if(vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9|| vrv == 13 || vrv == 14 || vrv == 17){
-            $(".percent-value").first().find(".number").first().html("");
+        if(parameters.var == 6 || parameters.var == 7 || parameters.var == 8 || parameters.var == 9|| parameters.var == 13 || parameters.var == 14 || parameters.var == 17){
+            percentual = "";
         }
         else if(vrv == 15 || vrv == 16){
-
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2));
-
+            percentual = formatDecimalLimit(value.percentual, 2);
         }
         else if(vrv == 18 || vrv == 19){
-
-            $(".percent-value").first().find(".number").first().html(value.valor);
-
+            percentual = value.valor;
         }
         else if(vrv == 10){
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual, 2)+'%');
-
+            percentual = formatDecimalLimit(value.percentual, 2)+'%';
         }
         else{
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
+            percentual = formatDecimalLimit(value.percentual*100, 2)+"%"
         }
 
-
+        $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
     }
-    else if(eixo == 3){
-        if(vrv == 1 || vrv == 13)
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.percentual*100, 2)+"%");
-        else if(vrv == 5 || vrv == 8){
-            $(".percent-value").first().find(".number").first().html(formatDecimalLimit(value.valor, 2))
-        } else{
-            $(".percent-value").first().find(".number").first().html("");           
+    else if(parameters.eixo == 3){
+
+        if(parameters.var == 1 || parameters.var == 13){
+            percentual = formatDecimalLimit(value.percentual*100, 2)+"%";
         }
+        else if(parameters.var == 5 || parameters.var == 8){
+            percentual = formatDecimalLimit(value.valor, 2);
+        }
+        else{
+            percentual = "";
+        }
+
+        $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
-        
         setMaxFontSize(doc);
     }
-
 }
 
 /*
@@ -1763,11 +1760,19 @@ function getSubdegId(deg, subdeg) {
             switch (subdeg) {
                 case '10 a 17':
                     return "1";
+                case '10 - 17':
+                    return "1";
                 case '18 a 29':
                     return "2";
-                case '30 a 49':
+                case '18 - 29':
+                    return "2";
+                case '30 - 49':
                     return "3";
-                case '50 a 64':
+                case '30 - 49':
+                    return "3";
+                case '50 - 64':
+                    return "4";
+                case '50 - 64':
                     return "4";
                 case '65 ou mais':
                     return "5";

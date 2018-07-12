@@ -1104,7 +1104,7 @@ else {
                 $(window.document).find(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(obj+1)+"]").prop('selected', true)//.val(obj+1)
                 updateWindowUrl('deg', deg);
                 updateWindowUrl('subdeg', obj+1)
-                configInfoDataBoxBarrasStackedClick(eixo, vrv, d, getSoma(d.x), deg);
+                configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSoma());
             })
             .style("cursor", "pointer");
         if((vrv == 6 || vrv == 4) && eixo == 1)

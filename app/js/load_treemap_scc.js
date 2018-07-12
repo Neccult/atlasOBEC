@@ -256,6 +256,7 @@ function create_treemap_scc(treemap_scc_box, data){
 
     // testa se o valor de size é zero
     if (isValueZero) {
+
         d3.selectAll(treemap_scc_box+">svg>g")
             .attr("display", "none");
 
@@ -265,19 +266,10 @@ function create_treemap_scc(treemap_scc_box, data){
             .attr("class", "no-info")
             .append("text")
             .text("Não há dados sobre essa desagregação")
-            .attr("x", svg.attr("width") / 2)
-            .attr("y", svg.attr("height") / 2)
+            .attr("x", svg.attr("width")/2)
+            .attr("y", svg.attr("height")/2)
             .attr("text-anchor", "middle");
     }
-
-    configInfoDataBoxTreemapSCC(eixo,
-        vrv,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
-        url,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
 
     function loadTooltipSCC(d, eixo, vrv){
 
@@ -424,6 +416,18 @@ function create_treemap_scc(treemap_scc_box, data){
         }
 
     }
+
+    configInfoDataBoxTreemapSCC(eixo,
+        vrv,
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
+        url,
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
+        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
+
+    updateData('treemap_scc')
+
 
 }
 
@@ -760,8 +764,6 @@ function update_treemap_scc(treemap_scc_box, data){
 
         var rects = svg.selectAll("g");
 
-
-
         rects.select("text").text(function(d) {return d.data.name; })
             .attr("display", "block")
             .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
@@ -804,7 +806,6 @@ function update_treemap_scc(treemap_scc_box, data){
 
         formatTreemapText(treemap_scc_box);
 
-
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
@@ -815,6 +816,7 @@ function update_treemap_scc(treemap_scc_box, data){
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg")
         );
 
+        updateData('treemap_scc')
 
     }, 500);
 

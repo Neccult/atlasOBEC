@@ -246,13 +246,12 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                         }
                         else if(vrv === 4 || vrv === 5 || vrv === 6 || vrv === 7 || vrv === 8) {
                             if(cad !== 0) {
-
                                 integerValue = d.data.size;
                                 percentValue = d.data.size/root.value;
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                                    // ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
                                 ]);
                             }
                             else {
@@ -261,7 +260,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
+                                    // ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"],
                                 ]);
 							}
 						}
@@ -269,7 +268,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
 							tooltipInstance.showTooltip(d, [
 								["title", d.data.name],
 								["", formatTextVrv(d.data.size, eixo, vrv)],
-								["", formatDecimalLimit(d.data.size/totais[ano]*100, 2) + "%"]
+								// ["", formatDecimalLimit(d.data.size/totais[ano]*100, 2) + "%"]
 							]);
 						}
                         else{
@@ -279,7 +278,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                             	tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"]
+                                    // ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"]
                                 ]);
                             }
                             else {
@@ -288,7 +287,7 @@ d3.json("./db/json_treemap_region.php"+config, function(error, data) {
                                 tooltipInstance.showTooltip(d, [
                                     ["title", d.data.name],
 	                                ["", formatTextVrv(d.data.size, eixo, vrv)],
-                                    ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"]
+                                    // ["", formatDecimalLimit(d.data.percentual*100, 2) + "%"]
                                 ]);
 							}
 						}
