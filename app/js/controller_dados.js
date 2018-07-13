@@ -63,6 +63,10 @@ function configInfoDataBoxTreemapSCC(dados) {
             setPercentValueData(dados.percent)
         }
 
+        if(parameters.cad != 0 && (parameters.uf != 0 || parameters.deg != 0)){
+            setTerceiroValueData(dados.valor/brasil_setor[parameters.ano])
+        }
+
 
 
         // if(parameters.cad != 0){
@@ -235,7 +239,6 @@ function configInfoDataBoxBarras(dados, valor, uos) {
                 setPercentValueData(valor)
             }
             else if(uos == 0){
-                console.log("tchau")
                 setIntegerValueData(valor)
             }
         }
@@ -704,14 +707,13 @@ function setPercentValueData(valor) {
     }
 }
 
-function setTerceiroValueData(value, cad){
-
-    uf = $(".bread-select[data-id=uf]").val();
+function setTerceiroValueData(value){
 
     if(parameters.eixo == 0){
-        var prt =  $(".bread-select[data-id=deg]").val()
+
         array_variaveis = [1, 4, 5, 6, 7, 8]
-        if(array_variaveis.includes(parseInt(parameters.var)) && uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
+
+        if(array_variaveis.includes(parseInt(parameters.var)) && parameters.uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
             $(".setor-value").first().css("display", "flex");
 
@@ -722,6 +724,7 @@ function setTerceiroValueData(value, cad){
             $(".setor-value").first().css("display", "none");
         }
     }
+
     if(parameters.eixo == 1){
         ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
         if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
