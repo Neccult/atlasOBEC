@@ -63,20 +63,7 @@ function configInfoDataBoxTreemapSCC(dados) {
             setPercentValueData(dados.percent)
         }
 
-        if(parameters.cad != 0 && (parameters.uf != 0 || parameters.deg != 0)){
-            setTerceiroValueData(dados.valor/brasil_setor[parameters.ano])
-        }
-
-
-
-        // if(parameters.cad != 0){
-        //     if (parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 7 || parameters.var == 8 ||parameters.var == 9) {
-        //         setPercentValueData({percentual: dados.percent});
-        //     }
-        //     else{
-        //         setPercentValueData({percentual: dados.percent_uf});
-        //     }
-        // }
+        setTerceiroValueData(dados.valor/brasil_setor[parameters.ano])
 
     }
     if(parameters.eixo == 1){
@@ -709,11 +696,15 @@ function setPercentValueData(valor) {
 
 function setTerceiroValueData(value){
 
+    console.log("oi")
+
     if(parameters.eixo == 0){
 
         array_variaveis = [1, 4, 5, 6, 7, 8]
 
         if(array_variaveis.includes(parseInt(parameters.var)) && parameters.uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
+
+            console.log("aaa")
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
             $(".setor-value").first().css("display", "flex");
 
@@ -721,6 +712,7 @@ function setTerceiroValueData(value){
             setMaxFontSize(doc);
         }
         else{
+            console.log("po")
             $(".setor-value").first().css("display", "none");
         }
     }
