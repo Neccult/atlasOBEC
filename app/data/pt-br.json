@@ -763,7 +763,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": ""}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -782,8 +782,8 @@
 				],
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
-					"view_box2": [{"id": "donut", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
                "mapa_valores": ""
 			},
@@ -807,8 +807,8 @@
 				],
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
-					"view_box2": [{"id": "donut", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -832,7 +832,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -855,7 +855,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -878,7 +878,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                "mapa_valores": ""
 			},
@@ -901,7 +901,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "linhas", "title": "Série Histórica"}]
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
                 "mapa_valores": ""
 			},
@@ -994,7 +994,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1018,7 +1018,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1150,7 +1150,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": [{"id": "mapa-mundi", "title": "MAPA-MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
@@ -1176,7 +1176,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": [{"id": "mapa-mundi", "title": "MAPA-MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
@@ -1202,7 +1202,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": [{"id": "mapa-mundi", "title": "MAPA-MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
@@ -1229,9 +1229,9 @@
 				],
 				"botoes":[],
 				"views": {
-					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
-					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
-					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
+					"view_box1": [{"id": "barras", "title": "C4 VALOR ABSOLUTO POR SETORES"}],
+					"view_box2": [{"id": "barras", "title": "C2 VALOR ABSOLUTO POR PARCEIROS"}],
+					"view_box3": [{"id": "barras", "title": "C4 VALOR ABSOLUTO POR UF"}]
 				}
 			},
 			{
@@ -1252,9 +1252,9 @@
 				],
 				"botoes": [],
 				"views": {
-					"view_box1": [{"id": "barras", "title": "Série Histórica"}],
-					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
-					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
+					"view_box1": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR SETORES"}],
+					"view_box2": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR PARCEIROS"}],
+					"view_box3": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR UF"}]
 				}
 			},
 			{
@@ -1269,9 +1269,9 @@
 				"prefixo_valor":"",
 				"botoes":[],
 				"views": {
-					"view_box1": [{"id": "", "title": "Série Histórica"}],
-					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
-					"view_box3": [{"id": "treemap_scc", "title": "Treemap - Setores Culturais e Criativos"}]
+					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS DO BRASIL"}]
 				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1291,7 +1291,7 @@
 				"views": {
 					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
-					"view_box3": [{"id": "barras", "title": "Série Histórica"}]
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL [cad]"}]
 				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -1311,7 +1311,7 @@
 					{"name":"Barras", "id":"barras"}
 				],
 				"views": {
-					"view_box1": [{"id": "mapa-mundi", "title": "MAPA-MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
@@ -1333,7 +1333,7 @@
 				"botoes":[],
 				"views": {
 					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
-					"view_box2": [{"id": "barras", "title": "Série Histórica"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL NOS SETORES CULTURAIS E CRIATIVOS"}],
 					"view_box3": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}]
 				},
 				"type":[
