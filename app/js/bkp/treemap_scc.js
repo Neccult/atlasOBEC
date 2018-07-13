@@ -632,7 +632,6 @@ d3.json("./db/json_treemap_scc.php?"+config, function(error, data) {
 
 
     if(eixo == 0){
-        
         configInfoDataBoxTreemapSCC(eixo,
             vrv,
             $(treemap_scc_box+' svg').find('rect[data-legend="'+url['cad']+'"]').attr("data-value"),

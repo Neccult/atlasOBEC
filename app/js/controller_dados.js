@@ -249,32 +249,32 @@ function configInfoDataBoxBarras(dados, valor, uos) {
     else if(parameters.eixo == 3){
         var mundo = parameters.mundo;
 
+
         if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[index_ano];
 
             if(parameters.uos == 0){
-                setIntegerValueData(dados);
+                setIntegerValueData(dados.valor);
             }
             else if(parameters.uos == 2){
-                setPercentValueData(dados);
+                setPercentValueData(dados.valor);
             }
         }
         else if(parameters.var == 1 || parameters.var == 13){
 
             dados.valor = dados.value[index_ano];
-            dados.percentual = dados.percentual[index_ano];
-
-            setIntegerValueData(dados);
+            
+            setIntegerValueData(dados.valor);
             if(mundo == 1)
-                setPercentValueData({percentual: dados.percentual});
+                setPercentValueData(dados.percentual[index_ano]);
 
 
         }
         else{
             dados.valor = dados.value[index_ano];
 
-            setIntegerValueData(dados);
-            setPercentValueData({percentual : dados.percentual[index_ano]});
+            setIntegerValueData(dados.valor);
+            setPercentValueData(dados.percentual[index_ano]);
 
         }
 
@@ -393,12 +393,12 @@ function setPercentValueData(valor) {
         setMaxFontSize(doc);
     }
     else if(parameters.eixo == 3){
-
+        console.log(valor)
         if(parameters.var == 1 || parameters.var == 13){
-            percentual = formatDecimalLimit(value.percentual*100, 2)+"%";
+            percentual = formatDecimalLimit(valor*100, 2)+"%";
         }
         else if(parameters.var == 5 || parameters.var == 8){
-            percentual = formatDecimalLimit(value.valor, 2);
+            percentual = formatDecimalLimit(valor, 2);
         }
         else{
             percentual = "";
@@ -417,7 +417,7 @@ function setTerceiroValueData(value){
         array_variaveis = [1, 4, 5, 6, 7, 8]
 
         if(array_variaveis.includes(parseInt(parameters.var)) && parameters.uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
-
+            console.log(value)
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
             $(".setor-value").first().css("display", "flex");
 

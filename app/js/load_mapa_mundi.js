@@ -44,10 +44,8 @@ function create_mapa_mundi(mapa_box, gdpData){
 
                 url['prc'] = convertCode(el);
 
-                setIntegerValueData(gdpData[convertCode(el)], eixo, vrv);
-
                 if(cad == 0){
-                    setPercentValueData(gdpData[convertCode(el)], eixo, vrv);
+                    setPercentValueData(gdpData[convertCode(el)]);
                 }
 
                 if(parameters.var == 1  || parameters.var == 13){
@@ -57,7 +55,7 @@ function create_mapa_mundi(mapa_box, gdpData){
                     else
                         valor = gdpData[convertCode(el)].valor/gdpData[0].valor;
 
-                    setPercentValueData({percentual: valor}, eixo, vrv);
+                    setPercentValueData(valor);
                 }
 
                 setPrcTitle(gdpData[convertCode(el)].prc)
@@ -75,7 +73,7 @@ function create_mapa_mundi(mapa_box, gdpData){
         else
             valor = gdpData[parameters.prc].valor/gdpData[0].valor;
         
-        setPercentValueData({percentual: valor}, eixo, vrv);
+        setPercentValueData(valor);
 
     });
 
