@@ -16,6 +16,8 @@ function create_bars(barras_box, data){
     var ocp = 0
     var uos = views_parameters[barras_box].uos;
 
+    console.log(views_parameters[barras_box])
+
 
     var corEixo = COLORS['eixo'][eixo].color;
 
@@ -350,7 +352,7 @@ function create_bars(barras_box, data){
                 destacarBarra(barras_box, dados.key[i]);
                 var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-                configInfoDataBoxBarrasClick(dados, i, valor);
+                // configInfoDataBoxBarrasClick(dados, i, valor);
 
                 updateIframe();
 
@@ -394,15 +396,21 @@ function create_bars(barras_box, data){
 
         destacarBarra(barras_box, parameters.ano);
 
-        var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
-
-        if(!(eixo == 1 && vrv == 6 && uos == 1) && !(eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-            configInfoDataBoxBarras(dados, valor, uos);
-        }
-
+        var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
         data_barra = data;
 
-        updateData('barras');
+        updateData('barras', dados, valor, uos);
+
+        if(parameters.eixo == 2 && parameters.var >= 18){
+
+            var soma = 0;
+            dados.value.forEach(function(key){
+                soma += key;
+            })
+
+            updateData('barras', dados, soma, 1);
+
+        }
 }
 
 function update_bars(barras_box, data){
@@ -748,44 +756,49 @@ function update_bars(barras_box, data){
             destacarBarra(barras_box, dados.key[i]);
             var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-            configInfoDataBoxBarrasClick(dados, i, valor);
+            // configInfoDataBoxBarrasClick(dados, i, valor);
             
             updateIframe();
 
         });
 
-        var xAxis = d3.axisBottom(x)
-                        .tickFormat(function (d, i) {
-                            return dados.key[i];
-                        })
-                        .tickSize(5)
-                        .tickPadding(5);
+    var xAxis = d3.axisBottom(x)
+                    .tickFormat(function (d, i) {
+                        return dados.key[i];
+                    })
+                    .tickSize(5)
+                    .tickPadding(5);
 
-        var yAxis = d3.axisLeft()
-                    .scale(y)
-                    .tickFormat(formatYAxis);
+    var yAxis = d3.axisLeft()
+                .scale(y)
+                .tickFormat(formatYAxis);
 
-        d3.select(barras_box+" g.eixo-x")
-            .transition()
-            .duration(400)
-            .call(xAxis);
+    d3.select(barras_box+" g.eixo-x")
+        .transition()
+        .duration(400)
+        .call(xAxis);
 
-        d3.select(barras_box+" g.eixo-y")
-            .transition()
-            .duration(400)
-            .call(yAxis);
+    d3.select(barras_box+" g.eixo-y")
+        .transition()
+        .duration(400)
+        .call(yAxis);
 
-        
-        destacarBarra(barras_box, parameters.ano);
-        
-        var valor = $(barras_box+' svg').find('rect[data-legend="'+url['ano']+'"]').attr("data-value");
+    destacarBarra(barras_box, parameters.ano);
 
-        if(!(parameters.eixo == 1 && parameters.var == 6 && parameters.uos == 1) && !(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
-            configInfoDataBoxBarras(dados, valor, uos);
-        }
+    var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
 
+    updateData('barras', dados, valor, uos);
 
-        updateData('barras');
+    if(parameters.eixo == 2 && parameters.var >= 18){
+
+        var soma = 0;
+        dados.value.forEach(function(key){
+            soma += key;
+        })
+
+        updateData('barras', dados, soma, 1);
+
+    }
 
 }
 
@@ -825,6 +838,7 @@ function destacarBarra(barras_box, barraId) {
 
 function loadTooltip_barras(d, key, eixo, vrv, dados){
 
+
     if(eixo === 0){
         if(vrv === 3){
            tooltipInstance.showTooltip(d, [
@@ -849,15 +863,16 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
 
    }
    else if(eixo === 1){
-       if (vrv === 9) {
+
+       if (vrv == 9) {
            tooltipInstance.showTooltip(d, [
                ["title", key],
                ["", formatTextVrv(d, eixo, vrv)],
            ]);
        }
-       else if(vrv === 2){
+       else if(vrv == 2){
 
-           if(url['ocp'] == 0){
+           if(parameters.ocp == 0){
                tooltipInstance.showTooltip(d, [
                    ["title", key],
                    ["", formatTextVrv(d*10000, eixo, vrv)],
@@ -872,7 +887,7 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
            }
 
        }
-       else if (vrv === 1 || (vrv >= 4 && vrv <= 8) || vrv === 11 || vrv === 10 || vrv >= 12) {
+       else if (vrv == 1 || (vrv >= 4 && vrv <= 8) || vrv == 11 || vrv == 10 || vrv >= 12) {
            tooltipInstance.showTooltip(d, [
                ["title", key],
                ["", formatTextVrv(d, eixo, vrv)],

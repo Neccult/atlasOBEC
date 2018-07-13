@@ -468,6 +468,23 @@ function mousemoveLinhas(d, data,  path, tooltipInstance) {
                 ])
             }
         }
+        else if(parameters.eixo == 2){
+            valor =  formatNumber(valor, 2).toString().replace(".", "");
+
+            if(parameters.var == 7){
+                tooltipInstance.showTooltip(d, [
+                    ["title", scc],
+                    ["", valor+"%"]
+                ])
+            }
+            else{
+                tooltipInstance.showTooltip(d, [
+                    ["title", scc],
+                    ["", valor]
+                ])
+            }
+
+        }
         else{
             valor =  formatNumber(valor, 2).toString().replace(".", "");
             tooltipInstance.showTooltip(d, [

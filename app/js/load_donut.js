@@ -81,23 +81,22 @@ function create_donut(donut_box, data){
             tooltipInstance.hideTooltip()
         })
 
-    if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
-        var soma = 0;
-        var acumuladoSetor;
-
-        Object.keys(data).forEach(function (key) {
-            soma += data[key].valor;
-            if(cad == data[key].cad)
-                acumuladoSetor = data[key].valor;
-        })
-
-        if(parameters.cad == 0)
-            acumuladoSetor = soma;
-
-
-        setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
-
-    }
+    // if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
+    //     var soma = 0;
+    //     var acumuladoSetor;
+    //
+    //     Object.keys(data).forEach(function (key) {
+    //         soma += data[key].valor;
+    //         if(cad == data[key].cad)
+    //             acumuladoSetor = data[key].valor;
+    //     })
+    //
+    //     if(parameters.cad == 0)
+    //         acumuladoSetor = soma;
+    //
+    //     setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
+    //
+    // }
 }
 
 function update_donut(donut_box, data){
@@ -177,23 +176,23 @@ function update_donut(donut_box, data){
             tooltipInstance.hideTooltip()
         })
 
-    if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
-        var soma = 0;
-        var acumuladoSetor;
-
-        Object.keys(data).forEach(function (key) {
-            soma += data[key].valor;
-            if(cad == data[key].cad)
-                acumuladoSetor = data[key].valor;
-        })
-
-        if(parameters.cad == 0)
-            acumuladoSetor = soma;
-
-
-        setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
-
-    }
+    // if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
+    //     var soma = 0;
+    //     var acumuladoSetor;
+    //
+    //     Object.keys(data).forEach(function (key) {
+    //         soma += data[key].valor;
+    //         if(cad == data[key].cad)
+    //             acumuladoSetor = data[key].valor;
+    //     })
+    //
+    //     if(parameters.cad == 0)
+    //         acumuladoSetor = soma;
+    //
+    //
+    //     setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
+    //
+    // }
 
 }
 

@@ -1,4 +1,3 @@
-
 var treemap;
 var root;
 var cell;
@@ -417,16 +416,18 @@ function create_treemap_scc(treemap_scc_box, data){
 
     }
 
-    configInfoDataBoxTreemapSCC(eixo,
-        vrv,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
-        url,
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
-        $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg"));
+    var data_value = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value");
+    var data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent");
+    if(parameters.eixo == 1 &&parameters.ocp != 0){
+        data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent")
+        data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-deg");
+    }
+    var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
+    var data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
 
-    updateData('treemap_scc')
+    var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf, deg: data_deg};
+
+    updateData('treemap_scc', dados);
 
 
 }
@@ -806,17 +807,19 @@ function update_treemap_scc(treemap_scc_box, data){
 
         formatTreemapText(treemap_scc_box);
 
-        configInfoDataBoxTreemapSCC(eixo,
-            vrv,
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf"),
-            url,
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"),
-            $(treemap_scc_box+' svg').find('rect[data-legend="'+url['ocp']+'"]').attr("data-deg")
-        );
+        var data_value = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value");
+        var data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent")
+        var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
+        var data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
 
-        updateData('treemap_scc')
+        if(parameters.eixo == 1 &&parameters.ocp != 0){
+            data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent")
+            data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-deg");
+        }
+
+        var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf, deg: data_deg};
+
+        updateData('treemap_scc', dados);
 
     }, 500);
 
@@ -1113,7 +1116,7 @@ function treemapClick(d, root){
 
         }
 
-        configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf, percent_deg);
+        // configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, cad_valor, cad_percent, cad_percent_uf, percent_deg);
 
     }
     else {
@@ -1141,7 +1144,7 @@ function treemapClick(d, root){
             cad_percent_uf = getSomaScc(d.data.colorId);
         }
 
-        configInfoDataBoxTreemapSCCOcupation(parameters.eixo, parameters.var, d, root, parameters.deg, cad_valor, cad_percent, cad_percent_uf );
+        // configInfoDataBoxTreemapSCCOcupation(parameters.eixo, parameters.var, d, root, parameters.deg, cad_valor, cad_percent, cad_percent_uf );
     }
 
     updateIframe();

@@ -314,7 +314,7 @@
 				"views": {
 					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "Treemap"}],
 					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
-					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
 				"fontes": " Elaboração do NECCULT com base no IBGE (PAS, PIA e PAC)."
 			},

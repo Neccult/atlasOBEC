@@ -524,115 +524,7 @@ function getDataVar(json, eixo, vrv){
     })[0];
 }
 
-function setTerceiroValueData(value, cad){
 
-    uf = $(".bread-select[data-id=uf]").val();
-
-    if(parameters.eixo == 0){
-        prt =  $(".bread-select[data-id=deg]").val()
-        array_variaveis = [1, 4, 5, 6, 7, 8]
-        if(array_variaveis.includes(parseInt(vrv)) && uf > 0 && ( prt > 0 ||cad > 0)){
-            $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
-            $(".setor-value").first().css("display", "flex");
-
-            doc = $(".setor-value").first().find(".number").first();
-            setMaxFontSize(doc);
-        }
-        else{
-            $(".setor-value").first().css("display", "none");
-        }
-    }
-    if(parameters.eixo == 1){
-        ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
-        if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
-           $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
-           $(".setor-value").first().css("display", "flex");
-
-           doc = $(".setor-value").first().find(".number").first();
-           setMaxFontSize(doc);
-        } 
-        else{
-            $(".setor-value").first().css("display", "none");
-        }
-    }
-    else if(parameters.eixo == 3){
-        if(parameters.var == 5 || parameters.var == 8){
-            if(parameters.cad == 1){
-                $(".state-title").first().css("display", "none");
-                $(".prc-title").first().css("display", "none");
-                $(".prc-title").first().css("display", "none");
-                desc = $(".percent-value").first().find(".description-number").first().text();
-                $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value, 2));
-                $(".setor-value").first().find(".description-number").first().text(desc.replace("UF", "SETOR"));
-                $(".setor-value").first().css("display", "block");
-                doc = $(".setor-value").first().find(".number").first();
-                setMaxFontSize(doc);
-            }
-        } else {
-            $(".setor-value").first().css("display", "none");
-            $(".state-title").first().css("display", "block");
-            $(".prc-title").first().css("display", "block");
-        }    
-    }
-    
-}
-/*
-* Função para atribuir o valor do dado inteiro para a variável em questão
-* Parâmetros: valores, eixo e variável
- */
-function setIntegerValueData(value) {
-
-	var description = PT_BR
-
-    var result = getDataVar(description, parameters.eixo, parameters.var);
-    sufixo = result.sufixo_valor;
-    prefixo = result.prefixo_valor;
-    valor = value.valor;
-    switch(parameters.eixo) {
-        case 0:
-            if(parameters.var == 3) {
-                valor = valor*100;
-            }else if(parameters.var == 9 && value.uf == null) {
-                valor = valor*100;
-            }
-            break;
-        case 1:
-            if(sufixo == '%')
-                valor *= 100;
-            break;
-    }
-    
-    var literal = formatDecimalLimit(valor, 2);
-
-    if(parameters.eixo == 0 && parameters.var == 3){
-        literal = formatDecimalLimit(valor, 2);
-    }
-    else if(parameters.eixo == 0 && parameters.var == 9){
-        valor = valor*100;
-        literal = formatDecimalLimit(valor, 2);
-    }
-    else if(parameters.eixo == 0 && parameters.var > 9){
-        literal = formatDecimalLimit(valor, 2);
-    }
-    else if(parameters.eixo == 1 && parameters.var == 2){
-        literal = formatDecimalLimit(valor, 4);
-    }
-    else if(parameters.eixo == 1 && parameters.var == 9){
-        literal = formatDecimalLimit(valor, 4);
-    }
-    else if(parameters.eixo == 3){
-        literal = formatDecimalLimit(valor, 2);
-    }
-
-    estado = $(".state-title").first().text()
-
-    $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
-    var doc =  $(".integer-value").first().find(".number").first();
-
-    $('.font-title').html("Fonte(s): "+result.fontes);
-    setMaxFontSize(doc);
-	
-}
 
 
 /*
@@ -712,96 +604,13 @@ function getTextWidth(text, font) {
  */
 
 
-/*
-* Função para atribuir o valor certo para o dado percentual da variavel em questão
-*
-* Parâmetros: valores, eixo e variável
- */
-function setPercentValueData(value) {
-    if(value.percentual == "NaN"){
-        value.percentual = 0;
-    }
 
-    var percentual = "";
-
-    if(parameters.eixo == 0){
-        if(parameters.var == 2 || parameters.var == 3 || parameters.var == 9) {
-            percentual = "";
-        }
-        else if(parameters.var < 9) {
-            percentual = formatDecimalLimit(value.percentual*100, 2)+"%"
-        }
-        else if(parameters.var >= 10 && parameters.var <= 13){
-            percentual = formatDecimalLimit(value.valor, 2);
-        }
-
-        $(".percent-value").first().find(".number").first().html(percentual);
-        var doc =  $(".percent-value").first().find(".number").first();
-        setMaxFontSize(doc);
-    }
-    else if(parameters.eixo == 1){
-        if(parameters.var > 11 ){
-            percentual = formatDecimalLimit(value.valor, 2)
-        }
-        else if(parameters.var == 2 || parameters.var == 11 || parameters.var == 10 ||  parameters.var == 9  || parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 8){
-            percentual = "";
-        }
-        else{
-            percentual = formatDecimalLimit(value.percentual*100, 2)+"%";
-        }
-
-        $(".percent-value").first().find(".number").first().html(percentual);
-        var doc =  $(".percent-value").first().find(".number").first();
-        setMaxFontSize(doc);
-    }
-    else if(parameters.eixo == 2){
-
-        if(parameters.var == 6 || parameters.var == 7 || parameters.var == 8 || parameters.var == 9|| parameters.var == 13 || parameters.var == 14 || parameters.var == 17){
-            percentual = "";
-        }
-        else if(vrv == 15 || vrv == 16){
-            percentual = formatDecimalLimit(value.percentual, 2);
-        }
-        else if(vrv == 18 || vrv == 19){
-            percentual = value.valor;
-        }
-        else if(vrv == 10){
-            percentual = formatDecimalLimit(value.percentual, 2)+'%';
-        }
-        else{
-            percentual = formatDecimalLimit(value.percentual*100, 2)+"%"
-        }
-
-        $(".percent-value").first().find(".number").first().html(percentual);
-        var doc =  $(".percent-value").first().find(".number").first();
-        setMaxFontSize(doc);
-    }
-    else if(parameters.eixo == 3){
-
-        if(parameters.var == 1 || parameters.var == 13){
-            percentual = formatDecimalLimit(value.percentual*100, 2)+"%";
-        }
-        else if(parameters.var == 5 || parameters.var == 8){
-            percentual = formatDecimalLimit(value.valor, 2);
-        }
-        else{
-            percentual = "";
-        }
-
-        $(".percent-value").first().find(".number").first().html(percentual);
-        var doc =  $(".percent-value").first().find(".number").first();
-        setMaxFontSize(doc);
-    }
-}
 
 /*
 * Função que mexe no texto da barra de legenda do mapa.
 * Centraliza, muda o tamanho da fonte e formata o texto.
 */
 
-function getDegName(){
-
-}
 
 function formatBarTextMap(value, eixo, vrv, obj){
     var font_size = 9
@@ -833,6 +642,7 @@ function formatBarTextMap(value, eixo, vrv, obj){
 }
 
 function formatTextVrv(value, eixo, vrv){
+
     $.ajaxSetup({async: false});
     var string;
     $.get("./data/pt-br.json")
@@ -851,6 +661,7 @@ function formatTextVrv(value, eixo, vrv){
                     break;
 
             }*/
+
             if(eixo == 1 && url['var'] == 2)
                 string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
             else if(eixo == 1 && url['var'] == 9)
@@ -1077,8 +888,6 @@ function updateMenuSetor(eixo, vrv){
     }
 
 }
-
-
 
 /*
 * Função para retornar um valor na casa dos milhões ou bilhões num formato encurtado
@@ -1751,7 +1560,8 @@ function getSubdegId(deg, subdeg) {
         case '2':
             switch (subdeg) {
                 case 'Feminino':
-                    return "0";
+                    return "2";
+
                 case 'Masculino':
                     return "1";
             }

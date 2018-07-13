@@ -1283,7 +1283,6 @@ $(document).ready(function(){
 
                 updateOptView()
 
-
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
@@ -1312,6 +1311,7 @@ $(document).ready(function(){
                 url['cad'] = 0;
                 url['deg'] = 0;
                 url['subdeg'] = 0;
+                url['pfj'] = 0;
 
 
                 updateWindowUrl('uf', url['uf']);
@@ -1320,6 +1320,7 @@ $(document).ready(function(){
                 updateWindowUrl('subdeg', url['subdeg']);
                 updateWindowUrl('ano', url['ano']);
                 updateWindowUrl('var', url['var']);
+                updateWindowUrl('pfj', url['pfj']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateWindowUrl('chg', 0);
@@ -1381,6 +1382,7 @@ $(document).ready(function(){
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
 
                 }
+
                 changeDescVar();
 
 

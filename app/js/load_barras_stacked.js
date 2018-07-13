@@ -193,7 +193,7 @@ function create_bars_stacked(barras_box, data){
             clickBarraStacked(d, i, obj, anos);
             updateIframe()
 
-            configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
+            // configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
 
 
         });
@@ -206,7 +206,8 @@ function create_bars_stacked(barras_box, data){
 
     var selectedValue = parseFloat(getSelectedValueStacked(barras_box));
     var soma = getSomaStacked();
-    configInfoDataBoxBarrasStacked(selectedValue, soma);
+
+    updateData('barras_stacked', dados, selectedValue, soma);
 
 }
 
@@ -389,7 +390,10 @@ function update_bars_stacked(barras_box, data){
     var selectedValue = parseFloat(getSelectedValueStacked(barras_box));
     var soma = getSomaStacked();
 
-    configInfoDataBoxBarrasStacked(selectedValue, soma);
+    console.log(selectedValue)
+
+    updateData('barras_stacked', dados, selectedValue, soma);
+
 
 }
 
@@ -401,15 +405,13 @@ function getSelectedValueStacked(barras_box){
 
     d3.select(barras_box).selectAll(".cost").each(function() {
 
+        console.log(getSubdegId(parameters.deg, $(this).attr("subdeg")))
 
         if(getSubdegId(parameters.deg, $(this).attr("subdeg")) == parameters.subdeg) {
-
 
             d3.select(this).selectAll("rect").each(function() {
 
                 if($(this).attr("data-legend") == parameters.ano){
-
-
                     value = $(this).attr("data-value");
                 }
 
