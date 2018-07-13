@@ -179,6 +179,12 @@ function create_treemap_region(treemap_box, data){
 
     formatTreemapText(treemap_box);
 
+    d3.select(treemap_box).selectAll("rect").each(function () {
+      if(d3.select(this).attr("data-legend") == parameters.uf){
+          updateData('treemap_region', d3.select(this).attr("data-percent"))
+      };
+    })
+
 }
 
 function update_treemap_region(treemap_box, data){
@@ -338,13 +344,13 @@ function update_treemap_region(treemap_box, data){
             .attr("text-anchor", "middle");
     }
 
-    /*if(url['uf'] !== 0){
-        destacaPais(url['uf'])
-    }*/
-
     formatTreemapText(treemap_box);
 
-
+    d3.select(treemap_box).selectAll("rect").each(function () {
+        if(d3.select(this).attr("data-legend") == parameters.uf){
+            updateData('treemap_region', d3.select(this).attr("data-percent"))
+        };
+    })
 }
 
 function nodeWidth(d){ return d.x1 - d.x0; }
@@ -430,7 +436,7 @@ function treemapRegionClick(d, root_region){
 }
 
 function treemapRegionMouseover(d){
-    console.log("salve")
+
 }
 
 function loadTooltip(d, tooltipInstance){

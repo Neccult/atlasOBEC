@@ -47,6 +47,16 @@ function configInfoDataBoxMapa(dados) {
     }
 }
 
+function configInfoDataBoxTreemapRegion(dados) {
+
+    if(parameters.eixo == 0) {
+
+
+        setPercentValueData(dados)
+
+    }
+}
+
 function configInfoDataBoxTreemapSCC(dados) {
 
 
@@ -354,231 +364,6 @@ function configInfoDataBoxBarrasStacked(dados, valor, soma) {
 }
 
 
-/*  --- CLICK --- */
-
-function configInfoDataBoxMapaClick(eixo, vrv, dados) {
-    deg = $('.bread-select[data-id=deg]').first().val()
-    if(eixo == 0) {
-
-    }
-    else if(eixo == 1){
-
-        if(url['cad'] == 0 && url['ocp'] == 0 || (url['cad'] == 0 && url['ocp'] == 3)){
-            if(deg == 0)
-                setPercentValueData(dados, eixo, vrv);
-        }
-
-    }
-    else if(eixo == 2){
-
-
-        setIntegerValueData(dados, eixo, vrv);
-        if(url['cad'] == 0 && (vrv < 18)){
-            setPercentValueData(dados, eixo, vrv);
-        }
-
-    }
-    else if(eixo == 3){
-
-
-
-    }
-}
-
-function configInfoDataBoxTreemapSCCClick(eixo, vrv, d, root, deg, valor, percent, percent_uf, data_cad) {
-
-    if(eixo == 0) {
-        if(vrv == 2 && url['uf'] == 0){
-            //setIntegerValueData({valor: d.data.size*100}, eixo, vrv);
-        }
-        else if(vrv == 2 && url['uf'] != 0){
-            //setIntegerValueData({valor: d.data.size}, eixo, vrv);
-        }
-        else if(vrv == 4 && url['uf'] == 0){
-            setIntegerValueData({valor: d.data.size}, eixo, vrv);
-        }
-
-        else if(vrv == 9 && url['uf'] == 0){
-            setIntegerValueData({valor: d.data.size}, eixo, vrv);
-        }
-
-        if (vrv == 1 || vrv == 3 || vrv == 4 || vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 ||vrv == 9) {
-            setPercentValueData({percentual: percent}, eixo, vrv);
-        }
-
-    }
-    else if(eixo == 1) {
-
-        if(deg == 0){
-            setIntegerValueData({valor: d.value}, eixo, vrv);
-            setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
-        }
-        else{
-            setIntegerValueData({valor: d.value}, eixo, vrv);
-            setPercentValueData({percentual: percent_uf}, eixo, vrv);
-            setTerceiroValueData(eixo, vrv, data_cad, url['cad']);
-        }
-    }
-    else if(eixo === 2){
-        setIntegerValueData({valor: d.value}, eixo, vrv);
-        setPercentValueData({percentual: d.data.size / root.value}, eixo, vrv);
-    }
-}
-
-function configInfoDataBoxTreemapSCCOcupation(eixo, vrv, d, root, deg, valor, percent, percent_uf) {
-    if(eixo == 1) {
-        destacaSetor(d.data.colorId);
-
-
-        if(url['deg'] == 0 || deg == 0){
-            setIntegerValueData({valor: valor, taxa: 0}, eixo, vrv);
-            setPercentValueData({percentual: percent, taxa: 0}, eixo, vrv);
-        }
-        else{
-            setIntegerValueData({valor: valor, taxa: 0}, eixo, vrv);
-            setPercentValueData({percentual:  percent , taxa: 0}, eixo, vrv);
-        }
-        setIntegerValueData({valor: valor, taxa: 0}, eixo, vrv);
-    }
-}
-
-function configInfoDataBoxBarrasClick(dados, i, valor) {
-
-    if(parameters.eixo == 0) {
-        if (parameters.var == 3) {
-            dados.valor = dados.value[i] / 100;
-            setIntegerValueData(dados);
-        }
-        else if (parameters.var == 1) {
-            dados.valor = dados.value[i];
-            setIntegerValueData(dados);
-            if(parameters.cad == 0)
-                setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]})
-        }
-        else if (parameters.var == 2) {
-            if(parameters.uf == 0){
-                dados.valor = dados.value[i];
-                setIntegerValueData(dados);
-            }
-            else if(parameters.uf != 0){
-                dados.valor = dados.value[i];
-                setIntegerValueData(dados);
-                //setPercentValueData({percentual: dados.percentual[i], taxa: dados.taxa[i]}, eixo, vrv);
-            }
-        }
-        else if (parameters.var == 9) {
-            dados.valor = dados.value[i]/100;
-            setIntegerValueData(dados);
-        }
-        else if (parameters.var >= 4 && parameters.var <= 8) {
-            dados.valor = dados.value[i];
-            setIntegerValueData(dados);
-            if(parameters.cad == 0)
-                setPercentValueData({percentual: dados.percentual[i]});
-        }
-        else if (parameters.var > 9) {
-            dados.valor = dados.value[i];
-            if(parameters.uos == 0){
-                setIntegerValueData(dados);
-            }
-            else if(parameters.uos == 1){
-                setPercentValueData(dados);
-            }
-        }
-
-        setTerceiroValueData(parameters.eixo, parameters.var, dados.percentual_setor[i], parameters.cad);
-
-
-    }
-    else if(parameters.eixo == 1){
-
-        if(parameters.var >= 12){
-            dados.valor = dados.value[i];
-            if(parameters.uos == 0){
-                setIntegerValueData(dados);
-            } else if(parameters.uos == 1){
-                setPercentValueData({valor: dados.value[i]});
-            }
-        }
-        else{
-
-            dados.valor = dados.value[i]
-
-            if(parameters.var == 2)
-                if(parameters.var == 0)
-                    dados.valor = dados.value[i]*100;
-
-
-            setIntegerValueData(dados);
-
-            //setTerceiroValueData(eixo, vrv, dados.percentual[i], url['cad']);
-            //setPercentValueData({percentual: dados.percentual[i]}, eixo, vrv);
-        }
-    }
-    else if(parameters.eixo == 2){
-
-        if(parameters.var == 1 || parameters.var == 2 || parameters.var == 3 || parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 7 || parameters.var == 8 || parameters.var == 9 || parameters.var == 11 || parameters.var == 12 || parameters.var == 13 || parameters.var == 14 || parameters.var == 18 || parameters.var == 19){
-            dados.valor = dados.value[i];
-            setIntegerValueData(dados, eixo, vrv);
-        }
-        else if(parameters.var == 17){
-            dados.valor = dados.value[i];
-            setIntegerValueData(dados, eixo, vrv);
-        }
-        else if(parameters.var == 15 || parameters.var == 16){
-            dados.valor = dados.value[i];
-            if(parameters.uos == 0){
-                setIntegerValueData(dados);
-            } else if(parameters.uos == 1){
-                setPercentValueData({percentual: dados.value[i]});
-            }
-        }
-        else if(parameters.var == 10){
-            dados.valor = dados.value[i];
-            if(parameters.mec == 0){
-                setIntegerValueData(dados);
-            }
-            else if(parameters.mec == 1){
-                setPercentValueData({percentual: dados.value[i]});
-            }
-        }
-
-
-    }
-    else if(parameters.eixo == 3){
-        if(parameters.var == 5 || parameters.var == 8){
-            dados.valor = dados.value[i];
-
-            if(parameters.cad == 0){
-                setIntegerValueData(dados);
-            } else if(url['cad'] == 2){
-                setPercentValueData(dados);
-            }
-        }
-        else if(parameters.cad == 1 || parameters.var == 13){
-        }
-        else{
-            dados.valor = dados.value[i];
-
-            setIntegerValueData(dados);
-            setPercentValueData({percentual : dados.percentual[i]});
-
-        }
-
-    }
-
-}
-
-function configInfoDataBoxBarrasStackedClick(valor, soma) {
-    if(parameters.eixo == 1) {
-        if(valor == "NaN") {
-            valor = 0;
-        }
-        setIntegerValueData({valor: valor});
-        setPercentValueData({percentual: valor/soma});
-    }
-}
-
 /*  --- SETTERS --- */
 
 function setIntegerValueData(value) {
@@ -614,8 +399,6 @@ function setPercentValueData(valor) {
     if(valor == "NaN"){
         valor = 0;
     }
-
-    console.log(valor)
 
     var percentual = formatDecimalLimit(valor*100, 2) + "%";
 
@@ -696,15 +479,12 @@ function setPercentValueData(valor) {
 
 function setTerceiroValueData(value){
 
-    console.log("oi")
-
     if(parameters.eixo == 0){
 
         array_variaveis = [1, 4, 5, 6, 7, 8]
 
         if(array_variaveis.includes(parseInt(parameters.var)) && parameters.uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
 
-            console.log("aaa")
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
             $(".setor-value").first().css("display", "flex");
 
@@ -712,7 +492,6 @@ function setTerceiroValueData(value){
             setMaxFontSize(doc);
         }
         else{
-            console.log("po")
             $(".setor-value").first().css("display", "none");
         }
     }
@@ -781,6 +560,9 @@ function updateData(view, dados, valor, uos){
     }
     else if(view == "treemap_scc" ){
         configInfoDataBoxTreemapSCC(dados)
+    }
+    else if(view == "treemap_region" ){
+        configInfoDataBoxTreemapRegion(dados)
     }
     else if(view == "barras_stacked"){
         var soma = uos
