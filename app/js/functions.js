@@ -1578,11 +1578,11 @@ function getSubdegId(deg, subdeg) {
                     return "2";
                 case '30 - 49':
                     return "3";
-                case '30 - 49':
+                case '30 a 49':
                     return "3";
                 case '50 - 64':
                     return "4";
-                case '50 - 64':
+                case '50 a 64':
                     return "4";
                 case '65 ou mais':
                     return "5";
@@ -1597,15 +1597,27 @@ function getSubdegId(deg, subdeg) {
                     return "1";
                 case 'Fundamental incompleto':
                     return "2";
+                case 'Fundamental Incompleto':
+                    return "2";
                 case 'Fundamental completo':
+                    return "3";
+                case 'Fundamental Completo':
                     return "3";
                 case 'Médio completo':
                     return "4";
+                case 'Médio Completo':
+                    return "4";
                 case 'Superior incompleto':
+                    return "5";
+                case 'Superior Incompleto':
                     return "5";
                 case 'Superior completo':
                     return "6";
+                case 'Superior Completo':
+                    return "6";
                 case 'Não determinado':
+                    return "7";
+                case 'Não Determinado':
                     return "7";
             }
             break;

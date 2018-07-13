@@ -32,11 +32,7 @@ function configInfoDataBoxMapa(dados) {
     }
     else if(parameters.eixo == 2){
 
-        // if(parameters.var == 17 && parameters.uf > 0){
-        //     setIntegerValueData({valor: dados.valor});
-        //     return
-        // }
-        //
+
         if(parameters.cad == 0 && parameters.uf != 0 && parameters.var < 18){
             setPercentValueData(dados.percentual);
         }
@@ -60,7 +56,6 @@ function configInfoDataBoxTreemapRegion(dados) {
 function configInfoDataBoxTreemapSCC(dados) {
 
 
-
     if(parameters.eixo == 0){
 
         if(parameters.cad == 0){
@@ -78,7 +73,7 @@ function configInfoDataBoxTreemapSCC(dados) {
     }
     if(parameters.eixo == 1){
 
-        if((parameters.cad == 0) || parameters.ocp == 3){
+        if((parameters.cad == 0 && parameters.ocp == 0)|| parameters.ocp == 3){
 
             if(parameters.uf == 0){
                 setPercentValueData(1)
@@ -247,68 +242,6 @@ function configInfoDataBoxBarras(dados, valor, uos) {
             setIntegerValueData(valor)
 
         }
-        // if(parameters.var == 15 || parameters.var == 16){
-        //     if(uos == 0){
-        //         dados.valor = dados.value[index_ano]
-        //         setIntegerValueData(dados, eixo, vrv)
-        //     }else{
-        //         setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[index_ano]}, eixo, vrv)
-        //     }
-        //
-        // }
-        // else if(parameters.var == 17){
-        //
-        // }
-        // else if(parameters.var == 19 && parameters.mec == 1){
-        //
-        //     var soma = 0;
-        //
-        //     for(var key in dados.value){
-        //         if(key != "remove")
-        //             soma += dados.value[key];
-        //     }
-        //
-        //     dados.valor = dados.value[index_ano]
-        //
-        //     setIntegerValueData(dados, eixo, vrv)
-        //     setPercentValueData({valor: formatTextVrv(soma, eixo, vrv)}, eixo, vrv)
-        //
-        //
-        // }
-        // else if(parameters.var == 10){
-        //     if(url['mec'] == 0){
-        //         dados.valor = dados.value[index_ano]
-        //         setIntegerValueData(dados, eixo, vrv)
-        //     }else{
-        //         setPercentValueData({percentual: dados.value[index_ano], taxa: dados.taxa[index_ano]}, eixo, vrv)
-        //     }
-        // }
-        // else if(parameters.var == 6 || parameters.var == 7 || parameters.var == 8 || parameters.var == 9 || parameters.var == 13){
-        //
-        //     // VARIAVEIS QUE NAO  TEM TREEMAP!!!
-        //     dados.valor = dados.value[index_ano];
-        //
-        //     setIntegerValueData(dados, eixo, vrv);
-        //     setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]}, eixo, vrv);
-        //
-        // }
-        // else{
-        //     if(parameters.uf == 0){
-        //
-        //         dados.valor = dados.value[index_ano];
-        //
-        //         setIntegerValueData(dados);
-        //         if(parameters.cad == 0){
-        //             setPercentValueData({percentual: 1, taxa: dados.taxa[index_ano]});
-        //         }
-        //     }
-        //     else{
-        //         dados.valor = dados.value[index_ano];
-        //         dados.percentual = dados.percentual[index_ano];
-        //
-        //         setIntegerValueData(dados);
-        //     }
-        // }
 
 
 

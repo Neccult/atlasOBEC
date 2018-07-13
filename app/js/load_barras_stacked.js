@@ -351,6 +351,7 @@ function update_bars_stacked(barras_box, data){
 
     var groups = svg_barras.select("g").selectAll(".cost")
         .data(dataset)
+        .attr("subdeg", function(d) {return d.key})
         .style("fill", function (d, i) {
             return colors(i);
         })
@@ -360,6 +361,7 @@ function update_bars_stacked(barras_box, data){
     var newR = groups.enter()
                 .append("g")
                 .attr("class", "cost")
+                .attr("subdeg", function(d) {return d.key})
                 .style("fill", function (d, i) {
                     return colors(i);
                 })
@@ -390,8 +392,6 @@ function update_bars_stacked(barras_box, data){
     var selectedValue = parseFloat(getSelectedValueStacked(barras_box));
     var soma = getSomaStacked();
 
-    console.log(selectedValue)
-
     updateData('barras_stacked', dados, selectedValue, soma);
 
 
@@ -401,11 +401,12 @@ function getSelectedValueStacked(barras_box){
 
     var value;
 
+
     // console.log(getSubdegId(parameters.deg, $(this).attr("subdeg")) )
 
     d3.select(barras_box).selectAll(".cost").each(function() {
 
-        console.log(getSubdegId(parameters.deg, $(this).attr("subdeg")))
+        console.log($(this).attr("subdeg"))
 
         if(getSubdegId(parameters.deg, $(this).attr("subdeg")) == parameters.subdeg) {
 
@@ -426,6 +427,8 @@ function getSelectedValueStacked(barras_box){
 }
 
 function clickBarraStacked(d, i, obj, anos){
+
+    console.log("oi")
 
     var indexAno = anos.indexOf(d.data.year);
 
