@@ -45,7 +45,7 @@ function configInfoDataBoxMapa(dados) {
 
 function configInfoDataBoxTreemapRegion(dados) {
 
-    if(parameters.eixo == 0) {
+    if(parameters.eixo == 0 || parameters.eixo == 1) {
 
 
         setPercentValueData(dados)
