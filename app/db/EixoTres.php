@@ -436,16 +436,12 @@ class EixoTres {
             $params[] = $var;
             $params[] = $mec;
             $params[] = $ufs;
-            
-            if($uos == 0) {
-                $query .=  " AND Ano > 0" ;
-            } else {
-                $query .=  " AND Ano = 0" ;
-                $query .=  " AND idCadeia = ?";
-                $params[] = $cad;
-            }
 
-            
+            $query .=  " AND Ano > 0" ;
+            $query .=  " AND idCadeia = ?";
+            $params[] = $cad;
+
+
             $paramsStr = '';
             foreach ($params as $param) {
                 $paramsStr .= 's';
@@ -660,6 +656,8 @@ class EixoTres {
             }
             $allObjects = $result_aux;
         }
+
+
 
 		self::disconnect();
 		

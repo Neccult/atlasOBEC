@@ -262,7 +262,6 @@ function getNameSindical($id) {
     }
 }
 
-
 //Trata o sexo
 if($deg == 2){
     switch($subdeg) {
@@ -450,7 +449,6 @@ else if($eixo == 2) {
     require_once("EixoTres.php");
         foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
-            // $barras[$tupla->Ano] = $tupla->Valor;
             if ($var < 15) {
                 if($var == 10){
                     $id = $tupla->Ano;

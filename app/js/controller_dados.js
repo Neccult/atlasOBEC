@@ -310,8 +310,11 @@ function setPercentValueData(valor) {
         else if(parameters.var == 15 || parameters.var == 16){
             percentual = formatDecimalLimit(valor, 2);
         }
-        else if(parameters.var == 18 || parameters.var == 19){
+        else if(parameters.var == 18){
             percentual = "R$ " + formatDecimalLimit(valor, 2);
+        }
+        else if(parameters.var == 19){
+            percentual = formatDecimalLimit(valor, 2);
         }
         else if(parameters.var == 10){
             percentual = formatDecimalLimit(valor, 2)+'%';

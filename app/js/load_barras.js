@@ -412,8 +412,6 @@ function create_bars(barras_box, data){
 
 function update_bars(barras_box, data){
 
-    data_barra = data;
-
     var svg_barras = d3.select(barras_box+" svg");
 
     if(svg_barras.attr("type") == "stacked"){

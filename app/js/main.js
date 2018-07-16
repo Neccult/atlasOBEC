@@ -362,7 +362,9 @@ function loadResult(){
 
     $("#containerDownload button").css("background-color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][3])
     $(".number").css("color", colorJSON['eixo'][getEixo(eixoUrl)]['color'][4])
-    $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
+    if(windowWidth > 1199){
+        $(".rotulo-bread").css("background-color",colorJSON['eixo'][getEixo(eixoUrl)]['color'][5]);
+    }
 
     removeVar('mercado', 3);
 
@@ -397,7 +399,8 @@ function loadMobile(){
         $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
     });
 
-    $( ".bread-parent" ).remove();
+    // $( ".bread-parent" ).remove();
+
 
     $('#containerDesc').css("height", "auto");
     $('#containerDesc').css("top", "0");
@@ -455,10 +458,10 @@ function loadPage(){
     var menuView = 'menudesktop.php?'+eixoUrl+'=1';
 
     if(windowWidth<1199){
-        // menuView = 'menumobile.php?'+eixoUrl+'=1';
+        menuView = 'menumobile.php?'+eixoUrl+'=1';
         $('#section0').css("display", "none")
 
-        // loadMobile();
+        loadMobile();
     }
     else{
         $("#menuvariaveis").css("display", "none")
