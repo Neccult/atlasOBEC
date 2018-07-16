@@ -701,7 +701,6 @@ function updateLegendByDeg(deg){
 
             $("#title-view-leg-scc").html(html);
 
-            /// TODO TRANSFORMAR PRA UMA FUNÇÃO?
             var cads = getCadsByMenu();
 
             updateBreadcrumbSetores(cads);
@@ -1005,10 +1004,17 @@ function updateSelectsByUrl(){
             $(this).val(obj[$(this).attr("data-id")]);
             url[$(this).attr("data-id")] = $(this).val();
         }
-
-
     })
 
+
+}
+
+function updateSelectsByVar(){
+
+
+    if(parameters.eixo == 2 && parameters.var == 18){
+        array_cad = []
+    }
 
 }
 
@@ -1355,6 +1361,7 @@ $(document).ready(function(){
 
                     if(url['var'] == 18 || url['var'] == 19){
                         $("#btn-opt").find(".col-btn").css("display", "block")
+                        console.log(getCadsByMenuDonut())
                     }
                     else{
                         $("#btn-opt").find(".col-btn").css("display", "none")
@@ -1476,12 +1483,19 @@ $(document).ready(function(){
     updateSelectsByUrl();
 
 
+
     if(window.location.pathname.match("resultado")){
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
         updateOptView("init");
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
         updateMecanismo(url, url['var'])
+        updateSelectsByVar();
+
+        if(parameters.eixo == 2 && (parameters.var >= 18)){
+            updateBreadcrumbSetores(getCadsByMenuDonut());
+        }
+
 
     }
 

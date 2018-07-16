@@ -276,7 +276,7 @@ function create_mapa(mapa_box, mapa){
 
     // configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[parameters.uf]);
 
-    updateData('mapa', dict[parameters.uf]);
+    updateData('mapa', dict[parameters.uf], dict);
     data_mapa = mapa;
     
     
@@ -420,7 +420,8 @@ function update_mapa(mapa_box, mapa){
 
     // configInfoDataBoxMapa(parameters.eixo, parameters.var, dict[parameters.uf]);
 
-    updateData('mapa', dict[parameters.uf]);
+    updateData('mapa', dict[parameters.uf], dict);
+
 }
 
 function mapaClick(svg_mapa, dict, d){

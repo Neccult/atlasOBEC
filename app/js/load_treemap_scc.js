@@ -415,19 +415,34 @@ function create_treemap_scc(treemap_scc_box, data){
         }
 
     }
+
+
+
     //NÃO TEM RETÂNGULO COM DATA-LEGEND = 0, PENSAR COMO FAZER
     var data_value = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-value");
 
     var data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent");
+
+    var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
+    var data_deg =  $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
     if(parameters.eixo == 1 && parameters.ocp != 0){
         data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent")
         data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-deg");
     }
-    var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
-    var data_deg =  $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
+    if(parameters.cad == 0){
+        var total = 0;
+
+        $(treemap_scc_box).find('svg').find('rect').each(function(){
+            total += parseFloat($(this).attr("data-value"));
+        })
+
+        data_value = total;
+    }
+
+    console.log(data_value)
 
     var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf, deg: data_deg};
-    console.log($(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg"))
+
     updateData('treemap_scc', dados);
 
 

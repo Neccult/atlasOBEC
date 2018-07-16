@@ -16,9 +16,6 @@ function create_bars(barras_box, data){
     var ocp = 0
     var uos = views_parameters[barras_box].uos;
 
-    console.log(views_parameters[barras_box])
-
-
     var corEixo = COLORS['eixo'][eixo].color;
 
     var color = function (colorId) {

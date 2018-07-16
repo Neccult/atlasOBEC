@@ -193,12 +193,22 @@ function updateSelectAnos(){
         })
         if(parameters.eixo == 1){
             dummy = anos_default[parameters.var][parameters.slc]
-        } else if(parameters.eixo == 3){
+        }
+        if(parameters.eixo == 2) {
+            if(parameters.var >= 18){
+
+                zeroIndex = anos_default[parameters.var].indexOf(0);
+                if(zeroIndex != -1){
+                    anos_default[parameters.var].splice(zeroIndex, 1);
+                }
+            }
+            dummy = anos_default[parameters.var]
+        }else if(parameters.eixo == 3){
             dummy = anos_default[parameters.var][parameters.slc == 0 ? 1 : 0]
         } else {
             dummy = anos_default[parameters.var];
         }
-        
+
         dummy.reverse().forEach(function(d){
             $(selectOp).append($('<option>', {
                 value: d,
