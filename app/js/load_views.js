@@ -265,6 +265,7 @@ function virtualParameters(){
                 views_parameters["#view_box_barras"].uos = '0'
                 views_parameters["#view_box_scc"].uos = '0'
             }
+
             if(parameters.var != 1){
                 $(".content-btn-mapa").css("display", "none");
             } else {
@@ -319,7 +320,6 @@ function loadViews(){
 
 
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-
         VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
     })
 
@@ -331,8 +331,12 @@ function loadViews(){
         VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
     })
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(dado){
-        // console/.log(dado)
+    $.get("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(dado){
+        console.log(dado)
+    })
+
+    $.get("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(dado){
+        console.log(dado)
     })
 
 

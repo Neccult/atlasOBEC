@@ -736,8 +736,6 @@ function update_bars(barras_box, data){
         })
         .attr("data-color", function(d, i, obj) {
             if((parameters.eixo == 1 && parameters.var == 6 && uos == 1)){
-
-
                 if(parameters.ocp != 0){
                     if(parameters.deg == 0){
                         return COLORS.ocupacoes[i+1].color;

@@ -326,6 +326,124 @@ if($eixo == 0) {
 
     }
 }
+else if($eixo == 1 && $var > 11) {
+    require_once("EixoDois.php");
+
+    foreach (EixoDois::getter_barras($var, $uf, $cad, $uos, $uos, $slc, $deg, $subdeg, $ano) as $tupla) {
+        // $barras[$tupla->Ano] = $tupla->Valor;
+
+
+        if($deg == 0 || $var == 4 || $var == 5 || $var == 6) {
+            if($var == 6 && $uos == 1 && $deg == 0 && $ocp == 0){
+                $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
+                
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else if($var == 6 && $uos == 1 && $deg == 0 && $ocp != 0){
+                $id = getNameOCP($tupla->idOcupacao);
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else if($var == 6 && $uos == 1 && $deg != 0){
+                $id = getNameDesag($deg, $tupla);
+                $barras[$id]['uf'] = getNameUF($tupla->idUF);
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+            else{
+
+                $id = $tupla->Ano;
+                $barras[$id]['ano'] = (int) $tupla->Ano;
+                $barras[$id]['valor'] = (double) $tupla->Valor;
+                $barras[$id]['percentual'] = (double) $tupla->Percentual;
+                $barras[$id]['taxa'] = (double) $tupla->Taxa;
+            }
+
+
+
+        }
+        else if($ocp == 3 && $deg != 0) {
+
+            $id = $tupla->Ano;
+            if($slc == 1) {
+                if($id == 2011) {
+                    $id = 2010;
+                }
+                if($id == 2012) {
+                    $id = 2011;
+                }
+                if($id == 2013) {
+                    $id = 2012;
+                }
+                if($id == 2014) {
+                    $id = 2013;
+                }
+                if($id == 2015) {
+                    $id = 2014;
+                }
+            }
+
+            $nomeDesag = getNameDesag($deg, $tupla);
+
+            $barras[intval($id-2007)]['year'] = (string)$tupla->Ano;
+            if(!isset($barras[intval($id-2007)][$nomeDesag]))
+                $barras[intval($id-2007)][$nomeDesag] = 0;
+
+            $barras[intval($id-2007)][$nomeDesag] += (double)$tupla->Valor;
+        }
+        else{
+
+            $id = $tupla->Ano;
+            if($slc == 1) {
+                if($id == 2011) {
+                    $id = 2010;
+                }
+                if($id == 2012) {
+                    $id = 2011;
+                }
+                if($id == 2013) {
+                    $id = 2012;
+                }
+                if($id == 2014) {
+                    $id = 2013;
+                }
+                if($id == 2015) {
+                    $id = 2014;
+                }
+            }
+
+            if($cad == 0 && $ocp == 0){
+                $nomeDesag = getNameDesag($deg, $tupla);
+
+                $barras[intval($id-2007)]['year'] = (string)$tupla->Ano;
+                if(!isset($barras[intval($id-2007)][$nomeDesag])) {
+                    $barras[intval($id - 2007)][$nomeDesag] = 0;
+                }
+                else{
+                    $barras[intval($id-2007)][$nomeDesag] += (double)$tupla->Valor;
+                }
+            }
+            else{
+                $nomeDesag = getNameDesag($deg, $tupla);
+
+                $barras[intval($id-2007)]['year'] = (string)$tupla->Ano;
+                $barras[intval($id - 2007)][$nomeDesag] = 0;
+                $barras[intval($id-2007)][$nomeDesag] = (double)$tupla->Valor;
+            }
+
+
+        }
+    }
+}
 else if($eixo == 1) {
     require_once("EixoDois.php");
 
@@ -334,10 +452,9 @@ else if($eixo == 1) {
 
 
         if($deg == 0 || $var == 4 || $var == 5 || $var == 6) {
-
             if($var == 6 && $uos == 1 && $deg == 0 && $ocp == 0){
                 $id = sigla_cadeia(getNameCadeia($tupla->idCadeia));
-                
+
                 $barras[$id]['uf'] = getNameUF($tupla->idUF);
                 $barras[$id]['ano'] = (int) $tupla->Ano;
                 $barras[$id]['valor'] = (double) $tupla->Valor;
