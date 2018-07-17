@@ -105,64 +105,68 @@ VIEWS = {
 }
 
 brasil_setor = []
+total_deg    = []
 
 $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-    brasil_setor = JSON.parse(dado)
+    brasil_setor = JSON.parse(dado);
 })
 
+$.get('./db/total_desag.php?'+URL_PARAM, function(dado){
+    total_deg = JSON.parse(dado);
+})
 
-//NÃO VÊ EM FUNÇÃO DA OCUPAÇÃO OU BENS
-$.ajaxSetup({async: false});
-$.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1)), function(data) {
-    anos_default = JSON.parse(data);
-
-    updateSelectAnos();
-});
-$.ajaxSetup({async: true});
+var url_anos_default = "./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1));
 
 virtualParameters();
 
-$.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descricoes.json')).done(function(pt_br_JSON, colors_JSON, descricoes){
-    PT_BR = pt_br_JSON[0];
-    COLORS = colors_JSON[0];
-    DESCRICOES = descricoes[0];
-    
-    updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
-    data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
+$.when($.get('data/pt-br.json'), 
+       $.get('data/colors.json'), 
+       $.get('data/descricoes.json'), 
+       $.get(url_anos_default))
+    .done(function(pt_br_JSON, colors_JSON, descricoes, data_anos){
+        PT_BR = pt_br_JSON[0];
+        COLORS = colors_JSON[0];
+        DESCRICOES = descricoes[0];
+        anos_default = JSON.parse(data_anos[0]);
+        
+        updateSelectAnos(); 
 
-    var view_box1 = data_var.views.view_box1[index_view_box1].id
-    var view_box2 = data_var.views.view_box2[0].id
-    var view_box3 = data_var.views.view_box3[0].id
+        updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
+        data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
+
+        var view_box1 = data_var.views.view_box1[index_view_box1].id
+        var view_box2 = data_var.views.view_box2[0].id
+        var view_box3 = data_var.views.view_box3[0].id
 
 
-    initTitleBox(index_view_box1, 0, 0);
-    updateTitleBox();
+        initTitleBox(index_view_box1, 0, 0);
+        updateTitleBox();
 
-    if(parameters.eixo == 3){
-        if(view_box1 == "mapa-mundi"){
-            view_box1 = "mapa";
+        if(parameters.eixo == 3){
+            if(view_box1 == "mapa-mundi"){
+                view_box1 = "mapa";
+            }
         }
-    }
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(dado){
-        // console.log(dado)
+        $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(dado){
+            // console.log(dado)
+        })
+
+        d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
+            VIEWS[view_box1].call(this, "#view_box", json);
+        })
+        
+        d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
+            VIEWS[view_box2].call(this, "#view_box_barras", json);
+        });
+
+        d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
+            VIEWS[view_box3].call(this, "#view_box_scc", json);
+        });
+
+
+
     })
-
-    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-        VIEWS[view_box1].call(this, "#view_box", json);
-    })
-    
-    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-        VIEWS[view_box2].call(this, "#view_box_barras", json);
-    });
-
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
-        VIEWS[view_box3].call(this, "#view_box_scc", json);
-    });
-
-
-
-})
 
 function updateParameters(){
 
@@ -187,6 +191,9 @@ function updateParameters(){
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
     URL_PARAM = $.param(parameters);
+
+    
+   
 
 }
 
@@ -291,6 +298,14 @@ function virtualParameters(){
 }
 
 function loadViews(){
+    if(parameters.eixo == 0 && parameters.cad == 0 && parameters.uf != 0 && parameters.deg != 0){
+        $.ajaxSetup({async: false});
+        $.get('./db/total_desag.php?'+URL_PARAM, function(dado){
+            total_deg = JSON.parse(dado);
+        })
+        $.ajaxSetup({async: true});
+    }
+    
 
     virtualParameters();
 
@@ -317,19 +332,23 @@ function loadViews(){
             view_box1 = "mapa";
         }
     }
+    
+    $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+        brasil_setor = JSON.parse(dado);
+    
+        d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
+            VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
+        })
 
+        d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
+            VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
+        })
 
-    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-        VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
+        d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
+            VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
+        })
     })
-
-    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-        VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
-    })
-
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
-        VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
-    })
+    
 
 }
 

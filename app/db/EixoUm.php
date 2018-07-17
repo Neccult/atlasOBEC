@@ -144,7 +144,36 @@ class EixoUm {
 		self::disconnect();
 		
 		return $allObjects;
-	}
+    }
+    
+    public static function getTotalSumPrt($var, $uf){
+        self::connect();
+        $params = [];
+        
+        $query = "SELECT Valor, Ano FROM `Eixo_1` WHERE Numero = ? and idUF = ? and idPorte = 0 and idCadeia = 0";
+
+        $params[] = $var;
+        $params[] = $uf;
+
+        $paramsStr = '';
+        foreach ($params as $param) {
+            $paramsStr .= 's';
+        }
+        $allObjects = [];
+
+        $stmt = mysqli_stmt_init(self::$conn);
+        if (mysqli_stmt_prepare($stmt, $query)) {
+
+            $stmt->bind_param($paramsStr, ...$params);
+            $stmt->execute();
+            $allObjects = self::fetch_results($stmt);
+        }
+        
+		self::disconnect();
+		
+		return $allObjects;
+
+    }
     
 	public static function getAnoDefault($var){
 		self::connect();
