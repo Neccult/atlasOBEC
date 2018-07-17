@@ -144,13 +144,13 @@ $.when($.get('data/pt-br.json'), $.get('data/colors.json'), $.get('data/descrico
         }
     }
 
-    $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(dado){
+    $.get("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(dado){
         // console.log(dado)
-    })
+    });
 
     d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
         VIEWS[view_box1].call(this, "#view_box", json);
-    })
+    });
     
     d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
         VIEWS[view_box2].call(this, "#view_box_barras", json);
@@ -319,17 +319,28 @@ function loadViews(){
     }
 
 
-    d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-        VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
+
+    $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+        brasil_setor = JSON.parse(dado)
+
+        d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
+            VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
+        })
+
+        d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
+            VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
+        })
+
+        d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
+            VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
+        })
+
     })
 
-    d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-        VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
-    })
 
-    d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
-        VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
-    })
+
+
+
 
 }
 

@@ -400,13 +400,8 @@ function update_bars_stacked(barras_box, data){
 function getSelectedValueStacked(barras_box){
 
     var value;
-
-
     // console.log(getSubdegId(parameters.deg, $(this).attr("subdeg")) )
-
     d3.select(barras_box).selectAll(".cost").each(function() {
-
-        console.log($(this).attr("subdeg"))
 
         if(getSubdegId(parameters.deg, $(this).attr("subdeg")) == parameters.subdeg) {
 
@@ -418,7 +413,6 @@ function getSelectedValueStacked(barras_box){
 
             });
         }
-
     });
 
 
@@ -427,8 +421,6 @@ function getSelectedValueStacked(barras_box){
 }
 
 function clickBarraStacked(d, i, obj, anos){
-
-    console.log("oi")
 
     var indexAno = anos.indexOf(d.data.year);
 
@@ -506,13 +498,13 @@ function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance, name) {
             if (url['ocp'] == 0) {
                 tooltipInstance.showTooltip(d, [
                     ["title", name],
-                    ["", formatTextVrv(d.y * 100, eixo, vrv)]
+                    ["", formatTextVrv(Math.abs(d[1] - d[0]) * 10000, eixo, vrv)]
                 ]);
             }
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", name],
-                    ["", formatTextVrv(d.y * 100, eixo, vrv)]
+                    ["", formatTextVrv(Math.abs(d[1] - d[0]) * 100, eixo, vrv)]
                 ]);
             }
         }
