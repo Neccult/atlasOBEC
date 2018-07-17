@@ -26,6 +26,7 @@ function create_bars(barras_box, data){
                     return corEixo[1]
                 }
                 else{
+
                     return COLORS.cadeias[colorId].color;
                 }
             }
@@ -265,14 +266,38 @@ function create_bars(barras_box, data){
             .enter().append("rect")
             .attr("class", "bar")
             .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
-            .attr("data-color", function(d, i, obj) { 
-                if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                    if(deg == 0)
-                        return color(dados.key[i])
-                    else
-                        return color(cad)
+            .attr("data-color", function(d, i, obj) {
+                if((parameters.eixo == 1 && parameters.var == 6 && uos == 1)){
+
+
+                    if(parameters.ocp != 0){
+                        if(parameters.deg == 0){
+                            return COLORS.ocupacoes[i+1].color;
+                        }
+                        else{
+                            return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+                        }
+                    }
+                    else{
+
+                        if(parameters.deg == 0){
+                            return color(dados.key[i])
+                        }
+                        else{
+                            return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+                        }
+                    }
+
                 }
-                else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+                else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
+                    if(parameters.deg == 0){
+                        return color(dados.key[i])
+                    }
+                    else{
+                        return color(cad)
+                    }
+                }
+                else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                     return color(0);
                 }
                 else {
@@ -709,14 +734,38 @@ function update_bars(barras_box, data){
 
             return  Math.abs(y(d) - zeroPosition);
         })
-        .attr("data-color", function(d, i, obj) { 
-            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                if(deg == 0)
-                    return color(dados.key[i])
-                else
-                    return color(cad)
+        .attr("data-color", function(d, i, obj) {
+            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1)){
+
+
+                if(parameters.ocp != 0){
+                    if(parameters.deg == 0){
+                        return COLORS.ocupacoes[i+1].color;
+                    }
+                    else{
+                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+                    }
+                }
+                else{
+
+                    if(parameters.deg == 0){
+                        return color(dados.key[i])
+                    }
+                    else{
+                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+                    }
+                }
+
             }
-            else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+            else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
+                if(parameters.deg == 0){
+                    return color(dados.key[i])
+                }
+                else{
+                    return color(cad)
+                }
+            }
+            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                 return color(0);
             }
             else {

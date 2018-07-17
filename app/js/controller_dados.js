@@ -16,6 +16,9 @@ function configInfoDataBoxMapa(dados, dict) {
             }
             setTerceiroValueData(dados.valor/total)
         }
+        else{
+            $(".setor-value").css("display", "none")
+        }
 
 
 
@@ -346,7 +349,9 @@ function setPercentValueData(valor) {
 
 function setTerceiroValueData(value){
 
+
     if(parameters.eixo == 0){
+
 
         array_variaveis = [1, 4, 5, 6, 7, 8]
 
@@ -358,6 +363,7 @@ function setTerceiroValueData(value){
             setMaxFontSize(doc);
         }
         else{
+
             $(".setor-value").first().css("display", "none");
         }
     }

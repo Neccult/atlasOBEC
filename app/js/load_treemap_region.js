@@ -448,6 +448,7 @@ function loadTooltip(d, tooltipInstance){
     var title = title_content.replace("<span>", "");
     title = title.replace("<br>", "");
     title = title.replace("</span>", "");
+
     if(parameters.var === 2) {
         integerValue = d.data.size;
         tooltipInstance.showTooltip(d, [
@@ -480,7 +481,7 @@ function loadTooltip(d, tooltipInstance){
         tooltipInstance.showTooltip(d, [
             ["title", d.data.name],
             ["", formatTextVrv(d.data.size, parameters.eixo, parameters.var)],
-            ["", formatDecimalLimit(d.data.size/brasil_setor[parameters.ano]*100, 2) + "%"]
+            // ["", formatDecimalLimit(d.data.size/brasil_setor[parameters.ano]*100, 2) + "%"]
         ]);
     }
     else{

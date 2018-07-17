@@ -495,11 +495,6 @@ function enableDesag(eixo, vrv, setor, iframe, slc, url){
         updateModalidade(url, vrv);
         updatePfj(url, vrv);
 
-	    /*switch(parseInt(vrv)){
-            case 2: removeMecenatoDesags(iframe, vrv); break;
-            case 15: removePorts(iframe); appendMecenatoDesags(iframe); break;
-            default: removeMecenatoDesags(iframe); break;
-        }*/
     }
 
 }

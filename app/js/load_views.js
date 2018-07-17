@@ -200,7 +200,7 @@ function updateSelectAnos(){
         if(parameters.eixo == 1){
             dummy = anos_default[parameters.var][parameters.slc]
         }
-        if(parameters.eixo == 2) {
+        else if(parameters.eixo == 2) {
             if(parameters.var >= 18){
 
                 zeroIndex = anos_default[parameters.var].indexOf(0);
@@ -209,9 +209,11 @@ function updateSelectAnos(){
                 }
             }
             dummy = anos_default[parameters.var]
-        }else if(parameters.eixo == 3){
+        }
+        else if(parameters.eixo == 3){
             dummy = anos_default[parameters.var][parameters.slc == 0 ? 1 : 0]
-        } else {
+        }
+        else {
             dummy = anos_default[parameters.var];
         }
 

@@ -1021,6 +1021,190 @@ function updateSelectsByVar(){
 
 }
 
+function updateOptView(container, btn){
+
+
+
+    if(container == "init"){
+
+
+
+        $(".btn-mapa button.opt.view").each(function(){
+
+
+            if(parameters.chg){
+                if($(this).attr("id") == "mapa"){
+
+                    $(this).css("opacity", "1")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[1]);
+                    else
+                        $(this).css("background-color", corEixo[2]);
+
+                }
+                else{
+                    $(this).css("opacity", "0.8")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[2]);
+                    else
+                        $(this).css("background-color", corEixo[1]);
+                }
+            }
+            else{
+                if($(this).attr("id") == "treemap_region"){
+                    $(this).css("opacity", "1")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[1]);
+                    else
+                        $(this).css("background-color", corEixo[2]);
+                }
+                else{
+                    $(this).css("opacity", "0.8")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[1]);
+                    else
+                        $(this).css("background-color", corEixo[2]);
+                }
+            };
+
+        });
+
+        $(".btn-opt button.opt.view").each(function(){
+
+            if(parameters.eixo == 2){
+                if(url['var'] == 18 || url['var'] == 19){
+                    $(this).css("display","block")
+
+                }
+                else{
+                    $(this).css("display","none")
+
+                }
+            }
+
+            if(parameters.eixo == 1){
+                if(parameters.ocp != '0'){
+
+                    switchToOcupations();
+                    $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
+
+                    if($(this).attr("id") == "setor"){
+                        $(this).css("opacity", "0.8")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[2]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                }
+                else{
+
+                    switchToSetores();
+                    $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
+
+                    if($(this).attr("id") == "ocupacao"){
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+                    }
+                    else {
+                        $(this).css("opacity", "1")
+                        if (parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                }
+            }
+            else if(parameters.eixo == 2){
+
+                if(parameters.mec == 0){
+                    if($(this).attr("id") == "recebedora"){
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[1]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                }
+                else{
+                    if($(this).attr("id") == "recebedora"){
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[1]);
+                    }
+                }
+
+            }
+
+
+        });
+    }
+    else{
+
+        if(container == "content-btn-mapa "){
+            $(".btn-mapa button.opt.view").each(function(){
+                if($(btn).attr("id") == $(this).attr("id")){
+                    $(this).css("opacity", "1");
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[1]);
+                    else
+                        $(this).css("background-color", corEixo[2]);
+                }
+                else{
+                    $(this).css("opacity", "0.8")
+                    if(parameters.eixo == 0)
+                        $(this).css("background-color", corEixo[2]);
+                    else
+                        $(this).css("background-color", corEixo[1]);
+
+                }
+            });
+        }
+        else{
+            if(container == "btn-opt"){
+                $("#btn-opt button.opt.view").each(function(){
+                    if($(btn).attr("id") == $(this).attr("id")){
+                        $(this).css("opacity", "1");
+                        if(parameters.eixo == 0 || parameters.eixo == 2)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        if(parameters.eixo == 0 || parameters.eixo == 2)
+                            $(this).css("background-color", corEixo[2]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+
+                    }
+                });
+            }
+        }
+
+
+    }
+
+
+
+
+
+}
+
+
 /*======
 	documento pronto
 ======*/
@@ -1364,7 +1548,6 @@ $(document).ready(function(){
 
                     if(url['var'] == 18 || url['var'] == 19){
                         $("#btn-opt").find(".col-btn").css("display", "block")
-                        console.log(getCadsByMenuDonut())
                     }
                     else{
                         $("#btn-opt").find(".col-btn").css("display", "none")
@@ -1413,8 +1596,9 @@ $(document).ready(function(){
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
 
 
-                    if(url['var'] == 4 || url['var'] == 5)
-                        updateLegendByDeg(url['deg'])
+                    if(url['var'] == 4 || url['var'] == 5 || url['var'] == 6){
+                        updateLegendByDeg(deg_value)
+                    }
 
                     updateWindowUrl('deg', deg_value);
                     updateWindowUrl('subdeg', $(this).val());
@@ -1499,190 +1683,17 @@ $(document).ready(function(){
             updateBreadcrumbSetores(getCadsByMenuDonut());
         }
 
+        if(url['ocp'] > 0){
+            enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
+        }
+        else{
+            enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 0, url);
+        }
+        updateLegendByDeg(parameters.deg)
+
+
 
     }
 
 });
 
-function updateOptView(container, btn){
-
-
-
-    if(container == "init"){
-
-
-
-        $(".btn-mapa button.opt.view").each(function(){
-
-
-            if(parameters.chg){
-                if($(this).attr("id") == "mapa"){
-
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
-
-                }
-                else{
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[2]);
-                    else
-                        $(this).css("background-color", corEixo[1]);
-                }
-            }
-            else{
-                if($(this).attr("id") == "treemap_region"){
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
-                }
-                else{
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
-                }
-            };
-
-        });
-
-        $(".btn-opt button.opt.view").each(function(){
-
-            if(parameters.eixo == 2){
-                if(url['var'] == 18 || url['var'] == 19){
-                    $(this).css("display","block")
-
-                }
-                else{
-                    $(this).css("display","none")
-
-                }
-            }
-
-            if(parameters.eixo == 1){
-                if(parameters.ocp != '0'){
-
-                    switchToOcupations();
-                    $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
-
-                    if($(this).attr("id") == "setor"){
-                        $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
-                    }
-                    else{
-                        $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[2]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
-                    }
-                }
-                else{
-
-                    switchToSetores();
-                    $(window.document).find(".bread-select[data-id=cad]").parent().find("span").text("Setor")
-
-                    if($(this).attr("id") == "ocupacao"){
-                        $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
-                    }
-                    else {
-                        $(this).css("opacity", "1")
-                        if (parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
-                    }
-                }
-            }
-            else if(parameters.eixo == 2){
-
-                if(parameters.mec == 0){
-                    if($(this).attr("id") == "recebedora"){
-                        $(this).css("opacity", "1")
-                        $(this).css("background-color", corEixo[1]);
-                    }
-                    else{
-                        $(this).css("opacity", "0.8")
-                        $(this).css("background-color", corEixo[2]);
-                    }
-                }
-                else{
-                    if($(this).attr("id") == "recebedora"){
-                        $(this).css("opacity", "0.8")
-                        $(this).css("background-color", corEixo[2]);
-                    }
-                    else{
-                        $(this).css("opacity", "1")
-                        $(this).css("background-color", corEixo[1]);
-                    }
-                }
-
-            }
-
-
-        });
-    }
-    else{
-
-        if(container == "content-btn-mapa "){
-            $(".btn-mapa button.opt.view").each(function(){
-                if($(btn).attr("id") == $(this).attr("id")){
-                    $(this).css("opacity", "1");
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
-                }
-                else{
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[2]);
-                    else
-                        $(this).css("background-color", corEixo[1]);
-
-                }
-            });
-        }
-        else{
-            if(container == "btn-opt"){
-                $("#btn-opt button.opt.view").each(function(){
-                    if($(btn).attr("id") == $(this).attr("id")){
-                        $(this).css("opacity", "1");
-                        if(parameters.eixo == 0 || parameters.eixo == 2)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
-                    }
-                    else{
-                        $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0 || parameters.eixo == 2)
-                            $(this).css("background-color", corEixo[2]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
-
-                    }
-                });
-            }
-        }
-
-
-    }
-
-
-
-
-
-}
