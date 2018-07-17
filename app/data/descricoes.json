@@ -42,11 +42,11 @@
 					{"": "DO TOTAL DE EMPRESAS DO BRASIL"},
 					{"u": "DO TOTAL DE EMPRESAS [uf]"},
 					{"s": "DO TOTAL DE EMPRESAS DO BRASIL"},
-					{"d": "DO TOTAL DE EMPRESAS [deg] DO BRASIL"},
+					{"d": "DO TOTAL DE EMPRESAS DO BRASIL"},
 					{"us": "DO TOTAL DE EMPRESAS [uf]"},
-					{"ud": "DO TOTAL DE EMPRESAS [deg] [uf]"},
-					{"sd": "DO TOTAL DE EMPRESAS [deg] DO BRASIL"},
-					{"usd": "DO TOTAL DE EMPRESAS [deg] [uf]"}
+					{"ud": "DO TOTAL DE EMPRESAS [uf]"},
+					{"sd": "DO TOTAL DE EMPRESAS DO BRASIL"},
+					{"usd": "DO TOTAL DE EMPRESAS [uf]"}
 				]
 			},
 			{
