@@ -34,7 +34,9 @@ function configInfoDataBoxMapa(dados, dict) {
             total += dict[i].valor;
         }
 
-        setTerceiroValueData(dados.valor/total);
+        if(parameters.deg == 0 && (parameters.cad == 0 && parameters.uf != 0 && parameters.deg == 0 && (parameters.ocp == 0 || parameters.ocp == 3))){
+            setTerceiroValueData(dados.valor/total);
+        }
 
 
     }
@@ -93,6 +95,10 @@ function configInfoDataBoxTreemapSCC(dados) {
 
             else if(parameters.deg == 0 && parameters.cad != 0){
                 setPercentValueData(dados.percent)
+            }
+
+            if(parameters.deg != 0 && parameters.cad != 0){
+                setTerceiroValueData(dados.percent_uf)
             }
         }
 
@@ -254,7 +260,7 @@ function setIntegerValueData(value) {
     var literal = formatDecimalLimit(valor, 2);
 
     if(parameters.eixo == 1 && parameters.var == 2){
-        literal = formatDecimalLimit(valor, 4);
+        literal = formatDecimalLimit(valor*100, 4);
     }
     else if(parameters.eixo == 1 && parameters.var == 9){
         literal = formatDecimalLimit(valor, 4);

@@ -377,6 +377,8 @@ class EixoDois {
                             ." AND idUF = 0"
                             ." GROUP BY Ano";
 
+//            echo $query;
+
             
             $stmt4 = mysqli_stmt_init(self::$conn);
             if (mysqli_stmt_prepare($stmt4, $query_max_ocp2)) {

@@ -80,6 +80,7 @@ function create_treemap_scc(treemap_scc_box, data){
         title = title.replace("<br>", "");
         title = title.replace("</span>", "");
 
+
         loadTooltipSCC(d, eixo , vrv);
     })
         .on("mouseout", tooltipInstance.hideTooltip)
@@ -272,8 +273,8 @@ function create_treemap_scc(treemap_scc_box, data){
 
     function loadTooltipSCC(d, eixo, vrv){
 
-        if(eixo === 0) {
-            if(vrv === 2 || vrv === 9){
+        if(eixo == 0) {
+            if(vrv == 2 || vrv == 9){
                 if (url['uf'] != 0) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d.data.name],
@@ -291,7 +292,6 @@ function create_treemap_scc(treemap_scc_box, data){
                     ]);
                 }
             }
-
             else{
                 if (url['uf'] != 0) {
 
@@ -313,19 +313,22 @@ function create_treemap_scc(treemap_scc_box, data){
             }
         }
 
-        else if(eixo === 1) {
+        else if(eixo == 1) {
 
 
-            if(vrv === 2){
+
+            if(vrv == 2){
+                console.log("oi")
+
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size*100, eixo, vrv)],
+                    ["", formatTextVrv(d.data.size*10000, eixo, vrv)],
                     ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
 
                 ]);
             }
             else if(uf == 0){
-                if(deg !== 0) {
+                if(deg != 0) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d.data.name],
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -343,7 +346,7 @@ function create_treemap_scc(treemap_scc_box, data){
                 }
             }
             else{
-                if(deg !== 0) {
+                if(deg != 0) {
                     tooltipInstance.showTooltip(d, [
                         ["title", d.data.name],
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -365,7 +368,7 @@ function create_treemap_scc(treemap_scc_box, data){
         }
 
 
-        else if(eixo === 2){
+        else if(eixo == 2){
             if(url['uf'] == 0 || url['var'] == 3){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
@@ -386,8 +389,8 @@ function create_treemap_scc(treemap_scc_box, data){
 
         }
 
-        else if(eixo === 3){
-            if (url['uf'] != 0 && (vrv === 1 || vrv === 2)){
+        else if(eixo == 3){
+            if (url['uf'] != 0 && (vrv == 1 || vrv == 2)){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -396,7 +399,7 @@ function create_treemap_scc(treemap_scc_box, data){
 
                 ]);
             }
-            else if (url['uf'] == 0 && (vrv === 1 || vrv === 2)){
+            else if (url['uf'] == 0 && (vrv == 1 || vrv == 2)){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -404,7 +407,7 @@ function create_treemap_scc(treemap_scc_box, data){
 
                 ]);
             }
-            else if(vrv === 99 && url['uf'] == 0){
+            else if(vrv == 99 && url['uf'] == 0){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -826,6 +829,15 @@ function update_treemap_scc(treemap_scc_box, data){
         var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
         var data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
 
+        if(parameters.eixo == 1 && parameters.deg != 0){
+            $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').each(function(){
+                if($(this).attr("id").match(getSubdegName(parameters.deg, parameters.subdeg))){
+                    data_percent_uf = $(this).attr("data-percent-uf");
+                }
+            });
+        }
+
+
         if(parameters.eixo == 1 &&parameters.ocp != 0){
             data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent")
             data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-deg");
@@ -908,8 +920,10 @@ function formatValor(valor) {
 
 function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
+    console.log("Oioiaiojioj")
 
-    if(eixo === 0) {
+
+    if(eixo == 0) {
         if(vrv === 2 || vrv === 9){
             if (url['uf'] != 0) {
                 tooltipInstance.showTooltip(d, [
@@ -949,11 +963,10 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
             }
         }
     }
+    else if(eixo == 1) {
 
-    else if(eixo === 1) {
 
-
-        if(vrv === 2){
+        if(vrv == 2){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
                 ["", formatTextVrv(d.data.size*100, eixo, vrv)],
@@ -962,7 +975,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
             ]);
         }
         else if(uf == 0){
-            if(parameters.deg !== 0) {
+            if(parameters.deg != 0) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -980,7 +993,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
             }
         }
         else{
-            if(parameters.deg !== 0) {
+            if(parameters.deg != 0) {
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -1002,7 +1015,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
     }
 
 
-    else if(eixo === 2){
+    else if(eixo == 2){
         if(url['uf'] == 0 || url['var'] == 3){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
@@ -1023,8 +1036,8 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
     }
 
-    else if(eixo === 3){
-        if (url['uf'] != 0 && (vrv === 1 || vrv === 2)){
+    else if(eixo == 3){
+        if (url['uf'] != 0 && (vrv == 1 || vrv == 2)){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
                 ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -1033,7 +1046,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
             ]);
         }
-        else if (url['uf'] == 0 && (vrv === 1 || vrv === 2)){
+        else if (url['uf'] == 0 && (vrv == 1 || vrv == 2)){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
                 ["", formatTextVrv(d.data.size, eixo, vrv)],
@@ -1041,7 +1054,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
             ]);
         }
-        else if(vrv === 99 && url['uf'] == 0){
+        else if(vrv == 99 && url['uf'] == 0){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
                 ["", formatTextVrv(d.data.size, eixo, vrv)],
