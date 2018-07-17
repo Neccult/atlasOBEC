@@ -115,14 +115,21 @@ function update_donut(donut_box, data){
                 .value(function(d) { return d.valor; })(data)
 
     var svg = d3.select(donut_box).select("svg g");
-
-    donut.data(pie)
     
-    donut.enter()
-         .append("g")
-         .attr("class", "arc");
+    var teste = donut.data(pie)
+    
 
-    donut.exit().remove()
+    teste.exit().remove()
+
+    teste.enter()
+                .append("g")
+                .attr("class", "arc")
+                .append(function(){
+                    alert("oi")
+                return "path";
+                    });
+
+    
 
     donut.select("path")
      .transition()
@@ -131,6 +138,8 @@ function update_donut(donut_box, data){
      .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
      .style("fill", function(d) { return color_donut(d.data.tipo); })
      .style("stroke", "none");
+    
+    donut = g
 
     d3.selectAll(".arc")
         .on("mouseover", function(d){
