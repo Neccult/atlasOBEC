@@ -543,7 +543,28 @@ function changeDescVar() {
     var eixoUrl = getEixo(window.location.hash.substring(1))
     var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
-    $(".desc-var").html(variavel.desc_var_mapa);
+
+    if(url['var'] == 19){
+        if(url['mec'] == 0){
+            $(".desc-var").html("Quantidade de empresas habilitadas a receber o cartão Vale-Cultura como forma de pagamento por produtos e serviços culturais.");
+
+        }
+        else{
+            $(".desc-var").html("Quantidade de trabalhadores beneficiados com o Vale-Cultura.");
+        }
+    }
+    else if(url['var'] == 18){
+        if(url['mec'] == 0){
+            $(".desc-var").html("Valor do consumo com o cartão Vale-Cultura segundo a Unidade Federativa da empresa Recebedora onde o cartão foi utilizado.");
+
+        }
+        else{
+            $(".desc-var").html("Valor do consumo com o cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado.");
+        }
+    }
+    else{
+        $(".desc-var").html(variavel.desc_var_mapa);
+    }
 }
 
 function cleanDesagsUrl() {
@@ -1125,6 +1146,7 @@ function updateOptView(container, btn){
                 }
             }
             else if(parameters.eixo == 2){
+                changeDescVar();
 
                 if(parameters.mec == 0){
                     if($(this).attr("id") == "recebedora"){
@@ -1376,6 +1398,9 @@ $(document).ready(function(){
                 updateWindowUrl('mec', url['mec'])
 
                 updateOptView($(this).parent().parent().attr("class"), $(this))
+
+                changeDescVar();
+
 
 
 
@@ -1672,6 +1697,7 @@ $(document).ready(function(){
 
 
     if(window.location.pathname.match("resultado")){
+        changeDescVar();
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
         updateOptView("init");

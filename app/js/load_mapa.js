@@ -536,12 +536,34 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
     else if(eixo == 2){
 
         //tooltips com os 3 valores na interface (valor, percentual e taxa)
-        if(vrv == 1  || vrv == 2 || vrv == 3 || vrv == 4 ||  vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14 || vrv == 18 || vrv == 19){
+        if(vrv == 1  || vrv == 2 || vrv == 3 || vrv == 4 ||  vrv == 5 || vrv == 6 || vrv == 7 || vrv == 8 || vrv == 9 || vrv == 11 || vrv == 12 || vrv == 13 || vrv == 14 || vrv == 18 ){
             tooltipInstance.showTooltip(d, [
                 ["title", d['properties']['name']],
                 ["", formatTextVrv(dict[d.id].valor, eixo, vrv)],
             //    ["", formatTextTaxaVrv(dict[d.id].percentual, eixo, vrv)],
             ]);
+        }
+        else if(parameters.var == 19){
+            if(parameters.mec == 0){
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv) + " recebedoras"],
+                ]);
+            }
+            else{
+                tooltipInstance.showTooltip(d, [
+                    ["title", d['properties']['name']],
+                    ["", formatTextVrv(dict[d.id].valor, eixo, vrv) + " trabalhadores"],
+                ]);
+            }
+        }
+        else if(parameters.var == 18){
+            if(parameters.mec == 0){
+
+            }
+            else{
+
+            }
         }
         else if(vrv == 17){
 

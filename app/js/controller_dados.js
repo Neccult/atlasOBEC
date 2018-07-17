@@ -29,19 +29,14 @@ function configInfoDataBoxMapa(dados, dict) {
             setPercentValueData(dados.percentual)
         }
 
-        // if(parameters.var == 1){
-        //
-        //     if(parameters.cad == 0 && parameters.ocp == 0 || (parameters.cad == 0 && parameters.ocp == 3)){
-        //
-        //         if(dadosUF != undefined){
-        //
-        //             if(parameters.deg == 0){
-        //
-        //                 setPercentValueData({percentual: dadosUF.percentual}, eixo, vrv);
-        //             }
-        //         }
-        //     }
-        // }
+        var total = 0;
+        for(i in dict){
+            total += dict[i].valor;
+        }
+
+        setTerceiroValueData(dados.valor/total);
+
+
     }
     else if(parameters.eixo == 2){
 
@@ -349,13 +344,12 @@ function setPercentValueData(valor) {
 
 function setTerceiroValueData(value){
 
-
     if(parameters.eixo == 0){
-
 
         array_variaveis = [1, 4, 5, 6, 7, 8]
 
         if(array_variaveis.includes(parseInt(parameters.var)) && parameters.uf > 0 && ( parameters.deg > 0 || parameters.cad > 0)){
+
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
             $(".setor-value").first().css("display", "flex");
 
@@ -367,8 +361,7 @@ function setTerceiroValueData(value){
             $(".setor-value").first().css("display", "none");
         }
     }
-
-    if(parameters.eixo == 1){
+    else if(parameters.eixo == 1){
         ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
         if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
             $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');

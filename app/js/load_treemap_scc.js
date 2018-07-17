@@ -439,8 +439,6 @@ function create_treemap_scc(treemap_scc_box, data){
         data_value = total;
     }
 
-    console.log(data_value)
-
     var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf, deg: data_deg};
 
     updateData('treemap_scc', dados);

@@ -375,6 +375,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
             var desc_perc = ''
             var desc_terc = ''
 
+            nomeano = $('.bread-select[data-id=ano]').first().val()
             nomeestado = mapPronome(getPrepos(uf_text), ["DE", "DO", "DA"], ["EM", "NO", "NA"])+' '+uf_text
             if("primeira" in desc_var.slc[slc]){
                 desc_var.slc[slc].primeira.forEach(function(d){
@@ -401,6 +402,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
             desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', cad_text)
                 .replace('[pfj]', pfj_text).replace('[mod]', mod_text)
                 .replace('{uf}', nomeestado).replace('[mec]', "VIA "+mec_text).replace("{cad}", cad_text)
+                .replace('[ano]', "NO ANO DE " + nomeano);
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
                 .replace('[uf]', nomeestado).replace('[cad]', cad_text)
                 .replace('[pfj]', pfj_text).replace('[mod]', mod_text)

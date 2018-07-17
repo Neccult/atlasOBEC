@@ -30,7 +30,7 @@ function create_donut(donut_box, data){
 
     g.append("path")
         .attr("d", arc)
-        .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
+        .attr("soma", function(d) {  return getSoma(data, d.data.tipo);})
         .style("fill", function(d) { return color_donut(d.data.tipo); })
         .style("stroke", "none")
         .each(function(d) { this._current = d; });
@@ -234,7 +234,7 @@ function color_donut(tipo){
         }
     }
 
-    return COLORS['cadeias'][tipo].color;
+    return COLORS['cadeias'][getCadId(tipo)].color;
 }
 
 function getPercent(data){

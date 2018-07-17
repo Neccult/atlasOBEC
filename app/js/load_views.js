@@ -331,15 +331,6 @@ function loadViews(){
         VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
     })
 
-    $.get("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(dado){
-        console.log(dado)
-    })
-
-    $.get("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(dado){
-        console.log(dado)
-    })
-
-
 }
 
 function updateViews(){

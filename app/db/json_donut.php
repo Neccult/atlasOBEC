@@ -153,7 +153,7 @@ if($eixo == 2 && $var >= 18){
 
 
         $valor = array();
-        $valor['tipo'] = sigla_cadeia(getNameCadeia($tupla->idCadeia));
+        $valor['tipo'] = getNameCadeia($tupla->idCadeia);
         $valor['valor'] = (float) $tupla->Valor;
         $valor['uf'] = (int) $tupla->idUF;
         $valor['cad'] = (int) $tupla->idCadeia;

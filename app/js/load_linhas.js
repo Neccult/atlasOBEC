@@ -312,6 +312,7 @@ function update_linhas(linhas_box, data){
 
 function getCadId(cadName){
     switch(cadName){
+        case "Todos": return 0;
         case "Arquitetura e Design": return 1;
         case "Artes Cênicas e Espetáculos": return 2;
         case "Audiovisual": return 3;
@@ -322,6 +323,7 @@ function getCadId(cadName){
         case "Música": return 8;
         case "Patrimônio": return 9;
         case "Publicidade":  return 10;
+        case "Outros":  return 11;
     }
 }
 
