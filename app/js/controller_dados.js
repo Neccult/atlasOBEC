@@ -5,7 +5,7 @@ function configInfoDataBoxMapa(dados, dict) {
 
     if(parameters.eixo == 0) {
 
-        if((parameters.cad == 0 && parameters.uf != 0) ){
+        if((parameters.cad == 0 && parameters.uf != 0 && parameters.deg == 0) ){
             setPercentValueData(dados.percentual)
         }
 
@@ -66,7 +66,6 @@ function configInfoDataBoxTreemapSCC(dados) {
     if(parameters.eixo == 0){
 
         if(parameters.cad == 0){
-
             if(parameters.uf == 0){
                 setPercentValueData(1)
             }
@@ -143,6 +142,10 @@ function configInfoDataBoxBarras(dados, valor, uos) {
         }
         else{
             setIntegerValueData(valor)
+            if(parameters.cad == 0 && parameters.deg > 0 && parameters.uf > 0){
+                console.log(valor/total_deg[parameters.ano])
+                setPercentValueData(valor/total_deg[parameters.ano])
+            }
         }
 
 
