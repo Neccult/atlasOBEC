@@ -711,15 +711,32 @@ function updateUrl() {
 function updateLegendByDeg(deg){
 
     if(deg == 0){
+
         if(url['ocp'] == 0){
-            $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
 
-            var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-            var html = "";
+            if(parameters.eixo == 2 && parameters.var == 10){
 
-            legendArray.forEach( function(id) {
-                html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
-            } );
+                $(".view-title-leg[data-id='scc&ocp']").html("");
+
+                var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                var html = "";
+
+                legendArray.forEach( function(id) {
+                    html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+                } );
+            }
+            else{
+
+                $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
+
+                var legendArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                var html = "";
+
+                legendArray.forEach( function(id) {
+                    html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+                } );
+            }
+
 
             $("#title-view-leg-scc").html(html);
 
@@ -910,6 +927,8 @@ function updateMenuLegenda(eixo, vrv){
         $("#title-view-leg-scc").html("" +
             "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
             "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
+
+        console.log("aqui")
     }
     else if(eixo == 2 && (vrv == 17)){
         cads =
@@ -1529,6 +1548,8 @@ $(document).ready(function(){
                 url['subdeg'] = 0;
                 url['pfj'] = 0;
 
+                console.log(url['ano'])
+
 
                 updateWindowUrl('uf', url['uf']);
                 updateWindowUrl('cad', url['cad']);
@@ -1697,7 +1718,6 @@ $(document).ready(function(){
     if(window.location.pathname.match("resultado")){
         changeDescVar();
         updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
-        updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
         updateOptView("init");
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
         updateMecanismo(url, url['var'])
@@ -1713,8 +1733,9 @@ $(document).ready(function(){
         else{
             enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 0, url);
         }
-        updateLegendByDeg(parameters.deg)
 
+        updateLegendByDeg(parameters.deg)
+        updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
 
 
     }
