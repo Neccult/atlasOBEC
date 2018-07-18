@@ -444,7 +444,6 @@ function update_bars(barras_box, data){
         create_bars(barras_box, data);
         return;
     }
-
     var svg_barras = d3.select(barras_box+" svg g");
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
