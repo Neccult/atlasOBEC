@@ -90,6 +90,7 @@ function controlVarPage(clickVar){
 }
 
 function getAnoDefault(eixo_atual){
+
     switch(eixo_atual){
         case 0: url['ano'] = d3.max(anos_default[url['var']]); break;
         case 1:
@@ -109,12 +110,9 @@ function getAnoDefault(eixo_atual){
             break;
 
         case 2:
-            if(url['var'] != 17){
-                url['ano'] = anos_default[url['var']][0];
-            }
-            else{
-                url['ano'] = 2017
-            }
+            index = 0;
+            url['ano'] = d3.max(anos_default[url['var']]);
+        
             break;
         case 3:
             if(url['var'] >= 11)
@@ -147,7 +145,7 @@ function defaultUrl(){
 }
 
 function updateIframe(url){
-    
+
     if(window.location.pathname.match("page.php")){
         return;
     }

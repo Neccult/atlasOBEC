@@ -226,10 +226,13 @@ function updateSelectAnos(){
         }
 
         dummy.reverse().forEach(function(d){
-            $(selectOp).append($('<option>', {
-                value: d,
-                text: d
-            }))
+            if(d != 0){
+                $(selectOp).append($('<option>', {
+                    value: d,
+                    text: d
+                }))
+            }
+            
         })
         $(this).val(parameters.ano);
     });
