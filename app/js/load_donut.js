@@ -100,13 +100,10 @@ function create_donut(donut_box, data){
 }
 
 function update_donut(donut_box, data){
-
     var height = $(donut_box).height();
     var width = $(donut_box).width();
 
     var radius = Math.min(width, height) / 2;
-
-      //valor raio círculo de dentro
 
     var pie = d3.pie()
                 .sort(function(a, b) {
@@ -116,31 +113,23 @@ function update_donut(donut_box, data){
 
     var svg = d3.select(donut_box).select("svg g");
     
-    var teste = donut.data(pie)
+    var teste = svg.selectAll(".arc").data(pie)
     
-
     teste.exit().remove()
 
-    teste.enter()
-                .append("g")
-                .attr("class", "arc")
-                .append(function(){
-                    alert("oi")
-                return "path";
-                    });
+    teste.enter().append("g").attr("class", "arc").append("path")
 
     
-
-    donut.select("path")
+    svg.selectAll(".arc")
+     .select("path")
      .transition()
      .duration(400)
      .attrTween("d", arcTween)
      .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
      .style("fill", function(d) { return color_donut(d.data.tipo); })
-     .style("stroke", "none");
+     .style("stroke", "none")
+     
     
-    donut = g
-
     d3.selectAll(".arc")
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
