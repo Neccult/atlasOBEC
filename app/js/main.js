@@ -541,6 +541,7 @@ function changeDescVar() {
     var eixoUrl = getEixo(window.location.hash.substring(1))
     var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
+    $('.value-info-title').html(variavel.mapa_valores);
 
     if(url['var'] == 19){
         if(url['mec'] == 0){
@@ -1059,6 +1060,15 @@ function updateSelectsByVar(){
 
 }
 
+function updateVarObs(){
+
+
+
+    $(window.document).find('.value-info-title').html(getDataVar(textJSON, parameters.eixo, parameters.var).mapa_valores);
+
+
+}
+
 function updateOptView(container, btn){
 
 
@@ -1544,11 +1554,11 @@ $(document).ready(function(){
 
                 url['uf'] = 0;
                 url['cad'] = 0;
+                url['mod'] = 0;
                 url['deg'] = 0;
                 url['subdeg'] = 0;
                 url['pfj'] = 0;
 
-                console.log(url['ano'])
 
 
                 updateWindowUrl('uf', url['uf']);
@@ -1557,6 +1567,7 @@ $(document).ready(function(){
                 updateWindowUrl('subdeg', url['subdeg']);
                 updateWindowUrl('ano', url['ano']);
                 updateWindowUrl('var', url['var']);
+                updateWindowUrl('mod', url['mod']);
                 updateWindowUrl('pfj', url['pfj']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
@@ -1722,11 +1733,6 @@ $(document).ready(function(){
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
         updateMecanismo(url, url['var'])
         updateSelectsByVar();
-
-        if(parameters.eixo == 2 && (parameters.var >= 18)){
-            updateBreadcrumbSetores(getCadsByMenuDonut());
-        }
-
         if(url['ocp'] > 0){
             enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
         }
@@ -1737,6 +1743,9 @@ $(document).ready(function(){
         updateLegendByDeg(parameters.deg)
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
 
+        if(parameters.eixo == 2 && (parameters.var >= 18)){
+            updateBreadcrumbSetores(getCadsByMenuDonut());
+        }
 
     }
 

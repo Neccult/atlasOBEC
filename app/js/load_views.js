@@ -285,6 +285,21 @@ function virtualParameters(){
             break;
         case 2:
             index_view_box1 = 0;
+            if(parameters.var == 15 || parameters.var == 16){
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '1'
+                views_parameters["#view_box_scc"].uos = '0'
+            }
+            else if(parameters.var == 10){
+                views_parameters["#view_box"].uos = '1'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'
+            }
+            else{
+                views_parameters["#view_box"].uos = '0'
+                views_parameters["#view_box_barras"].uos = '0'
+                views_parameters["#view_box_scc"].uos = '0'
+            }
             break;
         case 3:
             index_view_box1 = parameters.mundo;
