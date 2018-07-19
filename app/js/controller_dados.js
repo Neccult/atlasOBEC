@@ -205,10 +205,10 @@ function configInfoDataBoxBarras(dados, valor, uos) {
         if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[index_ano];
 
-            if(parameters.uos == 0){
+            if(uos == 0){
                 setIntegerValueData(dados.valor);
             }
-            else if(parameters.uos == 2){
+            else if(uos == 2){
                 setPercentValueData(dados.valor);
             }
         }
@@ -252,7 +252,6 @@ function configInfoDataBoxBarrasStacked(dados, valor, soma) {
 /*  --- SETTERS --- */
 
 function setIntegerValueData(value) {
-
     var description = PT_BR
 
     var result = getDataVar(description, parameters.eixo, parameters.var);
@@ -354,7 +353,7 @@ function setPercentValueData(valor) {
     }
 }
 
-function setTerceiroValueData(value){
+function setTerceiroValueData(value, uos){
 
     if(parameters.eixo == 0){
 
@@ -388,7 +387,7 @@ function setTerceiroValueData(value){
     }
     else if(parameters.eixo == 3){
         if(parameters.var == 5 || parameters.var == 8){
-            if(parameters.cad == 1){
+            if(uos == 1){
                 $(".state-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
