@@ -110,7 +110,6 @@ function getAnoDefault(eixo_atual){
             break;
 
         case 2:
-            index = 0;
             url['ano'] = d3.max(anos_default[url['var']]);
         
             break;
