@@ -77,7 +77,7 @@ function configInfoDataBoxTreemapSCC(dados) {
         }
 
         if(parameters.deg == 0){
-            setTerceiroValueData(dados.valor/total_deg[parameters.ano])
+            setTerceiroValueData(dados.valor/brasil_setor[parameters.ano])
         }
 
     }
@@ -125,6 +125,7 @@ function configInfoDataBoxTreemapSCC(dados) {
 }
 
 function configInfoDataBoxBarras(dados, valor, uos) {
+
     var index_ano = dados.key.indexOf(parameters.ano);
 
     if(parameters.eixo == 0){
