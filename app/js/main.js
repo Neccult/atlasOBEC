@@ -1350,9 +1350,6 @@ $(document).ready(function(){
     });
 
     $(document).on('click', ".ocp", function(){
-
-
-
         var eixo = parameters.eixo
 
         if(eixo == 1 && url['var'] < 12){
@@ -1362,10 +1359,11 @@ $(document).ready(function(){
             if(ocp != parameters.ocp){
                 url['ocp'] = ocp;
                 parameters.ocp = url['ocp']
-                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+                $(".bread-select[data-id='ocp']").val($(this).attr("data-id"));
 
                 updateWindowUrl('ocp', ocp)
                 updateIframe(url);
+
             }
 
 
@@ -1750,8 +1748,6 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
-
-    console.log(anos_default)
 
 
     if(window.location.pathname.match("resultado")){
