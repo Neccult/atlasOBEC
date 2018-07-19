@@ -172,7 +172,6 @@ function updateIframe(url){
     }
 
     //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
-
     updateViews();
 
 }
