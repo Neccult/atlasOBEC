@@ -107,9 +107,6 @@ VIEWS = {
 brasil_setor = []
 total_deg    = []
 
-$.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-    brasil_setor = JSON.parse(dado);
-})
 
 $.get('./db/total_desag.php?'+URL_PARAM, function(dado){
     total_deg = JSON.parse(dado);
@@ -149,23 +146,22 @@ $.when($.get('data/pt-br.json'),
         }
 
 
-        $.get("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(dado){
-            // console.log(dado)
-        })
+        $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
+            brasil_setor = JSON.parse(dado);
+            d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
+                VIEWS[view_box1].call(this, "#view_box", json);
+            })
+            
+            d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
+                VIEWS[view_box2].call(this, "#view_box_barras", json);
+            });
 
-        d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-            VIEWS[view_box1].call(this, "#view_box", json);
+            d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
+                VIEWS[view_box3].call(this, "#view_box_scc", json);
+            });
+
         })
         
-        d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-            VIEWS[view_box2].call(this, "#view_box_barras", json);
-        });
-
-        d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
-            VIEWS[view_box3].call(this, "#view_box_scc", json);
-        });
-
-
 
     })
 
