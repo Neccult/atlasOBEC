@@ -127,7 +127,7 @@ $.when($.get('data/pt-br.json'),
         anos_default = JSON.parse(data_anos[0]);
         
         updateSelectAnos(); 
-
+        
         updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
         data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 

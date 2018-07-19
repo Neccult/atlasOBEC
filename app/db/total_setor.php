@@ -14,7 +14,7 @@
         $vars = array(1,4,5,6,7,8);
 
         if(in_array($var, $vars)){
-            foreach(EixoUm::getTotalSumPrt($var, $cad, $deg) as $result){
+            foreach(EixoUm::getMaxValueSetor($var, $cad, $deg) as $result){
                 $json[$result->Ano] = $result->Valor;
             }
         }
