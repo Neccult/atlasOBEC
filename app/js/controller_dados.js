@@ -83,20 +83,22 @@ function configInfoDataBoxTreemapSCC(dados) {
     }
     if(parameters.eixo == 1){
 
-        if((parameters.cad == 0 && parameters.ocp == 0)|| parameters.ocp == 3){
+        if(((parameters.cad == 0 && parameters.ocp == 0)|| parameters.ocp == 3)  && parameters.deg == 0){
 
-            if(parameters.uf == 0){
+            if(parameters.uf == 0 ){
                 setPercentValueData(1)
             }
         }
         else{
 
-            if(parameters.ocp > 0){
-                setPercentValueData(dados.percent)
+            if(parameters.ocp > 0 && parameters.deg != 0){
+                // setPercentValueData(dados.percent)
             }
+            else if(parameters.cad != 0){
+                if(parameters.deg == 0){
+                    setPercentValueData(dados.percent)
+                }
 
-            else if(parameters.deg == 0 && parameters.cad != 0){
-                setPercentValueData(dados.percent)
             }
 
             if(parameters.deg != 0 && parameters.cad != 0){

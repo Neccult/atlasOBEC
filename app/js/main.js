@@ -69,24 +69,46 @@ function controlVar(clickVar){
 }
 
 function controlVarPage(clickVar){
-    newHash = window.location.hash;
 
-    var urlString = "";
+    var ano;
 
-    switch (newHash.substring(1)){
-        case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
-                                    break;
-        case "mercado":         urlString = 'page.php?var=1&uf=0&chg=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
-                                    break;
-        case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
-                                     break;
-        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
-                                    break;
-    }
+    console.log("antes")
 
-    window.location.href = urlString;
+    $.when($.get("./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1))))
+        .done(function(data_anos){
+            anos_default = JSON.parse(data_anos)
 
-    /* variáveis com valores default */
+            if(getEixo(window.location.hash.substring(1)) == 1 || getEixo(window.location.hash.substring(1)) == 3){
+                ano = d3.max(anos_default[1][0]);
+            }
+            else{
+                ano = d3.max(anos_default[1]);
+            }
+
+
+
+            newHash = window.location.hash;
+
+            var urlString = "";
+
+            switch (newHash.substring(1)){
+                case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano='+ano+'&eixo='+newHash.substring(1)+newHash;
+                    break;
+                case "mercado":         urlString = 'page.php?var=1&uf=0&chg=0&deg=0&subdeg=0&cad=0&ano='+ano+'&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+                    break;
+                case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano='+ano+'&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
+                    break;
+                case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano='+ano+'&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
+                    break;
+            }
+
+            window.location.href = urlString;
+
+        });
+
+
+
+
 }
 
 function getAnoDefault(eixo_atual){
@@ -687,9 +709,7 @@ function hideBreadcrumb(id) {
 	DOCUMENTO CARREGADO
 ======*/
 $(window).bind("load", function() {
-
     loadPage(); /* controla menu e fade */
-
 });
 
 function updateUrl() {
@@ -1330,9 +1350,6 @@ $(document).ready(function(){
     });
 
     $(document).on('click', ".ocp", function(){
-
-
-
         var eixo = parameters.eixo
 
         if(eixo == 1 && url['var'] < 12){
@@ -1342,10 +1359,11 @@ $(document).ready(function(){
             if(ocp != parameters.ocp){
                 url['ocp'] = ocp;
                 parameters.ocp = url['ocp']
-                $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
+                $(".bread-select[data-id='ocp']").val($(this).attr("data-id"));
 
                 updateWindowUrl('ocp', ocp)
                 updateIframe(url);
+
             }
 
 
@@ -1375,10 +1393,12 @@ $(document).ready(function(){
 
     if(url['var']) {
         if(window.location.pathname.match("resultado.php")){
+
             updateActiveBreadcrumbs(getEixo(window.location.hash.split("#")[1]), parseInt(url['var']));
         }
         controlVar(url['var']);
     }
+
 
     /*=== resultado ===*/
 
@@ -1572,8 +1592,6 @@ $(document).ready(function(){
                 url['subdeg'] = 0;
                 url['pfj'] = 0;
 
-
-
                 updateWindowUrl('uf', url['uf']);
                 updateWindowUrl('cad', url['cad']);
                 updateWindowUrl('deg', url['deg']);
@@ -1606,7 +1624,6 @@ $(document).ready(function(){
                     }
                     updateOcupacoes($(this).val());
                 }
-
                 if(eixo_atual == 2){
                     updateOptView('init')
                     updateDefaultMec(url['var']);
@@ -1622,7 +1639,6 @@ $(document).ready(function(){
                     }
 
                 }
-
                 if(eixo_atual == 3){
                     if(url['var'] == 1 || url['var'] == 13 || url['var'] == 5 || url['var'] == 8)
                         $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
@@ -1648,7 +1664,6 @@ $(document).ready(function(){
 
 
             }
-
 
             if(dataId === 'deg') {
 
@@ -1680,7 +1695,6 @@ $(document).ready(function(){
                 }
 
             }
-
 
             if(dataId === "uf"){
                 updateWindowUrl('uf', dataVal);
@@ -1724,8 +1738,6 @@ $(document).ready(function(){
             parent.window.location = "page.php#"+$(this).val();
         }
     });
-
-
     /* download doc */
     $(document).on('click', '.button-control-down', function(){
 
@@ -1736,7 +1748,6 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
-
 
 
     if(window.location.pathname.match("resultado")){

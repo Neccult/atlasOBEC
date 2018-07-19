@@ -89,9 +89,11 @@ function create_bars_stacked(barras_box, data){
         max_value = Math.max(d[1], max_value);
     })
 
+    console.log(anos)
+
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
-                  .domain(anos_default[parameters.var][0])
+                  .domain(anos)
                   .range([0, width])
                   .padding(0.05)
 
@@ -259,6 +261,12 @@ function update_bars_stacked(barras_box, data){
         }
     }
 
+    var anos = [];
+
+    Object.keys(data).forEach(function (key) {
+        anos.push(data[key].year);
+    });
+
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
@@ -298,9 +306,10 @@ function update_bars_stacked(barras_box, data){
     })
     
 
+    console.log(anos)
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
-        .domain(anos_default[parameters.var][0])
+        .domain(anos)
         .range([0, width])
         .padding(0.05)
 
