@@ -107,6 +107,9 @@ function create_mapa(mapa_box, mapa){
                     }
                 }
                 else{
+                    if(d.id == parameters.uf){
+                        return corEixo[1];
+                    }
                     if(color(dict[d.id]) == undefined)
                         return color(dict);
                     else
@@ -125,7 +128,7 @@ function create_mapa(mapa_box, mapa){
                 if(window.innerWidth <= 1199)
                     return;
                 mapaClick(svg_mapa, dict, d)
-                destacaPais(svg_mapa, parameters.uf);
+                // destacaPais(svg_mapa, parameters.uf);
 
             })
             .style("cursor", "pointer");

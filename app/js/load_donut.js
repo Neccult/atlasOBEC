@@ -138,13 +138,17 @@ function update_donut(donut_box, data){
             if(parameters.eixo == 2 && parameters.var == 17){
                 if(d.data.tipo == "Não"){
                     tooltipInstance.showTooltip(d.data, [
-                        ["title", "Não Possui"]
+                        ["title", "Não Possui"],
+                        ["", percentFormat(d.data.percent).replace(".",",")]
+
                     ]);
                 }
                 else{
+                    console.log(d.data.percent)
                     tooltipInstance.showTooltip(d.data, [
                         ["title", "Possui"],
-                        ["", formatTextVrv(d.data.total, 2, parameters.var)]
+                        ["", percentFormat(d.data.percent).replace(".",",")]
+
                     ]);
                 }
 

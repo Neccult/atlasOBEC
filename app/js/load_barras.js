@@ -289,13 +289,15 @@ function create_bars(barras_box, data){
                     }
 
                 }
-                else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
+                else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1)){
+
                     if(parameters.deg == 0){
                         return color(dados.key[i])
                     }
                     else{
                         return color(cad)
                     }
+
                 }
                 else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                     return color(0);

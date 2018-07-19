@@ -776,6 +776,7 @@
 				"desc_var_mapa": "Valor do consumo com o cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa Recebedora onde o cartão foi utilizado",
 				"desc":"",
 				"sufixo_valor":"",
+				"fontes":" SEFIC-MINC",
 				"prefixo_valor":"R$ ",
 				"type":[
 					{"name":"Barras", "id":"barras"}
@@ -785,7 +786,7 @@
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
-               "mapa_valores": ""
+               "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado."
 			},
 			{
 				"id":"19",
@@ -795,7 +796,7 @@
 				"desc_var_mapa": "Quantidade de trabalhadores beneficiados e quantidade de empresas habilitadas a receber o cartão Vale-Cultura como forma de pagamento por produtos e serviços culturais",
 				"desc":"",
 				"botoes":[],
-				"fontes":"COORDENAÇÃO GERAL DO PROGRAMA CULTURA DO TRABALHADOR (SEFIC-MINC)",
+				"fontes":" SEFIC-MINC",
 				"sufixo_valor":" ",
 				"prefixo_valor":"",
 				"type":[
@@ -810,7 +811,7 @@
 					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
 					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
 				},
-                "mapa_valores": ""
+                "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado."
 			},
 			{
 				"id":"3",
@@ -884,7 +885,7 @@
 			},
 			{
 				"id":"7",
-				"title":"Percentual dos recursos privados em contrapartida ao incentivo fiscal",
+				"title":"PERCENTUAL DE RECURSOS PRIVADOS NO TOTAL FINANCIADO VIA MECENATO",
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO [uf].",
 				"desc_percent": "",
@@ -1006,7 +1007,7 @@
 				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]",
 				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, de acordo com o ano de proposição do projeto.",
 				"sufixo_valor":"",
-				"fontes": "SALICnet. Atualizado para 2016. ",
+				"fontes": "SALICNET",
 				"prefixo_valor":"",
 				"botoes":[],
 				"type":[
@@ -1054,7 +1055,7 @@
 				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [cad] [uf]",
 				"desc_percent": "",
 				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
-				"desc_var_mapa": "A variável calcula o percentual médio financiado do projeto, obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto. ",
+				"desc_var_mapa": "A variável calcula a razão média entre o valor solicitado pelos proponentes e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto.",
 				"prefixo_valor":"",
 				"botoes":[],
 				"type":[

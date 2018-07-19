@@ -318,12 +318,11 @@ function create_treemap_scc(treemap_scc_box, data){
 
 
             if(vrv == 2){
-                console.log("oi")
 
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size*10000, eixo, vrv)],
-                    ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+                    // ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
 
                 ]);
             }
@@ -339,7 +338,7 @@ function create_treemap_scc(treemap_scc_box, data){
                     tooltipInstance.showTooltip(d, [
                         ["title", d.data.name],
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
-                        ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                        // ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
 
                     ]);
 
@@ -351,7 +350,7 @@ function create_treemap_scc(treemap_scc_box, data){
                         ["title", d.data.name],
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
                         ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                        // ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
                     ]);
                 }
                 else {
@@ -359,7 +358,7 @@ function create_treemap_scc(treemap_scc_box, data){
                         ["title", d.data.name],
                         ["", formatTextVrv(d.data.size, eixo, vrv)],
                         ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                        ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                        // ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
 
                     ]);
 
@@ -920,9 +919,6 @@ function formatValor(valor) {
 
 function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
 
-    console.log("Oioiaiojioj")
-
-
     if(eixo == 0) {
         if(vrv === 2 || vrv === 9){
             if (url['uf'] != 0) {
@@ -970,7 +966,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
             tooltipInstance.showTooltip(d, [
                 ["title", d.data.name],
                 ["", formatTextVrv(d.data.size*100, eixo, vrv)],
-                ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
+                // ["", formatTextTaxaVrv((d.data.size / root.value), eixo, vrv)],
 
             ]);
         }
@@ -986,7 +982,7 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                    // ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
 
                 ]);
 
@@ -997,16 +993,16 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
-                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                    // ["", formatDecimalLimit((d.data.size/d.parent.value)*100, 2) + "%"],
+                    // ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
                 ]);
             }
             else {
                 tooltipInstance.showTooltip(d, [
                     ["title", d.data.name],
                     ["", formatTextVrv(d.data.size, eixo, vrv)],
-                    ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
-                    ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
+                    // ["", formatDecimalLimit((d.data.size/root.value)*100, 2) + "%"],
+                    // ["", formatTextTaxaVrv(d.data.percentual, eixo, vrv)],
 
                 ]);
 

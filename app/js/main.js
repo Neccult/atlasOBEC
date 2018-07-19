@@ -540,6 +540,7 @@ function changeDescVar() {
     var eixoUrl = getEixo(window.location.hash.substring(1))
     var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
+    $('.value-info-title').html(variavel.mapa_valores);
 
     if(url['var'] == 19){
         if(url['mec'] == 0){
@@ -709,7 +710,7 @@ function updateUrl() {
 
 function updateLegendByDeg(deg){
 
-    if(deg == 0){
+    if(deg == 0 || parameters.eixo == 0){
 
         if(url['ocp'] == 0){
 
@@ -1060,11 +1061,7 @@ function updateSelectsByVar(){
 
 function updateOptView(container, btn){
 
-
-
     if(container == "init"){
-
-
 
         $(".btn-mapa button.opt.view").each(function(){
 
@@ -1188,6 +1185,30 @@ function updateOptView(container, btn){
             }
 
 
+            if(parameters.eixo == 3){
+                if(parameters.slc == 1){
+                    if($(this).attr("id") == "bens"){
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[3]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                }
+                else{
+                    if($(this).attr("id") == "bens"){
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[3]);
+                    }
+                }
+
+            }
+
         });
     }
     else{
@@ -1218,6 +1239,9 @@ function updateOptView(container, btn){
                         $(this).css("opacity", "1");
                         if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[1]);
+                        else if(parameters.eixo == 3)
+                            $(this).css("background-color", corEixo[2]);
+
                         else
                             $(this).css("background-color", corEixo[2]);
                     }
@@ -1225,6 +1249,8 @@ function updateOptView(container, btn){
                         $(this).css("opacity", "0.8")
                         if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[2]);
+                        else if(parameters.eixo == 3)
+                            $(this).css("background-color", corEixo[3]);
                         else
                             $(this).css("background-color", corEixo[1]);
 
@@ -1406,7 +1432,8 @@ $(document).ready(function(){
                 updateWindowUrl('ano', url['ano']);
 
                 updateIframe(url);
-            } else if(parameters.eixo == 2){
+            }
+            else if(parameters.eixo == 2){
 
                 var botao = PT_BR.dados_botoes[id];
 
@@ -1417,11 +1444,9 @@ $(document).ready(function(){
 
                 changeDescVar();
 
-
-
-
                 updateIframe(url);
-            } else {
+            }
+            else {
                 if(id === "setor") {
                     $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
                     $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
@@ -1543,11 +1568,11 @@ $(document).ready(function(){
 
                 url['uf'] = 0;
                 url['cad'] = 0;
+                url['mod'] = 0;
                 url['deg'] = 0;
                 url['subdeg'] = 0;
                 url['pfj'] = 0;
 
-                console.log(url['ano'])
 
 
                 updateWindowUrl('uf', url['uf']);
@@ -1556,6 +1581,7 @@ $(document).ready(function(){
                 updateWindowUrl('subdeg', url['subdeg']);
                 updateWindowUrl('ano', url['ano']);
                 updateWindowUrl('var', url['var']);
+                updateWindowUrl('mod', url['mod']);
                 updateWindowUrl('pfj', url['pfj']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
@@ -1721,11 +1747,6 @@ $(document).ready(function(){
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
         updateMecanismo(url, url['var'])
         updateSelectsByVar();
-
-        if(parameters.eixo == 2 && (parameters.var >= 18)){
-            updateBreadcrumbSetores(getCadsByMenuDonut());
-        }
-
         if(url['ocp'] > 0){
             enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
         }
@@ -1736,6 +1757,9 @@ $(document).ready(function(){
         updateLegendByDeg(parameters.deg)
         updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
 
+        if(parameters.eixo == 2 && (parameters.var >= 18)){
+            updateBreadcrumbSetores(getCadsByMenuDonut());
+        }
 
     }
 
