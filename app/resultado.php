@@ -448,8 +448,6 @@
                                 <div class="view-title-leg" data-id="scc&ocp">
                                 </div>
                                 <div id="title-view-leg-scc" style="">
-                                    <span data-id="1"><i style="display: inline-block; width: 10px; height: 10px; background-color: rgb(7, 19, 66)"></i> Exportação<br></span>
-                                    <span data-id="2"><i style="display: inline-block; width: 10px; height: 10px; background-color:  rgb(109, 191, 201)"></i> Importação<br></span>
                                 </div>
                             </div>
                         <?php } else if ($eixo == "politicas"){?>

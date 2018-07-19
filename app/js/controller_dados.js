@@ -11,9 +11,11 @@ function configInfoDataBoxMapa(dados, dict) {
 
         if(parameters.var == 1 && dados != undefined && parameters.deg != 0){
             var total = 0;
+
             for(i in dict){
                 total += dict[i].valor;
             }
+
             setTerceiroValueData(dados.valor/total)
         }
         else{
@@ -75,7 +77,7 @@ function configInfoDataBoxTreemapSCC(dados) {
         }
 
         if(parameters.deg == 0){
-            setTerceiroValueData(dados.valor/brasil_setor[parameters.ano])
+            setTerceiroValueData(dados.valor/total_deg[parameters.ano])
         }
 
     }

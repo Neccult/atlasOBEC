@@ -711,7 +711,7 @@ function updateUrl() {
 
 function updateLegendByDeg(deg){
 
-    if(deg == 0){
+    if(deg == 0 || parameters.eixo == 0){
 
         if(url['ocp'] == 0){
 
@@ -1060,22 +1060,9 @@ function updateSelectsByVar(){
 
 }
 
-function updateVarObs(){
-
-
-
-    $(window.document).find('.value-info-title').html(getDataVar(textJSON, parameters.eixo, parameters.var).mapa_valores);
-
-
-}
-
 function updateOptView(container, btn){
 
-
-
     if(container == "init"){
-
-
 
         $(".btn-mapa button.opt.view").each(function(){
 
@@ -1199,6 +1186,30 @@ function updateOptView(container, btn){
             }
 
 
+            if(parameters.eixo == 3){
+                if(parameters.slc == 1){
+                    if($(this).attr("id") == "bens"){
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[3]);
+                    }
+                    else{
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                }
+                else{
+                    if($(this).attr("id") == "bens"){
+                        $(this).css("opacity", "1")
+                        $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[3]);
+                    }
+                }
+
+            }
+
         });
     }
     else{
@@ -1229,6 +1240,9 @@ function updateOptView(container, btn){
                         $(this).css("opacity", "1");
                         if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[1]);
+                        else if(parameters.eixo == 3)
+                            $(this).css("background-color", corEixo[2]);
+
                         else
                             $(this).css("background-color", corEixo[2]);
                     }
@@ -1236,6 +1250,8 @@ function updateOptView(container, btn){
                         $(this).css("opacity", "0.8")
                         if(parameters.eixo == 0 || parameters.eixo == 2)
                             $(this).css("background-color", corEixo[2]);
+                        else if(parameters.eixo == 3)
+                            $(this).css("background-color", corEixo[3]);
                         else
                             $(this).css("background-color", corEixo[1]);
 
@@ -1417,7 +1433,8 @@ $(document).ready(function(){
                 updateWindowUrl('ano', url['ano']);
 
                 updateIframe(url);
-            } else if(parameters.eixo == 2){
+            }
+            else if(parameters.eixo == 2){
 
                 var botao = PT_BR.dados_botoes[id];
 
@@ -1428,11 +1445,9 @@ $(document).ready(function(){
 
                 changeDescVar();
 
-
-
-
                 updateIframe(url);
-            } else {
+            }
+            else {
                 if(id === "setor") {
                     $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Setor")
                     $(window.document).find(".bread-select[data-id=ocp]").attr('data-id', 'cad');
