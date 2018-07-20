@@ -368,6 +368,14 @@ function loadResult(){
 
 }
 
+function updateColorButtons(slc){
+    $("#btn-opt").find("button.opt").css("background-color", corEixo[3]);
+    $("#btn-opt").find("button.opt").css("opacity", "0.8");
+    $("#btn-opt").find("button.opt.active").css("opacity", "1");
+    $("#btn-opt").find("button.opt.active").css("background-color", corEixo[2])
+
+}
+
 function removeVar(eixo, vrv){
 
     var eixoUrl = window.location.hash.substring(1);
@@ -1638,8 +1646,15 @@ $(document).ready(function(){
                     updateServicos(url['var']);
                     updateTipo(url['var']);
                     url['typ'] = 1;
+                    url['slc'] = 0;
 
                     updateWindowUrl('typ', url['typ'])
+                    updateWindowUrl('slc', url['slc'])
+
+                    $('#bens').addClass("active");
+                    $('#servicos').removeClass("active");
+
+                    updateColorButtons(url['slc'])
 
                     $(".opt-select[data-id='typ']").val(1);
                     $('.bread-select[data-id=typ]').val(1);
