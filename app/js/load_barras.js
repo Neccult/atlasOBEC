@@ -330,9 +330,10 @@ function create_bars(barras_box, data){
                 barHeight = Math.abs(height - barHeight);
 
                 // BARRA PEQUENA
-                if (barHeight <= minBarHeight)
-                    return height - minBarHeight;
-
+                if (barHeight <= minBarHeight){
+                    return y(d) - minBarHeight;
+                }
+                    
                 return y(d);
             })
             .attr("width", x.bandwidth())
@@ -343,8 +344,19 @@ function create_bars(barras_box, data){
                 var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
                 
                 var isValueZero = y(d) == zeroPosition;
-                if (isValueZero)
+
+
+                if (isValueZero){
                     return minBarHeight;
+                }
+
+                barHeight = Math.abs(height - barHeight);
+
+                // BARRA PEQUENA
+                if (barHeight <= minBarHeight){
+                    return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+                }
+
 
                 return  Math.abs(y(d) - zeroPosition);
             })
@@ -717,9 +729,10 @@ function update_bars(barras_box, data){
             barHeight = Math.abs(height - barHeight);
 
             // BARRA PEQUENA
-            if (barHeight <= minBarHeight)
-                return height - minBarHeight;
-
+            if (barHeight <= minBarHeight){
+                return y(d) - minBarHeight;
+            }
+                
             return y(d);
         })
         .attr("width", x.bandwidth())
@@ -730,8 +743,19 @@ function update_bars(barras_box, data){
             var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
             
             var isValueZero = y(d) == zeroPosition;
-            if (isValueZero)
+
+
+            if (isValueZero){
                 return minBarHeight;
+            }
+
+            barHeight = Math.abs(height - barHeight);
+
+            // BARRA PEQUENA
+            if (barHeight <= minBarHeight){
+                return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+            }
+
 
             return  Math.abs(y(d) - zeroPosition);
         })

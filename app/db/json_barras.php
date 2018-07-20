@@ -329,7 +329,7 @@ if($eixo == 0) {
 else if($eixo == 1 && $var > 11) {
     require_once("EixoDois.php");
 
-    foreach (EixoDois::getter_barras($var, $uf, $cad, $uos, $uos, $slc, $deg, $subdeg, $ano) as $tupla) {
+    foreach (EixoDois::getter_barras($var, $uf, $cad, $ocp, $uos, $slc, $deg, $subdeg, $ano) as $tupla) {
         // $barras[$tupla->Ano] = $tupla->Valor;
 
 
