@@ -101,8 +101,7 @@ class EixoQuatro {
 	public static function getter_most_recent_year(){
 		self::connect();
 
-		$query = "SELECT MAX(Ano) AS Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 GROUP BY Numero, Consumo";
-
+		$query = "SELECT DISTINCT Ano, Numero, Consumo FROM `Eixo_4` WHERE `idUF` = 0 and (Consumo = 0 OR Consumo = 1)";
         $stmt = mysqli_stmt_init(self::$conn);
         mysqli_stmt_prepare($stmt, $query);        
         $stmt->execute();
@@ -326,7 +325,7 @@ class EixoQuatro {
 	Saída:
 	    Um conjunto de instâncias da Classe EixoQuatro com seus devidos atributos
 	-----------------------------------------------------------------------------*/
-	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc){
+	public static function getter_barras($var, $parc, $cad, $tipo, $uf, $mundo, $slc, $uos){
 
 		self::connect();
         $stmt = mysqli_stmt_init(self::$conn);
@@ -341,7 +340,13 @@ class EixoQuatro {
 
         $params[] = $parc;
         $params[] = $uf;
-        $params[] = $cad;
+        
+        //variáveis de IHH e C4
+        if($var == 5 || $var == 8){
+            $params[] = $uos;
+        } else {
+            $params[] = $cad;
+        }
         $params[] = $tipo;
         $params[] = $var;
         

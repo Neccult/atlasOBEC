@@ -3,7 +3,7 @@
 	"mapa":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_region":"Essa visualização permite observar a variável de interesse segmentada por Unidade Federativa.",
 	"treemap_scc":"Essa visualização permite observar a variável de interesse segmentada pelos Setores Culturais e Criativos.",
-
+	"mundo":"Mapa-mundi",
 	"var_desc": "Selecione aqui a variável que deseja visualizar.",
 	"uf":"Selecione aqui a Unidade da Federação que deseja visualizar.",
 	"prt":"Selecione aqui o porte de empresa que deseja visualizar. Este filtro só será habilitado quando você selecionar o setor.",
@@ -50,28 +50,14 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
-				],
-				"inativos":{
-					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
 				"fontes": "RAIS",
 				"mapa_valores": "",
@@ -92,21 +78,18 @@
 				"desc_var_barras": "A porcentagem corresponde à participação das empresas <span data-id='setor'></span> no total de empresas formais <span data-id='uf'></span> ano a ano",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
-				],
-				"inativos":{
-					"mapa":["uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
 				"mapa_valores": "Valores em percentual.",
 				"treemap_scc_valores": "Valores em pecentual.",
@@ -126,20 +109,17 @@
 				"desc_var_barras": "A porcentagem representa o crescimento (taxa positiva) ou a queda (taxa negativa) na quantidade de empresas <span data-id='setor'></span> <span data-id='uf'></span> ano a ano.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
+					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"}
-				],
-				"inativos":{
-					"mapa":["uf"],"barras":["ano"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
 				"fontes": "Elaboração do NECCULT com base na RAIS.",
 				"mapa_valores": "Valores em pecentual.",
@@ -165,29 +145,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -212,29 +178,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -259,29 +211,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
 				"treemap_scc_valores": "Valores em milhares de reais.",
@@ -306,28 +244,14 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"barras":["ano","prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
@@ -353,28 +277,14 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
 				"fontes": "IBGE (PAS, PIA e PAC).",
 				"mapa_valores": "Valores em milhares de reais.",
@@ -397,18 +307,14 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Atuação","id":"atc"}
-				],
-				"inativos":{
-					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "TREEMAP UFs"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
 				"fontes": " Elaboração do NECCULT com base no IBGE (PAS, PIA e PAC)."
 			},
@@ -427,9 +333,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
 			{
@@ -447,9 +359,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes": "Elaboração própria a partir da RAIS."
 			},
 			{
@@ -467,9 +385,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes": "Elaboração própria com base na RAIS."
 			},
 			{
@@ -487,9 +411,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes": "Elaboração própria com base na RAIS."
 			}
 		],
@@ -502,6 +432,11 @@
 				"title":"Total de Ocupados",
 				"sufixo_valor" :"",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}, {"id": "treemap_region", "title": "Treemap"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"desc_var_mapa": " A variável apresenta o número total de indivíduos ocupado(a)s em atividades produtivas ligadas aos setores ou às ocupações criativas e culturais, com possibilidade de desagregações.",
 				"desc":"Esse indicador demonstra o total de empresas culturais. Uma elevação deste número pode indicar um aumento tanto em termos de oferta, quanto de demanda por bens e serviços culturais, assim como uma diminuição pode indicar um arrefecimento da demanda por bens e serviços culturais.",
@@ -511,43 +446,18 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
-				],
-				"treemap_scc":[
-					{"name":"Visualização","id":"slc"},
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				"botoes": []
 			},
 			{
 				"id":"2",
 				"desc_int":"de participação do emprego [cad] no emprego total",
 				"title":"Participação no Emprego Total",
 				"desc_percent": "",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
 				"fontes":"Elaboração do NECCULT com base na RAIS e no IBGE (PNAD Anual).",
@@ -559,37 +469,10 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
-				],
-				"treemap_scc":[
-					{"name":"Visualização","id":"slc"},
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"3",
@@ -599,6 +482,11 @@
 				"sufixo_valor":"h",
 				"fontes":"RAIS e IBGE (PNAD Anual).",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
 				"desc":"Esse indicador demonstra a taxa de natalidade e mortalidade de empresas, isto é, o número de empresas que nascem e fecham num ano. Um aumento de taxa de natalidade pode indicar um aumento da demanda por bens e serviços culturais, ou um indicador de descentralização. Da mesma forma, um aumento da taxa de mortalidade indica que as empresas culturais estão com dificuldades estruturais e/ou de caráter institucional de manterem-se ativas.",
 				"desc_var_mapa": "A variável mostra o volume total de horas semanais trabalhadas nas atividades ligadas aos Setores e às Ocupações Culturais e Criativos.",
 				"type":[
@@ -607,37 +495,10 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
-				],
-				"treemap_scc":[
-					{"name":"Visualização","id":"slc"},
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"barras":["ano"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"4",
@@ -646,6 +507,11 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita total das empresas culturais, isto é, a entrada de fluxos monetários em decorrência das atividades produtivas. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
 				"desc_var_mapa": "A variável retrata o valor médio das remunerações monetárias, em R$, recebidas como compensação pelo(a)s trabalhadore(a)s empregado(a)s pelos setores e nas ocupações culturais e criativas.",
@@ -653,19 +519,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"5",
@@ -673,6 +530,11 @@
 				"title":"Remuneração por Hora Trabalhada",
 				"desc_percent": "",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"prefixo_valor":"R$ ",
 				"fontes":"Elaboração do NECCULT com base na RAIS E no IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra a receita operacional líquida das empresas culturais, isto é, as receitas brutas provenientes da exploração das atividades principais e secundárias exercidas pela empresa, com deduções dos impostos e contribuições (ICMS, PIS/Pasep, IPI, ISS, Simples Nacional, Cofins etc.), das vendas canceladas, abatimentos e descontos incondicionais. Um aumento na receita pode indicar uma elevação dos preços dos bens culturais, ou da quantidade vendida.",
@@ -681,19 +543,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"6",
@@ -701,6 +554,11 @@
 				"title":"Jornada de Trabalho Média",
 				"desc_percent": "",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE POR SETOR"}]
+				},
 				"prefixo_valor":"",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o custo total para o funcionamento das empresas culturais. Indica a participação dos custos na composição do total necessário para as firmas operarem. Indiretamente, retrata o quanto os custos totais das atividades culturais representam em relação aos custos totais do conjunto da indústria, do comércio e dosserviços. Um aumento no dispêndio pode indicar o aumento do preço dos insumos e fatores de produção. Uma diminuição pode indicar a redução dos preços dos insumos, ou da diminuição dos custos via inovação da base técnica e produtiva. ",
@@ -709,19 +567,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"7",
@@ -729,6 +578,15 @@
 				"desc_int":"",
 				"desc_percent": "da soma de remunerações pagas aos [ocp] [cad] [uf]",
 				"sufixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],	
 				"prefixo_valor":"R$ ",
 				"fontes":"RAIS E IBGE (PNAD Anual).",
 				"desc":"Esse indicador demonstra o ganho auferido ao longo das operações comerciais ou no exercício das atividades econômicas. Diante da subtração do total de receitas auferidas sobre o custo total das empresas, é possível, para cada estratificação proposta, delimitar as atividades culturais que geram maior retorno. Um aumento do lucro pode indicar um aumento da entrada e consecutiva geração de renda por parte das atividades culturias. O aumento da proporção de receitas em relação aos custos possibita aos setores culturais a obtenção de maiores ganhos reais.",
@@ -738,38 +596,7 @@
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Ano a Ano", "id":"barras"}
-				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Porte","id":"prt"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Sexo","id":"sex"},
-					{"name":"Faixa Etária","id":"fax"},
-					{"name":"Escolaridade","id":"esc"},
-					{"name":"Cor e Raça","id":"cor"},
-					{"name":"Formalidade","id":"frm"},
-					{"name":"Previdência","id":"prv"},
-					{"name":"Sindicato","id":"snd"}
-				],
-				"treemap_scc":[
-					{"name":"Visualização","id":"slc"},
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Ocupação","id":"ocp"},
-					{"name":"Desagregação","id":"deg"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
-				}
+				]
 			},
 			{
 				"id":"9",
@@ -778,6 +605,11 @@
 				"desc_percent": "",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
 				"fontes":"Elaboração do NECCULT com base na RAIS.",
 				"desc_var_mapa": "A variável mostra a relação entre o total de rendimentos do trabalho pagos e o valor adicionado, que é a soma de todas rendas novas criadas pelos setores culturais e criativos no País.",
 				"desc":"Esse indicador demonstra a razão entre o Valor Adicionado e o PIB, elucidando e contabilizando a contribuição da cultura na geração de riqueza. Um aumento desta razão indica que a cultura está contribuindo mais para  a geração de renda e produto na economia.",
@@ -785,17 +617,10 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
-				"inativos":{
-					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
-				}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				]
 			},
 			{
 				"id":"11",
@@ -811,14 +636,15 @@
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
 				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				}
 			},
 			{
 				"id":"12",
@@ -833,10 +659,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ocupação","id":"ocp"}
-				]
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				}
 			},
 			{
 				"id":"13",
@@ -851,10 +682,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ocupação","id":"ocp"}
-				]
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				}
 			},
 			{
 				"id":"14",
@@ -869,10 +705,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ocupação","id":"ocp"}
-				]
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				}
 			},
 			{
 				"id":"15",
@@ -887,10 +728,15 @@
 				"type":[
 					{"name":"Ano a Ano", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ocupação","id":"ocp"}
-				]
+				"botoes":[
+					{"name": "Mapa", "id": "mapa"},
+					{"name": "Treemap", "id": "treemap_region"}
+				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				}
 			}
 		],
 		[
@@ -910,58 +756,44 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
 			{
 				"id":"18",
 				"title":"<span>CONSUMO VIA VALE-CULTURA<span>",
-				"desc_int":"consumidos via cartão Vale-Cultura [cad] [uf] ",
+				"desc_int":"consumidos com cartão Vale-Cultura [cad] [uf] ",
 				"desc_percent": "Total consumido [cad] [uf] ",
-				"desc_var_mapa": "Valor do consumo realizado por meio do cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa recebedora onde o cartão foi utilizado.",
+				"botoes":[],
+				"desc_var_mapa": "Valor do consumo com o cartão Vale-Cultura, segundo a Unidade Federativa do Trabalhador beneficiado ou segundo a Unidade Federativa da empresa Recebedora onde o cartão foi utilizado",
 				"desc":"",
 				"sufixo_valor":"",
+				"fontes":" SEFIC-MINC",
 				"prefixo_valor":"R$ ",
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				],
-               "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado",
-				"fontes": "SEFIC-MINC"
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+               "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado."
 			},
 			{
 				"id":"19",
 				"title":"<span>AGENTES DO VALE-CULTURA<span>",
 				"desc_int":"[cad] [uf]",
 				"desc_percent": "[cad] [uf]",
-				"desc_var_mapa": "Quantidade de trabalhadores possuidores do cartão Vale-Cultura e quantidade de empresas cadastradas para receber compras realizadas com o cartão.",
+				"desc_var_mapa": "Quantidade de trabalhadores beneficiados e quantidade de empresas habilitadas a receber o cartão Vale-Cultura como forma de pagamento por produtos e serviços culturais",
 				"desc":"",
-				"fontes":"SEFIC-MINC",
+				"botoes":[],
+				"fontes":" SEFIC-MINC",
 				"sufixo_valor":" ",
 				"prefixo_valor":"",
 				"type":[
@@ -971,7 +803,12 @@
 					{"name":"UF ou Setores","id":"uos"},
 					{"name":"Ano","id":"ano"}
 				],
-				"mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado"
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO ACUMULADA POR SETOR"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+                "mapa_valores": "Valor total se refere à soma de todos os registros, inclusive aqueles em que a UF da recebedora não estava identificada. Assim, a soma dos valores das UFs pode não se igualar ao valor total aqui indicado."
 			},
 			{
 				"id":"3",
@@ -981,6 +818,7 @@
 				"desc_percent": "DO TOTAL DO FINANCIAMENTO À CULTURA VIA [] BNDES () [uf]",
 				"desc_var_mapa": "A variável apresenta o valor monetário bruto, em R$, destinado ao financiamento da produção artística e cultural no Brasil por meio do Fundo Cultural e demais linhas do crédito do BNDES.",
 				"fontes": "BNDES.",
+				"botoes":[],
 				"title":"Financiamento pelo BNDES",
 				"desc":"Mostra o valor bruto total destinado ao fomento da produção artística e cultural por meio do Fundo Cultural do BNDES.",
 				"type":[
@@ -989,26 +827,10 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"},
-					{"name":"Modalidade","id":"mod"}
-				],
-				"treemap_scc":[
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"cad"},
-					{"name":"Modalidade","id":"mod"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"barras":["ano"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1021,26 +843,17 @@
 				"sufixo_valor":"",
 				"fontes": "SALICnet.",
 				"prefixo_valor":"R$ ",
+				"botoes":[],
 				"desc":"Demonstra o valor bruto total na forma de incentivos privados para o fomento da produção artística e cultural por estrato proposto.",
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Ano","id":"ano"},
-					{"name":"Tipo de Pessoa","id":"pfj"}
-				],
-				"treemap_region":[
-					{"name":"Ano","id":"ano"},
-					{"name":"Tipo de Pessoa","id":"pfj"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Tipo de Pessoa","id":"pfj"}
-				],
-				"inativos":{
-					"mapa":["prt","uf", "atc"],"treemap_region":["uf", "prt"], "treemap_scc":["cad","prt"],"barras":["ano", "prt"]
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1059,23 +872,17 @@
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
 				},
                "mapa_valores": ""
 			},
 			{
 				"id":"7",
-				"title":"Percentual dos recursos privados em contrapartida ao incentivo fiscal",
+				"title":"PERCENTUAL DE RECURSOS PRIVADOS NO TOTAL FINANCIADO VIA MECENATO",
 				"desc":"Retrata o percentual dos recursos privados em cultura e despesas em fomento da cultura nos estratos referidos.",
 				"desc_int":"PERCENTUAL DO APOIO PRIVADO NO TOTAL APOIADO VIA MECENATO [uf].",
 				"desc_percent": "",
@@ -1088,17 +895,11 @@
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"barras":["ano","prt"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1118,26 +919,11 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
                "mapa_valores": ""
 			},
@@ -1157,28 +943,11 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Mecanismo","id":"mec"}
-				],
-				"inativos":{
-					"mapa":["uf","prt"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
 				},
                 "mapa_valores": ""
 			},
@@ -1192,9 +961,15 @@
 				"desc_var_mapa": "A variável mede a razão entre a despesa total com cultura (orçamento MinC) e a arrecadação federal total, e também a relação entre o financiamento total do fomento à cultura (FNC e mecenato) e arrecadação federal total.",
 				"sufixo_valor":"%",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA DESPESA MINC / RECEITA EXECUTIVO"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1207,28 +982,18 @@
 				"sufixo_valor":"",
 				"fontes": "SALICnet. ",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1239,30 +1004,20 @@
 				"desc_percent": "DO TOTAL DE PROJETOS APROVADOS PARA CAPTAÇÃO VIA MECENATO [uf]",
 				"desc_var_mapa": "A variável apresenta a soma de todos os projetos aprovados para captação via mecenato, de acordo com o ano de proposição do projeto.",
 				"sufixo_valor":"",
-				"fontes": "SALICnet. Atualizado para 2016. ",
+				"fontes": "SALICNET",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1275,28 +1030,18 @@
 				"desc_var_mapa": "A variável mostra o intervalo médio, em número de dias, entre a data de proposta do projeto de financiamento e a data da aprovação efetiva para início de captação de recursos.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Mapa", "id":"mapa"},
 					{"name":"Treemap", "id":"treemap_region"},
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"UF","id":"uf"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"UF","id":"uf"},
-					{"name":"Setor","id":"cad"}
-				],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1307,15 +1052,17 @@
 				"desc_int":"RAZÃO MÉDIA ENTRE VALOR SOLICITADO E VALOR APROVADO DOS PROJETOS APOIADOS VIA MECENATO [cad] [uf]",
 				"desc_percent": "",
 				"fontes": "Elaborado pelo NECCULT com base no SALICnet. ",
-				"desc_var_mapa": "A variável calcula o percentual médio financiado do projeto, obtido pela relação entre o valor solicitado e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto. ",
+				"desc_var_mapa": "A variável calcula a razão média entre o valor solicitado pelos proponentes e o valor aprovado para captação de cada projeto, de acordo com o ano de proposição do projeto.",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1328,13 +1075,15 @@
 				"sufixo_valor":"",
 				"prefixo_valor":"",
 				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1347,13 +1096,15 @@
 				"sufixo_valor":"",
 				"fontes": "Elaborado pelo NECCULT com base no SALICNET.",
 				"prefixo_valor":"",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR UF"}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA POR SETOR"}],
+					"view_box3": [{"id": "linhas", "title": "GRÁFICO DE LINHAS"}]
+				},
                 "mapa_valores": ""
 			},
 			{
@@ -1365,13 +1116,15 @@
 				"desc":"",
 				"sufixo_valor":"",
 				"prefixo_valor":"R$ ",
+				"botoes":[],
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"UF ou Setores","id":"uos"},
-					{"name":"Ano","id":"ano"}
-				],
+				"views": {
+					"view_box1": [{"id": "mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO DE ESTADOS QUE POSSUEM MECENATO ESTADUAL"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
 				"fontes": "",
 				"mapa_valores": "Observação: Valor total referente à soma dos valores enviados pelas Unidades Federativas brasileiras. Algumas Unidades Federativas que possuem esse mecanismo de financiamento não enviaram dados."
 			}
@@ -1394,29 +1147,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				"views": {
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				]
 			},
 			{
 				"id":"2",
@@ -1434,29 +1173,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"], "treemap_region":["uf"], "treemap_scc":["cad"],"barras":["ano"]
-				}
+				"views": {
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				]
 			},
 			{
 				"id":"3",
@@ -1474,29 +1199,15 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf"],"barras":["ano"]
-				}
+				"views": {
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
+				]
 			},
 			{
 				"id":"5",
@@ -1514,28 +1225,11 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "C4 VALOR ABSOLUTO POR SETORES"}],
+					"view_box2": [{"id": "barras", "title": "C2 VALOR ABSOLUTO POR PARCEIROS"}],
+					"view_box3": [{"id": "barras", "title": "C4 VALOR ABSOLUTO POR UF"}]
 				}
 			},
 			{
@@ -1554,28 +1248,11 @@
 					{"name":"Treemap SCC", "id":"treemap_scc"},
 					{"name":"Barras", "id":"barras"}
 				],
-				"mapa":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo", "id": "typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_region":[
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"treemap_scc":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Tipo","id":"typ"},
-					{"name":"Ano","id":"ano"}
-				],
-				"barras":[
-					{"name":"Parceiro","id":"prc"},
-					{"name":"Setor","id":"cad"},
-					{"name":"Tipo","id":"typ"}
-				],
-				"inativos":{
-					"mapa":["prt","uf","atc"],"treemap_region":["uf","prt"], "treemap_scc":["cad","prt"],"barras":["ano","prt"]
+				"botoes": [],
+				"views": {
+					"view_box1": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR SETORES"}],
+					"view_box2": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR PARCEIROS"}],
+					"view_box3": [{"id": "barras", "title": "IHH VALOR ABSOLUTO POR UF"}]
 				}
 			},
 			{
@@ -1588,11 +1265,14 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL [cad]"}],
+					"view_box3": [{"id": "treemap_scc", "title": "TREEMAP - SETORES CULTURAIS CRIATIVOS DO BRASIL"}]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Tipo","id":"typ"}
 				]
 			},
 			{
@@ -1605,11 +1285,14 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes": [],
+				"views": {
+					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL [cad]"}]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
 				]
 			},
 			{
@@ -1625,8 +1308,14 @@
 				"type":[
 					{"name":"Barras", "id":"barras"}
 				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
+				"views": {
+					"view_box1": [{"id": "mapa-mundi", "title": "MAPA MUNDI"}, {"id":"mapa", "title": "MAPA DO BRASIL"}],
+					"view_box2": [{"id": "donut", "title": "PROPORÇÃO EXPORTAÇÃO-IMPORTAÇÃO"}],
+					"view_box3": [{"id": "barras", "title": "SÉRIE HISTÓRICA [uf] [cad]"}]
+				},
+				"botoes":[
+					{"name": "Mundo", "id": "mundo"},
+					{"name": "Brasil", "id": "mapa"}
 				]
 			},
 			{
@@ -1639,16 +1328,41 @@
 				"fontes":"Elaboração do NECCULT com base no MDIC, FUNCEX e BIS.",
 				"sufixo_valor":"",
 				"prefixo_valor":"",
+				"botoes":[],
+				"views": {
+					"view_box1": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}],
+					"view_box2": [{"id": "barras", "title": "SÉRIE HISTÓRICA DO BRASIL NOS SETORES CULTURAIS E CRIATIVOS"}],
+					"view_box3": [{"id": "", "title": "Não há visualização deste tipo para a variável selecionada."}]
+				},
 				"type":[
 					{"name":"Barras", "id":"barras"}
-				],
-				"barras":[
-					{"name":"Setor","id":"cad"}
 				]
 			}
 
 		]
 	],
+	"dados_botoes": {
+		"bens": {
+			"slc": 0,
+			"deg": 0,
+			"typ": 0,
+			"complement": "servicos"
+		},
+		"servicos": {
+			"slc": 1,
+			"deg": 0,
+			"typ": 0,
+			"complement": "bens"
+		},
+		"recebedora": {
+			"mec": 0,
+			"complement": "trabalhador"
+		},
+		"trabalhador": {
+			"mec": 1,
+			"complement": "recebedora"
+		}
+	},
 	"select":
 	{
 		"eixo":[
@@ -1688,6 +1402,7 @@
 			{"name":"Tocantins","value":"17"}
 		],
 		"ano":[
+			{"name":"2017", "value":"2017"},
 			{"name":"2016", "value":"2016"},
 			{"name":"2015", "value":"2015"},
 			{"name":"2014", "value":"2014"},

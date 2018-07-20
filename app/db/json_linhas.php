@@ -58,18 +58,9 @@ if (!empty($_GET["var"])) {
 
     $var = $_GET["var"];
     $uf = $_GET["uf"];
-
-    $atc = $_GET["atc"];
     $cad = $_GET["cad"];
-    $prt = $_GET["prt"];
-    $ocp = $_GET["ocp"];
-    $sex    =   isset($_GET["sex"])   ?   $_GET["sex"]  :   0;	   /*== sexo ==*/
-    $fax    =   isset($_GET["fax"])   ?   $_GET["fax"]  :   0;	   /*== faixa etaria ==*/
-    $esc    =   isset($_GET["esc"])   ?   $_GET["esc"]  :   0;	   /*== escolaridade ==*/
-    $cor    =   isset($_GET["cor"])   ?   $_GET["cor"]  :   0;	   /*== cor e raça ==*/
-    $frm    =   isset($_GET["frm"])   ?   $_GET["frm"]  :   0;	   /*== formalidade ==*/
-    $prv    =   isset($_GET["prv"])   ?   $_GET["prv"]  :   0;	   /*== previdencia ==*/
-    $snd    =   isset($_GET["snd"])   ?   $_GET["snd"]  :   0;	   /*== sindical ==*/
+    $deg = $_GET["deg"];
+    $ocp    =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupação ==*/
     $mec    =   isset($_GET["mec"])   ?   $_GET["mec"]  :   0;	   /*== mecanismo ==*/
     $mod    =   isset($_GET["mod"])   ?   $_GET["mod"]  :   0;	   /*== modalidade ==*/
     $pfj    =   isset($_GET["pfj"])   ?   $_GET["pfj"]  :   0;	   /*== pessoa fisica/juridica ==*/
@@ -77,52 +68,47 @@ if (!empty($_GET["var"])) {
     $prc    =   isset($_GET["prc"])   ?   $_GET["prc"]  :   0;	   /*== Parceiro ==*/
     $slc    =   isset($_GET["slc"])   ?   $_GET["slc"]  :   0;	   /*== Parceiro ==*/
     $typ    =   isset($_GET["typ"])   ?   $_GET["typ"]  :   0;	   /*== Tipo de atividade ==*/
+    $desag    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Desagregação ==*/
+    $subdeg    =   isset($_GET["subdeg"])   ?   $_GET["subdeg"]  :   0;	   /*== Subdesagregação ==*/
     $ano    =   isset($_GET["ano"])   ?   $_GET["ano"]  :NULL;	   /*== Ano ==*/
 
-    $desag    =   isset($_GET["deg"])   ?   $_GET["deg"]  :   0;	   /*== Tipo de atividade ==*/
     $eixo = $_GET['eixo'];
 }
 else{
     $var = 1;
     $uf = 0;
-
-    $atc = 0;
     $cad = 0;
-    $prt = 0;
     $ocp = 0;
-    $sex = 0;
-    $fax = 0;
-    $esc = 0;
     $slc = 0;
-    $cor = 0;
     $mec = 0;
     $mod = 0;
     $pjj = 0;
-    $frm = 0;
-    $prv = 0;
     $uos = 0;
     $typ = 0;
     $prc = 0;
     $ano = NULL;
-    $snd = 0;
     $desag = 0;
+    $subdeg = 0;
     $eixo = 0;
 }
 
 //Trata o sexo
-switch($sex) {
-    case "0":
-        $sex = NULL;
-        break;
-    case "1":
-        $sex = 1;
-        break;
-    case "2":
-        $sex = 0;
-        break;
-    default:
-        $sex = NULL;
+if($desag == 2){
+    switch($subdeg) {
+        case "0":
+            $subdeg = NULL;
+            break;
+        case "1":
+            $subdeg = 1;
+            break;
+        case "2":
+            $subdeg = 0;
+            break;
+        default:
+            $subdeg = NULL;
+    }
 }
+
 
 //Trata a modalidade
 switch($mod) {
@@ -279,9 +265,9 @@ function getNameEtinia($id) {
 
 function getNameFormalidade($id) {
     switch ($id) {
-        case 2:
-            return "Formal";
         case 1:
+            return "Formal";
+        case 2:
             return "Informal";
 
     }
@@ -289,9 +275,9 @@ function getNameFormalidade($id) {
 
 function getNamePrev($id) {
     switch ($id) {
-        case 2:
-            return "Contribuinte";
         case 1:
+            return "Contribuinte";
+        case 2:
             return "Não contribuinte";
 
     }
@@ -299,47 +285,47 @@ function getNamePrev($id) {
 
 function getNameSindical($id) {
     switch ($id) {
-        case 2:
-            return "Membro";
         case 1:
+            return "Membro";
+        case 2:
             return "Não membro";
 
     }
 }
 
 $linhas = array();
+$anos = array();
 if($eixo == 0 && ($var == 3 || $var == 9)) {
     require_once("EixoUm.php");
-    for ($cad = 1; $cad <= 10; $cad++) {
-
-        foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt, $uos) as $tupla) {
-
-            $id = $tupla->Ano;
-            // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
 
 
-            //$linhas[$id]['uf'] = $tupla->UFNome;
+    foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
-        }
+        $id = $tupla->Ano;
+        $anos[$id]['ano'] = (int)$tupla->Ano;
+        $anos[$id][$tupla->CadeiaNome] = (double)$tupla->Valor;
+
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 0 && $var > 9 ) {
     require_once("EixoUm.php");
     for ($uos = 0; $uos <= 1; $uos++) {
 
-        foreach (EixoUm::getter_barras($var, $uf, $atc, $cad, $prt, $uos) as $tupla) {
+        foreach (EixoUm::getter_linhas($var, $uf, $cad, $deg, $uos) as $tupla) {
 
             $id = $tupla->Ano;
-            // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getName($uos)] = (double)$tupla->Valor;
-
-
-            //$linhas[$id]['uf'] = $tupla->UFNome;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getName($uos)] = (double)$tupla->Valor;
 
         }
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 1 && ($var > 11)) {
@@ -349,22 +335,23 @@ else if($eixo == 1 && ($var > 11)) {
 
         for ($uos = 0; $uos <= 1; $uos++) {
 
-            foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag , $ano) as $tupla) {
-                if($prt == 0 && $esc == 0 && $cor == 0 && $fax == 0 && $frm == 0 && $prv == 0 && $snd == 0 && $sex == NULL) {
+            foreach (EixoDois::getter_linhas($var, $uf, $uos, $ocp, $uos, $slc, $desag, $subdeg) as $tupla) {
+                if($subdeg == 0 || $subdeg == NULL) {
                     $id = $tupla->Ano;
 
-                    $linhas[$id]['ano'] = (int)$tupla->Ano;
-                    $linhas[$id][getName($uos)] = (double)$tupla->Valor;
+                    $anos[$id]['ano'] = (int)$tupla->Ano;
+                    $anos[$id][getName($uos)] = (double)$tupla->Valor;
 
-                    //$linhas[$id]['uf'] = $tupla->UFNome;
                 }
             }
         }
+
+
     }
     else{
         for ($ocp = 1; $ocp <= 2; $ocp++) {
 
-            foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag, $ano) as $tupla) {
+            foreach (EixoDois::getter_linhas($var, $uf, $cad, $ocp, $uos, $slc, $desag, $subdeg) as $tupla) {
 
                 $id = $tupla->Ano;
                 if($slc == 1) {
@@ -385,80 +372,76 @@ else if($eixo == 1 && ($var > 11)) {
                     }
                 }
 
-                $linhas[$id]['ano'] = (int)$tupla->Ano;
-                $linhas[$id][getNameSLC($ocp-1)] = (double)$tupla->Valor;
+                $anos[$id]['ano'] = (int)$tupla->Ano;
+                $anos[$id][getNameSLC($ocp-1)] = (double)$tupla->Valor;
 
             }
         }
     }
 
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
+    }
+
 }
 else if($eixo == 1 && ($var == 4 || $var == 5 || $var == 6) && $desag > 0) {
     require_once("EixoDois.php");
-    $valor = 0;
-    foreach(EixoDois::getter_linhas($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag) as $tupla){
-        switch($desag){
-            case 1:
-                $valor = getNamePorte($tupla->idPorte);
-                break;
-            case 2: 
-                $valor = getNameSexo($tupla->Sexo);
-                break;
-            case 3: 
-                $valor = getNameIdade($tupla->idIdade);
-                break;
-            case 4: 
-                $valor = getNameEscolaridade($tupla->idEscolaridade);
-                break;
-            case 5:
-                $valor = getNameEtinia($tupla->idEtinia);
-                break;
-            case 6:
-                $valor = getNameFormalidade($tupla->Formalidade);
-                break;
-            case 7:
-                $valor = getNamePrev($tupla->Previdencia);
-                break;
-            case 8: 
-                $valor = getNameSindical($tupla->Sindical);
-                break;
-        }
-
-        // $linhas[$tupla->Ano] = $tupla->Valor;
-
+    foreach(EixoDois::getter_linhas($var, $uf, $cad, $ocp, $uos, $slc, $desag, $subdeg) as $tupla){
 
             $id = $tupla->Ano;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][$valor] = (double)$tupla->Valor;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            switch ($desag){
+                case 1: $anos[$id][getNamePorte($tupla->idPorte)] = (double)$tupla->Valor;
+                         break;
+                case 2: $anos[$id][getNameSexo($tupla->Sexo)] = (double)$tupla->Valor;
+                    break;
+                case 3: $anos[$id][getNameIdade($tupla->idIdade)] = (double)$tupla->Valor;
+                    break;
+                case 4: $anos[$id][getNameEscolaridade($tupla->idEscolaridade)] = (double)$tupla->Valor;
+                    break;
+                case 5: $anos[$id][getNameEtinia($tupla->idEtinia)] = (double)$tupla->Valor;
+                    break;
+                case 6: $anos[$id][getNameFormalidade($tupla->Formalidade)] = (double)$tupla->Valor;
+                    break;
+                case 7: $anos[$id][getNamePrev($tupla->Previdencia)] = (double)$tupla->Valor;
+                    break;
+                case 8: $anos[$id][getNameSindical($tupla->Sindical)] = (double)$tupla->Valor;
+                    break;
+            }
 
+    }
 
-
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 1 && ($var == 11 || $var == 10 || $var == 9 || $var == 8 || (($var == 4 || $var == 5 ||  $var == 6) && $desag == 0 && $ocp == 0)) ) {
     require_once("EixoDois.php");
     for ($cad = 1; $cad <= 10; $cad++) {
 
-        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag, $ano) as $tupla) {
+        foreach (EixoDois::getter_linhas($var, $uf, $cad, $ocp, $uos, $slc, $desag, $subdeg) as $tupla) {
             $id = $tupla->Ano;
-            // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getNameCadeia($tupla->idCadeia)] = (double)$tupla->Valor;
-
-
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getNameCadeia($tupla->idCadeia)] = (double)$tupla->Valor;
         }
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 1 && ($var == 4 || $var == 5 || $var == 6) && $desag == 0 && $ocp != 0) {
     require_once("EixoDois.php");
-    for ($ocp = 1; $ocp <= 2; $ocp++) {
 
-        foreach (EixoDois::getter_barras($var, $uf, $cad, $prt, $ocp, $esc, $cor, $fax, $frm, $prv, $snd, $sex, $uos, $slc, $desag, $ano) as $tupla) {
+    foreach (EixoDois::getter_linhas($var, $uf, $cad, 3, $uos, $slc, $desag, $subdeg) as $tupla) {
 
-            $id = $tupla->Ano;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getNameOCP($ocp)] = (double)$tupla->Valor;
-        }
+        $id = $tupla->Ano;
+        $anos[$id]['ano'] = (int)$tupla->Ano;
+        $anos[$id][getNameOCP($tupla->idOcupacao)] = (double)$tupla->Valor;
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 }
 else if($eixo == 2 && $var > 14) {
@@ -468,46 +451,62 @@ else if($eixo == 2 && $var > 14) {
         foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
             $id = $tupla->Ano;
             // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getName($uos)] = (double)$tupla->Valor;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getName($uos)] = (double)$tupla->Valor;
 
 
             //$linhas[$id]['uf'] = $tupla->UFNome;
 
         }
     }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
+    }
+
 }
 else if($eixo == 2 && $var == 10) {
     require_once("EixoTres.php");
     for ($mec = 0; $mec <= 1; $mec++) {
 
-        foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
+        foreach (EixoTres::getter_linhas($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
             $id = $tupla->Ano;
             // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getName2($mec)] = (double)$tupla->Valor;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getName2($mec)] = (double)$tupla->Valor;
 
 
             //$linhas[$id]['uf'] = $tupla->UFNome;
 
         }
     }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
+    }
+
 }
 else if($eixo == 2 && $var < 15){
+
     require_once("EixoTres.php");
     for ($cad = 1; $cad <= 10; $cad++) {
+
 
         foreach (EixoTres::getter_barras($var, $uf, $cad, $mec, $pfj, $mod, $ano, $uos) as $tupla) {
 
             $id = $tupla->Ano;
             // $linhas[$tupla->Ano] = $tupla->Valor;
-            $linhas[$id]['ano'] = (int)$tupla->Ano;
-            $linhas[$id][getNameCadeia($tupla->idCadeia)] = (double)$tupla->Valor;
+            $anos[$id]['ano'] = (int)$tupla->Ano;
+            $anos[$id][getNameCadeia($tupla->idCadeia)] = (double)$tupla->Valor;
 
 
             //$linhas[$id]['uf'] = $tupla->UFNome;
 
         }
+    }
+
+    foreach ($anos as $ano){
+        $linhas[] = $ano;
     }
 
 }

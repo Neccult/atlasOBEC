@@ -1,7 +1,7 @@
 {
 	"ocupacoes": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#071342",
 			"gradient": {
 				"1": "#F2F0F4",
@@ -13,7 +13,7 @@
 			}
 		},
 		"1": {
-			"name": "Ocupacional - Atividades Relacionadas",
+			"name": "Atividades Relacionadas",
 			"color": "#87A8CA",
 			"gradient": {
 				"1": "#F3F6FA",
@@ -25,7 +25,7 @@
 			}
 		},
 		"2": {
-			"name": "Ocupacional - Cultura",
+			"name": "Cultura",
 			"color": "#077DDD",
 			"gradient": {
 				"1": "#F6F8FC",
@@ -37,7 +37,7 @@
 			}
 		},
 		"3": {
-			"name": "Ocupacional - Todos",
+			"name": "Todos",
 			"color": "#077DDD",
 			"gradient": {
 				"1": "#F6F8FC",
@@ -242,7 +242,7 @@
 	},
 	"regioes": {
 		"0": {
-			"name": "Principal",
+			"name": "Todos",
 			"color": "#2F484F"
 		},
 		"1": {
@@ -390,14 +390,14 @@
 		"0": {
 			"name": "Empreendimentos",
 			"color": {
-				"1": "#f2c94d",
+				"1": "#efc851",
 				"2": "#ffe866",
-				"3": "#f2c94d",
-				"4": "#f2c94d",
-				"5": "#f2c94d",
+				"3": "#efc851",
+				"4": "#efc851",
+				"5": "#efc851",
 				"6": "#"
 			}
-		},
+	},
 		"1": {
 			"name": "Mercado",
 			"color": {
@@ -433,4 +433,6 @@
 		}
 
 	}
+
+
 }

@@ -1,7 +1,16 @@
 
+<<<<<<< HEAD
 app/db/config.db.php
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/modules.xml
 .idea/minc.iml
 .idea/deployment.xml
+=======
+.idea/workspace.xml
+.idea/modules.xml
+.idea/minc.iml
+.idea/deployment.xml
+.idea/vcs.xml
+app/db/config.db.php
+>>>>>>> atlas_refat

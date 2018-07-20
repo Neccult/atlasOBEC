@@ -9,16 +9,6 @@
 	else
 		$uf = 0;
 
-	if (!empty($_GET["atc"]))
-		$atc = $_GET["atc"];
-	else
-		$atc = 0;
-
-	if (!empty($_GET["prt"]))
-		$prt = $_GET["prt"];
-	else
-		$prt = 0;
-
 	if (!empty($_GET["ano"]))
 		$ano = $_GET["ano"];
 	else
@@ -34,40 +24,15 @@
     else
         $ocp = 0;
 
-    if (!empty($_GET["sex"]))
-        $sex = $_GET["sex"];
+    if (!empty($_GET["deg"]))
+        $deg = $_GET["deg"];
     else
-        $sex = 0;
+        $deg = 0;
 
-    if (!empty($_GET["fax"]))
-        $fax = $_GET["fax"];
+    if (!empty($_GET["subdeg"]))
+        $subdeg = $_GET["subdeg"];
     else
-        $fax = 0;
-
-    if (!empty($_GET["esc"]))
-        $esc = $_GET["esc"];
-    else
-        $esc = 0;
-
-    if (!empty($_GET["cor"]))
-        $cor = $_GET["cor"];
-    else
-        $cor = 0;
-
-    if (!empty($_GET["frm"]))
-        $frm = $_GET["frm"];
-    else
-        $frm = 0;
-
-    if (!empty($_GET["prv"]))
-        $prv = $_GET["prv"];
-    else
-        $prv = 0;
-
-    if (!empty($_GET["snd"]))
-        $snd = $_GET["snd"];
-    else
-        $snd = 0;
+        $subdeg = 0;
 
     if (!empty($_GET["slc"]))
         $slc = $_GET["slc"];
@@ -130,7 +95,7 @@
 
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-		<script src="js/ie-emulation-modes-warning.js"></script>
+		<script src="js/dependencias/ie-emulation-modes-warning.js"></script>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -149,6 +114,7 @@
 		<!-- D3 QUEUE -->
 		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
 		<script src="js/functions.js"></script>
+		<script src="js/descricoes.js"></script>
 
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
@@ -170,9 +136,9 @@
             ?>
 		</div>
 		
-		<iframe id="view_box_barras" src="barras_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
+		<iframe id="view_box_barras" src="barras.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
 		</iframe>
-		<iframe id="view_box_scc" src="treemap_scc_box.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
+		<iframe id="view_box_scc" src="treemap_scc.php?view=mapa&var=1&prt=0&atc=0&cad=0&ocp=0&ano=2014&deg=0&uos=0&uf=0&mec=0&mod=0&pfj=0&eixo=politicas#politicas" style="width: 500px; height: 330px; opacity: 0" scrolling="no">
 		</iframe>
 
 		<script type="text/javascript">
@@ -181,17 +147,11 @@
 			var vrv = <?php echo $var; ?>;
 			var atc = <?php echo $atc; ?>;
 			var cad = <?php echo $cad; ?>;
-			var prt = <?php echo $prt; ?>;
 			var ano = <?php echo $ano; ?>;
             var ocp = <?php echo $ocp; ?>;
-            var sex = <?php echo $sex; ?>;
-            var fax = <?php echo $fax; ?>;
-            var esc = <?php echo $esc; ?>;
-            var cor = <?php echo $cor; ?>;
-            var frm = <?php echo $frm; ?>;
-            var prv = <?php echo $prv; ?>;
-            var snd = <?php echo $snd; ?>;
             var mec = <?php echo $mec; ?>;
+            var deg = <?php echo $deg; ?>;
+            var sub = <?php echo $subdeg; ?>;
             var mundo = <?php echo $mundo; ?>;
             var mod = <?php echo $mod; ?>;
             var slc = <?php echo $slc; ?>;
@@ -228,6 +188,8 @@
 				cad: "<?php echo $cad; ?>", 
 				ano: "<?php echo $ano; ?>",
 				uf: "<?php echo $uf; ?>",
+				deg: "<?php echo $deg; ?>",
+				subdeg: "<?php echo $subdeg; ?>",
                 eixo: eixo,
 				type: "<?php echo $type; ?>"
 			};
@@ -240,18 +202,6 @@
 				echo "<script src=\"js/".$view.".js\"></script>";
 			}
         ?>
-
-		<!--<div class="container" style="margin-top: 100px;">
-			<div class="row">
-				<div class="col-lg-12">
-					<h2>Export </h2>
-					<br/>
-					<button class="btn btn-success" id="save_as_pdf" value="">Save as PDF</button>
-					<button class="btn btn-success" id="save_as_png" value="">Save as PNG</button>
-					<br>
-				</div>
-			</div>	
-		</div>-->
 
 		<form id="svgform" method="post" action="cgi/download.pl">
 			 <input type="hidden" id="output_format" name="output_format" value="">
