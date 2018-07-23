@@ -49,8 +49,7 @@ function create_bars(barras_box, data){
         
         dados.key.push(data[key].ano);
 
-        if ((vrv === 3 ) && eixo == 0) dados.value.push(100 * data[key].valor);
-        else dados.value.push(data[key].valor);
+        dados.value.push(data[key].valor);
         
         if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
         else dados.percentual.push(data[key].percentual);
@@ -501,8 +500,7 @@ function update_bars(barras_box, data){
         
         dados.key.push(data[key].ano);
 
-        if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
-        else dados.value.push(data[key].valor);
+        dados.value.push(data[key].valor);
         
         if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
         else dados.percentual.push(data[key].percentual);
