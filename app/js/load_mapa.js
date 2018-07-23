@@ -479,17 +479,8 @@ function loadTooltip_mapa(d, dict, eixo, vrv){
 
         var valorTooltip = 0;
 
-        var array = ['1', '2', '4', '5', '6', '7' , '8'];
-        var array100 = ['3', '9'];
-
-
-        if(array.indexOf(vrv) != -1){
-            valorTooltip = dict[d.id].valor;
-        }
-        else if (array100.indexOf(vrv) != -1){
-            valorTooltip = dict[d.id].valor*100;
-        }
-
+        valorTooltip = dict[d.id].valor;
+ 
         tooltipInstance.showTooltip(d, [
             ["title", d['properties']['name']],
             ["", formatTextVrv(valorTooltip, eixo, vrv)]

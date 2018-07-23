@@ -850,27 +850,10 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
 
 
     if(eixo === 0){
-        if(vrv === 3){
-           tooltipInstance.showTooltip(d, [
-               ["title", key],
-               ["", formatTextVrv(d, eixo, vrv)],
-           ]);
-       }
-       else if(vrv === 9){
-
-            tooltipInstance.showTooltip(d, [
-                ["title", key],
-                ["", formatTextVrv(d*100, eixo, vrv)],
-                //    ["", formatTextTaxaVrv(dados.taxa[i], eixo, vrv)],
-            ]);
-       }
-       else{
-           tooltipInstance.showTooltip(d, [
-               ["title", key],
-               ["", formatTextVrv(d, eixo, vrv)],
-           ]);
-       }
-
+        tooltipInstance.showTooltip(d, [
+            ["title", key],
+            ["", formatTextVrv(d, eixo, vrv)]
+        ]);
    }
    else if(eixo === 1){
 

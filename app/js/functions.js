@@ -572,6 +572,14 @@ function setMaxFontSize(doc){
 
 }
 
+function normalizeValue(valor, sufixo){
+    if(parameters.eixo == 0 && sufixo == '%'){
+        return valor * 100;
+    } else {
+        return valor;
+    }
+}
+
 function getTextWidth(text, font) {
     var c = document.createElement("canvas");
     var ctx = c.getContext("2d");
@@ -591,20 +599,13 @@ function getTextWidth(text, font) {
 * Função que mexe no texto da barra de legenda do mapa.
 * Centraliza, muda o tamanho da fonte e formata o texto.
 */
-
-
 function formatBarTextMap(value, eixo, vrv, obj){
     var font_size = 9
     var description = PT_BR;
     sufixo = getDataVar(description, eixo, vrv).sufixo_valor;
     prefixo = getDataVar(description, eixo, vrv).prefixo_valor;
-    valor = value;
+    valor = normalizeValue(value, sufixo);
     switch(eixo) {
-        case 0:
-            if(vrv == 3) {
-                valor = valor*100;
-            }
-            break;
         case 1:
             if(vrv == 2){
                 valor *= 100;
@@ -624,36 +625,33 @@ function formatBarTextMap(value, eixo, vrv, obj){
 
 function formatTextVrv(value, eixo, vrv){
 
-    $.ajaxSetup({async: false});
     var string;
-    $.get("./data/pt-br.json")
-        .done(function(d){
-            variavel = d.var[eixo].filter(function(o){ return o.id == vrv})[0]
-            sufixo = variavel.sufixo_valor;
-            prefixo = variavel.prefixo_valor;
-            valor = value;
-            /*switch(eixo) {
-                case 0:
-                    break;
-                case 1:
-                    if(vrv === 2){
-                        valor *= 100;
-                    }
-                    break;
 
-            }*/
+    variavel = PT_BR.var[eixo].filter(function(o){ return o.id == vrv})[0]
+    sufixo = variavel.sufixo_valor;
+    prefixo = variavel.prefixo_valor;
+    valor = normalizeValue(value, sufixo);
 
-            if(eixo == 1 && url['var'] == 2)
-                string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
-            else if(eixo == 1 && url['var'] == 9)
-                string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
-            else if(eixo == 0 && url['var'] > 9)
-                string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
-            else
-                string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+    /*switch(eixo) {
+        case 0:
+            break;
+        case 1:
+            if(vrv === 2){
+                valor *= 100;
+            }
+            break;
 
-        });
-    $.ajaxSetup({async: true});
+    }*/
+
+    if(eixo == 1 && url['var'] == 2)
+        string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
+    else if(eixo == 1 && url['var'] == 9)
+        string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
+    else if(eixo == 0 && url['var'] > 9)
+        string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+    else
+        string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
+
     return string;
 }
 
@@ -686,19 +684,12 @@ function formatTextTaxaVrv(value, eixo, vrv){
 * Formata uma string de valor de variável. Põe prefixo, sufixo e 2 casas decimais.
 */
 function formatStringVrv(value, eixo, vrv){
-    $.ajaxSetup({async: false})
     var string;
     var d = PT_BR
-    getDataVar(d, eixo, vrv)
     sufixo = getDataVar(d, eixo, vrv).sufixo_valor;
     prefixo = getDataVar(d, eixo, vrv).prefixo_valor;
-    valor = value;
+    valor = normalizeValue(value, sufixo);
     switch(eixo) {
-        case 0:
-            if(vrv == 3) {
-                valor = valor*100;
-            }
-            break;
         case 1:
             if(vrv == 2){
                 valor *= 100;
@@ -710,8 +701,7 @@ function formatStringVrv(value, eixo, vrv){
 
     }
     string = prefixo+formatDecimalLimit(valor, 2)+sufixo;
-    $.ajaxSetup({async: true});
-
+    
     return string;
 }
 
