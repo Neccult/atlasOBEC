@@ -132,23 +132,17 @@ function configInfoDataBoxBarras(dados, valor, uos) {
 
     if(parameters.eixo == 0){
 
-        if(parameters.var == 9){
-            valor *= 100;
-            setIntegerValueData(valor)
-
-        }
-        else if(parameters.var >= 10){
+        if(parameters.var >= 10){
             if(uos == 1){
-                setPercentValueData(valor)
+                setPercentValueData(valor);
             }
             else if(uos == 0){
-                setIntegerValueData(valor)
+                setIntegerValueData(valor);
             }
         }
         else{
             setIntegerValueData(valor)
             if(parameters.cad == 0 && parameters.deg > 0 && parameters.uf > 0){
-                console.log(valor/total_deg[parameters.ano])
                 setPercentValueData(valor/total_deg[parameters.ano])
             }
         }
@@ -260,6 +254,10 @@ function setIntegerValueData(value) {
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
     valor = value;
+
+    if(parameters.eixo == 0 && sufixo == '%'){
+        valor = valor*100;
+    }
 
     var literal = formatDecimalLimit(valor, 2);
 
