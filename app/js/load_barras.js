@@ -51,7 +51,7 @@ function create_bars(barras_box, data){
         
         dados.key.push(data[key].ano);
 
-        if (( vrv === 3 ) && eixo ==0) dados.value.push(100 * data[key].valor);
+        if ((vrv === 3 ) && eixo == 0) dados.value.push(100 * data[key].valor);
         else dados.value.push(data[key].valor);
         
         if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
@@ -88,7 +88,7 @@ function create_bars(barras_box, data){
     })).nice();
 
     var formatYAxis = function (d) {
-            
+
         var higherZeroOcur = maxDecimalAxis;
         var dadosCounter = 0;
         var minFraction = 3;
@@ -99,6 +99,7 @@ function create_bars(barras_box, data){
         var formatDefault = function (d) {
             return removeDecimalZeroes(formatInit(d));
         };
+
         var formatThousands = function (d) {
             if(d == 0)
                 return 0;
@@ -331,7 +332,7 @@ function create_bars(barras_box, data){
 
                 // BARRA PEQUENA
                 if (barHeight <= minBarHeight)
-                    return height - minBarHeight;
+                    return height - barHeight;
 
                 return y(d);
             })
@@ -718,7 +719,7 @@ function update_bars(barras_box, data){
 
             // BARRA PEQUENA
             if (barHeight <= minBarHeight)
-                return height - minBarHeight;
+                return height - barHeight;
 
             return y(d);
         })
