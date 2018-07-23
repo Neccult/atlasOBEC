@@ -253,11 +253,8 @@ function setIntegerValueData(value) {
     var result = getDataVar(description, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
-    valor = value;
-
-    if(parameters.eixo == 0 && sufixo == '%'){
-        valor = valor*100;
-    }
+    
+    valor = normalizeValue(value, sufixo);
 
     var literal = formatDecimalLimit(valor, 2);
 
