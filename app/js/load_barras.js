@@ -6,7 +6,7 @@ function create_bars(barras_box, data){
 
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
-    var minBarHeight = 5;
+    var minBarHeight = 6;
 
     var eixo = parameters.eixo
     var vrv  = parameters.var
@@ -39,8 +39,6 @@ function create_bars(barras_box, data){
     }
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
-
-        // console.log(data)
 
         if(vrv == 3 && eixo == 0){
             delete data['2007'];
@@ -317,6 +315,7 @@ function create_bars(barras_box, data){
 
                 // TEM VALOR NEGATIVO
                 if (isValueNegative) {
+
                     // NÚMERO NEGATIVO
                     if (isValueNegative)
                         return zeroPosition;
@@ -329,10 +328,12 @@ function create_bars(barras_box, data){
 
                 barHeight = Math.abs(height - barHeight);
 
-                // BARRA PEQUENA
-                if (barHeight <= minBarHeight)
-                    return height - barHeight;
 
+
+                // BARRA PEQUENA
+                if (barHeight <= minBarHeight){
+                    return height - 5;
+                }
                 return y(d);
             })
             .attr("width", x.bandwidth())
@@ -341,9 +342,7 @@ function create_bars(barras_box, data){
 
                 // TEM VALOR NEGATIVO
                 var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-                
                 var isValueZero = y(d) == zeroPosition;
-
 
                 if (isValueZero){
                     return minBarHeight;
@@ -353,10 +352,8 @@ function create_bars(barras_box, data){
 
                 // BARRA PEQUENA
                 if (barHeight <= minBarHeight){
-                    return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+                    return Math.abs(5);
                 }
-
-
                 return  Math.abs(y(d) - zeroPosition);
             })
             .attr("fill", function (d,i ) {
@@ -714,6 +711,7 @@ function update_bars(barras_box, data){
 
             // TEM VALOR NEGATIVO
             if (isValueNegative) {
+
                 // NÚMERO NEGATIVO
                 if (isValueNegative)
                     return zeroPosition;
@@ -721,15 +719,17 @@ function update_bars(barras_box, data){
                 if (barHeight == zeroPosition)
                     return zeroPosition - 5;
 
-                    return y(0);
+                return y(0);
             }
 
             barHeight = Math.abs(height - barHeight);
 
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight)
-                return height - barHeight;
 
+
+            // BARRA PEQUENA
+            if (barHeight <= minBarHeight){
+                return height - 5;
+            }
             return y(d);
         })
         .attr("width", x.bandwidth())
@@ -738,9 +738,7 @@ function update_bars(barras_box, data){
 
             // TEM VALOR NEGATIVO
             var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-            
             var isValueZero = y(d) == zeroPosition;
-
 
             if (isValueZero){
                 return minBarHeight;
@@ -750,10 +748,8 @@ function update_bars(barras_box, data){
 
             // BARRA PEQUENA
             if (barHeight <= minBarHeight){
-                return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+                return Math.abs(5);
             }
-
-
             return  Math.abs(y(d) - zeroPosition);
         })
         .attr("data-color", function(d, i, obj) {
