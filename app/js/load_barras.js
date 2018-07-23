@@ -122,60 +122,31 @@ function create_bars(barras_box, data){
             }
             return (value+sufixos[c])
         };
-
-        function formatNano(d) {
-            
-            return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
-        };
-        function formatMicro(d) {
-            return removeDecimalZeroes(formatInit(d * 1e6)) + "µ";
-        };
-        function formatMili(d) {
-            return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
-        };
-        function formatPercent(d) {
-            if (eixo == 0 && vrv == 9) {
-                if (uf == 0)
-                    return removeDecimalZeroes(formatInit(d * 1e2)) + "%";
-                else{
-                    return format3dc(d*1e2) + "%";
-                }
-            }
-            return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
-    
-        };
-    
         var formatFraction = function (d) {
-            var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
-            var decimalDigits;
-            decimalDigits = minFraction + higherZeroOcur;
 
-            var format = d3.format("." + decimalDigits + "f");
-            dadosCounter++;
-    
-            if(d == 0){
-                return d;
-            }
-    
-            if(eixo == 0 && vrv == 9){
-                if(uf == 0){
-                    return formatPercent(d).replace(".", ",");
+
+            d = d*100;
+            d = Math.floor(d);
+
+            var value = d;
+            var c = 0;
+            var sufixos = ['', 'm', 'u', 'n', 'p'];
+
+            if(value <= 1/1000){
+                while(value.toString().length >= 5){
+
+                    c++;
+                    value = value * 1000;
+
                 }
-                else if(cad != 0 && uf != 0){
-                    return formatPercent(d).replace(".", ",");
-                }
             }
-    
-            if(Math.abs(d) < 1/1e7){
-                return formatNano(d).replace(".", ",");
-            }
-            else if(Math.abs(d) < 1/1e4){
-                return formatMicro(d).replace(".", ",");
-            }
-    
-            return (format(d)).replace(".", ",");
+
+            console.log(value+sufixos[c])
+
+            return (value+sufixos[c]+' %')
         };
-    
+
+
         var axisCountValidDecimalDigits = function (value, acum) {
             var acum = acum || 0;
             var digitString = typeof value !== 'string' && typeof value !== 'undefined' ? (value).toString() : value;
@@ -535,6 +506,29 @@ function update_bars(barras_box, data){
             }
             return (value+sufixos[c])
         };
+        var formatFraction = function (d) {
+
+
+            d = d*100;
+            d = Math.floor(d);
+
+            var value = d;
+            var c = 0;
+            var sufixos = ['', 'm', 'u', 'n', 'p'];
+
+            if(value <= 1/1000){
+                while(value.toString().length >= 5){
+
+                    c++;
+                    value = value * 1000;
+
+                }
+            }
+
+            console.log(value+sufixos[c])
+
+            return (value+sufixos[c]+' %')
+        };
 
         function formatNano(d) {
 
@@ -556,37 +550,6 @@ function update_bars(barras_box, data){
             }
             return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
 
-        };
-
-        var formatFraction = function (d) {
-            var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
-            var decimalDigits;
-            decimalDigits = minFraction + higherZeroOcur;
-
-            var format = d3.format("." + decimalDigits + "f");
-            dadosCounter++;
-
-            if(d == 0){
-                return d;
-            }
-
-            if(eixo == 0 && vrv == 9){
-                if(uf == 0){
-                    return formatPercent(d).replace(".", ",");
-                }
-                else if(cad != 0 && uf != 0){
-                    return formatPercent(d).replace(".", ",");
-                }
-            }
-
-            if(Math.abs(d) < 1/1e7){
-                return formatNano(d).replace(".", ",");
-            }
-            else if(Math.abs(d) < 1/1e4){
-                return formatMicro(d).replace(".", ",");
-            }
-
-            return (format(d)).replace(".", ",");
         };
 
         var axisCountValidDecimalDigits = function (value, acum) {
@@ -619,6 +582,7 @@ function update_bars(barras_box, data){
         var preFormatted = removeDecimalZeroes(preFormat(maxValue));
         var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
         var isSmall = preFormatted < 1 && preFormatted > -1;
+
 
         // has decimal
         if (isSmall){
