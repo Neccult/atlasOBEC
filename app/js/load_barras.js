@@ -100,18 +100,22 @@ function create_bars(barras_box, data){
 
         var formatGreatNumber = function (d) {
 
+
             var value = d;
             var c = 0;
             var sufixos = ['', 'K', 'M', 'B', 'T'];
 
             if(value >= 1000){
-                while(value.toString().length >= 4){
+                while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
+
                     c++;
                     value = value / 1000;
+
                 }
             }
 
-            if(eixo == 0 && vrv == 8){
+
+            if(parameters.eixo == 0 && parameters.var == 8){
                 if(c > 0){
                     c--;
                 }
@@ -509,18 +513,22 @@ function update_bars(barras_box, data){
 
         var formatGreatNumber = function (d) {
 
+
             var value = d;
             var c = 0;
             var sufixos = ['', 'K', 'M', 'B', 'T'];
 
             if(value >= 1000){
-                while(value.toString().length >= 4){
+                while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
+
                     c++;
                     value = value / 1000;
+
                 }
             }
 
-            if(eixo == 0 && vrv == 8){
+
+            if(parameters.eixo == 0 && parameters.var == 8){
                 if(c > 0){
                     c--;
                 }
