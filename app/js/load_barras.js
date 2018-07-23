@@ -93,48 +93,42 @@ function create_bars(barras_box, data){
         var formatInit = d3.format(".2f");
         var format3dc = d3.format(".3f");
 
+
         var formatDefault = function (d) {
             return removeDecimalZeroes(formatInit(d));
         };
 
-        var formatThousands = function (d) {
-            if(d == 0)
-                return 0;
-    
-            if(eixo == 0 && vrv == 8)
-                return removeDecimalZeroes(formatInit(d / 1e3)) + "M";
-    
-            return removeDecimalZeroes(formatInit(d / 1e3)) + "K";
+        var formatGreatNumber = function (d) {
+
+            var value = d;
+            var c = 0;
+            var sufixos = ['', 'K', 'M', 'B', 'T'];
+
+            if(value >= 1000){
+                while(value.toString().length >= 4){
+                    c++;
+                    value = value / 1000;
+                }
+            }
+
+            if(eixo == 0 && vrv == 8){
+                if(c > 0){
+                    c--;
+                }
+            }
+            return (value+sufixos[c])
         };
-        var formatMillions = function (d) {
-            if(d == 0)
-                return 0;
-    
-            if(eixo == 0 && vrv == 8)
-                return removeDecimalZeroes(formatInit(d / 1e6)) + "B";
-    
-            return removeDecimalZeroes(formatInit(d / 1e6)) + "M";
-        };
-    
-        var formatBillions = function (d) {
-            if(d == 0)
-                return 0;
-            return removeDecimalZeroes(formatInit(d / 1e9)) + "B";
-        };
-    
+
         function formatNano(d) {
             
             return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
         };
-    
         function formatMicro(d) {
             return removeDecimalZeroes(formatInit(d * 1e6)) + "µ";
         };
-    
         function formatMili(d) {
             return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
         };
-    
         function formatPercent(d) {
             if (eixo == 0 && vrv == 9) {
                 if (uf == 0)
@@ -150,22 +144,14 @@ function create_bars(barras_box, data){
         var formatFraction = function (d) {
             var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
             var decimalDigits;
-    
-    
-            // test decimal number and sets decimal digits that will be visible
-            // if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
             decimalDigits = minFraction + higherZeroOcur;
-    
-            // console.log("valor: "+Math.abs(d)+" - decimal digits: "+(decimalDigits))
-    
-    
+
             var format = d3.format("." + decimalDigits + "f");
-            // console.log(format(d))
             dadosCounter++;
     
-            if(d == 0)
+            if(d == 0){
                 return d;
-    
+            }
     
             if(eixo == 0 && vrv == 9){
                 if(uf == 0){
@@ -173,9 +159,7 @@ function create_bars(barras_box, data){
                 }
                 else if(cad != 0 && uf != 0){
                     return formatPercent(d).replace(".", ",");
-    
                 }
-    
             }
     
             if(Math.abs(d) < 1/1e7){
@@ -185,9 +169,6 @@ function create_bars(barras_box, data){
                 return formatMicro(d).replace(".", ",");
             }
     
-            // else if(Math.abs(d) < 1/1e1){
-            //     return formatMili(d).replace(".", ",");
-            // }
             return (format(d)).replace(".", ",");
         };
     
@@ -223,19 +204,15 @@ function create_bars(barras_box, data){
         var isSmall = preFormatted < 1 && preFormatted > -1;
     
         // has decimal
-        if (isSmall)
+        if (isSmall){
             return formatFraction;
+        }
     
         var preFormattedIntLength = Math.round(preFormatted).toString().length;
-    
-        if (preFormattedIntLength <= 3)
-            return formatDefault;
-        else if (preFormattedIntLength <= 6)
-            return formatThousands;
-        else if (preFormattedIntLength <= 9)
-            return formatMillions;
-        else if (preFormattedIntLength <= 12)
-            return formatBillions;
+
+        if (preFormattedIntLength > 0){
+            return formatGreatNumber;
+        }
     }();
 
     var grid_lines = d3.axisLeft(y)
@@ -517,161 +494,134 @@ function update_bars(barras_box, data){
     dados.key = d3.keys(data);
 
     var formatYAxis = function (d) {
-            
+
         var higherZeroOcur = maxDecimalAxis;
         var dadosCounter = 0;
         var minFraction = 3;
-    
+
         var formatInit = d3.format(".2f");
         var format3dc = d3.format(".3f");
-
 
 
         var formatDefault = function (d) {
             return removeDecimalZeroes(formatInit(d));
         };
-        var formatThousands = function (d) {
-            if(d == 0)
-                return 0;
-    
-            if(eixo == 0 && vrv == 8)
-                return removeDecimalZeroes(formatInit(d / 1e3)) + "M";
-    
-            return removeDecimalZeroes(formatInit(d / 1e3)) + "K";
+
+        var formatGreatNumber = function (d) {
+
+            var value = d;
+            var c = 0;
+            var sufixos = ['', 'K', 'M', 'B', 'T'];
+
+            if(value >= 1000){
+                while(value.toString().length >= 4){
+                    c++;
+                    value = value / 1000;
+                }
+            }
+
+            if(eixo == 0 && vrv == 8){
+                if(c > 0){
+                    c--;
+                }
+            }
+            return (value+sufixos[c])
         };
-        var formatMillions = function (d) {
-            if(d == 0)
-                return 0;
-    
-            if(eixo == 0 && vrv == 8)
-                return removeDecimalZeroes(formatInit(d / 1e6)) + "B";
-    
-            return removeDecimalZeroes(formatInit(d / 1e6)) + "M";
-        };
-    
-        var formatBillions = function (d) {
-            if(d == 0)
-                return 0;
-            return removeDecimalZeroes(formatInit(d / 1e9)) + "B";
-        };
-    
+
         function formatNano(d) {
-            
+
             return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
         };
-    
         function formatMicro(d) {
             return removeDecimalZeroes(formatInit(d * 1e6)) + "µ";
         };
-    
         function formatMili(d) {
             return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
         };
-    
         function formatPercent(d) {
             if (eixo == 0 && vrv == 9) {
                 if (uf == 0)
                     return removeDecimalZeroes(formatInit(d * 1e2)) + "%";
                 else{
                     return format3dc(d*1e2) + "%";
-    
                 }
-    
             }
-    
             return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
-    
+
         };
-    
+
         var formatFraction = function (d) {
             var decimalDigitsCount = axisCountValidDecimalDigits(dados.value[dadosCounter]);
             var decimalDigits;
-    
-    
-            // test decimal number and sets decimal digits that will be visible
-            // if there are a number like 0,005 it will add + 1 to the counter so it will show something like = 0,0052
             decimalDigits = minFraction + higherZeroOcur;
-    
-            // console.log("valor: "+Math.abs(d)+" - decimal digits: "+(decimalDigits))
-    
-    
+
             var format = d3.format("." + decimalDigits + "f");
-            // console.log(format(d))
             dadosCounter++;
-    
-            if(d == 0)
+
+            if(d == 0){
                 return d;
-    
-    
+            }
+
             if(eixo == 0 && vrv == 9){
                 if(uf == 0){
                     return formatPercent(d).replace(".", ",");
                 }
                 else if(cad != 0 && uf != 0){
                     return formatPercent(d).replace(".", ",");
-    
                 }
-    
             }
-    
+
             if(Math.abs(d) < 1/1e7){
                 return formatNano(d).replace(".", ",");
             }
             else if(Math.abs(d) < 1/1e4){
                 return formatMicro(d).replace(".", ",");
             }
-    
-            // else if(Math.abs(d) < 1/1e1){
-            //     return formatMili(d).replace(".", ",");
-            // }
+
             return (format(d)).replace(".", ",");
         };
-    
+
         var axisCountValidDecimalDigits = function (value, acum) {
             var acum = acum || 0;
             var digitString = typeof value !== 'string' && typeof value !== 'undefined' ? (value).toString() : value;
-    
+
             // break condition
             if (!value) {
                 if (acum > higherZeroOcur)
                     higherZeroOcur = acum;
-    
+
                 return higherZeroOcur;
             }
-    
+
             // if has dot (first iteration)
             if (digitString.match(/\./g))
                 digitString = digitString.split(".")[1];
-    
+
             var isZero = parseInt(digitString[0]) === 0 ? 1 : 0;
             var newValue = isZero ? digitString.substring(1) : "";
             var newAcum = acum + isZero;
-    
+
             return axisCountValidDecimalDigits(newValue, newAcum);
         };
-    
+
         var maxValue = d3.max(dados.value);
         var minValue = d3.min(dados.value);
-    
+
         var preFormat = d3.format('.2f');
         var preFormatted = removeDecimalZeroes(preFormat(maxValue));
         var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
         var isSmall = preFormatted < 1 && preFormatted > -1;
-    
+
         // has decimal
-        if (isSmall)
+        if (isSmall){
             return formatFraction;
-    
+        }
+
         var preFormattedIntLength = Math.round(preFormatted).toString().length;
-    
-        if (preFormattedIntLength <= 3)
-            return formatDefault;
-        else if (preFormattedIntLength <= 6)
-            return formatThousands;
-        else if (preFormattedIntLength <= 9)
-            return formatMillions;
-        else if (preFormattedIntLength <= 12)
-            return formatBillions;
+
+        if (preFormattedIntLength > 0){
+            return formatGreatNumber;
+        }
     }();
 
     var x = d3.scaleBand()

@@ -317,8 +317,8 @@ function update_bars_stacked(barras_box, data){
         .domain([0, max_value])
         .rangeRound([height, 0]);
 
-
     var cor;
+
     if(cad == 0){
         cor = corEixo[1];
     }
