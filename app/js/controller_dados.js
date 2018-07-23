@@ -207,10 +207,10 @@ function configInfoDataBoxBarras(dados, valor, uos) {
         if(parameters.var == 5 || parameters.var == 8){
             dados.valor = dados.value[index_ano];
 
-            if(parameters.uos == 0){
+            if(uos == 0){
                 setIntegerValueData(dados.valor);
             }
-            else if(parameters.uos == 2){
+            else if(uos == 2){
                 setPercentValueData(dados.valor);
             }
         }
@@ -254,7 +254,6 @@ function configInfoDataBoxBarrasStacked(dados, valor, soma) {
 /*  --- SETTERS --- */
 
 function setIntegerValueData(value) {
-
     var description = PT_BR
 
     var result = getDataVar(description, parameters.eixo, parameters.var);
@@ -308,8 +307,8 @@ function setPercentValueData(valor) {
         }
         else if(parameters.var == 2 || parameters.var == 11 || parameters.var == 10 ||  parameters.var == 9  || parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 8){
             percentual = "";
-        }
-
+        }            
+        
         $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
         setMaxFontSize(doc);
@@ -356,7 +355,7 @@ function setPercentValueData(valor) {
     }
 }
 
-function setTerceiroValueData(value){
+function setTerceiroValueData(value, uos){
 
     if(parameters.eixo == 0){
 
@@ -390,7 +389,7 @@ function setTerceiroValueData(value){
     }
     else if(parameters.eixo == 3){
         if(parameters.var == 5 || parameters.var == 8){
-            if(parameters.cad == 1){
+            if(uos == 1){
                 $(".state-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
                 $(".prc-title").first().css("display", "none");
@@ -432,7 +431,6 @@ function updateData(view, dados, valor, uos){
         configInfoDataBoxMapa(dados, valor);
     }
     else if(view == "barras"){
-
         if(!(parameters.eixo == 1 && parameters.var == 6 && parameters.uos == 1) && !(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
             configInfoDataBoxBarras(dados, valor, uos);
         }

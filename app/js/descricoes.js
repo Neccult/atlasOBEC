@@ -184,11 +184,14 @@ function updateTitleClickMapa(uf_click){
 
 function initTitleBox(index1, index2, index3){
     var data_var = getDataVar(PT_BR, parameters.eixo, parameters.var)
-    $("#containerMapa").find(".view-title").text(data_var.views.view_box1[index1].title);
-    $("#containerBarra").find(".view-title").text(data_var.views.view_box2[index2].title);
-    //$("#containerBarra").find(".view-title").text('SÉRIE HISTÓRICA [uf] [cad]');
+    if(parameters.slc == 1 && parameters.var > 11 && parameters.eixo == 1){
+        $("#containerMapa").find(".view-title").text("SÉRIE HISTÓRICA POR ATIVIDADES RELACIONADAS");
+        $("#containerBarra").find(".view-title").text("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
+    } else {
+        $("#containerMapa").find(".view-title").text(data_var.views.view_box1[index1].title);
+        $("#containerBarra").find(".view-title").text(data_var.views.view_box2[index2].title);
+    }
     $("#containerTree").find(".view-title").text(data_var.views.view_box3[index3].title);
-    //$("#containerTree").find(".view-title").text("TREEMAP - SETORES CULTURAIS CRIATIVOS [uf]");
 }
 
 function updateTitleBox(){
@@ -214,8 +217,14 @@ function updateTitleBox(){
     if(title_scc != undefined)
         $("#containerTree").find(".view-title").text(title_scc.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
 
-    if(title_barras != undefined)
-        $("#containerBarra").find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+    if(title_barras != undefined){
+        if(parameters.slc == 1 && parameters.var > 11 && parameters.eixo == 1){
+            $("#containerBarra").find(".view-title").text("SÉRIE HISTÓRICA POR ATIVIDADES CULTURAIS");
+        } else {
+            $("#containerBarra").find(".view-title").text(title_barras.replace("[uf]", getPrepos(uf)+' '+uf.toUpperCase()).replace("[cad]", cad));
+        }
+    }
+        
 }
 
 function updateDescription(descricoes, eixo, vrv, slc){
@@ -363,7 +372,6 @@ function updateDescription(descricoes, eixo, vrv, slc){
             desc_int = desc_int.replace('[uf]', nomeestado).replace('[cad]', cad_text)
             desc_perc = desc_perc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
             desc_terc = desc_terc.replace('[uf]', nomeestado).replace('[cad]', cad_text)
-
 
 
             $('.integer-value').find('.description-number').first().text(desc_int)

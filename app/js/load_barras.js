@@ -344,8 +344,19 @@ function create_bars(barras_box, data){
                 var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
                 
                 var isValueZero = y(d) == zeroPosition;
-                if (isValueZero)
+
+
+                if (isValueZero){
                     return minBarHeight;
+                }
+
+                barHeight = Math.abs(height - barHeight);
+
+                // BARRA PEQUENA
+                if (barHeight <= minBarHeight){
+                    return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+                }
+
 
                 return  Math.abs(y(d) - zeroPosition);
             })
@@ -731,8 +742,19 @@ function update_bars(barras_box, data){
             var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
             
             var isValueZero = y(d) == zeroPosition;
-            if (isValueZero)
+
+
+            if (isValueZero){
                 return minBarHeight;
+            }
+
+            barHeight = Math.abs(height - barHeight);
+
+            // BARRA PEQUENA
+            if (barHeight <= minBarHeight){
+                return Math.abs(y(d) + minBarHeight + 2 - zeroPosition);
+            }
+
 
             return  Math.abs(y(d) - zeroPosition);
         })

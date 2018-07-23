@@ -460,7 +460,17 @@ class EixoDois {
         } else if($ocp == 2){
             $query .= " AND idOcupacao = 2";
         } else if($ocp == 3){
-            $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
+            //Os índices IHH e C4 da ocupação são definidos pelo uos
+            if($var > 11){
+                if($uos == 0){
+                    $query .= " AND idOcupacao = 1";
+                } else {
+                    $query .= " AND idOcupacao = 2";
+                }
+                
+            } else {
+                $query .= " AND (idOcupacao = 1 OR idOcupacao = 2)";
+            }            
         }
         
         $var_single_deg = array(4, 5);
@@ -542,7 +552,6 @@ class EixoDois {
             }
             $allObjects = $result_aux;
         }
-        
         self::disconnect();
 
         return $allObjects;

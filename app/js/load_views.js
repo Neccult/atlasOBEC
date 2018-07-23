@@ -13,7 +13,9 @@ views_parameters = {
 window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
     parameters[key] = value;
 })
-
+if(!('slc' in parameters)){
+    parameters['slc'] = 0
+}
 parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 PT_BR = [];
 COLORS = [];
@@ -128,7 +130,7 @@ $.when($.get('data/pt-br.json'),
         
         updateSelectAnos(); 
         
-        updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
+        updateDescription(DESCRICOES, parameters.eixo, parameters.var, parameters.slc);
         data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
 
         var view_box1 = data_var.views.view_box1[index_view_box1].id
@@ -147,18 +149,30 @@ $.when($.get('data/pt-br.json'),
 
 
         $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-            brasil_setor = JSON.parse(dado);
-            d3.json("./db/json_"+view_box1+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box"].uos, function(json){
-                VIEWS[view_box1].call(this, "#view_box", json);
-            })
-            
-            d3.json("./db/json_"+view_box2+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_barras"].uos, function(json){
-                VIEWS[view_box2].call(this, "#view_box_barras", json);
-            });
+            brasil_setor = JSON.parse(dado); 
 
-            d3.json("./db/json_"+view_box3+".php?"+URL_PARAM+"&uos="+views_parameters["#view_box_scc"].uos, function(json){
-                VIEWS[view_box3].call(this, "#view_box_scc", json);
-            });
+            if(view_box1 == ""){
+                $("#view_box svg").remove()
+            } else {
+                d3.json("./db/json_" + view_box1 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box"].uos, function (json) {
+                    VIEWS[view_box1].call(this, "#view_box", json);
+                })    
+            }
+            if(view_box2 == ""){
+                $("#view_box_barras svg").remove()
+            } else {
+                d3.json("./db/json_" + view_box2 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_barras"].uos, function (json) {
+                    VIEWS[view_box2].call(this, "#view_box_barras", json);
+                })
+            }
+            
+            if(view_box3 == ""){
+                $("#view_box_scc svg").remove()
+            } else {
+                d3.json("./db/json_" + view_box3 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_scc"].uos, function (json) {
+                    VIEWS[view_box3].call(this, "#view_box_scc", json);
+                })
+            }
 
         })
         
@@ -184,6 +198,11 @@ function updateParameters(){
     window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
         parameters[key] = value;
     })
+
+
+    if(!('slc' in parameters)){
+        parameters['slc'] = 0
+    }
     
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
 
@@ -308,6 +327,12 @@ function virtualParameters(){
                 views_parameters["#view_box_barras"].uos = '0';
                 views_parameters["#view_box_scc"].uos = '0';    
             }
+
+            if(parameters.var == 5 || parameters.var == 8 || parameters.var == 11 || parameters.var == 12 || parameters.var == 14){
+                $(".content-btn-mapa").css("display", "none");
+            } else {
+                $(".content-btn-mapa").css("display", "block");
+            }
             break;
     }
 }
@@ -326,7 +351,7 @@ function loadViews(){
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
     
-    updateDescription(DESCRICOES, parameters.eixo, parameters.var, 0);
+    updateDescription(DESCRICOES, parameters.eixo, parameters.var, parameters.slc);
     
     var view_box1 = data_var.views.view_box1[index_view_box1].id
     var view_box2 = data_var.views.view_box2[0].id
@@ -350,27 +375,32 @@ function loadViews(){
     
     $.get('./db/total_setor.php?'+URL_PARAM, function(dado) {
         brasil_setor = JSON.parse(dado);
-
-        d3.json("./db/json_" + view_box1 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box"].uos, function (json) {
-            VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
-        })
-
-        d3.json("./db/json_" + view_box2 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_barras"].uos, function (json) {
-            VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
-        })
-
-        d3.json("./db/json_" + view_box3 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_scc"].uos, function (json) {
-            VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
-        })
+       
+        if(view_box1 == ""){
+            $("#view_box svg").remove()
+        } else {
+            d3.json("./db/json_" + view_box1 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box"].uos, function (json) {
+                VIEWS[view_box1].call(this, "#view_box", json, UPDATE_1);
+            })    
+        }
+        if(view_box2 == ""){
+            $("#view_box_barras svg").remove()
+        } else {
+            d3.json("./db/json_" + view_box2 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_barras"].uos, function (json) {
+                VIEWS[view_box2].call(this, "#view_box_barras", json, UPDATE_2);
+            })
+        }
+        
+        if(view_box3 == ""){
+            $("#view_box_scc svg").remove()
+        } else {
+            d3.json("./db/json_" + view_box3 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_scc"].uos, function (json) {
+                VIEWS[view_box3].call(this, "#view_box_scc", json, UPDATE_3);
+            })
+        }
 
 
     })
-    
-
-
-
-
-
 
 }
 
