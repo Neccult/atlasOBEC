@@ -117,9 +117,7 @@ function configInfoDataBoxTreemapSCC(dados) {
         else if(parameters.cad != 0) {
 
             setPercentValueData(dados.percent);
-
-
-
+        
         }
 
     }
@@ -150,7 +148,6 @@ function configInfoDataBoxBarras(dados, valor, uos) {
 
     }
     else if(parameters.eixo == 1){
-
 
         if(parameters.var == 6){
             if(uos == 0){
@@ -253,16 +250,13 @@ function setIntegerValueData(value) {
     var result = getDataVar(description, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
-    
+
     valor = normalizeValue(value, sufixo);
-
-    var literal = formatDecimalLimit(valor, 2);
-
-    if(parameters.eixo == 1 && parameters.var == 2){
-        literal = formatDecimalLimit(valor*100, 4);
-    }
-    else if(parameters.eixo == 1 && parameters.var == 9){
-        literal = formatDecimalLimit(valor, 4);
+    
+    if(parameters.eixo == 1 && (parameters.var == 2 || parameters.var == 9)){
+        var literal = formatDecimalLimit(valor, 4);
+    } else {
+        var literal = formatDecimalLimit(valor, 2);
     }
 
     estado = $(".state-title").first().text()

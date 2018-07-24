@@ -40,9 +40,9 @@ function create_bars(barras_box, data){
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-        if(vrv == 3 && eixo == 0){
-            delete data['2007'];
-        }
+    if(vrv == 3 && eixo == 0){
+        delete data['2007'];
+    }
 
     Object.keys(data).forEach(function (key) {
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
@@ -878,7 +878,6 @@ function getSoma(barraId) {
 function destacarBarra(barras_box, barraId) {
 
     d3.select(barras_box).selectAll("rect").each(function() {
-
 
     if($(this).attr("data-legend") == barraId) {
         if($(this).attr("class") !== "destacado") {

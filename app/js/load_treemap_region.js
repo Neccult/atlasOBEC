@@ -191,7 +191,6 @@ function update_treemap_region(treemap_box, data){
     var vrv = parameters.var;
     var cad = parameters.cad;
 
-
     var color = function(colorId){
         if(parameters.eixo == 3) {
             if(COLORS.parceiros[colorId]){
@@ -255,7 +254,6 @@ function update_treemap_region(treemap_box, data){
 
     setTimeout(function () {
 
-
         titleTextElement = cell_region.select("text")
             .text(function(d) {return d.data.name; })
             .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
@@ -264,7 +262,6 @@ function update_treemap_region(treemap_box, data){
             .attr("y", 19)
             .attr("text-anchor", "start")
             .style("opacity", 1);
-
 
         percentageTextElement
             .text(function(d) {
@@ -313,8 +310,6 @@ function update_treemap_region(treemap_box, data){
             .style("opacity", 1);
 
         formatTreemapText(treemap_box);
-
-
 
     }, 750);
 
