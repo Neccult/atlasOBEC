@@ -141,8 +141,6 @@ function create_bars(barras_box, data){
                 }
             }
 
-            console.log(value+sufixos[c])
-
             return (value+sufixos[c]+' %')
         };
 
@@ -525,7 +523,6 @@ function update_bars(barras_box, data){
                 }
             }
 
-            console.log(value+sufixos[c])
 
             return (value+sufixos[c]+' %')
         };
