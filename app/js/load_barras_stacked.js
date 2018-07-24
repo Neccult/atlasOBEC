@@ -504,18 +504,11 @@ function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance, name) {
         }
         else if (vrv == 2) {
 
-            if (url['ocp'] == 0) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", name],
-                    ["", formatTextVrv(Math.abs(d[1] - d[0]) * 10000, eixo, vrv)]
-                ]);
-            }
-            else {
-                tooltipInstance.showTooltip(d, [
-                    ["title", name],
-                    ["", formatTextVrv(Math.abs(d[1] - d[0]) * 100, eixo, vrv)]
-                ]);
-            }
+            tooltipInstance.showTooltip(d, [
+                ["title", name],
+                ["", formatTextVrv(Math.abs(d[1] - d[0]), eixo, vrv)]
+            ]);
+        
         }
         else if (vrv == 1 || (vrv >= 4 && vrv <= 8) || vrv == 11 || vrv == 10 || vrv >= 12) {
             tooltipInstance.showTooltip(d, [
