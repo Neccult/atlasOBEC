@@ -3,30 +3,35 @@
 		[
 			{
 				"nome":"Artigo 1",
+				"arquivo":"teste.pdf",
 				"tags": [
 					"Editorial"
 				]
 			},
 			{
 				"nome":"Artigo 2",
+				"arquivo":"teste.pdf",
 				"tags": [
 					"Audiovisual"
 				]
 			},
 			{
 				"nome":"Artigo 3",
+				"arquivo":"teste.pdf",
 				"tags": [
 					"Artes Cênicas e Espetáculos"
 				]
 			},
 			{
 				"nome":"Artigo 4",
+				"arquivo":"tesste.pdf",
 				"tags": [
 					"Todos"
 				]
 			},
 			{
 				"nome":"Artigo 5",
+				"arquivo":"teste.pdf",
 				"tags": [
 					"Artes Cênicas e Espetáculos",
 					"Música"

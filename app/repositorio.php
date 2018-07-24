@@ -111,9 +111,9 @@
         return artigos;
     }
 
-    function loadArticle(nome, tags){
+    function loadArticle(nome, tags, url){
         $(".results").append("" +
-            "<div class=\"card-result\">\n" +
+            "<div class=\"card-result\" url="+url+">\n" +
             "   <div class=\"media-card\">\n" +
             "       <div class=\"previa-card\"></div>\n" +
             "   </div>\n" +
@@ -122,7 +122,11 @@
             "       <div class=\"tags-card\">"+tags+"</div>\n" +
             "   </div>\n" +
             "</div>\n")
+
+
     }
+
+
 
     function loadTag(nome){
         badgesArray.push(nome);
@@ -155,32 +159,33 @@
 
         var filtered = [];
 
-
-
         artigos.forEach(function(artigo){
 
             var nome = artigo.nome;
             var tags = "";
+            var selecionado = false;
+
             if(filtro == ''){
 
                 artigo.tags.forEach(function(tag){
 
-                    if(badgesArray.includes(tag)){
+                    if(!selecionado && badgesArray.includes(tag) || tag == "Todos"){
                         filtered.push(artigo);
-                        return;
+                        selecionado = true;
                     }
                 })
 
             }
             else{
 
-                if(nome.toUpperCase().indexOf(filtro.toUpperCase()) != -1){
+                if(nome.toUpperCase().indexOf(filtro.toUpperCase()) != -1 || tag == "Todos"){
                     artigo.tags.forEach(function(tag){
 
-                        if(badgesArray.includes(tag)){
+                        if(!selecionado && badgesArray.includes(tag)){
                             filtered.push(artigo);
-                            return;
+                            selecionado = true;
                         }
+
                     })
                 }
 
@@ -196,9 +201,16 @@
             artigo.tags.forEach(function(lolo){
                 tags += lolo+ "\n"
             })
-            loadArticle(artigo.nome, tags)
+            loadArticle(artigo.nome, tags, artigo.arquivo)
         })
 
+        $('.card-result').on('click', function(){
+            var url = window.location.href.replace('repositorio.php', 'artigos/'+$(this).attr('url'))
+            window.open(
+                url,
+                '_blank' // <- This is what makes it open in a new window.
+            );
+        })
 
 
 
