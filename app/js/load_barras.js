@@ -101,7 +101,7 @@ function create_bars(barras_box, data){
         var formatGreatNumber = function (d) {
 
 
-            var value = d;
+            var value = d
             var c = 0;
             var sufixos = ['', 'K', 'M', 'B', 'T'];
 
@@ -128,10 +128,8 @@ function create_bars(barras_box, data){
             if(isIHHorC4var()){
                 return d;
             }
-
             d = d*100;
-            d = Math.floor(d);
-
+            d = +d.toFixed(2);
             var value = d;
             var c = 0;
             var sufixos = ['', 'm', 'u', 'n', 'p'];
@@ -516,9 +514,9 @@ function update_bars(barras_box, data){
             }
 
             d = d*100;
-            d = Math.floor(d);
-
+            d = +d.toFixed(2);
             var value = d;
+            
             var c = 0;
             var sufixos = ['', 'm', 'u', 'n', 'p'];
 

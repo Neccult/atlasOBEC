@@ -573,9 +573,7 @@ function setMaxFontSize(doc){
 }
 
 function normalizeValue(valor, sufixo){
-    if(parameters.eixo == 0 && sufixo == '%'){
-        return valor * 100;
-    } else if(parameters.eixo == 1 && parameters.var == 2){
+    if((parameters.eixo == 0 || parameters.eixo == 1) && sufixo == '%'){
         return valor * 100;
     } else {
         return valor;
