@@ -1641,3 +1641,13 @@ function getSubdegId(deg, subdeg) {
 
     }
 }
+
+function isIHHorC4var(){
+
+    return   ((parameters.eixo == 0 && (parameters.var == 10 || parameters.var == 11 || parameters.var == 12 || parameters.var == 13)) ||
+             (parameters.eixo == 1 && (parameters.var == 12 || parameters.var == 13 || parameters.var == 14 || parameters.var == 15)) ||
+             (parameters.eixo == 2 && (parameters.var == 10 || parameters.var == 15 || parameters.var == 16)) ||
+             (parameters.eixo == 3 && (parameters.var == 8)))
+
+
+}
