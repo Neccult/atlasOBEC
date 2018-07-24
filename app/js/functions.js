@@ -632,17 +632,6 @@ function formatTextVrv(value, eixo, vrv){
     prefixo = variavel.prefixo_valor;
     valor = normalizeValue(value, sufixo);
 
-    /*switch(eixo) {
-        case 0:
-            break;
-        case 1:
-            if(vrv === 2){
-                valor *= 100;
-            }
-            break;
-
-    }*/
-
     if(eixo == 1 && url['var'] == 2)
         string = prefixo+formatDecimalLimit(valor, 4)+sufixo;
     else if(eixo == 1 && url['var'] == 9)
