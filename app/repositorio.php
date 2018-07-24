@@ -15,7 +15,14 @@
                 <div class="repo-container-boxes">
                     <div class="menu">
                         <form class="w3-container w3-card-4">
-                            <h2>Setor</h2>
+                            <h1>Setor</h1>
+                            <p>
+                            <div class="btn-todos-nenhum">
+                                <div style="border-right: 1px black solid" id="todos">Todos</div>
+                                <div style="border-left: 1px black solid" id="nenhum">Nenhum</div>
+                            </div>
+
+                            </p>
                             <p>
                                 <input name="tag" class="check" type="checkbox" checked="checked" >
                                 <label>Arquitetura e Design</label>
@@ -56,6 +63,7 @@
                                 <input name="tag"  class="check" type="checkbox" checked="checked">
                                 <label>Publicidade</label>
                             </p>
+
                         </form>
                     </div>
 
@@ -63,10 +71,11 @@
 
                         <div class="filtro">
                             <div class="search-container">
-                                <form action="/action_page.php">
                                     <input type="text" placeholder="Procurar.." name="search">
                                     <button type="submit"><i class="fa fa-search"></i></button>
-                                </form>
+                            </div>
+                            <div class="search-badge">
+
                             </div>
                             <div class="badges">
                             </div>
@@ -120,33 +129,62 @@
         $('.badges').append('<div class="filtro-badge">'+nome+'</div>')
     }
 
+    function loadSearch(texto){
+        $('.search-badge').find('div').remove();
+        $('.search-badge').append('<div id="search-badge">'+texto+'</div>')
+
+        $('#search-badge').on('click', function () {
+            $(this).remove();
+            $('.search-container input').val('')
+            filterArticles()
+        })
+
+    }
+
     function flushArticles(){
         $('.card-result').each(function () {
             $(this).remove();
         })
     }
 
-
     function filterArticles(){
+
+        var filtro = ($('.search-container input').val())
 
         flushArticles();
 
         var filtered = [];
 
+
+
         artigos.forEach(function(artigo){
 
             var nome = artigo.nome;
             var tags = "";
-            var selecionado = false;
+            if(filtro == ''){
 
-            artigo.tags.forEach(function(tag){
+                artigo.tags.forEach(function(tag){
 
-                if(badgesArray.includes(tag)){
-                    console.log("oi")
-                    filtered.push(artigo);
+                    if(badgesArray.includes(tag)){
+                        filtered.push(artigo);
+                        return;
+                    }
+                })
+
+            }
+            else{
+
+                if(nome.toUpperCase().indexOf(filtro.toUpperCase()) != -1){
+                    artigo.tags.forEach(function(tag){
+
+                        if(badgesArray.includes(tag)){
+                            filtered.push(artigo);
+                            return;
+                        }
+                    })
                 }
 
-            })
+            }
 
 
         })
@@ -162,6 +200,8 @@
         })
 
 
+
+
     }
 
     $('.menu input[name="tag"]').on('change', function(){
@@ -170,6 +210,33 @@
         checkFilters();
 
     })
+
+    $('#nenhum').on("click", function(){
+        $('.menu input[name="tag"]').each(function(){
+            $(this).prop('checked', false)
+        })
+
+        $('.filtro-badge').each(function () {
+            $(this).remove();
+        })
+
+        checkFilters();
+
+    })
+
+    $('#todos').on("click", function(){
+        $('.menu input[name="tag"]').each(function(){
+            $(this).prop('checked', true)
+        })
+
+        $('.filtro-badge').each(function () {
+            $(this).remove();
+        })
+
+        badgesArray = [];
+        checkFilters();
+    })
+
 
     function checkFilters(){
 
@@ -203,6 +270,18 @@
 
         filterArticles()
     }
+
+    $('.search-container input').bind("enterKey",function(e){
+        loadSearch($(this).val())
+        filterArticles()
+    });
+
+    $('.search-container input').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            $(this).trigger("enterKey");
+        }
+    });
 
 
     checkFilters();
