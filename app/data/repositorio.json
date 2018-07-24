@@ -1,0 +1,37 @@
+{ 
+	"data":
+		[
+			{
+				"nome":"Artigo 1",
+				"tags": [
+					"Editorial"
+				]
+			},
+			{
+				"nome":"Artigo 2",
+				"tags": [
+					"Audiovisual"
+				]
+			},
+			{
+				"nome":"Artigo 3",
+				"tags": [
+					"Artes Cênicas e Espetáculos"
+				]
+			},
+			{
+				"nome":"Artigo 4",
+				"tags": [
+					"Todos"
+				]
+			},
+			{
+				"nome":"Artigo 5",
+				"tags": [
+					"Artes Cênicas e Espetáculos",
+					"Música"
+				]
+			}
+
+		]
+}

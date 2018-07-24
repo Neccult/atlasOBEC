@@ -1274,14 +1274,7 @@ function updateOptView(container, btn){
                 });
             }
         }
-
-
     }
-
-
-
-
-
 }
 
 
