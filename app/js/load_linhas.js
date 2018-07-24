@@ -276,23 +276,6 @@ function update_linhas(linhas_box, data){
         .call(d3.axisLeft(y))
 
 
-    d3.selectAll('.x g').each(function (d, index) {
-        transform = d3.select(this).attr('transform')
-        transform = transform.replace('translate(', '');
-
-        x = parseFloat(transform.split(',')[0]);
-        y = parseFloat(transform.split(',')[1].replace(')', ''));
-        coordsAxisX.push({'ano': anos[index], 'x': x, 'y': y})
-    })
-    d3.selectAll('.y g').each(function (d, index) {
-        transform = d3.select(this).attr('transform')
-        transform = transform.replace('translate(', '');
-
-        x = parseFloat(transform.split(',')[0]);
-        y = parseFloat(transform.split(',')[1].replace(')', ''));
-        coordsAxisY.push({'ano': anos[index], 'x': x, 'y': y})
-    })
-
     destacaSetor();
 }
 

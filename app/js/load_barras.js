@@ -125,6 +125,10 @@ function create_bars(barras_box, data){
         var formatFraction = function (d) {
 
 
+            if(isIHHorC4var()){
+                return d;
+            }
+
             d = d*100;
             d = Math.floor(d);
 
@@ -507,6 +511,10 @@ function update_bars(barras_box, data){
         var formatFraction = function (d) {
 
 
+            if(isIHHorC4var()){
+                return d;
+            }
+
             d = d*100;
             d = Math.floor(d);
 
@@ -522,7 +530,6 @@ function update_bars(barras_box, data){
 
                 }
             }
-
 
             return (value+sufixos[c]+' %')
         };
