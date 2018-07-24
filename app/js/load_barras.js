@@ -124,13 +124,24 @@ function create_bars(barras_box, data){
         };
         var formatFraction = function (d) {
 
-
             if(isIHHorC4var()){
                 return d;
             }
-            d = d*100;
-            d = +d.toFixed(2);
+
+            if(d/0.01 >= 1){
+                var dec_point = 2;
+            } else if (d/0.001 >= 1){
+                var dec_point = 3;
+            } else if (d/0.0001 >= 1){
+                var dec_point = 4;
+            }
+
+            var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
+
+            d = normalizeValue(d, sufixo);
+            d = +d.toFixed(dec_point);
             var value = d;
+
             var c = 0;
             var sufixos = ['', 'm', 'u', 'n', 'p'];
 
@@ -143,7 +154,7 @@ function create_bars(barras_box, data){
                 }
             }
 
-            return (value+sufixos[c]+' %')
+            return (value+sufixos[c]+sufixo)
         };
 
 
@@ -508,13 +519,22 @@ function update_bars(barras_box, data){
         };
         var formatFraction = function (d) {
 
-
             if(isIHHorC4var()){
                 return d;
             }
 
-            d = d*100;
-            d = +d.toFixed(2);
+            if(d/0.01 >= 1){
+                var dec_point = 2;
+            } else if (d/0.001 >= 1){
+                var dec_point = 3;
+            } else if (d/0.0001 >= 1){
+                var dec_point = 4;
+            }
+
+            var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
+
+            d = normalizeValue(d, sufixo);
+            d = +d.toFixed(dec_point);
             var value = d;
             
             var c = 0;
@@ -529,7 +549,7 @@ function update_bars(barras_box, data){
                 }
             }
 
-            return (value+sufixos[c]+' %')
+            return (value+sufixos[c]+sufixo)
         };
 
         function formatNano(d) {
