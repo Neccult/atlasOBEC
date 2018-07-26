@@ -100,6 +100,9 @@ function getAnoDefault(eixo_atual){
             if(url['var'] == 10 || url['var'] == 9 || url['var'] == 11){
                 url['slc'] = 0
                 url['ocp'] = 0
+
+                updateWindowUrl('ocp', 0);
+                updateWindowUrl('slc', 0);
             }
 
             if(url['ocp'] == 3){
@@ -574,8 +577,6 @@ function changeDescVar() {
 }
 
 function cleanDesagsUrl() {
-    //url['slc'] = 0;
-    //url['ocp'] = 0;
     url['subdeg'] = 0;
     url['pfj'] = 0;
     url['deg'] = 0;
@@ -1520,7 +1521,6 @@ $(document).ready(function(){
             updateIframe(url); /* altera gráfico */
         }
     }
-
     });
 
     $(document).on('change', ".bread-select", function(e){
@@ -1531,7 +1531,6 @@ $(document).ready(function(){
         if(dataId !== "eixo") {
             updateUrl();
 
-            // var eixo_atual = $('.bread-eixo[data-id="eixo"]').prop('selectedIndex');
             var eixo_atual = getEixo(window.location.hash.substring(1));
 
             if( $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value") != undefined){
@@ -1551,17 +1550,19 @@ $(document).ready(function(){
             if(dataId === "prc"){
                 updateWindowUrl('prc', dataVal);
                 $(window.document).find(".prc-title").first().html(this.options[e.target.selectedIndex].text);
-                // updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
             }
 
             if(dataId ==='var'){
-
+                
+                if( parameters.eixo == 1 && (parameters.var == 9 || parameters.var == 1)){
+                    switchBreadCadOcp(0);
+                }
+                
                 updateOptView()
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 cleanDesagsUrl();
                 getAnoDefault(eixo_atual);
-
 
                 if(url['ocp'] == 0){
                     switchToSetores();
@@ -1614,10 +1615,9 @@ $(document).ready(function(){
                     $('#mapa').addClass("active");
                     $('#treemap_region').removeClass("active");
                     $('.bread-select[data-id=deg]').val(0);
-
                 }
-                if(eixo_atual == 1){
 
+                if(eixo_atual == 1){
                     if(url['ocp'] > 0){
                         updateDefaultOcupation()
                     }

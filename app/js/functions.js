@@ -211,6 +211,19 @@ function removeDesags(iframe, ocp){
         })
 }
 
+function switchBreadCadOcp(slc){
+    if(parameters.eixo == 1){
+        if(slc == 0){
+            $("#bread-select-cad").attr("data-id", "cad");
+            $("#bread-select-cad").parent().find(".rotulo-bread").first().html("Setor");
+        } else {
+            $("#bread-select-cad").attr("data-id", "ocp");
+            $("#bread-select-cad").parent().find(".rotulo-bread").first().html("Ocupacação");
+        }
+        
+    }
+}
+
 function updateBreadUF(eixo, vrv){
     switch(eixo){
         case 0: 
@@ -372,19 +385,23 @@ function updateDefaultOcupation(){
     $("select[data-id='ocp'] > option").each(function () {
         $(this).remove();
     });
-    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
+
+    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6 || url['var'] == 9 && url['var'] == 11)){
         $(".bread-select[data-id='ocp']").append("<option value='3'>Todos</option>");
         $(".bread-select[data-id='ocp']").append("<option value='1'>Atividades Relacionadas</option>");
         $(".bread-select[data-id='ocp']").append("<option value='2'>Cultura</option>");
         $(".bread-select[data-id='ocp']").val(3)
         url['ocp'] = 3
 
-    } else {
+    } else if(url['var'] != 9 && url['var'] != 11) {
         url['ocp'] = 1
 
         $(".bread-select[data-id='ocp']").append("<option value='1'>Atividades Relacionadas</option>");
         $(".bread-select[data-id='ocp']").append("<option value='2'>Cultura</option>");
         $(".bread-select[data-id='ocp']").val(1)
+    } else {
+        url['ocp'] = 0
+        url['slc'] = 0
     }
 }
 
