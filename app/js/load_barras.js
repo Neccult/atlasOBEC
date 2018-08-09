@@ -707,20 +707,96 @@ function destacarBarra(barras_box, barraId, uos) {
 
     d3.select(barras_box).selectAll("rect").each(function() {
 
+        if(parameters.eixo == 1 && parameters.var == 6 && uos == 1){
 
-        if($(this).attr("data-legend") == barraId) {
-            if($(this).attr("class") !== "destacado") {
-                $(this).attr("class", "destacado");
-                $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", corEixo[1]);
-                $(this).css("opacity", "1");
+            if (parameters.ocp == 0){
+                if (parameters.deg == 0) {
+                    if (getCadABVId($(this).attr("data-legend")) == parameters.cad) {
+                        if($(this).attr("class") !== "destacado") {
+                            $(this).attr("class", "destacado");
+                            $(this).attr("data-color", $(this).css("fill"));
+                            $(this).css("fill", $(this).attr("data-color"));
+                            $(this).css("opacity", "1");
+                            $(this).css("stroke-width", "2");
+                        }
+                    }
+                    else {
+                        $(this).attr("class", "");
+                        $(this).css("fill", $(this).attr("data-color"));
+                        $(this).css("opacity", "0.5");
+                    }
+                }
+                else if (parameters.deg != 0) {
+                    if (getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) {
+                        if($(this).attr("class") !== "destacado") {
+                            $(this).attr("class", "destacado");
+                            $(this).attr("data-color", $(this).css("fill"));
+                            $(this).css("fill", $(this).attr("data-color"));
+                            $(this).css("opacity", "1");
+                            $(this).css("stroke-width", "2");
+                        }
+                    }
+                    else {
+                        $(this).attr("class", "");
+                        $(this).css("fill", $(this).attr("data-color"));
+                        $(this).css("opacity", "0.5");
+                    }
+                }
+            }
+            else{
+                if (parameters.deg == 0) {
+
+                    if (getOcpId($(this).attr("data-legend")) == parameters.ocp) {
+                        if($(this).attr("class") !== "destacado") {
+                            $(this).attr("class", "destacado");
+                            $(this).attr("data-color", $(this).css("fill"));
+                            $(this).css("fill", $(this).attr("data-color"));
+                            $(this).css("opacity", "1");
+                            $(this).css("stroke-width", "2");
+                        }
+                    }
+                    else {
+                        $(this).attr("class", "");
+                        $(this).css("fill", $(this).attr("data-color"));
+                        $(this).css("opacity", "0.5");
+                    }
+                }
+                else{
+                    if (getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) {
+                        if($(this).attr("class") !== "destacado") {
+                            $(this).attr("class", "destacado");
+                            $(this).attr("data-color", $(this).css("fill"));
+                            $(this).css("fill", $(this).attr("data-color"));
+                            $(this).css("opacity", "1");
+                            $(this).css("stroke-width", "2");
+                        }
+                    }
+                    else {
+                        $(this).attr("class", "");
+                        $(this).css("fill", $(this).attr("data-color"));
+                        $(this).css("opacity", "0.5");
+                    }
+                }
             }
         }
-        else {
-            $(this).attr("class", "");
-            $(this).css("fill", $(this).attr("data-color"));
-            $(this).css("opacity", "0.7");
+        else{
+            if($(this).attr("data-legend") == barraId) {
+                if($(this).attr("class") !== "destacado") {
+                    $(this).attr("class", "destacado");
+                    $(this).attr("data-color", $(this).css("fill"));
+                    $(this).css("fill", corEixo[1]);
+                    $(this).css("opacity", "1");
+                }
+            }
+            else {
+                $(this).attr("class", "");
+                $(this).css("fill", $(this).attr("data-color"));
+                $(this).css("opacity", "0.7");
+            }
         }
+
+
+
 
 
 

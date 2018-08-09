@@ -1646,6 +1646,28 @@ function getSubdegId(deg, subdeg) {
     }
 }
 
+function getOcpId(ocp) {
+    switch (ocp) {
+        case 'Relacionadas': return 1;
+        case 'Culturais': return 2;
+    }
+}
+
+function getCadABVId(cad) {
+    switch (cad) {
+        case 'Arq e D': return 1;
+        case 'Artes': return 2;
+        case 'Audio': return 3;
+        case 'Cult. Dig.': return 4;
+        case 'Edit.': return 5;
+        case 'Edu. Art.': return 6;
+        case 'Entret.': return 7;
+        case 'Música': return 8;
+        case 'Patrimônio': return 9;
+        case 'Publ.': return 10;
+    }
+}
+
 function isIHHorC4var(){
 
     return   ((parameters.eixo == 0 && (parameters.var == 10 || parameters.var == 11 || parameters.var == 12 || parameters.var == 13)) ||
