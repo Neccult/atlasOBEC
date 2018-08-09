@@ -288,7 +288,6 @@ function create_bars(barras_box, data){
                 return color(parameters.cad);
             }
         })
-        .attr("opacity", 0.8)
         .on("click", function(d, i, obj) {
             if(window.innerWidth <= 1199)
                 return;
@@ -299,7 +298,7 @@ function create_bars(barras_box, data){
             $("select[data-id='ano']").val(dados.key[i]);
             updateWindowUrl('ano', dados.key[i])
 
-            destacarBarra(barras_box, dados.key[i]);
+            destacarBarra(barras_box, dados.key[i], uos);
             var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
             updateIframe();
@@ -331,7 +330,7 @@ function create_bars(barras_box, data){
         .call(yAxis);
 
 
-    destacarBarra(barras_box, parameters.ano);
+    destacarBarra(barras_box, parameters.ano, uos);
 
     var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
 
@@ -363,12 +362,6 @@ function update_bars(barras_box, data){
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
 
-    var eixo = parameters.eixo
-    var vrv  = parameters.var
-    var cad  = parameters.cad
-    var deg  = parameters.deg
-    var prt = 0
-    var ocp = 0
     var uos = views_parameters[barras_box].uos;
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
@@ -376,7 +369,7 @@ function update_bars(barras_box, data){
     var width = chartWidth - margin.left - margin.right;
     var height = chartHeight - margin.top - margin.bottom;
 
-    if(vrv == 3 && eixo == 0){
+    if(parameters.var == 3 && parameters.eixo == 0){
         delete data['2007'];
     }
 
@@ -406,16 +399,17 @@ function update_bars(barras_box, data){
 
         dados.value.push(data[key].valor);
         
-        if ( vrv === 2  || vrv === 9) dados.percentual.push(0);
+        if ( parameters.var === 2  || parameters.var === 9) dados.percentual.push(0);
         else dados.percentual.push(data[key].percentual);
 
-        if (vrv === 2) {
+        if ( parameters.var === 2) {
             dados.taxa.push(0);
         }
         else {
             dados.taxa.push(data[key].taxa);
         }
     });
+
     dados.key = d3.keys(data);
 
     var formatYAxis = function (d) {
@@ -454,6 +448,7 @@ function update_bars(barras_box, data){
             }
             return (value+sufixos[c])
         };
+
         var formatFraction = function (d) {
 
             if(isIHHorC4var()){
@@ -489,51 +484,6 @@ function update_bars(barras_box, data){
             return (value+sufixos[c]+sufixo)
         };
 
-        function formatNano(d) {
-
-            return removeDecimalZeroes(formatInit(d * 1e9)) + "n";
-        };
-        function formatMicro(d) {
-            return removeDecimalZeroes(formatInit(d * 1e6)) + "µ";
-        };
-        function formatMili(d) {
-            return removeDecimalZeroes(formatInit(d * 1e3)) + "m";
-        };
-        function formatPercent(d) {
-            if (eixo == 0 && vrv == 9) {
-                if (uf == 0)
-                    return removeDecimalZeroes(formatInit(d * 1e2)) + "%";
-                else{
-                    return format3dc(d*1e2) + "%";
-                }
-            }
-            return removeDecimalZeroes(formatInit(d * 1e4)) + "%";
-
-        };
-
-        var axisCountValidDecimalDigits = function (value, acum) {
-            var acum = acum || 0;
-            var digitString = typeof value !== 'string' && typeof value !== 'undefined' ? (value).toString() : value;
-
-            // break condition
-            if (!value) {
-                if (acum > higherZeroOcur)
-                    higherZeroOcur = acum;
-
-                return higherZeroOcur;
-            }
-
-            // if has dot (first iteration)
-            if (digitString.match(/\./g))
-                digitString = digitString.split(".")[1];
-
-            var isZero = parseInt(digitString[0]) === 0 ? 1 : 0;
-            var newValue = isZero ? digitString.substring(1) : "";
-            var newAcum = acum + isZero;
-
-            return axisCountValidDecimalDigits(newValue, newAcum);
-        };
-
         var maxValue = d3.max(dados.value);
         var minValue = d3.min(dados.value);
 
@@ -560,7 +510,6 @@ function update_bars(barras_box, data){
                 .rangeRound([0, width])
                 .padding(0.1);
 
-    
     var y = d3.scaleLinear()
             .domain(d3.extent(dados.value))
             .rangeRound([height, 0], .002);
@@ -659,48 +608,46 @@ function update_bars(barras_box, data){
                     return color(dados.key[i])
                 }
                 else{
-                    return color(cad)
+                    return color(parameters.cad)
                 }
             }
             else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                 return color(0);
             }
             else {
-                return color(cad);
+                return color(parameters.cad);
             }
         })
         .attr("fill", function (d,i ) {
-            if((eixo == 1 && vrv == 6 && uos == 1) || (eixo == 2 && (vrv == 18 || vrv == 19) && uos == 1)){
-                if(deg == 0)
+            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1) || (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1)){
+                if(parameters.deg == 0){
                     return color(dados.key[i])
+
+                }
                 else
-                    return color(cad)
+                    return color(parameters.cad)
             }
-            else if(eixo == 3 && (vrv == 5 || vrv == 8)) {
+            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
                 return color(0);
             }
             else {
-                return color(cad);
+                return color(parameters.cad);
             }
         })
-        .attr("opacity", 0.8)
         .on("click", function(d, i, obj) {
             if(window.innerWidth <= 1199)
                 return;
 
-            if(eixo == 1 && vrv == 6 && uos == 1)
+            if(parameters.eixo == 1 && parameters.var == 6 && uos == 1)
                 return;
                 
             $("select[data-id='ano']").val(dados.key[i]);
             updateWindowUrl('ano', dados.key[i])
 
-            destacarBarra(barras_box, dados.key[i]);
+            destacarBarra(barras_box, dados.key[i], uos);
             var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-            // configInfoDataBoxBarrasClick(dados, i, valor);
-            
             updateIframe();
-
         });
 
     var xAxis = d3.axisBottom(x)
@@ -724,7 +671,7 @@ function update_bars(barras_box, data){
         .duration(400)
         .call(yAxis);
 
-    destacarBarra(barras_box, parameters.ano);
+    destacarBarra(barras_box, parameters.ano, uos);
 
     var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
 
@@ -756,23 +703,27 @@ function getSoma(barraId) {
     return soma;
 }
 
-function destacarBarra(barras_box, barraId) {
+function destacarBarra(barras_box, barraId, uos) {
 
     d3.select(barras_box).selectAll("rect").each(function() {
 
-    if($(this).attr("data-legend") == barraId) {
-        if($(this).attr("class") !== "destacado") {
-            $(this).attr("class", "destacado");
-            $(this).attr("data-color", $(this).css("fill"));
-            $(this).css("fill", corEixo[1]);
-            $(this).css("opacity", "1");
+
+        if($(this).attr("data-legend") == barraId) {
+            if($(this).attr("class") !== "destacado") {
+                $(this).attr("class", "destacado");
+                $(this).attr("data-color", $(this).css("fill"));
+                $(this).css("fill", corEixo[1]);
+                $(this).css("opacity", "1");
+            }
         }
-    }
-    else {
-        $(this).attr("class", "");
-        $(this).css("fill", $(this).attr("data-color"));
-        $(this).css("opacity", "0.7");
-    }
+        else {
+            $(this).attr("class", "");
+            $(this).css("fill", $(this).attr("data-color"));
+            $(this).css("opacity", "0.7");
+        }
+
+
+
     });
 }
 
