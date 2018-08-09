@@ -36,6 +36,20 @@
 					"Artes Cênicas e Espetáculos",
 					"Música"
 				]
+			},
+			{
+				"nome": "Introducing to Computer",
+				"arquivo": "teste.pdf",
+				"tags": [
+					"Todos"
+				]
+			},
+			{
+				"nome": "A experiência audiovisual nos espaços educativos",
+				"arquivo": "experiencia.pdf",
+				"tags": [
+					"Audiovisual"
+				]
 			}
 
 		]

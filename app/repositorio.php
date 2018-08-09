@@ -67,6 +67,8 @@
                         </form>
                     </div>
 
+                    <div style="width: 10px; height: auto; border-radius: 10px; background-color: #5B5B5F"></div>
+
                     <div class="content">
 
                         <div class="filtro">
@@ -178,10 +180,10 @@
             }
             else{
 
-                if(nome.toUpperCase().indexOf(filtro.toUpperCase()) != -1 || tag == "Todos"){
+                if(nome.toUpperCase().indexOf(filtro.toUpperCase()) != -1){
                     artigo.tags.forEach(function(tag){
 
-                        if(!selecionado && badgesArray.includes(tag)){
+                        if(!selecionado && badgesArray.includes(tag)  || tag == "Todos"){
                             filtered.push(artigo);
                             selecionado = true;
                         }

@@ -535,7 +535,7 @@
                         <div class="col-xs-3 col-btn"><button class="opt select" id="pdf">PDF</button></div>
                         <div class="col-xs-3 col-btn"><button class="opt select" id="csv">ODS</button></div>
                         <div class="col-xs-3 col-btn"><button class="opt select" id="img">IMG</button></div>
-                        <div class="col-xs-3 col-btn"><button onClick="testeF();" class="opt select" id="img">TESTE</button></div>
+<!--                        <div class="col-xs-3 col-btn"><button onClick="testeF();" class="opt select" id="img">TESTE</button></div>-->
                     </div>
 
                     <div class="row">
