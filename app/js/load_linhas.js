@@ -407,8 +407,6 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
         //     .attr("cy", d3.mouse(d3.event.currentTarget)[1])
         //     .attr("r", 5);
 
-
-
         if(parameters.eixo == 0 && parameters.var == 3){
             if(indexAno == 10){
                 valor = 0;
