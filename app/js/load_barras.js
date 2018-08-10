@@ -5,28 +5,7 @@ function create_bars(barras_box, data){
     var minBarHeight = 6;
 
     var uos = views_parameters[barras_box].uos;
-
     var corEixo = COLORS['eixo'][parameters.eixo].color;
-
-    var color = function (colorId) {
-
-        if (COLORS.cadeias[colorId]) {
-            if(colorId){
-                if(colorId == 0){
-                    return corEixo[1]
-                }
-                else{
-
-                    return COLORS.cadeias[colorId].color;
-                }
-            }
-            else{
-                return corEixo[2];
-            }
-        } else {
-            return COLORS.cadeias[0].color;
-        }
-    }
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
@@ -37,11 +16,11 @@ function create_bars(barras_box, data){
     Object.keys(data).forEach(function (key) {
 
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-        
+
         dados.key.push(data[key].ano);
 
         dados.value.push(data[key].valor);
-        
+
         if (parameters.var == 2  || parameters.var == 9) dados.percentual.push(0);
         else dados.percentual.push(data[key].percentual);
 
@@ -55,124 +34,43 @@ function create_bars(barras_box, data){
 
     dados.key = d3.keys(data);
 
-    // AQUI automatizar map center
     var margin = {top: 20, right: 20, bottom: 30, left: 35},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
-        
+
     var x = d3.scaleBand()
-            .domain(dados.key)
-            .rangeRound([0, width])
-            .padding(0.1);
+        .domain(dados.key)
+        .rangeRound([0, width])
+        .padding(0.1);
 
     var y = d3.scaleLinear()
-            .domain(d3.extent(dados.value))
-            .rangeRound([height, 0], .002);
+        .domain(d3.extent(dados.value))
+        .rangeRound([height, 0], .002);
 
     y.domain(d3.extent(dados.value, function (d) {
         return d;
     })).nice();
 
     var formatYAxis = function (d) {
-
-        var higherZeroOcur = maxDecimalAxis;
-        var dadosCounter = 0;
-        var minFraction = 3;
-    
-        var formatInit = d3.format(".2f");
-        var format3dc = d3.format(".3f");
-
-        var formatGreatNumber = function (d) {
-
-            var value = d
-            var c = 0;
-            var sufixos = ['', 'K', 'M', 'B', 'T'];
-
-            if(value >= 1000){
-                while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
-
-                    c++;
-                    value = value / 1000;
-                }
-            }
-
-            if(parameters.eixo == 0 && parameters.var == 8){
-                if(c > 0){
-                    c--;
-                }
-            }
-
-            return (value+sufixos[c])
-        };
-
-        var formatFraction = function (d) {
-
-            if(isIHHorC4var()){
-                return d;
-            }
-
-            if(d/0.01 >= 1){
-                var dec_point = 2;
-            } else if (d/0.001 >= 1){
-                var dec_point = 3;
-            } else if (d/0.0001 >= 1){
-                var dec_point = 4;
-            }
-
-            var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
-
-            d = normalizeValue(d, sufixo);
-            d = +d.toFixed(dec_point);
-            var value = d;
-
-            var c = 0;
-            var sufixos = ['', 'm', 'u', 'n', 'p'];
-
-            if(value <= 1/1000){
-                while(value.toString().length >= 5){
-                    c++;
-                    value = value * 1000;
-                }
-            }
-
-            return (value+sufixos[c]+sufixo)
-        };
-
-        var maxValue = d3.max(dados.value);
-        var minValue = d3.min(dados.value);
-    
-        var preFormat = d3.format('.2f');
-        var preFormatted = removeDecimalZeroes(preFormat(maxValue));
-        var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
-        var isSmall = preFormatted < 1 && preFormatted > -1;
-
-        // has decimal
-        if (isSmall){
-            return formatFraction;
-        }
-
-        var preFormattedIntLength = Math.round(preFormatted).toString().length;
-
-        if (preFormattedIntLength > 0) {
-            return formatGreatNumber;
-        }
+        return formatBarsYAxis(d, dados);
     }();
 
     var grid_lines = d3.axisLeft(y)
-                        .scale(y)
-                        .ticks(4)
-                        .tickSize(-width + 10)
-                        .tickSizeOuter(0)
-                        .tickFormat("")
+        .scale(y)
+        .ticks(4)
+        .tickSize(-width + 10)
+        .tickSizeOuter(0)
+        .tickFormat("")
 
     var valueTop = margin.top + 5;
+
     var svg_barras = d3.select(barras_box).append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                        .attr("type", "simples")
-                        .append("g")
-                        .attr("transform",
-                              "translate(" + (margin.left+5) + "," + valueTop + ")");
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .attr("type", "simples")
+        .append("g")
+        .attr("transform",
+            "translate(" + (margin.left+5) + "," + valueTop + ")");
 
     svg_barras.append("g")
         .attr("class", "grid")
@@ -185,124 +83,23 @@ function create_bars(barras_box, data){
         .attr("class", "bar")
         .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
         .attr("data-color", function(d, i, obj) {
-            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1)){
-
-                if(parameters.ocp != 0){
-                    if(parameters.deg == 0){
-                        return COLORS.ocupacoes[i+1].color;
-                    }
-                    else{
-                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
-                    }
-                }
-                else{
-
-                    if(parameters.deg == 0){
-                        return color(dados.key[i])
-                    }
-                    else{
-                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
-                    }
-                }
-
-            }
-            else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1)){
-
-                if(parameters.deg == 0){
-                    return color(dados.key[i])
-                }
-                else{
-                    return color(parameters.cad)
-                }
-
-            }
-            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
-                return color(0);
-            }
-            else {
-                return color(parameters.cad);
-            }
+            return getBarDataColor(d, i, uos);
         })
-        .attr("data-value", function(d) {   return d; })
+        .attr("data-value", function(d) {
+               return d; 
+        })
         .attr("x", function (d, i) {
             return x(dados.key[i]);
         })
         .attr("y", function (d) {
-            var barHeight = y(d);
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
-            var isValueNegative = d < 0;
-
-            // TEM VALOR NEGATIVO
-            if (isValueNegative) {
-
-                // NÚMERO NEGATIVO
-                if (isValueNegative)
-                    return zeroPosition;
-                // S barra for muito pequena
-                if (barHeight == zeroPosition)
-                    return zeroPosition - 5;
-
-                    return y(0);
-            }
-
-            barHeight = Math.abs(height - barHeight);
-
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight){
-                return height - 5;
-            }
-                return y(d);
+            return getBarY(y, d, dados, height, minBarHeight);
         })
         .attr("width", x.bandwidth())
         .attr("height", function (d) {
-            var barHeight = y(d);
-
-            // TEM VALOR NEGATIVO
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-            var isValueZero = y(d) == zeroPosition;
-
-            if (isValueZero){
-                return minBarHeight;
-            }
-
-            barHeight = Math.abs(height - barHeight);
-
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight){
-                return Math.abs(5);
-            }
-
-            return  Math.abs(y(d) - zeroPosition);
-        })
-        .attr("fill", function (d,i ) {
-            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1) || (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1)){
-                if(parameters.deg == 0)
-                    return color(dados.key[i])
-                else
-                    return color(parameters.cad)
-            }
-            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
-                return color(0);
-            }
-            else {
-                return color(parameters.cad);
-            }
+            return getBarHeight(y, d, dados, height, minBarHeight);
         })
         .on("click", function(d, i, obj) {
-            if(window.innerWidth <= 1199)
-                return;
-
-            if(parameters.eixo == 1 && parameters.var == 6 && uos == 1)
-                return;
-
-            $("select[data-id='ano']").val(dados.key[i]);
-            updateWindowUrl('ano', dados.key[i])
-
-            destacarBarra(barras_box, dados.key[i], uos);
-            var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
-
-            updateIframe();
-
+            clickBarras(barras_box, dados, uos, i)
         })
         .on("mouseover", function (d, i, obj) {
             loadTooltip_barras(d, dados.key[i], parameters.eixo, parameters.var)
@@ -320,7 +117,7 @@ function create_bars(barras_box, data){
     var yAxis = d3.axisLeft()
         .scale(y)
         .tickFormat(formatYAxis);
-        
+
     svg_barras.append("g").attr("class", "eixo-x")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
@@ -329,7 +126,6 @@ function create_bars(barras_box, data){
         .attr("transform", "translate(0, 0)")
         .call(yAxis);
 
-
     destacarBarra(barras_box, parameters.ano, uos);
 
     var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
@@ -337,15 +133,10 @@ function create_bars(barras_box, data){
     updateData('barras', dados, valor, uos);
 
     if(parameters.eixo == 2 && parameters.var >= 18){
-
-        var soma = 0;
-        dados.value.forEach(function(key){
-            soma += key;
-        });
-
+        var soma = getBarSoma(dados);
         updateData('barras', dados, soma, 1);
-
     }
+
 }
 
 function update_bars(barras_box, data){
@@ -373,25 +164,6 @@ function update_bars(barras_box, data){
         delete data['2007'];
     }
 
-    var color = function (colorId) {
-
-        if (COLORS.cadeias[colorId]) {
-            if(colorId){
-                if(colorId == 0){
-                    return corEixo[1]
-                }
-                else{
-                    return COLORS.cadeias[colorId].color;
-                }
-            }
-            else{
-                return corEixo[2];
-            }
-        } else {
-            return COLORS.cadeias[0].color;
-        }
-    }
-
     Object.keys(data).forEach(function (key) {
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
         
@@ -413,96 +185,7 @@ function update_bars(barras_box, data){
     dados.key = d3.keys(data);
 
     var formatYAxis = function (d) {
-
-        var higherZeroOcur = maxDecimalAxis;
-        var dadosCounter = 0;
-        var minFraction = 3;
-
-        var formatInit = d3.format(".2f");
-        var format3dc = d3.format(".3f");
-
-
-        var formatDefault = function (d) {
-            return removeDecimalZeroes(formatInit(d));
-        };
-
-        var formatGreatNumber = function (d) {
-
-            var value = d;
-            var c = 0;
-            var sufixos = ['', 'K', 'M', 'B', 'T'];
-
-            if(value >= 1000){
-                while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
-
-                    c++;
-                    value = value / 1000;
-
-                }
-            }
-
-            if(parameters.eixo == 0 && parameters.var == 8){
-                if(c > 0){
-                    c--;
-                }
-            }
-            return (value+sufixos[c])
-        };
-
-        var formatFraction = function (d) {
-
-            if(isIHHorC4var()){
-                return d;
-            }
-
-            if(d/0.01 >= 1){
-                var dec_point = 2;
-            } else if (d/0.001 >= 1){
-                var dec_point = 3;
-            } else if (d/0.0001 >= 1){
-                var dec_point = 4;
-            }
-
-            var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
-
-            d = normalizeValue(d, sufixo);
-            d = +d.toFixed(dec_point);
-            var value = d;
-            
-            var c = 0;
-            var sufixos = ['', 'm', 'u', 'n', 'p'];
-
-            if(value <= 1/1000){
-                while(value.toString().length >= 5){
-
-                    c++;
-                    value = value * 1000;
-
-                }
-            }
-
-            return (value+sufixos[c]+sufixo)
-        };
-
-        var maxValue = d3.max(dados.value);
-        var minValue = d3.min(dados.value);
-
-        var preFormat = d3.format('.2f');
-        var preFormatted = removeDecimalZeroes(preFormat(maxValue));
-        var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
-        var isSmall = preFormatted < 1 && preFormatted > -1;
-
-
-        // has decimal
-        if (isSmall){
-            return formatFraction;
-        }
-
-        var preFormattedIntLength = Math.round(preFormatted).toString().length;
-
-        if (preFormattedIntLength > 0){
-            return formatGreatNumber;
-        }
+        return formatBarsYAxis(d, dados);
     }();
 
     var x = d3.scaleBand()
@@ -535,119 +218,17 @@ function update_bars(barras_box, data){
             return x(dados.key[i]);
         })
         .attr("y", function (d) {
-            var barHeight = y(d);
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
-            var isValueNegative = d < 0;
-
-            // TEM VALOR NEGATIVO
-            if (isValueNegative) {
-
-                // NÚMERO NEGATIVO
-                if (isValueNegative)
-                    return zeroPosition;
-                // S barra for muito pequena
-                if (barHeight == zeroPosition)
-                    return zeroPosition - 5;
-
-                return y(0);
-            }
-
-            barHeight = Math.abs(height - barHeight);
-
-
-
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight){
-                return height - 5;
-            }
-            return y(d);
+            return getBarY(y, d, dados, height, minBarHeight);
         })
         .attr("width", x.bandwidth())
         .attr("height", function (d) {
-            var barHeight = y(d);
-
-            // TEM VALOR NEGATIVO
-            var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
-            var isValueZero = y(d) == zeroPosition;
-
-            if (isValueZero){
-                return minBarHeight;
-            }
-
-            barHeight = Math.abs(height - barHeight);
-
-            // BARRA PEQUENA
-            if (barHeight <= minBarHeight){
-                return Math.abs(5);
-            }
-            return  Math.abs(y(d) - zeroPosition);
+            return getBarHeight(y, d, dados, height, minBarHeight);
         })
         .attr("data-color", function(d, i, obj) {
-            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1)){
-                if(parameters.ocp != 0){
-                    if(parameters.deg == 0){
-                        return COLORS.ocupacoes[i+1].color;
-                    }
-                    else{
-                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
-                    }
-                }
-                else{
-
-                    if(parameters.deg == 0){
-                        return color(dados.key[i])
-                    }
-                    else{
-                        return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
-                    }
-                }
-
-            }
-            else if((parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && parameters.uos == 1)){
-                if(parameters.deg == 0){
-                    return color(dados.key[i])
-                }
-                else{
-                    return color(parameters.cad)
-                }
-            }
-            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
-                return color(0);
-            }
-            else {
-                return color(parameters.cad);
-            }
-        })
-        .attr("fill", function (d,i ) {
-            if((parameters.eixo == 1 && parameters.var == 6 && uos == 1) || (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1)){
-                if(parameters.deg == 0){
-                    return color(dados.key[i])
-
-                }
-                else
-                    return color(parameters.cad)
-            }
-            else if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
-                return color(0);
-            }
-            else {
-                return color(parameters.cad);
-            }
+            return getBarDataColor(d, i, uos);
         })
         .on("click", function(d, i, obj) {
-            if(window.innerWidth <= 1199)
-                return;
-
-            if(parameters.eixo == 1 && parameters.var == 6 && uos == 1)
-                return;
-                
-            $("select[data-id='ano']").val(dados.key[i]);
-            updateWindowUrl('ano', dados.key[i])
-
-            destacarBarra(barras_box, dados.key[i], uos);
-            var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
-
-            updateIframe();
+            clickBarras(barras_box, dados, uos, i)
         });
 
     var xAxis = d3.axisBottom(x)
@@ -678,20 +259,99 @@ function update_bars(barras_box, data){
     updateData('barras', dados, valor, uos);
 
     if(parameters.eixo == 2 && parameters.var >= 18){
-
-        var soma = 0;
-        dados.value.forEach(function(key){
-            soma += key;
-        })
-
+        var soma = getBarSoma(dados);
         updateData('barras', dados, soma, 1);
-
     }
 
 }
-
-
 var maxDecimalAxis = 0;
+
+function getBarSoma(dados) {
+    var soma = 0;
+    dados.value.forEach(function(key){
+        soma += key;
+    })
+    return soma;
+}
+
+function getBarHeight(y, d, dados, height, minBarHeight) {
+
+    var barHeight = y(d);
+
+    // TEM VALOR NEGATIVO
+    var zeroPosition = d3.min(dados.value) < 0 ? y(0) : height;
+    var isValueZero = y(d) == zeroPosition;
+
+    if (isValueZero){
+        return minBarHeight;
+    }
+
+    barHeight = Math.abs(height - barHeight);
+
+    // BARRA PEQUENA
+    if (barHeight <= minBarHeight){
+        return Math.abs(5);
+    }
+
+    return  Math.abs(y(d) - zeroPosition);
+
+}
+
+function getBarY(y, d, dados, height, minBarHeight) {
+
+    var barHeight = y(d);
+    var zeroPosition = d3.min(dados.value) < 0 ? y(0) : false;
+    var isValueNegative = d < 0;
+
+    // TEM VALOR NEGATIVO
+    if (isValueNegative) {
+
+        // NÚMERO NEGATIVO
+        if (isValueNegative)
+            return zeroPosition;
+        // S barra for muito pequena
+        if (barHeight == zeroPosition)
+            return zeroPosition - 5;
+
+        return y(0);
+    }
+
+    barHeight = Math.abs(height - barHeight);
+
+    // BARRA PEQUENA
+    if (barHeight <= minBarHeight){
+        return height - 5;
+    }
+    return y(d);
+
+}
+
+function getBarDataColor(d, i, uos) {
+    if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
+        return barColor(0);
+    }
+    else {
+        return barColor(parameters.cad, i, uos);
+    }
+}
+
+function clickBarras(barras_box, dados, uos, i) {
+
+    if(window.innerWidth <= 1199)
+        return;
+
+    if(parameters.eixo == 1 && parameters.var == 6 && uos == 1)
+        return;
+
+    $("select[data-id='ano']").val(dados.key[i]);
+    updateWindowUrl('ano', dados.key[i])
+
+    destacarBarra(barras_box, dados.key[i], uos);
+    var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
+
+    updateIframe();
+
+}
 
 function getSoma(barraId) {
     var soma = 0;
@@ -794,13 +454,99 @@ function destacarBarra(barras_box, barraId, uos) {
                 $(this).css("opacity", "0.7");
             }
         }
-
-
-
-
-
-
     });
+}
+
+function formatBarsYAxis(d, dados) {
+    var higherZeroOcur = maxDecimalAxis;
+    var dadosCounter = 0;
+    var minFraction = 3;
+
+    var formatInit = d3.format(".2f");
+    var format3dc = d3.format(".3f");
+
+
+    var formatDefault = function (d) {
+        return removeDecimalZeroes(formatInit(d));
+    };
+
+    var formatGreatNumber = function (d) {
+
+        var value = d;
+        var c = 0;
+        var sufixos = ['', 'K', 'M', 'B', 'T'];
+
+        if(value >= 1000){
+            while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
+
+                c++;
+                value = value / 1000;
+
+            }
+        }
+
+        if(parameters.eixo == 0 && parameters.var == 8){
+            if(c > 0){
+                c--;
+            }
+        }
+        return (value+sufixos[c])
+    };
+
+    var formatFraction = function (d) {
+
+        if(isIHHorC4var()){
+            return d;
+        }
+
+        if(d/0.01 >= 1){
+            var dec_point = 2;
+        } else if (d/0.001 >= 1){
+            var dec_point = 3;
+        } else if (d/0.0001 >= 1){
+            var dec_point = 4;
+        }
+
+        var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
+
+        d = normalizeValue(d, sufixo);
+        d = +d.toFixed(dec_point);
+        var value = d;
+        
+        var c = 0;
+        var sufixos = ['', 'm', 'u', 'n', 'p'];
+
+        if(value <= 1/1000){
+            while(value.toString().length >= 5){
+
+                c++;
+                value = value * 1000;
+
+            }
+        }
+
+        return (value+sufixos[c]+sufixo)
+    };
+
+    var maxValue = d3.max(dados.value);
+    var minValue = d3.min(dados.value);
+
+    var preFormat = d3.format('.2f');
+    var preFormatted = removeDecimalZeroes(preFormat(maxValue));
+    var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
+    var isSmall = preFormatted < 1 && preFormatted > -1;
+
+
+    // has decimal
+    if (isSmall){
+        return formatFraction;
+    }
+
+    var preFormattedIntLength = Math.round(preFormatted).toString().length;
+
+    if (preFormattedIntLength > 0){
+        return formatGreatNumber;
+    }
 }
 
 function loadTooltip_barras(d, key, eixo, vrv, dados){
@@ -842,9 +588,54 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
 
 }
 
+function barColor(colorId, i, uos) {
 
+    if (parameters.eixo == 1 && parameters.var == 6 && uos == 1){
+        if(parameters.ocp != 0){
 
+            if(parameters.deg == 0){
+                return COLORS.ocupacoes[i+1].color;
+            }
+            else{
+                return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+            }
 
+        }
+        else{
 
+            if(parameters.deg == 0){
+                return color(dados.key[i])
+            }
+            else{
+                return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
+            }
+        
+        }
+    }
 
+    else if (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1){
+        if(parameters.deg == 0){
+            return color(dados.key[i])
+        }
+        else{
+            return color(parameters.cad)
+        }
+    }
 
+    else if (COLORS.cadeias[colorId]) {
+        if(colorId){
+            if(colorId == 0){
+                return corEixo[1]
+            }
+            else{
+                return COLORS.cadeias[colorId].color;
+            }
+        }
+        else{
+            return corEixo[2];
+        }
+    } 
+    else {
+        return COLORS.cadeias[0].color;
+    }
+}
