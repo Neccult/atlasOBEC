@@ -83,7 +83,7 @@ function create_bars(barras_box, data){
         .attr("class", "bar")
         .attr("data-legend", function(d, i, obj) { return dados.key[i]; })
         .attr("data-color", function(d, i, obj) {
-            return getBarDataColor(d, i, uos);
+            return getBarDataColor(d, i, uos, dados);
         })
         .attr("data-value", function(d) {
                return d; 
@@ -225,7 +225,7 @@ function update_bars(barras_box, data){
             return getBarHeight(y, d, dados, height, minBarHeight);
         })
         .attr("data-color", function(d, i, obj) {
-            return getBarDataColor(d, i, uos);
+            return getBarDataColor(d, i, uos, dados);
         })
         .on("click", function(d, i, obj) {
             clickBarras(barras_box, dados, uos, i)
@@ -326,12 +326,12 @@ function getBarY(y, d, dados, height, minBarHeight) {
 
 }
 
-function getBarDataColor(d, i, uos) {
+function getBarDataColor(d, i, uos, dados) {
     if(parameters.eixo == 3 && (parameters.var == 5 || parameters.var == 8)) {
         return barColor(0);
     }
     else {
-        return barColor(parameters.cad, i, uos);
+        return barColor(parameters.cad, i, uos, dados);
     }
 }
 
@@ -367,91 +367,56 @@ function destacarBarra(barras_box, barraId, uos) {
 
     d3.select(barras_box).selectAll("rect").each(function() {
 
+        var destacado = false;
+
         if(parameters.eixo == 1 && parameters.var == 6 && uos == 1){
 
-            if (parameters.ocp == 0){
-                if (parameters.deg == 0) {
-                    if (getCadABVId($(this).attr("data-legend")) == parameters.cad) {
-                        if($(this).attr("class") !== "destacado") {
-                            $(this).attr("class", "destacado");
-                            $(this).attr("data-color", $(this).css("fill"));
-                            $(this).css("fill", $(this).attr("data-color"));
-                            $(this).css("opacity", "1");
-                            $(this).css("stroke-width", "2");
-                        }
-                    }
-                    else {
-                        $(this).attr("class", "");
-                        $(this).css("fill", $(this).attr("data-color"));
-                        $(this).css("opacity", "0.5");
-                    }
-                }
-                else if (parameters.deg != 0) {
-                    if (getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) {
-                        if($(this).attr("class") !== "destacado") {
-                            $(this).attr("class", "destacado");
-                            $(this).attr("data-color", $(this).css("fill"));
-                            $(this).css("fill", $(this).attr("data-color"));
-                            $(this).css("opacity", "1");
-                            $(this).css("stroke-width", "2");
-                        }
-                    }
-                    else {
-                        $(this).attr("class", "");
-                        $(this).css("fill", $(this).attr("data-color"));
-                        $(this).css("opacity", "0.5");
-                    }
-                }
-            }
-            else{
-                if (parameters.deg == 0) {
 
-                    if (getOcpId($(this).attr("data-legend")) == parameters.ocp) {
-                        if($(this).attr("class") !== "destacado") {
-                            $(this).attr("class", "destacado");
-                            $(this).attr("data-color", $(this).css("fill"));
-                            $(this).css("fill", $(this).attr("data-color"));
-                            $(this).css("opacity", "1");
-                            $(this).css("stroke-width", "2");
-                        }
-                    }
-                    else {
-                        $(this).attr("class", "");
-                        $(this).css("fill", $(this).attr("data-color"));
-                        $(this).css("opacity", "0.5");
-                    }
-                }
-                else{
-                    if (getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) {
-                        if($(this).attr("class") !== "destacado") {
-                            $(this).attr("class", "destacado");
-                            $(this).attr("data-color", $(this).css("fill"));
-                            $(this).css("fill", $(this).attr("data-color"));
-                            $(this).css("opacity", "1");
-                            $(this).css("stroke-width", "2");
-                        }
-                    }
-                    else {
-                        $(this).attr("class", "");
-                        $(this).css("fill", $(this).attr("data-color"));
-                        $(this).css("opacity", "0.5");
-                    }
-                }
+            if (parameters.ocp == 0 && parameters.deg == 0){
+                    destacado = ((getCadABVId($(this).attr("data-legend")) == parameters.cad) ? true : false);
             }
-        }
-        else{
-            if($(this).attr("data-legend") == barraId) {
+            else if (parameters.ocp == 0 && parameters.deg != 0) {
+                    destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.cad) ? true : false);
+            }
+            else if(parameters.ocp != 0 && parameters.deg == 0){
+                    destacado = ((getOcpId($(this).attr("data-legend")) == parameters.cad) ? true : false);
+            }
+            else if(parameters.ocp != 0 && parameters.deg != 0){
+                    destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) ? true : false);
+            }
+
+            if(destacado) {
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
                     $(this).attr("data-color", $(this).css("fill"));
-                    $(this).css("fill", corEixo[1]);
+                    $(this).css("fill", $(this).attr("data-color"));
                     $(this).css("opacity", "1");
+                    $(this).css("stroke-width", "2");
                 }
             }
             else {
                 $(this).attr("class", "");
                 $(this).css("fill", $(this).attr("data-color"));
-                $(this).css("opacity", "0.7");
+                $(this).css("opacity", "0.8");
+            }
+        }
+        else {
+
+            destacado = (($(this).attr("data-legend") == barraId) ? true : false);
+            
+            if(destacado) {
+                if($(this).attr("class") !== "destacado") {
+                    $(this).attr("class", "destacado");
+                    $(this).attr("data-color", $(this).css("fill"));
+                    $(this).css("fill", corEixo[1]);
+                    $(this).css("opacity", "1");
+                    $(this).css("stroke-width", "1");
+                }
+            }
+            else {
+                $(this).attr("class", "");
+                $(this).css("fill", $(this).attr("data-color"));
+                $(this).css("opacity", "0.8");
             }
         }
     });
@@ -588,7 +553,7 @@ function loadTooltip_barras(d, key, eixo, vrv, dados){
 
 }
 
-function barColor(colorId, i, uos) {
+function barColor(colorId, i, uos, dados) {
 
     if (parameters.eixo == 1 && parameters.var == 6 && uos == 1){
         if(parameters.ocp != 0){
@@ -604,22 +569,17 @@ function barColor(colorId, i, uos) {
         else{
 
             if(parameters.deg == 0){
-                return color(dados.key[i])
+                return COLORS.cadeias[i+1].color;
             }
             else{
                 return COLORS.deg[parameters.deg].subdeg[getSubdegName(parameters.deg, (i+1).toString())]
             }
-        
+    
         }
     }
 
-    else if (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19) && uos == 1){
-        if(parameters.deg == 0){
-            return color(dados.key[i])
-        }
-        else{
-            return color(parameters.cad)
-        }
+    else if (parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
+        return COLORS.cadeias[colorId].color;
     }
 
     else if (COLORS.cadeias[colorId]) {
