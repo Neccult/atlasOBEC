@@ -677,7 +677,7 @@ ul.var-list li{
 }
 
 .destacado-scc {
-	stroke:	#555 !important;
+	stroke:	#555;
 	stroke-width: 1px;
 }
 .container {
