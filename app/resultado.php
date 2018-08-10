@@ -532,9 +532,9 @@
                 <span id="containerDownload" class="col-md-4 col-xs-10 contexto" style="top:-220px">
                     <div class="row">
                         <div class="col-md-12 opt-title text-center">DOWNLOAD</div>
-                        <div class="col-xs-3 col-btn"><button class="opt select" id="pdf">PDF</button></div>
-                        <div class="col-xs-3 col-btn"><button class="opt select" id="csv">ODS</button></div>
-                        <div class="col-xs-3 col-btn"><button class="opt select" id="img">IMG</button></div>
+                        <div class="col-xs-4 col-btn"><button class="opt select" id="pdf">PDF</button></div>
+                        <div class="col-xs-4 col-btn"><button class="opt select" id="csv">ODS</button></div>
+                        <div class="col-xs-4 col-btn"><button class="opt select" id="img">IMG</button></div>
 <!--                        <div class="col-xs-3 col-btn"><button onClick="testeF();" class="opt select" id="img">TESTE</button></div>-->
                     </div>
 
