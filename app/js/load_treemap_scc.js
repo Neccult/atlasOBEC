@@ -323,12 +323,9 @@ function update_treemap_scc(treemap_scc_box, data){
             return fontSize;
         });
 
-    var percentageTextElement = cell.select(".percentage")
-        .style("opacity", 0)
+    var percentageTextElement = cell.select(".percentage").style("opacity", 0)
 
-    var titleTextElement = cell.select("text")
-        .style("opacity", 0)
-
+    var titleTextElement = cell.select("text").style("opacity", 0)
 
     if(parameters.eixo == 0 || parameters.eixo == 2){
         cell.data(root.leaves())
@@ -340,8 +337,8 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("data-percent", function(d) { return (d.data.size/root.value); })
             .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
             .attr("id", function(d) { return d.data.id; })
-            .style("stroke", function(d){
-                if(d.data.colorId == parameters.cad) {
+            .style("stroke", function(d) {
+                if (d.data.colorId == parameters.cad) {
                     return "#555";
                 }
                 else {
@@ -483,10 +480,10 @@ function update_treemap_scc(treemap_scc_box, data){
             .text(function (d) {
 
                 var divisao = d.data.size / root.value;
-                if (uf) {
+                if (parameters.uf) {
                     return formatDecimalLimit((divisao) * 100, 2) + "%";
                 } else if (parameters.var == 2 || parameters.var === 9) {
-                    if (uf === 0) {
+                    if (parameters.uf === 0) {
                         return formatDecimalLimit((divisao) * 100, 2) + "%";
                     }
                     else {
@@ -609,7 +606,6 @@ function formatValor(valor) {
 function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
     
     if(eixo == 0) {
-
         tooltipInstance.showTooltip(d, [
             ["title", d.data.name],
             ["", formatTextVrv(d.data.size, eixo, vrv)]
@@ -617,46 +613,11 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
                 
     }
     else if(eixo == 1) {
-
-
-        if(vrv == 2){
-            tooltipInstance.showTooltip(d, [
-                ["title", d.data.name],
-                ["", formatTextVrv(d.data.size, eixo, vrv)]
-            ]);
-        }
-        else if(uf == 0){
-            if(parameters.deg != 0) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)]
-                ]);
-            }
-            else {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)]
-                ]);
-
-            }
-        }
-        else{
-            if(parameters.deg != 0) {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)]
-                ]);
-            }
-            else {
-                tooltipInstance.showTooltip(d, [
-                    ["title", d.data.name],
-                    ["", formatTextVrv(d.data.size, eixo, vrv)]
-                ]);
-
-            }
-        }
+        tooltipInstance.showTooltip(d, [
+            ["title", d.data.name],
+            ["", formatTextVrv(d.data.size, eixo, vrv)]
+        ]);
     }
-
 
     else if(eixo == 2){
         if(url['uf'] == 0 || url['var'] == 3){
@@ -703,7 +664,6 @@ function loadTooltipSCC(d, eixo, vrv, tooltipInstance){
             ]);
         }
     }
-
 }
 
 function sumByCount(d) {
@@ -727,7 +687,6 @@ function color(colorId){
 
     if(parameters.eixo == 1) {
 
-
         if(COLORS.cadeias[colorId]){
 
             COLORS.cadeias[colorId].gradient["7"] = COLORS.cadeias[colorId].color;
@@ -749,7 +708,7 @@ function color(colorId){
 
 function treemapClick(d, root){
 
-    if(url['ocp'] == 0) {
+    if(parameters.ocp == 0) {
 
         destacaTreemap(d.data.colorId);
 
