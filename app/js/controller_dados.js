@@ -271,7 +271,7 @@ function setPercentValueData(valor) {
         valor = 0;
     }
 
-    var percentual = formatDecimalLimit(valor*100, 2) + "%";
+    var percentual;
 
     if(parameters.eixo == 0){
 
@@ -280,6 +280,9 @@ function setPercentValueData(valor) {
         }
         else if(parameters.var >= 10){
             percentual = formatDecimalLimit(valor, 2);
+        }
+        else {
+            percentual = formatDecimalLimit(valor*100, 2) + "%";
         }
 
         $(".percent-value").first().find(".number").first().html(percentual);
@@ -293,6 +296,9 @@ function setPercentValueData(valor) {
         else if(parameters.var == 2 || parameters.var == 11 || parameters.var == 10 ||  parameters.var == 9  || parameters.var == 4 || parameters.var == 5 || parameters.var == 6 || parameters.var == 8){
             percentual = "";
         }            
+        else{
+            percentual = formatDecimalLimit(valor*100, 2) + "%";
+        }
         
         $(".percent-value").first().find(".number").first().html(percentual);
         var doc =  $(".percent-value").first().find(".number").first();
