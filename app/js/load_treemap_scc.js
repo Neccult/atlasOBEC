@@ -63,7 +63,7 @@ function create_treemap_scc(treemap_scc_box, data){
             if(window.parent.innerWidth <= 1199)
                 return;
 
-            treemapClick(d, root);
+            treemapClick(treemap_scc_box, d, root);
         })
         .style("cursor", "pointer");
 
@@ -230,7 +230,7 @@ function create_treemap_scc(treemap_scc_box, data){
 
     var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf, deg: data_deg};
 
-    destacaTreemap(parameters.cad);
+    destacaTreemap(treemap_scc_box, parameters.cad);
     updateData('treemap_scc', dados);
 }
 
@@ -290,8 +290,6 @@ function update_treemap_scc(treemap_scc_box, data){
             return "url(#clip-" + d.data.id + ")";
         })
 
-
-
     percentageTextElement.select('tspan')
         .text(function (d) {
 
@@ -337,14 +335,6 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("data-percent", function(d) { return (d.data.size/root.value); })
             .attr("data-percent-uf", function(d) {  return (d.data.size/root.value); })
             .attr("id", function(d) { return d.data.id; })
-            .style("stroke", function(d) {
-                if (d.data.colorId == parameters.cad) {
-                    return "#555";
-                }
-                else {
-                    return "none";
-                }
-            })
             .attr("width", function(d) { return d.x1 - d.x0; })
             .attr("height", function(d) { return d.y1 - d.y0; })
             .attr("fill", function(d) { return color(d.data.colorId); })
@@ -383,7 +373,7 @@ function update_treemap_scc(treemap_scc_box, data){
             .on("click", function(d) {
                 if(window.parent.innerWidth <= 1199)
                     return;
-                treemapClick(d, root);
+                treemapClick(treemap_scc_box, d, root);
             })
 
         newR
@@ -448,18 +438,22 @@ function update_treemap_scc(treemap_scc_box, data){
             .attr("width", function(d) { return nodeWidth(d); })
             .attr("height", function(d) { return d.y1 - d.y0; })
             .attr("id", function(d) { return d.data.id; })
-            .style("stroke", function(d){
-                if(d.data.colorId == parameters.cad) {
-                    return "#555";
-                }
-                else{
-                    return "rgba(255, 255, 255, 0.47)";
-                }
-            })
             .attr("fill", function(d) { return color(d.data.colorId)});
 
         cell = rect
     }
+
+    var data_value = data.children[parameters.cad-1].children[0].children[0].size;
+    var data_percent = data.children[parameters.cad-1].children[0].children[0].size/root.value;
+    var data_percent_uf = data.children[parameters.cad-1].children[0].children[0].size/root.value;
+    var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf};
+
+    updateData('treemap_scc', dados);
+
+    console.log("Valores (antes):", 
+        data.children[parameters.cad-1].children[0].children[0].size,
+        data.children[parameters.cad-1].children[0].children[0].size/root.value)
+    console.log(data.children[parameters.cad-1].children[0].children[0])
 
     setTimeout(function () {
 
@@ -516,6 +510,8 @@ function update_treemap_scc(treemap_scc_box, data){
         var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
         var data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
 
+        console.log("Valores (depois): ", data_value, data_percent, data_percent_uf, data_deg);
+        
         if(parameters.eixo == 1 && parameters.deg != 0){
             $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').each(function(){
                 if($(this).attr("id").match(getSubdegName(parameters.deg, parameters.subdeg))){
@@ -525,7 +521,7 @@ function update_treemap_scc(treemap_scc_box, data){
         }
 
         if(parameters.eixo == 1 && parameters.ocp != 0){
-            data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent")
+            data_percent = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-percent");
             data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.ocp+'"]').attr("data-deg");
         }
 
@@ -533,6 +529,7 @@ function update_treemap_scc(treemap_scc_box, data){
 
         updateData('treemap_scc', dados);
 
+        destacaTreemap(treemap_scc_box, parameters.cad);
     }, 500);
 
     // testa e mostra mensagem de valor zerado/indisponível
@@ -564,15 +561,23 @@ function update_treemap_scc(treemap_scc_box, data){
     }
 }
 
-function destacaTreemap(cadId) {
+function destacaTreemap(treemap_scc_box, cadId) {
 
-    $("rect").each(function() {
-        if($(this).attr("data-legend") == cadId) {
+    $(treemap_scc_box).find("rect").each(function() {
+
+        if(cadId == 0){
+            $(this).animate({"opacity": "1"}, "fast");
+            $(this).css("stroke", "none");
+        }
+        else if($(this).attr("data-legend") == cadId) {
             $(this).attr("class", "destacado-scc");
             $(this).animate({"opacity": "1"}, "fast");
+            $(this).css("stroke", "#555");
+            $(this).css("stroke-width", "2");
         }
         else {
             $(this).attr("class", "");
+            $(this).css("stroke", "none");
             $(this).animate({"opacity": "0.7"}, "fast");
         }
     });
@@ -688,7 +693,6 @@ function color(colorId){
     if(parameters.eixo == 1) {
 
         if(COLORS.cadeias[colorId]){
-
             COLORS.cadeias[colorId].gradient["7"] = COLORS.cadeias[colorId].color;
             return COLORS.cadeias[colorId].color;
         }
@@ -706,50 +710,38 @@ function color(colorId){
     }
 }
 
-function treemapClick(d, root){
+function treemapClick(treemap_scc_box, d, root){
 
-    if(parameters.ocp == 0) {
-
-        destacaTreemap(d.data.colorId);
-
-        deg = parameters.deg;
-        eixo = parameters.eixo;
-        vrv = parameters.var;
-
+    if(parameters.ocp == 0 || parameters.ocp == null) {
         cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent");
         cad_valor = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-value");
         cad_percent_uf = ($('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent-uf"))
 
         percent_deg = 0;
 
-        if(deg !=0){
-
+        if(parameters.deg !=0){
             cad_percent_uf = (d.data.size/d.parent.parent.value)
             percent_deg = (d.data.size/d.parent.parent.parent.value)
 
-            $(".bread-select[data-id=deg]").find("optgroup[value="+deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
-            $(".bread-select[data-id=cad]").val(d.data.colorId)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true);
+            $(".bread-select[data-id=cad]").val(d.data.colorId);
 
             updateWindowUrl('cad', d.data.colorId)
-            updateWindowUrl('deg', deg)
+            updateWindowUrl('deg', parameters.deg)
             updateWindowUrl('subdeg', d.data.desagreg)
-
         }
         else{
-
             $(".bread-select[data-id=cad]").val(d.data.colorId)
             updateWindowUrl('cad', d.data.colorId)
-
         }
+
     }
     else {
-
         $("select[data-id='ocp']").val(d.data.colorId);
         updateWindowUrl('ocp', d.data.colorId);
         updateWindowUrl('cad', 0);
 
         enableDesag(parameters.eixo, parameters.var, d.data.colorId, true, parameters.slc, url);
-        destacaTreemap(d.data.colorId);
 
         cad_valor = d.data.size;
 

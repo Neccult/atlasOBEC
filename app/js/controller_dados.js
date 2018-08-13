@@ -64,7 +64,6 @@ function configInfoDataBoxTreemapRegion(dados) {
 
 function configInfoDataBoxTreemapSCC(dados) {
 
-
     if(parameters.eixo == 0){
 
         if(parameters.cad == 0){
@@ -83,7 +82,7 @@ function configInfoDataBoxTreemapSCC(dados) {
     }
     if(parameters.eixo == 1){
 
-        if(((parameters.cad == 0 && parameters.ocp == 0)|| parameters.ocp == 3)  && parameters.deg == 0){
+        if(((parameters.cad == 0 && parameters.ocp == 0) || parameters.ocp == 3)  && parameters.deg == 0){
 
             if(parameters.uf == 0 ){
                 setPercentValueData(1)
@@ -245,7 +244,7 @@ function configInfoDataBoxBarrasStacked(dados, valor, soma) {
 /*  --- SETTERS --- */
 
 function setIntegerValueData(value) {
-    var description = PT_BR
+    var description = PT_BR;
 
     var result = getDataVar(description, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;

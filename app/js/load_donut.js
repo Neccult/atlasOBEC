@@ -95,7 +95,6 @@ function create_donut(donut_box, data){
     //         acumuladoSetor = soma;
     //
     //     setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
-    //
     // }
 }
 

@@ -397,7 +397,7 @@ function destacarBarra(barras_box, barraId, uos) {
             else {
                 $(this).attr("class", "");
                 $(this).css("fill", $(this).attr("data-color"));
-                $(this).css("opacity", "0.8");
+                $(this).css("opacity", "0.65");
             }
         }
         else {
@@ -411,12 +411,14 @@ function destacarBarra(barras_box, barraId, uos) {
                     $(this).css("fill", corEixo[1]);
                     $(this).css("opacity", "1");
                     $(this).css("stroke-width", "1");
+                    $(this).css("stroke", "#555");
                 }
             }
             else {
                 $(this).attr("class", "");
                 $(this).css("fill", $(this).attr("data-color"));
-                $(this).css("opacity", "0.8");
+                $(this).css("opacity", "0.65");
+                $(this).css("stroke", "none");
             }
         }
     });

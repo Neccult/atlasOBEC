@@ -1777,6 +1777,8 @@ $(document).ready(function(){
             updateBreadcrumbSetores(getCadsByMenuDonut());
         }
 
+        $('.bread-select[data-id="cad"]').val(parameters.cad)
+
     }
 
 });
