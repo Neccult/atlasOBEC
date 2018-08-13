@@ -506,7 +506,7 @@ function update_treemap_scc(treemap_scc_box, data){
         var data_percent_uf = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-percent-uf");
         var data_deg = $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').attr("data-deg");
 
-        console.log("Valores (depois): ", data_value, data_percent, data_percent_uf, data_deg);
+        // console.log("Valores (depois): ", data_value, data_percent, data_percent_uf, data_deg);
         
         if(parameters.eixo == 1 && parameters.deg != 0){
             $(treemap_scc_box+' svg').find('rect[data-legend="'+parameters.cad+'"]').each(function(){
