@@ -443,18 +443,14 @@ function update_treemap_scc(treemap_scc_box, data){
         cell = rect
     }
 
-    var data_value = data.children[parameters.cad-1].children[0].children[0].size;
-    var data_percent = data.children[parameters.cad-1].children[0].children[0].size/root.value;
-    var data_percent_uf = data.children[parameters.cad-1].children[0].children[0].size/root.value;
-    var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf};
-
-    updateData('treemap_scc', dados);
-
-    console.log("Valores (antes):", 
-        data.children[parameters.cad-1].children[0].children[0].size,
-        data.children[parameters.cad-1].children[0].children[0].size/root.value)
-    console.log(data.children[parameters.cad-1].children[0].children[0])
-
+    if(parameters.cad != 0){
+        var data_value = data.children[parameters.cad-1].children[0].children[0].size;
+        var data_percent = data.children[parameters.cad-1].children[0].children[0].size/root.value;
+        var data_percent_uf = data.children[parameters.cad-1].children[0].children[0].size/root.value;
+        
+        var dados = {valor: data_value, percent: data_percent, percent_uf: data_percent_uf};
+        updateData('treemap_scc', dados);
+    }
     setTimeout(function () {
 
         if(svg.attr("no-data") == 1){
