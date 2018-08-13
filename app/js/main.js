@@ -1776,14 +1776,7 @@ $(document).ready(function(){
         if(parameters.eixo == 2 && (parameters.var >= 18)){
             updateBreadcrumbSetores(getCadsByMenuDonut());
         }
-
-        $('.bread-select[data-id="cad"]').val(parameters.cad)
-        if(parameters.eixo == 1){
-            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(parameters.subdeg)+"]").prop('selected', true);
-        }
-        else{
-            $('.bread-select[data-id="deg"]').val(parameters.deg);
-        }
+        setBreadcrumbsByUrl();
     }
 
 });

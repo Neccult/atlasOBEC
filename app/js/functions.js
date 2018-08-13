@@ -381,6 +381,17 @@ function updateBreadcrumbSetores(cads){
     }
 }
 
+function setBreadcrumbsByUrl(){
+    $('.bread-select[data-id="cad"]').val(parameters.cad)
+    if(parameters.eixo == 1){
+        $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(parameters.subdeg)+"]").prop('selected', true);
+    }
+    else{
+        $('.bread-select[data-id="deg"]').val(parameters.deg);
+    }
+    $(".bread-select[data-id='mec']").val(parameters.mec);
+}
+
 function updateDefaultOcupation(){
     $("select[data-id='ocp'] > option").each(function () {
         $(this).remove();

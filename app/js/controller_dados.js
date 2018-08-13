@@ -21,9 +21,6 @@ function configInfoDataBoxMapa(dados, dict) {
         else{
             $(".setor-value").css("display", "none")
         }
-
-
-
     }
     else if(parameters.eixo == 1){
 
