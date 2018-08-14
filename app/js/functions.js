@@ -381,6 +381,17 @@ function updateBreadcrumbSetores(cads){
     }
 }
 
+function setBreadcrumbsByUrl(){
+    $('.bread-select[data-id="cad"]').val(parameters.cad)
+    if(parameters.eixo == 1){
+        $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(parameters.subdeg)+"]").prop('selected', true);
+    }
+    else{
+        $('.bread-select[data-id="deg"]').val(parameters.deg);
+    }
+    $(".bread-select[data-id='mec']").val(parameters.mec);
+}
+
 function updateDefaultOcupation(){
     $("select[data-id='ocp'] > option").each(function () {
         $(this).remove();
@@ -1643,6 +1654,28 @@ function getSubdegId(deg, subdeg) {
             }
             break;
 
+    }
+}
+
+function getOcpId(ocp) {
+    switch (ocp) {
+        case 'Relacionadas': return 1;
+        case 'Culturais': return 2;
+    }
+}
+
+function getCadABVId(cad) {
+    switch (cad) {
+        case 'Arq e D': return 1;
+        case 'Artes': return 2;
+        case 'Audio': return 3;
+        case 'Cult. Dig.': return 4;
+        case 'Edit.': return 5;
+        case 'Edu. Art.': return 6;
+        case 'Entret.': return 7;
+        case 'Música': return 8;
+        case 'Patrimônio': return 9;
+        case 'Publ.': return 10;
     }
 }
 

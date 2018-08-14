@@ -677,7 +677,7 @@ ul.var-list li{
 }
 
 .destacado-scc {
-	stroke:	#555 !important;
+	stroke:	#555;
 	stroke-width: 1px;
 }
 .container {
@@ -706,6 +706,7 @@ article.results-article div.results-content{
 	height: 100%;
 	width: 100%;
 }
+
 .desc-chart .title{
 	margin-bottom: 40px;
 	margin-top: 50px;
@@ -824,7 +825,7 @@ article.results-article div.results-content{
 
 #menu-view .view-title-leg{
 	margin-top: 0px;
-	font-size: 18px;
+	font-size: 20px;
 }
 
 .view-title-leg{
@@ -1716,7 +1717,7 @@ button.opt.active{
 		width: 100%;
 	}
 
-	#containerTree *{
+	#containerTree .view-title, #containerTree #view_box_scc, #containerTree #menu-view{
 		width: 100%;
 	}
 

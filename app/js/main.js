@@ -1266,14 +1266,7 @@ function updateOptView(container, btn){
                 });
             }
         }
-
-
     }
-
-
-
-
-
 }
 
 
@@ -1774,7 +1767,7 @@ $(document).ready(function(){
         if(parameters.eixo == 2 && (parameters.var >= 18)){
             updateBreadcrumbSetores(getCadsByMenuDonut());
         }
-
+        setBreadcrumbsByUrl();
     }
 
 });

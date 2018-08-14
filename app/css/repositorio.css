@@ -1,0 +1,265 @@
+#section1{
+    height: 100%;
+    background-color: #E7E7E7;
+
+}
+
+article.repo-article{
+    display: flex;
+    height: 61vh;
+    width: 100%;
+    padding: 10px 0px;
+    color: #5b5b5f;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.1em;
+}
+
+article.repo-article div.repo-content{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+    padding: 0 10%;
+
+}
+
+.repo-container-boxes{
+    height: auto;
+    display: flex;
+    flex-flow: row;
+    padding: 30px;
+    background-color: white;
+    border: 3px #5b5b5f solid;
+    border-radius: 50px;
+}
+
+.repo-container-boxes .menu{
+    width: 30%;
+}
+
+.repo-container-boxes .content{
+    width: 100%;
+}
+
+.repo-container-boxes .content{
+    display: flex;
+    flex-flow: column;
+}
+
+.repo-container-boxes div{
+    /*width: 100%;*/
+}
+
+.repo-container {
+    width: 100% !important;
+    padding-top: 80px;
+}
+
+.filtro{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filtro {
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+}
+
+.filtro .search-container {
+    float: right;
+    width: 50%;
+    height: 35px;
+    background-color: white;
+    border: 1px #5b5b5f solid;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+
+}
+
+.filtro input[type=text] {
+    padding: 6px;
+    /*margin-top: 8px;*/
+    width: 85%;
+    font-size: 17px;
+    border: none;
+}
+
+.filtro .search-container button {
+    float: right;
+    padding: 6px 10px;
+    /*margin-top: 8px;*/
+    margin-right: 16px;
+    background: #fff;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.filtro .search-container button:hover {
+    background: #ccc;
+}
+
+.filtro .badges{
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+    height: 50%;
+
+}
+
+.filtro .search-badge{
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+    height: 50%;
+
+}
+
+.filtro #search-badge{
+    border: 1px #5b5b5f solid;
+    width: auto;
+    height: 22px;
+    padding: 0 10px;
+    background-color: #E7E7E7;
+    color: #black;
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.filtro-badge{
+    border: 1px #5b5b5f solid;
+    width: auto;
+    height: 16px;
+    padding: 0 10px;
+    background-color: #5b5b5f;
+    color: #f7f7f7;
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.check{
+    width:24px;
+    height:24px;
+    position:relative;
+    top:6px;
+    cursor: pointer;
+}
+
+.menu{
+    padding: 20px;
+    background-color: white;
+}
+
+.menu label{
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.menu .btn-todos-nenhum{
+    display: flex;
+    flex-flow: row;
+    border: 1px #5b5b5f  solid;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    background-color: #5b5b5f ;
+    color: #f7f7f7;
+
+}
+
+.menu .btn-todos-nenhum div{
+    cursor: pointer;
+    height: 25px;
+    width: 50%;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.results{
+    height: 600px;
+    background-color: white;
+    padding: 20px;
+    overflow: auto;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.results .card-result{
+    height: 200px;
+    width: 160px;
+    background: #F1F1F1;
+    display: flex;
+    flex-flow: column;
+    padding: 10px;
+    border: 2px #3c3c3c solid;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.results .card-result div{
+    /*border: 1px #0f0f0f solid;*/
+}
+
+.results .card-result .media-card{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.results .card-result .media-card .previa-card{
+    height: 80px;
+    width: 80px;
+    background-padding:s 10px;
+    background-image: url("../images/pdf.png");
+    background-repeat: no-repeat;
+    background-size: 70px;
+
+
+}
+
+.results .card-result .info-card{
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: column;
+
+
+}
+
+.results .card-result .info-card .title-card{
+    width: auto;
+    color: #000;
+    text-align: center;
+
+}
+
+.results .card-result .info-card .tags-card{
+    width: 100%;
+    font-size: 10px;
+    color: #000;
+    text-align: right;
+
+}

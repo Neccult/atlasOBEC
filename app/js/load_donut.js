@@ -33,14 +33,17 @@ function create_donut(donut_box, data){
         .attr("soma", function(d) {  return getSoma(data, d.data.tipo);})
         .style("fill", function(d) { return color_donut(d.data.tipo); })
         .style("stroke", "none")
+        .style("cursor", "pointer")
         .each(function(d) { this._current = d; });
 
     donut = g;
 
     d3.selectAll(".arc")
+        .on("click", function(d) {
+            clickDonut(d);
+        })
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
-
 
             if(parameters.eixo == 2 && parameters.var == 17){
                 if(d.data.tipo == "Não"){
@@ -54,17 +57,13 @@ function create_donut(donut_box, data){
                         ["", formatTextVrv(d.data.total, 2, parameters.var)]
                     ]);
                 }
-
             }
             else if(parameters.eixo == 2 && parameters.var >= 18){
                 tooltipInstance.showTooltip(d.data, [
                     ["title", d.data.tipo],
                     ["", formatTextVrv(d.data.valor, 2, parameters.var)],
                     ["", percentFormat(d.data.percent).replace(".",",")]
-
-
                 ]);
-
             }
             else{
                 tooltipInstance.showTooltip(d.data, [
@@ -80,23 +79,6 @@ function create_donut(donut_box, data){
             d3.select(this).attr("transform", "scale(1)")
             tooltipInstance.hideTooltip()
         })
-
-    // if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
-    //     var soma = 0;
-    //     var acumuladoSetor;
-    //
-    //     Object.keys(data).forEach(function (key) {
-    //         soma += data[key].valor;
-    //         if(cad == data[key].cad)
-    //             acumuladoSetor = data[key].valor;
-    //     })
-    //
-    //     if(parameters.cad == 0)
-    //         acumuladoSetor = soma;
-    //
-    //     setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
-    //
-    // }
 }
 
 function update_donut(donut_box, data){
@@ -128,9 +110,13 @@ function update_donut(donut_box, data){
      .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
      .style("fill", function(d) { return color_donut(d.data.tipo); })
      .style("stroke", "none")
+     .style("cursor", "pointer")
      
     
     d3.selectAll(".arc")
+        .on("click", function(d) {
+            clickDonut(d);
+        })
         .on("mouseover", function(d){
             d3.select(this).attr("transform", "scale(1.01)")
 
@@ -268,5 +254,13 @@ function indexTipos(tipo){
     switch(tipo){
         case "Exportação": return 1;
         case "Importação": return 2;
+    }
+}
+
+function clickDonut(d) {
+    if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)) {
+        updateWindowUrl('cad', d.data.cad);
+        updateIframe();
+        $('.bread-select[data-id="cad"]').val(d.data.cad);
     }
 }
