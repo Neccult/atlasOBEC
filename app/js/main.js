@@ -1141,17 +1141,11 @@ function updateOptView(container, btn){
 
                     if($(this).attr("id") == "setor"){
                         $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
+                        $(this).css("background-color", corEixo[1]);
                     }
                     else{
                         $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[2]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
+                        $(this).css("background-color", corEixo[2]);
                     }
                 }
                 else{
@@ -1161,10 +1155,7 @@ function updateOptView(container, btn){
 
                     if($(this).attr("id") == "ocupacao"){
                         $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
+                        $(this).css("background-color", corEixo[1]);
                     }
                     else {
                         $(this).css("opacity", "1")
@@ -1557,7 +1548,7 @@ $(document).ready(function(){
                 if( parameters.eixo == 1 && (parameters.var == 9 || parameters.var == 1)){
                     switchBreadCadOcp(0);
                 }
-                
+
                 updateOptView()
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
