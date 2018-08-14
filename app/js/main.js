@@ -18,10 +18,7 @@ $.get("./data/colors.json")
 $.get("./data/pt-br.json", function(data){
     textJSON = data
 })
-
-
 $.ajaxSetup({async: true});
-
 
 /*-----------------------------------------------------------------------------
 Função: controlVar
@@ -70,6 +67,14 @@ function controlVar(clickVar){
 
 }
 
+/*-----------------------------------------------------------------------------
+Função: controlVarPage
+    redireciona a página no primeiro carregamento
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function controlVarPage(clickVar){
     newHash = window.location.hash;
 
@@ -91,12 +96,20 @@ function controlVarPage(clickVar){
     /* variáveis com valores default */
 }
 
+/*-----------------------------------------------------------------------------
+Função: getAnoDefault
+    atualiza a variavel url com o ano mais atual da variável em questao
+Entrada:
+    eixo_autal
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+
 function getAnoDefault(eixo_atual){
 
     switch(eixo_atual){
         case 0: url['ano'] = d3.max(anos_default[url['var']]); break;
         case 1:
-
             if(url['var'] == 10 || url['var'] == 9 || url['var'] == 11){
                 url['slc'] = 0
                 url['ocp'] = 0
@@ -147,6 +160,15 @@ function defaultUrl(){
     url['pfj'] = 0;
     url['uos'] = 0;
 }
+
+/*-----------------------------------------------------------------------------
+Função: updateIframe
+    chama a função para atualizar as visualizações
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 
 function updateIframe(url){
 
@@ -253,6 +275,15 @@ function controlFilter(selectvalue, selectid, valueDesag){
 
 }
 
+/*-----------------------------------------------------------------------------
+Função: controlAno
+    controla os anos das variáveis
+Entrada:
+    select
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+
 function controlAno(select){
 
     if(window.location.hash==="#empreendimentos"){
@@ -289,8 +320,6 @@ function controlAno(select){
         }
     }
 }
-
-
 /*-----------------------------------------------------------------------------
 Função: getEixo
    Dicionário para o eixo, recebe o nome string e retorna o id int
@@ -371,6 +400,15 @@ function loadResult(){
 
 }
 
+/*-----------------------------------------------------------------------------
+Função: updateColorButtons
+   atualiza as cores dos botões (btn-opt)
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+
 function updateColorButtons(slc){
     $("#btn-opt").find("button.opt").css("background-color", corEixo[3]);
     $("#btn-opt").find("button.opt").css("opacity", "0.8");
@@ -379,6 +417,15 @@ function updateColorButtons(slc){
 
 }
 
+/*-----------------------------------------------------------------------------
+Função: removeVar
+   remove variável do select de variáveis
+Entrada:
+    eixo => eixo atual;
+    vrv => variável atual;
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function removeVar(eixo, vrv){
 
     var eixoUrl = window.location.hash.substring(1);
@@ -408,9 +455,6 @@ function loadMobile(){
         $(".bread-select[data-id='eixo']").val(window.location.hash.substring(1));
     });
 
-    // $( ".bread-parent" ).remove();
-
-
     $('#containerDesc').css("height", "auto");
     $('#containerDesc').css("top", "0");
     $('#containerDados').css("height", "500px");
@@ -419,7 +463,6 @@ function loadMobile(){
     $('#containerDownload').css("display", "block");
     $('#containerDownload').css("top", "0");
     $('#containerDownload').find("row").css("padding-left", "0");
-
 
     div1 = $('#containerMapa');
     div2 = $('#containerDesc');
@@ -448,8 +491,6 @@ function loadMobile(){
     }
 
     $('.bread-eixo[data-id=eixo]').val(window.location.hash.substring(1))
-
-
 }
 
 /*-----------------------------------------------------------------------------
@@ -535,7 +576,14 @@ function smoothScroll(link){
         }
     }
 }
-
+/*-----------------------------------------------------------------------------
+Função: getUf
+    retorna a UF da url atual
+Entrada:
+    textJSON
+Saída:
+    string
+-----------------------------------------------------------------------------*/
 function getUf(textJSON) {
     var uf_length = textJSON.length;
     var i;
@@ -545,7 +593,15 @@ function getUf(textJSON) {
         }
     }
 }
-
+/*-----------------------------------------------------------------------------
+Função: changeDescVar
+    modifica a descrição da variável
+    também gerencia a descrição no caso das variáveis 18 e 19 do eixo de fomento.
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function changeDescVar() {
     // import pt-br.json file for get the title
     var eixoUrl = getEixo(window.location.hash.substring(1))
@@ -575,7 +631,14 @@ function changeDescVar() {
         $(".desc-var").html(variavel.desc_var_mapa);
     }
 }
-
+/*-----------------------------------------------------------------------------
+Função: cleanDesagsUrl
+    zera os valores de alguns parametros da url
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function cleanDesagsUrl() {
     url['subdeg'] = 0;
     url['pfj'] = 0;
@@ -584,7 +647,15 @@ function cleanDesagsUrl() {
     url['mec'] = 0;
     url['uos'] = 0;
 }
-
+/*-----------------------------------------------------------------------------
+Função: updateWindowUrl
+    atualiza algum parametro da url da página
+Entrada:
+    id => nome do parametro
+    valor => novo valor do parametro
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateWindowUrl(id, valor){
 
     var replace = id+"=[0-9]*";
@@ -596,7 +667,15 @@ function updateWindowUrl(id, valor){
     var urlString = parent.window.location.href.replace(re, id+"="+valor);
     parent.window.history.pushState(null, null, urlString);
 }
-
+/*-----------------------------------------------------------------------------
+Função: updateActiveBreadcrumbs
+    atualiza para mostrar somente os breadcrumbs relevantes da variável
+Entrada:
+    eixo => nome do parametro
+    vrv => novo valor do parametro
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateActiveBreadcrumbs(eixo, vrv){
     if(eixo == 0){
         return;
@@ -688,20 +767,29 @@ function updateActiveBreadcrumbs(eixo, vrv){
 
     }
 }
-
+/*-----------------------------------------------------------------------------
+Função: hideBreadcrumb
+    esconde breadcrumb irrelevante
+Entrada:
+    id => nome do parametro do breadcrumb
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function hideBreadcrumb(id) {
     $(".bread-select[data-id='"+id+"']").parent().parent().css("display","none");
 }
 
-/*======
-	DOCUMENTO CARREGADO
-======*/
 $(window).bind("load", function() {
-
     loadPage(); /* controla menu e fade */
-
 });
-
+/*-----------------------------------------------------------------------------
+Função: updateUrl
+    atualiza os valores da variável url a partir da url da página
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateUrl() {
     var eixo_atual = getEixo(window.location.hash.substring(1))
 
@@ -716,13 +804,18 @@ function updateUrl() {
             url[$(this).attr('data-id')] = $(this).val();
     });
 }
-
+/*-----------------------------------------------------------------------------
+Função: updateLegendByDeg
+    atualiza a legenda pela desagregração
+Entrada:
+    deg => desagregação (id)
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateLegendByDeg(deg){
 
     if(deg == 0 || parameters.eixo == 0){
-
         if(url['ocp'] == 0){
-
             if(parameters.eixo == 2 && parameters.var == 10){
 
                 $(".view-title-leg[data-id='scc&ocp']").html("");
@@ -746,17 +839,13 @@ function updateLegendByDeg(deg){
                 } );
             }
 
-
             $("#title-view-leg-scc").html(html);
-
             var cads = getCadsByMenu();
-
             updateBreadcrumbSetores(cads);
         }
         else{
             switchToOcupations();
         }
-
     }
     else if(deg > 0){
 
@@ -791,9 +880,16 @@ function updateLegendByDeg(deg){
     }
 
 }
-
+/*-----------------------------------------------------------------------------
+Função: getCadsByMenu
+    retorna array de cads, formado pela legenda
+Entrada:
+    void
+Saída:
+    array => cads
+-----------------------------------------------------------------------------*/
 function getCadsByMenu(){
-    var cads = [];[];
+    var cads = [];
     $("#title-view-leg-scc").find(".scc").each(function(){
         cad = {id: $(this).attr("data-id"), nome: $(this).text()}
         cads.push(cad)
@@ -801,7 +897,14 @@ function getCadsByMenu(){
 
     return cads;
 }
-
+/*-----------------------------------------------------------------------------
+Função: getCadsByMenuDonut
+    retorna array de cads, formado pela legenda do donut
+Entrada:
+    void
+Saída:
+    array => cads
+-----------------------------------------------------------------------------*/
 function getCadsByMenuDonut(){
     var cads = [];
 
@@ -812,17 +915,14 @@ function getCadsByMenuDonut(){
 
     return cads;
 }
-
-function getCadsByMenu(){
-    var cads = [];[];
-    $("#title-view-leg-scc").find(".scc").each(function(){
-        cad = {id: $(this).attr("data-id"), nome: $(this).text()}
-        cads.push(cad)
-    })
-
-    return cads;
-}
-
+/*-----------------------------------------------------------------------------
+Função: switchToSetores
+    modifica os breadcrumbs para o SETORIAL (eixo mercado)
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function switchToSetores() {
 
     $(".view-title-leg[data-id='scc&ocp']").html("SETORES");
@@ -835,6 +935,45 @@ function switchToSetores() {
     updateBreadcrumbSetores(cads);
 }
 
+/*-----------------------------------------------------------------------------
+Função: switchToOcupations
+    modifica os breadcrumbs para o OCUPACIONAL (eixo mercado)
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function switchToOcupations() {
+
+    $(".view-title-leg[data-id='scc&ocp']").html("OCUPAÇÕES");
+
+    var legendArray = [1, 2];
+    var html = "";
+
+    legendArray.forEach( function(id) {
+        html += "<span class=\"ocp\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
+    } );
+
+    $("#title-view-leg-scc").html(html);
+
+    $(".bread-select[data-id='cad']").empty();
+
+    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
+        $(".bread-select[data-id='cad']").append("<option value='3'>Todos</option>");
+    }
+    $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
+    $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
+    $(".bread-select[data-id='cad']").attr("data-id", "ocp");
+}
+/*-----------------------------------------------------------------------------
+Função: updateMenuLegenda
+    atualiza a legenda pelo eixo e variável
+Entrada:
+    eixo => eixo atual;
+    vrv => variável atual;
+Saída:
+    cads => array com os cads do menu
+-----------------------------------------------------------------------------*/
 function updateMenuLegenda(eixo, vrv){
 
     var cads = [];
@@ -1004,30 +1143,14 @@ function updateMenuLegenda(eixo, vrv){
     return cads;
 
 }
-
-function switchToOcupations() {
-
-    $(".view-title-leg[data-id='scc&ocp']").html("OCUPAÇÕES");
-
-    var legendArray = [1, 2];
-    var html = "";
-
-    legendArray.forEach( function(id) {
-        html += "<span class=\"ocp\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
-    } );
-
-    $("#title-view-leg-scc").html(html);
-
-    $(".bread-select[data-id='cad']").empty();
-
-    if(!(url['var'] == 4 || url['var'] == 5 || url['var'] == 6)){
-        $(".bread-select[data-id='cad']").append("<option value='3'>Todos</option>");
-    }
-    $(".bread-select[data-id='cad']").append("<option value='1'>Atividades Relacionadas</option>");
-    $(".bread-select[data-id='cad']").append("<option value='2'>Cultura</option>");
-    $(".bread-select[data-id='cad']").attr("data-id", "ocp");
-}
-
+/*-----------------------------------------------------------------------------
+Função: updateSelectsByUrl
+    atualiza os selects pelos parametros da url da página
+Entrada:
+    void
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateSelectsByUrl(){
 
     var eixo = parent.window.location.hash.substring(1)
@@ -1066,32 +1189,26 @@ function updateSelectsByUrl(){
 
 
 }
-
-function updateSelectsByVar(){
-
-
-    if(parameters.eixo == 2 && parameters.var == 18){
-        array_cad = []
-    }
-
-}
-
+/*-----------------------------------------------------------------------------
+Função: updateOptView
+    inicializa e atualiza os botões e seus estilos padrões
+Entrada:
+    container => container (parent) do botão
+    btn => botão
+Saída:
+    void
+-----------------------------------------------------------------------------*/
 function updateOptView(container, btn){
 
     if(container == "init"){
-
         $(".btn-mapa button.opt.view").each(function(){
-
-
             if(parameters.chg){
                 if($(this).attr("id") == "mapa"){
-
                     $(this).css("opacity", "1")
                     if(parameters.eixo == 0)
                         $(this).css("background-color", corEixo[1]);
                     else
                         $(this).css("background-color", corEixo[2]);
-
                 }
                 else{
                     $(this).css("opacity", "0.8")
@@ -1229,7 +1346,6 @@ function updateOptView(container, btn){
         });
     }
     else{
-
         if(container == "content-btn-mapa "){
             $(".btn-mapa button.opt.view").each(function(){
                 if($(btn).attr("id") == $(this).attr("id")){
@@ -1270,7 +1386,6 @@ function updateOptView(container, btn){
                             $(this).css("background-color", corEixo[3]);
                         else
                             $(this).css("background-color", corEixo[1]);
-
                     }
                 });
             }
@@ -1283,7 +1398,6 @@ function updateOptView(container, btn){
 	documento pronto
 ======*/
 
-
 $(document).ready(function(){
 
     /* ATUALIZA OS IFRAMES QUANDO A JANELA FOR REDIMENSIONADA */
@@ -1293,11 +1407,8 @@ $(document).ready(function(){
 
 
     /*=== selecionar variável ===*/
-
+    /* LISTENER PARA O CLICK EM OPÇÃO DE LEGENDA SETORIAL */
     $(document).on('click', ".scc", function(){
-
-
-
         var eixo = parameters.eixo
 
         if((eixo == 0 && url['var'] < 10) || (eixo == 1 && url['var'] < 12) || (eixo == 2 && url['var'] >= 18) || eixo == 3 ){
@@ -1308,7 +1419,6 @@ $(document).ready(function(){
 
                 if(eixo == 2 && parameters.var == 19 && parameters.mec == 1)
                     return;
-
 
                 url['cad'] = setor;
                 parameters.cad = url['cad']
@@ -1340,10 +1450,8 @@ $(document).ready(function(){
 
     });
 
+    /* LISTENER PARA O CLICK EM OPÇÃO DE LEGENDA OCUPACIONAL */
     $(document).on('click', ".ocp", function(){
-
-
-
         var eixo = parameters.eixo
 
         if(eixo == 1 && url['var'] < 12){
@@ -1358,12 +1466,10 @@ $(document).ready(function(){
                 updateWindowUrl('ocp', ocp)
                 updateIframe(url);
             }
-
-
         }
-
     });
 
+    /* LISTENER PARA O CLICK EM OPÇÃO DE LEGENDA DESAGREGAÇÃO */
     $(document).on('click', ".deg", function(){
 
 
@@ -1379,11 +1485,12 @@ $(document).ready(function(){
 
     });
 
-
+    /* VERIFICA SE PRECISA INICIALIZAR A URL */
     if(url['var'] === "" && window.location.pathname.match("page.php")){
         controlVarPage(url['var']);
     }
 
+    /* VERIFICA SE PRECISA INICIALIZAR OS BREADCRUMBS E A URL INTERNA */
     if(url['var']) {
         if(window.location.pathname.match("resultado.php")){
             updateActiveBreadcrumbs(getEixo(window.location.hash.split("#")[1]), parseInt(url['var']));
@@ -1393,7 +1500,7 @@ $(document).ready(function(){
 
     /*=== resultado ===*/
 
-    /* alterar tipo de visualização */
+    /* ALTERA O TIPO DE VISUALIZAÇÃO */
     $(document).on('click', "button.opt.view", function(){
 
         ///TODO REFATORAR
@@ -1516,6 +1623,7 @@ $(document).ready(function(){
     }
     });
 
+    /* LISTENER PARA A MUDANÇA */
     $(document).on('change', ".bread-select", function(e){
 
         var dataId = $(this).attr("data-id");
