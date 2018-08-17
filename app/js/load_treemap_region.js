@@ -172,6 +172,7 @@ function create_treemap_region(treemap_box, data){
 }
 
 function update_treemap_region(treemap_box, data){
+    destaca_treemap_region(treemap_box, 0);
     var transition_time = 200;
 
     var color = function(colorId){
@@ -210,6 +211,7 @@ function update_treemap_region(treemap_box, data){
         .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 
     cell_region.select("rect")
+        .attr("data-legend", function(d) { return getIdUF(d.data.name); })
         .attr("width", function(d) { return d.x1 - d.x0; })
         .attr("height", function(d) { return d.y1 - d.y0; })
 
@@ -225,15 +227,11 @@ function update_treemap_region(treemap_box, data){
         .on("mouseout", tooltipInstance.hideTooltip)
         .style("cursor", "pointer");
 
-
-
     var percentageTextElement = cell_region.select(".percentage").select('tspan')
         .style("opacity", 0)
 
     var titleTextElement = cell_region.select("text")
         .style("opacity", 0)
-
-
 
     setTimeout(function () {
 
@@ -264,7 +262,6 @@ function update_treemap_region(treemap_box, data){
                         return formatDecimalLimit(d.data.percentual*100, 2) + '%';
                     }
                 }
-
                 else if(parameters.eixo == 1){
                     return formatDecimalLimit((d.data.size/root_region.value)*100 , 2) + '%';
                 }
@@ -342,7 +339,7 @@ function destaca_treemap_region(treemap_box, uf) {
             $(this).animate({"opacity": "1"}, "fast");
             $(this).css("stroke", "none");
         }
-        else if(d3.select(this).attr("data-legend") == parameters.uf){
+        else if(d3.select(this).attr("data-legend") == uf){
             $(this).attr("class", "destacado-scc");
             $(this).animate({"opacity": "1"}, "fast");
             $(this).css("stroke", "#555");
@@ -374,10 +371,9 @@ function sumBySize(d) {
 	return d.size;
 }
 
-
-
 function treemapRegionClick(d, root_region){
     updateWindowUrl('uf', getIdUF(d.data.name));
+    $(".bread-select[data-id=uf]").val(getIdUF(d.data.name));
     updateIframe()
 }
 
