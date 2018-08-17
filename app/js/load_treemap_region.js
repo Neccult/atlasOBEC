@@ -172,7 +172,7 @@ function create_treemap_region(treemap_box, data){
 }
 
 function update_treemap_region(treemap_box, data){
-    destaca_treemap_region(treemap_box, 0);
+    destaca_treemap_region(treemap_box, 99);
     var transition_time = 200;
 
     var color = function(colorId){
@@ -337,6 +337,10 @@ function destaca_treemap_region(treemap_box, uf) {
 
         if(uf == 0){
             $(this).animate({"opacity": "1"}, "fast");
+            $(this).css("stroke", "none");
+        }
+        else if(uf == 99){
+            $(this).animate({"opacity": "0.7"}, "fast");
             $(this).css("stroke", "none");
         }
         else if(d3.select(this).attr("data-legend") == uf){
