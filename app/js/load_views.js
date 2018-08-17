@@ -141,6 +141,8 @@ $.when($.get('data/pt-br.json'),
         initTitleBox(index_view_box1, 0, 0);
         updateTitleBox();
 
+        changeDownloadURL(window.location.href, window.location.hash.substring(1));
+        
         if(parameters.eixo == 3){
             if(view_box1 == "mapa-mundi"){
                 view_box1 = "mapa";
@@ -409,6 +411,7 @@ function updateViews(){
     updateParameters();
     updateSelectAnos();
     loadViews();
+    changeDownloadURL(window.location.href, window.location.hash.substring(1));
 
 }
 

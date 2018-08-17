@@ -175,10 +175,34 @@ function updateIframe(url){
     if(window.location.pathname.match("page.php")){
         return;
     }
-
-    //changeDownloadURL(newUrl + "&eixo=" +window.location.hash.substring(1) + window.location.hash, window.location.hash.substring(1));
+    
     updateViews();
 
+}
+
+/*-----------------------------------------------------------------------------
+Função: openFilter
+    abre ou fecha o filtro que foi clicado
+Entrada: 
+    filter => filtro que foi clicado
+Saída:
+    void
+-----------------------------------------------------------------------------*/
+function openFilter(filter){
+	var contexto = $(filter).parents('.contexto'),
+		active = $(filter).hasClass('active');
+
+	/* remove classe active dos botões */
+	$(contexto).find('.opt.select').removeClass('active');	
+
+	/* esconde todos os blocos */
+	$(contexto).find('.select-group').addClass('hide');
+
+	/* se está abrindo outro */
+	if(!active){
+		$(contexto).find(filter).addClass('active');
+		$(contexto).find('.select-group#select-'+$(filter).attr('id')).removeClass('hide');
+	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -1614,6 +1638,10 @@ $(document).ready(function(){
     }
     });
 
+    $(document).on('click', ".opt.select", function(){
+        openFilter($(this));
+	});
+
     /* LISTENER PARA A MUDANÇA */
     $(document).on('change', ".bread-select", function(e){
 
@@ -1762,7 +1790,7 @@ $(document).ready(function(){
 
                 changeDescVar();
 
-
+    
             }
 
 
@@ -1835,6 +1863,7 @@ $(document).ready(function(){
             }
 
             updateIframe(url);
+
         }
         else{
             parent.window.location = "page.php#"+$(this).val();
