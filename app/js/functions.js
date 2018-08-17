@@ -25,10 +25,12 @@ function UpdateWindowUrl(id, valor){
 }
 
 function changeDownloadURL(url, eixo){
+    url = url.match(/\?.*/gi)[0]
+    
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
     $('#select-pdf input').attr("value", newURL)
-    vrv = parseInt(url.match(/var=[0-9]+/)[0].replace("var=", ''))
-    ocp = url.match(/ocp=[0-9]+/)[0].replace("ocp=", '')
+    vrv = parameters.var
+    ocp = parameters.ocp
 
     diretorio = ''
 
@@ -40,6 +42,7 @@ function changeDownloadURL(url, eixo){
             case '1': diretorio = 'servicos/'; break;
         }
     }
+
     if(eixo == "mercado"){
         switch(ocp){
             case '0': diretorio = 'setorial/'; break;
@@ -50,6 +53,7 @@ function changeDownloadURL(url, eixo){
     
     }
     
+
     $.get('./data/csv_files.json', function(data){
         var name_url;
         if(diretorio != '')
