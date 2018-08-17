@@ -746,7 +746,7 @@ function treemapClick(treemap_scc_box, d, root){
             cad_percent = $('svg').find('rect[data-legend="'+d.data.colorId+'"]').attr("data-percent")
         }
         else{
-            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true)//.val(obj+1)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(d.data.desagreg)+"]").prop('selected', true);
 
             updateWindowUrl('deg', parameters.deg)
             updateWindowUrl('subdeg', d.data.desagreg)

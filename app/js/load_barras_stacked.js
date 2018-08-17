@@ -5,28 +5,18 @@ function create_bars_stacked(barras_box, data){
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
 
-    var eixo = parameters.eixo
-    var vrv  = parameters.var
-    var cad  = parameters.cad
-    var deg  = parameters.deg
-    var subdeg  = parameters.subdeg
-    var prt = 0
-    var ocp = 0
-    var uos = 0
-
-    var corEixo = COLORS['eixo'][eixo].color;
+    var corEixo = COLORS['eixo'][parameters.eixo].color;
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-    if(vrv == 3 && eixo == 0){
-            delete data['2007'];
-        }
+    if(parameters.var == 3 && parameters.eixo == 0){
+        delete data['2007'];
+    }
 
     var desag = selectDesag()
-
     var anos = [];
 
-    if((vrv == 6 || vrv == 4) && eixo == 1){
+    if((parameters.var == 6 || parameters.var == 4) && parameters.eixo == 1){
         aux = []
         selectDesag();
         Object.keys(data).forEach(function (key) {
@@ -89,8 +79,6 @@ function create_bars_stacked(barras_box, data){
         max_value = Math.max(d[1], max_value);
     })
 
-    console.log(anos)
-
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
                   .domain(anos)
@@ -104,14 +92,14 @@ function create_bars_stacked(barras_box, data){
 
 
     var cor;
-    if(cad == 0){
+    if(parameters.cad == 0){
         cor = corEixo[1];
     }
     else{
-        cor = COLORS.cadeias[cad].color
+        cor = COLORS.cadeias[parameters.cad].color
     }
 
-    var cor2 = COLORS.cadeias[cad].gradient['2'];
+    var cor2 = COLORS.cadeias[parameters.cad].gradient['2'];
 
     var colors = d3.scaleLinear()
         .domain([0, dados.length])
@@ -130,7 +118,7 @@ function create_bars_stacked(barras_box, data){
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
-        .ticks(10)
+        .ticks(8)
         .tickFormat(formatYAxis)
         .tickSize(5)
         .tickPadding(10);
@@ -191,9 +179,8 @@ function create_bars_stacked(barras_box, data){
             updateWindowUrl('subdeg', newSubdeg)
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
-
             clickBarraStacked(d, i, obj, anos);
-            updateIframe()
+            updateIframe();
 
             // configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
 
@@ -201,7 +188,7 @@ function create_bars_stacked(barras_box, data){
         });
 
 
-    if((vrv == 6 || vrv == 4) && eixo == 1)
+    if((parameters.var == 6 || parameters.var == 4) && parameters.eixo == 1)
         desagregacao = 1
     else
         desagregacao = $(".bread-select[data-id=deg]").val();
@@ -210,6 +197,7 @@ function create_bars_stacked(barras_box, data){
     var soma = getSomaStacked();
 
     updateData('barras_stacked', dados, selectedValue, soma);
+    destacaBarraStacked(barras_box, anos)
 
 }
 
@@ -228,19 +216,8 @@ function update_bars_stacked(barras_box, data){
     var chartWidth = width_box(barras_box);
     var chartHeight = height_box(barras_box);
     var minBarHeight = 5;
-
-    var eixo = parameters.eixo
-    var vrv  = parameters.var
-    var cad  = parameters.cad
-    var deg  = parameters.deg
-    var subdeg  = parameters.subdeg
-    var prt = 0
-    var ocp = 0
-    var uos = 0
-
     var maxDecimalAxis = 0;
-
-    var corEixo = COLORS['eixo'][eixo].color;
+    var corEixo = COLORS['eixo'][parameters.eixo].color;
 
     var color = function (colorId) {
 
@@ -267,10 +244,9 @@ function update_bars_stacked(barras_box, data){
         anos.push(data[key].year);
     });
 
-
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-    if(vrv == 3 && eixo == 0){
+    if(parameters.var == 3 && parameters.eixo == 0){
         delete data['2007'];
     }
 
@@ -304,9 +280,7 @@ function update_bars_stacked(barras_box, data){
     dataset[dataset.length-1].forEach(function(d){
         max_value = Math.max(d[1], max_value);
     })
-    
 
-    console.log(anos)
     // Set x, y and colors
     var x_eixo1 = d3.scaleBand()
         .domain(anos)
@@ -319,14 +293,14 @@ function update_bars_stacked(barras_box, data){
 
     var cor;
 
-    if(cad == 0){
+    if(parameters.cad == 0){
         cor = corEixo[1];
     }
     else{
-        cor = COLORS.cadeias[cad].color
+        cor = COLORS.cadeias[parameters.cad].color
     }
 
-    var cor2 = COLORS.cadeias[cad].gradient['2'];
+    var cor2 = COLORS.cadeias[parameters.cad].gradient['2'];
 
     var colors = d3.scaleLinear()
         .domain([0, dados.length])
@@ -334,8 +308,13 @@ function update_bars_stacked(barras_box, data){
 
 
     var formatYAxis = function (d) {
-        var formatInit = d3.format(".0f");
-        return formatInit(d);
+
+        function kFormatter(num) {
+            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
+        }
+
+        return kFormatter(d);
+
     }
 
     // Define and draw axes
@@ -402,8 +381,6 @@ function update_bars_stacked(barras_box, data){
     var soma = getSomaStacked();
 
     updateData('barras_stacked', dados, selectedValue, soma);
-
-
 }
 
 function getSelectedValueStacked(barras_box){
@@ -437,15 +414,16 @@ function clickBarraStacked(d, i, obj, anos){
         $(this).find("rect").each(function(k){
             if(indexAno == k) {
                 $(this).css("opacity", 1);
+                $(this).css("stroke", "#555")
+                $(this).css("stroke-width", '1')
             }
             else{
-                $(this).css("opacity", 0.5);
+                $(this).css("opacity", 0.6);
+                $(this).css("stroke", "none")
             }
         })
     })
-
     updateWindowUrl('ano', d.data.year)
-
 }
 
 function getSomaStacked() {
@@ -464,33 +442,24 @@ function getSomaStacked() {
     return soma;
 }
 
-function destacaBarra(barras_box, barraId) {
+function destacaBarraStacked(barras_box, anos) {
 
+    var indexAno = anos.indexOf(parameters.ano);
 
-    return ;
-        i = 0;
-        d3.select(barras_box).select("rect").each(function() {
-
-        var rgb = d3.rgb(corEixo[1]);
-        r = rgb.r;
-        g = rgb.g;
-        b = rgb.b;
-
-        if($(this).attr("data-legend") == barraId) {
-            if($(this).attr("class") !== "destacado") {
-                $(this).attr("class", "destacado");
-                $(this).attr("data-color", $(this).css("fill"));
-                $(this).css("fill", function(){ return'rgb('+(r+i*15)+','+(g+i*15)+','+(b+i*15)+')'});
-                $(this).animate({"opacity": "1"}, "fast");
-                i++;
+    $(".cost").each(function(i){
+        $(this).find("rect").each(function(k){
+            if(indexAno == k) {
+                $(this).css("opacity", 1);
+                $(this).css("stroke", "#555")
+                $(this).css("stroke-width", '1')
             }
-        }
-        else {
-            $(this).attr("class", "");
-            if($(this).attr("data-color") != undefined) $(this).css("fill", $(this).attr("data-color"));
-            $(this).animate({"opacity": "0.7"}, "fast");
-        }
-    });
+            else{
+                $(this).css("opacity", 0.6);
+                $(this).css("stroke", "none")
+            }
+        })
+    })
+    
 }
 
 function loadTooltipStacked(d, obj, i, eixo, vrv, tooltipInstance, name) {
