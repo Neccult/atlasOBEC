@@ -460,6 +460,12 @@ function destacaBarraStacked(barras_box, anos, colors) {
 
     $(".cost").each(function(i){
         $(this).find("rect").each(function(k){
+            $(this).css("fill", colors(i));
+        })
+    })
+
+    $(".cost").each(function(i){
+        $(this).find("rect").each(function(k){
             if(indexAno == k) {
                 $(this).css("opacity", 1);
                 $(this).css("stroke", "#555");

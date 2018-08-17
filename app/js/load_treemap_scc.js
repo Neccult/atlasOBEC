@@ -561,6 +561,8 @@ function destacaTreemap(treemap_scc_box, cadId) {
 
     $(treemap_scc_box).find("rect").each(function() {
 
+        $(this).css('fill', color($(this).attr("data-legend")));
+
         if(cadId == 0){
             $(this).animate({"opacity": "1"}, "fast");
             $(this).css("stroke", "none");
@@ -570,6 +572,12 @@ function destacaTreemap(treemap_scc_box, cadId) {
             $(this).animate({"opacity": "1"}, "fast");
             $(this).css("stroke", "#555");
             $(this).css("stroke-width", "2");
+            if($(this).attr("id-subdeg") == parameters.subdeg){
+                $(this).css('fill', corEixo[1]);
+            }
+            else{
+                $(this).css('fill', color(cadId));
+            }
         }
         else {
             $(this).attr("class", "");
