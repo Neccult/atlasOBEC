@@ -262,6 +262,5 @@ function clickDonut(d) {
         $('.bread-select[data-id="cad"]').val(d.data.cad);
         updateWindowUrl('cad', d.data.cad);
         updateIframe();
-
     }
 }

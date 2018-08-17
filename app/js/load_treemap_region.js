@@ -5,15 +5,10 @@ var cell_region;
 
 function create_treemap_region(treemap_box, data){
 
-
     /* cria svg */
     svg_treemap_region = d3.select(treemap_box).append("svg");
     svg_treemap_region.attr('width', $(treemap_box).width());
     svg_treemap_region.attr('height', $(treemap_box).height());
-
-    var vrv = parameters.var;
-    var cad = parameters.cad;
-
 
     svg_treemap_region = d3.select("svg");
 	width = svg_treemap_region.attr("width"),
@@ -58,9 +53,6 @@ function create_treemap_region(treemap_box, data){
 
     treemap_region(root_region);
     
-    var integerValue = 0;
-    var percentValue = 0;
-    
     cell_region = svg_treemap_region.selectAll("g")
 				.data(root_region.leaves())
 				.enter().append("g")
@@ -68,7 +60,7 @@ function create_treemap_region(treemap_box, data){
                 .style("cursor", "pointer");
 
     cell_region.append("rect")
-        .attr("data-legend", function(d) { return ufId(d.data.name); })
+        .attr("data-legend", function(d) { return getIdUF(d.data.name); })
         .attr("data-integer", function(d) { return d.data.size; })
         .attr("data-percent", function(d) { return d.data.size/root_region.value; })
         .attr("id", function(d) { return d.data.id; })
@@ -77,11 +69,6 @@ function create_treemap_region(treemap_box, data){
         .attr("fill", function(d){
             return color(d.data.colorId);
         });
-
-    cell_region.append("clipPath")
-        .attr("id", function(d) { return "clip-" + d.data.id; })
-        .append("use")
-        .attr("xlink:href", function(d) { return "#" + d.data.id; });
 
 
     cell_region
@@ -96,7 +83,6 @@ function create_treemap_region(treemap_box, data){
 
 	var titleTextElement = cell_region.append("text")
 		.text(function(d) {return d.data.name; })
-		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
 		.attr("class", "title")
 		.attr("x", 10)
 		.attr("y", 19)
@@ -104,22 +90,21 @@ function create_treemap_region(treemap_box, data){
 
 	var percentageTextElement = cell_region.append("text")
 		.attr("text-anchor", "start")
-		.attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
 		.attr("class", "percentage");
                     
     percentageTextElement.append('tspan')
 		.text(function(d) {
 			if(parameters.eixo == 0){
-                if(cad && vrv != 2) {
+                if(parameters.cad && parameters.var != 2) {
                     return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
                 }
-                else if(vrv === 2) {
+                else if(parameters.var == 2) {
                     return formatDecimalLimit(d.data.size, 3) + '%';
                 }
-                else if(vrv == 9) {
+                else if(parameters.var == 9) {
                     return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
 				}
-				else if(vrv == 1){
+				else if(parameters.var == 1){
 					return formatDecimalLimit((d.data.size/totais[parameters.ano])*100, 2) + '%';
 				}
                 else {
@@ -130,7 +115,7 @@ function create_treemap_region(treemap_box, data){
                 return formatDecimalLimit((d.data.size/root_region.value)*100 , 2) + '%';
             }
 			else if(parameters.eixo == 2){
-                if(vrv === 7) {
+                if(parameters.var === 7) {
                     return formatDecimalLimit(d.data.size, 3);
                 }
 			}
@@ -173,23 +158,21 @@ function create_treemap_region(treemap_box, data){
 			.attr("text-anchor", "middle");
 	}
 
-	/*if(url['uf'] !== 0){
-        destacaPais(url['uf'])
-    }*/
-
     formatTreemapText(treemap_box);
 
     d3.select(treemap_box).selectAll("rect").each(function () {
       if(d3.select(this).attr("data-legend") == parameters.uf){
+          
           updateData('treemap_region', d3.select(this).attr("data-percent"))
       };
     })
+    
+    destaca_treemap_region(treemap_box, parameters.uf);
 
 }
 
 function update_treemap_region(treemap_box, data){
-    var vrv = parameters.var;
-    var cad = parameters.cad;
+    var transition_time = 200;
 
     var color = function(colorId){
         if(parameters.eixo == 3) {
@@ -223,7 +206,7 @@ function update_treemap_region(treemap_box, data){
     treemap_region(root_region);
 
     cell_region.data(root_region.leaves())
-        .transition().duration(500)
+        .transition().duration(transition_time)
         .attr("transform", function(d) { return "translate(" + d.x0 + "," + d.y0 + ")"; })
 
     cell_region.select("rect")
@@ -256,7 +239,6 @@ function update_treemap_region(treemap_box, data){
 
         titleTextElement = cell_region.select("text")
             .text(function(d) {return d.data.name; })
-            .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
             .attr("class", "title")
             .attr("x", 10)
             .attr("y", 19)
@@ -266,16 +248,16 @@ function update_treemap_region(treemap_box, data){
         percentageTextElement
             .text(function(d) {
                 if(parameters.eixo == 0){
-                    if(cad && vrv != 2) {
+                    if(parameters.cad && parameters.var != 2) {
                         return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
                     }
-                    else if(vrv === 2) {
+                    else if(parameters.var === 2) {
                         return formatDecimalLimit(d.data.size, 3) + '%';
                     }
-                    else if(vrv == 9) {
+                    else if(parameters.var == 9) {
                         return formatDecimalLimit((d.data.size/root_region.value)*100, 2)+"%";
                     }
-                    else if(vrv == 1){
+                    else if(parameters.var == 1){
                         return formatDecimalLimit((d.data.size/totais[parameters.ano])*100, 2) + '%';
                     }
                     else {
@@ -287,7 +269,7 @@ function update_treemap_region(treemap_box, data){
                     return formatDecimalLimit((d.data.size/root_region.value)*100 , 2) + '%';
                 }
                 else if(parameters.eixo == 2){
-                    if(vrv === 7) {
+                    if(parameters.var === 7) {
                         return formatDecimalLimit(d.data.size, 3);
                     }
                 }
@@ -306,12 +288,15 @@ function update_treemap_region(treemap_box, data){
                 return fontSize;
             })
             .transition()
-            .duration(800)
+            .duration(transition_time - 200)
             .style("opacity", 1);
 
         formatTreemapText(treemap_box);
 
-    }, 750);
+        destaca_treemap_region(treemap_box, parameters.uf);
+
+
+    }, transition_time + 200);
 
 
 
@@ -346,6 +331,29 @@ function update_treemap_region(treemap_box, data){
             updateData('treemap_region', d3.select(this).attr("data-percent"))
         };
     })
+
+}
+
+function destaca_treemap_region(treemap_box, uf) {
+
+    d3.select(treemap_box).selectAll("rect").each(function () {
+
+        if(uf == 0){
+            $(this).animate({"opacity": "1"}, "fast");
+            $(this).css("stroke", "none");
+        }
+        else if(d3.select(this).attr("data-legend") == parameters.uf){
+            $(this).attr("class", "destacado-scc");
+            $(this).animate({"opacity": "1"}, "fast");
+            $(this).css("stroke", "#555");
+            $(this).css("stroke-width", "2");
+        }
+        else{
+            $(this).attr("class", "");
+            $(this).css("stroke", "none");
+            $(this).animate({"opacity": "0.7"}, "fast");
+        }
+    })
 }
 
 function nodeWidth(d){ return d.x1 - d.x0; }
@@ -366,67 +374,10 @@ function sumBySize(d) {
 	return d.size;
 }
 
-function ufId(uf) {
-	switch(uf) {
-		case "RO":
-			return 11;
-        case "AC":
-            return 12;
-        case "AM":
-            return 13;
-        case "RR":
-            return 14;
-        case "PA":
-            return 15;
-        case "AP":
-            return 16;
-        case "TO":
-            return 17;
-        case "MA":
-            return 21;
-        case "PI":
-            return 22;
-        case "CE":
-            return 23;
-        case "RN":
-            return 24;
-        case "PB":
-            return 25;
-        case "PE":
-            return 26;
-        case "AL":
-            return 27;
-        case "SE":
-            return 28;
-        case "BA":
-            return 29;
-        case "MG":
-            return 31;
-        case "ES":
-            return 32;
-        case "RJ":
-            return 33;
-        case "SP":
-            return 35;
-        case "PR":
-            return 41;
-        case "SC":
-            return 42;
-        case "RS":
-            return 43;
-        case "MS":
-            return 50;
-        case "MT":
-            return 51;
-        case "GO":
-            return 52;
-        case "DF":
-            return 53;
-	}
-}
+
 
 function treemapRegionClick(d, root_region){
-    updateWindowUrl('uf', ufId(d.data.name));
+    updateWindowUrl('uf', getIdUF(d.data.name));
     updateIframe()
 }
 

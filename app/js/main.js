@@ -1861,7 +1861,7 @@ $(document).ready(function(){
         updateOptView("init");
         updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
         updateMecanismo(url, url['var'])
-        updateSelectsByVar();
+        // updateSelectsByVar();
         if(url['ocp'] > 0){
             enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
         }
