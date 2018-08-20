@@ -179,7 +179,7 @@ function create_bars_stacked(barras_box, data){
             updateWindowUrl('subdeg', newSubdeg)
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
-            clickBarraStacked(d, i, obj, anos);
+            clickBarraStacked(d, i, obj, anos, colors);
             updateIframe();
 
             // configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
@@ -197,12 +197,11 @@ function create_bars_stacked(barras_box, data){
     var soma = getSomaStacked();
 
     updateData('barras_stacked', dados, selectedValue, soma);
-    destacaBarraStacked(barras_box, anos)
+    destacaBarraStacked(barras_box, anos, colors)
 
 }
 
 function update_bars_stacked(barras_box, data){
-
 
     var svg_barras = d3.select(barras_box)
         .select("svg");
@@ -381,6 +380,7 @@ function update_bars_stacked(barras_box, data){
     var soma = getSomaStacked();
 
     updateData('barras_stacked', dados, selectedValue, soma);
+    destacaBarraStacked(barras_box, anos, colors)
 }
 
 function getSelectedValueStacked(barras_box){
@@ -406,16 +406,28 @@ function getSelectedValueStacked(barras_box){
 
 }
 
-function clickBarraStacked(d, i, obj, anos){
+function clickBarraStacked(d, i, obj, anos, colors){
 
     var indexAno = anos.indexOf(d.data.year);
 
     $(".cost").each(function(i){
         $(this).find("rect").each(function(k){
+            $(this).css("fill", colors(i))
+        })
+    })
+
+    $(".cost").each(function(i){
+        $(this).find("rect").each(function(k){
             if(indexAno == k) {
                 $(this).css("opacity", 1);
-                $(this).css("stroke", "#555")
-                $(this).css("stroke-width", '1')
+                $(this).css("stroke", "#555");
+                $(this).css("stroke-width", '1');
+                if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
+                    $(this).css('fill', corEixo[1]);
+                }
+                else{
+                    $(this).css("fill", colors(i))
+                }
             }
             else{
                 $(this).css("opacity", 0.6);
@@ -442,16 +454,29 @@ function getSomaStacked() {
     return soma;
 }
 
-function destacaBarraStacked(barras_box, anos) {
+function destacaBarraStacked(barras_box, anos, colors) {
 
     var indexAno = anos.indexOf(parameters.ano);
 
     $(".cost").each(function(i){
         $(this).find("rect").each(function(k){
+            $(this).css("fill", colors(i));
+        })
+    })
+
+    $(".cost").each(function(i){
+        $(this).find("rect").each(function(k){
             if(indexAno == k) {
                 $(this).css("opacity", 1);
-                $(this).css("stroke", "#555")
-                $(this).css("stroke-width", '1')
+                $(this).css("stroke", "#555");
+                $(this).css("stroke-width", '1');
+                $(this).css("fill", colors(i))
+                if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
+                    $(this).css('fill', corEixo[1]);
+                }
+                else{
+                    $(this).css("fill", colors(i))
+                }
             }
             else{
                 $(this).css("opacity", 0.6);
@@ -459,6 +484,8 @@ function destacaBarraStacked(barras_box, anos) {
             }
         })
     })
+
+    
     
 }
 
