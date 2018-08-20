@@ -25,8 +25,8 @@ function UpdateWindowUrl(id, valor){
 }
 
 function changeDownloadURL(url, eixo){
-    url = url.match(/\?.*/gi)[0]
-    
+    url = url.match(/\?.*/gi)[0].replace('?', '')
+
     newURL = $('#select-pdf input').attr("value").replace(/download.php?.*/, "download.php?"+ url);
     $('#select-pdf input').attr("value", newURL)
     vrv = parameters.var
