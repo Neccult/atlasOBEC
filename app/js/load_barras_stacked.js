@@ -360,7 +360,6 @@ function update_bars_stacked(barras_box, data){
         .attr("y", function (d) { return y_eixo1(d[1]); })
         .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
-        .style("cursor", "pointer")
         .on("mouseover", function (d, i, obj) {
             var name = $(this).parent().attr("subdeg");
             loadTooltipStacked(d, obj,  i, parameters.eixo, parameters.var, tooltipInstance, name);
