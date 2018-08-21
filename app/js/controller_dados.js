@@ -97,7 +97,7 @@ function configInfoDataBoxTreemapSCC(dados) {
 
             }
 
-            if(parameters.deg != 0 && parameters.cad != 0){
+            if(parameters.deg != 0 && parameters.cad != 0 || parameters.deg == 0){
                 setTerceiroValueData(dados.percent_uf)
             }
         }
@@ -161,10 +161,10 @@ function configInfoDataBoxBarras(dados, valor, uos) {
         }
         else{
            setIntegerValueData(valor)
-
        }
 
     }
+
     else if(parameters.eixo == 2){
 
         if(parameters.var == 10 || parameters.var == 15 || parameters.var == 16){
@@ -187,6 +187,7 @@ function configInfoDataBoxBarras(dados, valor, uos) {
 
 
     }
+
     else if(parameters.eixo == 3){
         var mundo = parameters.mundo;
 
@@ -366,17 +367,24 @@ function setTerceiroValueData(value, uos){
         }
     }
     else if(parameters.eixo == 1){
-        ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
-        if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
-            $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
-            $(".setor-value").first().css("display", "flex");
 
-            doc = $(".setor-value").first().find(".number").first();
-            setMaxFontSize(doc);
-        }
-        else{
+        if(parameters.deg == 0){
             $(".setor-value").first().css("display", "none");
         }
+        else{
+            ocp = $(".bread-select[data-id=ocp]").val() == undefined ? 0 : $(".bread-select[data-id=ocp]").val()
+            if(parameters.var == 1 && (parameters.cad > 0 || parameters.ocp != 0 && parameters.ocp != 3) && parameters.uf > 0){
+                $(".setor-value").first().find(".number").first().text(formatDecimalLimit(value*100, 2)+'%');
+                $(".setor-value").first().css("display", "flex");
+    
+                doc = $(".setor-value").first().find(".number").first();
+                setMaxFontSize(doc);
+            }
+            else{
+                $(".setor-value").first().css("display", "none");
+            }
+        }
+        
     }
     else if(parameters.eixo == 3){
         if(parameters.var == 5 || parameters.var == 8){
