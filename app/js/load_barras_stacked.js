@@ -204,7 +204,7 @@ function update_bars_stacked(barras_box, data){
         .select("svg");
 
     if(svg_barras.attr("type") == "simples"){
-        svg_barras.remove()
+        svg_barras.remove();
         create_bars_stacked(barras_box, data);
         return;
     }
@@ -360,7 +360,20 @@ function update_bars_stacked(barras_box, data){
         .attr("y", function (d) { return y_eixo1(d[1]); })
         .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
-        .style("cursor", "pointer");
+        .style("cursor", "pointer")
+        .on("mouseover", function (d, i, obj) {
+            var name = $(this).parent().attr("subdeg");
+            loadTooltipStacked(d, obj,  i, parameters.eixo, parameters.var, tooltipInstance, name);
+        })
+        .on("mouseout", tooltipInstance.hideTooltip)
+        .on("click", function(d, i, obj) {
+            var newSubdeg = getSubdegId(parameters.deg, $(this).parent().attr("subdeg"));
+            updateWindowUrl('subdeg', newSubdeg)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
+
+            clickBarraStacked(barras_box, d, i, obj, anos, colors);
+            updateIframe();
+        });
 
     var rect = groups.selectAll("rect");
 
@@ -445,7 +458,7 @@ function destacaBarraStacked(barras_box, anos, colors) {
                 $(this).css("stroke-width", '1');
                 $(this).css("fill", colors(i))
                 if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
-                    $(this).css('fill', corEixo[1]);
+                    $(this).css('fill', corEixo[2]);
                 }
                 else{
                     $(this).css("fill", colors(i))

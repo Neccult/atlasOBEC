@@ -574,7 +574,7 @@ function destacaTreemap(treemap_scc_box, cadId) {
             $(this).css("stroke-width", "2");
 
             if(parameters.eixo == 1 && $(this).attr("id-subdeg") == parameters.subdeg){
-                $(this).css('fill', corEixo[1]);
+                $(this).css('fill', corEixo[2]);
             }
             else{
                 $(this).css('fill', color(cadId));
