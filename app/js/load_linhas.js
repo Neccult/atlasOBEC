@@ -7,9 +7,6 @@ var marginLines = {top: 20, right: 25, bottom: 40, left: 45}
 
 var xLines, yLines;
 
-
-
-
 function create_linhas(linhas_box, data){
 
     keysLines = [];
@@ -42,7 +39,6 @@ function create_linhas(linhas_box, data){
         .append("g")
         .attr("transform",
             "translate(" + marginLines.left + "," + marginLines.top + ")")
-
 
     d3.select(linhas_box).select("svg").style("opacity", "0.1")
     d3.select(linhas_box).select("svg").transition().duration(500).style("opacity", "1");
@@ -190,8 +186,8 @@ function update_linhas(linhas_box, data){
 
 
     var valueline = d3.line()
-        .x(function(d) { return x(d.ano); })
-        .y(function(d) { return y(d.valor); });
+        .x(function(d) { return xLines(d.ano); })
+        .y(function(d) { return yLines(d.valor); });
 
     getBoxXY();
 
@@ -262,7 +258,7 @@ function update_linhas(linhas_box, data){
     // Add the Y Axis
     svg_linhas.select(".y")
         .transition().duration(800)
-        .call(d3.axisLeft(y))
+        .call(d3.axisLeft(yLines))
 
 
     destacaSetor();

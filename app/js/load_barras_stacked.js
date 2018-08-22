@@ -607,6 +607,7 @@ var formatYAxisStacked = function (d) {
             num = Math.ceil(num*1000000)/1000;
             cont++;
         }
+        
         return num+arraySymbols[cont-1];
     }
 
