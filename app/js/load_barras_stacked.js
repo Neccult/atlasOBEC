@@ -41,7 +41,7 @@ function create_bars_stacked(barras_box, data){
     });
 
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    var margin = {top: 20, right: 20, bottom: 30, left: 55},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -105,21 +105,13 @@ function create_bars_stacked(barras_box, data){
         .domain([0, dados.length])
         .range([cor, cor2])
 
-    var formatYAxis = function (d) {
-
-        function kFormatter(num) {
-            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
-        }
-
-        return kFormatter(d);
-
-    }
+    
 
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
         .ticks(8)
-        .tickFormat(formatYAxis)
+        .tickFormat(formatYAxisStacked)
         .tickSize(5)
         .tickPadding(10);
 
@@ -246,7 +238,7 @@ function update_bars_stacked(barras_box, data){
         delete data['2007'];
     }
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    var margin = {top: 20, right: 20, bottom: 30, left: 55},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -302,22 +294,11 @@ function update_bars_stacked(barras_box, data){
         .domain([0, dados.length])
         .range([cor, cor2])
 
-
-    var formatYAxis = function (d) {
-
-        function kFormatter(num) {
-            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
-        }
-
-        return kFormatter(d);
-
-    }
-
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
         .ticks(8)
-        .tickFormat(formatYAxis)
+        .tickFormat(formatYAxisStacked)
         .tickSize(5)
         .tickPadding(10);
 
@@ -600,4 +581,41 @@ function desagregacao_names() {
 
 function selectDesag(){
     return parameters.subdeg;
+}
+
+var formatYAxisStacked = function (d) {
+
+    if(d == 0) return 0;
+
+    function kFormatter(num) { 
+        var arraySymbols = ['K', 'M', 'G', 'T'];
+        var cont = 0;
+
+        while(num > 999){
+            num = num/1000;
+            cont++; 
+        }
+
+        return num+arraySymbols[cont-1];
+    }
+
+    function mFormatter(num) {
+        var arraySymbols = ['m', 'u', 'n', 'p'];
+        var cont = 0;
+
+        while(num < 0.01){
+            num = Math.ceil(num*1000000)/1000;
+            cont++;
+        }
+        return num+arraySymbols[cont-1];
+    }
+
+    if(d > 999){
+        return kFormatter(d);
+    }
+    else if(d < 0.01){
+        return mFormatter(d);
+    }
+
+    return d;
 }

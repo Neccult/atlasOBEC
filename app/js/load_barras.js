@@ -16,9 +16,7 @@ function create_bars(barras_box, data){
     Object.keys(data).forEach(function (key) {
 
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-
         dados.key.push(data[key].ano);
-
         dados.value.push(data[key].valor);
 
         if (parameters.var == 2  || parameters.var == 9) dados.percentual.push(0);
