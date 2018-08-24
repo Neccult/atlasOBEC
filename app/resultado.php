@@ -513,6 +513,13 @@
             </div>
 
             <div class="row">
+            
+                <form id="svgform" method="post" action="cgi/download_pdf.php">
+                    <input type="hidden" id="output_format" name="output_format" value="">
+                    <input type="hidden" id="data" name="data" value="">
+                    <input type="hidden" id="data_barras" name = "data_barras" value="">
+                    <input type="hidden" id="data_scc" name = "data_scc" value="">
+                </form>
 
                 <script>
                     function result_mobile() {

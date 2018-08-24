@@ -158,6 +158,7 @@ $.when($.get('data/pt-br.json'),
             } else {
                 d3.json("./db/json_" + view_box1 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box"].uos, function (json) {
                     VIEWS[view_box1].call(this, "#view_box", json);
+
                 })    
             }
             if(view_box2 == ""){
@@ -177,7 +178,6 @@ $.when($.get('data/pt-br.json'),
             }
 
         })
-        
 
     })
 

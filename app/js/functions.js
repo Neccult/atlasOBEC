@@ -69,6 +69,27 @@ function changeDownloadURL(url, eixo){
     })
 }
 
+function sendViewsToDownload(output_format){
+    var svg = $('#view_box > svg').first()[0];
+    var svg_barras = $('#view_box_barras > svg')[0];
+    var svg_scc = $('#view_box_scc > svg')[0];
+    
+    // Extract the data as SVG text string
+    var svg_xml = (new XMLSerializer).serializeToString(svg);
+    var svg_barras_xml = (new XMLSerializer).serializeToString(svg_barras);
+    var svg_scc_xml = (new XMLSerializer).serializeToString(svg_scc);
+    // Submit the <FORM> to the server.
+    // The result will be an attachment file to download.
+    var form = document.getElementById("svgform");
+    console.log(form)
+    form['output_format'].value = output_format;
+    form['data'].value = svg_xml ;
+    form['data_barras'].value = svg_barras_xml;
+    form['data_scc'].value = svg_scc_xml;
+    form.submit();
+    
+}
+
 function ajustaAnos(keys) {
 	for(var i = 0; i < keys.length; i++) {
 		keys[i] = keys[i+1];
