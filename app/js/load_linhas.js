@@ -21,11 +21,10 @@ function create_linhas(linhas_box, data){
     });
 
     Object.keys(data[0]).forEach(function (key) {
-        if(key != "ano")
-            keysLines.push(key);
+        if(key != "ano") keysLines.push(key);
     });
 
-    // append the svg obgect to the body of the page
+    // append the svg object to the body of the page
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
 
@@ -98,7 +97,6 @@ function create_linhas(linhas_box, data){
         .x(function(d) { return xLines(d.ano); })
         .y(function(d) { return yLines(d.valor); });
 
-
     svg_linhas.selectAll("path.line")
         .data(dados)
         .enter().append("path")
@@ -119,8 +117,6 @@ function create_linhas(linhas_box, data){
                 else{
                     return 0.3
                 }
-
-
                 return 1;
             }
             else if(parameters.cad != 0 ){
@@ -154,6 +150,7 @@ function create_linhas(linhas_box, data){
         .on("mouseout", function () {
             tooltipInstance.hideTooltip();
             d3.selectAll(".bolinha").remove()
+            d3.selectAll(".haste").remove()
         });
 
 
@@ -198,9 +195,6 @@ function update_linhas(linhas_box, data){
         .select("g")
         .attr("transform",
             "translate(" + marginLines.left + "," + marginLines.top + ")");
-
-
-
 
     data.forEach(function(d) {
 
@@ -260,11 +254,8 @@ function update_linhas(linhas_box, data){
         .transition().duration(800)
         .call(d3.axisLeft(yLines))
 
-
     destacaSetor();
 }
-
-
 
 function getCadId(cadName){
     switch(cadName){
@@ -374,24 +365,36 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
         }
 
 
+
         var valor;
         var indexAno = anosLines.indexOf(ano);
 
-        // svg_linhas.append("circle")
-        //     .attr('class', 'bolinha')
-        //     .style("z-index", '0')
-        //     .attr("cx", coordAxis.x[indexAno].x)
-        //     .attr("cy", d3.mouse(d3.event.currentTarget)[1])
-        //     .attr("r", 8);
-        //
-        // svg_linhas.append("circle")
-        //     .attr('class', 'bolinha')
-        //     .style("z-index", '0')
-        //     .attr('fill', corEixo[2])
-        //     .attr("cx", coordAxis.x[indexAno].x)
-        //     .attr("cy", d3.mouse(d3.event.currentTarget)[1])
-        //     .attr("r", 5);
+        console.log();
 
+
+        svg_linhas.append("circle")
+            .attr('class', 'bolinha')
+            .style("z-index", '0')
+            .attr("cx", coordAxis.x[indexAno].x)
+            .attr("cy", yLines(d[indexAno].valor))
+            .attr("r", 2);
+
+        // svg_linhas.append("line")           // attach a line
+        //     .attr('class', 'haste')
+        //     .style("stroke", "black")       // colour the line
+        //     .attr("x1", coordAxis.x[indexAno].x)                // x position of the first end of the line
+        //     .attr("y1", d3.mouse(d3.event.currentTarget)[1])                 // y position of the first end of the line
+        //     .attr("x2", d3.mouse(d3.event.currentTarget)[0]+30)                // x position of the second end of the line
+        //     .attr("y2", d3.mouse(d3.event.currentTarget)[1]+25);
+
+        // svg_linhas.append("polygon")    // attach a polyline
+        //     .attr("class", "haste")
+        //     .style("stroke", "black")   // colour the line
+        //     .style("fill", "#39393a")     // remove any fill colour
+        //     .attr("points", (coordAxis.x[indexAno].x) + "," + (yLines(d[indexAno].valor)) + " " + 
+        //                     (d3.mouse(d3.event.currentTarget)[0]+30) + "," + (d3.mouse(d3.event.currentTarget)[1]+12) + " " + 
+        //                     (d3.mouse(d3.event.currentTarget)[0]+30) + "," + (d3.mouse(d3.event.currentTarget)[1]+28));  // x,y points
+        
         if(parameters.eixo == 0 && parameters.var == 3){
             if(indexAno == 10){
                 valor = 0;
@@ -414,7 +417,7 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
                 ])
             }
             else if(parameters.var == 9){
-                valor =  formatNumber(valor*100, 6).toString().replace(".", "");
+                valor = formatNumber(valor*100, 6).toString().replace(".", "");
                 tooltipInstance.showTooltip(d, [
                     ["title", scc],
                     ["", valor+"%"]
@@ -471,12 +474,7 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
                 ["", valor]
             ])
         }
-
     }
-
-
-
-
 }
 
 function getAxisCoords(){
