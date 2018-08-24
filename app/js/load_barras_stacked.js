@@ -41,7 +41,7 @@ function create_bars_stacked(barras_box, data){
     });
 
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    var margin = {top: 20, right: 20, bottom: 30, left: 55},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -105,21 +105,13 @@ function create_bars_stacked(barras_box, data){
         .domain([0, dados.length])
         .range([cor, cor2])
 
-    var formatYAxis = function (d) {
-
-        function kFormatter(num) {
-            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
-        }
-
-        return kFormatter(d);
-
-    }
+    
 
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
         .ticks(8)
-        .tickFormat(formatYAxis)
+        .tickFormat(formatYAxisStacked)
         .tickSize(5)
         .tickPadding(10);
 
@@ -179,12 +171,9 @@ function create_bars_stacked(barras_box, data){
             updateWindowUrl('subdeg', newSubdeg)
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
-            clickBarraStacked(d, i, obj, anos, colors);
+            clickBarraStacked(barras_box, d, i, obj, anos, colors);
             updateIframe();
-
             // configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
-
-
         });
 
 
@@ -207,7 +196,7 @@ function update_bars_stacked(barras_box, data){
         .select("svg");
 
     if(svg_barras.attr("type") == "simples"){
-        svg_barras.remove()
+        svg_barras.remove();
         create_bars_stacked(barras_box, data);
         return;
     }
@@ -249,7 +238,7 @@ function update_bars_stacked(barras_box, data){
         delete data['2007'];
     }
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    var margin = {top: 20, right: 20, bottom: 30, left: 55},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -305,22 +294,11 @@ function update_bars_stacked(barras_box, data){
         .domain([0, dados.length])
         .range([cor, cor2])
 
-
-    var formatYAxis = function (d) {
-
-        function kFormatter(num) {
-            return num > 999 ? (num/1000).toString().replace(".","") + 'k' : num
-        }
-
-        return kFormatter(d);
-
-    }
-
     // Define and draw axes
     var yAxis_eixo1 = d3.axisLeft()
         .scale(y_eixo1)
         .ticks(8)
-        .tickFormat(formatYAxis)
+        .tickFormat(formatYAxisStacked)
         .tickSize(5)
         .tickPadding(10);
 
@@ -363,7 +341,19 @@ function update_bars_stacked(barras_box, data){
         .attr("y", function (d) { return y_eixo1(d[1]); })
         .attr("height", function (d) { return Math.abs(y_eixo1(d[0]) - y_eixo1(d[1])); })
         .attr("width", x_eixo1.bandwidth())
-        .style("cursor", "pointer");
+        .on("mouseover", function (d, i, obj) {
+            var name = $(this).parent().attr("subdeg");
+            loadTooltipStacked(d, obj,  i, parameters.eixo, parameters.var, tooltipInstance, name);
+        })
+        .on("mouseout", tooltipInstance.hideTooltip)
+        .on("click", function(d, i, obj) {
+            var newSubdeg = getSubdegId(parameters.deg, $(this).parent().attr("subdeg"));
+            updateWindowUrl('subdeg', newSubdeg)
+            $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
+
+            clickBarraStacked(barras_box, d, i, obj, anos, colors);
+            updateIframe();
+        });
 
     var rect = groups.selectAll("rect");
 
@@ -406,36 +396,12 @@ function getSelectedValueStacked(barras_box){
 
 }
 
-function clickBarraStacked(d, i, obj, anos, colors){
+function clickBarraStacked(barras_box, d, i, obj, anos, colors){
 
     var indexAno = anos.indexOf(d.data.year);
+    updateWindowUrl('ano', d.data.year);
+    $('bread-select[ano]').val(d.data.year);
 
-    $(".cost").each(function(i){
-        $(this).find("rect").each(function(k){
-            $(this).css("fill", colors(i))
-        })
-    })
-
-    $(".cost").each(function(i){
-        $(this).find("rect").each(function(k){
-            if(indexAno == k) {
-                $(this).css("opacity", 1);
-                $(this).css("stroke", "#555");
-                $(this).css("stroke-width", '1');
-                if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
-                    $(this).css('fill', corEixo[1]);
-                }
-                else{
-                    $(this).css("fill", colors(i))
-                }
-            }
-            else{
-                $(this).css("opacity", 0.6);
-                $(this).css("stroke", "none")
-            }
-        })
-    })
-    updateWindowUrl('ano', d.data.year)
 }
 
 function getSomaStacked() {
@@ -472,7 +438,7 @@ function destacaBarraStacked(barras_box, anos, colors) {
                 $(this).css("stroke-width", '1');
                 $(this).css("fill", colors(i))
                 if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
-                    $(this).css('fill', corEixo[1]);
+                    $(this).css('fill', corEixo[2]);
                 }
                 else{
                     $(this).css("fill", colors(i))
@@ -615,4 +581,42 @@ function desagregacao_names() {
 
 function selectDesag(){
     return parameters.subdeg;
+}
+
+var formatYAxisStacked = function (d) {
+
+    if(d == 0) return 0;
+
+    function kFormatter(num) { 
+        var arraySymbols = ['K', 'M', 'G', 'T'];
+        var cont = 0;
+
+        while(num > 999){
+            num = num/1000;
+            cont++; 
+        }
+
+        return num+arraySymbols[cont-1];
+    }
+
+    function mFormatter(num) {
+        var arraySymbols = ['m', 'u', 'n', 'p'];
+        var cont = 0;
+
+        while(num < 0.01){
+            num = Math.ceil(num*1000000)/1000;
+            cont++;
+        }
+        
+        return num+arraySymbols[cont-1];
+    }
+
+    if(d > 999){
+        return kFormatter(d);
+    }
+    else if(d < 0.01){
+        return mFormatter(d);
+    }
+
+    return d;
 }

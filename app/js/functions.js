@@ -1254,18 +1254,22 @@ var tooltip = (function(){
 			// create all elements passed via array: arr
             createElements(d, arr);
             // graph position on screen
+            
             // console.log($('.container'))
 			var chartOffset = $('.container').offset(),
 				leftOffset = chartOffset.left,
 				leftOffsetEnd = leftOffset+$('.container').width(),
 				topOffset = chartOffset.top,
-				bottomOffset = topOffset + $('.container').height();
+                bottomOffset = topOffset + $('.container').height();
+
 			// tooltip dimensions
-			var tooltipWidth = $('.tooltip').width();
+            var tooltipWidth = $('.tooltip').width();
 			/*== posição do tooltip ==*/
 			var xPosition = d3.event.pageX-leftOffset+30;
 			var xPositionEnd = xPosition+tooltipWidth;
-			var yPosition = d3.event.pageY -topOffset+5;
+            var yPosition = d3.event.pageY -topOffset+5;
+            
+            console.log(-topOffset+5)
 
 			// if tooltips final position is outside screen boundries
 			if(xPositionEnd>leftOffsetEnd){
@@ -1326,9 +1330,6 @@ var tooltip = (function(){
             // shows tooltip
             d3.select(".tooltip").classed("none", false);
         };
-
-
-
 		/*-----------------------------------------------------------------------------
 			Função: hideTooltip
 				esconde o element tooltip

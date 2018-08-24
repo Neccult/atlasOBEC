@@ -975,7 +975,7 @@ function switchToOcupations() {
     var html = "";
 
     legendArray.forEach( function(id) {
-        html += "<span class=\"ocp\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> "+colorJSON.ocupacoes[id]['name']+"<br></span>\n";
+        html += "<span class=\"ocp\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.ocupacoes[id]['color']+"\"></i> <div>"+colorJSON.ocupacoes[id]['name']+"</div><br></span>\n";
     } );
 
     $("#title-view-leg-scc").html(html);
@@ -1009,8 +1009,8 @@ function updateMenuLegenda(eixo, vrv){
         ]
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>Setor</div><br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> </div>UF</div><br></span>");
 
     }
     else if(eixo == 1 && (vrv == 3 || vrv == 4)){
@@ -1021,7 +1021,7 @@ function updateMenuLegenda(eixo, vrv){
         var html = "";
 
         legendArray.forEach( function(id) {
-            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> <div>"+colorJSON.cadeias[id]['name']+"</div><br></span>\n";
         } );
 
         $("#title-view-leg-scc").html(html);
@@ -1035,8 +1035,8 @@ function updateMenuLegenda(eixo, vrv){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>Setor</div><br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> <div>UF</div><br></span>");
     }
     else if(eixo == 2 && vrv == 2){
 
@@ -1046,7 +1046,7 @@ function updateMenuLegenda(eixo, vrv){
         var html = "";
 
         legendArray.forEach( function(id) {
-            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> <div>"+colorJSON.cadeias[id]['name']+"</div><br></span>\n";
         } );
 
         $("#title-view-leg-scc").html(html);
@@ -1063,7 +1063,7 @@ function updateMenuLegenda(eixo, vrv){
 
 
         legendArray.forEach( function(id) {
-            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> <div>"+colorJSON.cadeias[id]['name']+"</div><br></span>\n";
         });
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
@@ -1078,7 +1078,7 @@ function updateMenuLegenda(eixo, vrv){
         var html = "";
 
         legendArray.forEach( function(id) {
-            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> <div>"+colorJSON.cadeias[id]['name']+"</div><br></span>\n";
         });
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html(html);
@@ -1094,8 +1094,8 @@ function updateMenuLegenda(eixo, vrv){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Setor<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> UF<br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>Setor</div><br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> <div>UF</div><br></span>");
     }
     else if(eixo == 2 && (vrv == 10)){
         cads =
@@ -1106,10 +1106,8 @@ function updateMenuLegenda(eixo, vrv){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  DESPESA MINC / RECEITA EXECUTIVO<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO<br></span>");
-
-        console.log("aqui")
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>DESPESA MINC / RECEITA EXECUTIVO</div><br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> <div>FINANCIAMENTO ESTATAL / RECEITA EXECUTIVO</div><br></span>");
     }
     else if(eixo == 2 && (vrv == 17)){
         cads =
@@ -1119,8 +1117,8 @@ function updateMenuLegenda(eixo, vrv){
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
         $("#menu-view-donut").find("#title-view-leg-scc-donut").html("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i>  Possui <br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> Não Possui <br></span>");
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>Possui</div> <br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[2]+"\"></i> <div>Não Possui</div> <br></span>");
 
     }
     else if(eixo == 3 && (vrv >= 1 && vrv != 5 && vrv != 8 && vrv <= 10 || vrv == 12)){
@@ -1140,10 +1138,8 @@ function updateMenuLegenda(eixo, vrv){
         $(".view-title-leg[data-id='scc&ocp']").html("");
 
         $("#title-view-leg-scc").append("" +
-            "        <span data-id=\"1\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> Exportação<br></span>\n" +
-            "        <span data-id=\"2\"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+corEixo[3]+"\"></i> Importação<br></span>");
-
-
+            "        <span data-id=\"1\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[1]+"\"></i> <div>Exportação</div><br></span>\n" +
+            "        <span data-id=\"2\"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+corEixo[3]+"\"></i> <div>Importação</div><br></span>");
     }
     else{
 
@@ -1156,7 +1152,7 @@ function updateMenuLegenda(eixo, vrv){
         var html = "";
 
         legendArray.forEach( function(id) {
-            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> "+colorJSON.cadeias[id]['name']+"<br></span>\n";
+            html += "<span class=\"scc\" data-id="+id+"><i style=\"display: inline-block; margin-top: 1px; width: 10px; height: 10px; background-color: "+colorJSON.cadeias[id]['color']+"\"></i> <div>"+colorJSON.cadeias[id]['name']+"</div><br></span>\n";
         } );
 
         $("#title-view-leg-scc").html(html);
@@ -1673,6 +1669,8 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
+
+                $(".setor-value").first().css("display", "none");
                 
                 if( parameters.eixo == 1 && (parameters.var == 9 || parameters.var == 1)){
                     switchBreadCadOcp(0);

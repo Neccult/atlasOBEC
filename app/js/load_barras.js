@@ -16,9 +16,7 @@ function create_bars(barras_box, data){
     Object.keys(data).forEach(function (key) {
 
         dados.percentual_setor.push(data[key].valor/brasil_setor[key])
-
         dados.key.push(data[key].ano);
-
         dados.value.push(data[key].valor);
 
         if (parameters.var == 2  || parameters.var == 9) dados.percentual.push(0);
@@ -34,7 +32,7 @@ function create_bars(barras_box, data){
 
     dados.key = d3.keys(data);
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 35},
+    var margin = {top: 20, right: 20, bottom: 30, left: 45},
         width = chartWidth - margin.left - margin.right,
         height = chartHeight - margin.top - margin.bottom;
 
@@ -156,7 +154,8 @@ function update_bars(barras_box, data){
     var uos = views_parameters[barras_box].uos;
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 35};
+    var margin = {top: 20, right: 20, bottom: 30, left: 45};
+
     var width = chartWidth - margin.left - margin.right;
     var height = chartHeight - margin.top - margin.bottom;
 
@@ -462,6 +461,7 @@ function formatBarsYAxis(d, dados) {
 
     var formatFraction = function (d) {
 
+        console.log(d)
         if(isIHHorC4var()){
             return d;
         }
@@ -472,7 +472,13 @@ function formatBarsYAxis(d, dados) {
             var dec_point = 3;
         } else if (d/0.0001 >= 1){
             var dec_point = 4;
+        } else if (d/0.00001 >= 1){
+            var dec_point = 5;
         }
+
+        // if(parameters.eixo == 1 && parameters.var == 2) d = d/10;
+
+        console.log(d, dec_point);
 
         var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
 

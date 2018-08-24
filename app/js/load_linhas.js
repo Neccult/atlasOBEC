@@ -1,21 +1,15 @@
-
-var anos = [];
-var keys = [];
+var anosLines = [];
+var keysLines = [];
 
 var parseTime = d3.timeParse("%Y");
 
-var margin = {top: 20, right: 25, bottom: 40, left: 45},
-    width,
-    height;
+var marginLines = {top: 20, right: 25, bottom: 40, left: 45}
 
-var x, y;
-
-
-
+var xLines, yLines;
 
 function create_linhas(linhas_box, data){
 
-    keys = [];
+    keysLines = [];
 
     getDivSize(linhas_box);
     getBoxXY();
@@ -23,29 +17,27 @@ function create_linhas(linhas_box, data){
     var coordsAxis;
 
     Object.keys(data).forEach(function (key) {
-            anos.push(data[key].ano);
+        anosLines.push(data[key].ano);
     });
 
     Object.keys(data[0]).forEach(function (key) {
-        if(key != "ano")
-            keys.push(key);
+        if(key != "ano") keysLines.push(key);
     });
 
-    // append the svg obgect to the body of the page
+    // append the svg object to the body of the page
     // appends a 'group' element to 'svg'
     // moves the 'group' element to the top left margin
 
     var svg_linhas = d3.select(linhas_box).append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width + marginLines.left + marginLines.right)
+        .attr("height", height + marginLines.top + marginLines.bottom)
         .attr("deg", parameters.deg)
         .attr("ocp", parameters.ocp)
         .attr("var", parameters.var)
         .style("opacity", "0.1")
         .append("g")
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")")
-
+            "translate(" + marginLines.left + "," + marginLines.top + ")")
 
     d3.select(linhas_box).select("svg").style("opacity", "0.1")
     d3.select(linhas_box).select("svg").transition().duration(500).style("opacity", "1");
@@ -68,7 +60,7 @@ function create_linhas(linhas_box, data){
     var dados = [];
     var valoresBrutos = [];
 
-    $.each(keys, function(i, deg) {
+    $.each(keysLines, function(i, deg) {
 
         var valores = [];
         var obj = {};
@@ -87,7 +79,7 @@ function create_linhas(linhas_box, data){
     });
 
     // Scale the range of the data
-    x.domain(d3.extent(data, function(d) { return d.ano; }));
+    xLines.domain(d3.extent(data, function(d) { return d.ano; }));
 
     var tooltipInstance = tooltip.getInstance();
 
@@ -99,12 +91,11 @@ function create_linhas(linhas_box, data){
             min = 0;
     }
 
-    y.domain([min, max]);
+    yLines.domain([min, max]);
 
     var valueline = d3.line()
-        .x(function(d) { return x(d.ano); })
-        .y(function(d) { return y(d.valor); });
-
+        .x(function(d) { return xLines(d.ano); })
+        .y(function(d) { return yLines(d.valor); });
 
     svg_linhas.selectAll("path.line")
         .data(dados)
@@ -126,8 +117,6 @@ function create_linhas(linhas_box, data){
                 else{
                     return 0.3
                 }
-
-
                 return 1;
             }
             else if(parameters.cad != 0 ){
@@ -161,27 +150,20 @@ function create_linhas(linhas_box, data){
         .on("mouseout", function () {
             tooltipInstance.hideTooltip();
             d3.selectAll(".bolinha").remove()
+            d3.selectAll(".haste").remove()
         });
 
 
     // Add the X Axis
     svg_linhas.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(xLines))
         .attr("class", "x");
 
     // Add the Y Axis
     svg_linhas.append("g")
-        .call(d3.axisLeft(y))
+        .call(d3.axisLeft(yLines))
         .attr("class", "y");
-
-
-
-
-
-
-
-
 }
 
 function update_linhas(linhas_box, data){
@@ -201,8 +183,8 @@ function update_linhas(linhas_box, data){
 
 
     var valueline = d3.line()
-        .x(function(d) { return x(d.ano); })
-        .y(function(d) { return y(d.valor); });
+        .x(function(d) { return xLines(d.ano); })
+        .y(function(d) { return yLines(d.valor); });
 
     getBoxXY();
 
@@ -212,10 +194,7 @@ function update_linhas(linhas_box, data){
     var svg_linhas = d3.select(linhas_box).select("svg")
         .select("g")
         .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-
-
+            "translate(" + marginLines.left + "," + marginLines.top + ")");
 
     data.forEach(function(d) {
 
@@ -233,7 +212,7 @@ function update_linhas(linhas_box, data){
     var dados = [];
     var valoresBrutos = [];
 
-    $.each( keys, function( i, deg ) {
+    $.each( keysLines, function( i, deg ) {
 
         var valores = [];
         var obj = {};
@@ -261,8 +240,8 @@ function update_linhas(linhas_box, data){
             min = 0;
     }
 
-    x.domain(d3.extent(data, function(d) { return d.ano; }));
-    y.domain([min, max]);
+    xLines.domain(d3.extent(data, function(d) { return d.ano; }));
+    yLines.domain([min, max]);
 
     //TODO EXIT E ENTER DO LINHAS PARA DEGS DIFERENTES
     var paths = svg_linhas.selectAll("path")
@@ -273,13 +252,10 @@ function update_linhas(linhas_box, data){
     // Add the Y Axis
     svg_linhas.select(".y")
         .transition().duration(800)
-        .call(d3.axisLeft(y))
-
+        .call(d3.axisLeft(yLines))
 
     destacaSetor();
 }
-
-
 
 function getCadId(cadName){
     switch(cadName){
@@ -382,41 +358,53 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
             }
 
             if (d3.mouse(d3.event.currentTarget)[0] >= calc1 && d3.mouse(d3.event.currentTarget)[0] <= calc2) {
-                ano = anos[i];
+                ano = anosLines[i];
                 break;
             }
 
         }
 
 
+
         var valor;
-        var indexAno = anos.indexOf(ano);
+        var indexAno = anosLines.indexOf(ano);
 
-        // svg_linhas.append("circle")
-        //     .attr('class', 'bolinha')
-        //     .style("z-index", '0')
-        //     .attr("cx", coordAxis.x[indexAno].x)
-        //     .attr("cy", d3.mouse(d3.event.currentTarget)[1])
-        //     .attr("r", 8);
-        //
-        // svg_linhas.append("circle")
-        //     .attr('class', 'bolinha')
-        //     .style("z-index", '0')
-        //     .attr('fill', corEixo[2])
-        //     .attr("cx", coordAxis.x[indexAno].x)
-        //     .attr("cy", d3.mouse(d3.event.currentTarget)[1])
-        //     .attr("r", 5);
+        console.log();
 
+
+        svg_linhas.append("circle")
+            .attr('class', 'bolinha')
+            .style("z-index", '0')
+            .attr("cx", coordAxis.x[indexAno].x)
+            .attr("cy", yLines(d[indexAno].valor))
+            .attr("r", 2);
+
+        // svg_linhas.append("line")           // attach a line
+        //     .attr('class', 'haste')
+        //     .style("stroke", "black")       // colour the line
+        //     .attr("x1", coordAxis.x[indexAno].x)                // x position of the first end of the line
+        //     .attr("y1", d3.mouse(d3.event.currentTarget)[1])                 // y position of the first end of the line
+        //     .attr("x2", d3.mouse(d3.event.currentTarget)[0]+30)                // x position of the second end of the line
+        //     .attr("y2", d3.mouse(d3.event.currentTarget)[1]+25);
+
+        // svg_linhas.append("polygon")    // attach a polyline
+        //     .attr("class", "haste")
+        //     .style("stroke", "black")   // colour the line
+        //     .style("fill", "#39393a")     // remove any fill colour
+        //     .attr("points", (coordAxis.x[indexAno].x) + "," + (yLines(d[indexAno].valor)) + " " + 
+        //                     (d3.mouse(d3.event.currentTarget)[0]+30) + "," + (d3.mouse(d3.event.currentTarget)[1]+12) + " " + 
+        //                     (d3.mouse(d3.event.currentTarget)[0]+30) + "," + (d3.mouse(d3.event.currentTarget)[1]+28));  // x,y points
+        
         if(parameters.eixo == 0 && parameters.var == 3){
             if(indexAno == 10){
                 valor = 0;
             }
             else{
-                valor = d[anos.indexOf(ano)].valor;
+                valor = d[anosLines.indexOf(ano)].valor;
             }
         }
         else{
-            valor = d[anos.indexOf(ano)].valor;
+            valor = d[anosLines.indexOf(ano)].valor;
         }
 
 
@@ -429,7 +417,7 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
                 ])
             }
             else if(parameters.var == 9){
-                valor =  formatNumber(valor*100, 6).toString().replace(".", "");
+                valor = formatNumber(valor*100, 6).toString().replace(".", "");
                 tooltipInstance.showTooltip(d, [
                     ["title", scc],
                     ["", valor+"%"]
@@ -486,12 +474,7 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
                 ["", valor]
             ])
         }
-
     }
-
-
-
-
 }
 
 function getAxisCoords(){
@@ -504,7 +487,7 @@ function getAxisCoords(){
 
         x = parseFloat(transform.split(',')[0]);
         y = parseFloat(transform.split(',')[1].replace(')', ''));
-        coordsAxisX.push({'ano': anos[index], 'x': x, 'y': y})
+        coordsAxisX.push({'ano': anosLines[index], 'x': x, 'y': y})
     })
     d3.selectAll('.y g').each(function (d, index) {
         transform = d3.select(this).attr('transform')
@@ -512,7 +495,7 @@ function getAxisCoords(){
 
         x = parseFloat(transform.split(',')[0]);
         y = parseFloat(transform.split(',')[1].replace(')', ''));
-        coordsAxisY.push({'ano': anos[index], 'x': x, 'y': y})
+        coordsAxisY.push({'ano': anosLines[index], 'x': x, 'y': y})
     })
 
     return {x: coordsAxisX, y: coordsAxisY};
@@ -756,13 +739,13 @@ function colorLinhas(deg){
 }
 
 function getDivSize(linhas_box) {
-    width = $(linhas_box).width() - margin.left - margin.right;
-    height = $(linhas_box).height() - margin.top - margin.bottom;
+    width = $(linhas_box).width() - marginLines.left - marginLines.right;
+    height = $(linhas_box).height() - marginLines.top - marginLines.bottom;
 }
 
 function getBoxXY() {
-    x = d3.scaleTime().range([0, width]);
-    y = d3.scaleLinear().range([height, 0]);
+    xLines = d3.scaleTime().range([0, width]);
+    yLines = d3.scaleLinear().range([height, 0]);
 }
 
 function getMin(valores) {
