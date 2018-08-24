@@ -369,9 +369,6 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
         var valor;
         var indexAno = anosLines.indexOf(ano);
 
-        console.log();
-
-
         svg_linhas.append("circle")
             .attr('class', 'bolinha')
             .style("z-index", '0')

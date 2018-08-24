@@ -1269,8 +1269,6 @@ var tooltip = (function(){
 			var xPositionEnd = xPosition+tooltipWidth;
             var yPosition = d3.event.pageY -topOffset+5;
             
-            console.log(-topOffset+5)
-
 			// if tooltips final position is outside screen boundries
 			if(xPositionEnd>leftOffsetEnd){
 				xPosition = xPosition - tooltipWidth - 30; /* altera a posição */
