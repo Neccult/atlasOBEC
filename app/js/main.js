@@ -1669,6 +1669,8 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
+
+                $(".setor-value").first().css("display", "none");
                 
                 if( parameters.eixo == 1 && (parameters.var == 9 || parameters.var == 1)){
                     switchBreadCadOcp(0);
