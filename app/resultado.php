@@ -519,6 +519,7 @@
                     <input type="hidden" id="data" name="data" value="">
                     <input type="hidden" id="data_barras" name = "data_barras" value="">
                     <input type="hidden" id="data_scc" name = "data_scc" value="">
+                    <input type="hidden" id="width_views" name ="width_views" value="">
                 </form>
 
                 <script>
