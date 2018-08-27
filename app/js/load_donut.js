@@ -130,7 +130,6 @@ function update_donut(donut_box, data){
                     ]);
                 }
                 else{
-                    console.log(d.data.percent)
                     tooltipInstance.showTooltip(d.data, [
                         ["title", "Possui"],
                         ["", percentFormat(d.data.percent).replace(".",",")]

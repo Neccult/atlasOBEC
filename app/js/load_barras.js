@@ -128,11 +128,16 @@ function create_bars(barras_box, data){
 
     var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
 
-    updateData('barras', dados, valor, uos);
 
     if(parameters.eixo == 2 && parameters.var >= 18){
         var soma = getBarSoma(dados);
         updateData('barras', dados, soma, 1);
+    }
+    else if(parameters.eixo == 2 && parameters.var == 17){
+
+    }
+    else{
+        updateData('barras', dados, valor, uos);
     }
 
 }
@@ -255,11 +260,16 @@ function update_bars(barras_box, data){
 
     var valor = $(barras_box+' svg').find('rect[data-legend="'+parameters.ano+'"]').attr("data-value");
 
-    updateData('barras', dados, valor, uos);
 
     if(parameters.eixo == 2 && parameters.var >= 18){
         var soma = getBarSoma(dados);
         updateData('barras', dados, soma, 1);
+    }
+    else if(parameters.eixo == 2 && parameters.var == 17){
+
+    }
+    else{
+        updateData('barras', dados, valor, uos);
     }
 
 }
@@ -461,7 +471,6 @@ function formatBarsYAxis(d, dados) {
 
     var formatFraction = function (d) {
 
-        console.log(d)
         if(isIHHorC4var()){
             return d;
         }
@@ -477,8 +486,6 @@ function formatBarsYAxis(d, dados) {
         }
 
         // if(parameters.eixo == 1 && parameters.var == 2) d = d/10;
-
-        console.log(d, dec_point);
 
         var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
 

@@ -40,12 +40,16 @@ function configInfoDataBoxMapa(dados, dict) {
 
     }
     else if(parameters.eixo == 2){
-
-
-        if(parameters.cad == 0 && parameters.uf != 0 && parameters.var < 18){
+         if(parameters.var == 17){
+            if(dados.SouN && dados.valor == 0)
+                setIntegerValueData('Indisponível');
+            else
+                setIntegerValueData(dados.valor);
+        }
+        else if(parameters.cad == 0 && parameters.uf != 0 && parameters.var < 18){
             setPercentValueData(dados.percentual);
         }
-
+        
     }
     else if(parameters.eixo == 3){
 
@@ -176,16 +180,15 @@ function configInfoDataBoxBarras(dados, valor, uos) {
             }
         }
         else if(parameters.var >= 18 && uos == 1){
-
             setPercentValueData(valor)
+        }
+        else if(parameters.var == 17){
+            setIntegerValueData(valor)
         }
         else{
             setIntegerValueData(valor)
 
         }
-
-
-
     }
 
     else if(parameters.eixo == 3){
@@ -247,18 +250,24 @@ function setIntegerValueData(value) {
     var result = getDataVar(description, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
+    var valor;
 
-    valor = normalizeValue(value, sufixo);
+    if(value != 'Indisponível'){
+        valor = normalizeValue(value, sufixo);
     
-    if(parameters.eixo == 1 && (parameters.var == 2 || parameters.var == 9)){
-        var literal = formatDecimalLimit(valor, 4);
-    } else {
-        var literal = formatDecimalLimit(valor, 2);
+        if(parameters.eixo == 1 && (parameters.var == 2 || parameters.var == 9)){
+            var literal = formatDecimalLimit(valor, 4);
+        } else {
+            var literal = formatDecimalLimit(valor, 2);
+        }
     }
+        
 
     estado = $(".state-title").first().text()
 
-    $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
+    if(value != 'Indisponível') $(".integer-value").first().find(".number").first().html(prefixo+literal+sufixo);
+    else $(".integer-value").first().find(".number").first().html(value);
+
     var doc =  $(".integer-value").first().find(".number").first();
 
     $('.font-title').html("Fonte(s): "+result.fontes);
@@ -418,7 +427,6 @@ function updateData(view, dados, valor, uos){
     var vrvViews = PT_BR.var[eixo].filter(filterByID)[0].views;
 
     var data = {}
-
 
     function filterByID(item) {
         if (item.id == vrv) {

@@ -1751,11 +1751,13 @@ button.opt.active{
 	}
 
 	#title-view-leg-scc{
-		height: 100px;
+		height: 120px;
 		padding-top: 0;
 
 		display: flex;
 		flex-flow: column wrap;
+
+		margin-bottom: 10px;
 
 	}
 

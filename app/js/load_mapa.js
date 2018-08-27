@@ -282,7 +282,6 @@ function create_mapa(mapa_box, mapa){
     updateData('mapa', dict[parameters.uf], dict);
     data_mapa = mapa;
     
-    
 }
 
 function update_mapa(mapa_box, mapa){
