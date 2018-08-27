@@ -233,7 +233,11 @@ function update_bars(barras_box, data){
         })
         .on("click", function(d, i, obj) {
             clickBarras(barras_box, dados, uos, i)
-        });
+        })
+        .on("mouseover", function (d, i, obj) {
+            loadTooltip_barras(d, dados.key[i], parameters.eixo, parameters.var)
+        })
+        .on("mouseout", tooltipInstance.hideTooltip);
 
     var xAxis = d3.axisBottom(x)
                     .tickFormat(function (d, i) {

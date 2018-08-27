@@ -1222,38 +1222,64 @@ function updateOptView(container, btn){
 
     if(container == "init"){
         $(".btn-mapa button.opt.view").each(function(){
-            if(parameters.chg){
-                if($(this).attr("id") == "mapa"){
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
-                        $(this).css("background-color", corEixo[2]);
+
+            if(parameters.eixo != 3){
+                if(parameters.chg){
+                    if($(this).attr("id") == "mapa"){
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[2]);
+                        else
+                            $(this).css("background-color", corEixo[1]);
+                    }
                 }
                 else{
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[2]);
-                    else
-                        $(this).css("background-color", corEixo[1]);
-                }
+                    if($(this).attr("id") == "treemap_region"){
+                        $(this).css("opacity", "1")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        if(parameters.eixo == 0)
+                            $(this).css("background-color", corEixo[1]);
+                        else
+                            $(this).css("background-color", corEixo[2]);
+                    }
+                };
             }
             else{
-                if($(this).attr("id") == "treemap_region"){
-                    $(this).css("opacity", "1")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
+                if(parameters.mundo){
+                    if($(this).attr("id") == "mundo"){
+                        $(this).css("opacity", "1")
                         $(this).css("background-color", corEixo[2]);
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[1]);
+                    }
                 }
                 else{
-                    $(this).css("opacity", "0.8")
-                    if(parameters.eixo == 0)
-                        $(this).css("background-color", corEixo[1]);
-                    else
+                    if ($(this).attr("id") == "mundo") {
+                        $(this).css("opacity", "1")
                         $(this).css("background-color", corEixo[2]);
-                }
-            };
+                    }
+                    else{
+                        $(this).css("opacity", "0.8")
+                        $(this).css("background-color", corEixo[1]);
+                    }
+                };
+            }
+            
 
         });
 
@@ -1262,11 +1288,9 @@ function updateOptView(container, btn){
             if(parameters.eixo == 2){
                 if(url['var'] == 18 || url['var'] == 19){
                     $(this).css("display","block")
-
                 }
                 else{
                     $(this).css("display","none")
-
                 }
             }
 
@@ -1328,9 +1352,8 @@ function updateOptView(container, btn){
                 }
 
             }
+            else if(parameters.eixo == 3){
 
-
-            if(parameters.eixo == 3){
                 if(parameters.slc == 1){
                     if($(this).attr("id") == "bens"){
                         $(this).css("opacity", "0.8")
@@ -1353,7 +1376,6 @@ function updateOptView(container, btn){
                 }
 
             }
-
         });
     }
     else{
@@ -1691,7 +1713,6 @@ $(document).ready(function(){
                     switchToOcupations();
                 }
 
-
                 if(url['ocp'] > 0)
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 1, url);
                 else
@@ -1707,8 +1728,7 @@ $(document).ready(function(){
                 url['deg'] = 0;
                 url['subdeg'] = 0;
                 url['pfj'] = 0;
-
-
+                url['mundo'] = 0;
 
                 updateWindowUrl('uf', url['uf']);
                 updateWindowUrl('cad', url['cad']);
@@ -1718,6 +1738,7 @@ $(document).ready(function(){
                 updateWindowUrl('var', url['var']);
                 updateWindowUrl('mod', url['mod']);
                 updateWindowUrl('pfj', url['pfj']);
+                updateWindowUrl('mundo', url['mundo']);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateWindowUrl('chg', 0);
@@ -1755,7 +1776,6 @@ $(document).ready(function(){
                     else{
                         $("#btn-opt").find(".col-btn").css("display", "none")
                     }
-
                 }
 
                 if(eixo_atual == 3){
@@ -1868,7 +1888,6 @@ $(document).ready(function(){
         }
     });
 
-
     /* download doc */
     $(document).on('click', '.button-control-down', function(){
 
@@ -1888,8 +1907,6 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
-
-
 
     if(window.location.pathname.match("resultado")){
         changeDescVar();
