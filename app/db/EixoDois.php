@@ -368,7 +368,6 @@ class EixoDois {
                 $stmt3->execute();
                 $obj1 = self::fetch_results($stmt3)[0];
             }
-
             
             $query_max_ocp2 = "SELECT MAX(Valor) as Valor FROM ".self::$table
                             ." WHERE idOcupacao=2"
@@ -377,9 +376,6 @@ class EixoDois {
                             ." AND idUF = 0"
                             ." GROUP BY Ano";
 
-//            echo $query;
-
-            
             $stmt4 = mysqli_stmt_init(self::$conn);
             if (mysqli_stmt_prepare($stmt4, $query_max_ocp2)) {
                 $stmt4->bind_param($paramsStr, ...$params);
@@ -751,6 +747,9 @@ class EixoDois {
             }
             else {
                 if($uos == 1 && $var == 6) {
+                    $query .= " AND idCadeia != 0";
+                }
+                else if ($var == 4 || $var == 5){
                     $query .= " AND idCadeia != 0";
                 }
                 else {
