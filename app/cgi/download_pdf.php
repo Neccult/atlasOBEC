@@ -4,6 +4,11 @@
     $svg_box2  = $_POST['data_barras'];
     $svg_box3  = $_POST['data_scc'];
 
+    $xmls = array();
+    array_push($xmls, simplexml_load_string($svg_box1));
+    array_push($xmls, simplexml_load_string($svg_box2));
+    array_push($xmls, simplexml_load_string($svg_box3));
+
     $temp_nm1 = tempnam(sys_get_temp_dir(), 'svg');
     $temp_nm2 = tempnam(sys_get_temp_dir(), 'svg');
     $temp_nm3 = tempnam(sys_get_temp_dir(), 'svg');
@@ -17,8 +22,8 @@
     fwrite($temp_f2, $svg_box2);
     fwrite($temp_f3, $svg_box3);
     
-    var_dump(shell_exec('python svg.py '.$temp_nm1.' '.$temp_nm2.' '.$temp_nm3));
-
+    shell_exec('python svg.py '.$temp_nm1.' '.$temp_nm2.' '.$temp_nm3.' '.$xmls[0]['width'].' '.$xmls[1]['width'].' '.$xmls[2]['width']);
+    
     fclose($temp_f1) or die($php_errormsg);
     fclose($temp_f2) or die($php_errormsg);
     fclose($temp_f3) or die($php_errormsg); 
@@ -36,5 +41,5 @@
         readfile($file);
         exit;
     }
-    
+
 ?>

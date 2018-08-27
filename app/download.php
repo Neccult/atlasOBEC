@@ -78,11 +78,12 @@
 		$view = $_GET["view"];
 	else
 		$view = "mapa";
-
+/*
 	if (!empty($_GET["type"]))
 		$type = $_GET["type"];
 	else
-		$type = "pdf";
+		$type = "pdf";*/
+	$type = 'pdf';
 ?>
 
 <!DOCTYPE html>
