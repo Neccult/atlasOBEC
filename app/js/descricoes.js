@@ -424,7 +424,7 @@ function updateDescription(descricoes, eixo, vrv, slc){
             var desc_int = ''
             var desc_perc = ''
             var desc_terc = ''
-
+            
             prc_text = $('.bread-select[data-id=prc] option:selected').first().text()
             if(key == 'i'){
                 nomeestado = mapPronome(getPrepos(uf_text), ['DE', 'DA', 'DO'], ['', 'A', 'O'])+' '+uf_text
@@ -460,22 +460,23 @@ function updateDescription(descricoes, eixo, vrv, slc){
                 }
 
             }
-            if("primeira" in desc_var.slc[slc]){
-                desc_var.slc[slc].primeira.forEach(function(d){
+        
+            if("primeira" in desc_var.slc[parameters.mundo]){
+                desc_var.slc[parameters.mundo].primeira.forEach(function(d){
                     if(key in d){
                         desc_int = d[key]; return;
                     }
                 })
             }
-            if("segunda" in desc_var.slc[slc]){
-                desc_var.slc[slc].segunda.forEach(function(d){
+            if("segunda" in desc_var.slc[parameters.mundo]){
+                desc_var.slc[parameters.mundo].segunda.forEach(function(d){
                     if(key in d){
                         desc_perc = d[key]; return;
                     }
                 })
             }
-            if("terceira" in desc_var.slc[slc]){
-                desc_var.slc[slc].terceira.forEach(function(d){
+            if("terceira" in desc_var.slc[parameters.mundo]){
+                desc_var.slc[parameters.mundo].terceira.forEach(function(d){
                     if(key in d){
                         desc_terc = d[key]; return;
                     }
