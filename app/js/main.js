@@ -1903,9 +1903,11 @@ $(document).ready(function(){
                 sendViewsToDownload('pdf');
             }, 400);
                         
+        } else {
+            window.open(downloadUrl, '_blank');
         }
 
-        //window.open(downloadUrl, '_blank');
+        
 
     });
 
