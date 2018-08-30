@@ -280,7 +280,7 @@ class EixoQuatro {
 			$query = "SELECT * FROM ".self::$table." AS ex"
 				." JOIN Parceiro AS parc ON parc.idParceiro = ex.idParceiro AND parc.idParceiro = ?"
 				." JOIN UF AS uf ON uf.idUF = ex.idUF"
-				." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
+                ." JOIN Cadeia AS cad ON cad.idCadeia = ex.idCadeia AND cad.idCadeia = ?"
 				." JOIN Tipo AS tipo ON tipo.idTipo = ex.idTipo AND tipo.idTipo = ?"
 				." WHERE ex.Numero = ?";
 
@@ -292,6 +292,12 @@ class EixoQuatro {
             if ($anos > 0) {
                 $query .= " AND ex.Ano = ?";
                 $params[] = $anos;
+            }
+
+            if ($slc == 0) {
+                $query .= " AND ex.Consumo = 1";
+            } else {
+                $query .= " AND ex.Consumo = 0";
             }
 
             $paramsStr = '';
@@ -307,8 +313,10 @@ class EixoQuatro {
                 $stmt->execute();
                 $allObjects = self::fetch_results($stmt);
             }
-		}
-        
+
+
+        }
+
 		self::disconnect();
 		
 		return $allObjects;

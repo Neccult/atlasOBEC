@@ -1358,20 +1358,24 @@ function updateOptView(container, btn){
                     if($(this).attr("id") == "bens"){
                         $(this).css("opacity", "0.8")
                         $(this).css("background-color", corEixo[3]);
+                        $(this).css("cursor", "default");
                     }
                     else{
                         $(this).css("opacity", "1")
                         $(this).css("background-color", corEixo[2]);
+                        $(this).css("cursor", "pointer");
                     }
                 }
                 else{
                     if($(this).attr("id") == "bens"){
                         $(this).css("opacity", "1")
                         $(this).css("background-color", corEixo[2]);
+                        $(this).css("cursor", "pointer");
                     }
                     else{
                         $(this).css("opacity", "0.8")
                         $(this).css("background-color", corEixo[3]);
+                        $(this).css("cursor", "default");
                     }
                 }
 

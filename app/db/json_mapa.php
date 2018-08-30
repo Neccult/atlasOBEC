@@ -134,9 +134,9 @@ else if($eixo == 2) {
 }
 else if($eixo == 3) {
     require_once("EixoQuatro.php");
-    if($mundo == 0){
-        $mapa = new stdClass();
-    }
+    
+    $mapa = new stdClass();
+    
     foreach (EixoQuatro::getter_mapa($var, $cad, $typ, $ano, $prc, $uf, $mundo, $slc) as $tupla) {
 
         if($mundo == 0){
@@ -153,19 +153,22 @@ else if($eixo == 3) {
         else{
             if($tupla->idUF != 99){
                 $id = $tupla->idUF;
-            $mapa[$id]['id'] = (int) $tupla->idUF;
-            $mapa[$id]['uf'] = $tupla->UFNome;
-            $mapa[$id]['prc'] = $tupla->ParceiroNome;
-            $mapa[$id]['ano'] = (double) $tupla->Ano;
-            $mapa[$id]['valor'] = (double) $tupla->Valor;
-            $mapa[$id]['percentual'] = (double) $tupla->Percentual;
-            $mapa[$id]['taxa'] = (double) $tupla->Taxa;
+                $mapa->$id = [];
+
+                $mapa->$id['id'] = (int) $tupla->idUF;
+                $mapa->$id['uf'] = $tupla->UFNome;
+                $mapa->$id['prc'] = $tupla->ParceiroNome;
+                $mapa->$id['ano'] = (double) $tupla->Ano;
+                $mapa->$id['valor'] =  (double) $tupla->Valor;
+                $mapa->$id['percentual'] = (double) $tupla->Percentual;
+                $mapa->$id['taxa'] = (double) $tupla->Taxa;
+
             }
             
         }
-            
-
     }
+    
+
 }
 
 echo json_encode($mapa);
