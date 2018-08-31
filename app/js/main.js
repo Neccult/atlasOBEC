@@ -1438,6 +1438,13 @@ function updateOptView(container, btn){
     }
 }
 
+function updateParameter(parameter, value, updateBread){
+    updateWindowUrl(parameter, value);
+    url[parameter] == value;
+
+    if(updateBread) $('bread-select['+parameter+']').val(value);
+        
+}
 
 /*======
 	documento pronto
@@ -1560,37 +1567,28 @@ $(document).ready(function(){
 
             if(parameters.eixo == 3){
 
-                if(id == "mapa") url['mundo'] = 1;
-                else if(id == "mundo") url['mundo'] = 0;
-
-                updateWindowUrl('mundo', url['mundo']);
+                if(id == "mapa") updateParameter('mundo', 1, false);
+                else if(id == "mundo") updateParameter('mundo', 0, false);
 
             } else {
 
-                if(id === "treemap_region") url['chg'] = '1';
-                else if(id === "mapa") url['chg'] = '0';
+                if(id === "treemap_region") updateParameter('chg', 1, false); 
+                else if(id === "mapa") updateParameter('chg', 0, false); 
 
-                updateWindowUrl('chg', url['chg'])
             }
-            
             updateIframe(url); /* atualiza gráfico */
-
-
         }
         else {
             updateUrl();
             if(parameters.eixo == 3){
                 var botao = PT_BR.dados_botoes[id];
-
-                url['slc'] = botao.slc;
                 var index_ano = botao.slc == 0 ? 1 : 0;
-                url['ano'] = d3.max(anos_default[parameters.var][index_ano]);
+
+                updateParameter('ano', d3.max(anos_default[parameters.var][index_ano], false));
+                updateParameter('slc', botao.slc, false);
 
                 $(this).addClass("active");
                 $('#'+botao.complement).removeClass("active");
-
-                updateWindowUrl('slc', url['slc']);
-                updateWindowUrl('ano', url['ano']);
 
                 updateIframe(url);
             }
@@ -1598,18 +1596,13 @@ $(document).ready(function(){
 
                 var botao = PT_BR.dados_botoes[id];
 
-                url['mec'] = botao.mec;
-                updateWindowUrl('mec', url['mec'])
-               if(parameters.var == 19 && url['mec'] == 1){
-                    updateWindowUrl('cad', 0);
-                    url['cad'] == 0;
-                    $('bread-select[cad]').val(0);    
-                }
+                updateParameter('mec', botao.mec, true);
+
+               if(parameters.var == 19 && url['mec'] == 1) updateParameter('cad', 0, true);
 
                 updateOptView($(this).parent().parent().attr("class"), $(this))
 
                 changeDescVar();
-
                 updateIframe(url);
                 switchToSetores();
             }
@@ -1621,46 +1614,32 @@ $(document).ready(function(){
                     enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 0, url);
                     switchToSetores();
 
-                    url['slc'] = 0;
-                    url['deg'] = 0;
-                    url['ocp'] = 0;
-
                     controlFilter('0', 'deg');
                     $(this).addClass("active");
                     $('#ocupacao').removeClass("active");
 
-                    url['ano'] = d3.max(anos_default[url['var']][0]);
-
-                    updateWindowUrl('slc', url['slc'])
-                    updateWindowUrl('deg', url['deg'])
-                    updateWindowUrl('ocp', url['ocp'])
-                    updateWindowUrl('ano', url['ano'])
-
+                    updateParameter('slc', 0, false);
+                    updateParameter('deg', 0, false);
+                    updateParameter('ocp', 0, false);
+                    updateParameter('ano', d3.max(anos_default[url['var']][0]), false);
                 }
                 else {
                     enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
 
                     updateDataDescUoS();
-
                     switchToOcupations();
-                    url['slc'] = 1;
-                    url['deg'] = 0;
-                    url['cad'] = 0;
 
                     if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
-                        url['ocp'] = 1;
+                        updateParameter('ocp', 1, false);
                     else
-                        url['ocp'] = 3;
+                        updateParameter('ocp', 3, false);
+                        
                     controlFilter('0', 'deg');
-                    url['cad'] = 0;
 
-                    url['ano'] = d3.max(anos_default[url['var']][1]);
-
-                    updateWindowUrl('slc', url['slc'])
-                    updateWindowUrl('deg', url['deg'])
-                    updateWindowUrl('ocp', url['ocp'])
-                    updateWindowUrl('ano', url['ano'])
-                    updateWindowUrl('cad', url['cad'])
+                    updateParameter('slc', 1, false);
+                    updateParameter('deg', 0, false);
+                    updateParameter('cad', 0, false);
+                    updateWindowUrl('ano', d3.max(anos_default[url['var']][1]));
 
                     $(this).addClass("active");
                     $('#setor').removeClass("active");
@@ -1735,30 +1714,19 @@ $(document).ready(function(){
                 else
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
 
-                $('.bread-select[data-id=uf]').val(0);
-                $('.bread-select[data-id=cad]').val(0);
-                $('.bread-select[data-id=deg]').val(0);
 
-                url['uf'] = 0;
-                url['cad'] = 0;
-                url['mod'] = 0;
-                url['deg'] = 0;
-                url['subdeg'] = 0;
-                url['pfj'] = 0;
-                url['mundo'] = 0;
-
-                updateWindowUrl('uf', url['uf']);
-                updateWindowUrl('cad', url['cad']);
-                updateWindowUrl('deg', url['deg']);
-                updateWindowUrl('subdeg', url['subdeg']);
-                updateWindowUrl('ano', url['ano']);
-                updateWindowUrl('var', url['var']);
-                updateWindowUrl('mod', url['mod']);
-                updateWindowUrl('pfj', url['pfj']);
-                updateWindowUrl('mundo', url['mundo']);
+                updateParameter('uf', 0, true);
+                updateParameter('cad', 0, true);
+                updateParameter('deg', 0, true);
+                updateParameter('mod', 0, false);
+                updateParameter('subdeg', 0, false);
+                updateParameter('pfj', 0, false);
+                updateParameter('mundo', 0, false);
+                updateParameter('ano', url['ano'], false);
+                updateParameter('var', 0, false);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
-                    updateWindowUrl('chg', 0);
+                    updateParameter('chg', 0, false);
                 }
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
@@ -1800,59 +1768,40 @@ $(document).ready(function(){
                         $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
                     updateServicos(url['var']);
                     updateTipo(url['var']);
-                    url['typ'] = 1;
-                    url['slc'] = 0;
 
-                    updateWindowUrl('typ', url['typ'])
-                    updateWindowUrl('slc', url['slc'])
+                    updateParameter('typ', 1, true);
+                    updateParameter('slc', 0, false);
 
                     $('#bens').addClass("active");
                     $('#servicos').removeClass("active");
 
                     updateColorButtons(url['slc'])
 
-                    $(".opt-select[data-id='typ']").val(1);
-                    $('.bread-select[data-id=typ]').val(1);
                     if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
-                        $('.bread-select[data-id=prc]').val(0);
-                        url['prc'] = 0;
-                        updateWindowUrl('prc', url['prc'])
-
+                        updateParameter('prc', 0, true);
                     }
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
 
                 }
-
                 changeDescVar();
-
-    
             }
 
-
             if(dataId === 'deg') {
-
                 if(eixo_atual == 1){
                     if($(this).find('option:selected').parent().attr("value") != undefined){
                         deg_value =  $(this).find('option:selected').parent().attr("value")
                     }
                     else{
                         deg_value = $(this).val()
-
-
                     }
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
-
 
                     if(url['var'] == 4 || url['var'] == 5 || url['var'] == 6){
                         updateLegendByDeg(deg_value)
                     }
 
-                    updateWindowUrl('deg', deg_value);
-                    updateWindowUrl('subdeg', $(this).val());
-
-                    url['deg'] = deg_value;
-                    url['subdeg'] = $(this).val();
-
+                    updateParameter('deg', deg_value, false);
+                    updateParameter('subdeg', $(this).val())
                 }
                 else{
                     controlFilter($(this).val(), $(this).attr('data-id'), 1);
@@ -1875,18 +1824,12 @@ $(document).ready(function(){
 
             if(dataId === "mod") {
                 url['mod'] = ($(this).val())
-                url['mec'] = 0;
-                updateWindowUrl('mec', 0)
-                $(".bread-select[data-id=mec]").val(0);
-
+                updateParameter('mec', 0, true);
             }
 
             if(dataId === "mec") {
                 url['mec'] = ($(this).val())
-                url['mod'] = 0;
-                updateWindowUrl('mod', 0)
-                $(".bread-select[data-id=mod]").val(0);
-
+                updateParameter('mod', 0, true);
             }
 
             if(dataId === "ocp") {
