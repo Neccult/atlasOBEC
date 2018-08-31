@@ -32,7 +32,8 @@ function create_donut(donut_box, data){
         .attr("d", arc)
         .attr("soma", function(d) {  return getSoma(data, d.data.tipo);})
         .style("fill", function(d) { return color_donut(d.data.tipo); })
-        .style("stroke", "none")
+        .style("stroke", "black")
+        .style("stroke-width", "0.25")
         .style("cursor", "pointer")
         .each(function(d) { this._current = d; });
 
@@ -109,7 +110,8 @@ function update_donut(donut_box, data){
      .attrTween("d", arcTween)
      .attr("soma", function(d) { return getSoma(data, d.data.tipo);})
      .style("fill", function(d) { return color_donut(d.data.tipo); })
-     .style("stroke", "none")
+     .style("stroke-width", "0.25")
+     .style("cursor", "pointer")
      .style("cursor", "pointer")
      
     
@@ -162,25 +164,6 @@ function update_donut(donut_box, data){
             d3.select(this).attr("transform", "scale(1)")
             tooltipInstance.hideTooltip()
         })
-
-    // if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)){
-    //     var soma = 0;
-    //     var acumuladoSetor;
-    //
-    //     Object.keys(data).forEach(function (key) {
-    //         soma += data[key].valor;
-    //         if(cad == data[key].cad)
-    //             acumuladoSetor = data[key].valor;
-    //     })
-    //
-    //     if(parameters.cad == 0)
-    //         acumuladoSetor = soma;
-    //
-    //
-    //     setPercentValueData({valor: formatTextVrv(acumuladoSetor,parameters.eixo, parameters.var)} , parameters.eixo, parameters.var)
-    //
-    // }
-
 }
 
 function arcTween(a) {

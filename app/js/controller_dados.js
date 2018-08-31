@@ -49,6 +49,11 @@ function configInfoDataBoxMapa(dados, dict) {
         else if(parameters.cad == 0 && parameters.uf != 0 && parameters.var < 18){
             setPercentValueData(dados.percentual);
         }
+        else if(parameters.var >= 18){
+            setIntegerValueData(dados.valor);
+        }
+
+        console.log(dados.valor)
         
     }
     else if(parameters.eixo == 3){
