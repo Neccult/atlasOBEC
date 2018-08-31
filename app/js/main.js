@@ -1074,7 +1074,15 @@ function updateMenuLegenda(eixo, vrv){
 
         $("#menu-view-donut").find(".view-title-leg-donut[data-id='scc&ocp']").html("");
 
-        var legendArray = [0, 2, 3, 5, 8, 11];
+        var legendArray;
+
+        if(url['mec'] == 0){
+            legendArray = [0, 2, 3, 5, 8, 11];
+        }
+        else{
+            legendArray = [0];
+        }
+
         var html = "";
 
         legendArray.forEach( function(id) {
@@ -1547,7 +1555,6 @@ $(document).ready(function(){
 
         updateOptView($(this).parent().parent().attr("class"), $(this))
 
-
         if(id == "treemap_region" || id == "mapa" || id == "mundo") {
             updateUrl();
 
@@ -1593,12 +1600,18 @@ $(document).ready(function(){
 
                 url['mec'] = botao.mec;
                 updateWindowUrl('mec', url['mec'])
+               if(parameters.var == 19 && url['mec'] == 1){
+                    updateWindowUrl('cad', 0);
+                    url['cad'] == 0;
+                    $('bread-select[cad]').val(0);    
+                }
 
                 updateOptView($(this).parent().parent().attr("class"), $(this))
 
                 changeDescVar();
 
                 updateIframe(url);
+                switchToSetores();
             }
             else {
                 if(id === "setor") {

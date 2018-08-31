@@ -50,11 +50,9 @@ function configInfoDataBoxMapa(dados, dict) {
             setPercentValueData(dados.percentual);
         }
         else if(parameters.var >= 18){
-            setIntegerValueData(dados.valor);
+            if(dados != null) setIntegerValueData(dados.valor);
         }
 
-        console.log(dados.valor)
-        
     }
     else if(parameters.eixo == 3){
 
