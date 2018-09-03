@@ -451,6 +451,8 @@ function destacarBarra(barras_box, barraId, uos) {
 }
 
 function formatBarsYAxis(d, dados) {
+
+
     var higherZeroOcur = maxDecimalAxis;
     var dadosCounter = 0;
     var minFraction = 3;
@@ -464,17 +466,14 @@ function formatBarsYAxis(d, dados) {
     };
 
     var formatGreatNumber = function (d) {
-
         var value = d;
         var c = 0;
         var sufixos = ['', 'K', 'M', 'B', 'T'];
 
         if(value >= 1000){
             while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
-
                 c++;
                 value = value / 1000;
-
             }
         }
 
@@ -488,10 +487,11 @@ function formatBarsYAxis(d, dados) {
 
     var formatFraction = function (d) {
 
+        if(isIHHorC4var()) return d;
 
-        if(isIHHorC4var()){
-            return d;
-        }
+        var isNegative = (d < 0) ? true : false;
+
+        if(isNegative) d = d * (-1);
 
         if(d/0.01 >= 1){
             var dec_point = 2;
@@ -511,8 +511,6 @@ function formatBarsYAxis(d, dados) {
             var dec_point = 9;
         }
 
-        // if(parameters.eixo == 1 && parameters.var == 2) d = d/10;
-
         var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
 
         d = normalizeValue(d, sufixo);
@@ -529,9 +527,15 @@ function formatBarsYAxis(d, dados) {
         }
 
         value = Math.ceil(value * 1000)/1000;
-        
-        return (value+sufixos[c]+sufixo)
+
+        var signal = (isNegative) ? "-" : "";
+        var retorno = (value == 0) ? signal+value+sufixo : signal+value+sufixos[c]+sufixo;
+
+        if(isNegative) d = d * (-1);
+
+        return retorno;
     };
+
 
     var maxValue = d3.max(dados.value);
     var minValue = d3.min(dados.value);
@@ -539,8 +543,7 @@ function formatBarsYAxis(d, dados) {
     var preFormat = d3.format('.2f');
     var preFormatted = removeDecimalZeroes(preFormat(maxValue));
     var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
-    var isSmall = preFormatted < 1 && preFormatted > -1;
-
+    var isSmall = preFormatted <= 1 && preFormatted >= -1;
 
     // has decimal
     if (isSmall){
