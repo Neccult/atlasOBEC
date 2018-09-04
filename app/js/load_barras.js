@@ -469,7 +469,7 @@ function formatBarsYAxis(d, dados) {
         var value = d;
         var c = 0;
         var sufixos = ['', 'K', 'M', 'B', 'T'];
-
+        var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
         if(value >= 1000){
             while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
                 c++;
@@ -482,7 +482,7 @@ function formatBarsYAxis(d, dados) {
                 c--;
             }
         }
-        return (value+sufixos[c])
+        return (value+sufixos[c]+sufixo)
     };
 
     var formatFraction = function (d) {
