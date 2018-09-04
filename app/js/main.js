@@ -122,7 +122,7 @@ function getAnoDefault(eixo_atual){
                 index_ocp = 1
             }
             else{
-                index_ocp = url['ocp']
+                index_ocp = 0
             }
             url['ano'] = d3.max(anos_default[url['var']][index_ocp]);
             break;
@@ -868,6 +868,7 @@ function updateLegendByDeg(deg){
             updateBreadcrumbSetores(cads);
         }
         else{
+            alert("a")
             switchToOcupations();
         }
     }
@@ -1303,6 +1304,7 @@ function updateOptView(container, btn){
             if(parameters.eixo == 1){
                 if(parameters.ocp != '0'){
 
+                    alert("b")
                     switchToOcupations();
                     $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
 
@@ -1625,6 +1627,7 @@ $(document).ready(function(){
                     enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
 
                     updateDataDescUoS();
+                    alert("c")
                     switchToOcupations();
 
                     if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
@@ -1704,6 +1707,7 @@ $(document).ready(function(){
                     $('#ocupacao').removeClass("active");
                 }
                 else{
+                    alert("d")
                     switchToOcupations();
                 }
 
