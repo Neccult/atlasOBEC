@@ -1898,7 +1898,6 @@ $(document).ready(function(){
         var downloadUrl = $(this).siblings('.url-input').val();
 
         if(downloadUrl.match('download.php?')){
-            //downloadUrl = downloadUrl.replace(/download.php\?.*/, 'cgi/download.pl');
             setTimeout(function(){
                 sendViewsToDownload('pdf');
             }, 400);
@@ -1906,9 +1905,6 @@ $(document).ready(function(){
         } else {
             window.open(downloadUrl, '_blank');
         }
-
-        
-
     });
 
     defaultUrl();

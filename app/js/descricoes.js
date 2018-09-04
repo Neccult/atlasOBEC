@@ -237,10 +237,8 @@ function updateDescription(descricoes, eixo, vrv, slc){
     ocp = $('.bread-select[data-id=ocp]').first().val()
     ocp_text = $('.bread-select[data-id=ocp] option:selected').first().text()
 
-
-
-    uf = $('.bread-select[data-id=uf]').first().val()
-    uf_text = $('.bread-select[data-id=uf] option:selected').first().text()
+    uf = parameters.uf;
+    uf_text = getNomeUF(parameters.uf);
 
     desag = $('.bread-select[data-id=deg]').first().val()
     desag_text = $('.bread-select[data-id=deg] option:selected').first().text()

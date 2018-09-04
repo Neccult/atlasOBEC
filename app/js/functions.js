@@ -81,11 +81,11 @@ function sendViewsToDownload(output_format){
     // Submit the <FORM> to the server.
     // The result will be an attachment file to download.
     var form = document.getElementById("svgform");
-    console.log(form)
     form['output_format'].value = 'pdf';
     form['data'].value = svg_xml ;
     form['data_barras'].value = svg_barras_xml;
     form['data_scc'].value = svg_scc_xml;
+    form['url_p'].value = URL_PARAM;
     form.submit();
     
 }

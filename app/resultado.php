@@ -133,9 +133,9 @@
                             <?php
                             if($eixo == "mercado") {
                                 ?>
-                                <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
-                                    <button data-desc="<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
-                                </div>
+                                <div style="margin-bothttp://localhost/ministerio/atlasOBEC/app/data/csv/empreendimentos/NECCULT - 2018 - ATLAS - Eixo 1 - Síntese V01.xlsxtom: 10px;" class="col-xs-6 col-btn">
+                                    <button data-desc=http://localhost/ministerio/atlasOBEC/app/data/csv/empreendimentos/NECCULT - 2018 - ATLAS - Eixo 1 - Síntese V01.xlsx"<?= $json_text['deg_setor'] ?>" class="opt view <?php if($slc == 0) echo 'active';?>" id="setor">Setor</button>
+                                </div>http://localhost/ministerio/atlasOBEC/app/data/csv/empreendimentos/NECCULT - 2018 - ATLAS - Eixo 1 - Síntese V01.xlsx
                                 <div style="margin-bottom: 10px;" class="col-xs-6 col-btn">
                                     <button data-desc="<?= $json_text['deg_ocupacao'] ?>" class="opt view <?php if($slc == 1) echo 'active';?>" id="ocupacao">Ocupação</button>
                                 </div>
@@ -519,6 +519,7 @@
                     <input type="hidden" id="data" name="data" value="">
                     <input type="hidden" id="data_barras" name = "data_barras" value="">
                     <input type="hidden" id="data_scc" name = "data_scc" value="">
+                    <input type="hidden" id="url_p" name ="url_p" value="">
                     <input type="hidden" id="width_views" name ="width_views" value="">
                 </form>
 
