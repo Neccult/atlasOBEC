@@ -1440,7 +1440,7 @@ function updateParameter(parameter, value, updateBread){
     updateWindowUrl(parameter, value);
     url[parameter] == value;
 
-    if(updateBread) $('bread-select['+parameter+']').val(value);
+    if(updateBread) $('.bread-select[data-id='+parameter+']').val(value);
         
 }
 

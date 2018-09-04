@@ -309,6 +309,7 @@ function switchBreadCadOcp(slc){
 }
 
 function updateBreadUF(eixo, vrv){
+
     switch(eixo){
         case 0: 
 
