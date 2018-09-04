@@ -99,9 +99,9 @@ function getnameUF($id){
         case 42: return "Santa Catarina";
         case 43: return "Rio Grande do Sul";
         case 50: return "Mato Grosso do Sul";
-        case 52: return "Mato Grosso";
-        case 53: return "Goiás";
-        case 54: return "Distrito Federal";
+        case 51: return "Mato Grosso";
+        case 52: return "Goiás";
+        case 53: return "Distrito Federal";
     }
 }
 
