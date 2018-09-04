@@ -563,28 +563,56 @@ function destacaTreemap(treemap_scc_box, cadId) {
 
         $(this).css('fill', color($(this).attr("data-legend")));
 
-        if(cadId == 0){
-            $(this).animate({"opacity": "1"}, "fast");
-            $(this).css("stroke", "none");
+        if(parameters.eixo == 1 && parameters.ocp > 0 && parameters.ocp != 3){
+            if(parameters.ocp == 3){
+                $(this).animate({"opacity": "1"}, "fast");
+                $(this).css("stroke", "none");
+            }
+            else if($(this).attr("data-legend") == parameters.ocp) {
+                $(this).attr("class", "destacado-scc");
+                $(this).animate({"opacity": "1"}, "fast");
+                $(this).css("stroke", "#555");
+                $(this).css("stroke-width", "2");
+    
+                if(parameters.eixo == 1 && $(this).attr("id-subdeg") == parameters.subdeg){
+                    $(this).css('fill', corEixo[2]);
+                }
+                else{
+                    $(this).css('fill', color(parameters.ocp));
+                }
+            }
+            else {
+                $(this).attr("class", "");
+                $(this).css("stroke", "none");
+                $(this).animate({"opacity": "0.7"}, "fast");
+            }
+        } 
+        else{
+            if(cadId == 0){
+                $(this).animate({"opacity": "1"}, "fast");
+                $(this).css("stroke", "none");
+            }
+            else if($(this).attr("data-legend") == cadId) {
+                $(this).attr("class", "destacado-scc");
+                $(this).animate({"opacity": "1"}, "fast");
+                $(this).css("stroke", "#555");
+                $(this).css("stroke-width", "2");
+    
+                if(parameters.eixo == 1 && $(this).attr("id-subdeg") == parameters.subdeg){
+                    $(this).css('fill', corEixo[2]);
+                }
+                else{
+                    $(this).css('fill', color(cadId));
+                }
+            }
+            else {
+                $(this).attr("class", "");
+                $(this).css("stroke", "none");
+                $(this).animate({"opacity": "0.7"}, "fast");
+            }
         }
-        else if($(this).attr("data-legend") == cadId) {
-            $(this).attr("class", "destacado-scc");
-            $(this).animate({"opacity": "1"}, "fast");
-            $(this).css("stroke", "#555");
-            $(this).css("stroke-width", "2");
 
-            if(parameters.eixo == 1 && $(this).attr("id-subdeg") == parameters.subdeg){
-                $(this).css('fill', corEixo[2]);
-            }
-            else{
-                $(this).css('fill', color(cadId));
-            }
-        }
-        else {
-            $(this).attr("class", "");
-            $(this).css("stroke", "none");
-            $(this).animate({"opacity": "0.7"}, "fast");
-        }
+        
     });
 }
 

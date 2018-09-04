@@ -1235,33 +1235,21 @@ function updateOptView(container, btn){
                 if(parameters.chg){
                     if($(this).attr("id") == "mapa"){
                         $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
+                        (parameters.eixo == 0) ? $(this).css("background-color", corEixo[1]) : $(this).css("background-color", corEixo[2]);
                     }
                     else{
                         $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[2]);
-                        else
-                            $(this).css("background-color", corEixo[1]);
+                        (parameters.eixo == 0) ? $(this).css("background-color", corEixo[2]) : $(this).css("background-color", corEixo[1]);
                     }
                 }
                 else{
                     if($(this).attr("id") == "treemap_region"){
                         $(this).css("opacity", "1")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
+                        (parameters.eixo == 0) ?  $(this).css("background-color", corEixo[1]) : $(this).css("background-color", corEixo[2]);
                     }
                     else{
                         $(this).css("opacity", "0.8")
-                        if(parameters.eixo == 0)
-                            $(this).css("background-color", corEixo[1]);
-                        else
-                            $(this).css("background-color", corEixo[2]);
+                        (parameters.eixo == 0) ?  $(this).css("background-color", corEixo[1]) : $(this).css("background-color", corEixo[2]);
                     }
                 };
             }
@@ -1293,14 +1281,11 @@ function updateOptView(container, btn){
 
         $(".btn-opt button.opt.view").each(function(){
 
-            if(parameters.eixo == 2){
-                if(url['var'] == 18 || url['var'] == 19){
-                    $(this).css("display","block")
-                }
-                else{
-                    $(this).css("display","none")
-                }
-            }
+            if(parameters.eixo == 2)
+                (url['var'] == 18 || url['var'] == 19) ? $(this).css("display","block") : $(this).css("display","none");
+            else if(parameters.eixo == 1)
+                (url['var'] == 9 || url['var'] == 11) ? $(this).css("display","none") : $(this).css("display","block");
+            
 
             if(parameters.eixo == 1){
                 if(parameters.ocp != '0'){
@@ -1714,7 +1699,6 @@ $(document).ready(function(){
                 else
                     enableDesag(getEixo(window.location.hash.substring(1)), $(this).val(), url['cad'], false, 0, url);
 
-
                 updateParameter('uf', 0, true);
                 updateParameter('cad', 0, true);
                 updateParameter('deg', 0, true);
@@ -1725,10 +1709,8 @@ $(document).ready(function(){
                 updateParameter('ano', url['ano'], false);
                 updateParameter('var', 0, false);
 
-                if(eixo_atual == 0 || eixo_atual == 1){
-                    updateParameter('chg', 0, false);
-                }
-
+                if(eixo_atual == 0 || eixo_atual == 1) updateParameter('chg', 0, false);
+            
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
 
@@ -1745,27 +1727,20 @@ $(document).ready(function(){
                     if(url['ocp'] > 0){
                         updateDefaultOcupation()
                     }
+
                     updateOcupacoes($(this).val());
                 }
 
                 if(eixo_atual == 2){
                     updateOptView('init')
                     updateDefaultMec(url['var']);
-                    if(url['var'] != 17){
-                        $(".value-info-title").text("")
-                    }
+                    if(url['var'] != 17) $(".value-info-title").text("")
 
-                    if(url['var'] == 18 || url['var'] == 19){
-                        $("#btn-opt").find(".col-btn").css("display", "block")
-                    }
-                    else{
-                        $("#btn-opt").find(".col-btn").css("display", "none")
-                    }
+                    (url['var'] == 18 || url['var'] == 19) ? $("#btn-opt").find(".col-btn").css("display", "block") :  $("#btn-opt").find(".col-btn").css("display", "none");
                 }
 
                 if(eixo_atual == 3){
-                    if(url['var'] == 1 || url['var'] == 13 || url['var'] == 5 || url['var'] == 8)
-                        $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
+                    if(url['var'] == 1 || url['var'] == 13 || url['var'] == 5 || url['var'] == 8) $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
                     updateServicos(url['var']);
                     updateTipo(url['var']);
 
@@ -1788,17 +1763,11 @@ $(document).ready(function(){
 
             if(dataId === 'deg') {
                 if(eixo_atual == 1){
-                    if($(this).find('option:selected').parent().attr("value") != undefined){
-                        deg_value =  $(this).find('option:selected').parent().attr("value")
-                    }
-                    else{
-                        deg_value = $(this).val()
-                    }
+                    deg_value = ($(this).find('option:selected').parent().attr("value") != undefined) ? $(this).find('option:selected').parent().attr("value") : $(this).val();
+
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
 
-                    if(url['var'] == 4 || url['var'] == 5 || url['var'] == 6){
-                        updateLegendByDeg(deg_value)
-                    }
+                    if(url['var'] == 4 || url['var'] == 5 || url['var'] == 6) updateLegendByDeg(deg_value)
 
                     updateParameter('deg', deg_value, false);
                     updateParameter('subdeg', $(this).val())
@@ -1808,7 +1777,6 @@ $(document).ready(function(){
                 }
 
             }
-
 
             if(dataId === "uf"){
                 updateWindowUrl('uf', dataVal);
