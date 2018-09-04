@@ -118,7 +118,7 @@ function getAnoDefault(eixo_atual){
                 updateWindowUrl('slc', 0);
             }
 
-            if(url['ocp'] == 3){
+            if(url['ocp'] != 0){
                 index_ocp = 1
             }
             else{
