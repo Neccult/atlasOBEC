@@ -25,13 +25,11 @@ function create_mapa(mapa_box, mapa){
     var info = [];
 
     Object.keys(mapa).forEach(function(key) {
-
         info.push(mapa[key]);
         if(parameters.eixo == 2 && parameters.var == 17)
             return dict[mapa[key].id] = {id:mapa[key].id, SouN:mapa[key].SouN, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
         else
             return dict[mapa[key].id] = {id:mapa[key].id, uf:mapa[key].uf, valor:mapa[key].valor, ano:mapa[key].ano, percentual:mapa[key].percentual, taxa:mapa[key].taxa};
-
     });
 
     //carrega estados JSON
@@ -290,13 +288,11 @@ function update_mapa(mapa_box, mapa){
     d3.json("./data/br-min.json", function(data){
         br_states = data;
     })
-
-
     var corEixo = window.COLORS['eixo'][parameters.eixo].color;
     
 	var dict = {};
     var info = [];
-    
+
     Object.keys(mapa).forEach(function(key) {
         info.push(mapa[key]);
         if(parameters.eixo == 2 && parameters.var == 17)

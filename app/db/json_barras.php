@@ -619,17 +619,18 @@ else if($eixo == 3) {
     require_once("EixoQuatro.php");
     foreach (EixoQuatro::getter_barras($var, $prc, $cad, $typ, $uf, $mundo, $slc, $uos) as $tupla) {
 
-        // $barras[$tupla->Ano] = $tupla->Valor;
         
         $id = $tupla->Ano;
         $barras[$id]['uf'] = $tupla->UFNome;
         $barras[$id]['prc'] = $tupla->ParceiroNome;
         $barras[$id]['ano'] = (int) $tupla->Ano;
+
         $barras[$id]['valor'] = (double) $tupla->Valor;
         $barras[$id]['percentual'] = (double) $tupla->Percentual;
         $barras[$id]['taxa'] = (double) $tupla->Taxa;
 
     }
+
 }
 
 echo json_encode($barras);

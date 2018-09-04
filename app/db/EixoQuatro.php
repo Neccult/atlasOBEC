@@ -300,6 +300,7 @@ class EixoQuatro {
                 $query .= " AND ex.Consumo = 0";
             }
 
+
             $paramsStr = '';
             foreach ($params as $param) {
                 $paramsStr .= 's';
@@ -362,8 +363,8 @@ class EixoQuatro {
 			$query .= " AND ex.Consumo = 1";
         } else {
 			$query .= " AND ex.Consumo = 0";
-		}
-
+        }
+        
         $paramsStr = '';
         foreach ($params as $param) {
             $paramsStr .= 's';

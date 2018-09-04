@@ -84,7 +84,7 @@ function create_bars(barras_box, data){
             return getBarDataColor(d, i, uos, dados);
         })
         .attr("data-value", function(d) {
-               return d; 
+            return d; 
         })
         .attr("x", function (d, i) {
             return x(dados.key[i]);
@@ -186,11 +186,14 @@ function update_bars(barras_box, data){
         }
     });
 
+
     dados.key = d3.keys(data);
 
     var formatYAxis = function (d) {
         return formatBarsYAxis(d, dados);
     }();
+
+
 
     var x = d3.scaleBand()
                 .domain(dados.key)
@@ -205,6 +208,8 @@ function update_bars(barras_box, data){
         return d;
     })).nice();
 
+
+
     var rect = svg_barras.selectAll("rect")
                          .data(dados.value) 
     
@@ -214,6 +219,8 @@ function update_bars(barras_box, data){
         return x(dados.key[i]);
     })
     
+
+
     var rect = svg_barras.selectAll("rect")
 
     rect.attr("data-legend", function(d, i, obj) { return dados.key[i]; })
@@ -250,6 +257,9 @@ function update_bars(barras_box, data){
                 .scale(y)
                 .tickFormat(formatYAxis);
 
+
+
+
     d3.select(barras_box+" g.eixo-x")
         .transition()
         .duration(400)
@@ -259,6 +269,9 @@ function update_bars(barras_box, data){
         .transition()
         .duration(400)
         .call(yAxis);
+
+
+
 
     destacarBarra(barras_box, parameters.ano, uos);
 
@@ -438,6 +451,8 @@ function destacarBarra(barras_box, barraId, uos) {
 }
 
 function formatBarsYAxis(d, dados) {
+
+
     var higherZeroOcur = maxDecimalAxis;
     var dadosCounter = 0;
     var minFraction = 3;
@@ -451,17 +466,14 @@ function formatBarsYAxis(d, dados) {
     };
 
     var formatGreatNumber = function (d) {
-
         var value = d;
         var c = 0;
         var sufixos = ['', 'K', 'M', 'B', 'T'];
 
         if(value >= 1000){
             while(value.toString().indexOf('.') == -1 && value.toString().length >= 4){
-
                 c++;
                 value = value / 1000;
-
             }
         }
 
@@ -475,9 +487,11 @@ function formatBarsYAxis(d, dados) {
 
     var formatFraction = function (d) {
 
-        if(isIHHorC4var()){
-            return d;
-        }
+        if(isIHHorC4var()) return d;
+
+        var isNegative = (d < 0) ? true : false;
+
+        if(isNegative) d = d * (-1);
 
         if(d/0.01 >= 1){
             var dec_point = 2;
@@ -487,9 +501,15 @@ function formatBarsYAxis(d, dados) {
             var dec_point = 4;
         } else if (d/0.00001 >= 1){
             var dec_point = 5;
+        } else if (d/0.000001 >= 1){
+            var dec_point = 6;
+        } else if (d/0.0000001 >= 1){
+            var dec_point = 7;
+        } else if (d/0.00000001 >= 1){
+            var dec_point = 8;
+        } else if (d/0.000000001 >= 1){
+            var dec_point = 9;
         }
-
-        // if(parameters.eixo == 1 && parameters.var == 2) d = d/10;
 
         var sufixo = getDataVar(PT_BR, parameters.eixo, parameters.var).sufixo_valor;
 
@@ -500,17 +520,22 @@ function formatBarsYAxis(d, dados) {
         var c = 0;
         var sufixos = ['', 'm', 'u', 'n', 'p'];
 
-        if(value <= 1/1000){
-            while(value.toString().length >= 5){
-
-                c++;
-                value = value * 1000;
-
-            }
+        while(value <= 1/1000){
+            c++;
+            value *= 1000;
+            if(c >= 4) break;
         }
 
-        return (value+sufixos[c]+sufixo)
+        value = Math.ceil(value * 1000)/1000;
+
+        var signal = (isNegative) ? "-" : "";
+        var retorno = (value == 0) ? signal+value+sufixo : signal+value+sufixos[c]+sufixo;
+
+        if(isNegative) d = d * (-1);
+
+        return retorno;
     };
+
 
     var maxValue = d3.max(dados.value);
     var minValue = d3.min(dados.value);
@@ -518,8 +543,7 @@ function formatBarsYAxis(d, dados) {
     var preFormat = d3.format('.2f');
     var preFormatted = removeDecimalZeroes(preFormat(maxValue));
     var preFormattedMin = removeDecimalZeroes(preFormat(minValue));
-    var isSmall = preFormatted < 1 && preFormatted > -1;
-
+    var isSmall = preFormatted <= 1 && preFormatted >= -1;
 
     // has decimal
     if (isSmall){

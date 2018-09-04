@@ -146,7 +146,7 @@ function create_linhas(linhas_box, data){
                 clickLinhas(dados, (this));
             }
         })
-        .on("mouseout", function () {
+        .on("mouseout", function (path) {
             tooltipInstance.hideTooltip();
             d3.selectAll(".bolinha").remove();
             // d3.selectAll(".haste").remove();
