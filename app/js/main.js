@@ -1440,7 +1440,7 @@ function updateOptView(container, btn){
 
 function updateParameter(parameter, value, updateBread){
     updateWindowUrl(parameter, value);
-    url[parameter] == value;
+    url[parameter] = value;
 
     if(updateBread) $('.bread-select[data-id='+parameter+']').val(value);
         
@@ -1725,7 +1725,6 @@ $(document).ready(function(){
                 updateParameter('pfj', 0, false);
                 updateParameter('mundo', 0, false);
                 updateParameter('ano', url['ano'], false);
-                updateParameter('var', 0, false);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateParameter('chg', 0, false);

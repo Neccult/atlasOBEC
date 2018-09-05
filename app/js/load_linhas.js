@@ -10,15 +10,12 @@ var xLines, yLines;
 function create_linhas(linhas_box, data){
 
     keysLines = [];
-
     getDivSize(linhas_box);
     getBoxXY();
 
     var coordsAxis;
 
-    Object.keys(data).forEach(function (key) {
-        anosLines.push(data[key].ano);
-    });
+    anosLines = anos_default[parameters.var][parameters.ocp];
 
     Object.keys(data[0]).forEach(function (key) {
         if(key != "ano") keysLines.push(key);
