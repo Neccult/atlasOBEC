@@ -1,5 +1,4 @@
 
-parameters = {};
 
 
 tooltipInstance = tooltip.getInstance();
@@ -9,21 +8,17 @@ views_parameters = {
     "#view_box": {},
     "#view_box_barras": {},
     "#view_box_scc": {}
-};
-window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
-    parameters[key] = value;
-})
-if(!('slc' in parameters)){
-    parameters['slc'] = 0
 }
-parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
-PT_BR = [];
-COLORS = [];
-URL_PARAM = $.param(parameters);
+
+parameters = {};
+URL_PARAM = '';
 br_states = [];
-anos_default = [];
-data_var_ant = [];
+data_var_ant = null;
 view_box1_ant = '';
+
+load_objects.done(function(){
+    initViews();
+});
 
 VIEWS = {
     "barras": function (box, data, update){
@@ -109,79 +104,21 @@ VIEWS = {
 brasil_setor = []
 total_deg    = []
 
+function initParameters(){
+    data_var_ant = null;
 
-$.get('./db/total_desag.php?'+URL_PARAM, function(dado){
-    total_deg = JSON.parse(dado);
-})
-
-var url_anos_default = "./db/json_ano_default.php?eixo="+getEixo(window.location.hash.substring(1));
-
-virtualParameters();
-
-$.when($.get('data/pt-br.json'), 
-       $.get('data/colors.json'), 
-       $.get('data/descricoes.json'), 
-       $.get(url_anos_default))
-    .done(function(pt_br_JSON, colors_JSON, descricoes, data_anos){
-        PT_BR = pt_br_JSON[0];
-        COLORS = colors_JSON[0];
-        DESCRICOES = descricoes[0];
-        anos_default = JSON.parse(data_anos[0]);
-        
-        updateSelectAnos(); 
-        
-        updateDescription(DESCRICOES, parameters.eixo, parameters.var, parameters.slc);
-        data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
-
-        var view_box1 = data_var.views.view_box1[index_view_box1].id
-        var view_box2 = data_var.views.view_box2[0].id
-        var view_box3 = data_var.views.view_box3[0].id
-
-
-        initTitleBox(index_view_box1, 0, 0);
-        updateTitleBox();
-
-        changeDownloadURL(window.location.href, window.location.hash.substring(1));
-        
-        if(parameters.eixo == 3){
-            if(view_box1 == "mapa-mundi"){
-                view_box1 = "mapa";
-            }
-        }
-
-
-        $.get('./db/total_setor.php?'+URL_PARAM, function(dado){
-            brasil_setor = JSON.parse(dado); 
-
-            if(view_box1 == ""){
-                $("#view_box svg").remove()
-            } else {
-                d3.json("./db/json_" + view_box1 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box"].uos, function (json) {
-                    VIEWS[view_box1].call(this, "#view_box", json);
-                })    
-            }
-
-            if(view_box2 == ""){
-                $("#view_box_barras svg").remove()
-            } else {
-                d3.json("./db/json_" + view_box2 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_barras"].uos, function (json) {
-                    VIEWS[view_box2].call(this, "#view_box_barras", json);
-                })
-            }          
-            
-            if(view_box3 == ""){
-                $("#view_box_scc svg").remove()
-            } else {
-                d3.json("./db/json_" + view_box3 + ".php?" + URL_PARAM + "&uos=" + views_parameters["#view_box_scc"].uos, function (json) {
-                    VIEWS[view_box3].call(this, "#view_box_scc", json);
-                })
-            }
-
-           
-            
-
-        })
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value){
+        parameters[key] = value;
     })
+
+    if(!('slc' in parameters)){
+        parameters['slc'] = 0
+    }
+
+    parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
+
+    URL_PARAM = $.param(parameters);
+}
 
 function updateParameters(){
 
@@ -203,9 +140,8 @@ function updateParameters(){
         parameters[key] = value;
     })
 
-
     if(!('slc' in parameters)){
-        parameters['slc'] = 0
+        parameters['slc'] = 0;
     }
     
     parameters.eixo = indexEixo(parameters.eixo.replace(/#.*/, ''));
@@ -214,7 +150,7 @@ function updateParameters(){
 }
 
 function updateSelectAnos(){
-
+    
     $('select[data-id=ano]').each(function(){
         selectOp = this;
         $(this.options).each(function(){
@@ -345,7 +281,7 @@ function loadViews(){
         $.ajaxSetup({async: true});
     }
     
-
+    updateSelectAnos();
     virtualParameters();
 
     data_var = getDataVar(PT_BR, parameters.eixo, parameters.var);
@@ -359,9 +295,15 @@ function loadViews(){
     initTitleBox(index_view_box1, 0, 0);
     updateTitleBox();
 
-    var UPDATE_1 = (view_box1 == view_box1_ant);
-    var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0].id);
-    var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0].id);
+    if(data_var_ant !== null){   //se existir data_var 
+        var UPDATE_1 = (view_box1 == view_box1_ant);
+        var UPDATE_2 = (view_box2 == data_var_ant.views.view_box2[0].id);
+        var UPDATE_3 = (view_box3 == data_var_ant.views.view_box3[0].id);    
+    } else {
+        var UPDATE_1 = false;
+        var UPDATE_2 = false;
+        var UPDATE_3 = false;
+    }
     
     if(parameters.eixo == 3){
         if(!UPDATE_1 && view_box1_ant == "mapa-mundi"){
@@ -402,13 +344,19 @@ function loadViews(){
     })
 }
 
+function initViews(){
+    initParameters();
+    loadViews();
+
+    changeDownloadURL(window.location.href, window.location.hash.substring(1));
+}
+
 function updateViews(){
 
     updateParameters();
-    updateSelectAnos();
     loadViews();
-    changeDownloadURL(window.location.href, window.location.hash.substring(1));
 
+    changeDownloadURL(window.location.href, window.location.hash.substring(1));    
 }
 
 function indexEixo(eixo){

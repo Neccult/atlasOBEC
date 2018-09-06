@@ -8,17 +8,11 @@ var textJSON = []
 var colorJSON = []
 var corEixo;
 
-$.ajaxSetup({async: false});
-$.get("./data/colors.json")
-    .done(function(data){
-        colorJSON = data
-        corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
-    });
+load_objects.done(function(){
+    colorJSON = COLORS;
+    corEixo = colorJSON['eixo'][getEixo(window.location.hash.substring(1))]['color'];
+});
 
-$.get("./data/pt-br.json", function(data){
-    textJSON = data
-})
-$.ajaxSetup({async: true});
 
 /*-----------------------------------------------------------------------------
 Função: controlVar
@@ -368,7 +362,6 @@ function getEixo(eixo){
     }
     else return 0;
 }
-
 /*-----------------------------------------------------------------------------
 Função: loadResult
    carrega página de resultado e filtros;
@@ -629,7 +622,7 @@ Saída:
 function changeDescVar() {
     // import pt-br.json file for get the title
     var eixoUrl = getEixo(window.location.hash.substring(1))
-    var variavel = textJSON.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
+    var variavel = PT_BR.var[eixoUrl].filter(function(o){ return o.id == url['var']})[0]
 
     $('.value-info-title').html(variavel.mapa_valores);
 
@@ -804,7 +797,9 @@ function hideBreadcrumb(id) {
 }
 
 $(window).bind("load", function() {
-    loadPage(); /* controla menu e fade */
+    load_objects.done(function(){
+        loadPage(); /* controla menu e fade */
+    });    
 });
 /*-----------------------------------------------------------------------------
 Função: updateUrl
@@ -868,7 +863,6 @@ function updateLegendByDeg(deg){
             updateBreadcrumbSetores(cads);
         }
         else{
-            alert("a")
             switchToOcupations();
         }
     }
@@ -1304,7 +1298,6 @@ function updateOptView(container, btn){
             if(parameters.eixo == 1){
                 if(parameters.ocp != '0'){
 
-                    alert("b")
                     switchToOcupations();
                     $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
 
@@ -1584,7 +1577,7 @@ $(document).ready(function(){
                 var botao = PT_BR.dados_botoes[id];
                 var index_ano = botao.slc == 0 ? 1 : 0;
 
-                updateParameter('ano', d3.max(anos_default[parameters.var][index_ano], false));
+                updateParameter('ano', d3.max(anos_default[parameters.var][index_ano]), false);
                 updateParameter('slc', botao.slc, false);
 
                 $(this).addClass("active");
@@ -1627,7 +1620,6 @@ $(document).ready(function(){
                     enableDesag(getEixo(window.location.hash.substring(1)), url['var'], url['cad'], false, 1, url);
 
                     updateDataDescUoS();
-                    alert("c")
                     switchToOcupations();
 
                     if(url['var'] == 4 || url['var']  == 5 || url['var']  == 6)
@@ -1707,7 +1699,6 @@ $(document).ready(function(){
                     $('#ocupacao').removeClass("active");
                 }
                 else{
-                    alert("d")
                     switchToOcupations();
                 }
 
@@ -1866,29 +1857,31 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
+    
+    load_objects.done(function(){
+        
+        if(window.location.pathname.match("resultado")){
+            changeDescVar();
+            updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
+            updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
+            updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
+            updateMecanismo(url, url['var'])
+            // updateSelectsByVar();
+            if(url['ocp'] > 0){
+                enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
+            }
+            else{
+                enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 0, url);
+            }
+            updateOptView("init");
+            updateLegendByDeg(parameters.deg)
 
-    if(window.location.pathname.match("resultado")){
-        changeDescVar();
-        updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
-        updateOptView("init");
-        updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
-        updateMecanismo(url, url['var'])
-        // updateSelectsByVar();
-        if(url['ocp'] > 0){
-            enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
+            if(parameters.eixo == 2 && (parameters.var >= 18)){
+                updateBreadcrumbSetores(getCadsByMenuDonut());
+            }
+            setBreadcrumbsByUrl();
         }
-        else{
-            enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 0, url);
-        }
-
-        updateLegendByDeg(parameters.deg)
-        updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
-
-        if(parameters.eixo == 2 && (parameters.var >= 18)){
-            updateBreadcrumbSetores(getCadsByMenuDonut());
-        }
-        setBreadcrumbsByUrl();
-    }
-
+    });
+    
 });
 

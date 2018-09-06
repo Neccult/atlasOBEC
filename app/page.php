@@ -82,6 +82,7 @@
 </script>
 
 <script src="js/d3/d3.min.js"></script>
+<script type="text/javascript" src="js/load_json.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript">

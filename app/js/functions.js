@@ -60,6 +60,7 @@ function changeDownloadURL(url, eixo){
             dados = data[eixo][diretorio]
         else
             dados = data[eixo]
+        
         name_url = dados.filter(function( obj ) {
             return obj.id == vrv;
         })[0].file_name;
