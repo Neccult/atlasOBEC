@@ -15,7 +15,7 @@ function create_linhas(linhas_box, data){
 
     var coordsAxis;
 
-    anosLines = anos_default[parameters.var][parameters.ocp];
+    anosLines = parameters.ocp == 0 ? anos_default[parameters.var][parameters.ocp] : anos_default[parameters.var][1];
 
     Object.keys(data[0]).forEach(function (key) {
         if(key != "ano") keysLines.push(key);
@@ -173,10 +173,9 @@ function update_linhas(linhas_box, data){
             svg_linhas.remove();
             create_linhas(linhas_box, data);
         }, 500)
-
+ 
         return;
     }
-
 
     var valueline = d3.line()
         .x(function(d) { return xLines(d.ano); })
@@ -360,18 +359,25 @@ function mousemoveLinhas(svg_linhas, d, data,  path, tooltipInstance, coordAxis)
 
         }
 
+        if(parameters.ocp != 0 && ano > 2011){
+        }
+
         var valor;
-        var indexAno = anosLines.indexOf(ano);
+        var indexAnoY = anosLines.indexOf(ano);
+
+        if(parameters.ocp != 0 && ano > 2011) indexAnoY--;
+
+        var indexAnoX = anosLines.indexOf(ano);
 
         svg_linhas.append("circle")
             .attr('class', 'bolinha')
             .style("z-index", '0')
-            .attr("cx", coordAxis.x[indexAno].x)
-            .attr("cy", yLines(d[indexAno].valor))
+            .attr("cx", coordAxis.x[indexAnoX].x)
+            .attr("cy", yLines(d[indexAnoY].valor))
             .attr("r", 2);
 
         if(parameters.eixo == 0 && parameters.var == 3){
-            if(indexAno == 10){
+            if(indexAnoY == 10){
                 valor = 0;
             }
             else{
