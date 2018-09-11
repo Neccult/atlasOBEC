@@ -9,9 +9,7 @@ function create_bars(barras_box, data){
 
     var dados = {key: [], value: [], percentual: [], taxa: [], percentual_setor: []};
 
-    if(parameters.var == 3 && parameters.eixo == 0){
-        delete data['2007'];
-    }
+    if(parameters.var == 3 && parameters.eixo == 0) delete data['2007'];
 
     Object.keys(data).forEach(function (key) {
 
@@ -22,12 +20,8 @@ function create_bars(barras_box, data){
         if (parameters.var == 2  || parameters.var == 9) dados.percentual.push(0);
         else dados.percentual.push(data[key].percentual);
 
-        if (parameters.var == 2) {
-            dados.taxa.push(0);
-        }
-        else {
-            dados.taxa.push(data[key].taxa);
-        }
+        (parameters.var == 2) ? dados.taxa.push(0) : dados.taxa.push(data[key].taxa)
+       
     });
 
     dados.key = d3.keys(data);
@@ -133,10 +127,7 @@ function create_bars(barras_box, data){
         var soma = getBarSoma(dados);
         updateData('barras', dados, soma, 1);
     }
-    else if(parameters.eixo == 2 && parameters.var == 17){
-
-    }
-    else{
+    else if(!(parameters.eixo == 2 && parameters.var == 17)){
         updateData('barras', dados, valor, uos);
     }
 
@@ -366,8 +357,36 @@ function clickBarras(barras_box, dados, uos, i) {
     if(window.innerWidth <= 1199)
         return;
 
-    if(parameters.eixo == 1 && parameters.var == 6 && uos == 1)
+    if(parameters.eixo == 1 && parameters.var == 6 && uos == 1){
+
+        if(parameters.slc == 0){
+            if(parameters.deg == 0){
+                i++;
+                $("select[data-id='cad']").val(i);
+                updateWindowUrl('cad', i);
+                destacarBarra(barras_box, dados.key[i], uos);
+                updateIframe();
+            }
+            else{
+                i++;
+                $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(i)+"]").prop('selected', true);
+                updateWindowUrl('subdeg', i);
+                destacarBarra(barras_box, dados.key[i], uos);
+                updateIframe();
+            }
+            
+        }
+        else{
+            i++;
+            $("select[data-id='ocp']").val(i);
+            updateWindowUrl('ocp', i);
+            destacarBarra(barras_box, dados.key[i], uos);
+            updateIframe();
+
+        }
+        
         return;
+    }
 
     $("select[data-id='ano']").val(dados.key[i]);
     updateWindowUrl('ano', dados.key[i])
@@ -397,25 +416,25 @@ function destacarBarra(barras_box, barraId, uos) {
 
         if(parameters.eixo == 1 && parameters.var == 6 && uos == 1){
 
-
             if (parameters.ocp == 0 && parameters.deg == 0){
-                    destacado = ((getCadABVId($(this).attr("data-legend")) == parameters.cad) ? true : false);
+                destacado = ((getCadABVId($(this).attr("data-legend")) == parameters.cad) ? true : false);
             }
             else if (parameters.ocp == 0 && parameters.deg != 0) {
-                    destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.cad) ? true : false);
+                destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) ? true : false);
             }
             else if(parameters.ocp != 0 && parameters.deg == 0){
-                    destacado = ((getOcpId($(this).attr("data-legend")) == parameters.cad) ? true : false);
+                destacado = ((getOcpId($(this).attr("data-legend")) == parameters.ocp) ? true : false);
             }
             else if(parameters.ocp != 0 && parameters.deg != 0){
-                    destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) ? true : false);
+                destacado = ((getSubdegId(parameters.deg, $(this).attr("data-legend")) == parameters.subdeg) ? true : false);
             }
 
             if(destacado) {
+
                 if($(this).attr("class") !== "destacado") {
                     $(this).attr("class", "destacado");
-                    $(this).attr("data-color", $(this).css("fill"));
                     $(this).css("fill", $(this).attr("data-color"));
+                    $(this).attr("data-color", $(this).css("fill"));
                     $(this).css("opacity", "1");
                     $(this).css("stroke-width", "2");
                 }
