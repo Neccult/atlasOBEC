@@ -443,7 +443,7 @@ function mapaClick(svg_mapa, dict, d){
 
     setStateTitle(d['properties']['name']);
 
-    updateIframe()
+    updateIframe(true)
 
 }
 

@@ -792,5 +792,5 @@ function treemapClick(treemap_scc_box, d, root){
             cad_percent_uf = getSomaScc(d.data.colorId);
         }
     }
-    updateIframe();
+    updateIframe(true);
 }

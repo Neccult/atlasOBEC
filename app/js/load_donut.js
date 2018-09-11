@@ -243,6 +243,6 @@ function clickDonut(d) {
     if(parameters.eixo == 2 && (parameters.var == 18 || parameters.var == 19)) {
         $('.bread-select[data-id="cad"]').val(d.data.cad);
         updateWindowUrl('cad', d.data.cad);
-        updateIframe();
+        updateIframe(true);
     }
 }

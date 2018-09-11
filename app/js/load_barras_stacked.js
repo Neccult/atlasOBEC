@@ -172,7 +172,7 @@ function create_bars_stacked(barras_box, data){
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
             clickBarraStacked(barras_box, d, i, obj, anos, colors);
-            updateIframe();
+            updateIframe(true);
             // configInfoDataBoxBarrasStackedClick(getSelectedValueStacked(barras_box), getSomaStacked());
         });
 
@@ -352,7 +352,7 @@ function update_bars_stacked(barras_box, data){
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+(newSubdeg)+"]").prop('selected', true);
 
             clickBarraStacked(barras_box, d, i, obj, anos, colors);
-            updateIframe();
+            updateIframe(true);
         });
 
     var rect = groups.selectAll("rect");

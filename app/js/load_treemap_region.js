@@ -378,7 +378,7 @@ function sumBySize(d) {
 function treemapRegionClick(d, root_region){
     updateWindowUrl('uf', getIdUF(d.data.name));
     $(".bread-select[data-id=uf]").val(getIdUF(d.data.name));
-    updateIframe()
+    updateIframe(true)
 }
 
 function treemapRegionMouseover(d){

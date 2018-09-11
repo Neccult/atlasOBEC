@@ -16,10 +16,6 @@ br_states = [];
 data_var_ant = null;
 view_box1_ant = '';
 
-load_objects.done(function(){
-    initViews();
-});
-
 VIEWS = {
     "barras": function (box, data, update){
         if(parseInt(parameters.deg) && !(parameters.eixo == 1 && (parameters.var == 4 || parameters.var == 5 || parameters.var == 6)) && !(parameters.eixo == 0)){
@@ -347,16 +343,11 @@ function loadViews(){
 function initViews(){
     initParameters();
     loadViews();
-
-    changeDownloadURL(window.location.href, window.location.hash.substring(1));
 }
 
 function updateViews(){
-
     updateParameters();
     loadViews();
-
-    changeDownloadURL(window.location.href, window.location.hash.substring(1));    
 }
 
 function indexEixo(eixo){

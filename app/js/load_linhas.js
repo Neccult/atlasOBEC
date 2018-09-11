@@ -307,7 +307,7 @@ function clickLinhas(d, path) {
 
             $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+getSubdegId(parameters.deg, $(path).attr("scc"))+"]").prop('selected', true)//.val(obj+1)
             updateWindowUrl('subdeg', getSubdegId(parameters.deg, $(path).attr("scc")))
-            updateIframe();
+            updateIframe(true);
 
         }
         else{
@@ -319,7 +319,7 @@ function clickLinhas(d, path) {
             $(".bread-select[data-id='cad']").val(cadId);
 
             updateWindowUrl('cad', cadId)
-            updateIframe();
+            updateIframe(true);
         }
 
         destacaSetor($(path).attr("scc"));

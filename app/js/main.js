@@ -99,12 +99,13 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 
-function getAnoDefault(eixo_atual){
-
+function getAnoDefault(vrv){
+    let eixo_atual = parameters.eixo;
     switch(eixo_atual){
-        case 0: url['ano'] = d3.max(anos_default[url['var']]); break;
+        case 0: 
+            return d3.max(anos_default[vrv]); 
         case 1:
-            if(url['var'] == 10 || url['var'] == 9 || url['var'] == 11){
+            if(vrv == 10 || vrv == 9 || vrv == 11){
                 url['slc'] = 0
                 url['ocp'] = 0
 
@@ -118,19 +119,18 @@ function getAnoDefault(eixo_atual){
             else{
                 index_ocp = 0
             }
-            url['ano'] = d3.max(anos_default[url['var']][index_ocp]);
-            break;
+            return d3.max(anos_default[vrv][index_ocp]);
+
 
         case 2:
-            url['ano'] = d3.max(anos_default[url['var']]);
+            return d3.max(anos_default[vrv]);
         
-            break;
         case 3:
-            if(url['var'] >= 11)
+            if(vrv >= 11)
                 url['slc'] = 0
             index = url['slc'] == 0 ? 1 : 0
 
-            url['ano'] = d3.max(anos_default[url['var']][index]); break;
+            return d3.max(anos_default[vrv][index]); break;
     }
 }
 
@@ -164,13 +164,23 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 
-function updateIframe(url){
+function updateIframe(UPDATE_FLAG){
 
     if(window.location.pathname.match("page.php")){
         return;
     }
+    if(!UPDATE_FLAG){
+        initViews();
+    } else {
+        updateViews();
+    }
+
+
+    updateMenuSetor();
+    updateBreadUF();
+    changeDownloadURL(window.location.href, window.location.hash.substring(1));    
+
     
-    updateViews();
 
 }
 
@@ -810,7 +820,7 @@ Saída:
     void
 -----------------------------------------------------------------------------*/
 function updateUrl() {
-    var eixo_atual = getEixo(window.location.hash.substring(1))
+    var eixo_atual = parameters.eixo;
 
     $('.bread-select').each(function() {
 
@@ -948,7 +958,7 @@ function switchToSetores() {
     $("#title-view-leg-scc").empty();
 
     var eixo = getEixo(window.location.hash.substring(1));
-    var cads = updateMenuLegenda(eixo, url['var']);
+    var cads = updateMenuLegenda(url['var']);
 
 
     updateBreadcrumbSetores(cads);
@@ -993,7 +1003,8 @@ Entrada:
 Saída:
     cads => array com os cads do menu
 -----------------------------------------------------------------------------*/
-function updateMenuLegenda(eixo, vrv){
+function updateMenuLegenda(vrv){
+    let eixo = parameters.eixo;
 
     var cads = [];
     if(eixo == 0 && vrv > 9){
@@ -1450,7 +1461,6 @@ $(document).ready(function(){
         controlPageWidth();
     });
 
-
     /*=== selecionar variável ===*/
     /* LISTENER PARA O CLICK EM OPÇÃO DE LEGENDA SETORIAL */
     $(document).on('click', ".scc", function(){
@@ -1475,7 +1485,7 @@ $(document).ready(function(){
 
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', setor)
-                updateIframe(url);
+                updateIframe(true);
             }
         }
         else if(eixo == 2 && parameters.var < 15){
@@ -1489,7 +1499,7 @@ $(document).ready(function(){
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
                 updateWindowUrl('cad', url['cad'])
                 updateWindowUrl('uf', url['uf'])
-                updateIframe(url);
+                updateIframe(true);
             }
         }
 
@@ -1509,7 +1519,7 @@ $(document).ready(function(){
                 $(".bread-select[data-id='cad']").val($(this).attr("data-id"));
 
                 updateWindowUrl('ocp', ocp)
-                updateIframe(url);
+                updateIframe(true);
             }
         }
     });
@@ -1525,7 +1535,7 @@ $(document).ready(function(){
 
 
         $(".bread-select[data-id=deg]").find("optgroup[value="+parameters.deg+"]").find("option[value="+parameters.subdeg+"]").prop('selected', true)
-        updateIframe();
+        updateIframe(true);
 
 
     });
@@ -1569,7 +1579,7 @@ $(document).ready(function(){
                 else if(id === "mapa") updateParameter('chg', 0, false); 
 
             }
-            updateIframe(url); /* atualiza gráfico */
+            updateIframe(true); /* atualiza gráfico */
         }
         else {
             updateUrl();
@@ -1583,7 +1593,7 @@ $(document).ready(function(){
                 $(this).addClass("active");
                 $('#'+botao.complement).removeClass("active");
 
-                updateIframe(url);
+                updateIframe(true);
             }
             else if(parameters.eixo == 2){
 
@@ -1596,7 +1606,7 @@ $(document).ready(function(){
                 updateOptView($(this).parent().parent().attr("class"), $(this))
 
                 changeDescVar();
-                updateIframe(url);
+                updateIframe(true);
                 switchToSetores();
             }
             else {
@@ -1640,7 +1650,7 @@ $(document).ready(function(){
                     //troca o nome do select de setor
                     $(window.document).find(".bread-select[data-id=ocp]").parent().find("span").text("Ocupação")
                 }
-            updateIframe(url); /* altera gráfico */
+            updateIframe(true); /* altera gráfico */
         }
     }
     });
@@ -1658,8 +1668,8 @@ $(document).ready(function(){
         if(dataId !== "eixo") {
             updateUrl();
 
-            var eixo_atual = getEixo(window.location.hash.substring(1));
-
+            let eixo_atual = parameters.eixo;
+            
             if( $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value") != undefined){
                 url['deg'] =  $(".bread-select[data-id=deg]").find('option:selected').parent().attr("value")
             }
@@ -1668,7 +1678,7 @@ $(document).ready(function(){
             }
 
             if(dataId === "typ"){
-                if($(this).val() == 3 && (url['var'] == 1 || url['var'] == 13) )
+                if($(this).val() == 3 && (parameters.var == 1 || parameters.var == 13) )
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "none")
                 else
                     $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
@@ -1680,10 +1690,10 @@ $(document).ready(function(){
             }
 
             if(dataId ==='var'){
-
+                let vrv = dataVal;
                 $(".setor-value").first().css("display", "none");
                 
-                if( parameters.eixo == 1 && (parameters.var == 9 || parameters.var == 1)){
+                if( parameters.eixo == 1 && (vrv == 9 || vrv == 1)){
                     switchBreadCadOcp(0);
                 }
 
@@ -1691,8 +1701,8 @@ $(document).ready(function(){
 
                 $('.percent-value').find(".box-dado").find('.number').first().text("")
                 cleanDesagsUrl();
-                getAnoDefault(eixo_atual);
 
+                
                 if(url['ocp'] == 0){
                     switchToSetores();
                     $('#setor').addClass("active");
@@ -1715,7 +1725,7 @@ $(document).ready(function(){
                 updateParameter('subdeg', 0, false);
                 updateParameter('pfj', 0, false);
                 updateParameter('mundo', 0, false);
-                updateParameter('ano', url['ano'], false);
+                updateParameter('ano', getAnoDefault(vrv), false);
 
                 if(eixo_atual == 0 || eixo_atual == 1){
                     updateParameter('chg', 0, false);
@@ -1723,9 +1733,6 @@ $(document).ready(function(){
 
                 $(window.document).find(".cad-title").first().html($('.bread-select[data-id=cad] option:selected').text());
                 $(window.document).find(".title[data-id='var-title']").first().html($('.bread-select[data-id=var] option:selected').text());
-
-                updateMenuSetor(getEixo(window.location.hash.substring(1)), $(this).val());
-                updateBreadUF(eixo_atual, url['var']);
 
                 if(eixo_atual == 0){
                     $('#mapa').addClass("active");
@@ -1743,11 +1750,11 @@ $(document).ready(function(){
                 if(eixo_atual == 2){
                     updateOptView('init')
                     updateDefaultMec(url['var']);
-                    if(url['var'] != 17){
+                    if(vrv != 17){
                         $(".value-info-title").text("")
                     }
 
-                    if(url['var'] == 18 || url['var'] == 19){
+                    if(vrv == 18 || vrv == 19){
                         $("#btn-opt").find(".col-btn").css("display", "block")
                     }
                     else{
@@ -1756,10 +1763,10 @@ $(document).ready(function(){
                 }
 
                 if(eixo_atual == 3){
-                    if(url['var'] == 1 || url['var'] == 13 || url['var'] == 5 || url['var'] == 8)
+                    if(vrv == 1 || vrv == 13 || vrv == 5 || vrv == 8)
                         $(window.document).find(".percent-value").find(".box-dado").first().css("display", "block")
-                    updateServicos(url['var']);
-                    updateTipo(url['var']);
+                    updateServicos(vrv);
+                    updateTipo(vrv);
 
                     updateParameter('typ', 1, true);
                     updateParameter('slc', 0, false);
@@ -1769,7 +1776,7 @@ $(document).ready(function(){
 
                     updateColorButtons(url['slc'])
 
-                    if((url['var'] >= 5 && url['var'] <= 12) || url['var'] == 14){
+                    if((vrv >= 5 && vrv <= 12) || vrv == 14){
                         updateParameter('prc', 0, true);
                     }
                     $(window.document).find(".prc-title").first().html($(".bread-select[data-id='prc'] option:selected").text());
@@ -1787,8 +1794,8 @@ $(document).ready(function(){
                         deg_value = $(this).val()
                     }
                     controlFilter(deg_value, $(this).attr('data-id'), $(this).val());
-
-                    if(url['var'] == 4 || url['var'] == 5 || url['var'] == 6){
+                    
+                    if(parameters.var == 4 || parameters.var == 5 || parameters.var == 6){
                         updateLegendByDeg(deg_value)
                     }
 
@@ -1806,7 +1813,7 @@ $(document).ready(function(){
                 updateWindowUrl('uf', dataVal);
 
                 $(window.document).find(".state-title").first().html(this.options[e.target.selectedIndex].text);
-                updateDataDesc(url['var'], $(this).attr("data-id"), this.options[e.target.selectedIndex].text)
+                updateDataDesc($(this).attr("data-id"), this.options[e.target.selectedIndex].text)
 
             }
 
@@ -1832,7 +1839,7 @@ $(document).ready(function(){
                 updateWindowUrl(dataId, dataVal);
             }
 
-            updateIframe(url);
+            updateIframe(true);
 
         }
         else{
@@ -1857,15 +1864,16 @@ $(document).ready(function(){
 
     defaultUrl();
     updateSelectsByUrl();
-    
+
     load_objects.done(function(){
         
         if(window.location.pathname.match("resultado")){
+            updateIframe(false);
             changeDescVar();
-            updateMenuLegenda(getEixo(window.location.hash.substring(1)), url['var']);
-            updateMenuSetor(getEixo(window.location.hash.substring(1)), url['var']);
-            updateBreadUF(getEixo(window.location.hash.substring(1)), url['var'])
-            updateMecanismo(url, url['var'])
+            updateMenuLegenda(parameters.var);
+            updateMecanismo(url['var']);
+
+            
             // updateSelectsByVar();
             if(url['ocp'] > 0){
                 enableDesag(getEixo(window.location.hash.substring(1)), parameters.var, parameters.cad, false, 1, url);
@@ -1880,6 +1888,7 @@ $(document).ready(function(){
                 updateBreadcrumbSetores(getCadsByMenuDonut());
             }
             setBreadcrumbsByUrl();
+
         }
     });
     

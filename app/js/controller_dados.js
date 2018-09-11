@@ -248,9 +248,8 @@ function configInfoDataBoxBarrasStacked(dados, valor, soma) {
 /*  --- SETTERS --- */
 
 function setIntegerValueData(value) {
-    var description = PT_BR;
 
-    var result = getDataVar(description, parameters.eixo, parameters.var);
+    var result = getDataVar(PT_BR, parameters.eixo, parameters.var);
     sufixo = result.sufixo_valor;
     prefixo = result.prefixo_valor;
     var valor;

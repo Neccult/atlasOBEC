@@ -309,8 +309,9 @@ function switchBreadCadOcp(slc){
     }
 }
 
-function updateBreadUF(eixo, vrv){
-
+function updateBreadUF(){
+    let eixo = parameters.eixo;
+    let vrv  = parameters.var;
     switch(eixo){
         case 0: 
 
@@ -417,43 +418,44 @@ function updateTipo(vrv){
 
 }
 
-function updateMecanismo(url, vrv){
-
-    $("select[data-id='mec'] > option").each(function() {
-        $(this).remove();
-    });
-
-    if(url['var'] != 17){
-        $("select[data-id='mec']").append("<option value='0'>Todos</option>");
-
-        $("select[data-id='mec']").parent().parent().css('display', 'flex')
-
-        if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
-            $("select[data-id='mec']").append("<option value='1'>FNC</option>");
-            $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
-        }
-
-        else if(vrv == 17){
+function updateMecanismo(vrv){
+    if(parameters.eixo == 2){
+        
+        $("select[data-id='mec'] > option").each(function() {
+            $(this).remove();
+        });
+    
+        if(url['var'] != 17){
+            $("select[data-id='mec']").append("<option value='0'>Todos</option>");
+    
+            $("select[data-id='mec']").parent().parent().css('display', 'flex')
+    
+            if(vrv == 1 ||  vrv == 8 || vrv == 9 || vrv == 15 || vrv == 16){
+                $("select[data-id='mec']").append("<option value='1'>FNC</option>");
+                $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+            }
+    
+            else if(vrv == 17){
+                $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
+                $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
+            }
+    
+            else if(vrv == 3){
+                $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
+                $("select[data-id='mec']").append("<option value='4'>Outros</option>");
+            }
+            else {
+                $("select[data-id='mec']").parent().parent().css('display', 'none')
+            }
+    
+        } 
+        else{
+            $("select[data-id='mec']").parent().parent().css('display', 'flex')
+            $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
             $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
-            $("select[data-id='mec']").append("<option value='2'>Mecenato</option>");
         }
 
-        else if(vrv == 3){
-            $("select[data-id='mec']").append("<option value='3'>Fundo Cultural</option>");
-            $("select[data-id='mec']").append("<option value='4'>Outros</option>");
-        }
-        else {
-            $("select[data-id='mec']").parent().parent().css('display', 'none')
-        }
-
-    } 
-    else{
-        $("select[data-id='mec']").parent().parent().css('display', 'flex')
-        $("select[data-id='mec']").append("<option value='0'>Mecenato Estadual</option>");
-        $("select[data-id='mec']").append("<option value='1'>Editais Estaduais</option>");
     }
-
-
 }
 
 function updateBreadcrumbSetores(cads){
@@ -605,7 +607,7 @@ function enableDesag(eixo, vrv, setor, iframe, slc, url){
     }
     else if(eixo == 2) {
 
-        updateMecanismo(url, vrv);
+        updateMecanismo(url);
         updateModalidade(url, vrv);
         updatePfj(url, vrv);
 
@@ -715,9 +717,9 @@ function getTextWidth(text, font) {
 */
 function formatBarTextMap(value, eixo, vrv, obj){
     var font_size = 9
-    var description = PT_BR;
-    sufixo = getDataVar(description, eixo, vrv).sufixo_valor;
-    prefixo = getDataVar(description, eixo, vrv).prefixo_valor;
+
+    sufixo = getDataVar(PT_BR, eixo, vrv).sufixo_valor;
+    prefixo = getDataVar(PT_BR, eixo, vrv).prefixo_valor;
     valor = normalizeValue(value, sufixo);
     switch(eixo) {
         case 1:
@@ -866,7 +868,10 @@ function updateDataDescUoS(ocp){
 * Essa função tira ou coloca o menu dos setores em função
 * do eixo e da variável selecionada
 */
-function updateMenuSetor(eixo, vrv){
+function updateMenuSetor(){
+    let eixo = parameters.eixo;
+    let vrv  = parameters.var;
+
 	if(eixo == 0){
 		if(vrv > 9){
 

@@ -375,7 +375,7 @@ function clickBarras(barras_box, dados, uos, i) {
     destacarBarra(barras_box, dados.key[i], uos);
     var valor = $(barras_box+' svg').find('rect[data-legend="'+dados.key[i]+'"]').attr("data-value");
 
-    updateIframe();
+    updateIframe(true);
 
 }
 

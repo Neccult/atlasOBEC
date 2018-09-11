@@ -64,7 +64,7 @@ function create_mapa_mundi(mapa_box, gdpData){
                 updateWindowUrl('prc', convertCode(el))
                 destacaPrc(el, mapa_box)
 
-                updateIframe()
+                updateIframe(true)
             }
         })
         destacaPrc(unconvertCode(parseInt(parameters.prc)), mapa_box);
