@@ -437,6 +437,8 @@ function destacaBarraStacked(barras_box, anos, colors) {
                 $(this).css("stroke", "#555");
                 $(this).css("stroke-width", '1');
                 $(this).css("fill", colors(i))
+                console.log(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")))
+                console.log(parameters.subdeg)
                 if(getSubdegId(parameters.deg, $(this).parent().attr("subdeg")) == parameters.subdeg){
                     $(this).css('fill', corEixo[2]);
                 }

@@ -836,7 +836,7 @@ function updateServicos(vrv){
 	}
 }
 
-function updateDataDesc(vrv, uos, valor){
+function updateDataDesc(uos, valor){
 
     $(".integer-value").first().find(".description-number").children("span").each(function () {
 
@@ -1670,32 +1670,21 @@ function getSubdegId(deg, subdeg) {
             break;
 
         case '4':
+            subdeg = subdeg.toUpperCase()
             switch (subdeg) {
-                case 'Sem instrução':
+                case 'SEM INSTRUÇÃO':
                     return "1";
-                case 'Fundamental incompleto':
+                case 'FUNDAMENTAL INCOMPLETO':
                     return "2";
-                case 'Fundamental Incompleto':
-                    return "2";
-                case 'Fundamental completo':
+                case 'FUNDAMENTAL COMPLETO':
                     return "3";
-                case 'Fundamental Completo':
-                    return "3";
-                case 'Médio completo':
+                case 'MÉDIO COMPLETO':
                     return "4";
-                case 'Médio Completo':
-                    return "4";
-                case 'Superior incompleto':
+                case 'SUPERIOR INCOMPLETO':
                     return "5";
-                case 'Superior Incompleto':
-                    return "5";
-                case 'Superior completo':
+                case 'SUPERIOR COMPLETO':
                     return "6";
-                case 'Superior Completo':
-                    return "6";
-                case 'Não determinado':
-                    return "7";
-                case 'Não Determinado':
+                case 'NÃO DETERMINADO':
                     return "7";
             }
             break;
