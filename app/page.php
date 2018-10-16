@@ -11,7 +11,7 @@
     /* GETS! */
     $uf         =   isset($_GET["uf"])    ?   $_GET["uf"]   :   0;	   /*== uf ==*/
     $chg         =   isset($_GET["chg"])    ?   $_GET["chg"]   :   0;	   /*== VIEW ==*/
-    $ano        =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2014;	   /*== ano ==*/
+    $ano        =   isset($_GET["ano"])   ?   $_GET["ano"]  :   2016;	   /*== ano ==*/
     $cad        =   isset($_GET["cad"])   ?   $_GET["cad"]  :   0;	   /*== ocupacao ==*/
     $var        =   isset($_GET["var"])   ?   $_GET["var"]  :   "";	   /*== variavel ==*/
     $ocp        =   isset($_GET["ocp"])   ?   $_GET["ocp"]  :   0;	   /*== ocupacao ==*/

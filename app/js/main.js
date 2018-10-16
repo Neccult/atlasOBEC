@@ -29,13 +29,13 @@ function controlVar(clickVar){
     var urlString = "";
 
     switch (newHash.substring(1)){
-        case "empreendimentos": urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+        case "empreendimentos": urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2016&eixo='+newHash.substring(1)+newHash;
             break;
-        case "mercado":         urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "mercado":         urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&subdeg=0&cad=0&ano=2016&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
             break;
-        case "politicas":       urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
+        case "politicas":       urlString = 'resultado.php?var='+clickVar+'&uf=0&deg=0&cad=0&ano=2017&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
             break;
-        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'resultado.php?var='+clickVar+'&uf=0&prc=0&typ=1&cad=0&ano=2017&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
             break;
     }
 
@@ -75,13 +75,13 @@ function controlVarPage(clickVar){
     var urlString = "";
 
     switch (newHash.substring(1)){
-        case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano=2014&eixo='+newHash.substring(1)+newHash;
+        case "empreendimentos": urlString = 'page.php?var=1&chg=0&uf=0&deg=0&cad=0&ano=2016&eixo='+newHash.substring(1)+newHash;
                                     break;
-        case "mercado":         urlString = 'page.php?var=1&uf=0&chg=0&deg=0&subdeg=0&cad=0&ano=2014&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "mercado":         urlString = 'page.php?var=1&uf=0&chg=0&deg=0&subdeg=0&cad=0&ano=2016&ocp=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
-        case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2014&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
+        case "politicas":       urlString = 'page.php?var=1&uf=0&deg=0&cad=0&ano=2017&mec=0&mod=0&pfj=0&eixo='+newHash.substring(1)+newHash;
                                      break;
-        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2014&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
+        case "comercio":        urlString = 'page.php?var=1&uf=0&prc=0&typ=1&cad=0&ano=2017&mundo=0&slc=0&eixo='+newHash.substring(1)+newHash;
                                     break;
     }
 
